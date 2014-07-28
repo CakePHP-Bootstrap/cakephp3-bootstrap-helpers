@@ -34,8 +34,28 @@ class BootstrapFormHelper extends FormHelper {
     
     private $colSize ;
     
+    private $defaultButtonType = 'default' ;
     private $buttonTypes = array('primary', 'info', 'success', 'warning', 'danger', 'inverse', 'link') ;
     private $buttonSizes = array('mini', 'small', 'large') ;
+
+    public function __construct (Cake\View\View $view, array $config = []) {
+        if (isset($config['buttons'])) {
+            if (isset($config['buttons']['type'])) {
+                $this->defaultButtonType = $config['buttons']['type'] ;
+            }
+        }
+        if (isset($config['columns'])) {
+            $this->colSize = $config['columns'] ;
+        }
+        else {
+            $this->colSize = array(
+                'label' => 2,
+                'input' => 6,
+                'error' => 4
+            ) ;
+        }
+        parent::__construct($view, $config);
+    }
     
     /**
      * 
@@ -47,7 +67,7 @@ class BootstrapFormHelper extends FormHelper {
      * 
     **/
     private function addButtonClasses ($options) {
-        $options = $this->addClass($options, 'btn btn-default') ;
+        $options = $this->addClass($options, 'btn btn-'.$this->defaultButtonType) ;
         foreach ($this->buttonTypes as $type) {
             if (isset($options['bootstrap-type']) && $options['bootstrap-type'] == $type) {
                 $options = $this->addClass($options, 'btn-'.$type) ;
@@ -97,13 +117,9 @@ class BootstrapFormHelper extends FormHelper {
      * 
     **/
     public function create($model = null, $options = array()) {
-        $this->colSize = array(
-            'label' => 2,
-            'input' => 6,
-            'error' => 4
-        ) ;
         if (isset($options['cols'])) {
             $this->colSize = $options['cols'] ;
+            unset($options['cols']) ;
         }
         $this->horizontal = $this->_extractOption('horizontal', $options, false);
 		unset($options['horizontal']);
@@ -126,10 +142,10 @@ class BootstrapFormHelper extends FormHelper {
             'inputContainerError' => '<div class="form-group has-error">{{content}}{{error}}</div>',
             'formGroup' => '{{label}}'.($this->horizontal ? '<div class="'.$this->getColClass('input').'">' : '').'{{input}}'.($this->horizontal ? '</div>' : ''),
             'input' => '<input class="form-control" {{attrs}} type="{{type}}" name="{{name}}" id="{{name}}" />',
-            'checkboxContainer' => '<div class="form-group">'.($this->horizontal ? '<div class="col-lg-offset-'.$this->colSize['label'].' col-lg-'.(12 - $this->colSize['label']).'">' : '').'<div class="checkbox"><label>{{content}}</label>'.($this->horizontal ? '</div>' : '').'</div></div>',
+            'checkboxContainer' => '<div class="form-group">'.($this->horizontal ? '<div class="'.$this->getColClass('label', true).' '.$this->getColClass('input').'">' : '').'<div class="checkbox"><label>{{content}}</label>'.($this->horizontal ? '</div>' : '').'</div></div>',
             'label' => '<label class="'.($this->horizontal ? $this->getColClass('label') : '').' '.($this->inline ? 'sr-only' : 'control-label').'" {{attrs}}>{{text}}</label>',
             'error' => '<span class="help-block '.($this->horizontal ? $this->getColClass('error') : '').'">{{content}}</span>',
-            'submitContainer' => '<div class="form-group">'.($this->horizontal ? '<div class="col-lg-offset-'.$this->colSize['label'].' col-lg-'.(12 - $this->colSize['label']).'">' : '').'{{content}}'.($this->horizontal ? '</div>' : '').'</div>',
+            'submitContainer' => '<div class="form-group">'.($this->horizontal ? '<div class="'.$this->getColClass('label', true).' '.$this->getColClass('input').'">' : '').'{{content}}'.($this->horizontal ? '</div>' : '').'</div>',
         ]) ;
 		return parent::create($model, $options) ;
 	}
@@ -139,12 +155,17 @@ class BootstrapFormHelper extends FormHelper {
      * Return the col size class for the specified column (label, input or error).
      *
     **/
-    private function getColClass($what) {
-        $size = $this->colSize[$what] ;
-        if ($size) {
-            return 'col-lg-'.$size ;
+    private function getColClass($what, $offset = false) {
+        if (isset($this->colSize[$what])) {
+            return 'col-md-'.($offset ? 'offset-' : '').$this->colSize[$what] ;
         }
-        return '' ;
+        $classes = [] ;
+        foreach ($this->colSize as $cl => $arr) {
+            if (isset($arr[$what])) {
+                $classes[] = 'col-'.$cl.'-'.($offset ? 'offset-' : '').$arr[$what] ;
+            }
+        }
+        return implode(' ', $classes) ;
     }
 
     /**
