@@ -127,9 +127,9 @@ class BootstrapFormHelper extends FormHelper {
             'formGroup' => '{{label}}'.($this->horizontal ? '<div class="'.$this->getColClass('input').'">' : '').'{{input}}'.($this->horizontal ? '</div>' : ''),
             'input' => '<input class="form-control" {{attrs}} type="{{type}}" name="{{name}}" id="{{name}}" />',
             'checkboxContainer' => '<div class="form-group">'.($this->horizontal ? '<div class="col-lg-offset-'.$this->colSize['label'].' col-lg-'.(12 - $this->colSize['label']).'">' : '').'<div class="checkbox"><label>{{content}}</label>'.($this->horizontal ? '</div>' : '').'</div></div>',
-            'checkboxWrapper' => '{{input}} xxx {{{label}}} yyy',
             'label' => '<label class="'.($this->horizontal ? $this->getColClass('label') : '').' '.($this->inline ? 'sr-only' : 'control-label').'" {{attrs}}>{{text}}</label>',
-            'error' => '<span class="help-block '.($this->horizontal ? $this->getColClass('error') : '').'">{{content}}</span>'
+            'error' => '<span class="help-block '.($this->horizontal ? $this->getColClass('error') : '').'">{{content}}</span>',
+            'submitContainer' => '<div class="form-group">'.($this->horizontal ? '<div class="col-lg-offset-'.$this->colSize['label'].' col-lg-'.(12 - $this->colSize['label']).'">' : '').'{{content}}'.($this->horizontal ? '</div>' : '').'</div>',
         ]) ;
 		return parent::create($model, $options) ;
 	}
@@ -171,68 +171,48 @@ class BootstrapFormHelper extends FormHelper {
      * 		-> array: Add elements in array before inputs
      * 	- append: Same as prepend except it add elements after input
      *        
-    **//*
+    **/
     public function input($fieldName, array $options = array()) {
     
-        $prepend = $this->_extractOption('prepend', $options, null) ;
+        $prepend = $this->_extractOption('prepend', $options, '') ;
         unset ($options['prepend']) ;
-        $append = $this->_extractOption('append', $options, null) ;
+        $append = $this->_extractOption('append', $options, '') ;
         unset ($options['append']) ;
-        $before = $this->_extractOption('before', $options, '') ;
-        $after = $this->_extractOption('after', $options, '') ;
-        $between = $this->_extractOption('between', $options, '') ;
-        $label = $this->_extractOption('label', $options, false) ;
-        
-        $options = $this->_parseOptions($fieldName, $options) ;
-        $options['format'] = array('label', 'before', 'input', 'between', 'error', 'after') ;
 
-        $beforeClass = '' ;
-                
-        if ($options['type'] == 'checkbox' || $options['type'] == 'radio') {
-            $before = '<label>'.$before ;
-            $between = $between.'</label>' ;
-            $options['format'] = array('before', 'input', 'label', 'between', 'error', 'after') ;
-            $options['div'] = array(
-                'class' => $options['type']
-            );
-        }
-        else if ($this->horizontal) {
-            $beforeClass .= $this->getColClass('input') ;
-        }
-        if ($prepend) {
-            $beforeClass .= ' input-group' ;
-            if (is_string($prepend)) {
-                $before .= '<span class="input-group-'.($this->matchButton($prepend) ? 'btn' : 'addon').'">'.$prepend.'</span>' ;
-            }
-            if (is_array($prepend)) {
-                foreach ($prepend as $pre) {
-                    $before .= $pre ;
+        $oldTemplate = $this->templates('input') ;
+
+        if ($prepend || $append) {
+            $before = '' ;
+            $after = '' ;
+            if ($prepend) {
+                if (is_string($prepend)) {
+                    $before = '<span class="input-group-'.($this->matchButton($prepend) ? 'btn' : 'addon').'">'.$prepend.'</span>' ;
+                }
+                else {
+                    $before = '<span class="input-group-btn">'.implode('', $prepend).'</span>' ;
                 }
             }
-        }
-        if ($append) {
-            $beforeClass .= ' input-group' ;
-            if (is_string($append)) {
-                $between = '<span class="input-group-'.($this->matchButton($append) ? 'btn' : 'addon').'">'.$append.'</span>'.$between ;
-            }
-            if (is_array($append)) {
-                foreach ($append as $apd) {
-                    $between = $apd.$between ;
+            if ($append) {
+                if (is_string($append)) {
+                    $after = '<span class="input-group-'.($this->matchButton($append) ? 'btn' : 'addon').'">'.$append.'</span>' ;
+                }
+                else {
+                    $after = '<span class="input-group-btn">'.implode('', $append).'</span>' ;
                 }
             }
+            $this->templates([
+                'input' => '<div class="input-group">'.$before.'<input class="form-control" {{attrs}} type="{{type}}" name="{{name}}" id="{{name}}" />'.$after.'</div>'
+            ]) ;
         }
-        
-        if ($beforeClass) {
-            $before = '<div class="'.$beforeClass.'">'.$before ;
-            $after = $after.'</div>' ;
-        }
-        
-        $options['before'] = $before ; 
-        $options['after'] = $after ;
-        $options['between'] = $between ;
-        
-		return parent::input($fieldName, $options) ;
-	}*/
+
+		$res = parent::input($fieldName, $options) ;
+
+	    $this->templates([
+            'input' => $oldTemplate
+        ]) ;
+
+        return $res ;
+    }
     
     /**
      * 
@@ -277,7 +257,7 @@ class BootstrapFormHelper extends FormHelper {
      * @param $options Options for div method
      * 
     **/
-    public function buttonToolbar ($buttonGroups, array $options = array()) {
+    public function buttonToolbar (array $buttonGroups, array $options = array()) {
         $options = $this->addClass($options, 'btn-toolbar') ;
         return $this->Html->tag('div', implode('', $buttonGroups), $options) ;
     }
@@ -299,7 +279,7 @@ class BootstrapFormHelper extends FormHelper {
         $options = $this->addClass($options, "dropdown-toggle") ;
         
         $outPut = '<div class="btn-group">' ;
-        $outPut .= $this->button($title.'<span class="caret"></span>', $options) ;
+        $outPut .= $this->button($title.' <span class="caret"></span>', $options) ;
         $outPut .= '<ul class="dropdown-menu">' ;
         foreach ($menu as $action) {
             if ($action === 'divider') {
@@ -325,36 +305,8 @@ class BootstrapFormHelper extends FormHelper {
      * 
     **/    
     public function submit($caption = null, array $options = array()) {
-        if (!isset($options['div'])) {
-            $options['div'] = false ;
-        }
         $options = $this->addButtonClasses($options) ;
         return parent::submit($caption, $options) ;
-    }
-	
-    /**
-     * 
-     * End a form, Twitter Bootstrap like.
-     * 
-     * New options:
-     * 	- bootstrap-type: Twitter bootstrap button type (primary, danger, info, etc.)
-     * 	- bootstrap-size: Twitter bootstrap button size (mini, small, large)
-     * 
-    **/
-    public function end ($options = null) {
-	if ($options == null) {
-		return parent::end() ;
-	}
-	if (is_string($options)) {
-		$options = array('label' => $options) ;
-	}
-        if (!$this->inline) {
-            if (!array_key_exists('div', $options)) {
-                $options['div'] = array() ;
-            }
-            $options['div']['class'] = 'form-actions' ;
-        }
-		return parent::end($options) ;
     }
     
     /** SPECIAL FORM **/

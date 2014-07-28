@@ -20,9 +20,11 @@
 * @license http://www.apache.org/licenses/LICENSE-2.0
 */
 
+namespace App\View\Helper;
+
 class BootstrapModalHelper extends AppHelper {
 
-    public $helpers = array('Html') ;
+    public $helpers = ['Html'];
 
     public $current = NULL ;
     
