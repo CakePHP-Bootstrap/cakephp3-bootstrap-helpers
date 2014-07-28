@@ -99,8 +99,8 @@ class BootstrapFormHelper extends FormHelper {
     public function create($model = null, $options = array()) {
         $this->colSize = array(
             'label' => 2,
-            'input' => 10,
-            'error' => 2
+            'input' => 6,
+            'error' => 4
         ) ;
         if (isset($options['cols'])) {
             $this->colSize = $options['cols'] ;
@@ -123,12 +123,13 @@ class BootstrapFormHelper extends FormHelper {
         $options['role'] = 'form' ;
         $this->templates([
             'inputContainer' => '<div class="form-group">{{content}}</div>',
+            'inputContainerError' => '<div class="form-group has-error">{{content}}{{error}}</div>',
             'formGroup' => '{{label}}'.($this->horizontal ? '<div class="'.$this->getColClass('input').'">' : '').'{{input}}'.($this->horizontal ? '</div>' : ''),
             'input' => '<input class="form-control" {{attrs}} type="{{type}}" name="{{name}}" id="{{name}}" />',
             'checkboxContainer' => '<div class="form-group">'.($this->horizontal ? '<div class="col-lg-offset-'.$this->colSize['label'].' col-lg-'.(12 - $this->colSize['label']).'">' : '').'<div class="checkbox"><label>{{content}}</label>'.($this->horizontal ? '</div>' : '').'</div></div>',
             'checkboxWrapper' => '{{input}} xxx {{{label}}} yyy',
-            'label' => '<label class="'.($this->horizontal ? $this->getColClass('error') : '').' '.($this->inline ? 'sr-only' : 'control-label').'" {{attrs}}>{{text}}</label>',
-            'error' => '<span class="'.($this->horizontal ? 'help-inline '.$this->getColClass('error') : 'help-block').'">{{error}}</span>'
+            'label' => '<label class="'.($this->horizontal ? $this->getColClass('label') : '').' '.($this->inline ? 'sr-only' : 'control-label').'" {{attrs}}>{{text}}</label>',
+            'error' => '<span class="help-block '.($this->horizontal ? $this->getColClass('error') : '').'">{{content}}</span>'
         ]) ;
 		return parent::create($model, $options) ;
 	}
