@@ -38,7 +38,7 @@ class BootstrapFormHelper extends FormHelper {
     private $buttonTypes = array('primary', 'info', 'success', 'warning', 'danger', 'inverse', 'link') ;
     private $buttonSizes = array('mini', 'small', 'large') ;
 
-    public function __construct (Cake\View\View $view, array $config = []) {
+    public function __construct (\Cake\View\View $view, array $config = []) {
         if (isset($config['buttons'])) {
             if (isset($config['buttons']['type'])) {
                 $this->defaultButtonType = $config['buttons']['type'] ;
