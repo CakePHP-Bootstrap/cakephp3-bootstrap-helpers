@@ -26,7 +26,7 @@ use Cake\View\Helper\HtmlHelper;
 
 class BootstrapHtmlHelper extends HtmlHelper {    
 
-    private function _extractOption ($key, $options, $default = null) {
+    protected function _extractOption ($key, $options, $default = null) {
         if (isset($options[$key])) {
             return $options[$key] ;
         }
@@ -40,7 +40,7 @@ class BootstrapHtmlHelper extends HtmlHelper {
      * If type == $default, $default is returned (even if it is not in $avail).
      * 
     **/
-    private function _extractType ($options, $key = 'type', $default = 'info', 
+    protected function _extractType ($options, $key = 'type', $default = 'info', 
                                       $avail = array('info', 'success', 'warning', 'error')) {
         $type = $this->_extractOption($key, $options, $default) ;
         if ($default !== false && $type == $default) {

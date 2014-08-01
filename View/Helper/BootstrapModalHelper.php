@@ -28,7 +28,7 @@ class BootstrapModalHelper extends AppHelper {
 
     public $current = NULL ;
     
-    private function _extractOption ($key, $options, $default = null) {
+    protected function _extractOption ($key, $options, $default = null) {
         if (isset($options[$key])) {
             return $options[$key] ;
         }
@@ -64,9 +64,9 @@ class BootstrapModalHelper extends AppHelper {
         }
 		$res = $this->Html->div('modal fade', NULL, $options).$this->Html->div('modal-dialog').$this->Html->div('modal-content');
         if (is_string($title) && $title) {
-            $res .= $this->_createheader($title, array('close' => $close)) ;
+            $res .= $this->_createHeader($title, array('close' => $close)) ;
             if (!$nobody) {
-                $res .= $this->_startpart('body');
+                $res .= $this->_startPart('body');
             }
         }
         return $res ;
@@ -84,7 +84,7 @@ class BootstrapModalHelper extends AppHelper {
         $res = '' ;
         if ($this->current != NULL) {
             $this->current = NULL ;
-            $res .= $this->_endpart();
+            $res .= $this->_endPart();
         }
         if ($buttons !== NULL) {
             $res .= $this->footer($buttons, $options) ;
@@ -93,15 +93,15 @@ class BootstrapModalHelper extends AppHelper {
 		return $res ;
     }
 
-    private function _cleancurrent () {
+    protected function _cleanCurrent () {
         if ($this->current) {
             $this->current = NULL ;
-            return $this->_endpart();
+            return $this->_endPart();
         }
         return '' ;
     }
 
-    private function _createheader ($title, $options = array()) {
+    protected function _createHeader ($title, $options = array()) {
         $close = $this->_extractOption('close', $options, true);
         unset($options['close']) ;
         if ($close) {
@@ -110,14 +110,14 @@ class BootstrapModalHelper extends AppHelper {
         else {
             $button = '' ;
         }
-        return $this->_cleancurrent().$this->Html->div('modal-header', $button.$this->Html->tag('h4', $title, array('class' => 'modal-title', 'id' => $this->currentId ? $this->currentId.'Label' : false)), $options) ; 
+        return $this->_cleanCurrent().$this->Html->div('modal-header', $button.$this->Html->tag('h4', $title, array('class' => 'modal-title', 'id' => $this->currentId ? $this->currentId.'Label' : false)), $options) ; 
     }
 
-    private function _createbody ($text, $options = array()) {
-        return $this->_cleancurrent().$this->Html->div('modal-body', $text, $options) ; 
+    protected function _createBody ($text, $options = array()) {
+        return $this->_cleanCurrent().$this->Html->div('modal-body', $text, $options) ; 
     }
 
-    private function _createfooter ($buttons = NULL, $options = array()) {
+    protected function _createFooter ($buttons = NULL, $options = array()) {
         if ($buttons == NULL) {
             $close = $this->_extractOption('close', $options, true);
             unset($options['close']) ;
@@ -128,19 +128,19 @@ class BootstrapModalHelper extends AppHelper {
                 $buttons = '' ;
             }
         }
-        return $this->_cleancurrent().$this->Html->div('modal-footer', $buttons, $options) ; 
+        return $this->_cleanCurrent().$this->Html->div('modal-footer', $buttons, $options) ; 
     }
     
-    private function _startpart ($part, $options = array()) {
+    protected function _startPart ($part, $options = array()) {
         $res = '' ;
         if ($this->current != NULL) {
-            $res = $this->_endpart () ;
+            $res = $this->_endPart () ;
         }
         $this->current = $part ;
         return $res.$this->Html->div('modal-'.$part, NULL, $options) ;
     }
 
-    private function _endpart () {
+    protected function _endPart () {
         return '</div>' ;
     }
 
@@ -157,9 +157,9 @@ class BootstrapModalHelper extends AppHelper {
     **/
     public function header ($info = NULL, $options = array()) {
         if (is_string($info)) {
-            return $this->_createheader($info, $options) ;
+            return $this->_createHeader($info, $options) ;
         }
-        return $this->_startpart('header', is_array($info) ? $info : $options) ;
+        return $this->_startPart('header', is_array($info) ? $info : $options) ;
     }
 
     /**
@@ -174,14 +174,14 @@ class BootstrapModalHelper extends AppHelper {
     public function body ($info = NULL, $options = array()) {
         if (is_string($info)) {
             if ($this->current != NULL) {
-                $this->_endpart() ;
+                $this->_endPart() ;
             }
-            return $this->_createbody($info, $options) ;
+            return $this->_createBody($info, $options) ;
         }
-        return $this->_startpart('body', is_array($info) ? $info : $options) ;
+        return $this->_startPart('body', is_array($info) ? $info : $options) ;
     }
 
-    private function _isAssociativeArray ($array) {
+    protected function _isAssociativeArray ($array) {
         return array_keys($array) !== range(0, count($array) - 1);
     }
     
@@ -196,14 +196,14 @@ class BootstrapModalHelper extends AppHelper {
      *     - close: Add the 'close' button to the footer (default true).
      *
     **/
-    public function footer ($buttons = array(), $options = array()) {
+    public function footer ($buttons = [], $options = []) {
         if ($buttons === NULL || (!empty($buttons) && $this->_isAssociativeArray($buttons))) {
-            return $this->_startpart('footer', $buttons === NULL ? $options : $buttons) ;
+            return $this->_startPart('footer', $buttons === NULL ? $options : $buttons) ;
         }
         if (empty($buttons)) {
-            return $this->_createfooter(NULL, $options) ;
+            return $this->_createFooter(NULL, $options) ;
         }
-        return $this->_createfooter(is_string($buttons) ? $buttons : implode('', $buttons), $options) ;
+        return $this->_createFooter(is_string($buttons) ? $buttons : implode('', $buttons), $options) ;
     }
 
 }

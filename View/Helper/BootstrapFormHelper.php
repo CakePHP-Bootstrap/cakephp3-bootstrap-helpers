@@ -66,7 +66,7 @@ class BootstrapFormHelper extends FormHelper {
      * @return The new options with class values (btn, and btn-* according to initial options)
      * 
     **/
-    private function addButtonClasses ($options) {
+    protected function _addButtonClasses ($options) {
         $options = $this->addClass($options, 'btn btn-'.$this->defaultButtonType) ;
         foreach ($this->buttonTypes as $type) {
             if (isset($options['bootstrap-type']) && $options['bootstrap-type'] == $type) {
@@ -94,7 +94,7 @@ class BootstrapFormHelper extends FormHelper {
      * @return true if the HTML code contains a button
      *
     **/
-    private function matchButton ($html) {
+    protected function _matchButton ($html) {
         return strpos($html, '<button') !== FALSE || strpos($html, 'type="submit"') !== FALSE ;
     }
 	
@@ -140,12 +140,12 @@ class BootstrapFormHelper extends FormHelper {
         $this->templates([
             'inputContainer' => '<div class="form-group">{{content}}</div>',
             'inputContainerError' => '<div class="form-group has-error">{{content}}{{error}}</div>',
-            'formGroup' => '{{label}}'.($this->horizontal ? '<div class="'.$this->getColClass('input').'">' : '').'{{input}}'.($this->horizontal ? '</div>' : ''),
+            'formGroup' => '{{label}}'.($this->horizontal ? '<div class="'.$this->_getColClass('input').'">' : '').'{{input}}'.($this->horizontal ? '</div>' : ''),
             'input' => '<input class="form-control" {{attrs}} type="{{type}}" name="{{name}}" id="{{name}}" />',
-            'checkboxContainer' => '<div class="form-group">'.($this->horizontal ? '<div class="'.$this->getColClass('label', true).' '.$this->getColClass('input').'">' : '').'<div class="checkbox"><label>{{content}}</label>'.($this->horizontal ? '</div>' : '').'</div></div>',
-            'label' => '<label class="'.($this->horizontal ? $this->getColClass('label') : '').' '.($this->inline ? 'sr-only' : 'control-label').'" {{attrs}}>{{text}}</label>',
-            'error' => '<span class="help-block '.($this->horizontal ? $this->getColClass('error') : '').'">{{content}}</span>',
-            'submitContainer' => '<div class="form-group">'.($this->horizontal ? '<div class="'.$this->getColClass('label', true).' '.$this->getColClass('input').'">' : '').'{{content}}'.($this->horizontal ? '</div>' : '').'</div>',
+            'checkboxContainer' => '<div class="form-group">'.($this->horizontal ? '<div class="'.$this->_getColClass('label', true).' '.$this->_getColClass('input').'">' : '').'<div class="checkbox"><label>{{content}}</label>'.($this->horizontal ? '</div>' : '').'</div></div>',
+            'label' => '<label class="'.($this->horizontal ? $this->_getColClass('label') : '').' '.($this->inline ? 'sr-only' : 'control-label').'" {{attrs}}>{{text}}</label>',
+            'error' => '<span class="help-block '.($this->horizontal ? $this->_getColClass('error') : '').'">{{content}}</span>',
+            'submitContainer' => '<div class="form-group">'.($this->horizontal ? '<div class="'.$this->_getColClass('label', true).' '.$this->_getColClass('input').'">' : '').'{{content}}'.($this->horizontal ? '</div>' : '').'</div>',
         ]) ;
 		return parent::create($model, $options) ;
 	}
@@ -155,7 +155,7 @@ class BootstrapFormHelper extends FormHelper {
      * Return the col size class for the specified column (label, input or error).
      *
     **/
-    private function getColClass($what, $offset = false) {
+    protected function _getColClass($what, $offset = false) {
         if (isset($this->colSize[$what])) {
             return 'col-md-'.($offset ? 'offset-' : '').$this->colSize[$what] ;
         }
@@ -207,7 +207,7 @@ class BootstrapFormHelper extends FormHelper {
             $after = '' ;
             if ($prepend) {
                 if (is_string($prepend)) {
-                    $before = '<span class="input-group-'.($this->matchButton($prepend) ? 'btn' : 'addon').'">'.$prepend.'</span>' ;
+                    $before = '<span class="input-group-'.($this->_matchButton($prepend) ? 'btn' : 'addon').'">'.$prepend.'</span>' ;
                 }
                 else {
                     $before = '<span class="input-group-btn">'.implode('', $prepend).'</span>' ;
@@ -215,7 +215,7 @@ class BootstrapFormHelper extends FormHelper {
             }
             if ($append) {
                 if (is_string($append)) {
-                    $after = '<span class="input-group-'.($this->matchButton($append) ? 'btn' : 'addon').'">'.$append.'</span>' ;
+                    $after = '<span class="input-group-'.($this->_matchButton($append) ? 'btn' : 'addon').'">'.$append.'</span>' ;
                 }
                 else {
                     $after = '<span class="input-group-btn">'.implode('', $append).'</span>' ;
@@ -245,7 +245,7 @@ class BootstrapFormHelper extends FormHelper {
      * 
     **/
     public function button($title, array $options = array()) {
-        $options = $this->addButtonClasses($options) ;
+        $options = $this->_addButtonClasses($options) ;
         return parent::button($title, $options) ;
     }
     
@@ -326,7 +326,7 @@ class BootstrapFormHelper extends FormHelper {
      * 
     **/    
     public function submit($caption = null, array $options = array()) {
-        $options = $this->addButtonClasses($options) ;
+        $options = $this->_addButtonClasses($options) ;
         return parent::submit($caption, $options) ;
     }
     
