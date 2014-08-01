@@ -138,11 +138,12 @@ class BootstrapFormHelper extends FormHelper {
         }
         $options['role'] = 'form' ;
         $this->templates([
-            'inputContainer' => '<div class="form-group">{{content}}</div>',
-            'inputContainerError' => '<div class="form-group has-error">{{content}}{{error}}</div>',
+            'inputContainer' => '<div class="form-group {{type}}{{required}}">{{content}}</div>',
+            'inputContainerError' => '<div class="form-group has-error {{type}}{{required}}">{{content}}{{error}}</div>',
             'formGroup' => '{{label}}'.($this->horizontal ? '<div class="'.$this->_getColClass('input').'">' : '').'{{input}}'.($this->horizontal ? '</div>' : ''),
             'input' => '<input class="form-control" {{attrs}} type="{{type}}" name="{{name}}" id="{{name}}" />',
             'checkboxContainer' => '<div class="form-group">'.($this->horizontal ? '<div class="'.$this->_getColClass('label', true).' '.$this->_getColClass('input').'">' : '').'<div class="checkbox"><label>{{content}}</label>'.($this->horizontal ? '</div>' : '').'</div></div>',
+            'radioContainer' => '<div class="form-group">'.($this->horizontal ? '<div class="'.$this->_getColClass('label', true).' '.$this->_getColClass('input').'">' : '').'<div class="checkbox"><label>{{content}}</label>'.($this->horizontal ? '</div>' : '').'</div></div>',
             'label' => '<label class="'.($this->horizontal ? $this->_getColClass('label') : '').' '.($this->inline ? 'sr-only' : 'control-label').'" {{attrs}}>{{text}}</label>',
             'error' => '<span class="help-block '.($this->horizontal ? $this->_getColClass('error') : '').'">{{content}}</span>',
             'submitContainer' => '<div class="form-group">'.($this->horizontal ? '<div class="'.$this->_getColClass('label', true).' '.$this->_getColClass('input').'">' : '').'{{content}}'.($this->horizontal ? '</div>' : '').'</div>',
