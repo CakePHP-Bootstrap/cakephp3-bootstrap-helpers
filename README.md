@@ -30,6 +30,111 @@ Just add Helper files into your View/Helpers directory and load the helpers in y
 
 I tried to keep CakePHP helpers style. You can find the documentation directly in the Helpers files.
 
+Html
+====
+
+Overload of <code>getCrumbList</code> and new functions availables:
+
+<pre><code>$this->Html->label('My Label', 'primary') ;
+
+$this->Html->badge('1') ;
+$this->Html->badge('2') ;
+
+$this->Html->alert('This is a warning alert!') ;
+$this->Html->alert('This is a success alert!', 'success');</code></pre>
+
+See the source for full documentation.
+
+Form
+====
+
+Standard CakePHP code working with this helper!
+
+<pre><code>$this->Form->create($myModel);
+$this->Form->input('field1') ;
+$this->Form->input('field2') ;
+$this->Form->input('field3') ;
+$this->Form->end('Submit') ;</code></pre>
+
+Added possibility to create inline and horizontal forms: <code>$this->Form->create($myModal, ['horizontal' => true, 'inline' => false]);</code>
+
+With <code>horizontal</code>, it is possible to specify the width of each columns:
+<pre><code>$this->Form->create($myModal, [
+    'horizontal' => true,
+    'cols' => [ // Total is 12
+        'label' => 2,
+        'input' => 6,
+        'error' => 4
+    ]
+]);</code></pre>
+
+You can also set column widths for different screens:
+<pre><code>$this->Form->create($myModal, [
+    'horizontal' => true,
+    'cols' => [ 
+        'sm' => [
+            'label' => 4,
+            'input' => 4,
+            'error' => 4
+        ],
+        'md' => [
+            'label' => 2,
+            'input' => 6,
+            'error' => 4
+        ]
+    ]
+]);</code></pre>
+
+New functions available to create buttons group, toolbar and dropdown:
+<pre><code>$this->Form->buttonGroup([$this->Form->button('1'), $this->Form->button('2')]) ;
+$this->Form->buttonToolbar([
+    $this->Form->buttonGroup([$this->Form->button('1'), $this->Form->button('2')]),
+    $this->Form->buttonGroup([$this->Form->button('3'), $this->Form->button('4')])
+]) ;
+$this->Form->dropdownButton('My Dropdown', [
+    $this->Html->link('Link 1'),
+    $this->Html->link('Link 2'),
+    'divider',
+    $this->Html->link('Link 3')
+]);</code></pre>
+
+New options available when creating input to prepend / append button or text to input:
+<pre><code>$this->Form->input('mail', [
+    'prepend' => '@', 
+    'append' => $this->Form->button('Send')
+]) ;
+$this->Form->input('mail', [
+    'append' => [
+        $this->Form->button('Button'),
+        $this->Form->dropdownButton('Dropdown', [
+            'A', 'B', 'divider', 'C'
+        ]);
+    ]
+]) ;</code></pre>
+
+It is possible to specify default button type and column width (for horizontal forms) when creating the helper:
+<pre><code>// In your Controller
+public $helpers = [
+    'Form' => [
+        'className' => 'BootstrapForm',
+        'buttons' => [
+            'type' => 'primary'
+        ],
+        'columns' => [
+            'sm' => [
+                'label' => 4,
+                'input' => 4,
+                'error' => 4
+            ],
+            'md' => [
+                'label' => 2,
+                'input' => 6,
+                'error' => 4
+            ]
+        ]
+    ]
+];</code></pre>
+
 Copyright and license
 =====================
 
