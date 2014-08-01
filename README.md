@@ -5,7 +5,9 @@ CakePHP 3.0 Helpers to generate HTML with @Twitter Boostrap 3
 
 This is the new repository for my CakePHP Bootstrap 3 Helpers (CakePHP 2.0 repository here: https://github.com/Holt59/cakephp-bootstrap3-helpers).
 
-!!! Work in progress !!!
+Working helpers: Html, Form, Modal, Paginator
+
+<i>The <code>BootstrapNavbarHelper</code> is currently not working with CakePHP 3.</i>
 
 How to use?
 ===========
@@ -20,6 +22,9 @@ Just add Helper files into your View/Helpers directory and load the helpers in y
     ],
     'Paginator' => [
         'className' => 'BootstrapPaginator'
+    ],
+    'Modal' => [
+        'className' => 'BootstrapModal'
     ]
 ];</code></pre>
 
