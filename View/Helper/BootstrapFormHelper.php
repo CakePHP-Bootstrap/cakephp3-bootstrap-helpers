@@ -31,12 +31,17 @@ class BootstrapFormHelper extends FormHelper {
     public $horizontal = false ;
     public $inline = false ;
     public $search = false ;
+    public $colSize ;
     
-    private $colSize ;
-    
+    private $defaultColumnSize = [
+        'label' => 2,
+        'input' => 6,
+        'error' => 4
+    ];  
     private $defaultButtonType = 'default' ;
-    private $buttonTypes = array('primary', 'info', 'success', 'warning', 'danger', 'inverse', 'link') ;
-    private $buttonSizes = array('mini', 'small', 'large') ;
+
+    private $buttonTypes = ['primary', 'info', 'success', 'warning', 'danger', 'inverse', 'link'] ;
+    private $buttonSizes = ['mini', 'small', 'large'] ;
 
     public function __construct (\Cake\View\View $view, array $config = []) {
         if (isset($config['buttons'])) {
@@ -45,14 +50,7 @@ class BootstrapFormHelper extends FormHelper {
             }
         }
         if (isset($config['columns'])) {
-            $this->colSize = $config['columns'] ;
-        }
-        else {
-            $this->colSize = array(
-                'label' => 2,
-                'input' => 6,
-                'error' => 4
-            ) ;
+            $this->defaultColumnSize = $config['columns'] ;
         }
         parent::__construct($view, $config);
     }
@@ -120,6 +118,9 @@ class BootstrapFormHelper extends FormHelper {
         if (isset($options['cols'])) {
             $this->colSize = $options['cols'] ;
             unset($options['cols']) ;
+        }
+        else {
+            $this->colSize = $this->defaultColumnSize ;
         }
         $this->horizontal = $this->_extractOption('horizontal', $options, false);
 		unset($options['horizontal']);
