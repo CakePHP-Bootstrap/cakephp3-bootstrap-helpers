@@ -1,6 +1,7 @@
 {
 	"name": "holt59/cakephp3-bootstrap3-helpers",
 	"description": "Bootstrap 3 Helpers for CakePHP 3.0",
+    "keywords": ["CakePHP", "Bootstrap"],
 	"license": "Apache",
 	"type": "cakephp-plugin",
 	"require": {
