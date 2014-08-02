@@ -5,9 +5,23 @@ CakePHP 3.0 Helpers to generate HTML with @Twitter Boostrap 3
 
 This is the new repository for my CakePHP Bootstrap 3 Helpers (CakePHP 2.0 repository here: https://github.com/Holt59/cakephp-bootstrap3-helpers).
 
-Working helpers: Html, Form, Modal, Paginator
+Installation
+============
 
-<i>The <code>BootstrapNavbarHelper</code> is currently not working with CakePHP 3.</i>
+Run
+`composer require holt59/cakephp3-bootstrap3-helpers:dev-master`
+or add the following into your composer.json and run `composer update`.
+```
+"require" : {
+  "holt59/cakephp3-bootstrap3-helpers": "dev-master"
+}
+```
+
+Load the plugin in your bootstrap file
+```php
+// /src/Config/bootstrap.php
+Plugin::load('Bootstrap3');
+```
 
 How to use?
 ===========
@@ -15,16 +29,16 @@ How to use?
 Just add Helper files into your View/Helpers directory and load the helpers in you controller:
 <pre><code>public $helpers = [
     'Html' => [
-        'className' => 'BootstrapHtml'
+        'className' => 'Bootstrap3.BootstrapHtml'
     ],
     'Form' => [
-        'className' => 'BootstrapForm'
+        'className' => 'Bootstrap3.BootstrapForm'
     ],
     'Paginator' => [
-        'className' => 'BootstrapPaginator'
+        'className' => 'Bootstrap3.BootstrapPaginator'
     ],
     'Modal' => [
-        'className' => 'BootstrapModal'
+        'className' => 'Bootstrap3.BootstrapModal'
     ]
 ];</code></pre>
 
@@ -116,7 +130,7 @@ It is possible to specify default button type and column width (for horizontal f
 <pre><code>// In your Controller
 public $helpers = [
     'Form' => [
-        'className' => 'BootstrapForm',
+        'className' => 'Bootstrap3.BootstrapForm',
         'buttons' => [
             'type' => 'primary'
         ],

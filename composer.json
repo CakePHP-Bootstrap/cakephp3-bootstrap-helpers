@@ -13,5 +13,8 @@
 		"psr-4": {
 			"Bootstrap3\\": "src"
 		}
-	}
+	},
+    "extra": {
+        "installer-name": "Bootstrap3"
+    }
 }
