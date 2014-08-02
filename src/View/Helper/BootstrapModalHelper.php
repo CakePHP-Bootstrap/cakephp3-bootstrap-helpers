@@ -20,9 +20,11 @@
 * @license http://www.apache.org/licenses/LICENSE-2.0
 */
 
-namespace App\View\Helper;
+namespace Bootstrap3\View\Helper;
 
-class BootstrapModalHelper extends AppHelper {
+use Cake\View\Helper;
+
+class BootstrapModalHelper extends Helper {
 
     public $helpers = ['Html'];
 

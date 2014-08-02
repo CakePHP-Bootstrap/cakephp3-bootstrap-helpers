@@ -20,7 +20,7 @@
 * @license http://www.apache.org/licenses/LICENSE-2.0
 */
 
-namespace App\View\Helper;
+namespace Bootstrap3\View\Helper;
 
 use Cake\View\Helper\PaginatorHelper;
 
