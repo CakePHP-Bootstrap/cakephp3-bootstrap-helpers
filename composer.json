@@ -1,0 +1,17 @@
+{
+	"name": "holt59/cakephp3-bootstrap3-helpers",
+	"description": "Bootstrap 3 Helpers for CakePHP 3.0",
+	"license": "Apache",
+	"type": "cakephp-plugin",
+	"require": {
+		"composer/installers": "*"
+	},
+	"require-dev": {
+		"cakephp/cakephp": "3.0.x-dev"
+	},
+	"autoload": {
+		"psr-4": {
+			"Bootstrap3\\": "src"
+		}
+	}
+}
