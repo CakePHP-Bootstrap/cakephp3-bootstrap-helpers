@@ -12,7 +12,7 @@ Run
 `composer require holt59/cakephp3-bootstrap3-helpers:dev-master`
 or add the following into your composer.json and run `composer update`.
 ```json
-"require" : {
+"require": {
   "holt59/cakephp3-bootstrap3-helpers": "dev-master"
 }
 ```
