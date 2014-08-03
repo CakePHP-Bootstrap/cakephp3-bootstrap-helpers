@@ -224,13 +224,14 @@ echo $this->Modal->end() ;
 ```
 
 With the two last versions, it is possible to omit a part:
-```
+```php
 <?php
 echo $this->Modal->create() ;
 echo $this->Modal->body() ; // No header
 echo $this->Modal->footer() ; // Footer with close button (default)
 echo $this->Modal->end() ;
 ?>
+```
 
 **Info:** You can use the `BootstrapFormHelper` to create toggle button for your modals!
 
