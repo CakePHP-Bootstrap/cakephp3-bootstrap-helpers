@@ -165,6 +165,79 @@ public $helpers = [
 ];
 ```
 
+Modal
+=====
+
+Simple helper to create modal, 3 ways of using it:
+
+**First one (simple) - You should use this one if possible!**
+
+```php
+<?php
+// Start a modal with a title, default value for 'close' is true
+echo $this->Modal->create("My Modal Form", ['id' => 'MyModal', 'close' => false]) ; 
+?>
+<p>Here I write the body of my modal !</p>
+<?php
+// Close the modal, output a footer with a 'close' button
+echo $this->Modal->end() ;
+// It is possible to specify custom buttons:
+echo $this->Modal->end([
+    $this->Form->button('Submit', ['bootstrap-type' => 'primary']),   
+    $this->Form->button('Close', ['data-dismiss' => 'modal']) 
+]);
+?>
+```
+
+**Second one - No HTML, the various section are split in different methods.**
+```php
+<?php
+echo $this->Modal->create(['id' => 'MyModal2']) ;
+echo $this->Modal->header('My Title', ['close' => false]) ; 
+echo $this->Modal->body('My Body', ['class' => 'my-body-class']) ;
+echo $this->Modal->footer([
+    $this->Form->button('Submit', ['bootstrap-type' => 'primary']),   
+    $this->Form->button('Close', ['data-dismiss' => 'modal']) 
+]) ;
+echo $this->Modal->end() ;
+?>
+```
+
+**Third one (advanced) - You start each section manually, but you can customize almost everything!**
+```php
+<?php
+echo $this->Modal->create(['id' => 'MyModal3']) ;
+echo $this->Modal->header(['class' => 'my-header-class']) ; 
+?>
+<h4>My Header!</h4>
+<?php
+echo $this->Modal->body() ;
+?>
+<p>My body!</p>
+<?php
+echo $this->Modal->footer(['close' => false]) ;
+?>
+<p>My footer... Oops, no buttons!</p>
+<?php
+echo $this->Modal->end() ;
+?>
+```
+
+With the two last versions, it is possible to omit a part:
+```
+<?php
+echo $this->Modal->create() ;
+echo $this->Modal->body() ; // No header
+echo $this->Modal->footer() ; // Footer with close button (default)
+echo $this->Modal->end() ;
+?>
+
+**Info:** You can use the `BootstrapFormHelper` to create toggle button for your modals!
+
+```php
+echo $this->Form->button('Toggle Form', ['data-toggle' => 'modal', 'data-target' => '#MyModal']) ;
+```
+
 Copyright and license
 =====================
 
