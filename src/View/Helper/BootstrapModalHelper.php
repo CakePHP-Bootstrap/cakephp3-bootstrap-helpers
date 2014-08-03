@@ -64,7 +64,7 @@ class BootstrapModalHelper extends Helper {
             $this->currentId = $options['id'] ;
             $options['aria-labbeledby'] = $this->currentId.'Label' ;
         }
-		$res = $this->Html->div('modal fade', NULL, $options).$this->Html->div('modal-dialog').$this->Html->div('modal-content');
+		$res = $this->Html->div('modal fade '.$this->_extractOption('class', $options, ''), NULL, $options).$this->Html->div('modal-dialog').$this->Html->div('modal-content');
         if (is_string($title) && $title) {
             $res .= $this->_createHeader($title, array('close' => $close)) ;
             if (!$nobody) {
@@ -112,11 +112,14 @@ class BootstrapModalHelper extends Helper {
         else {
             $button = '' ;
         }
-        return $this->_cleanCurrent().$this->Html->div('modal-header', $button.$this->Html->tag('h4', $title, array('class' => 'modal-title', 'id' => $this->currentId ? $this->currentId.'Label' : false)), $options) ; 
+        return $this->_cleanCurrent().$this->Html->div('modal-header '.$this->_extractOption('class', $options, ''), 
+            $button.$this->Html->tag('h4', $title, array('class' => 'modal-title', 'id' => $this->currentId ? $this->currentId.'Label' : false)), 
+            $options
+        ) ; 
     }
 
     protected function _createBody ($text, $options = array()) {
-        return $this->_cleanCurrent().$this->Html->div('modal-body', $text, $options) ; 
+        return $this->_cleanCurrent().$this->Html->div('modal-body '.$this->_extractOption('class', $options, ''), $text, $options) ; 
     }
 
     protected function _createFooter ($buttons = NULL, $options = array()) {
@@ -130,7 +133,7 @@ class BootstrapModalHelper extends Helper {
                 $buttons = '' ;
             }
         }
-        return $this->_cleanCurrent().$this->Html->div('modal-footer', $buttons, $options) ; 
+        return $this->_cleanCurrent().$this->Html->div('modal-footer '.$this->_extractOption('class', $options, ''), $buttons, $options) ; 
     }
     
     protected function _startPart ($part, $options = array()) {
@@ -139,7 +142,7 @@ class BootstrapModalHelper extends Helper {
             $res = $this->_endPart () ;
         }
         $this->current = $part ;
-        return $res.$this->Html->div('modal-'.$part, NULL, $options) ;
+        return $res.$this->Html->div('modal-'.$part.' '.$this->_extractOption('class', $options, ''), NULL, $options) ;
     }
 
     protected function _endPart () {
