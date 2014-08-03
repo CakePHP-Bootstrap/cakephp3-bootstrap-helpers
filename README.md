@@ -19,7 +19,7 @@ or add the following into your composer.json and run `composer update`.
 
 Load the plugin in your bootstrap file
 ```php
-// /src/Config/bootstrap.php
+// /config/bootstrap.php
 Plugin::load('Bootstrap3');
 ```
 
