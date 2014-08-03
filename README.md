@@ -11,7 +11,7 @@ Installation
 Run
 `composer require holt59/cakephp3-bootstrap3-helpers:dev-master`
 or add the following into your composer.json and run `composer update`.
-```
+```json
 "require" : {
   "holt59/cakephp3-bootstrap3-helpers": "dev-master"
 }
@@ -27,7 +27,8 @@ How to use?
 ===========
 
 Just add Helper files into your View/Helpers directory and load the helpers in you controller:
-<pre><code>public $helpers = [
+```php
+public $helpers = [
     'Html' => [
         'className' => 'Bootstrap3.BootstrapHtml'
     ],
@@ -40,7 +41,8 @@ Just add Helper files into your View/Helpers directory and load the helpers in y
     'Modal' => [
         'className' => 'Bootstrap3.BootstrapModal'
     ]
-];</code></pre>
+];
+```
 
 I tried to keep CakePHP helpers style. You can find the documentation directly in the Helpers files.
 
@@ -49,13 +51,15 @@ Html
 
 Overload of <code>getCrumbList</code> and new functions availables:
 
-<pre><code>$this->Html->label('My Label', 'primary') ;
+```php
+$this->Html->label('My Label', 'primary') ;
 
 $this->Html->badge('1') ;
 $this->Html->badge('2') ;
 
 $this->Html->alert('This is a warning alert!') ;
-$this->Html->alert('This is a success alert!', 'success');</code></pre>
+$this->Html->alert('This is a success alert!', 'success');
+```
 
 See the source for full documentation.
 
@@ -64,26 +68,31 @@ Form
 
 Standard CakePHP code working with this helper!
 
-<pre><code>$this->Form->create($myModel);
+```php
+$this->Form->create($myModel);
 $this->Form->input('field1') ;
 $this->Form->input('field2') ;
 $this->Form->input('field3') ;
-$this->Form->end('Submit') ;</code></pre>
+$this->Form->end('Submit') ;
+```
 
-Added possibility to create inline and horizontal forms: <code>$this->Form->create($myModal, ['horizontal' => true, 'inline' => false]);</code>
+Added possibility to create inline and horizontal forms: `$this->Form->create($myModal, ['horizontal' => true, 'inline' => false]);`
 
 With <code>horizontal</code>, it is possible to specify the width of each columns:
-<pre><code>$this->Form->create($myModal, [
+```php
+$this->Form->create($myModal, [
     'horizontal' => true,
     'cols' => [ // Total is 12
         'label' => 2,
         'input' => 6,
         'error' => 4
     ]
-]);</code></pre>
+]);
+```
 
 You can also set column widths for different screens:
-<pre><code>$this->Form->create($myModal, [
+```php
+$this->Form->create($myModal, [
     'horizontal' => true,
     'cols' => [ 
         'sm' => [
@@ -97,10 +106,12 @@ You can also set column widths for different screens:
             'error' => 4
         ]
     ]
-]);</code></pre>
+]);
+```
 
 New functions available to create buttons group, toolbar and dropdown:
-<pre><code>$this->Form->buttonGroup([$this->Form->button('1'), $this->Form->button('2')]) ;
+```php
+$this->Form->buttonGroup([$this->Form->button('1'), $this->Form->button('2')]) ;
 $this->Form->buttonToolbar([
     $this->Form->buttonGroup([$this->Form->button('1'), $this->Form->button('2')]),
     $this->Form->buttonGroup([$this->Form->button('3'), $this->Form->button('4')])
@@ -110,10 +121,12 @@ $this->Form->dropdownButton('My Dropdown', [
     $this->Html->link('Link 2'),
     'divider',
     $this->Html->link('Link 3')
-]);</code></pre>
+]);
+```
 
 New options available when creating input to prepend / append button or text to input:
-<pre><code>$this->Form->input('mail', [
+```php
+$this->Form->input('mail', [
     'prepend' => '@', 
     'append' => $this->Form->button('Send')
 ]) ;
@@ -124,10 +137,12 @@ $this->Form->input('mail', [
             'A', 'B', 'divider', 'C'
         ]);
     ]
-]) ;</code></pre>
+]) ;
+```
 
 It is possible to specify default button type and column width (for horizontal forms) when creating the helper:
-<pre><code>// In your Controller
+```php
+// In your Controller
 public $helpers = [
     'Form' => [
         'className' => 'Bootstrap3.BootstrapForm',
@@ -147,7 +162,8 @@ public $helpers = [
             ]
         ]
     ]
-];</code></pre>
+];
+```
 
 Copyright and license
 =====================
