@@ -52,13 +52,13 @@ Html
 Overload of <code>getCrumbList</code> and new functions availables:
 
 ```php
-$this->Html->label('My Label', 'primary') ;
+echo $this->Html->label('My Label', 'primary') ;
 
-$this->Html->badge('1') ;
-$this->Html->badge('2') ;
+echo $this->Html->badge('1') ;
+echo $this->Html->badge('2') ;
 
-$this->Html->alert('This is a warning alert!') ;
-$this->Html->alert('This is a success alert!', 'success');
+echo $this->Html->alert('This is a warning alert!') ;
+echo $this->Html->alert('This is a success alert!', 'success');
 ```
 
 See the source for full documentation.
@@ -69,18 +69,44 @@ Form
 Standard CakePHP code working with this helper!
 
 ```php
-$this->Form->create($myModel);
-$this->Form->input('field1') ;
-$this->Form->input('field2') ;
-$this->Form->input('field3') ;
-$this->Form->end('Submit') ;
+echo $this->Form->create();
+echo $this->Form->input('username') ;
+echo $this->Form->input('password') ;
+echo $this->Form->input('remember') ;
+echo $this->Form->end('Log In') ;
 ```
+
+Will output:
+
+```html
+<form method="post" accept-charset="utf-8" role="form" action="/login">
+  <div style="display:none;">
+    <input class="form-control" value="POST" type="hidden" name="_method" id="_method">
+  </div>
+  <div class="form-group text">
+    <label class=" control-label" for="username">Username</label>
+    <input class="form-control" id="username" type="text" name="username">
+  </div>
+  <div class="form-group password">
+    <label class=" control-label" for="password">Password</label>
+    <input class="form-control" id="password" type="password" name="password">
+  </div>
+  <div class="form-group">
+    <div class="checkbox">
+      <label>
+        <input class="form-control" value="0" type="hidden" name="remember" id="remember">
+        <input type="checkbox" name="remember" value="1" id="remember">
+        Remember me
+      </label>
+    </div>
+  </div>
+</form>```
 
 Added possibility to create inline and horizontal forms: `$this->Form->create($myModal, ['horizontal' => true, 'inline' => false]);`
 
 With <code>horizontal</code>, it is possible to specify the width of each columns:
 ```php
-$this->Form->create($myModal, [
+echo $this->Form->create($myModal, [
     'horizontal' => true,
     'cols' => [ // Total is 12
         'label' => 2,
@@ -92,7 +118,7 @@ $this->Form->create($myModal, [
 
 You can also set column widths for different screens:
 ```php
-$this->Form->create($myModal, [
+echo $this->Form->create($myModal, [
     'horizontal' => true,
     'cols' => [ 
         'sm' => [
@@ -111,12 +137,12 @@ $this->Form->create($myModal, [
 
 New functions available to create buttons group, toolbar and dropdown:
 ```php
-$this->Form->buttonGroup([$this->Form->button('1'), $this->Form->button('2')]) ;
-$this->Form->buttonToolbar([
+echo $this->Form->buttonGroup([$this->Form->button('1'), $this->Form->button('2')]) ;
+echo $this->Form->buttonToolbar([
     $this->Form->buttonGroup([$this->Form->button('1'), $this->Form->button('2')]),
     $this->Form->buttonGroup([$this->Form->button('3'), $this->Form->button('4')])
 ]) ;
-$this->Form->dropdownButton('My Dropdown', [
+echo $this->Form->dropdownButton('My Dropdown', [
     $this->Html->link('Link 1'),
     $this->Html->link('Link 2'),
     'divider',
@@ -126,16 +152,19 @@ $this->Form->dropdownButton('My Dropdown', [
 
 New options available when creating input to prepend / append button or text to input:
 ```php
-$this->Form->input('mail', [
+echo $this->Form->input('mail', [
     'prepend' => '@', 
     'append' => $this->Form->button('Send')
 ]) ;
-$this->Form->input('mail', [
+echo $this->Form->input('mail', [
     'append' => [
         $this->Form->button('Button'),
         $this->Form->dropdownButton('Dropdown', [
-            'A', 'B', 'divider', 'C'
-        ]);
+            $this->Html->link('A', []), 
+            $this->Html->link('B', []),
+            'divider', 
+            $this->Html->link('C', [])
+        ])
     ]
 ]) ;
 ```
