@@ -73,7 +73,8 @@ echo $this->Form->create();
 echo $this->Form->input('username') ;
 echo $this->Form->input('password') ;
 echo $this->Form->input('remember') ;
-echo $this->Form->end('Log In') ;
+echo $this->Form->submit('Log In') ;
+echo $this->Form->end() ;
 ```
 
 Will output:
@@ -100,10 +101,60 @@ Will output:
       </label>
     </div>
   </div>
+  <div class="form-group">
+    <input type="submit" class="btn btn-primary" value="Log In">
+  </div>
 </form>
 ```
 
 Added possibility to create inline and horizontal forms: `$this->Form->create($myModal, ['horizontal' => true, 'inline' => false]);`
+
+```php
+echo $this->Form->create(null, ['horizontal' => true]);
+echo $this->Form->input('username') ;
+echo $this->Form->input('password') ;
+echo $this->Form->input('remember') ;
+echo $this->Form->submit('Log In') ;
+echo $this->Form->end() ;
+```
+
+Will output:
+
+```html
+<form method="post" accept-charset="utf-8" class="form-horizontal" role="form" action="/CakePHP3/">
+  <div style="display:none;">
+    <input class="form-control" value="POST" type="hidden" name="_method" id="_method">
+  </div>
+  <div class="form-group text">
+    <label class="col-md-2 control-label" for="username">Username</label>
+    <div class="col-md-6">
+      <input class="form-control" id="username" type="text" name="username">
+    </div>
+  </div>
+  <div class="form-group password">
+    <label class="col-md-2 control-label" for="password">Password</label>
+    <div class="col-md-6">
+      <input class="form-control" id="password" type="password" name="password">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-md-offset-2 col-md-6">
+      <div class="checkbox">
+        <label>
+          <input class="form-control" value="0" type="hidden" name="remember" id="remember">
+          <input type="checkbox" name="remember" value="1" id="remember">
+          Remember me
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-md-offset-2 col-md-6">
+      <input type="submit" class="btn btn-primary" value="Log In">
+    </div>
+  </div>
+</form>
+```
 
 With <code>horizontal</code>, it is possible to specify the width of each columns:
 ```php
