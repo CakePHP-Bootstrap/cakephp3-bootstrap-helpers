@@ -78,7 +78,7 @@ echo $this->Form->end('Log In') ;
 
 Will output:
 
-```
+```html
 <form method="post" accept-charset="utf-8" role="form" action="/login">
   <div style="display:none;">
     <input class="form-control" value="POST" type="hidden" name="_method" id="_method">
