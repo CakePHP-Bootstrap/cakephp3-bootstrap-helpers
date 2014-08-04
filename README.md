@@ -270,6 +270,27 @@ echo $this->Modal->end([
 ?>
 ```
 
+Output:
+
+```html
+<div id="MyModal" tabindex="-1" role="dialog" aria-hidden="true" aria-labbeledby="MyModalLabel" class="modal fade" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header ">
+        <h4 class="modal-title" id="MyModalLabel">My Modal Form</h4>
+      </div>
+      <div class="modal-body ">    
+        <p>Here I write the body of my modal !</p>
+      </div>
+      <div class="modal-footer ">
+        <button class="btn btn-primary btn-primary" type="submit">Submit</button>
+        <button data-dismiss="modal" class="btn btn-primary" type="submit">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
 **Second one - No HTML, the various section are split in different methods.**
 ```php
 <?php
