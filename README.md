@@ -17,9 +17,10 @@ or add the following into your composer.json and run `composer update`.
 }
 ```
 
-Load the plugin in your bootstrap file
+If you do not use `composer`, simply clone the repository into your `plugins/Bootstrap3` folder.
+
+Don't forget to load the plugin in your `/config/bootstrap.php` file:
 ```php
-// /config/bootstrap.php
 Plugin::load('Bootstrap3');
 ```
 
