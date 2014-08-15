@@ -1,9 +1,9 @@
-cakephp3-bootstrap3-helpers
-===========================
+CakePHP 3.x Helpers for Bootstrap 3
+===================================
 
-CakePHP 3.0 Helpers to generate HTML with @Twitter Boostrap 3
+CakePHP 3.0 Helpers to generate HTML with @Twitter Boostrap 3: `Html`, `Form`, `Modal` and `Paginator` helpers available!
 
-This is the new repository for my CakePHP Bootstrap 3 Helpers (CakePHP 2.0 repository here: https://github.com/Holt59/cakephp-bootstrap3-helpers).
+<i>This is the new repository for my CakePHP Bootstrap 3 Helpers (CakePHP 2.0 repository here: https://github.com/Holt59/cakephp-bootstrap3-helpers).</i>
 
 Installation
 ============
