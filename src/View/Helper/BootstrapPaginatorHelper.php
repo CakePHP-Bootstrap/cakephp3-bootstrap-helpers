@@ -38,6 +38,8 @@ class BootstrapPaginatorHelper extends PaginatorHelper {
             'number' => '<li><a href="{{url}}">{{text}}</a></li>',
             'current ' => '<li class="active"><a href="{{url}}">{{text}}</a></li>'
         ]);
+        
+        parent::__construct($view, $config);
     }
     
     /**
