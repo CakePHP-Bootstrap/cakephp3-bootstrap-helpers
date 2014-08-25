@@ -26,7 +26,7 @@ use Cake\View\Helper\FormHelper;
 
 class BootstrapFormHelper extends FormHelper {
 
-    public $helpers = array('Html') ;
+    public $helpers = array('Html','Url') ;
     
     public $horizontal = false ;
     public $inline = false ;
@@ -114,7 +114,7 @@ class BootstrapFormHelper extends FormHelper {
      * @return The HTML tags corresponding to the openning of the form
      * 
     **/
-    public function create($model = null, $options = array()) {
+    public function create($model = null, Array $options = array()) {
         if (isset($options['cols'])) {
             $this->colSize = $options['cols'] ;
             unset($options['cols']) ;
