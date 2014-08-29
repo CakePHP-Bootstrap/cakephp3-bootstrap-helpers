@@ -143,6 +143,8 @@ class BootstrapFormHelper extends FormHelper {
             'inputContainerError' => '<div class="form-group has-error {{type}}{{required}}">{{content}}{{error}}</div>',
             'formGroup' => '{{label}}'.($this->horizontal ? '<div class="'.$this->_getColClass('input').'">' : '').'{{input}}'.($this->horizontal ? '</div>' : ''),
             'input' => '<input class="form-control" {{attrs}} type="{{type}}" name="{{name}}" id="{{name}}" />',
+            'select' => '<select class="form-control" name="{{name}}"{{attrs}}>{{content}}</select>',
+            'selectMultiple' => '<select class="form-control" name="{{name}}[]" multiple="multiple"{{attrs}}>{{content}}</select>',
             'checkboxContainer' => '<div class="form-group">'.($this->horizontal ? '<div class="'.$this->_getColClass('label', true).' '.$this->_getColClass('input').'">' : '').'<div class="checkbox"><label>{{content}}</label>'.($this->horizontal ? '</div>' : '').'</div></div>',
             'radioContainer' => '<div class="form-group">'.($this->horizontal ? '<div class="'.$this->_getColClass('label', true).' '.$this->_getColClass('input').'">' : '').'<div class="checkbox"><label>{{content}}</label>'.($this->horizontal ? '</div>' : '').'</div></div>',
             'label' => '<label class="'.($this->horizontal ? $this->_getColClass('label') : '').' '.($this->inline ? 'sr-only' : 'control-label').'" {{attrs}}>{{text}}</label>',
