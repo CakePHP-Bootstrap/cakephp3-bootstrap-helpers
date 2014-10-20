@@ -40,6 +40,8 @@ class BootstrapFormHelper extends FormHelper {
     ];  
     private $defaultButtonType = 'default' ;
 
+    private $defaultFormType = 'basic';
+
     private $buttonTypes = ['primary', 'info', 'success', 'warning', 'danger', 'inverse', 'link'] ;
     private $buttonSizes = ['mini', 'small', 'large'] ;
 
@@ -52,7 +54,30 @@ class BootstrapFormHelper extends FormHelper {
         if (isset($config['columns'])) {
             $this->defaultColumnSize = $config['columns'] ;
         }
+
+        if (isset($config['type'])) {
+            $this->setFormType($config['type']);
+        }
+
         parent::__construct($view, $config);
+    }
+
+    protected function setFormType($type) {
+        $this->horizontal = $this->inline = $this->search = false;
+
+        if (strstr($type, 'horizontal')) {
+            $this->defaultFormType = 'horizontal';
+            $this->horizontal = true;
+        } elseif (strstr($type, 'inline')) {
+            $this->defaultFormType = 'inline';
+            $this->inline = true;
+        } elseif (strstr($type, 'search')) {
+            $this->defaultFormType = 'search';
+            $this->search = true;
+        } else {
+            $this->defaultFormType = 'basic';
+            return false;
+        }
     }
     
     /**
@@ -122,12 +147,12 @@ class BootstrapFormHelper extends FormHelper {
         else {
             $this->colSize = $this->defaultColumnSize ;
         }
-        $this->horizontal = $this->_extractOption('horizontal', $options, false);
-		unset($options['horizontal']);
-        $this->search = $this->_extractOption('search', $options, false) ;
-        unset($options['search']) ;
-        $this->inline = $this->_extractOption('inline', $options, false) ;
-        unset($options['inline']) ;
+
+        if (isset($options['type'])) {
+            $this->setFormType($this->_extractOption('type', $options, false));
+            unset($options['type']);
+        }
+
 		if ($this->horizontal) {
 			$options = $this->addClass($options, 'form-horizontal') ;
 		}
