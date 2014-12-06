@@ -145,8 +145,8 @@ class BootstrapFormHelper extends FormHelper {
             'input' => '<input class="form-control" {{attrs}} type="{{type}}" name="{{name}}" id="{{name}}" />',
             'select' => '<select class="form-control" name="{{name}}"{{attrs}}>{{content}}</select>',
             'selectMultiple' => '<select class="form-control" name="{{name}}[]" multiple="multiple"{{attrs}}>{{content}}</select>',
-            'checkboxContainer' => '<div class="form-group">'.($this->horizontal ? '<div class="'.$this->_getColClass('label', true).' '.$this->_getColClass('input').'">' : '').'<div class="checkbox"><label>{{content}}</label>'.($this->horizontal ? '</div>' : '').'</div></div>',
-            'radioContainer' => '<div class="form-group">'.($this->horizontal ? '<div class="'.$this->_getColClass('label', true).' '.$this->_getColClass('input').'">' : '').'<div class="checkbox"><label>{{content}}</label>'.($this->horizontal ? '</div>' : '').'</div></div>',
+            'checkboxContainer' => '<div class="form-group">'.($this->horizontal ? '<div class="'.$this->_getColClass('label', true).' '.$this->_getColClass('input').'">' : '').'<div class="checkbox">{{content}}'.($this->horizontal ? '</div>' : '').'</div></div>',
+            'radioContainer' => '<div class="form-group">'.($this->horizontal ? '<div class="'.$this->_getColClass('label', true).' '.$this->_getColClass('input').'">' : '').'<div class="checkbox">{{content}}'.($this->horizontal ? '</div>' : '').'</div></div>',
             'label' => '<label class="'.($this->horizontal ? $this->_getColClass('label') : '').' '.($this->inline ? 'sr-only' : 'control-label').'" {{attrs}}>{{text}}</label>',
             'error' => '<span class="help-block '.($this->horizontal ? $this->_getColClass('error') : '').'">{{content}}</span>',
             'submitContainer' => '<div class="form-group">'.($this->horizontal ? '<div class="'.$this->_getColClass('label', true).' '.$this->_getColClass('input').'">' : '').'{{content}}'.($this->horizontal ? '</div>' : '').'</div>',
@@ -170,20 +170,6 @@ class BootstrapFormHelper extends FormHelper {
             }
         }
         return implode(' ', $classes) ;
-    }
-
-    /**
-     *
-     * Create & return a label message (Twitter Boostrap like).
-     *
-    **/
-    public function label($fieldName, $text = NULL, array $options = []) {
-        $nolabel = strpos($options['input'], 'type="checkbox"') !== false 
-            || strpos($options['input'], 'type="radio"') !== false  ;
-        if ($nolabel) {
-            return $text ;
-        }
-        return parent::label($fieldName, $text, $options) ;
     }
 	
     /** 
