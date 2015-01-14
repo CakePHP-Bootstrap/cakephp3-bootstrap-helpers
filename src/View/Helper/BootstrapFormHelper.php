@@ -145,6 +145,7 @@ class BootstrapFormHelper extends FormHelper {
             'input' => '<input class="form-control" {{attrs}} type="{{type}}" name="{{name}}" id="{{name}}" />',
             'select' => '<select class="form-control" name="{{name}}"{{attrs}}>{{content}}</select>',
             'selectMultiple' => '<select class="form-control" name="{{name}}[]" multiple="multiple"{{attrs}}>{{content}}</select>',
+            'textarea' => '<textarea class="form-control" name="{{name}}"{{attrs}}>{{value}}</textarea>',
             'checkboxContainer' => '<div class="form-group">'.($this->horizontal ? '<div class="'.$this->_getColClass('label', true).' '.$this->_getColClass('input').'">' : '').'<div class="checkbox">{{content}}'.($this->horizontal ? '</div>' : '').'</div></div>',
             'radioContainer' => '<div class="form-group">'.($this->horizontal ? '<div class="'.$this->_getColClass('label', true).' '.$this->_getColClass('input').'">' : '').'<div class="checkbox">{{content}}'.($this->horizontal ? '</div>' : '').'</div></div>',
             'label' => '<label class="'.($this->horizontal ? $this->_getColClass('label') : '').' '.($this->inline ? 'sr-only' : 'control-label').'" {{attrs}}>{{text}}</label>',
