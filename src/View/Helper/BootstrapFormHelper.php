@@ -40,8 +40,8 @@ class BootstrapFormHelper extends FormHelper {
     ];  
     private $defaultButtonType = 'default' ;
 
-    private $buttonTypes = ['primary', 'info', 'success', 'warning', 'danger', 'inverse', 'link'] ;
-    private $buttonSizes = ['mini', 'small', 'large'] ;
+    private $buttonTypes = ['default', 'primary', 'info', 'success', 'warning', 'danger', 'link'] ;
+    private $buttonSizes = ['xs', 'sm', 'lg'] ;
 
     public function __construct (\Cake\View\View $view, array $config = []) {
         if (isset($config['buttons'])) {
@@ -65,21 +65,17 @@ class BootstrapFormHelper extends FormHelper {
      * 
     **/
     protected function _addButtonClasses ($options) {
-        $options = $this->addClass($options, 'btn btn-'.$this->defaultButtonType) ;
-        foreach ($this->buttonTypes as $type) {
-            if (isset($options['bootstrap-type']) && $options['bootstrap-type'] == $type) {
-                $options = $this->addClass($options, 'btn-'.$type) ;
-                break ;
-            }
-        }
-        foreach ($this->buttonSizes as $size) {
-            if (isset($options['bootstrap-size']) && $options['bootstrap-size'] == $size) {
-                $options = $this->addClass($options, 'btn-'.$size) ;
-                break ;
-            }
-        }
+        $type = $this->_extractOption('bootstrap-type', $options, $this->defaultButtonType);
+        $size = $this->_extractOption('bootstrap-size', $options, FALSE);
         unset($options['bootstrap-size']) ;
         unset($options['bootstrap-type']) ;
+        $options = $this->addClass($options, 'btn') ;
+        if (in_array($type, $this->buttonTypes)) {
+            $options = $this->addClass($options, 'btn-'.$type) ;
+        }
+        if (in_array($size, $this->buttonSizes)) {
+            $options = $this->addClass($options, 'btn-'.$size) ;
+        }
         return $options ;
     }
 
@@ -225,6 +221,21 @@ class BootstrapFormHelper extends FormHelper {
 
         return $res ;
     }
+
+    /**
+     *
+     * Create & return a Cakephp options array from the $options specified.
+     *
+    **/
+    protected function _createButtonOptions (array $options = array()) {
+        $options = $this->_addButtonClasses($options);
+        $block = $this->_extractOption('bootstrap-block', $options, false) ;
+        unset($options['bootstrap-block']);
+        if ($block) {
+            $options = $this->addClass($options, 'btn-block') ;
+        }
+        return $options ;
+    }
     
     /**
      * 
@@ -236,8 +247,7 @@ class BootstrapFormHelper extends FormHelper {
      * 
     **/
     public function button($title, array $options = array()) {
-        $options = $this->_addButtonClasses($options) ;
-        return parent::button($title, $options) ;
+        return parent::button($title, $this->_createButtonOptions($options)) ;
     }
     
     /**
@@ -317,8 +327,7 @@ class BootstrapFormHelper extends FormHelper {
      * 
     **/    
     public function submit($caption = null, array $options = array()) {
-        $options = $this->_addButtonClasses($options) ;
-        return parent::submit($caption, $options) ;
+        return parent::submit($caption, $this->_createButtonOptions($options)) ;
     }
     
     /** SPECIAL FORM **/
