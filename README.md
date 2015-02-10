@@ -25,7 +25,7 @@ If you do not use `composer`, simply clone the repository into your `plugins/Boo
 
 Don't forget to load the plugin in your `/config/bootstrap.php` file:
 ```php
-Plugin::load('Bootstrap3');
+Plugin::load('Bootstrap3', ['autoload' => true]);
 ```
 
 How to use?
