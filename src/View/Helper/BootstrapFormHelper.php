@@ -142,8 +142,17 @@ class BootstrapFormHelper extends FormHelper {
             'select' => '<select class="form-control" name="{{name}}"{{attrs}}>{{content}}</select>',
             'selectMultiple' => '<select class="form-control" name="{{name}}[]" multiple="multiple"{{attrs}}>{{content}}</select>',
             'textarea' => '<textarea class="form-control" name="{{name}}"{{attrs}}>{{value}}</textarea>',
-            'checkboxContainer' => '<div class="form-group">'.($this->horizontal ? '<div class="'.$this->_getColClass('label', true).' '.$this->_getColClass('input').'">' : '').'<div class="checkbox">{{content}}'.($this->horizontal ? '</div>' : '').'</div></div>',
-            'radioContainer' => '<div class="form-group">'.($this->horizontal ? '<div class="'.$this->_getColClass('label', true).' '.$this->_getColClass('input').'">' : '').'<div class="checkbox">{{content}}'.($this->horizontal ? '</div>' : '').'</div></div>',
+            'checkboxContainer' => '<div class="form-group">'
+                    .($this->horizontal ? '<div class="'.$this->_getColClass('label', true).' '.$this->_getColClass('input').'">' : '')
+                        .'<div class="checkbox">{{content}}</div>'
+                    .($this->horizontal ? '</div>' : '')
+                .'</div>',
+            'radioContainer' => '<div class="form-group">'
+                    .($this->horizontal ? '<div class="'.$this->_getColClass('label', true).' '.$this->_getColClass('input').'">' : '')
+                        .'{{content}}'
+                    .($this->horizontal ? '</div>' : '')
+                .'</div>',
+            'radioWrapper' => '<div class="radio">{{label}}</div>',
             'label' => '<label class="'.($this->horizontal ? $this->_getColClass('label') : '').' '.($this->inline ? 'sr-only' : 'control-label').'" {{attrs}}>{{text}}</label>',
             'error' => '<span class="help-block '.($this->horizontal ? $this->_getColClass('error') : '').'">{{content}}</span>',
             'submitContainer' => '<div class="form-group">'.($this->horizontal ? '<div class="'.$this->_getColClass('label', true).' '.$this->_getColClass('input').'">' : '').'{{content}}'.($this->horizontal ? '</div>' : '').'</div>',
@@ -186,8 +195,16 @@ class BootstrapFormHelper extends FormHelper {
         unset ($options['prepend']) ;
         $append = $this->_extractOption('append', $options, '') ;
         unset ($options['append']) ;
+        $inline = $this->_extractOption('inline', $options, '') ;
+        unset ($options['inline']) ;
 
-        $oldTemplate = $this->templates('input') ;
+        $oldTemplates = [
+            'input' => $this->templates('input'),
+            'label' => $this->templates('label'),
+            'radioWrapper' => $this->templates('radioWrapper'),
+            'nestingLabel' => $this->templates('nestingLabel'),
+            'radioContainer' => $this->templates('radioContainer')
+        ] ;
 
         if ($prepend || $append) {
             $before = '' ;
@@ -213,11 +230,26 @@ class BootstrapFormHelper extends FormHelper {
             ]) ;
         }
 
+        $options = $this->_parseOptions($fieldName, $options);
+
+        if ($inline) {
+            if ($options['type'] === 'radio') {
+                $this->templates([
+                    'label' => $oldTemplates['label'].'<div></div>',
+                    'radioWrapper' => '{{label}}',
+                    'nestingLabel' => '{{hidden}}<label{{attrs}} class="radio-inline">{{input}}{{text}}</label>'
+                ]) ;
+            }
+        }
+
+        if ($this->horizontal && $options['type'] === 'radio') {
+            $this->templates([
+                'radioContainer' => '<div class="form-group">{{content}}</div>'
+            ]);
+        }
 		$res = parent::input($fieldName, $options) ;
 
-	    $this->templates([
-            'input' => $oldTemplate
-        ]) ;
+	    $this->templates($oldTemplates) ;
 
         return $res ;
     }
