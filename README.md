@@ -21,12 +21,17 @@ or add the following into your composer.json and run `composer update`.
 }
 ```
 
-If you do not use `composer`, simply clone the repository into your `plugins/Bootstrap3` folder.
-
 Don't forget to load the plugin in your `/config/bootstrap.php` file:
+```php
+Plugin::load('Bootstrap3');
+```
+
+If you do not use `composer`, simply clone the repository into your `plugins/Bootstrap3` folder, and add `'autoload' => true` when loading the plugin:
+
 ```php
 Plugin::load('Bootstrap3', ['autoload' => true]);
 ```
+
 
 How to use?
 ===========
