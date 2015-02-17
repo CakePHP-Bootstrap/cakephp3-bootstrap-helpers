@@ -4,9 +4,6 @@
 	"keywords": ["CakePHP", "Bootstrap"],
 	"license": "Apache",
 	"type": "cakephp-plugin",
-	"require": {
-		"composer/installers": "*"
-	},
 	"require-dev": {
 		"cakephp/cakephp": "3.0.x-dev"
 	},
