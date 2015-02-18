@@ -73,8 +73,13 @@ class BootstrapPaginatorHelper extends PaginatorHelper {
             unset($options['size']) ;
         }
           
-        $options['before'] = '<ul class="'.$class.'">' ;
-        $options['after'] = '</ul>' ;
+        if (!isset($options['before'])) {
+            $options['before'] = '<ul class="'.$class.'">' ;
+        }
+        
+        if (!isset($options['after'])) {
+            $options['after'] = '</ul>' ;
+        }
 
         if (isset($options['prev'])) {
             $options['before'] .= $this->prev($options['prev']) ;
