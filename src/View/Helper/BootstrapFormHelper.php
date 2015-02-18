@@ -69,12 +69,12 @@ class BootstrapFormHelper extends FormHelper {
         $size = $this->_extractOption('bootstrap-size', $options, FALSE);
         unset($options['bootstrap-size']) ;
         unset($options['bootstrap-type']) ;
-        $options = $this->addClass($options, 'btn') ;
+        $options = array_merge_recursive(['class'=>['btn']], $options);
         if (in_array($type, $this->buttonTypes)) {
-            $options = $this->addClass($options, 'btn-'.$type) ;
+            array_splice($options['class'], 1, 0, 'btn-'.$type);
         }
         if (in_array($size, $this->buttonSizes)) {
-            $options = $this->addClass($options, 'btn-'.$size) ;
+            array_splice($options['class'], 1, 0, 'btn-'.$size);
         }
         return $options ;
     }
@@ -125,13 +125,13 @@ class BootstrapFormHelper extends FormHelper {
         $this->inline = $this->_extractOption('inline', $options, false) ;
         unset($options['inline']) ;
 		if ($this->horizontal) {
-			$options = $this->addClass($options, 'form-horizontal') ;
+			$options = array_merge_recursive(['class'=>['form-horizonta']], $options);
 		}
         else if ($this->inline) {
-            $options = $this->addClass($options, 'form-inline') ;
+            $options = array_merge_recursive(['class'=>['form-inline']], $options);
         }
         if ($this->search) {
-            $options = $this->addClass($options, 'form-search') ;
+            $options = array_merge_recursive(['class'=>['form-search']], $options);
         }
         $options['role'] = 'form' ;
         $this->templates([
@@ -264,7 +264,7 @@ class BootstrapFormHelper extends FormHelper {
         $block = $this->_extractOption('bootstrap-block', $options, false) ;
         unset($options['bootstrap-block']);
         if ($block) {
-            $options = $this->addClass($options, 'btn-block') ;
+            $options = array_merge_recursive(['class'=>['btn-block']], $options);
         }
         return $options ;
     }
@@ -296,9 +296,9 @@ class BootstrapFormHelper extends FormHelper {
     public function buttonGroup ($buttons, array $options = array()) {
         $vertical = $this->_extractOption('vertical', $options, false) ;
         unset($options['vertical']) ;
-        $options = $this->addClass($options, 'btn-group') ;
+        $options = array_merge_recursive(['class'=>['btn-group']], $options);
         if ($vertical) {
-            $options = $this->addClass($options, 'btn-group-vertical') ;
+            array_splice($options['class'], 1, 0, 'btn-group-vertical');
         }
         return $this->Html->tag('div', implode('', $buttons), $options) ;
     }
@@ -312,7 +312,7 @@ class BootstrapFormHelper extends FormHelper {
      * 
     **/
     public function buttonToolbar (array $buttonGroups, array $options = array()) {
-        $options = $this->addClass($options, 'btn-toolbar') ;
+        $options = array_merge_recursive(['class'=>['btn-toolbar']], $options);
         return $this->Html->tag('div', implode('', $buttonGroups), $options) ;
     }
     
@@ -330,7 +330,7 @@ class BootstrapFormHelper extends FormHelper {
     
         $options['type'] = false ;
         $options['data-toggle'] = 'dropdown' ;
-        $options = $this->addClass($options, "dropdown-toggle") ;
+        $options = array_merge_recursive(['class'=>['dropdown-toggle']], $options);
         
         $outPut = '<div class="btn-group">' ;
         $outPut .= $this->button($title.' <span class="caret"></span>', $options) ;

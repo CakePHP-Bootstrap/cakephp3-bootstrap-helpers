@@ -88,8 +88,8 @@ class BootstrapHtmlHelper extends HtmlHelper {
         $type = $this->_extractType($options, 'type', $default = 'default',
                     array('default', 'primary', 'success', 'warning', 'info', 'danger')) ;
         unset ($options['type']) ;
-        $options = $this->addClass($options, 'label') ;
-        $options = $this->addClass($options, 'label-'.$type) ;
+        $options = array_merge_recursive(['class'=>['label']], $options);
+        array_splice($options['class'], 1, 0, 'label-'.$type);
         return $this->tag('span', $text, $options) ;
     }
     
@@ -103,7 +103,7 @@ class BootstrapHtmlHelper extends HtmlHelper {
      *
     **/
     public function badge ($text, $options = array()) {
-        $options = $this->addClass($options, 'badge') ;
+        $options = array_merge_recursive(['class'=>['badge']], $options);
         return $this->tag('span', $text, $options) ;
     }
 
@@ -119,7 +119,7 @@ class BootstrapHtmlHelper extends HtmlHelper {
     **/
     public function getCrumbList(array $options = array(), $startText = false) {
         $options['separator'] = '' ;
-        $options = $this->addClass($options, 'breadcrumb') ;
+        $options = array_merge_recursive(['class'=>['breadcrumb']], $options);
         return parent::getCrumbList ($options, $startText) ;
     }
     
@@ -149,9 +149,9 @@ class BootstrapHtmlHelper extends HtmlHelper {
         $button = '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' ;
         $type = $this->_extractType($options, 'type', 'warning', array('info', 'warning', 'success', 'danger')) ;
         unset($options['type']) ;
-        $options = $this->addClass($options, 'alert') ;
+        $options = array_merge_recursive(['class'=>['alert']], $options);
         if ($type) {
-            $options = $this->addClass($options, 'alert-'.$type) ;
+            array_splice($options['class'], 1, 0, 'alert-'.$type);
         }
         $class = $options['class'] ;
         unset($options['class']) ;
@@ -220,12 +220,12 @@ class BootstrapHtmlHelper extends HtmlHelper {
                 'style' => 'width: '.$widths.'%;'
             )) ;
         }
-        $options = $this->addClass($options, 'progress') ;
+        $options = array_merge_recursive(['class'=>['progress']], $options);
         if ($active) {
-            $options = $this->addClass($options, 'active') ;
+            array_splice($options['class'], 1, 0, 'active');
         }
         if ($striped) {
-            $options = $this->addClass($options, 'progress-striped') ;
+            array_splice($options['class'], 1, 0, 'progress-striped');
         }
         $classes = $options['class'];
         unset($options['class']) ;
