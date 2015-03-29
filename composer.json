@@ -4,8 +4,8 @@
 	"keywords": ["CakePHP", "Bootstrap"],
 	"license": "Apache",
 	"type": "cakephp-plugin",
-	"require-dev": {
-		"cakephp/cakephp": "3.0.x-dev"
+	"require": {
+		"cakephp/cakephp": "~3.0"
 	},
 	"autoload": {
 		"psr-4": {
