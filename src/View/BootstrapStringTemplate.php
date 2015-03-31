@@ -1,0 +1,63 @@
+<?php 
+namespace Bootstrap3\View;
+
+use Cake\View\StringTemplate;
+use Cake\Utility\Hash;
+
+class BootstrapStringTemplate extends StringTemplate {
+
+    /**
+     * Compile templates into a more efficient printf() compatible format.
+     *
+     * @param array $templates The template names to compile. If empty all templates will be compiled.
+     * @return void
+     */
+    protected function _compileTemplates(array $templates = [])
+    {
+        if (empty($templates)) {
+            $templates = array_keys($this->_config);
+        }
+        foreach ($templates as $name) {
+            $template = $this->get($name);
+            if ($template === null) {
+                $this->_compiled[$name] = [null, null];
+            }
+
+            preg_match_all('#\{\{([\w.]+)\}\}#', $template, $matches);
+            $this->_compiled[$name] = [
+                str_replace($matches[0], '%s', $template),
+                $matches[1]
+            ];
+        }
+    }
+
+    /**
+     * Format a template string with $data
+     *
+     * @param string $name The template name.
+     * @param array $data The data to insert.
+     * @return string
+    '*/
+    public function format($name, array $data)
+    {
+        if (!isset($this->_compiled[$name])) {
+            return '';
+        }
+        list($template, $placeholders) = $this->_compiled[$name];
+        if (isset($data['attrs']) 
+            && in_array('attrs.class', $placeholders)
+            && preg_match('#class="([^"]+)"#', $data['attrs'], $matches) > 0) {
+            preg_replace('#class="[^"]+"#', '', $data['attrs']);
+            $data['attrs.class'] = $matches[1];
+        }  
+        if ($template === null) {
+            return '';
+        }
+        $replace = [];
+        foreach ($placeholders as $placeholder) {
+            $replace[] = isset($data[$placeholder]) ? $data[$placeholder] : null;
+        }
+        return vsprintf($template, $replace);
+    }
+
+};

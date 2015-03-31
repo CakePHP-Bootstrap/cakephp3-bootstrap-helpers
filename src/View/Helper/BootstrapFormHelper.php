@@ -52,6 +52,7 @@ class BootstrapFormHelper extends FormHelper {
         if (isset($config['columns'])) {
             $this->defaultColumnSize = $config['columns'] ;
         }
+        $this->_defaultConfig['templateClass'] = 'Bootstrap3\View\BootstrapStringTemplate' ;
         parent::__construct($view, $config);
     }
     
@@ -165,10 +166,10 @@ class BootstrapFormHelper extends FormHelper {
             'inputContainer' => '<div class="form-group {{type}}{{required}}">{{content}}</div>',
             'inputContainerError' => '<div class="form-group has-error {{type}}{{required}}">{{content}}{{error}}</div>',
             'formGroup' => '{{label}}'.($this->horizontal ? '<div class="'.$this->_getColClass('input').'">' : '').'{{input}}'.($this->horizontal ? '</div>' : ''),
-            'input' => '<input type="{{type}}" name="{{name}}"{{attrs}}/>',
-            'select' => '<select name="{{name}}"{{attrs}}>{{content}}</select>',
-            'selectMultiple' => '<select name="{{name}}[]" multiple="multiple"{{attrs}}>{{content}}</select>',
-            'textarea' => '<textarea name="{{name}}"{{attrs}}>{{value}}</textarea>',
+            'input' => '<input type="{{type}}" name="{{name}}" class="form-control {{attrs.class}}" {{attrs}}/>',
+            'select' => '<select name="{{name}}" class="form-control {{attrs.class}}" {{attrs}}>{{content}}</select>',
+            'selectMultiple' => '<select name="{{name}}[]" multiple="multiple" class="form-control {{attrs.class}}" {{attrs}}>{{content}}</select>',
+            'textarea' => '<textarea name="{{name}}" class="form-control {{attrs.class}}" {{attrs}}>{{value}}</textarea>',
             'checkboxContainer' => '<div class="form-group">'
                     .($this->horizontal ? '<div class="'.$this->_getColClass('label', true).' '.$this->_getColClass('input').'">' : '')
                         .'<div class="checkbox">{{content}}</div>'
@@ -186,7 +187,7 @@ class BootstrapFormHelper extends FormHelper {
         ]) ;
 		return parent::create($model, $options) ;
 	}
-    
+
     /**
      *
      * Return the col size class for the specified column (label, input or error).
@@ -253,15 +254,11 @@ class BootstrapFormHelper extends FormHelper {
                 }
             }
             $this->templates([
-                'input' => '<div class="input-group">'.$before.'<input {{attrs}} type="{{type}}" name="{{name}}" id="{{name}}" />'.$after.'</div>'
+                'input' => '<div class="input-group">'.$before.'<input class="form-control {{attrs.class}}" {{attrs}} type="{{type}}" name="{{name}}" id="{{name}}" />'.$after.'</div>'
             ]) ;
         }
 
         $options = $this->_parseOptions($fieldName, $options);
-        if ($options['type'] != 'checkbox'
-            && $options['type'] != 'radio') {
-            $options = $this->addClass($options, 'form-control');
-        }
             
         if ($inline) {
             if ($options['type'] === 'radio') {
