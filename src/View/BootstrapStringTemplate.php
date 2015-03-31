@@ -37,13 +37,15 @@ class BootstrapStringTemplate extends StringTemplate {
      * @param string $name The template name.
      * @param array $data The data to insert.
      * @return string
-    '*/
+    */
     public function format($name, array $data)
     {
         if (!isset($this->_compiled[$name])) {
             return '';
         }
         list($template, $placeholders) = $this->_compiled[$name];
+        /* If there is a {{attrs.class}} block in $template, remove classes from $data['attrs']
+           and put them in $data['attrs.class']. */
         if (isset($data['attrs']) 
             && in_array('attrs.class', $placeholders)
             && preg_match('#class="([^"]+)"#', $data['attrs'], $matches) > 0) {
