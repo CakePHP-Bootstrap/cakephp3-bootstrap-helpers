@@ -165,7 +165,7 @@ class BootstrapFormHelper extends FormHelper {
         $this->templates([
             'inputContainer' => '<div class="form-group {{type}}{{required}}">{{content}}</div>',
             'inputContainerError' => '<div class="form-group has-error {{type}}{{required}}">{{content}}{{error}}</div>',
-            'formGroup' => '{{label}}'.($this->horizontal ? '<div class="'.$this->_getColClass('input').'">' : '').'{{input}}'.($this->horizontal ? '</div>' : ''),
+            'formGroup' => '{{label}}'.($this->horizontal ? '<div class="'.$this->_getColClass('input').'">' : '').'{{prepend}}{{input}}{{append}}'.($this->horizontal ? '</div>' : ''),
             'input' => '<input type="{{type}}" name="{{name}}" class="form-control {{attrs.class}}" {{attrs}}/>',
             'select' => '<select name="{{name}}" class="form-control {{attrs.class}}" {{attrs}}>{{content}}</select>',
             'selectMultiple' => '<select name="{{name}}[]" multiple="multiple" class="form-control {{attrs.class}}" {{attrs}}>{{content}}</select>',
@@ -218,68 +218,98 @@ class BootstrapFormHelper extends FormHelper {
      *        
     **/
     public function input($fieldName, array $options = array()) {
-    
+
+        $options = $this->_parseOptions($fieldName, $options);
+
         $prepend = $this->_extractOption('prepend', $options, '') ;
-        unset ($options['prepend']) ;
         $append = $this->_extractOption('append', $options, '') ;
-        unset ($options['append']) ;
-        $inline = $this->_extractOption('inline', $options, '') ;
-        unset ($options['inline']) ;
-
-        $oldTemplates = [
-            'input' => $this->templates('input'),
-            'label' => $this->templates('label'),
-            'radioWrapper' => $this->templates('radioWrapper'),
-            'nestingLabel' => $this->templates('nestingLabel'),
-            'radioContainer' => $this->templates('radioContainer')
-        ] ;
-
         if ($prepend || $append) {
-            $before = '' ;
-            $after = '' ;
             if ($prepend) {
                 if (is_string($prepend)) {
-                    $before = '<span class="input-group-'.($this->_matchButton($prepend) ? 'btn' : 'addon').'">'.$prepend.'</span>' ;
+                    $prepend = '<span class="input-group-'.($this->_matchButton($prepend) ? 'btn' : 'addon').'">'.$prepend.'</span>' ;
                 }
                 else {
-                    $before = '<span class="input-group-btn">'.implode('', $prepend).'</span>' ;
+                    $prepend = '<span class="input-group-btn">'.implode('', $prepend).'</span>' ;
                 }
             }
             if ($append) {
                 if (is_string($append)) {
-                    $after = '<span class="input-group-'.($this->_matchButton($append) ? 'btn' : 'addon').'">'.$append.'</span>' ;
+                    $append = '<span class="input-group-'.($this->_matchButton($append) ? 'btn' : 'addon').'">'.$append.'</span>' ;
                 }
                 else {
-                    $after = '<span class="input-group-btn">'.implode('', $append).'</span>' ;
+                    $append = '<span class="input-group-btn">'.implode('', $append).'</span>' ;
                 }
             }
-            $this->templates([
-                'input' => '<div class="input-group">'.$before.'<input class="form-control {{attrs.class}}" {{attrs}} type="{{type}}" name="{{name}}" id="{{name}}" />'.$after.'</div>'
-            ]) ;
+            $prepend = '<div class="input-group">'.$prepend;
+            $append .= '</div>';
         }
 
-        $options = $this->_parseOptions($fieldName, $options);
+        $help = $this->_extractOption('help', $options, '');
+        unset($options['help']);
+        if ($help) {
+            $append .= '<p class="help-block">'.$help.'</p>' ;
+        }
+
+        $inline = $this->_extractOption('inline', $options, '') ;
+        unset ($options['inline']) ;
             
-        if ($inline) {
-            if ($options['type'] === 'radio') {
-                $this->templates([
-                    'label' => $oldTemplates['label'].'<div></div>',
+        if ($options['type'] === 'radio') {
+            $options['templates'] = [] ;
+            if ($inline) {
+                $options['templates'] = [
+                    'label' => $this->templates('label').'<div></div>',
                     'radioWrapper' => '{{label}}',
                     'nestingLabel' => '{{hidden}}<label{{attrs}} class="radio-inline">{{input}}{{text}}</label>'
-                ]) ;
+                ] ;
+            }
+            if ($this->horizontal) {
+                $options['templates']['radioContainer'] = '<div class="form-group">{{content}}</div>';
+            }
+            if (empty($options['templates'])) {
+                unset($options['templates']);
             }
         }
 
-        if ($this->horizontal && $options['type'] === 'radio') {
-            $this->templates([
-                'radioContainer' => '<div class="form-group">{{content}}</div>'
-            ]);
+        $options['_data'] = [
+            'prepend' => $prepend,
+            'append' => $append
+        ];
+
+        return parent::input($fieldName, $options) ;
+    }
+
+    /**
+     * Generates an group template element
+     *
+     * @param array $options The options for group template
+     * @return string The generated group template
+     */
+    protected function _groupTemplate($options) {
+        $groupTemplate = $options['options']['type'] . 'FormGroup';
+        if (!$this->templater()->get($groupTemplate)) {
+            $groupTemplate = 'formGroup';
         }
-		$res = parent::input($fieldName, $options) ;
+        $data = [
+            'input' => $options['input'],
+            'label' => $options['label'],
+            'error' => $options['error']
+        ];
+        if (isset($options['options']['_data'])) {
+            $data = array_merge($data, $options['options']['_data']);
+        }
+        return $this->templater()->format($groupTemplate, $data);
+    }
 
-	    $this->templates($oldTemplates) ;
-
-        return $res ;
+    /**
+     * Generates an input element
+     *
+     * @param string $fieldName the field name
+     * @param array $options The options for the input element
+     * @return string The generated input element
+     */
+    protected function _getInput($fieldName, $options) {
+        unset($options['_data']);
+        return parent::_getInput($fieldName, $options);
     }
 
     /**
