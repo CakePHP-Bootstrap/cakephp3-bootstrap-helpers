@@ -26,20 +26,68 @@ use Cake\View\Helper\FormHelper;
 
 class BootstrapFormHelper extends FormHelper {
 
-    public $helpers = array('Html','Url') ;
-    
-    public $horizontal = false ;
-    public $inline = false ;
-    public $search = false ;
-    public $colSize ;
-    
+    public $helpers = ['Html', 'Url'] ;
+
+    /**
+     * Default config for the helper.
+     *
+     * @var array
+     */
+    protected $_defaultConfig = [
+        'errorClass' => 'has-error',
+        'typeMap' => [
+            'string' => 'text', 'datetime' => 'datetime', 'boolean' => 'checkbox',
+            'timestamp' => 'datetime', 'text' => 'textarea', 'time' => 'time',
+            'date' => 'date', 'float' => 'number', 'integer' => 'number',
+            'decimal' => 'number', 'binary' => 'file', 'uuid' => 'string'
+        ],
+        'templates' => [
+            'button' => '<button{{attrs}}>{{text}}</button>',
+            'checkbox' => '<input type="checkbox" name="{{name}}" value="{{value}}"{{attrs}}>',
+            'checkboxFormGroup' => '{{label}}',
+            'checkboxWrapper' => '<div class="checkbox">{{label}}</div>',
+            'checkboxContainer' => '<div class="form-group"><div class="checkbox">{{content}}</div></div>',
+            'dateWidget' => '{{year}}{{month}}{{day}}{{hour}}{{minute}}{{second}}{{meridian}}',
+            'error' => '<span class="help-block">{{content}}</span>',
+            'errorList' => '<ul>{{content}}</ul>',
+            'errorItem' => '<li>{{text}}</li>',
+            'file' => '<input type="file" name="{{name}}"{{attrs}}>',
+            'fieldset' => '<fieldset{{attrs}}>{{content}}</fieldset>',
+            'formStart' => '<form{{attrs}}>',
+            'formEnd' => '</form>',
+            'formGroup' => '{{label}}{{prepend}}{{input}}{{append}}',
+            'hiddenBlock' => '<div style="display:none;">{{content}}</div>',
+            'input' => '<input type="{{type}}" name="{{name}}" class="form-control {{attrs.class}}" {{attrs}} />',
+            'inputSubmit' => '<input type="{{type}}"{{attrs}}>',
+            'inputContainer' => '<div class="form-group {{type}}{{required}}">{{content}}</div>',
+            'inputContainerError' => '<div class="form-group has-error {{type}}{{required}}">{{content}}{{error}}</div>',
+            'label' => '<label class="control-label" {{attrs}}>{{text}}</label>',
+            'nestingLabel' => '{{hidden}}<label{{attrs}}>{{input}}{{text}}</label>',
+            'legend' => '<legend>{{text}}</legend>',
+            'option' => '<option value="{{value}}"{{attrs}}>{{text}}</option>',
+            'optgroup' => '<optgroup label="{{label}}"{{attrs}}>{{content}}</optgroup>',
+            'select' => '<select name="{{name}}" class="form-control {{attrs.class}}" {{attrs}}>{{content}}</select>',
+            'selectMultiple' => '<select name="{{name}}[]" multiple="multiple" class="form-control {{attrs.class}}" {{attrs}}>{{content}}</select>',
+            'radio' => '<input type="radio" name="{{name}}" value="{{value}}"{{attrs}}>',
+            'radioWrapper' => '<div class="radio">{{label}}</div>',
+            'radioContainer' => '<div class="form-group">{{content}}</div>',
+            'textarea' => '<textarea name="{{name}}" class="form-control {{attrs.class}}" {{attrs}}>{{value}}</textarea>',
+            'submitContainer' => '<div class="form-group">{{content}}</div>',
+        ]
+    ];
+
     private $defaultColumnSize = [
         'label' => 2,
         'input' => 6,
         'error' => 4
     ];  
     private $defaultButtonType = 'default' ;
-
+    
+    public $horizontal = false ;
+    public $inline = false ;
+    public $search = false ;
+    public $colSize ;
+    
     private $buttonTypes = ['default', 'primary', 'info', 'success', 'warning', 'danger', 'link'] ;
     private $buttonSizes = ['xs', 'sm', 'lg'] ;
 
@@ -52,6 +100,7 @@ class BootstrapFormHelper extends FormHelper {
         if (isset($config['columns'])) {
             $this->defaultColumnSize = $config['columns'] ;
         }
+        $this->colSize = $this->defaultColumnSize ;
         $this->_defaultConfig['templateClass'] = 'Bootstrap3\View\BootstrapStringTemplate' ;
         parent::__construct($view, $config);
     }
@@ -163,13 +212,7 @@ class BootstrapFormHelper extends FormHelper {
         }
         $options['role'] = 'form' ;
         $this->templates([
-            'inputContainer' => '<div class="form-group {{type}}{{required}}">{{content}}</div>',
-            'inputContainerError' => '<div class="form-group has-error {{type}}{{required}}">{{content}}{{error}}</div>',
             'formGroup' => '{{label}}'.($this->horizontal ? '<div class="'.$this->_getColClass('input').'">' : '').'{{prepend}}{{input}}{{append}}'.($this->horizontal ? '</div>' : ''),
-            'input' => '<input type="{{type}}" name="{{name}}" class="form-control {{attrs.class}}" {{attrs}}/>',
-            'select' => '<select name="{{name}}" class="form-control {{attrs.class}}" {{attrs}}>{{content}}</select>',
-            'selectMultiple' => '<select name="{{name}}[]" multiple="multiple" class="form-control {{attrs.class}}" {{attrs}}>{{content}}</select>',
-            'textarea' => '<textarea name="{{name}}" class="form-control {{attrs.class}}" {{attrs}}>{{value}}</textarea>',
             'checkboxContainer' => '<div class="form-group">'
                     .($this->horizontal ? '<div class="'.$this->_getColClass('label', true).' '.$this->_getColClass('input').'">' : '')
                         .'<div class="checkbox">{{content}}</div>'
@@ -180,7 +223,6 @@ class BootstrapFormHelper extends FormHelper {
                         .'{{content}}'
                     .($this->horizontal ? '</div>' : '')
                 .'</div>',
-            'radioWrapper' => '<div class="radio">{{label}}</div>',
             'label' => '<label class="'.($this->horizontal ? $this->_getColClass('label') : '').' '.($this->inline ? 'sr-only' : 'control-label').'" {{attrs}}>{{text}}</label>',
             'error' => '<span class="help-block '.($this->horizontal ? $this->_getColClass('error') : '').'">{{content}}</span>',
             'submitContainer' => '<div class="form-group">'.($this->horizontal ? '<div class="'.$this->_getColClass('label', true).' '.$this->_getColClass('input').'">' : '').'{{content}}'.($this->horizontal ? '</div>' : '').'</div>',
@@ -193,7 +235,7 @@ class BootstrapFormHelper extends FormHelper {
      * Return the col size class for the specified column (label, input or error).
      *
     **/
-    protected function _getColClass($what, $offset = false) {
+    protected function _getColClass ($what, $offset = false) {
         if (isset($this->colSize[$what])) {
             return 'col-md-'.($offset ? 'offset-' : '').$this->colSize[$what] ;
         }

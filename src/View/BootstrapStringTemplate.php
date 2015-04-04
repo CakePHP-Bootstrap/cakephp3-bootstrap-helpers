@@ -46,12 +46,16 @@ class BootstrapStringTemplate extends StringTemplate {
         list($template, $placeholders) = $this->_compiled[$name];
         /* If there is a {{attrs.class}} block in $template, remove classes from $data['attrs']
            and put them in $data['attrs.class']. */
-        if (isset($data['attrs']) 
-            && in_array('attrs.class', $placeholders)
-            && preg_match('#class="([^"]+)"#', $data['attrs'], $matches) > 0) {
-            preg_replace('#class="[^"]+"#', '', $data['attrs']);
-            $data['attrs.class'] = $matches[1];
-        }  
+        if (isset($data['attrs'])) {
+            foreach ($placeholders as $placeholder) {
+                if (substr($placeholder, 0, 6) == 'attrs.'
+                    && in_array('attrs.'.substr($placeholder, 6), $placeholders)
+                    && preg_match('#'.substr($placeholder, 6).'="([^"]+)"#', $data['attrs'], $matches) > 0) {
+                    preg_replace('#'.substr($placeholder, 6).'="[^"]+"#', '', $data['attrs']);
+                    $data[$placeholder] = $matches[1];
+                }  
+            }
+        }
         if ($template === null) {
             return '';
         }
