@@ -51,7 +51,7 @@ class BootstrapFormHelper extends FormHelper {
             'error' => '<span class="help-block">{{content}}</span>',
             'errorList' => '<ul>{{content}}</ul>',
             'errorItem' => '<li>{{text}}</li>',
-            'file' => '<input type="file" name="{{name}}"{{attrs}}>',
+            'file' => '<input type="file" name="{{name}}" {{attrs}}>',
             'fieldset' => '<fieldset{{attrs}}>{{content}}</fieldset>',
             'formStart' => '<form{{attrs}}>',
             'formEnd' => '</form>',
@@ -76,31 +76,68 @@ class BootstrapFormHelper extends FormHelper {
         ]
     ];
 
-    private $defaultColumnSize = [
-        'label' => 2,
-        'input' => 6,
-        'error' => 4
-    ];  
-    private $defaultButtonType = 'default' ;
+    /**
+     * Default widgets
+     *
+     * @var array
+     */
+    protected $_defaultWidgets = [
+        'button' => ['Cake\View\Widget\ButtonWidget'],
+        'checkbox' => ['Cake\View\Widget\CheckboxWidget'],
+        'file' => ['Cake\View\Widget\FileWidget'],
+        'label' => ['Cake\View\Widget\LabelWidget'],
+        'nestingLabel' => ['Cake\View\Widget\NestingLabelWidget'],
+        'multicheckbox' => ['Cake\View\Widget\MultiCheckboxWidget', 'nestingLabel'],
+        'radio' => ['Cake\View\Widget\RadioWidget', 'nestingLabel'],
+        'select' => ['Cake\View\Widget\SelectBoxWidget'],
+        'textarea' => ['Cake\View\Widget\TextareaWidget'],
+        'datetime' => ['Cake\View\Widget\DateTimeWidget', 'select'],
+        '_default' => ['Cake\View\Widget\BasicWidget'],
+    ];
     
     public $horizontal = false ;
     public $inline = false ;
     public $search = false ;
     public $colSize ;
-    
+
+    /**
+     * Use custom file inputs (bootstrap style, with javascript).
+     *
+     * @var boolean
+     */
+    protected $_customFileInput = true ;
+
+    /**
+     * Default type for buttons.
+     *
+     * @var string
+     */
+    protected $_defaultButtonType = 'default' ;
+
+    /**
+     * Default colums size.
+     *
+     * @var array
+     */
+    protected $_defaultColumnSize = [
+        'label' => 2,
+        'input' => 6,
+        'error' => 4
+    ];
+
     private $buttonTypes = ['default', 'primary', 'info', 'success', 'warning', 'danger', 'link'] ;
     private $buttonSizes = ['xs', 'sm', 'lg'] ;
 
     public function __construct (\Cake\View\View $view, array $config = []) {
         if (isset($config['buttons'])) {
             if (isset($config['buttons']['type'])) {
-                $this->defaultButtonType = $config['buttons']['type'] ;
+                $this->_defaultButtonType = $config['buttons']['type'] ;
             }
         }
         if (isset($config['columns'])) {
-            $this->defaultColumnSize = $config['columns'] ;
+            $this->_defaultColumnSize = $config['columns'] ;
         }
-        $this->colSize = $this->defaultColumnSize ;
+        $this->colSize = $this->_defaultColumnSize ;
         $this->_defaultConfig['templateClass'] = 'Bootstrap3\View\BootstrapStringTemplate' ;
         parent::__construct($view, $config);
     }
@@ -142,7 +179,7 @@ class BootstrapFormHelper extends FormHelper {
      * 
     **/
     protected function _addButtonClasses ($options) {
-        $type = $this->_extractOption('bootstrap-type', $options, $this->defaultButtonType);
+        $type = $this->_extractOption('bootstrap-type', $options, $this->_defaultButtonType);
         $size = $this->_extractOption('bootstrap-size', $options, FALSE);
         unset($options['bootstrap-size']) ;
         unset($options['bootstrap-type']) ;
@@ -193,7 +230,7 @@ class BootstrapFormHelper extends FormHelper {
             unset($options['cols']) ;
         }
         else {
-            $this->colSize = $this->defaultColumnSize ;
+            $this->colSize = $this->_defaultColumnSize ;
         }
         $this->horizontal = $this->_extractOption('horizontal', $options, false);
 		unset($options['horizontal']);
@@ -362,6 +399,37 @@ class BootstrapFormHelper extends FormHelper {
             }
         }
         return str_replace('{{colsize}}', round(12 / count($inputs)), '<div class="row">'.implode('', $inputs).'</div>') ;
+    }
+
+    /**
+     * Creates file input widget.
+     *
+     * @param string $fieldName Name of a field, in the form "modelname.fieldname"
+     * @param array $options Array of HTML attributes.
+     * @return string A generated file input.
+     * @link http://book.cakephp.org/3.0/en/views/helpers/form.html#creating-file-inputs
+     */
+    public function file($fieldName, array $options = []) {
+        if (!$this->_customFileInput || (isset($options['default']) && $options['default'])) {
+            return parent::file($fieldName, $options);
+        }
+        $options += ['secure' => true];
+        $options = $this->_initInputField($fieldName, $options);
+        unset($options['type']);
+        $fileInput = $this->widget('file', array_merge($options, [
+            'style' => 'display: none;',
+            'onchange' => "document.getElementById('".$options['id']."-input').value = this.files[0].name;"
+        ]));
+        $fakeInput = $this->text($fieldName, array_merge($options, [
+            'readonly' => 'readonly',
+            'id' => $options['id'].'-input',
+            'onclick' => "document.getElementById('".$options['id']."').click();"
+        ]));
+        $fakeButton = $this->button(__('Choose File'), [
+            'type' => 'button',
+            'onclick' => "document.getElementById('".$options['id']."').click();"
+        ]);
+        return $fileInput.$this->Html->div('input-group', $this->Html->div('input-group-btn', $fakeButton).$fakeInput) ;
     }
 
     /**
