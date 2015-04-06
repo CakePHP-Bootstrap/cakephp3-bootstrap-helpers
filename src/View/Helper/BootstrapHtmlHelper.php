@@ -26,6 +26,20 @@ use Cake\View\Helper\HtmlHelper;
 
 class BootstrapHtmlHelper extends HtmlHelper {    
 
+    /**
+     * Use font awesome icons instead of glyphicons.
+     *
+     * @var boolean
+     */
+    protected $_useFontAwesome = FALSE;
+
+    public function __construct (\Cake\View\View $view, array $config = []) {
+        if (isset($config['useFontAwesome'])) {
+            $this->_useFontAwesome = $config['useFontAwesome'];
+        }
+        parent::__construct($view, $config);
+    }
+
     protected function _extractOption ($key, $options, $default = null) {
         if (isset($options[$key])) {
             return $options[$key] ;
@@ -81,15 +95,33 @@ class BootstrapHtmlHelper extends HtmlHelper {
 
     /**
      * 
-     * Create a Twitter Bootstrap icon.
+     * Create a glyphicon or font awesome icon depending on $this->_useFontAwesome.
      * 
-     * @param $icon The type of the icon (search, pencil, etc.)
+     * @param $icon Name of the icon.
      * 
     **/
     public function icon ($icon) {
-        return '<i class="glyphicon glyphicon-'.$icon.'"></i>' ; 
+        return $this->_useFontAwesome ? $this->faIcon($icon) : $this->glIcon($icon);
     }
     
+    /**
+     * Create a font awesome icon.
+     *
+     * @param $icon Name of the icon.
+     */
+    public function faIcon ($icon) {
+        return '<i class="fa fa-'.$icon.'"></i>' ;
+    }
+
+    /**
+     * Create a glyphicon icon.
+     *
+     * @param $icon Name of the icon.
+     */
+    public function glIcon ($icon) {
+        return '<i class="glyphicon glyphicon-'.$icon.'"></i>';
+    }
+
     /**
      *
      * Create a Twitter Bootstrap span label.
