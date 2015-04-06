@@ -304,7 +304,9 @@ class BootstrapFormHelper extends FormHelper {
         $options = $this->_parseOptions($fieldName, $options);
 
         $prepend = $this->_extractOption('prepend', $options, '') ;
+        unset($options['prepend']);
         $append = $this->_extractOption('append', $options, '') ;
+        unset($options['append']);
         if ($prepend || $append) {
             if ($prepend) {
                 if (is_string($prepend)) {
@@ -378,6 +380,7 @@ class BootstrapFormHelper extends FormHelper {
         ];
         if (isset($options['options']['_data'])) {
             $data = array_merge($data, $options['options']['_data']);
+            unset($options['options']['_data']);
         }
         return $this->templater()->format($groupTemplate, $data);
     }
