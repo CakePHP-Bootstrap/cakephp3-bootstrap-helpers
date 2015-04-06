@@ -522,61 +522,187 @@
                         </div>
                     </div>
                     <h3>Button Group, Toolbar & Dropdown</h3>
-
-
-
-
-
-
-                        <p>New functions available to create buttons group, toolbar and dropdown:</p>
-                        <pre><code class="language-php">echo $this->Form->buttonGroup([$this->Form->button('1'), $this->Form->button('2')]) ;
-echo $this->Form->buttonToolbar([
-    $this->Form->buttonGroup([$this->Form->button('1'), $this->Form->button('2')]),
-    $this->Form->buttonGroup([$this->Form->button('3'), $this->Form->button('4')])
-]) ;
-echo $this->Form->dropdownButton('My Dropdown', [
-    $this->Html->link('Link 1'),
-    $this->Html->link('Link 2'),
-    'divider',
-    $this->Html->link('Link 3')
-]);</code></pre>
-                        <p>New options available when creating input to prepend / append button or text to input:</p>
-                        <pre><code class="language-php">echo $this->Form->input('mail', [
-    'prepend' => '@', 
-    'append' => $this->Form->button('Send')
-]) ;
-echo $this->Form->input('mail', [
-    'append' => [
-        $this->Form->button('Button'),
-        $this->Form->dropdownButton('Dropdown', [
-            $this->Html->link('A', []), 
-            $this->Html->link('B', []),
-            'divider', 
-            $this->Html->link('C', [])
-        ])
-    ]
-]) ;</code></pre>
-                        <p>It is possible to specify default button type and column width (for horizontal forms) when creating the helper:</p>
-                        <pre><code class="language-php">public $helpers = [
-    'Form' => [
-        'className' => 'Bootstrap3.BootstrapForm',
-        'buttons' => [
-            'type' => 'primary'
-        ],
-        'columns' => [
-            'sm' => [
-                'label' => 4,
-                'input' => 4,
-                'error' => 4
-            ],
-            'md' => [
-                'label' => 2,
-                'input' => 6,
-                'error' => 4
-            ]
+                    <div role="tabpanel">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#buttons-1-php" aria-controls="buttons-1-php" role="tab" data-toggle="tab">PHP</a></li>
+                            <li role="presentation"><a href="#buttons-1-markup" aria-controls="buttons-1-markup" role="tab" data-toggle="tab">Markup</a></li>
+                            <li role="presentation"><a href="#buttons-1-output" aria-controls="buttons-1-output" role="tab" data-toggle="tab">Output</a></li>
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="buttons-1-php">
+                                <pre><code class="language-php">&lt;?php
+    echo $this-&gt;Form-&gt;buttonGroup([$this-&gt;Form-&gt;button('1'), $this-&gt;Form-&gt;button('2')]) ;
+?&gt;</code></pre>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="buttons-1-markup">
+                                <pre><code class="language-markup">&lt;div class=&quot;btn-group&quot;&gt;
+    &lt;button class=&quot;btn btn-default&quot; type=&quot;submit&quot;&gt;1&lt;/button&gt;
+    &lt;button class=&quot;btn btn-default&quot; type=&quot;submit&quot;&gt;2&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="buttons-1-output">
+                                <div class="btn-group"><button class="btn btn-default" type="submit">1</button><button class="btn btn-default" type="submit">2</button></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div role="tabpanel">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#buttons-2-php" aria-controls="buttons-2-php" role="tab" data-toggle="tab">PHP</a></li>
+                            <li role="presentation"><a href="#buttons-2-markup" aria-controls="buttons-2-markup" role="tab" data-toggle="tab">Markup</a></li>
+                            <li role="presentation"><a href="#buttons-2-output" aria-controls="buttons-2-output" role="tab" data-toggle="tab">Output</a></li>
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="buttons-2-php">
+                                <pre><code class="language-php">&lt;?php
+    echo $this-&gt;Form-&gt;buttonToolbar([
+        $this-&gt;Form-&gt;buttonGroup([$this-&gt;Form-&gt;button('1'), $this-&gt;Form-&gt;button('2')]),
+        $this-&gt;Form-&gt;buttonGroup([$this-&gt;Form-&gt;button('3'), $this-&gt;Form-&gt;button('4')])
+    ]) ;
+?&gt;</code></pre>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="buttons-2-markup">
+                                <pre><code class="language-markup">&lt;div class=&quot;btn-toolbar&quot;&gt;
+    &lt;div class=&quot;btn-group&quot;&gt;
+        &lt;button class=&quot;btn btn-default&quot; type=&quot;submit&quot;&gt;1&lt;/button&gt;
+        &lt;button class=&quot;btn btn-default&quot; type=&quot;submit&quot;&gt;2&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;btn-group&quot;&gt;
+        &lt;button class=&quot;btn btn-default&quot; type=&quot;submit&quot;&gt;3&lt;/button&gt;
+        &lt;button class=&quot;btn btn-default&quot; type=&quot;submit&quot;&gt;4&lt;/button&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="buttons-2-output">
+                                <div class="btn-toolbar"><div class="btn-group"><button class="btn btn-default" type="submit">1</button><button class="btn btn-default" type="submit">2</button></div><div class="btn-group"><button class="btn btn-default" type="submit">3</button><button class="btn btn-default" type="submit">4</button></div></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div role="tabpanel">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#buttons-3-php" aria-controls="buttons-3-php" role="tab" data-toggle="tab">PHP</a></li>
+                            <li role="presentation"><a href="#buttons-3-markup" aria-controls="buttons-3-markup" role="tab" data-toggle="tab">Markup</a></li>
+                            <li role="presentation"><a href="#buttons-3-output" aria-controls="buttons-3-output" role="tab" data-toggle="tab">Output</a></li>
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="buttons-3-php">
+                                <pre><code class="language-php">&lt;?php
+    echo $this-&gt;Form-&gt;dropdownButton('My Dropdown', [
+        $this-&gt;Html-&gt;link('Link 1', '#'),
+        $this-&gt;Html-&gt;link('Link 2', '#'),
+        'divider',
+        $this-&gt;Html-&gt;link('Link 3', '#')
+    ]);
+?&gt;</code></pre>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="buttons-3-markup">
+                                <pre><code class="language-markup">&lt;div class=&quot;btn-group&quot;&gt;
+    &lt;button data-toggle=&quot;dropdown&quot; class=&quot;dropdown-toggle btn btn-default&quot;&gt;My Dropdown &lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;&lt;/button&gt;
+    &lt;ul class=&quot;dropdown-menu&quot;&gt;
+        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Link 1&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Link 2&lt;/a&gt;&lt;/li&gt;
+        &lt;li class=&quot;divider&quot;&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Link 3&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/div&gt;</code></pre>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="buttons-3-output">
+                                <div class="btn-group"><button data-toggle="dropdown" class="dropdown-toggle btn btn-default">My Dropdown <span class="caret"></span></button><ul class="dropdown-menu"><li><a href="#">Link 1</a></li><li><a href="#">Link 2</a></li><li class="divider"></li><li><a href="#">Link 3</a></li></ul></div>
+                            </div>
+                        </div>
+                    </div>
+                    <h3>New prepend / append & help options</h3>
+                    <div role="tabpanel">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#preapp-1-php" aria-controls="preapp-1-php" role="tab" data-toggle="tab">PHP</a></li>
+                            <li role="presentation"><a href="#preapp-1-markup" aria-controls="preapp-1-markup" role="tab" data-toggle="tab">Markup</a></li>
+                            <li role="presentation"><a href="#preapp-1-output" aria-controls="preapp-1-output" role="tab" data-toggle="tab">Output</a></li>
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="preapp-1-php">
+                                <pre><code class="language-php">&lt;?php
+    echo $this-&gt;Form-&gt;input('mail', [
+        'prepend' =&gt; '@', 
+        'help' =&gt; 'Hey guy, you need some help?',
+        'append' =&gt; $this-&gt;Form-&gt;button('Send')
+    ]) ;
+?&gt;</code></pre>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="preapp-1-markup">
+                                <pre><code class="language-markup">&lt;div class=&quot;form-group text&quot;&gt;
+    &lt;label class=&quot; control-label&quot;  for=&quot;mail&quot;&gt;Mail&lt;/label&gt;
+    &lt;div class=&quot;input-group&quot;&gt;
+        &lt;span class=&quot;input-group-addon&quot;&gt;@&lt;/span&gt;
+        &lt;input type=&quot;text&quot; name=&quot;mail&quot; class=&quot;form-control &quot; id=&quot;mail&quot; /&gt;
+        &lt;span class=&quot;input-group-btn&quot;&gt;
+            &lt;button class=&quot;btn btn-default&quot; type=&quot;submit&quot;&gt;Send&lt;/button&gt;
+        &lt;/span&gt;
+    &lt;/div&gt;
+    &lt;p class=&quot;help-block&quot;&gt;Hey guy, you need some help?&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="preapp-1-output">
+                                <div class="form-group text"><label class=" control-label"  for="mail">Mail</label><div class="input-group"><span class="input-group-addon">@</span><input type="text" name="mail" class="form-control "  id="mail" /><span class="input-group-btn"><button class="btn btn-default" type="submit">Send</button></span></div><p class="help-block">Hey guy, you need some help?</p></div>
+                            </div>
+                        </div>
+                    </div>
+                    <p>You can also easily append dropdown menu to your input:</p>
+                    <div role="tabpanel">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#preapp-2-php" aria-controls="preapp-2-php" role="tab" data-toggle="tab">PHP</a></li>
+                            <li role="presentation"><a href="#preapp-2-markup" aria-controls="preapp-2-markup" role="tab" data-toggle="tab">Markup</a></li>
+                            <li role="presentation"><a href="#preapp-2-output" aria-controls="preapp-2-output" role="tab" data-toggle="tab">Output</a></li>
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="preapp-2-php">
+                                <pre><code class="language-php">&lt;?php
+    echo $this-&gt;Form-&gt;input('mail', [
+        'append' =&gt; [
+            $this-&gt;Form-&gt;button('Button'),
+            $this-&gt;Form-&gt;dropdownButton('Dropdown', [
+                $this-&gt;Html-&gt;link('A', '#'), 
+                $this-&gt;Html-&gt;link('B', '#'),
+                'divider', 
+                $this-&gt;Html-&gt;link('C', '#')
+            ])
         ]
-    ]
-];</code></pre>
+    ]) ;
+?&gt;</code></pre>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="preapp-2-markup">
+                                <pre><code class="language-markup">&lt;div class=&quot;form-group text&quot;&gt;
+    &lt;label class=&quot; control-label&quot;  for=&quot;mail&quot;&gt;Mail&lt;/label&gt;
+    &lt;div class=&quot;input-group&quot;&gt;
+        &lt;input type=&quot;text&quot; name=&quot;mail&quot; class=&quot;form-control &quot;  id=&quot;mail&quot; /&gt;
+        &lt;span class=&quot;input-group-btn&quot;&gt;
+            &lt;button class=&quot;btn btn-default&quot; type=&quot;submit&quot;&gt;Button&lt;/button&gt;
+            &lt;div class=&quot;btn-group&quot;&gt;
+                &lt;button data-toggle=&quot;dropdown&quot; class=&quot;dropdown-toggle btn btn-default&quot;&gt;Dropdown &lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;&lt;/button&gt;
+                &lt;ul class=&quot;dropdown-menu&quot;&gt;
+                    &lt;li&gt;&lt;a href=&quot;#&quot;&gt;A&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&quot;#&quot;&gt;B&lt;/a&gt;&lt;/li&gt;
+                    &lt;li class=&quot;divider&quot;&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&quot;#&quot;&gt;C&lt;/a&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/div&gt;
+        &lt;/span&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="preapp-2-output">
+                                <div class="form-group text"><label class=" control-label"  for="mail">Mail</label><div class="input-group"><input type="text" name="mail" class="form-control "  id="mail" /><span class="input-group-btn"><button class="btn btn-default" type="submit">Button</button><div class="btn-group"><button data-toggle="dropdown" class="dropdown-toggle btn btn-default">Dropdown <span class="caret"></span></button><ul class="dropdown-menu"><li><a href="#">A</a></li><li><a href="#">B</a></li><li class="divider"></li><li><a href="#">C</a></li></ul></div></span></div></div>
+                            </div>
+                        </div>
+                    </div>
                     </section><!--
                     <section id="helpers-paginator">
                         <h1>Paginator Helper</h1>
