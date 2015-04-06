@@ -417,7 +417,7 @@ class BootstrapFormHelper extends FormHelper {
             return parent::file($fieldName, $options);
         }
         if (!isset($options['id'])) {
-            $options['id'] = 'file-'.rand();
+            $options['id'] = $fieldName ;
         }
         $options += ['secure' => true];
         $options = $this->_initInputField($fieldName, $options);
