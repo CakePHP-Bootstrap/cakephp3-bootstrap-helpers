@@ -105,7 +105,7 @@ class BootstrapFormHelper extends FormHelper {
      *
      * @var boolean
      */
-    protected $_customFileInput = true ;
+    protected $_customFileInput = false ;
 
     /**
      * Default type for buttons.
@@ -136,6 +136,9 @@ class BootstrapFormHelper extends FormHelper {
         }
         if (isset($config['columns'])) {
             $this->_defaultColumnSize = $config['columns'] ;
+        }
+        if (isset($config['useCustomFileInput'])) {
+            $this->_customFileInput = $config['useCustomFileInput'];
         }
         $this->colSize = $this->_defaultColumnSize ;
         $this->_defaultConfig['templateClass'] = 'Bootstrap3\View\BootstrapStringTemplate' ;
@@ -412,6 +415,9 @@ class BootstrapFormHelper extends FormHelper {
     public function file($fieldName, array $options = []) {
         if (!$this->_customFileInput || (isset($options['default']) && $options['default'])) {
             return parent::file($fieldName, $options);
+        }
+        if (!isset($options['id'])) {
+            $options['id'] = 'file-'.rand();
         }
         $options += ['secure' => true];
         $options = $this->_initInputField($fieldName, $options);
