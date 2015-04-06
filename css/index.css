@@ -19,6 +19,8 @@ pre[class*="language-"] {
     line-height: 1.45;
     border-radius: 3px;
     border: 1px solid #eee;
+    word-break: normal;
+    word-wrap: normal;
 }
 
 #forkme {

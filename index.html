@@ -195,50 +195,157 @@
                                 </div>
                             </div>
                         </div>
-                        <h3>Label & Badge</h3>
-                        <pre><code class="language-php">echo $this->Html->label('My Label', 'primary') ;
-
-echo $this->Html->badge('1') ;
-echo $this->Html->badge('2') ;</code></pre>
-                        <h3>Alert</h3>
-                        <pre><code class="language-php">echo $this->Html->alert('This is a warning alert!') ;
-echo $this->Html->alert('This is a success alert!', 'success');</code></pre>
+                        <h3>Labels</h3>
+                        <div role="tabpanel">
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#label-php" aria-controls="label-php" role="tab" data-toggle="tab">PHP</a></li>
+                                <li role="presentation"><a href="#label-markup" aria-controls="label-markup" role="tab" data-toggle="tab">Markup</a></li>
+                                <li role="presentation"><a href="#label-output" aria-controls="label-output" role="tab" data-toggle="tab">Output</a></li>
+                            </ul>
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="label-php">
+                                    <pre><code class="language-php">&lt;?php
+    echo $this-&gt;Html-&gt;label('My Label', 'primary') ;
+    echo $this-&gt;Html-&gt;label('My Label', 'danger') ;
+    echo $this-&gt;Html-&gt;label('My Label', 'success') ;
+?&gt;</code></pre>
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="label-markup">
+                                    <pre><code class="language-markup">&lt;span class=&quot;label label-primary&quot;&gt;My Label&lt;/span&gt;
+&lt;span class=&quot;label label-danger&quot;&gt;My Label&lt;/span&gt;
+&lt;span class=&quot;label label-success&quot;&gt;My Label&lt;/span&gt;</code></pre>
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="label-output">
+                                    <span class="label label-primary">My Label</span><span class="label label-danger">My Label</span><span class="label label-success">My Label</span>
+                                </div>
+                            </div>
+                        </div>
+                        <h3>Badges</h3>
+                        <div role="tabpanel">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#badge-php" aria-controls="badge-php" role="tab" data-toggle="tab">PHP</a></li>
+                            <li role="presentation"><a href="#badge-markup" aria-controls="badge-markup" role="tab" data-toggle="tab">Markup</a></li>
+                            <li role="presentation"><a href="#badge-output" aria-controls="badge-output" role="tab" data-toggle="tab">Output</a></li>
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="badge-php">
+                                <pre><code class="language-php">&lt;?php
+    echo $this-&gt;Html-&gt;badge('1') ;
+    echo $this-&gt;Html-&gt;badge('2') ;
+    echo $this-&gt;Html-&gt;badge('3') ;
+?&gt;</code></pre>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="badge-markup">
+                                <pre><code class="language-markup">&lt;span class=&quot;badge&quot;&gt;1&lt;/span&gt;
+&lt;span class=&quot;badge&quot;&gt;2&lt;/span&gt;
+&lt;span class=&quot;badge&quot;&gt;3&lt;/span&gt;</code></pre>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="badge-output">
+                                <span class="badge">1</span><span class="badge">2</span><span class="badge">3</span>
+                            </div>
+                        </div>
+                    </div>
+                    <h3>Alerts</h3>
+                    <div role="tabpanel">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#alert-php" aria-controls="alert-php" role="tab" data-toggle="tab">PHP</a></li>
+                            <li role="presentation"><a href="#alert-markup" aria-controls="alert-markup" role="tab" data-toggle="tab">Markup</a></li>
+                            <li role="presentation"><a href="#alert-output" aria-controls="alert-output" role="tab" data-toggle="tab">Output</a></li>
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="alert-php">
+                                <pre><code class="language-php">&lt;?php
+    echo $this-&gt;Html-&gt;alert('This is a warning alert!') ;
+    echo $this-&gt;Html-&gt;alert('This is a success alert!', 'success');
+    echo $this-&gt;Html-&gt;alert('This is a info alert with a specific id!', [
+        'id' =&gt; 'alert-info',
+        'type' =&gt; 'info'
+    ]);
+?&gt;</code></pre>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="alert-markup">
+                                <pre><code class="language-markup">&lt;div class=&quot;alert alert-warning&quot;&gt;
+    &lt;button type=&quot;button&quot; class=&quot;close&quot; data-dismiss=&quot;alert&quot; aria-hidden=&quot;true&quot;&gt;&amp;times;&lt;/button&gt;
+    This is a warning alert!
+&lt;/div&gt;
+&lt;div class=&quot;alert alert-success&quot;&gt;
+    &lt;button type=&quot;button&quot; class=&quot;close&quot; data-dismiss=&quot;alert&quot; aria-hidden=&quot;true&quot;&gt;&amp;times;&lt;/button&gt;
+    This is a success alert!
+&lt;/div&gt;
+&lt;div id=&quot;alert-info&quot; class=&quot;alert alert-info&quot;&gt;
+    &lt;button type=&quot;button&quot; class=&quot;close&quot; data-dismiss=&quot;alert&quot; aria-hidden=&quot;true&quot;&gt;&amp;times;&lt;/button&gt;
+    This is a info alert with a specific id!
+&lt;/div&gt;</code></pre>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="alert-output">
+                                <div class="alert alert-warning"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>This is a warning alert!</div><div class="alert alert-success"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>This is a success alert!</div><div id="alert-info" class="alert alert-info"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>This is a info alert with a specific id!</div>
+                            </div>
+                        </div>
+                    </div>
                     </section>
                     <section id="helpers-form">
                         <h1>Form Helper</h1>
-                        <p>Standard CakePHP code working with this helper!</p>
-                        <pre><code class="language-php">echo $this->Form->create();
-echo $this->Form->input('username') ;
-echo $this->Form->input('password') ;
-echo $this->Form->input('remember') ;
-echo $this->Form->submit('Log In') ;
-echo $this->Form->end() ;</code></pre>
-                        <p>Will output:</p>
-                        <pre><code class="language-markup">&lt;form method=&quot;post&quot; accept-charset=&quot;utf-8&quot; role=&quot;form&quot; action=&quot;/login&quot;&gt;
-  &lt;div style=&quot;display:none;&quot;&gt;
-    &lt;input class=&quot;form-control&quot; value=&quot;POST&quot; type=&quot;hidden&quot; name=&quot;_method&quot; id=&quot;_method&quot;&gt;
-  &lt;/div&gt;
-  &lt;div class=&quot;form-group text&quot;&gt;
-    &lt;label class=&quot; control-label&quot; for=&quot;username&quot;&gt;Username&lt;/label&gt;
-    &lt;input class=&quot;form-control&quot; id=&quot;username&quot; type=&quot;text&quot; name=&quot;username&quot;&gt;
-  &lt;/div&gt;
-  &lt;div class=&quot;form-group password&quot;&gt;
-    &lt;label class=&quot; control-label&quot; for=&quot;password&quot;&gt;Password&lt;/label&gt;
-    &lt;input class=&quot;form-control&quot; id=&quot;password&quot; type=&quot;password&quot; name=&quot;password&quot;&gt;
-  &lt;/div&gt;
-  &lt;div class=&quot;form-group&quot;&gt;
-    &lt;div class=&quot;checkbox&quot;&gt;
-      &lt;label&gt;
-        &lt;input class=&quot;form-control&quot; value=&quot;0&quot; type=&quot;hidden&quot; name=&quot;remember&quot; id=&quot;remember&quot;&gt;
-        &lt;input type=&quot;checkbox&quot; name=&quot;remember&quot; value=&quot;1&quot; id=&quot;remember&quot;&gt;
-        Remember me
-      &lt;/label&gt;
+                        <h3>Standard Use</h3>
+                        <p>Standard CakePHP code working with this helper, you do not need to worry about anything!</p>
+                        <div role="tabpanel">
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#form-1-php" aria-controls="form-1-php" role="tab" data-toggle="tab">PHP</a></li>
+                                <li role="presentation"><a href="#form-1-markup" aria-controls="form-1-markup" role="tab" data-toggle="tab">Markup</a></li>
+                                <li role="presentation"><a href="#form-1-output" aria-controls="form-1-output" role="tab" data-toggle="tab">Output</a></li>
+                            </ul>
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="form-1-php">
+                                    <pre><code class="language-php">&lt;?php
+    echo $this-&gt;Form-&gt;create();
+    echo $this-&gt;Form-&gt;input('username', ['type' =&gt; 'text']) ;
+    echo $this-&gt;Form-&gt;input('password', ['type' =&gt; 'password']) ;
+    echo $this-&gt;Form-&gt;input('remember', ['type' =&gt; 'checkbox']) ;
+    echo $this-&gt;Form-&gt;submit('Log In') ;
+    echo $this-&gt;Form-&gt;end() ;
+?&gt;</code></pre>
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="form-1-markup">
+                                    <pre><code class="language-markup">&lt;form method=&quot;post&quot; accept-charset=&quot;utf-8&quot; role=&quot;form&quot; action=&quot;#&quot;&gt;
+    &lt;div style=&quot;display:none;&quot;&gt;
+        &lt;input type=&quot;hidden&quot; name=&quot;_method&quot; class=&quot;form-control &quot;  value=&quot;POST&quot; /&gt;
     &lt;/div&gt;
-  &lt;/div&gt;
-  &lt;div class=&quot;form-group&quot;&gt;
-    &lt;input type=&quot;submit&quot; class=&quot;btn btn-primary&quot; value=&quot;Log In&quot;&gt;
-  &lt;/div&gt;
+    &lt;div class=&quot;form-group text&quot;&gt;
+        &lt;label class=&quot; control-label&quot; for=&quot;username&quot;&gt;Username&lt;/label&gt;
+        &lt;input type=&quot;text&quot; name=&quot;username&quot; class=&quot;form-control &quot;  id=&quot;username&quot; /&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;form-group password&quot;&gt;
+        &lt;label class=&quot; control-label&quot;  for=&quot;password&quot;&gt;Password&lt;/label&gt;
+        &lt;input type=&quot;password&quot; name=&quot;password&quot; class=&quot;form-control &quot;  id=&quot;password&quot; /&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;form-group&quot;&gt;
+        &lt;div class=&quot;checkbox&quot;&gt;
+            &lt;input type=&quot;hidden&quot; name=&quot;remember&quot; class=&quot;form-control &quot;  value=&quot;0&quot; /&gt;
+            &lt;label for=&quot;remember&quot;&gt;&lt;input type=&quot;checkbox&quot; name=&quot;remember&quot; value=&quot;1&quot; id=&quot;remember&quot;&gt;Remember&lt;/label&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;form-group&quot;&gt;
+        &lt;input type=&quot;submit&quot; class=&quot;btn btn-default&quot; value=&quot;Log In&quot;&gt;
+    &lt;/div&gt;
 &lt;/form&gt;</code></pre>
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="form-1-output">
+                                    <form method="post" accept-charset="utf-8" role="form" action="#"><div style="display:none;"><input type="hidden" name="_method" class="form-control "  value="POST" /></div><div class="form-group text"><label class=" control-label"  for="username">Username</label><input type="text" name="username" class="form-control "  id="username" /></div><div class="form-group password"><label class=" control-label"  for="password">Password</label><input type="password" name="password" class="form-control "  id="password" /></div><div class="form-group"><div class="checkbox"><input type="hidden" name="remember" class="form-control "  value="0" /><label for="remember"><input type="checkbox" name="remember" value="1" id="remember">Remember</label></div></div><div class="form-group"><input type="submit" class="btn btn-default" value="Log In"></div></form>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
                         <p>Added possibility to create inline and horizontal forms: <code>$this-&gt;Form-&gt;create($myModal, ['horizontal' =&gt; true, 'inline' =&gt; false]);</code></p>
                         <pre><code class="language-php">echo $this->Form->create(null, ['horizontal' => true]);
 echo $this->Form->input('username') ;
