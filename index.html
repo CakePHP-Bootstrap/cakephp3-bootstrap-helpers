@@ -341,77 +341,193 @@
                                 </div>
                             </div>
                         </div>
-
-
-
-
-
-                        <p>Added possibility to create inline and horizontal forms: <code>$this-&gt;Form-&gt;create($myModal, ['horizontal' =&gt; true, 'inline' =&gt; false]);</code></p>
-                        <pre><code class="language-php">echo $this->Form->create(null, ['horizontal' => true]);
-echo $this->Form->input('username') ;
-echo $this->Form->input('password') ;
-echo $this->Form->input('remember') ;
-echo $this->Form->submit('Log In') ;
-echo $this->Form->end() ;</code></pre>
-                        <p>Will output:</p>
-                        <pre><code class="language-markup">&lt;form method=&quot;post&quot; accept-charset=&quot;utf-8&quot; class=&quot;form-horizontal&quot; role=&quot;form&quot; action=&quot;/CakePHP3/&quot;&gt;
-  &lt;div style=&quot;display:none;&quot;&gt;
-    &lt;input class=&quot;form-control&quot; value=&quot;POST&quot; type=&quot;hidden&quot; name=&quot;_method&quot; id=&quot;_method&quot;&gt;
-  &lt;/div&gt;
-  &lt;div class=&quot;form-group text&quot;&gt;
-    &lt;label class=&quot;col-md-2 control-label&quot; for=&quot;username&quot;&gt;Username&lt;/label&gt;
-    &lt;div class=&quot;col-md-6&quot;&gt;
-      &lt;input class=&quot;form-control&quot; id=&quot;username&quot; type=&quot;text&quot; name=&quot;username&quot;&gt;
+                        <h3>Horizontal Forms</h3>
+                        <div role="tabpanel">
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#form-horizontal-php" aria-controls="form-horizontal-php" role="tab" data-toggle="tab">PHP</a></li>
+                                <li role="presentation"><a href="#form-horizontal-markup" aria-controls="form-horizontal-markup" role="tab" data-toggle="tab">Markup</a></li>
+                                <li role="presentation"><a href="#form-horizontal-output" aria-controls="form-horizontal-output" role="tab" data-toggle="tab">Output</a></li>
+                            </ul>
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="form-horizontal-php">
+                                    <pre><code class="language-php">&lt;?php
+    echo $this-&gt;Form-&gt;create(null, ['horizontal' =&gt; true]);
+    echo $this-&gt;Form-&gt;input('username', ['type' =&gt; 'text']) ;
+    echo $this-&gt;Form-&gt;input('password', ['type' =&gt; 'password']) ;
+    echo $this-&gt;Form-&gt;input('remember', ['type' =&gt; 'checkbox']) ;
+    echo $this-&gt;Form-&gt;submit('Log In') ;
+    echo $this-&gt;Form-&gt;end() ;
+?&gt;</code></pre>
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="form-horizontal-markup">
+                                    <pre><code class="language-markup">&lt;form method=&quot;post&quot; accept-charset=&quot;utf-8&quot; class=&quot;form-horizontal&quot; role=&quot;form&quot; action=&quot;#&quot;&gt;
+    &lt;div style=&quot;display:none;&quot;&gt;
+        &lt;input type=&quot;hidden&quot; name=&quot;_method&quot; class=&quot;form-control &quot;  value=&quot;POST&quot; /&gt;
     &lt;/div&gt;
-  &lt;/div&gt;
-  &lt;div class=&quot;form-group password&quot;&gt;
-    &lt;label class=&quot;col-md-2 control-label&quot; for=&quot;password&quot;&gt;Password&lt;/label&gt;
-    &lt;div class=&quot;col-md-6&quot;&gt;
-      &lt;input class=&quot;form-control&quot; id=&quot;password&quot; type=&quot;password&quot; name=&quot;password&quot;&gt;
+    &lt;div class=&quot;form-group text&quot;&gt;
+        &lt;label class=&quot;col-md-2 control-label&quot;  for=&quot;username&quot;&gt;Username&lt;/label&gt;
+        &lt;div class=&quot;col-md-6&quot;&gt;
+            &lt;input type=&quot;text&quot; name=&quot;username&quot; class=&quot;form-control &quot;  id=&quot;username&quot; /&gt;
+        &lt;/div&gt;
     &lt;/div&gt;
-  &lt;/div&gt;
-  &lt;div class=&quot;form-group&quot;&gt;
-    &lt;div class=&quot;col-md-offset-2 col-md-6&quot;&gt;
-      &lt;div class=&quot;checkbox&quot;&gt;
-        &lt;label&gt;
-          &lt;input class=&quot;form-control&quot; value=&quot;0&quot; type=&quot;hidden&quot; name=&quot;remember&quot; id=&quot;remember&quot;&gt;
-          &lt;input type=&quot;checkbox&quot; name=&quot;remember&quot; value=&quot;1&quot; id=&quot;remember&quot;&gt;
-          Remember me
-        &lt;/label&gt;
-      &lt;/div&gt;
+    &lt;div class=&quot;form-group password&quot;&gt;
+        &lt;label class=&quot;col-md-2 control-label&quot;  for=&quot;password&quot;&gt;Password&lt;/label&gt;
+        &lt;div class=&quot;col-md-6&quot;&gt;
+            &lt;input type=&quot;password&quot; name=&quot;password&quot; class=&quot;form-control &quot;  id=&quot;password&quot; /&gt;
+        &lt;/div&gt;
     &lt;/div&gt;
-  &lt;/div&gt;
-  &lt;div class=&quot;form-group&quot;&gt;
-    &lt;div class=&quot;col-md-offset-2 col-md-6&quot;&gt;
-      &lt;input type=&quot;submit&quot; class=&quot;btn btn-primary&quot; value=&quot;Log In&quot;&gt;
+    &lt;div class=&quot;form-group&quot;&gt;
+        &lt;div class=&quot;col-md-offset-2 col-md-6&quot;&gt;
+            &lt;div class=&quot;checkbox&quot;&gt;
+                &lt;input type=&quot;hidden&quot; name=&quot;remember&quot; class=&quot;form-control &quot;  value=&quot;0&quot; /&gt;
+                &lt;label for=&quot;remember&quot;&gt;
+                    &lt;input type=&quot;checkbox&quot; name=&quot;remember&quot; value=&quot;1&quot; id=&quot;remember&quot;&gt;
+                    Remember
+                &lt;/label&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
     &lt;/div&gt;
-  &lt;/div&gt;
+    &lt;div class=&quot;form-group&quot;&gt;
+        &lt;div class=&quot;col-md-offset-2 col-md-6&quot;&gt;
+            &lt;input type=&quot;submit&quot; class=&quot;btn btn-default&quot; value=&quot;Log In&quot;&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
 &lt;/form&gt;</code></pre>
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="form-horizontal-output">
+                                    <form method="post" accept-charset="utf-8" class="form-horizontal" role="form" action="#"><div style="display:none;"><input type="hidden" name="_method" class="form-control "  value="POST" /></div><div class="form-group text"><label class="col-md-2 control-label"  for="username">Username</label><div class="col-md-6"><input type="text" name="username" class="form-control "  id="username" /></div></div><div class="form-group password"><label class="col-md-2 control-label"  for="password">Password</label><div class="col-md-6"><input type="password" name="password" class="form-control "  id="password" /></div></div><div class="form-group"><div class="col-md-offset-2 col-md-6"><div class="checkbox"><input type="hidden" name="remember" class="form-control "  value="0" /><label for="remember"><input type="checkbox" name="remember" value="1" id="remember">Remember</label></div></div></div><div class="form-group"><div class="col-md-offset-2 col-md-6"><input type="submit" class="btn btn-default" value="Log In"></div></div></form>
+                                </div>
+                            </div>
+                        </div>
+
                         <p>With <code>horizontal</code>, it is possible to specify the width of each columns:</p>
-                        <pre><code class="language-php">echo $this->Form->create($myModal, [
+                        <pre><code class="language-php">echo $this->Form->create(null, [
     'horizontal' => true,
-    'cols' => [ // Total is 12
+    'cols' => [ // Total is 12, default is 2 / 6 / 4
         'label' => 2,
         'input' => 6,
         'error' => 4
     ]
 ]);</code></pre>
                         <p>You can also set column widths for different screens:</p>
-                        <pre><code class="language-php">echo $this->Form->create($myModal, [
-    'horizontal' => true,
-    'cols' => [ 
-        'sm' => [
-            'label' => 4,
-            'input' => 4,
-            'error' => 4
-        ],
-        'md' => [
-            'label' => 2,
-            'input' => 6,
-            'error' => 4
+                        <div role="tabpanel">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#form-horizontal-2-php" aria-controls="form-horizontal-2-php" role="tab" data-toggle="tab">PHP</a></li>
+                            <li role="presentation"><a href="#form-horizontal-2-markup" aria-controls="form-horizontal-2-markup" role="tab" data-toggle="tab">Markup</a></li>
+                            <li role="presentation"><a href="#form-horizontal-2-output" aria-controls="form-horizontal-2-output" role="tab" data-toggle="tab">Output</a></li>
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="form-horizontal-2-php">
+                                <pre><code class="language-php">&lt;?php
+    echo $this-&gt;Form-&gt;create(null, [
+        'horizontal' =&gt; true,
+        'cols' =&gt; [ 
+            'sm' =&gt; [
+                'label' =&gt; 4,
+                'input' =&gt; 4,
+                'error' =&gt; 4
+            ],
+            'md' =&gt; [
+                'label' =&gt; 2,
+                'input' =&gt; 6,
+                'error' =&gt; 4
+            ]
         ]
+    ]);
+    echo $this-&gt;Form-&gt;input('username', ['type' =&gt; 'text']) ;
+    echo $this-&gt;Form-&gt;input('password', ['type' =&gt; 'password']) ;
+    echo $this-&gt;Form-&gt;input('remember', ['type' =&gt; 'checkbox']) ;
+    echo $this-&gt;Form-&gt;submit('Log In') ;
+    echo $this-&gt;Form-&gt;end() ;
+?&gt;</code></pre>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="form-horizontal-2-markup">
+                                <pre><code class="language-markup">&lt;form method=&quot;post&quot; accept-charset=&quot;utf-8&quot; class=&quot;form-horizontal&quot; role=&quot;form&quot; action=&quot;#&quot;&gt;
+    &lt;div style=&quot;display:none;&quot;&gt;
+        &lt;input type=&quot;hidden&quot; name=&quot;_method&quot; class=&quot;form-control &quot;  value=&quot;POST&quot; /&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;form-group text&quot;&gt;
+        &lt;label class=&quot;col-sm-4 col-md-2 control-label&quot;  for=&quot;username&quot;&gt;Username&lt;/label&gt;
+        &lt;div class=&quot;col-sm-4 col-md-6&quot;&gt;
+            &lt;input type=&quot;text&quot; name=&quot;username&quot; class=&quot;form-control &quot;  id=&quot;username&quot; /&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;form-group password&quot;&gt;
+        &lt;label class=&quot;col-sm-4 col-md-2 control-label&quot;  for=&quot;password&quot;&gt;Password&lt;/label&gt;
+        &lt;div class=&quot;col-sm-4 col-md-6&quot;&gt;
+            &lt;input type=&quot;password&quot; name=&quot;password&quot; class=&quot;form-control &quot;  id=&quot;password&quot; /&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;form-group&quot;&gt;
+        &lt;div class=&quot;col-sm-offset-4 col-md-offset-2 col-sm-4 col-md-6&quot;&gt;
+            &lt;div class=&quot;checkbox&quot;&gt;
+                &lt;input type=&quot;hidden&quot; name=&quot;remember&quot; class=&quot;form-control &quot;  value=&quot;0&quot; /&gt;
+                &lt;label for=&quot;remember&quot;&gt;
+                    &lt;input type=&quot;checkbox&quot; name=&quot;remember&quot; value=&quot;1&quot; id=&quot;remember&quot;&gt;
+                    Remember
+                &lt;/label&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;form-group&quot;&gt;
+        &lt;div class=&quot;col-sm-offset-4 col-md-offset-2 col-sm-4 col-md-6&quot;&gt;
+            &lt;input type=&quot;submit&quot; class=&quot;btn btn-default&quot; value=&quot;Log In&quot;&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/form&gt;</code></pre>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="form-horizontal-2-output">
+                                <form method="post" accept-charset="utf-8" class="form-horizontal" role="form" action="#"><div style="display:none;"><input type="hidden" name="_method" class="form-control "  value="POST" /></div><div class="form-group text"><label class="col-sm-4 col-md-2 control-label"  for="username">Username</label><div class="col-sm-4 col-md-6"><input type="text" name="username" class="form-control "  id="username" /></div></div><div class="form-group password"><label class="col-sm-4 col-md-2 control-label"  for="password">Password</label><div class="col-sm-4 col-md-6"><input type="password" name="password" class="form-control "  id="password" /></div></div><div class="form-group"><div class="col-sm-offset-4 col-md-offset-2 col-sm-4 col-md-6"><div class="checkbox"><input type="hidden" name="remember" class="form-control "  value="0" /><label for="remember"><input type="checkbox" name="remember" value="1" id="remember">Remember</label></div></div></div><div class="form-group"><div class="col-sm-offset-4 col-md-offset-2 col-sm-4 col-md-6"><input type="submit" class="btn btn-default" value="Log In"></div></div></form>
+                            </div>
+                        </div>
+                    </div>
+                    <h3>Custom File Input</h3>
+                    <p>Bootstrap do not customize (ugly) file inputs, so you can choose to customize it with the helpers. To enable the custom file inputs (see demo bellow), set <code>useCustomFileInput</code> to <code>true</code> when enabling the helper:</p>
+                    <pre><code class="language-php">public $helpers = [
+    'Form' => [
+        'className' => 'Bootstrap3.BootstrapForm',
+        'useCustomFileInput' => true
     ]
-]);</code></pre>
+];</code></pre>
+                    <div role="tabpanel">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#form-fileinput-php" aria-controls="form-fileinput-php" role="tab" data-toggle="tab">PHP</a></li>
+                            <li role="presentation"><a href="#form-fileinput-markup" aria-controls="form-fileinput-markup" role="tab" data-toggle="tab">Markup</a></li>
+                            <li role="presentation"><a href="#form-fileinput-output" aria-controls="form-fileinput-output" role="tab" data-toggle="tab">Output</a></li>
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="form-fileinput-php">
+                                <pre><code class="language-php">&lt;?php
+    echo $this-&gt;Form-&gt;file('file');
+?&gt;</code></pre>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="form-fileinput-markup">
+                                <pre><code class="language-markup">&lt;input type=&quot;file&quot; name=&quot;file&quot;  id=&quot;file&quot; style=&quot;display: none;&quot; onchange=&quot;document.getElementById('file-input').value = this.files[0].name;&quot;&gt;
+&lt;div class=&quot;input-group&quot;&gt;
+    &lt;div class=&quot;input-group-btn&quot;&gt;
+        &lt;button type=&quot;button&quot; onclick=&quot;document.getElementById('file').click();&quot; class=&quot;btn btn-default&quot;&gt;Choose File&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;input type=&quot;text&quot; name=&quot;file&quot; class=&quot;form-control &quot;  id=&quot;file-input&quot; readonly=&quot;readonly&quot; onclick=&quot;document.getElementById('file').click();&quot; /&gt;
+&lt;/div&gt;</code></pre>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="form-fileinput-output">
+                                <input type="file" name="file"  id="file" style="display: none;" onchange="document.getElementById(&#039;file-input&#039;).value = this.files[0].name;"><div class="input-group"><div class="input-group-btn"><button type="button" onclick="document.getElementById('file').click();" class="btn btn-default">Choose File</button></div><input type="text" name="file" class="form-control "  id="file-input" readonly="readonly" onclick="document.getElementById(&#039;file&#039;).click();" /></div>
+                            </div>
+                        </div>
+                    </div>
+                    <h3>Button Group, Toolbar & Dropdown</h3>
+
+
+
+
+
+
                         <p>New functions available to create buttons group, toolbar and dropdown:</p>
                         <pre><code class="language-php">echo $this->Form->buttonGroup([$this->Form->button('1'), $this->Form->button('2')]) ;
 echo $this->Form->buttonToolbar([
