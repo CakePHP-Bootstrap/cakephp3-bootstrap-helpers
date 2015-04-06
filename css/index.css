@@ -51,6 +51,21 @@ a.cake-link {
     color: #c7254e;
 }
 
+.btn-custom {
+    background-color: #1096D0 ;
+    border-color: #0A90CC;
+    color: white;
+}
+
+.btn-custom:hover,
+.btn-custom:focus,
+.btn-custom:active,
+.btn-custom.active {
+    background-color: #068CC6 ;
+    border-color: #0080C0;
+    color: white;
+}
+
 .nav-tabs {
     margin-bottom: 15px;
 }
@@ -94,4 +109,14 @@ a.cake-link {
 section h1 {
     padding-bottom: 20px;
     border-bottom: 1px solid #ddd;
+}
+
+div[role="tabpanel"] {
+    position: relative;
+}
+
+.btn-modal {
+     position: absolute;
+    top: 4px;
+    right: 0px;
 }

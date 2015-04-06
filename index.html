@@ -32,7 +32,7 @@
                                 <li><a href="#helpers-html">HTML Helper</a></li>
                                 <li><a href="#helpers-form">Form Helper</a></li>
                                 <li><a href="#helpers-paginator">Paginator Helper</a></li>
-                                <li><a href="#helpers-model">Modal Helper</a></li>
+                                <li><a href="#helpers-modal">Modal Helper</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -587,74 +587,188 @@ echo $this->Form->input('mail', [
                         <p>The Bootstrap 3 modal helper allow  you to easily create modal without having to write bunch of html code. There is 3 ways of using this helper, the first one being the most
                         simple and common.</p>
                         <h3>Example 1 - Simple header & footer, custom body</h3>
-                        <pre><code class="language-php">&lt;?php
-// Start a modal with a title, default value for 'close' is true
-echo $this->Modal->create("My Modal Form", ['id' => 'MyModal', 'close' => false]) ; 
+                        <div role="tabpanel">
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#modal-1-php" aria-controls="modal-1-php" role="tab" data-toggle="tab">PHP</a></li>
+                                <li role="presentation"><a href="#modal-1-markup" aria-controls="modal-1-markup" role="tab" data-toggle="tab">Markup</a></li>
+                            </ul>
+                            <button type="button" class="btn btn-custom btn-modal" data-toggle="modal" data-target="#MyModal1">Show Modal</button>
+                            <div id="MyModal1" tabindex="-1" role="dialog" aria-hidden="true" aria-labbeledby="MyModal1Label" class="modal fade"><div class="modal-dialog"><div class="modal-content"><div class="modal-header "><h4 class="modal-title" id="MyModal1Label">Example 1 - Simple header & footer, custom body</h4></div><div class="modal-body "><p>Here I write the body of my modal !</p></div><div class="modal-footer "><button class="btn btn-primary btn-primary" type="submit">Submit</button><button data-dismiss="modal" class="btn btn-default" type="submit">Close</button></div></div></div></div>
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="modal-1-php">
+                                    <pre><code class="language-php">&lt;?php
+    // Start a modal with a title, default value for 'close' is true
+    echo $this->Modal->create("My Modal Form", ['id' => 'MyModal1', 'close' => false]) ; 
 ?&gt;
 &lt;p&gt;Here I write the body of my modal !&lt;/p&gt;
 &lt;?php
-// Close the modal, output a footer with a 'close' button
-echo $this->Modal->end() ;
-// It is possible to specify custom buttons:
-echo $this->Modal->end([
-    $this->Form->button('Submit', ['bootstrap-type' => 'primary']),   
-    $this->Form->button('Close', ['data-dismiss' => 'modal']) 
-]);
+    // Close the modal, output a footer with a 'close' button
+    echo $this->Modal->end() ;
+    // It is possible to specify custom buttons:
+    echo $this->Modal->end([
+        $this->Form->button('Submit', ['bootstrap-type' => 'primary']),   
+        $this->Form->button('Close', ['data-dismiss' => 'modal']) 
+    ]);
 ?&gt;</code></pre>
-                        <p>Output:</p>
-                        <pre><code class="language-markup">&lt;div id=&quot;MyModal&quot; tabindex=&quot;-1&quot; role=&quot;dialog&quot; aria-hidden=&quot;true&quot; aria-labbeledby=&quot;MyModalLabel&quot; class=&quot;modal fade&quot; style=&quot;display: none;&quot;&gt;
-  &lt;div class=&quot;modal-dialog&quot;&gt;
-    &lt;div class=&quot;modal-content&quot;&gt;
-      &lt;div class=&quot;modal-header &quot;&gt;
-        &lt;!-- With 'close' =&gt; true, or without specifying:
-        &lt;button type=&quot;button&quot; class=&quot;close&quot; data-dismiss=&quot;modal&quot; aria-hidden=&quot;true&quot;&gt;&times;&lt;/button&gt; --&gt;
-        &lt;h4 class=&quot;modal-title&quot; id=&quot;MyModalLabel&quot;&gt;My Modal Form&lt;/h4&gt;
-      &lt;/div&gt;
-      &lt;div class=&quot;modal-body &quot;&gt;    
-        &lt;p&gt;Here I write the body of my modal !&lt;/p&gt;
-      &lt;/div&gt;
-      &lt;div class=&quot;modal-footer &quot;&gt;
-        &lt;button class=&quot;btn btn-primary btn-primary&quot; type=&quot;submit&quot;&gt;Submit&lt;/button&gt;
-        &lt;button data-dismiss=&quot;modal&quot; class=&quot;btn btn-primary&quot; type=&quot;submit&quot;&gt;Close&lt;/button&gt;
-      &lt;/div&gt;
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="modal-1-markup">
+                                    <pre><code class="language-markup">&lt;div id=&quot;MyModal1&quot; tabindex=&quot;-1&quot; role=&quot;dialog&quot; aria-hidden=&quot;true&quot; aria-labbeledby=&quot;MyModal1Label&quot; class=&quot;modal fade&quot;
+    &lt;div class=&quot;modal-dialog&quot;&gt;
+        &lt;div class=&quot;modal-content&quot;&gt;
+            &lt;div class=&quot;modal-header &quot;&gt;
+                &lt;!-- With 'close' =&gt; true, or without specifying:
+                &lt;button type=&quot;button&quot; class=&quot;close&quot; data-dismiss=&quot;modal&quot; aria-hidden=&quot;true&quot;&gt;&times;&lt;/button&gt; --&gt;
+                &lt;h4 class=&quot;modal-title&quot; id=&quot;MyModal1Label&quot;&gt;Example 1 - Simple header & footer, custom body&lt;/h4&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;modal-body &quot;&gt;    
+                &lt;p&gt;Here I write the body of my modal !&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;modal-footer &quot;&gt;
+                &lt;button class=&quot;btn btn-primary btn-primary&quot; type=&quot;submit&quot;&gt;Submit&lt;/button&gt;
+                &lt;button data-dismiss=&quot;modal&quot; class=&quot;btn btn-default&quot; type=&quot;submit&quot;&gt;Close&lt;/button&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
     &lt;/div&gt;
-  &lt;/div&gt;
 &lt;/div&gt;</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
                         <h3>Example 2 - No HTML</h3>
                         <p>This one allow you to directly specify the modal body content when calling <code>Modal::body</code>. It is useful when the body you want to render is
                         a PHP string.</p>
-                        <pre><code class="language-php">echo $this->Modal->create(['id' => 'MyModal2']) ;
-echo $this->Modal->header('My Title', ['close' => false]) ; 
-echo $this->Modal->body('My Body', ['class' => 'my-body-class']) ;
-echo $this->Modal->footer([
-    $this->Form->button('Submit', ['bootstrap-type' => 'primary']),   
-    $this->Form->button('Close', ['data-dismiss' => 'modal']) 
-]) ;
-echo $this->Modal->end() ;</code></pre>
+                        <div role="tabpanel">
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#modal-2-php" aria-controls="modal-2-php" role="tab" data-toggle="tab">PHP</a></li>
+                                <li role="presentation"><a href="#modal-2-markup" aria-controls="modal-2-markup" role="tab" data-toggle="tab">Markup</a></li>
+                            </ul>
+                            <button type="button" class="btn btn-custom btn-modal" data-toggle="modal" data-target="#MyModal2">Show Modal</button>
+                            <div id="MyModal2" tabindex="-1" role="dialog" aria-hidden="true" aria-labbeledby="MyModal2Label" class="modal fade "><div class="modal-dialog"><div class="modal-content"><div class="modal-header "><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="MyModal2Label">Example 2 - No HTML</h4></div><div class="modal-body my-body-class"><p>My body... !</p></div><div class="modal-footer "><button class="btn btn-primary" type="submit">Submit</button><button data-dismiss="modal" class="btn btn-default" type="submit">Close</button></div></div></div></div>
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="modal-2-php">
+                                    <pre><code class="language-php">&lt;?php
+    $content = "&lt;p&gt;My body... !&lt;/p&gt;";
+    echo $this->Modal->create(['id' => 'MyModal2']) ;
+    echo $this->Modal->header('Example 2 - No HTML', ['close' => false]) ; 
+    echo $this->Modal->body($content, ['class' => 'my-body-class']) ;
+    echo $this->Modal->footer([
+        $this->Form->button('Submit', ['bootstrap-type' => 'primary']),   
+        $this->Form->button('Close', ['data-dismiss' => 'modal']) 
+    ]) ;
+    echo $this->Modal->end() ;
+?&gt;</code></pre>
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="modal-2-markup">
+                                    <pre><code class="language-markup">&lt;div id=&quot;MyModal2&quot; tabindex=&quot;-1&quot; role=&quot;dialog&quot; aria-hidden=&quot;true&quot; aria-labbeledby=&quot;MyModal2Label&quot; class=&quot;modal fade &quot;&gt;
+    &lt;div class=&quot;modal-dialog&quot;&gt;
+        &lt;div class=&quot;modal-content&quot;&gt;
+            &lt;div class=&quot;modal-header &quot;&gt;
+                &lt;button type=&quot;button&quot; class=&quot;close&quot; data-dismiss=&quot;modal&quot; aria-hidden=&quot;true&quot;&gt;&amp;times;&lt;/button&gt;
+                &lt;h4 class=&quot;modal-title&quot; id=&quot;MyModal2Label&quot;&gt;Example 2 - No HTML&lt;/h4&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;modal-body my-body-class&quot;&gt;
+                &lt;p&gt;My body... !&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;modal-footer &quot;&gt;
+                &lt;button class=&quot;btn btn-primary&quot; type=&quot;submit&quot;&gt;Submit&lt;/button&gt;
+                &lt;button data-dismiss=&quot;modal&quot; class=&quot;btn btn-default&quot; type=&quot;submit&quot;&gt;Close&lt;/button&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
                         <h3>Example 3 - Custom Modal</h3>
                         <p>If you want a custom modal, you can start each sestion manually and add whatever you want:</p>
-                        <pre><code class="language-php">&lt;?php 
-echo $this->Modal->create(['id' => 'MyModal3']) ;
-echo $this->Modal->header(['class' => 'my-header-class']) ; 
+                        <div role="tabpanel">
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#modal-3-php" aria-controls="modal-3-php" role="tab" data-toggle="tab">PHP</a></li>
+                                <li role="presentation"><a href="#modal-3-markup" aria-controls="modal-3-markup" role="tab" data-toggle="tab">Markup</a></li>
+                            </ul>
+                            <button type="button" class="btn btn-custom btn-modal" data-toggle="modal" data-target="#MyModal3">Show Modal</button>
+                            <div id="MyModal3" tabindex="-1" role="dialog" aria-hidden="true" aria-labbeledby="MyModal3Label" class="modal fade "><div class="modal-dialog"><div class="modal-content"><div class="modal-header my-header-class"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4>My Header!</h4></div><div class="modal-body "><p>My body!</p></div><div class="modal-footer "><p>My footer... Oops, no buttons!</p></div></div></div></div>
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="modal-3-php">
+                                    <pre><code class="language-php">&lt;?php 
+    echo $this-&gt;Modal-&gt;create(['id' =&gt; 'MyModal3']) ;
+    echo $this-&gt;Modal-&gt;header(['class' =&gt; 'my-header-class']) ; 
 ?&gt;
+&lt;button type=&quot;button&quot; class=&quot;close&quot; data-dismiss=&quot;modal&quot; aria-hidden=&quot;true&quot;&gt;&amp;times;&lt;/button&gt;
 &lt;h4&gt;My Header!&lt;/h4&gt;
 &lt;?php
-echo $this-&gt;Modal-&gt;body() ;
+    echo $this-&gt;Modal-&gt;body() ;
 ?&gt;
 &lt;p&gt;My body!&lt;/p&gt;
 &lt;?php
-echo $this-&gt;Modal-&gt;footer(['close' =&gt; false]) ;
+    echo $this-&gt;Modal-&gt;footer(['close' =&gt; false]) ;
 ?&gt;
 &lt;p&gt;My footer... Oops, no buttons!&lt;/p&gt;
 &lt;?php
-echo $this-&gt;Modal-&gt;end() ;
-&gt;</code></pre>
+    echo $this-&gt;Modal-&gt;end() ;
+?&gt;</code></pre>
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="modal-3-markup">
+                                    <pre><code class="language-markup">&lt;div id=&quot;MyModal3&quot; tabindex=&quot;-1&quot; role=&quot;dialog&quot; aria-hidden=&quot;true&quot; aria-labbeledby=&quot;MyModal3Label&quot; class=&quot;modal fade &quot;&gt;
+    &lt;div class=&quot;modal-dialog&quot;&gt;
+        &lt;div class=&quot;modal-content&quot;&gt;
+            &lt;div class=&quot;modal-header my-header-class&quot;&gt;
+                &lt;button type=&quot;button&quot; class=&quot;close&quot; data-dismiss=&quot;modal&quot; aria-hidden=&quot;true&quot;&gt;&amp;times;&lt;/button&gt;
+                &lt;h4&gt;My Header!&lt;/h4&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;modal-body &quot;&gt;
+                &lt;p&gt;My body!&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;modal-footer &quot;&gt;
+                &lt;p&gt;My footer... Oops, no buttons!&lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                                </div>
+                            </div>
+                        </div>
                         <p>Notice that you can omit a section if you want:</p>
-                        <pre><code class="language-php">echo $this->Modal->create() ;
-echo $this->Modal->body() ; // No header
-echo $this->Modal->footer() ; // Footer with close button (default)
-echo $this->Modal->end() ;</code></pre>
-                        <p><b>Hint:</b> You can use the <code>BootstrapFormHelper</code> to create a toggle button for your modal: </p>
+                        <div role="tabpanel">
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#modal-4-php" aria-controls="modal-4-php" role="tab" data-toggle="tab">PHP</a></li>
+                                <li role="presentation"><a href="#modal-4-markup" aria-controls="modal-4-markup" role="tab" data-toggle="tab">Markup</a></li>
+                            </ul>
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="modal-4-php">
+                                    <pre><code class="language-php">&lt;?php
+    echo $this-&gt;Modal-&gt;create(['id' =&gt; 'MyModal4']) ;
+    echo $this-&gt;Modal-&gt;body() ; // No header
+    echo $this-&gt;Modal-&gt;footer() ; // Footer with close button (default)
+    echo $this-&gt;Modal-&gt;end() ;
+?&gt;</code></pre>
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="modal-4-markup">
+                                    <pre><code class="language-markup">&lt;div id=&quot;MyModal4&quot; tabindex=&quot;-1&quot; role=&quot;dialog&quot; aria-hidden=&quot;true&quot; class=&quot;modal fade &quot;&gt;
+    &lt;div class=&quot;modal-dialog&quot;&gt;
+        &lt;div class=&quot;modal-content&quot;&gt;
+            &lt;div class=&quot;modal-body &quot;&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;modal-footer &quot;&gt;
+                &lt;button type=&quot;button&quot; class=&quot;btn btn-default&quot; data-dismiss=&quot;modal&quot;&gt;Close&lt;/button&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                        <h3>Creating a toggle button</h3>
+                        <p>You can use the <code>BootstrapFormHelper</code> to create a toggle button for your modal: </p>
                         <pre><code class="language-php">echo $this->Form->button('Toggle Form', [
     'data-toggle' => 'modal', 
     'data-target' => '#MyModal'
