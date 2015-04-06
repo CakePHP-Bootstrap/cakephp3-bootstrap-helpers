@@ -45,6 +45,10 @@ pre[class*="language-"] {
     text-decoration: none;
 }
     
+a.cake-link {
+    color: #c7254e;
+}
+
 .nav-tabs {
     margin-bottom: 15px;
 }
@@ -58,7 +62,7 @@ pre[class*="language-"] {
 }
 
 .jumbotron .container {
-    padding-top: 20px;
+    padding-top: 26px;
 }
 
 .jumbotron .headline {

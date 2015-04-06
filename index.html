@@ -113,15 +113,96 @@
                     </section>
                     <section id="helpers-html">
                         <h1>HTML Helper</h1>
-                        <p>Overload of <code>getCrumbList</code> and new functions availables:</p>
+                        <h3 class="method">getCrumbList</h3>
+                        <p>Overload of <a class="cake-link" href="http://api.cakephp.org/3.0/class-Cake.View.Helper.HtmlHelper.html#_getCrumbList" target="_blank"><code>Cake\View\Helper\HTMLHelper::getCrumbList</code></a>.</p>
+                        <div role="tabpanel">
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#getcrumblist-php" aria-controls="getcrumblist-php" role="tab" data-toggle="tab">PHP</a></li>
+                                <li role="presentation"><a href="#getcrumblist-markup" aria-controls="getcrumblist-markup" role="tab" data-toggle="tab">Markup</a></li>
+                                <li role="presentation"><a href="#getcrumblist-output" aria-controls="getcrumblist-output" role="tab" data-toggle="tab">Output</a></li>
+                            </ul>
+
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="getcrumblist-php">
+                                    <pre><code class="language-php">&lt;?php
+    $this->Html->addCrumb('Home', '/');
+    $this->Html->addCrumb('Pages', ['controller' => 'pages']); 
+    $this->Html->addCrumb('About', ['controller' => 'pages', 'action' => 'about']);
+    echo $this->Html->getCrumbList();
+?&gt;</code></pre>
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="getcrumblist-markup">
+                                    <pre><code class="language-markup">&lt;ul class=&quot;breadcrumb&quot;&gt;
+    &lt;li class=&quot;first&quot;&gt;&lt;a href=&quot;/&quot;&gt;Home&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;/pages&quot;&gt;Pages&lt;/a&gt;&lt;/li&gt;
+    &lt;li class=&quot;last&quot;&gt;&lt;a href=&quot;/pages/about&quot;&gt;About&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="getcrumblist-output">
+                                    <ul class="breadcrumb"><li class="first"><a href="#">Home</a></li><li><a href="#">Pages</a></li><li class="last"><a href="#">About</a></li></ul>
+                                </div>
+                            </div>
+
+                        </div>
+                        <h3>Icons</h3>
+                        <div role="tabpanel">
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#icons-php" aria-controls="icons-php" role="tab" data-toggle="tab">PHP</a></li>
+                                <li role="presentation"><a href="#icons-markup" aria-controls="icons-markup" role="tab" data-toggle="tab">Markup</a></li>
+                            </ul>
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="icons-php">
+                                    <pre><code class="language-php">&lt;?php
+    echo $this-&gt;Html-&gt;icon('pencil');
+?&gt;</code></pre>
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="icons-markup">
+                                    <pre><code class="language-markup">&lt;i class=&quot;glyphicon glyphicon-pencil&quot;&gt;&lt;/i&gt;</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                        <h3>Icons - Font Awesome</h3>
+                        <pre><code class="language-php">public $helpers = [
+    'Html' =&gt; [
+        'className' => 'Bootstrap3.BootstrapHtml',
+        'useFontAwesome' => true // Add this line to set font awesome as default
+    ]
+];</code></pre>
+                        <div role="tabpanel">
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#icons-fa-php" aria-controls="icons-fa-php" role="tab" data-toggle="tab">PHP</a></li>
+                                <li role="presentation"><a href="#icons-fa-markup" aria-controls="icons-fa-markup" role="tab" data-toggle="tab">Markup</a></li>
+                            </ul>
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="icons-fa-php">
+                                    <pre><code class="language-php">&lt;?php
+    echo $this-&gt;Html-&gt;icon('pencil');
+    echo $this-&gt;Html-&gt;glIcon('pencil'); // Glyphicon icons are still available with BootstrapHtmlHelper::glIcon
+    echo $this-&gt;Html-&gt;faIcon('pencil'); // FontAwesome are always available using BootstrapHtmlHelper::faIcon
+?&gt;</code></pre>
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="icons-fa-markup">
+                                    <pre><code class="language-markup">&lt;i class=&quot;fa fa-pencil&quot;&gt;&lt;/i&gt;
+&lt;i class=&quot;fa fa-pencil&quot;&gt;&lt;/i&gt;
+&lt;i class=&quot;glyphicon glyphicon-pencil&quot;&gt;&lt;/i&gt;</code></pre>
+
+                                </div>
+                            </div>
+                        </div>
+                        <h3>Label & Badge</h3>
                         <pre><code class="language-php">echo $this->Html->label('My Label', 'primary') ;
 
 echo $this->Html->badge('1') ;
-echo $this->Html->badge('2') ;
-
-echo $this->Html->alert('This is a warning alert!') ;
+echo $this->Html->badge('2') ;</code></pre>
+                        <h3>Alert</h3>
+                        <pre><code class="language-php">echo $this->Html->alert('This is a warning alert!') ;
 echo $this->Html->alert('This is a success alert!', 'success');</code></pre>
-                        <p>See the source for full documentation.</p>
                     </section>
                     <section id="helpers-form">
                         <h1>Form Helper</h1>
