@@ -3,6 +3,10 @@ body {
     font-size: 14px ;
 }
 
+.navbar {
+    margin-bottom: 0;
+}
+
 footer {
     padding: 20px 0;
     margin-top: 20px ;
@@ -26,7 +30,7 @@ pre[class*="language-"] {
 #forkme {
     display: block;
     position: absolute;
-    top: 124px;
+    top: 80px;
     right: -70px;
     color: #1096D0;
     background: #f8f8f8;
@@ -120,4 +124,78 @@ div[role="tabpanel"] {
      position: absolute;
     top: 4px;
     right: 0px;
+}
+
+.right-nav {
+    width: 263px;
+}
+
+.right-nav-fixed {
+    position: fixed;
+    top: 20px;
+}
+
+.right-nav li a:hover, 
+.right-nav li a:focus, 
+.right-nav li a:active, 
+.right-nav li.active a {
+    background: none;
+}
+
+.right-nav li a {
+    color: #767676 ;
+    padding: 4px 20px;
+    font-size: 13px;
+}
+
+.right-nav li a:hover {
+    color: #1096D0;
+    border-left: 1px solid #1096D0 ;
+    padding-left: 19px;
+}
+
+.right-nav li.active > a {
+    color: #1096D0;
+    border-left: 2px solid #1096D0 ;
+    padding-left: 18px;
+}
+
+.right-nav > ul > li.active > a {
+    font-weight: bold ;
+}
+
+.right-nav li ul {
+    display: none ;
+}
+
+.right-nav li.active ul {
+    display: block ;
+}
+
+.right-nav li li a {
+    padding: 1px 20px 1px 30px;
+    font-size: 12px ;
+}
+
+.right-nav li li a:hover {
+    padding-left: 29px;
+}
+
+.right-nav li li.active a {
+    padding-left: 28px;
+}
+
+.right-nav > a {
+    display: block;
+    padding: 4px 10px;
+    margin-top: 10px;
+    margin-left: 10px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #999;
+}
+
+.right-nav > a:hover {
+    text-decoration: none ;
+    color: #1096D0 ;
 }

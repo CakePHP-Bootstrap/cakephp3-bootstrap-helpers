@@ -10,9 +10,9 @@
         <link rel="stylesheet" type="text/css" href="css/prism.min.css" media="screen">
         <link rel="stylesheet" type="text/css" href="css/index.css" media="screen">
     </head>
-    <body>
+    <body data-spy="scroll" data-target=".right-nav" data-offset="22">
 
-        <nav class="navbar navbar-default navbar-fixed-top">
+        <nav class="navbar navbar-default">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -54,7 +54,7 @@
 
         <div class="container">
             <div class="row">
-                <div class="col-md-12">
+                <div id="content" class="col-md-9">
                     <section id="getting-started">
                         <h1>Getting Started</h1>
                         <h3>Dependencies</h3>
@@ -86,7 +86,7 @@
                                 </div>
                                 <div role="tabpanel" class="tab-pane" id="install-manual">
                                     <p>If you do not use <code>composer</code>, simply clone the repository into your <code>plugins/Bootstrap3</code> folder by running:</p>
-                                    <pre class="prettyprint">git clone https://github.com/Holt59/cakephp3-bootstrap3-helpers.git plugins/Bootstrap3</code></pre>
+                                    <pre><code class="language-javascript">git clone https://github.com/Holt59/cakephp3-bootstrap3-helpers.git plugins/Bootstrap3</code></pre>
                                     <p>And then load the plugin with <code>autoload</code> set to <code>true</code> in your <code>/config/bootstrap.php</code> file:</p>
                                     <pre><code class="language-php">Plugin::load('Bootstrap3' ['autoload' => true]);</code></pre>
                                 </div>
@@ -113,7 +113,7 @@
                     </section>
                     <section id="helpers-html">
                         <h1>HTML Helper</h1>
-                        <h3 class="method">getCrumbList</h3>
+                        <h3 class="method" id="getcrumblist">getCrumbList</h3>
                         <p>Overload of <a class="cake-link" href="http://api.cakephp.org/3.0/class-Cake.View.Helper.HtmlHelper.html#_getCrumbList" target="_blank"><code>Cake\View\Helper\HTMLHelper::getCrumbList</code></a>.</p>
                         <div role="tabpanel">
                             <!-- Nav tabs -->
@@ -146,7 +146,7 @@
                             </div>
 
                         </div>
-                        <h3>Icons</h3>
+                        <h3 id="icons">Icons</h3>
                         <div role="tabpanel">
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs" role="tablist">
@@ -165,7 +165,7 @@
                                 </div>
                             </div>
                         </div>
-                        <h3>Icons - Font Awesome</h3>
+                        <h3 id="icons-fa">Icons - Font Awesome</h3>
                         <pre><code class="language-php">public $helpers = [
     'Html' =&gt; [
         'className' => 'Bootstrap3.BootstrapHtml',
@@ -195,7 +195,7 @@
                                 </div>
                             </div>
                         </div>
-                        <h3>Labels</h3>
+                        <h3 id="labels">Labels</h3>
                         <div role="tabpanel">
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs" role="tablist">
@@ -222,7 +222,7 @@
                                 </div>
                             </div>
                         </div>
-                        <h3>Badges</h3>
+                        <h3 id="badges">Badges</h3>
                         <div role="tabpanel">
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs" role="tablist">
@@ -249,7 +249,7 @@
                             </div>
                         </div>
                     </div>
-                    <h3>Alerts</h3>
+                    <h3 id="alerts">Alerts</h3>
                     <div role="tabpanel">
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs" role="tablist">
@@ -291,7 +291,7 @@
                     </section>
                     <section id="helpers-form">
                         <h1>Form Helper</h1>
-                        <h3>Standard Use</h3>
+                        <h3 id="form-standard-use">Standard Use</h3>
                         <p>Standard CakePHP code working with this helper, you do not need to worry about anything!</p>
                         <div role="tabpanel">
                             <!-- Nav tabs -->
@@ -341,7 +341,7 @@
                                 </div>
                             </div>
                         </div>
-                        <h3>Horizontal Forms</h3>
+                        <h3 id="horizontal-forms">Horizontal Forms</h3>
                         <div role="tabpanel">
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs" role="tablist">
@@ -485,7 +485,7 @@
                             </div>
                         </div>
                     </div>
-                    <h3>Custom File Input</h3>
+                    <h3 id="custom-file-input">Custom File Input</h3>
                     <p>Bootstrap do not customize (ugly) file inputs, so you can choose to customize it with the helpers. To enable the custom file inputs (see demo bellow), set <code>useCustomFileInput</code> to <code>true</code> when enabling the helper:</p>
                     <pre><code class="language-php">public $helpers = [
     'Form' => [
@@ -521,7 +521,7 @@
                             </div>
                         </div>
                     </div>
-                    <h3>Button Group, Toolbar & Dropdown</h3>
+                    <h3 id="button-groups-etc">Button Group, Toolbar & Dropdown</h3>
                     <div role="tabpanel">
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs" role="tablist">
@@ -616,7 +616,7 @@
                             </div>
                         </div>
                     </div>
-                    <h3>New prepend / append & help options</h3>
+                    <h3 id="form-new-options">New input options</h3>
                     <div role="tabpanel">
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs" role="tablist">
@@ -712,7 +712,7 @@
                         <h1>Modal Helper</h1>
                         <p>The Bootstrap 3 modal helper allow  you to easily create modal without having to write bunch of html code. There is 3 ways of using this helper, the first one being the most
                         simple and common.</p>
-                        <h3>Example 1 - Simple header & footer, custom body</h3>
+                        <h3 id="modal-standard-use">Example 1 - Standard Use</h3>
                         <div role="tabpanel">
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs" role="tablist">
@@ -762,7 +762,7 @@
                             </div>
                         </div>
 
-                        <h3>Example 2 - No HTML</h3>
+                        <h3 id="modal-without-html">Example 2 - Without HTML</h3>
                         <p>This one allow you to directly specify the modal body content when calling <code>Modal::body</code>. It is useful when the body you want to render is
                         a PHP string.</p>
                         <div role="tabpanel">
@@ -810,7 +810,7 @@
                             </div>
                         </div>
 
-                        <h3>Example 3 - Custom Modal</h3>
+                        <h3 id="modal-custom">Example 3 - Custom Modal</h3>
                         <p>If you want a custom modal, you can start each sestion manually and add whatever you want:</p>
                         <div role="tabpanel">
                             <!-- Nav tabs -->
@@ -893,7 +893,7 @@
                                 </div>
                             </div>
                         </div>
-                        <h3>Creating a toggle button</h3>
+                        <h3 id="modal-togglebutton">Creating a toggle button</h3>
                         <p>You can use the <code>BootstrapFormHelper</code> to create a toggle button for your modal: </p>
                         <pre><code class="language-php">echo $this->Form->button('Toggle Form', [
     'data-toggle' => 'modal', 
@@ -901,6 +901,47 @@
 ]) ;</code></pre>
                     </section>
                 </div>     
+                <div class="col-md-3">
+                    <nav class="right-nav">
+                        <ul class="nav">
+                            <li>
+                                <a href="#getting-started">Getting Started</a>
+
+                            </li>
+                            <li>
+                                <a href="#helpers-html">HTML Helper</a>
+                                <ul class="nav">
+                                    <li><a href="#getcrumblist">getCrumbList</a></li>
+                                    <li><a href="#icons">Icons</a></li>
+                                    <li><a href="#icons-fa">Icons - Font Awesome</a></li>
+                                    <li><a href="#labels">Labels</a></li>
+                                    <li><a href="#badges">Badges</a></li>
+                                    <li><a href="#alerts">Alerts</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#helpers-form">Form Helper</a>
+                                <ul class="nav">
+                                    <li><a href="#form-standard-use">Standard Use</a></li>
+                                    <li><a href="#horizontal-forms">Horizontal Forms</a></li>
+                                    <li><a href="#custom-file-input">Custom File Input</a></li>
+                                    <li><a href="#button-groups-etc">Button Group, Toolbar & Dropdown</a></li>
+                                    <li><a href="#form-new-options">New input options</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#helpers-modal">Modal Helper</a>
+                                <ul class="nav">
+                                    <li><a href="#modal-standard-use">Standard Use</a></li>
+                                    <li><a href="#modal-without-html">Without HTML</a></li>
+                                    <li><a href="#modal-custom">Custom Modal</a></li>
+                                    <li><a href="#modal-togglebutton">Creating a toggle button</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <a href="#top">Back to top</a>
+                    </nav>
+                </div>
             </div>
         </div>
 
@@ -921,13 +962,22 @@
         <script src="js/prism.min.js"></script>
 
         <script type="text/javascript">
+            var sideNavOffset = $('.right-nav').offset().top;
             $('a[href^="#"]:not([role="tab"])').on('click', function (e) {
                 var section = $($(this).attr('href'));
                 if (section.length > 0) {
                     e.preventDefault();
                     $('html, body').animate({
-                        scrollTop: section.offset().top - ($('nav.navbar-fixed-top').outerHeight() + parseInt($('nav.navbar-fixed-top').css('margin-bottom'), 10))
+                        scrollTop: section.offset().top - 20
                     }, 500);
+                }
+            });
+            $(window).on('scroll', function (e) {
+                if ($(window).scrollTop() + 20 > sideNavOffset) {
+                    $('.right-nav').addClass('right-nav-fixed');
+                }
+                else {
+                    $('.right-nav').removeClass('right-nav-fixed');
                 }
             });
         </script>
