@@ -967,8 +967,15 @@
                 var section = $($(this).attr('href'));
                 if (section.length > 0) {
                     e.preventDefault();
+                    if (!section.is('h3')) {
+                        $('.right-nav').addClass('scrolling');
+                    }
                     $('html, body').animate({
                         scrollTop: section.offset().top - 20
+                    }, {
+                        complete: function () {
+                            $('.right-nav').removeClass('scrolling');
+                        }
                     }, 500);
                 }
             });

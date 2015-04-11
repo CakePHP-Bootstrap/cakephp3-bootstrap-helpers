@@ -164,7 +164,8 @@ div[role="tabpanel"] {
     font-weight: bold ;
 }
 
-.right-nav li ul {
+.right-nav li ul,
+.right-nav.scrolling li.active ul {
     display: none ;
 }
 
