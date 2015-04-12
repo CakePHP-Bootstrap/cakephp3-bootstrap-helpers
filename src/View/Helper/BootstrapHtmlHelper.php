@@ -291,6 +291,45 @@ class BootstrapHtmlHelper extends HtmlHelper {
         return $this->div($classes, $bars, $options) ;
     }
     
+    /**
+     * 
+     * Create & return a twitter bootstrap dropdown menu.
+     * 
+     * @param $menu HTML tags corresponding to menu options (which will be wrapped
+     * 		 into <li> tag). To add separator, pass 'divider'.
+     * @param $options Options for the ul tag.
+     * 
+     */
+    public function dropdown (array $menu = [], array $options = []) {
+        $output = '' ;
+        foreach ($menu as $action) {
+            if ($action === 'divider' || (is_array($action) && $action[0] === 'divider')) {
+                $output .= '<li role="presentation" class="divider"></li>' ;
+            }
+            elseif (is_array($action)) {
+                if ($action[0] === 'header') {
+                    $output .= '<li role="presentation" class="dropdown-header">'.$action[1].'</li>' ;
+                }
+                else {
+                    if ($action[0] === 'link') {
+                        array_shift($action); // Remove first cell
+                    }
+                    $name = array_shift($action) ;
+                    $url  = array_shift($action) ;
+                    $action['role'] = 'menuitem' ;
+                    $action['tabindex'] = -1 ;
+                    $output .= '<li role="presentation">'.$this->link($name, $url, $action).'</li>';
+                }
+            }
+            else {
+                $output .= '<li role="presentation">'.$action.'</li>' ;
+            }
+        }
+        $options = $this->addClass($options, 'dropdown-menu');
+        $options['role'] = 'menu' ;
+        return $this->div(null, $output, $options) ;
+    }
+    
 }
 
 ?>

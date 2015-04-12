@@ -26,7 +26,13 @@ use Cake\View\Helper\FormHelper;
 
 class BootstrapFormHelper extends FormHelper {
 
-    public $helpers = ['Html', 'Url'] ;
+    public $helpers = [
+        'Html', 
+        'Url',
+        'bHtml' => [
+            'className' => 'Bootstrap3.BootstrapHtml'
+        ]
+    ] ;
 
     /**
      * Default config for the helper.
@@ -152,7 +158,7 @@ class BootstrapFormHelper extends FormHelper {
      * @param string|array $class The class name being added.
      * @param string $key the key to use for class.
      * @return array Array of options with $key set.
-    **/
+     */
     public function addClass(array $options = [], $class = null, $key = 'class') {
         if (is_array($class)) {
             $class = implode(' ', array_unique(array_map('trim', $class))) ;
@@ -180,7 +186,7 @@ class BootstrapFormHelper extends FormHelper {
      * 
      * @return The new options with class values (btn, and btn-* according to initial options)
      * 
-    **/
+     */
     protected function _addButtonClasses ($options) {
         $type = $this->_extractOption('bootstrap-type', $options, $this->_defaultButtonType);
         $size = $this->_extractOption('bootstrap-size', $options, FALSE);
@@ -529,7 +535,7 @@ class BootstrapFormHelper extends FormHelper {
      *
      * Create & return a Cakephp options array from the $options specified.
      *
-    **/
+     */
     protected function _createButtonOptions (array $options = array()) {
         $options = $this->_addButtonClasses($options);
         $block = $this->_extractOption('bootstrap-block', $options, false) ;
@@ -544,12 +550,13 @@ class BootstrapFormHelper extends FormHelper {
      * 
      * Create & return a Twitter Like button.
      * 
-     * New options:
-     * 	- bootstrap-type: Twitter bootstrap button type (primary, danger, info, etc.)
-     * 	- bootstrap-size: Twitter bootstrap button size (mini, small, large)
+     * ### New options:
+     *
+     * - bootstrap-type: Twitter bootstrap button type (primary, danger, info, etc.)
+     * - bootstrap-size: Twitter bootstrap button size (mini, small, large)
      * 
-    **/
-    public function button($title, array $options = array()) {
+     */
+    public function button($title, array $options = []) {
         return parent::button($title, $this->_createButtonOptions($options)) ;
     }
     
@@ -589,33 +596,30 @@ class BootstrapFormHelper extends FormHelper {
     
     /**
      * 
-     * Create & return a twitter bootstrap dropdown button.
+     * Create & return a twitter bootstrap dropdown button. This function is a shortcut for:
+     * 
+     *   $this->Form->$buttonGroup([
+     *     $this->Form->button($title, $options), 
+     *     $this->Html->dropdown($menu, [])
+     *   ]);
      * 
      * @param $title The text in the button
      * @param $menu HTML tags corresponding to menu options (which will be wrapped
      * 		 into <li> tag). To add separator, pass 'divider'.
      * @param $options Options for button
      * 
-    **/
-    public function dropdownButton ($title, array $menu = array(), array $options = array()) {
+     */
+    public function dropdownButton ($title, array $menu = [], array $options = []) {
     
         $options['type'] = false ;
         $options['data-toggle'] = 'dropdown' ;
         $options = $this->addClass($options, "dropdown-toggle") ;
         
-        $outPut = '<div class="btn-group">' ;
-        $outPut .= $this->button($title.' <span class="caret"></span>', $options) ;
-        $outPut .= '<ul class="dropdown-menu">' ;
-        foreach ($menu as $action) {
-            if ($action === 'divider') {
-                $outPut .= '<li class="divider"></li>' ;
-            }
-            else {
-                $outPut .= '<li>'.$action.'</li>' ;
-            }
-        }
-        $outPut .= '</ul></div>' ;
-        return $outPut ;
+        return $this->buttonGroup([
+            $this->button($title.' <span class="caret"></span>', $options),
+            $this->bHtml->dropdown($menu)
+        ]);
+
     }
     
     /**
