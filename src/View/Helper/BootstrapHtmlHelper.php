@@ -240,9 +240,9 @@ class BootstrapHtmlHelper extends HtmlHelper {
      *     
     **/
     public function progress ($widths, $options = array()) {
-        $striped = $this->_extractOption('striped', $options, false) ;
+        $striped = $this->_extractOption('striped', $options, false) || in_array('striped', $options);
         unset($options['striped']) ;
-        $active = $this->_extractOption('active', $options, false) ;
+        $active = $this->_extractOption('active', $options, false) || in_array('active', $options);
         unset($options['active']) ;
         $bars = '' ;
         if (is_array($widths)) {
