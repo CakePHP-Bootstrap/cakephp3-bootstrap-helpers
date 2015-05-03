@@ -293,6 +293,42 @@ class BootstrapFormHelper extends FormHelper {
         }
         return implode(' ', $classes) ;
     }
+
+    public function prepend ($input, $prepend) {
+        if ($prepend) {
+            if (is_string($prepend)) {
+                $prepend = '<span class="input-group-'.($this->_matchButton($prepend) ? 'btn' : 'addon').'">'.$prepend.'</span>' ;
+            }
+            else {
+                $prepend = '<span class="input-group-btn">'.implode('', $prepend).'</span>' ;
+            }
+        }
+        if ($input === null) {
+            return '<div class="input-group">'.$prepend ;
+        }
+        return $this->_wrap($input, $prepend, null);
+    }
+
+    public function append ($input, $append) {
+        if (is_string($append)) {
+            $append = '<span class="input-group-'.($this->_matchButton($append) ? 'btn' : 'addon').'">'.$append.'</span>' ;
+        }
+        else {
+            $append = '<span class="input-group-btn">'.implode('', $append).'</span>' ;
+        }
+        if ($input === null) {
+            return $append.'</div>' ;
+        }
+        return $this->_wrap($input, null, $append);
+    }
+
+    public function wrap ($input, $prepend, $append) {
+        return $this->prepend(null, $prepend).$input.$this->append(null, $append);
+    }
+
+    protected function _wrap ($input, $prepend, $append) {
+        return '<div class="input-group">'.$prepend.$input.$append.'</div>' ;
+    }
 	
     /** 
      * 
@@ -314,24 +350,8 @@ class BootstrapFormHelper extends FormHelper {
         $append = $this->_extractOption('append', $options, '') ;
         unset($options['append']);
         if ($prepend || $append) {
-            if ($prepend) {
-                if (is_string($prepend)) {
-                    $prepend = '<span class="input-group-'.($this->_matchButton($prepend) ? 'btn' : 'addon').'">'.$prepend.'</span>' ;
-                }
-                else {
-                    $prepend = '<span class="input-group-btn">'.implode('', $prepend).'</span>' ;
-                }
-            }
-            if ($append) {
-                if (is_string($append)) {
-                    $append = '<span class="input-group-'.($this->_matchButton($append) ? 'btn' : 'addon').'">'.$append.'</span>' ;
-                }
-                else {
-                    $append = '<span class="input-group-btn">'.implode('', $append).'</span>' ;
-                }
-            }
-            $prepend = '<div class="input-group">'.$prepend;
-            $append .= '</div>';
+            $prepend = $this->prepend(null, $prepend);
+            $append  = $this->append(null, $append);
         }
 
         $help = $this->_extractOption('help', $options, '');
