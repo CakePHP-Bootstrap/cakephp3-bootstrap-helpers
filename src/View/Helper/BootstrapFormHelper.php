@@ -299,7 +299,7 @@ class BootstrapFormHelper extends FormHelper {
             if (is_string($prepend)) {
                 $prepend = '<span class="input-group-'.($this->_matchButton($prepend) ? 'btn' : 'addon').'">'.$prepend.'</span>' ;
             }
-            else {
+            else if ($prepend !== false) {
                 $prepend = '<span class="input-group-btn">'.implode('', $prepend).'</span>' ;
             }
         }
@@ -313,7 +313,7 @@ class BootstrapFormHelper extends FormHelper {
         if (is_string($append)) {
             $append = '<span class="input-group-'.($this->_matchButton($append) ? 'btn' : 'addon').'">'.$append.'</span>' ;
         }
-        else {
+        else if ($append !== false) {
             $append = '<span class="input-group-btn">'.implode('', $append).'</span>' ;
         }
         if ($input === null) {
@@ -345,9 +345,9 @@ class BootstrapFormHelper extends FormHelper {
 
         $options = $this->_parseOptions($fieldName, $options);
 
-        $prepend = $this->_extractOption('prepend', $options, '') ;
+        $prepend = $this->_extractOption('prepend', $options, false) ;
         unset($options['prepend']);
-        $append = $this->_extractOption('append', $options, '') ;
+        $append = $this->_extractOption('append', $options, false) ;
         unset($options['append']);
         if ($prepend || $append) {
             $prepend = $this->prepend(null, $prepend);
