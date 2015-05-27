@@ -460,7 +460,9 @@ class BootstrapFormHelper extends FormHelper {
             'id' => $options['id'].'-input',
             'onclick' => "document.getElementById('".$options['id']."').click();"
         ]));
-        $fakeButton = $this->button(__('Choose File'), [
+        $buttonLabel = $this->_extractOption('button-label', $options, __('Choose File'));
+        unset($options['button-label']) ;
+        $fakeButton = $this->button($buttonLabel, [
             'type' => 'button',
             'onclick' => "document.getElementById('".$options['id']."').click();"
         ]);
