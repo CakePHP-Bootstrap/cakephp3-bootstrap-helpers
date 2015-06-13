@@ -452,6 +452,7 @@ class BootstrapFormHelper extends FormHelper {
         $options = $this->_initInputField($fieldName, $options);
         unset($options['type']);
         $countLabel = $this->_extractOption('count-label', $options, __('files selected'));
+        unset($options['count-label']);
         $fileInput = $this->widget('file', array_merge($options, [
             'style' => 'display: none;',
             'onchange' => "document.getElementById('".$options['id']."-input').value = (this.files.length <= 1) ? this.files[0].name : this.files.length + ' ' + '" . $countLabel . "';"
