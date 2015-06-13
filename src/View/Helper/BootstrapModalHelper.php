@@ -64,7 +64,25 @@ class BootstrapModalHelper extends Helper {
             $this->currentId = $options['id'] ;
             $options['aria-labbeledby'] = $this->currentId.'Label' ;
         }
-		$res = $this->Html->div('modal fade '.$this->_extractOption('class', $options, ''), NULL, $options).$this->Html->div('modal-dialog').$this->Html->div('modal-content');
+        $options['size'] = $this->_extractOption('size', $options, '');
+	    switch($options['size']) {
+		    case 'lg':
+		    case 'large':
+		    case 'modal-lg':
+			    $size = 'modal-lg';
+			    break;
+		    case 'sm':
+		    case 'small':
+		    case 'modal-sm':
+			    $size = 'modal-sm';
+			    break;
+		    default:
+			    $size = '';
+			    break;
+	    }
+	    unset($options['size']);
+        
+	    $res = $this->Html->div('modal fade '.$this->_extractOption('class', $options, ''), NULL, $options).$this->Html->div('modal-dialog '.$size).$this->Html->div('modal-content');
         if (is_string($title) && $title) {
             $res .= $this->_createHeader($title, array('close' => $close)) ;
             if (!$nobody) {
