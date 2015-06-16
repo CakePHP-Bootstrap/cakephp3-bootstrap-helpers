@@ -427,10 +427,18 @@ class BootstrapFormHelper extends FormHelper {
         $inputs = [] ;
         foreach ($fields as $field => $in) {
             if ($this->_extractOption($field, $options, $in)) {
-                array_push($inputs, '<div class="col-md-{{colsize}}">{{'.($field == 'timeFormat' ? 'meridian' : $field).'}}</div>');
+                $inputs[$field] = '<div class="col-md-{{colsize}}">{{'.($field == 'timeFormat' ? 'meridian' : $field).'}}</div>';
             }
         }
-        return str_replace('{{colsize}}', round(12 / count($inputs)), '<div class="row">'.implode('', $inputs).'</div>') ;
+        $tplt = $this->templates('dateWidget');
+        $tplt = explode('}}{{', substr($tplt, 2, count($tplt) - 3));
+        $html = '' ;
+        foreach ($tplt as $v) {
+            if (isset($inputs[$v])) {
+                $html .= $inputs[$v] ;
+            }
+        }
+        return str_replace('{{colsize}}', round(12 / count($inputs)), '<div class="row">'.$html.'</div>') ;
     }
 
     /**
