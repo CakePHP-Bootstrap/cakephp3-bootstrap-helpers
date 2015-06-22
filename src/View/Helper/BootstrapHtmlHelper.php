@@ -351,7 +351,7 @@ class BootstrapHtmlHelper extends HtmlHelper {
             $rowsHtml .= $determineContent($colData);
 
             if ($count % $breakIndex === 0) {
-                $rowsHtml .= '</div><div class="row">';
+                $rowsHtml .= '<div class="clearfix hidden-xs hidden-sm"></div>';
             }
 
             $count++;
