@@ -313,7 +313,6 @@ class BootstrapHtmlHelper extends HtmlHelper {
                 else {
                     if ($action[0] === 'link') {
                         array_shift($action); // Remove first cell
-
                         return $rowHtml;
                     }
                     $name = array_shift($action) ;
