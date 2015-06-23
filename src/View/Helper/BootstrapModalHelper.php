@@ -62,7 +62,7 @@ class BootstrapModalHelper extends Helper {
         $options['aria-hidden'] = $this->_extractOption('aria-hidden', $options, 'true');
         if (isset($options['id'])) {
             $this->currentId = $options['id'] ;
-            $options['aria-labbeledby'] = $this->currentId.'Label' ;
+            $options['aria-labelledby'] = $this->currentId.'Label' ;
         }
         $options['size'] = $this->_extractOption('size', $options, '');
 	    switch($options['size']) {
