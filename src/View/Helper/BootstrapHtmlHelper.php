@@ -329,6 +329,37 @@ class BootstrapHtmlHelper extends HtmlHelper {
         $options['role'] = 'menu' ;
         return $this->div(null, $output, $options) ;
     }
+
+    /**
+     * Create a formatted collection of elements while
+     * maintaining proper bootstrappy markup. Useful when
+     * displaying, for example, a list of products that would require
+     * more than the maximum number of columns per row.
+     *
+     * @param $breakIndex int|string divisible index that will trigger a new row
+     * @param $data array collection of data used to render each column
+     * @param $determineContent callable a callback that will be called with the 
+     * data required to render an individual column
+     * @return string
+     */
+    public function splicedRows ($breakIndex, array $data, callable $determineContent) {
+        $rowsHtml = '<div class="row">';
+
+        $count = 1;
+        foreach ($data as $index => $colData) {
+            $rowsHtml .= $determineContent($colData);
+
+            if ($count % $breakIndex === 0) {
+                $rowsHtml .= '<div class="clearfix hidden-xs hidden-sm"></div>';
+            }
+
+            $count++;
+        }
+
+        $rowsHtml .= '</div>';
+        return $rowsHtml;
+
+    }
     
 }
 
