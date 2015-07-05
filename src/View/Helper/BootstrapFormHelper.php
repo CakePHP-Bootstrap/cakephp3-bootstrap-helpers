@@ -201,6 +201,26 @@ class BootstrapFormHelper extends FormHelper {
         }
         return $options ;
     }
+    
+    /**
+     *
+     * Replace the templates with the ones specified by newTemplates, call the specified function
+     * with the specified parameters, and then restore the old templates.
+     *
+     * @params $templates The new templates
+     * @params $callback  The function to call
+     * @params $params    The arguments for the $callback function
+     *
+     * @return The return value of $callback
+     *
+    **/
+    protected function _wrapTemplates ($templates, $callback, $params) {
+        $oldTemplates = array_map ([$this, 'templates'], array_combine(array_keys($templates), array_keys($templates))) ;
+        $this->templates ($templates) ;
+        $result = call_user_func_array ($callback, $params) ;
+        $this->templates ($oldTemplates) ;
+        return $result ;
+    } 
 
     /**
      *
@@ -513,10 +533,9 @@ class BootstrapFormHelper extends FormHelper {
      */
     public function dateTime($fieldName, array $options = []) {
         $fields = ['year' => true, 'month' => true, 'day' => true, 'hour' => true, 'minute' => true, 'second' => false, 'timeFormat' => false];
-        $this->templates([
+        return $this->_wrapTemplates ([
             'dateWidget' => $this->_getDatetimeTemplate($fields, $options)
-        ]);
-        return parent::dateTime($fieldName, $options);
+        ], [$this, 'parent::dateTime'], [$fieldName, $options]);
     }
 
     /**
@@ -533,10 +552,9 @@ class BootstrapFormHelper extends FormHelper {
      */
     public function time($fieldName, array $options = []) {
         $fields = ['hour' => true, 'minute' => true, 'second' => false, 'timeFormat' => false];
-        $this->templates([
+        return $this->_wrapTemplates ([
             'dateWidget' => $this->_getDatetimeTemplate($fields, $options)
-        ]);
-        return parent::time($fieldName, $options);
+        ], [$this, 'parent::time'], [$fieldName, $options]);
     }
 
     /**
@@ -553,10 +571,9 @@ class BootstrapFormHelper extends FormHelper {
      */
     public function date($fieldName, array $options = []) {
         $fields = ['year' => true, 'month' => true, 'day' => true];
-        $this->templates([
+        return $this->_wrapTemplates ([
             'dateWidget' => $this->_getDatetimeTemplate($fields, $options)
-        ]);
-        return parent::date($fieldName, $options);
+        ], [$this, 'parent::date'], [$fieldName, $options]);
     }
 
     /**
