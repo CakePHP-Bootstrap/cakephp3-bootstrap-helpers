@@ -535,7 +535,7 @@ class BootstrapFormHelper extends FormHelper {
         $fields = ['year' => true, 'month' => true, 'day' => true, 'hour' => true, 'minute' => true, 'second' => false, 'timeFormat' => false];
         return $this->_wrapTemplates ([
             'dateWidget' => $this->_getDatetimeTemplate($fields, $options)
-        ], [$this, 'parent::dateTime'], [$fieldName, $options]);
+        ], 'parent::dateTime', [$fieldName, $options]);
     }
 
     /**
@@ -554,7 +554,7 @@ class BootstrapFormHelper extends FormHelper {
         $fields = ['hour' => true, 'minute' => true, 'second' => false, 'timeFormat' => false];
         return $this->_wrapTemplates ([
             'dateWidget' => $this->_getDatetimeTemplate($fields, $options)
-        ], [$this, 'parent::time'], [$fieldName, $options]);
+        ], 'parent::time', [$fieldName, $options]);
     }
 
     /**
@@ -573,7 +573,7 @@ class BootstrapFormHelper extends FormHelper {
         $fields = ['year' => true, 'month' => true, 'day' => true];
         return $this->_wrapTemplates ([
             'dateWidget' => $this->_getDatetimeTemplate($fields, $options)
-        ], [$this, 'parent::date'], [$fieldName, $options]);
+        ], 'parent::date', [$fieldName, $options]);
     }
 
     /**
