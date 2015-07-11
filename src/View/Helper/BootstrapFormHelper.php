@@ -236,6 +236,26 @@ class BootstrapFormHelper extends FormHelper {
     }
 	
     /**
+     *
+     * Set the default templates according to the inner properties of the form ($this->horizontal and $this->inline).
+     *
+    **/
+    protected function _setDefaultTemplates () {
+        $this->templates([
+            'formGroup' => '{{label}}'.($this->horizontal ? '<div class="'.$this->_getColClass('input').'">' : '').'{{prepend}}{{input}}{{append}}'.($this->horizontal ? '</div>' : ''),
+            'checkboxContainer' => ($this->horizontal ? '<div class="form-group"><div class="'.$this->_getColClass('label', true).' '.$this->_getColClass('input').'">' : '')
+                        .'<div class="checkbox">{{content}}</div>'
+                    .($this->horizontal ? '</div></div>' : ''),
+            'radioContainer' => ($this->horizontal ? '<div class="form-group"><div class="'.$this->_getColClass('label', true).' '.$this->_getColClass('input').'">' : '')
+                        .'{{content}}'
+                    .($this->horizontal ? '</div></div>' : ''),
+            'label' => '<label class="'.($this->horizontal ? $this->_getColClass('label') : '').' '.($this->inline ? 'sr-only' : 'control-label').' {{attrs.class}}" {{attrs}}>{{text}}</label>',
+            'error' => '<span class="help-block '.($this->horizontal ? $this->_getColClass('error') : '').'">{{content}}</span>',
+            'submitContainer' => '<div class="form-group">'.($this->horizontal ? '<div class="'.$this->_getColClass('label', true).' '.$this->_getColClass('input').'">' : '').'{{content}}'.($this->horizontal ? '</div>' : '').'</div>',
+        ]) ;
+    }
+	
+    /**
      * 
      * Create a Twitter Bootstrap like form. 
      * 
@@ -277,20 +297,20 @@ class BootstrapFormHelper extends FormHelper {
             $options = $this->addClass($options, 'form-search') ;
         }
         $options['role'] = 'form' ;
-        $this->templates([
-            'formGroup' => '{{label}}'.($this->horizontal ? '<div class="'.$this->_getColClass('input').'">' : '').'{{prepend}}{{input}}{{append}}'.($this->horizontal ? '</div>' : ''),
-            'checkboxContainer' => ($this->horizontal ? '<div class="form-group"><div class="'.$this->_getColClass('label', true).' '.$this->_getColClass('input').'">' : '')
-                        .'<div class="checkbox">{{content}}</div>'
-                    .($this->horizontal ? '</div></div>' : ''),
-            'radioContainer' => ($this->horizontal ? '<div class="form-group"><div class="'.$this->_getColClass('label', true).' '.$this->_getColClass('input').'">' : '')
-                        .'{{content}}'
-                    .($this->horizontal ? '</div></div>' : ''),
-            'label' => '<label class="'.($this->horizontal ? $this->_getColClass('label') : '').' '.($this->inline ? 'sr-only' : 'control-label').' {{attrs.class}}" {{attrs}}>{{text}}</label>',
-            'error' => '<span class="help-block '.($this->horizontal ? $this->_getColClass('error') : '').'">{{content}}</span>',
-            'submitContainer' => '<div class="form-group">'.($this->horizontal ? '<div class="'.$this->_getColClass('label', true).' '.$this->_getColClass('input').'">' : '').'{{content}}'.($this->horizontal ? '</div>' : '').'</div>',
-        ]) ;
+        $this->_setDefaultTemplates () ;
 		return parent::create($model, $options) ;
 	}
+
+    /**
+     *
+     * Switch horizontal mode on or off.
+     *
+    **/
+    public function setHorizontal ($horizontal) {
+        $this->horizontal = $horizontal ;
+        $this->_setDefaultTemplates () ;
+    }
+
 
     /**
      *
