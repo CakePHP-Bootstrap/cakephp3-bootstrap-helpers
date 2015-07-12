@@ -457,6 +457,58 @@
                             </div>
                         </div>
                     </div>
+                        
+                        <p>To avoid compatibility issue with some bootstrap plugins, you can switch from horizontal layout to standard layout by using the <code>BootstrapFormHelper::setHorizontal</code> method.</p>
+                        <div role="tabpanel">
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#form-sethorizontal-php" aria-controls="form-sethorizontal-php" role="tab" data-toggle="tab">PHP</a></li>
+                                <li role="presentation"><a href="#form-sethorizontal-markup" aria-controls="form-sethorizontal-markup" role="tab" data-toggle="tab">Markup</a></li>
+                                <li role="presentation"><a href="#form-sethorizontal-output" aria-controls="form-sethorizontal-output" role="tab" data-toggle="tab">Output</a></li>
+                            </ul>
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="form-sethorizontal-php">
+                                    <pre><code class="language-php">&lt;?php 
+    echo $this-&gt;Form-&gt;create(NULL, ['horizontal' =&gt; true]) ;
+    echo $this-&gt;Form-&gt;input('horizontal_1'); 
+    echo $this-&gt;Form-&gt;setHorizontal (false) ;
+    echo $this-&gt;Form-&gt;input('non_horizontal'); 
+    echo $this-&gt;Form-&gt;setHorizontal (true) ;
+    echo $this-&gt;Form-&gt;input('horizontal_2'); 
+    echo $this-&gt;Form-&gt;end() ;
+?&gt;</code></pre>
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="form-sethorizontal-markup">
+                                    <pre><code class="language-markup">&lt;form accept-charset=&quot;utf-8&quot; action=&quot;#&quot; class=&quot;form-horizontal&quot; method=&quot;post&quot;&gt;
+    &lt;div style=&quot;display:none;&quot;&gt;
+        &lt;input class=&quot;form-control&quot; name=&quot;_method&quot; type=&quot;hidden&quot; value=&quot;POST&quot;&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;form-group text&quot;&gt;
+        &lt;label class=&quot;col-md-2 control-label&quot; for=&quot;horizontal-1&quot;&gt;Horizontal 1&lt;/label&gt;
+        &lt;div class=&quot;col-md-6&quot;&gt;
+            &lt;input class=&quot;form-control&quot; id=&quot;horizontal-1&quot; name=&quot;horizontal_1&quot; type=&quot;text&quot;&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;form-group text&quot;&gt;
+        &lt;label class=&quot; control-label&quot; for=&quot;non-horizontal&quot;&gt;Non Horizontal&lt;/label&gt;
+        &lt;input class=&quot;form-control&quot; id=&quot;non-horizontal&quot; name=&quot;non_horizontal&quot; type=&quot;text&quot;&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;form-group text&quot;&gt;
+        &lt;label class=&quot;col-md-2 control-label&quot; for=&quot;horizontal-2&quot;&gt;Horizontal 2&lt;/label&gt;
+        &lt;div class=&quot;col-md-6&quot;&gt;
+            &lt;input class=&quot;form-control&quot; id=&quot;horizontal-2&quot; name=&quot;horizontal_2&quot; type=&quot;text&quot;&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/form&gt;</code></pre>
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="form-sethorizontal-output">
+                                    <form method="post" accept-charset="utf-8" class="form-horizontal" role="form" action="#"><div style="display:none;"><input type="hidden" name="_method" class="form-control " value="POST"></div><div class="form-group text"><label class="col-md-2 control-label " for="horizontal-1">Horizontal 1</label><div class="col-md-6"><input type="text" name="horizontal_1" class="form-control " id="horizontal-1"></div></div><div class="form-group text"><label class=" control-label " for="non-horizontal">Non Horizontal</label><input type="text" name="non_horizontal" class="form-control " id="non-horizontal"></div><div class="form-group text"><label class="col-md-2 control-label " for="horizontal-2">Horizontal 2</label><div class="col-md-6"><input type="text" name="horizontal_2" class="form-control " id="horizontal-2"></div></div></form>                               
+                                </div>
+                            </div>
+                        </div>
+
+
                     <h3 id="custom-file-input">Custom File Input</h3>
                     <p>Bootstrap do not customize (ugly) file inputs, so you can choose to customize it with the helpers. To enable the custom file inputs (see demo bellow), set <code>useCustomFileInput</code> to <code>true</code> when enabling the helper:</p>
                     <pre><code class="language-php">public $helpers = [
