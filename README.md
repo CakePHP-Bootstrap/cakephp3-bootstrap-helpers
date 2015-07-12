@@ -10,7 +10,7 @@ Do not hesitate to [**post a github issue**](https://github.com/Holt59/cakephp3-
 Who is using it?
 ================
 
-Non-exhaustive list of projects using these helpers, if you want to be in this list, do not hesitate to [email me](mailto:capelle.mikael@gmail.com) or [post a github issue](https://github.com/Holt59/cakephp3-bootstrap3-helpers/issues/new).
+Non-exhaustive list of projects using these helpers, if you want to be in this list, do not hesitate to [email me](mailto:capelle.mikael@gmail.com) or post a comment on [this issue](https://github.com/Holt59/cakephp3-bootstrap3-helpers/issues/32).
 
  - [**CakeAdmin**] (https://github.com/cakemanager/cakeadmin-lightstrap), LightStrap Theme for CakeAdmin
 
