@@ -297,7 +297,7 @@ class BootstrapHtmlHelper extends HtmlHelper {
      *
      * @param $menu HTML tags corresponding to menu options (which will be wrapped
      * 		 into <li> tag). To add separator, pass 'divider'.
-     * @param $options Options for the ul tag.
+     * @param $options Attributes for the wrapper (change it with tag)
      *
      */
     public function dropdown (array $menu = [], array $options = []) {
