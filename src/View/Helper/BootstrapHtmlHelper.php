@@ -338,6 +338,50 @@ class BootstrapHtmlHelper extends HtmlHelper {
         return $this->tag($tag, $output, $options) ;
     }
 
+    public function navbarNav(array $menu = [], array $options = []) {
+        $output = '';
+        foreach ($menu as $item => $submenu) {
+            if ($item === 'divider' || (is_array($item) && $item[0] === 'divider')) {
+                $output .= '<li role="presentation" class="divider"></li>' ;
+            }
+            elseif (is_array($submenu)) {
+                $dropdown_options = ['tag' => 'ul'];
+                $link_options = [
+                    'data-toggle' => 'dropdown',
+                    'role' => 'button',
+                    'aria-haspopup' => 'true',
+                    'aria-expanded' => 'false'
+                ];
+                $li_options = [];
+                if (array_key_exists('_options', $submenu) && is_array($submenu['_options'])) {
+                    if (array_key_exists('dropdown', $submenu['_options'])) {
+                        $dropdown_options += $submenu['_options']['dropdown'];
+                        $dropdown_options = $this->addClass($dropdown_options, 'dropdown-menu');
+                    }
+                    if (array_key_exists('link', $submenu['_options'])) {
+                        $link_options += $submenu['_options']['link'];
+                        $link_options = $this->addClass($link_options, 'dropdown-toggle');
+                    }
+                    if (array_key_exists('li', $submenu['_options'])) {
+                        $li_options += $submenu['_options']['li'];
+                    }
+                    unset($submenu['_options']);
+                }
+
+                $output .= $this->tag(
+                    'li',
+                    $this->link($item, '#', $link_options).$this->dropdown($submenu, $dropdown_options),
+                    $li_options
+                );
+            }
+            else {
+                $output .= '<li>'.$submenu.'</li>' ;
+            }
+        }
+        $options = ['tag' => 'ul', 'class' => 'nav navbar-nav'] + $options;
+        return $this->tag($options['tag'], $output, $options);
+    }
+
     /**
      * Create a formatted collection of elements while
      * maintaining proper bootstrappy markup. Useful when
