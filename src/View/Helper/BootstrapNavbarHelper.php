@@ -23,6 +23,7 @@
 namespace Bootstrap3\View\Helper;
 
 use Cake\View\Helper ;
+use Cake\Routing\Router;
 
 class BootstrapNavbarHelper extends Helper {
 
@@ -33,7 +34,7 @@ class BootstrapNavbarHelper extends Helper {
         ]
     ] ;
 
-    public $autoActiveLink = false ;
+    public $autoActiveLink = true ;
     public $autoButtonLink = true ;
     
     protected $_fixed = false ;
@@ -73,7 +74,7 @@ class BootstrapNavbarHelper extends Helper {
         /** Generate options for outer div. **/
         $options = $this->addClass($options, 'navbar navbar-default') ;
         if ($this->_fixed !== false) {
-            $options = $this->addClass($options, 'navbar-fixed-'.$this->fixed) ;
+            $options = $this->addClass($options, 'navbar-fixed-'.$this->_fixed) ;
         }
         else if ($this->_static !== false) {
             $options = $this->addClass($options, 'navbar-static-top') ;
@@ -137,10 +138,13 @@ class BootstrapNavbarHelper extends Helper {
      * @param options Options passed to link method (+ extra options, see above)
      *     
     **/
-    public function link ($name, $url = '', $options = [], $linkOptions = []) {
+    public function link ($name, $url = '', array $options = [], array $linkOptions = []) {
         if ($this->_level == 0 && $this->autoButtonLink) {
             $options = $this->addClass ($options, 'btn btn-default navbar-btn') ;
             return $this->Html->link ($name, $url, $options) ;
+        }
+        if (Router::url() == Router::url ($url) && $this->autoActiveLink) {
+            $options = $this->addClass ($options, 'active');
         }
         return $this->Html->tag('li', $this->Html->link ($name, $url, $linkOptions), $options) ;
     }
@@ -155,7 +159,7 @@ class BootstrapNavbarHelper extends Helper {
      * Add a divider to the navbar or to a menu.
      * 
     **/
-    public function divider ($options = []) {
+    public function divider (array $options = []) {
         $options = $this->addClass ($options, 'divider') ;
         $options['role'] = 'separator' ;
         return $this->Html->tag('li', '', $options) ;
@@ -166,7 +170,7 @@ class BootstrapNavbarHelper extends Helper {
      * Add a header to the navbar or to a menu.
      * 
     **/
-    public function header ($name, $options = []) {
+    public function header ($name, array $options = []) {
         $options = $this->addClass ($options, 'dropdown-header') ;
         return $this->Html->tag('li', $name, $options) ;
     }
@@ -255,7 +259,7 @@ class BootstrapNavbarHelper extends Helper {
     **/
     public function endMenu () {
         $this->_level -= 1 ;
-        return ($this->_level == 1 ? '</li>' : '').'</ul>' ;
+        return '</ul>'.($this->_level == 1 ? '</li>' : '') ;
     }
 
     /**
