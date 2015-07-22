@@ -163,6 +163,16 @@ class BootstrapNavbarHelper extends Helper {
 
     /**
      * 
+     * Add a header to the navbar or to a menu.
+     * 
+    **/
+    public function header ($name, $options = []) {
+        $options = $this->addClass ($options, 'dropdown-header') ;
+        return $this->Html->tag('li', $name, $options) ;
+    }
+
+    /**
+     * 
      * Add a text to the navbar or to a menu.
      * 
      * @param text The text message
@@ -188,26 +198,6 @@ class BootstrapNavbarHelper extends Helper {
         return $this->Html->tag($tag, $text, $options) ;
     }
     
-    /**
-     *
-     * Add a HTML block to the navbar.
-     *
-     * @param block The HTML block to add
-     *
-     * Extra options:
-     *  - list true/false (default true), specify if block should be wrap in a "li" tag, only
-     *      work on main nav (in submenu, block are always wrapped in a li tag)
-     *
-    **/
-    public function block ($block, $options = array()) {
-        $list = $this->_extractOption('list', $options, true) ;
-        unset ($options['list']) ;
-        $value = array(
-            'text' => $block,
-            'list' => $list
-        ) ;
-        $this->_addToCurrent('block', $value, $options) ;
-    }
     
     /**
      *
@@ -241,7 +231,7 @@ class BootstrapNavbarHelper extends Helper {
             $options = $this->addClass ($options, ['nav', 'navbar-nav']);
             $res = $this->Html->tag('ul', null, $options) ;
         }
-        else if ($this->_level == 1) {
+        else {
             $linkOptions += [
                 'data-toggle' => 'dropdown',
                 'role' => 'button',
