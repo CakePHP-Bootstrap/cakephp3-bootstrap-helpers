@@ -316,9 +316,14 @@ class BootstrapHtmlHelper extends HtmlHelper {
                     }
                     $name = array_shift($action) ;
                     $url  = array_shift($action) ;
+                    $li_options = ['role' => 'presentation'];
+                    if (array_key_exists('_options', $action)) {
+                        $li_options += $action['_options'];
+                        unset($action['_options']);
+                    }
                     $action['role'] = 'menuitem' ;
                     $action['tabindex'] = -1 ;
-                    $output .= '<li role="presentation">'.$this->link($name, $url, $action).'</li>';
+                    $output .= $this->tag('li', $this->link($name, $url, $action), $li_options);
                 }
             }
             else {
@@ -331,6 +336,61 @@ class BootstrapHtmlHelper extends HtmlHelper {
         $tag = $options['tag'];
         unset($options['tag']);
         return $this->tag($tag, $output, $options) ;
+    }
+
+    public function navbarNav(array $menu = [], array $options = []) {
+        $output = '';
+        foreach ($menu as $item => $submenu) {
+            if ($item === 'divider' || (is_array($item) && $item[0] === 'divider')) {
+                $output .= '<li role="presentation" class="divider"></li>' ;
+            }
+            elseif (is_array($submenu)) {
+                $dropdown_options = ['tag' => 'ul'];
+                $link_options = [
+                    'data-toggle' => 'dropdown',
+                    'role' => 'button',
+                    'aria-haspopup' => 'true',
+                    'aria-expanded' => 'false'
+                ];
+                $li_options = ['caret' => true];
+                if (array_key_exists('_options', $submenu) && is_array($submenu['_options'])) {
+                    if (array_key_exists('dropdown', $submenu['_options'])) {
+                        $dropdown_options += $submenu['_options']['dropdown'];
+                        $dropdown_options = $this->addClass($dropdown_options, 'dropdown-menu');
+                    }
+                    if (array_key_exists('link', $submenu['_options'])) {
+                        $link_options += $submenu['_options']['link'];
+                        $link_options = $this->addClass($link_options, 'dropdown-toggle');
+                    }
+                    if (array_key_exists('li', $submenu['_options'])) {
+                        $li_options += $submenu['_options']['li'];
+                    }
+                    unset($submenu['_options']);
+                }
+
+                $caret = '';
+                if ($li_options['caret'] === TRUE) {
+                    $caret = ' <span class="caret"></span>';
+                } elseif ($li_options['caret'] === FALSE) {
+                    $caret = '';
+                } else {
+                    $caret = $li_options['caret'];
+                }
+                unset($li_options['caret']);
+
+                $output .= $this->tag(
+                    'li',
+                    $this->link($item.$caret, '#', $link_options).
+                    $this->dropdown($submenu, $dropdown_options),
+                    $li_options
+                );
+            }
+            else {
+                $output .= '<li>'.$submenu.'</li>' ;
+            }
+        }
+        $options = ['tag' => 'ul', 'class' => 'nav navbar-nav'] + $options;
+        return $this->tag($options['tag'], $output, $options);
     }
 
     /**
