@@ -316,9 +316,14 @@ class BootstrapHtmlHelper extends HtmlHelper {
                     }
                     $name = array_shift($action) ;
                     $url  = array_shift($action) ;
+                    $li_options = ['role' => 'presentation'];
+                    if (array_key_exists('_options', $action)) {
+                        $li_options += $action['_options'];
+                        unset($action['_options']);
+                    }
                     $action['role'] = 'menuitem' ;
                     $action['tabindex'] = -1 ;
-                    $output .= '<li role="presentation">'.$this->link($name, $url, $action).'</li>';
+                    $output .= $this->tag('li', $this->link($name, $url, $action), $li_options);
                 }
             }
             else {
