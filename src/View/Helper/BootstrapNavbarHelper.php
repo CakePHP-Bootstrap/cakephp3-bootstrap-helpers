@@ -138,7 +138,7 @@ class BootstrapNavbarHelper extends Helper {
      *     
     **/
     public function link ($name, $url = '', $options = [], $linkOptions = []) {
-        if ($this->_level == 0) {
+        if ($this->_level == 0 && $this->autoButtonLink) {
             $options = $this->addClass ($options, 'btn btn-default navbar-btn') ;
             return $this->Html->link ($name, $url, $options) ;
         }
