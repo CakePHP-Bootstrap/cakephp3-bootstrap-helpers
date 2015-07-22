@@ -352,7 +352,7 @@ class BootstrapHtmlHelper extends HtmlHelper {
                     'aria-haspopup' => 'true',
                     'aria-expanded' => 'false'
                 ];
-                $li_options = [];
+                $li_options = ['caret' => true];
                 if (array_key_exists('_options', $submenu) && is_array($submenu['_options'])) {
                     if (array_key_exists('dropdown', $submenu['_options'])) {
                         $dropdown_options += $submenu['_options']['dropdown'];
@@ -368,9 +368,20 @@ class BootstrapHtmlHelper extends HtmlHelper {
                     unset($submenu['_options']);
                 }
 
+                $caret = '';
+                if ($li_options['caret'] === TRUE) {
+                    $caret = ' <span class="caret"></span>';
+                } elseif ($li_options['caret'] === FALSE) {
+                    $caret = '';
+                } else {
+                    $caret = $li_options['caret'];
+                }
+                unset($li_options['caret']);
+
                 $output .= $this->tag(
                     'li',
-                    $this->link($item, '#', $link_options).$this->dropdown($submenu, $dropdown_options),
+                    $this->link($item.$caret, '#', $link_options).
+                    $this->dropdown($submenu, $dropdown_options),
                     $li_options
                 );
             }
