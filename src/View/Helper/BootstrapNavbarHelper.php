@@ -288,7 +288,7 @@ class BootstrapNavbarHelper extends Helper {
      * End a navbar.
      * 
     **/
-    public function end ( {
+    public function end () {
         $res = '</div></div>' ;
         if ($this->_responsive) {
             $res .= '</div>' ;
