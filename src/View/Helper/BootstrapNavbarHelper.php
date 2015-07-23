@@ -34,27 +34,44 @@ class BootstrapNavbarHelper extends Helper {
         ]
     ] ;
 
+    /**
+     * Automatic detection of active link (class="active").
+     *
+     * @var bool
+     */
     public $autoActiveLink = true ;
+    
+    /**
+     * Automatic button link when not in a menu.
+     *
+     * @var bool
+     */
     public $autoButtonLink = true ;
     
     protected $_fixed = false ;
     protected $_static = false ;
     protected $_responsive = false ;
     protected $_inverse = false ;
-	protected $_fluid = false;
+    protected $_fluid = false;
         
+    /**
+     * Menu level (0 = out of menu, 1 = main horizontal menu, 2 = dropdown menu).
+     *
+     * @var int
+     */
     protected $_level = 0;
 
     /**
      * 
      * Create a new navbar.
      * 
+     * @param $brand 
      * @param options Options passed to tag method for outer navbar div
      * 
      * Extra options:
      *  - fixed: false, 'top', 'bottom'
      *  - static: false, true (useless if fixed != false)
-     *  - responsive: false, true
+     *  - responsive: false, true (if true, a toggle button will be added)
      *  - inverse: false, true
      *  - fluid: false, true
      * 
@@ -68,8 +85,8 @@ class BootstrapNavbarHelper extends Helper {
         unset($options['static']) ;
         $this->_inverse = $this->_extractOption('inverse', $options, false) ;
         unset($options['inverse']) ;
-		$this->_fluid = $this->_extractOption('fluid', $options, false);
-		unset($options['fluid']);
+        $this->_fluid = $this->_extractOption('fluid', $options, false);
+        unset($options['fluid']);
         
         /** Generate options for outer div. **/
         $options = $this->addClass($options, 'navbar navbar-default') ;
@@ -121,21 +138,12 @@ class BootstrapNavbarHelper extends Helper {
     
     /**
      * 
-     * Functions below accept following options:
-     * 
-     *   - disabled (default false)
-     *   - active (default auto)
-     *   - pull (default auto)
-     * 
-    **/
-    
-    /**
-     * 
      * Add a link to the navbar or to a menu.
      * 
-     * @param name The link text
-     * @param url The link URL
-     * @param options Options passed to link method (+ extra options, see above)
+     * @param name        The link text
+     * @param url         The link URL
+     * @param options     Options passed to the tag method (for the li tag)
+     * @param linkOptions Options passed to the link method
      *     
     **/
     public function link ($name, $url = '', array $options = [], array $linkOptions = []) {
@@ -149,6 +157,14 @@ class BootstrapNavbarHelper extends Helper {
         return $this->Html->tag('li', $this->Html->link ($name, $url, $linkOptions), $options) ;
     }
 
+    /**
+     * 
+     * Add a button to the navbar.
+     * 
+     * @param name    Text of the button.
+     * @param options Options sent to the BootstrapFormHelper::button method.
+     * 
+    **/
     public function button ($name, array $options = []) {
         $options = $this->addClass ($options, 'navbar-btn') ;
         return $this->Form->button ($name, $options) ;
@@ -157,6 +173,8 @@ class BootstrapNavbarHelper extends Helper {
     /**
      * 
      * Add a divider to the navbar or to a menu.
+     * 
+     * @param options Options sent to the tag method.
      * 
     **/
     public function divider (array $options = []) {
@@ -167,7 +185,10 @@ class BootstrapNavbarHelper extends Helper {
 
     /**
      * 
-     * Add a header to the navbar or to a menu.
+     * Add a header to the navbar or to a menu, should not be used outside a submenu.
+     * 
+     * @param name    Title of the header.
+     * @param options Options sent to the tag method.
      * 
     **/
     public function header ($name, array $options = []) {
@@ -177,13 +198,13 @@ class BootstrapNavbarHelper extends Helper {
 
     /**
      * 
-     * Add a text to the navbar or to a menu.
+     * Add a text to the navbar.
      * 
-     * @param text The text message
-     * @param options Options passed to the tag method (+ extra options, see above)
+     * @param text The text message.
+     * @param options Options passed to the tag method (+ extra options, see above).
      * 
      * Extra options:
-     *  - wrap The HTML tag to use (default p)
+     *  - tag The HTML tag to use (default 'p')
      * 
     **/
     public function text ($text, $options = []) {
@@ -207,8 +228,8 @@ class BootstrapNavbarHelper extends Helper {
      *
      * Add a serach form to the navbar.
      *
-     * @param model Model for BootstrapFormHelper::searchForm method
-     * @param options Options for BootstrapFormHelper::searchForm method
+     * @param model   Model for BootstrapFormHelper::searchForm method.
+     * @param options Options for BootstrapFormHelper::searchForm method.
      *
     **/
     public function searchForm ($model = null, $options = []) {
@@ -266,10 +287,8 @@ class BootstrapNavbarHelper extends Helper {
      * 
      * End a navbar.
      * 
-     * @param compile If true, compile the navbar and return
-     *    
     **/
-    public function end ($compile = false) {
+    public function end ( {
         $res = '</div></div>' ;
         if ($this->_responsive) {
             $res .= '</div>' ;
