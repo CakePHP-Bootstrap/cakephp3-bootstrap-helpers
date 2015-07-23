@@ -62,6 +62,33 @@ class BootstrapNavbarHelper extends Helper {
     protected $_level = 0;
 
     /**
+     * Adds the given class to the element options
+     *
+     * @param array $options Array options/attributes to add a class to
+     * @param string|array $class The class name being added.
+     * @param string $key the key to use for class.
+     * @return array Array of options with $key set.
+    **/
+    public function addClass(array $options = [], $class = null, $key = 'class') {
+        if (is_array($class)) {
+            $class = implode(' ', array_unique(array_map('trim', $class))) ;
+        }
+        if (isset($options[$key])) {
+            $optClass = $options[$key];
+            if (is_array($optClass)) {
+                $optClass = trim(implode(' ', array_unique(array_map('trim', $optClass))));
+            }
+        }
+        if (isset($optClass) && $optClass) {
+            $options[$key] = $optClass.' '.$class ;
+        }
+        else {
+            $options[$key] = $class ;
+        }
+        return $options ;
+    }
+
+    /**
      * 
      * Create a new navbar.
      * 
