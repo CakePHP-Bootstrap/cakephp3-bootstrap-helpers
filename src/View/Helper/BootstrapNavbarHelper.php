@@ -27,6 +27,8 @@ use Cake\Routing\Router;
 
 class BootstrapNavbarHelper extends Helper {
 
+    use BootstrapTrait ;
+
     public $helpers = [
         'Html',
         'Form' => [
@@ -321,18 +323,6 @@ class BootstrapNavbarHelper extends Helper {
             $res .= '</div>' ;
         }
         return $res ;
-    }
-    
-    /**
-     * 
-     * Extract options from $options, returning $default if $key is not found.
-     * 
-    **/
-    protected function _extractOption ($key, $options, $default = null) {
-        if (isset($options[$key])) {
-            return $options[$key] ;
-        }
-        return $default ;
     }
         
 }

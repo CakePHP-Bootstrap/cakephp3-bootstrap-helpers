@@ -26,6 +26,8 @@ use Cake\View\Helper\HtmlHelper;
 
 class BootstrapHtmlHelper extends HtmlHelper {
 
+    use BootstrapTrait ;
+
     /**
      * Use font awesome icons instead of glyphicons.
      *
@@ -38,59 +40,6 @@ class BootstrapHtmlHelper extends HtmlHelper {
             $this->_useFontAwesome = $config['useFontAwesome'];
         }
         parent::__construct($view, $config);
-    }
-
-    protected function _extractOption ($key, $options, $default = null) {
-        if (isset($options[$key])) {
-            return $options[$key] ;
-        }
-        return $default ;
-    }
-
-    /**
-     * Adds the given class to the element options
-     *
-     * @param array $options Array options/attributes to add a class to
-     * @param string|array $class The class name being added.
-     * @param string $key the key to use for class.
-     * @return array Array of options with $key set.
-    **/
-    public function addClass(array $options = [], $class = null, $key = 'class') {
-        if (is_array($class)) {
-            $class = implode(' ', array_unique(array_map('trim', $class))) ;
-        }
-        if (isset($options[$key])) {
-            $optClass = $options[$key];
-            if (is_array($optClass)) {
-                $optClass = trim(implode(' ', array_unique(array_map('trim', $optClass))));
-            }
-        }
-        if (isset($optClass) && $optClass) {
-            $options[$key] = $optClass.' '.$class ;
-        }
-        else {
-            $options[$key] = $class ;
-        }
-        return $options ;
-    }
-
-    /**
-     *
-     * Check type values in $options, returning null if no option is found or if
-     * option is not in $avail.
-     * If type == $default, $default is returned (even if it is not in $avail).
-     *
-    **/
-    protected function _extractType ($options, $key = 'type', $default = 'info',
-                                      $avail = array('info', 'success', 'warning', 'error')) {
-        $type = $this->_extractOption($key, $options, $default) ;
-        if ($default !== false && $type == $default) {
-            return $default ;
-        }
-        if (!in_array($type, $avail)) {
-            return null ;
-        }
-        return $type ;
     }
 
     /**

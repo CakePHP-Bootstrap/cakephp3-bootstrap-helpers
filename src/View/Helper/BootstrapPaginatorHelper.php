@@ -26,6 +26,7 @@ use Cake\View\Helper\PaginatorHelper;
 
 class BootstrapPaginatorHelper extends PaginatorHelper {
 
+    use BootstrapTrait ;
 
     public function __construct ($view, $config = []) {
         $this->templates([

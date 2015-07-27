@@ -26,6 +26,8 @@ use Cake\View\Helper\FormHelper;
 
 class BootstrapFormHelper extends FormHelper {
 
+    use BootstrapTrait ;
+
     public $helpers = [
         'Html', 
         'Url',
@@ -149,57 +151,6 @@ class BootstrapFormHelper extends FormHelper {
         $this->colSize = $this->_defaultColumnSize ;
         $this->_defaultConfig['templateClass'] = 'Bootstrap3\View\BootstrapStringTemplate' ;
         parent::__construct($view, $config);
-    }
-    
-    /**
-     * Adds the given class to the element options
-     *
-     * @param array $options Array options/attributes to add a class to
-     * @param string|array $class The class name being added.
-     * @param string $key the key to use for class.
-     * @return array Array of options with $key set.
-     */
-    public function addClass(array $options = [], $class = null, $key = 'class') {
-        if (is_array($class)) {
-            $class = implode(' ', array_unique(array_map('trim', $class))) ;
-        }
-        if (isset($options[$key])) {
-            $optClass = $options[$key];
-            if (is_array($optClass)) {
-                $optClass = trim(implode(' ', array_unique(array_map('trim', $optClass))));
-            }
-        }
-        if (isset($optClass) && $optClass) {
-            $options[$key] = $optClass.' '.$class ;
-        }
-        else {
-            $options[$key] = $class ;
-        }
-        return $options ;
-    }
-    
-    /**
-     * 
-     * Add classes to options according to values of bootstrap-type and bootstrap-size for button.
-     * 
-     * @param $options The initial options with bootstrap-type and/or bootstrat-size values
-     * 
-     * @return The new options with class values (btn, and btn-* according to initial options)
-     * 
-     */
-    protected function _addButtonClasses ($options) {
-        $type = $this->_extractOption('bootstrap-type', $options, $this->_defaultButtonType);
-        $size = $this->_extractOption('bootstrap-size', $options, FALSE);
-        unset($options['bootstrap-size']) ;
-        unset($options['bootstrap-type']) ;
-        $options = $this->addClass($options, 'btn') ;
-        if (in_array($type, $this->buttonTypes)) {
-            $options = $this->addClass($options, 'btn-'.$type) ;
-        }
-        if (in_array($size, $this->buttonSizes)) {
-            $options = $this->addClass($options, 'btn-'.$size) ;
-        }
-        return $options ;
     }
     
     /**
