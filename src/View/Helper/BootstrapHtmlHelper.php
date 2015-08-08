@@ -49,8 +49,8 @@ class BootstrapHtmlHelper extends HtmlHelper {
      * @param $icon Name of the icon.
      *
     **/
-    public function icon ($icon) {
-        return $this->_useFontAwesome ? $this->faIcon($icon) : $this->glIcon($icon);
+    public function icon ($icon, $options = array()) {
+        return $this->_useFontAwesome ? $this->faIcon($icon, $options) : $this->glIcon($icon, $options);
     }
 
     /**
@@ -58,8 +58,11 @@ class BootstrapHtmlHelper extends HtmlHelper {
      *
      * @param $icon Name of the icon.
      */
-    public function faIcon ($icon) {
-        return '<i class="fa fa-'.$icon.'"></i>' ;
+    public function faIcon ($icon, $options = array()) {
+        $options = $this->addClass($options, 'fa');
+        $options = $this->addClass($options, 'fa-'.$icon);
+
+        return $this->tag('i', '', $options);
     }
 
     /**
@@ -67,8 +70,11 @@ class BootstrapHtmlHelper extends HtmlHelper {
      *
      * @param $icon Name of the icon.
      */
-    public function glIcon ($icon) {
-        return '<i class="glyphicon glyphicon-'.$icon.'"></i>';
+    public function glIcon ($icon, $options = array()) {
+        $options = $this->addClass($options, 'glyphicon');
+        $options = $this->addClass($options, 'glyphicon-'.$icon);
+
+        return $this->tag('i', '', $options);
     }
 
     /**
