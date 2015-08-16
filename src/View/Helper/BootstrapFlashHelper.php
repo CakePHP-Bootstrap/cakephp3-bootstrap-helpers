@@ -28,6 +28,8 @@ class BootstrapFlashHelper extends FlashHelper {
 
     use BootstrapTrait ;
 
+    protected $_bootstrapTemplates = ['info', 'error', 'success', 'warning'] ;
+
     /**
      * Used to render the message set in FlashComponent::set()
      *
@@ -82,7 +84,10 @@ class BootstrapFlashHelper extends FlashHelper {
         $flash = $options + $flash;
         $this->request->session()->delete("Flash.$key");
 
-        $flash['element'] = 'Bootstrap3.'.$flash['element'] ;
+        $element = $flash['element'] ;
+        if (in_array(basename($element), $this->_bootstrapTemplates)) {
+            $flash['element'] = 'Bootstrap3.'.$element ;
+        }
 
         return $this->_View->element($flash['element'], $flash);
     }
