@@ -1,5 +1,5 @@
-<?php 
-namespace Bootstrap3\View;
+<?php
+namespace Bootstrap\View;
 
 use Cake\View\StringTemplate;
 use Cake\Utility\Hash;
@@ -53,7 +53,7 @@ class BootstrapStringTemplate extends StringTemplate {
                     && preg_match('#'.substr($placeholder, 6).'="([^"]+)"#', $data['attrs'], $matches) > 0) {
                     preg_replace('#'.substr($placeholder, 6).'="[^"]+"#', '', $data['attrs']);
                     $data[$placeholder] = $matches[1];
-                }  
+                }
             }
         }
         if ($template === null) {
@@ -66,4 +66,4 @@ class BootstrapStringTemplate extends StringTemplate {
         return vsprintf($template, $replace);
     }
 
-};
+}; 

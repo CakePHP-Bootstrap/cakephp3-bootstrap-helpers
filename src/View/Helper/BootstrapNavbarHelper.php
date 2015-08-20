@@ -20,7 +20,7 @@
 * @license http://www.apache.org/licenses/LICENSE-2.0
 */
 
-namespace Bootstrap3\View\Helper;
+namespace Bootstrap\View\Helper;
 
 use Cake\View\Helper ;
 use Cake\Routing\Router;
@@ -32,7 +32,7 @@ class BootstrapNavbarHelper extends Helper {
     public $helpers = [
         'Html',
         'Form' => [
-            'className' => 'Bootstrap3.BootstrapForm'
+            'className' => 'Bootstrap.BootstrapForm'
         ]
     ] ;
 

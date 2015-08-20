@@ -20,7 +20,7 @@
 * @license http://www.apache.org/licenses/LICENSE-2.0
 */
 
-namespace Bootstrap3\View\Helper;
+namespace Bootstrap\View\Helper;
 
 use Cake\View\Helper\FormHelper;
 
@@ -32,7 +32,7 @@ class BootstrapFormHelper extends FormHelper {
         'Html', 
         'Url',
         'bHtml' => [
-            'className' => 'Bootstrap3.BootstrapHtml'
+            'className' => 'Bootstrap.BootstrapHtml'
         ]
     ] ;
 
@@ -149,7 +149,7 @@ class BootstrapFormHelper extends FormHelper {
             $this->_customFileInput = $config['useCustomFileInput'];
         }
         $this->colSize = $this->_defaultColumnSize ;
-        $this->_defaultConfig['templateClass'] = 'Bootstrap3\View\BootstrapStringTemplate' ;
+        $this->_defaultConfig['templateClass'] = 'Bootstrap\View\BootstrapStringTemplate' ;
         parent::__construct($view, $config);
     }
     
