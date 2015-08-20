@@ -13,13 +13,13 @@
     <body data-spy="scroll" data-target=".right-nav" data-offset="22">
 
         <div class="jumbotron">
-            <a href="https://github.com/Holt59/cakephp3-bootstrap3-helpers" id="forkme"><i class="fa fa-github"></i> Fork me on Github</a>
+            <a href="https://github.com/Holt59/cakephp3-bootstrap-helpers" id="forkme"><i class="fa fa-github"></i> Fork me on Github</a>
             <div class="container">
-            <h1>CakePHP 3, Bootstrap 3 Helpers</h1>
+            <h1>CakePHP 3, Bootstrap Helpers</h1>
             <p class="headline"><a href="http://cakephp.org/" target="_blank">CakePHP 3.x</a> helpers for the <a href="http://getbootstrap.com/" target="_blank">Bootstrap 3</a> HTML, CSS &amp; JS framework by <a href="https://github.com/Holt59" target="_blank">@Holt59</a>.</p>
             <p>
-                <a class="btn btn-lg" href="https://github.com/Holt59/cakephp3-bootstrap3-helpers" target="_blank"><i class="fa fa-github"></i> Code on Github</a>
-                <a class="btn btn-lg" href="https://github.com/Holt59/cakephp3-bootstrap3-helpers/archive/master.zip"><i class="fa fa-download"></i> Download (.zip)</a>
+                <a class="btn btn-lg" href="https://github.com/Holt59/cakephp3-bootstrap-helpers" target="_blank"><i class="fa fa-github"></i> Code on Github</a>
+                <a class="btn btn-lg" href="https://github.com/Holt59/cakephp3-bootstrap-helpers/archive/master.zip"><i class="fa fa-download"></i> Download (.zip)</a>
             </p>
             </div>
         </div>
@@ -47,20 +47,20 @@
                             <!-- Tab panes -->
                             <div class="tab-content">
                                 <div role="tabpanel" class="tab-pane active" id="install-composer">
-                                    <p>Since v3, CakePHP uses composer, the easiest way to set up the Bootstrap 3 helpers is by either running</p>
-                                    <pre><code class="language-javascript">composer require holt59/cakephp3-bootstrap3-helpers:dev-master</code></pre>
+                                    <p>Since v3, CakePHP uses composer, the easiest way to set up the Bootstrap helpers is by either running</p>
+                                    <pre><code class="language-javascript">composer require holt59/cakephp3-bootstrap-helpers:dev-master</code></pre>
                                     <p>or adding the following to your <code>composer.json</code> and run <code>composer update</code>:</p>
                                     <pre><code class="language-bash">"require": {
-    "holt59/cakephp3-bootstrap3-helpers": "dev-master"
+    "holt59/cakephp3-bootstrap-helpers": "dev-master"
 }</code></pre>
                                     <p>Do not forget to load the plugin by adding the following line into your <code>/config/bootstrap.php</code> file:</p>
-                                    <pre><code class="language-php">Plugin::load('Bootstrap3');</code></pre>
+                                    <pre><code class="language-php">Plugin::load('Bootstrap');</code></pre>
                                 </div>
                                 <div role="tabpanel" class="tab-pane" id="install-manual">
-                                    <p>If you do not use <code>composer</code>, simply clone the repository into your <code>plugins/Bootstrap3</code> folder by running:</p>
-                                    <pre><code class="language-javascript">git clone https://github.com/Holt59/cakephp3-bootstrap3-helpers.git plugins/Bootstrap3</code></pre>
+                                    <p>If you do not use <code>composer</code>, simply clone the repository into your <code>plugins/Bootstrap</code> folder by running:</p>
+                                    <pre><code class="language-javascript">git clone https://github.com/Holt59/cakephp3-bootstrap-helpers.git plugins/Bootstrap</code></pre>
                                     <p>And then load the plugin with <code>autoload</code> set to <code>true</code> in your <code>/config/bootstrap.php</code> file:</p>
-                                    <pre><code class="language-php">Plugin::load('Bootstrap3' ['autoload' => true]);</code></pre>
+                                    <pre><code class="language-php">Plugin::load('Bootstrap' ['autoload' => true]);</code></pre>
                                 </div>
                             </div>
 
@@ -69,16 +69,16 @@
                         <p>Once the plugin is loaded, you just need to enable them into your <code>AppController</code> like this:</p>
                         <pre><code class="language-php">public $helpers = [
     'Html' => [
-        'className' => 'Bootstrap3.BootstrapHtml'
+        'className' => 'Bootstrap.BootstrapHtml'
     ],
     'Form' => [
-        'className' => 'Bootstrap3.BootstrapForm'
+        'className' => 'Bootstrap.BootstrapForm'
     ],
     'Paginator' => [
-        'className' => 'Bootstrap3.BootstrapPaginator'
+        'className' => 'Bootstrap.BootstrapPaginator'
     ],
     'Modal' => [
-        'className' => 'Bootstrap3.BootstrapModal'
+        'className' => 'Bootstrap.BootstrapModal'
     ]
 ];</code></pre>
                         <p>See <a href="http://book.cakephp.org/3.0/en/views/helpers.html" target="_blank">CakePHP documentation</a> for more information on how to enable helpers in your controllers (especially if you want to use the default <b>CakePHP</b> helpers together with these helpers).</p>
@@ -140,7 +140,7 @@
                         <h3 id="icons-fa">Icons - Font Awesome</h3>
                         <pre><code class="language-php">public $helpers = [
     'Html' =&gt; [
-        'className' => 'Bootstrap3.BootstrapHtml',
+        'className' => 'Bootstrap.BootstrapHtml',
         'useFontAwesome' => true // Add this line to set font awesome as default
     ]
 ];</code></pre>
