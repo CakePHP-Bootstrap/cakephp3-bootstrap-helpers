@@ -19,7 +19,7 @@ composer require holt59/cakephp3-bootstrap-helpers:dev-master
 
 If you want the latest **Bootstrap 3** version of the plugin:
 ```
-composer require holt59/cakephp3-bootstrap-helpers:~3.0*
+composer require holt59/cakephp3-bootstrap-helpers:~3.0
 ```
 
 If you want to test the **Bootstrap 4** version of the plugin (alpha):
