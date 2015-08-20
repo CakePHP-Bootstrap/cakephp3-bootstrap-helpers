@@ -33,11 +33,14 @@ class BootstrapHtmlHelper extends HtmlHelper {
      *
      * @var boolean
      */
-    protected $_useFontAwesome = FALSE;
+    protected $_useFontAwesome = true;
 
     public function __construct (\Cake\View\View $view, array $config = []) {
         if (isset($config['useFontAwesome'])) {
             $this->_useFontAwesome = $config['useFontAwesome'];
+        }
+		if (isset($config['useGlyphicon'])) {
+            $this->_useFontAwesome = !$config['useGlyphicon'];
         }
         parent::__construct($view, $config);
     }
@@ -49,7 +52,7 @@ class BootstrapHtmlHelper extends HtmlHelper {
      * @param $icon Name of the icon.
      *
     **/
-    public function icon ($icon, $options = array()) {
+    public function icon ($icon, $options = []) {
         return $this->_useFontAwesome ? $this->faIcon($icon, $options) : $this->glIcon($icon, $options);
     }
 
@@ -58,11 +61,8 @@ class BootstrapHtmlHelper extends HtmlHelper {
      *
      * @param $icon Name of the icon.
      */
-    public function faIcon ($icon, $options = array()) {
-        $options = $this->addClass($options, 'fa');
-        $options = $this->addClass($options, 'fa-'.$icon);
-
-        return $this->tag('i', '', $options);
+    public function faIcon ($icon, $options = []) {
+        return $this->tag('i', '', $this->addClass($options, ['fa', 'fa-'.$icon]));
     }
 
     /**
@@ -70,11 +70,8 @@ class BootstrapHtmlHelper extends HtmlHelper {
      *
      * @param $icon Name of the icon.
      */
-    public function glIcon ($icon, $options = array()) {
-        $options = $this->addClass($options, 'glyphicon');
-        $options = $this->addClass($options, 'glyphicon-'.$icon);
-
-        return $this->tag('i', '', $options);
+    public function glIcon ($icon, $options = []) {
+        return $this->tag('i', '', $this->addClass($options, ['glyphicon', 'glyphicon-'.$icon]));
     }
 
     /**
@@ -92,7 +89,7 @@ class BootstrapHtmlHelper extends HtmlHelper {
      *  - type The type of the label (useless if $type specified)
      *
     **/
-    public function label ($text, $type = 'default', $options = array()) {
+    public function label ($text, $type = 'default', $options = []) {
         if (is_string($type)) {
             $options['type'] = $type ;
         }
@@ -100,11 +97,9 @@ class BootstrapHtmlHelper extends HtmlHelper {
             $options = $type ;
         }
         $type = $this->_extractType($options, 'type', $default = 'default',
-                    array('default', 'primary', 'success', 'warning', 'info', 'danger')) ;
+                    ['default', 'primary', 'success', 'warning', 'info', 'danger']) ;
         unset ($options['type']) ;
-        $options = $this->addClass($options, 'label') ;
-        $options = $this->addClass($options, 'label-'.$type) ;
-        return $this->tag('span', $text, $options) ;
+        return $this->tag('span', $text, $this->addClass($options, ['label', 'label-'.$type])) ;
     }
 
     /**
@@ -116,9 +111,8 @@ class BootstrapHtmlHelper extends HtmlHelper {
      *
      *
     **/
-    public function badge ($text, $options = array()) {
-        $options = $this->addClass($options, 'badge') ;
-        return $this->tag('span', $text, $options) ;
+    public function badge ($text, $options = []) {
+        return $this->tag('span', $text, $this->addClass($options, 'badge')) ;
     }
 
     /**
@@ -131,7 +125,7 @@ class BootstrapHtmlHelper extends HtmlHelper {
      * Unusable options:
      * 	- Separator
     **/
-    public function getCrumbList(array $options = array(), $startText = false) {
+    public function getCrumbList(array $options = [], $startText = false) {
         $options['separator'] = '' ;
         $options = $this->addClass($options, 'breadcrumb') ;
         return parent::getCrumbList ($options, $startText) ;
@@ -153,7 +147,7 @@ class BootstrapHtmlHelper extends HtmlHelper {
      *    $type is specified)
      *
     **/
-    public function alert ($text, $type = 'warning', $options = array()) {
+    public function alert ($text, $type = 'warning', $options = []) {
         if (is_string($type)) {
             $options['type'] = $type ;
         }
@@ -161,7 +155,7 @@ class BootstrapHtmlHelper extends HtmlHelper {
             $options = $type ;
         }
         $button = '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' ;
-        $type = $this->_extractType($options, 'type', 'warning', array('info', 'warning', 'success', 'danger')) ;
+        $type = $this->_extractType($options, 'type', 'warning', ['info', 'warning', 'success', 'danger']) ;
         unset($options['type']) ;
         $options = $this->addClass($options, 'alert') ;
         if ($type) {
@@ -194,7 +188,7 @@ class BootstrapHtmlHelper extends HtmlHelper {
      * 	- active: boolean, specify if progress bar should be active
      *
     **/
-    public function progress ($widths, $options = array()) {
+    public function progress ($widths, $options = []) {
         $striped = $this->_extractOption('striped', $options, false) || in_array('striped', $options);
         unset($options['striped']) ;
         $active = $this->_extractOption('active', $options, false) || in_array('active', $options);
