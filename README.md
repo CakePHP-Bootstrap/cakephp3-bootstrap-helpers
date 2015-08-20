@@ -12,8 +12,19 @@ How to... ?
 
 **Installation**
 
+If you want the latest version of the plugin (currently **Boostrap 3**):
 ```
 composer require holt59/cakephp3-bootstrap-helpers:dev-master
+```
+
+If you want the latest **Bootstrap 3** version of the plugin:
+```
+composer require holt59/cakephp3-bootstrap-helpers:3.*
+```
+
+If you want to test the **Bootstrap 4** version of the plugin (alpha):
+```
+composer require holt59/cakephp3-bootstrap-helpers:bootstrap4-alpha
 ```
 
 **Documentation**
