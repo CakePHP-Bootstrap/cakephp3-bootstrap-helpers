@@ -414,7 +414,8 @@ class BootstrapFormHelper extends FormHelper {
         $inputs = [] ;
         foreach ($fields as $field => $in) {
             if ($this->_extractOption($field, $options, $in)) {
-                $inputs[$field] = '<div class="col-md-{{colsize}}">{{'.($field == 'timeFormat' ? 'meridian' : $field).'}}</div>';
+                if ($field === 'timeFormat') $field = 'meridian' ; // Template uses "meridian" instead of timeFormat
+                $inputs[$field] = '<div class="col-md-{{colsize}}">{{'.$field.'}}</div>';
             }
         }
         $tplt = $this->templates('dateWidget');
