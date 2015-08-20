@@ -24,7 +24,7 @@ composer require holt59/cakephp3-bootstrap-helpers:3.*
 
 If you want to test the **Bootstrap 4** version of the plugin (alpha):
 ```
-composer require holt59/cakephp3-bootstrap-helpers:bootstrap4-alpha
+composer require holt59/cakephp3-bootstrap-helpers:v4.0.0-alpha
 ```
 
 **Documentation**
