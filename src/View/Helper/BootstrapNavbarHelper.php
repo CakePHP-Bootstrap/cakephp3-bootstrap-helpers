@@ -53,9 +53,10 @@ class BootstrapNavbarHelper extends Helper {
     protected $_fixed = false ;
     protected $_static = false ;
     protected $_responsive = false ;
-    protected $_inverse = false ;
     protected $_fluid = false;
-        
+    protected $_theme = 'dark' ;
+    protected $_bg    = 'inverse' ;
+
     /**
      * Menu level (0 = out of menu, 1 = main horizontal menu, 2 = dropdown menu).
      *
@@ -101,8 +102,9 @@ class BootstrapNavbarHelper extends Helper {
      *  - fixed: false, 'top', 'bottom'
      *  - static: false, true (useless if fixed != false)
      *  - responsive: false, true (if true, a toggle button will be added)
-     *  - inverse: false, true
      *  - fluid: false, true
+     *  - theme: dark, light (default dark)
+     *  - bg: inverse, primary, faded, etc. (default inverse - Set to false to not use)
      * 
     **/
     public function create ($brand, $options = []) {
@@ -112,10 +114,12 @@ class BootstrapNavbarHelper extends Helper {
         unset($options['responsive']) ;
         $this->_static = $this->_extractOption('static', $options, false) ;
         unset($options['static']) ;
-        $this->_inverse = $this->_extractOption('inverse', $options, false) ;
-        unset($options['inverse']) ;
         $this->_fluid = $this->_extractOption('fluid', $options, false);
         unset($options['fluid']);
+        $this->_theme = $this->_extractOption('theme', $options, $this->_theme);
+        unset($options['theme']);
+        $this->_bg = $this->_extractOption('bg', $options, $this->_bg);
+        unset($options['bg']);
         
         /** Generate options for outer div. **/
         $options = $this->addClass($options, 'navbar navbar-default') ;
@@ -125,28 +129,23 @@ class BootstrapNavbarHelper extends Helper {
         else if ($this->_static !== false) {
             $options = $this->addClass($options, 'navbar-static-top') ;
         }
-        if ($this->_inverse !== false) {
-            $options = $this->addClass($options , 'navbar-inverse') ;
+        if ($this->_bg !== false) {
+            $options = $this->addClass($options, 'bg-'.$this->_bg) ;
         }
+        if ($this->_theme !== false) {
+            $options = $this->addClass($options, 'navbar-'.$this->_theme) ;
+        }
+
         
-        $toggleButton = '' ;
         $rightOpen = '' ;
         if ($this->_responsive) {
-            $toggleButton = $this->Html->tag('button', 
-                implode('', array(
-                    $this->Html->tag('span', __('Toggle navigation'), array('class' => 'sr-only')),
-                    $this->Html->tag('span', '', array('class' => 'icon-bar')),
-                    $this->Html->tag('span', '', array('class' => 'icon-bar')),
-                    $this->Html->tag('span', '', array('class' => 'icon-bar'))
-                )),
-                array(
-                    'type' => 'button',
-                    'class' => 'navbar-toggle collapsed',
-                    'data-toggle' => 'collapse',
-                    'data-target' => '.navbar-collapse'
-                )
-            ) ;
-            $rightOpen = $this->Html->tag('div', null, ['class' => 'navbar-collapse collapse']) ;
+            $toggleButton = $this->Html->tag('button', '&#9776;', [
+                'type' => 'button',
+                'class' => 'navbar-toggler hidden-sm-up',
+                'data-toggle' => 'collapse',
+                'data-target' => '#navbar-collapse'
+            ]) ;
+            $rightOpen = $toggleButton.$this->Html->tag('div', null, ['class' => 'collapse navbar-toggleable-xs', 'id' => '#navbar-collapse']) ;
         }
 
         if ($brand) {
@@ -158,11 +157,11 @@ class BootstrapNavbarHelper extends Helper {
                 $brandOptions = $this->addClass ($brandOptions, 'navbar-brand') ;
                 $brand = $this->Html->link ($brand['name'], $brand['url'], $brandOptions) ;
             }
-            $rightOpen = $this->Html->tag('div', $toggleButton.$brand, ['class' => 'navbar-header']).$rightOpen ;
+            $rightOpen .= $brand ;
         }
         
         /** Add and return outer div openning. **/
-        return $this->Html->tag('div', null, $options).$this->Html->tag('div', null, ['class' => $this->_fluid ? 'container-fluid' : 'container']).$rightOpen ;
+        return $this->Html->tag('div', null, ['class' => $this->_fluid ? 'container-fluid' : 'container']).$this->Html->tag('nav', null, $options).$rightOpen ;
     }
     
     /**
@@ -183,6 +182,8 @@ class BootstrapNavbarHelper extends Helper {
         if (Router::url() == Router::url ($url) && $this->autoActiveLink) {
             $options = $this->addClass ($options, 'active');
         }
+        $options = $this->addClass ($options, 'nav-item') ;
+        $linkOptions = $this->addClass ($linkOptions, 'nav-link') ;
         return $this->Html->tag('li', $this->Html->link ($name, $url, $linkOptions), $options) ;
     }
 
@@ -252,22 +253,6 @@ class BootstrapNavbarHelper extends Helper {
         return $this->Html->tag($tag, $text, $options) ;
     }
     
-    
-    /**
-     *
-     * Add a serach form to the navbar.
-     *
-     * @param model   Model for BootstrapFormHelper::searchForm method.
-     * @param options Options for BootstrapFormHelper::searchForm method.
-     *
-    **/
-    public function searchForm ($model = null, $options = []) {
-        $align = $this->_extractOption ($options, 'align', 'left') ;
-        unset ($options['align']) ;
-        $options = $this->addClass($options, ['navbar-form',  'navbar-'.$align]) ;
-        return $this->Form->searchForm($model, $options) ;
-    }
-    
     /**
      * 
      * Start a new menu, 2 levels: If not in submenu, create a dropdown menu,
@@ -293,13 +278,69 @@ class BootstrapNavbarHelper extends Helper {
                 'aria-expanded' => 'false',
                 'escape' => false
             ] ;
+            $linkOptions = $this->addClass ($linkOptions, 'nav-link');
             $link        = $this->Html->link ($name.(array_key_exists ('caret', $linkOptions) ? $linkOptions['caret'] : '<span class="caret"></span>'), $url ? $url : '#', $linkOptions);
-            $options     = $this->addClass ($options, 'dropdown') ;
+            $options     = $this->addClass ($options, ['dropdown', 'nav-item']) ;
             $listOptions = $this->addClass ($listOptions, 'dropdown-menu') ;
             $res = $this->Html->tag ('li', null, $options).$link.$this->Html->tag ('ul', null, $listOptions);
         }
         $this->_level += 1 ;
         return $res ;
+    }
+    
+    /**
+     * 
+     * Create a basic bootstrap search form.
+     * 
+     * @param $model The model of the form
+     * @param $options The options that will be pass to the BootstrapForm::create method
+     * @param $inputOptions Options used for the BootstrapFormHelper::input method (see default values).
+     * @param $buttonOptions Options used for the BootstrapFormHelper::submit method (see default values).
+     * 
+     * Extra options:
+     *  - align: false|"right"|"left" (default "right"), form alignment
+     * Extra button options:
+     *  - text: The text to use (default 'Search')
+     *
+     *     
+    **/
+    public function searchForm ($model = null, $options = [], $inputOptions = [], $buttonOptions = []) {
+
+        $align = $this->_extractOption ('align', $options, 'right');
+        unset($options['align']);
+        
+        $options = $this->addClass ($options, ['form-inline', 'navbar-form']);
+        if ($align) $options = $this->addClass ($options, 'pull-'.$align) ;
+
+        if (isset($options['_input'])) {
+            $inputOptions = $options['_input'] ;
+            unset ($options['_input']) ;
+        }
+        if (isset($options['_button'])) {
+            $buttonOptions = $options['_button'] ;
+            unset ($options['_button']) ;
+        }
+
+        $inputOptions += [
+            'type' => 'text',
+            'label' => false,
+            'placeholder' => 'Search... '
+        ] ;
+
+        $buttonOptions += [
+            'class' => 'btn-info-outline'
+        ] ;
+        $buttonText = $this->_extractOption ('text', $buttonOptions, 'Search') ;
+        unset ($buttonOptions['text']) ;
+
+        $output = '' ;
+        $output .= $this->Form->create($model, $options) ;
+        $output .= $this->Form->input('search', $inputOptions) ;
+        $output .= ' ' ; 
+        $output .= $this->Form->submit($buttonText, $buttonOptions) ;
+        $output .= $this->Form->end() ;
+    
+        return $output ;
     }
     
     /**
@@ -318,11 +359,7 @@ class BootstrapNavbarHelper extends Helper {
      * 
     **/
     public function end () {
-        $res = '</div></div>' ;
-        if ($this->_responsive) {
-            $res .= '</div>' ;
-        }
-        return $res ;
+        return ($this->_responsive ? '</div>' : '').'</nav></div>' ;
     }
         
 }

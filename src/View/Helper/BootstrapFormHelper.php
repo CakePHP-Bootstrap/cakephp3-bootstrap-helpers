@@ -653,45 +653,6 @@ class BootstrapFormHelper extends FormHelper {
     public function submit($caption = null, array $options = array()) {
         return parent::submit($caption, $this->_createButtonOptions($options)) ;
     }
-    
-    /** SPECIAL FORM **/
-    
-    /**
-     * 
-     * Create a basic bootstrap search form.
-     * 
-     * @param $model The model of the form
-     * @param $options The options that will be pass to the BootstrapForm::create method
-     * 
-     * Extra options:
-     * 	- label: The input label (default false)
-     * 	- placeholder: The input placeholder (default "Search... ")
-     * 	- button: The search button text (default: "Search")
-     *     
-    **/
-    public function searchForm ($model = null, $options = array()) {
-        
-        $label = $this->_extractOption('label', $options, false) ;
-        unset($options['label']) ;
-        $placeholder = $this->_extractOption('placeholder', $options, 'Search... ') ;
-        unset($options['placeholder']) ;
-        $button = $this->_extractOption('button', $options, 'Search') ;
-        unset($options['button']) ;
-        
-        $output = '' ;
-        
-        $output .= $this->create($model, array_merge(array('search' => true, 'inline' => (bool)$label), $options)) ;
-        $output .= $this->input('search', array(
-            'label' => $label,
-            'placeholder' => $placeholder,
-            'append' => array(
-                $this->button($button, array('style' => 'vertical-align: middle'))
-            )
-        )) ;
-        $output .= $this->end() ;
-    
-        return $output ;
-    }
 
 }
 
