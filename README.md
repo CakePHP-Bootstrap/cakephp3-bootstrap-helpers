@@ -5,7 +5,7 @@ CakePHP 3.0 Helpers to generate HTML with @Twitter Boostrap style: `Html`, `Form
 
 **Important:** From now, this repository will not target a specific bootstrap version, so you may encounter errors if you are requiring `cakephp3-bootstrap3-helpers` instead of `cakephp3-bootstrap-helpers` or loading `Bootstrap3` plugin instead of `Bootstrap`. Do not hesitate to open a new issue if you have trouble getting the plugin working.
 
-**Important:** The current version of bootstrap is v3.3.5, a new `bootstrap4-alpha` branch has been created with the aim of supporting Bootstrap 4. When the final version of Bootstrap 4 will be released, the `bootstrap4-alpha` branch will become the `master` branch of this plugin. 
+**Important:** The current version of bootstrap is v3.3.5, a new `bootstrap4-alpha` branch has been created with the aim of supporting Bootstrap 4. When the final version of Bootstrap 4 will be released, the `bootstrap4-alpha` branch will become the `master` branch of this plugin. See bellow if you want to always target a specific version of Bootstrap.
 
 How to... ?
 ===========
