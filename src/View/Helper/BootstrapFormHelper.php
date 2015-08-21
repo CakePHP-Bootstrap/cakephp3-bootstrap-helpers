@@ -69,7 +69,7 @@ class BootstrapFormHelper extends FormHelper {
             'inputSubmit' => '<input type="{{type}}"{{attrs}}>',
             'inputContainer' => '<fieldset class="form-group {{type}}{{required}}">{{content}}</fieldset>',
             'inputContainerError' => '<fieldset class="form-group has-error {{type}}{{required}}">{{content}}{{error}}</fieldset>',
-            'label' => '<label class="control-label {{attrs.class}}" {{attrs}}>{{text}}</label>',
+            'label' => '<label class="form-control-label {{attrs.class}}" {{attrs}}>{{text}}</label>',
             'nestingLabel' => '{{hidden}}<label class="c-input {{attrs.class}}" {{attrs}}>{{input}}<span class="c-indicator"></span>{{text}}</label>',
             'legend' => '<legend>{{text}}</legend>',
             'option' => '<option value="{{value}}"{{attrs}}>{{text}}</option>',
@@ -192,18 +192,21 @@ class BootstrapFormHelper extends FormHelper {
      *
     **/
     protected function _setDefaultTemplates () {
+		$this->templates ($this->_defaultConfig['templates']);
 		if ($this->horizontal) {
 			$this->templates([
 				'formGroup' => '{{label}}<div class="'.$this->_getColClass('input').'">{{prepend}}{{input}}{{append}}</div>',
 				'label' => str_replace('{{attrs.class}}', $this->_getColClass('label').' {{attrs.class}}', $this->templates('label')),
 				'error' => str_replace('{{attrs.class}}', $this->_getColClass('error').' {{attrs.class}}', $this->templates('error')),
-				'checkboxContainer' => '<fieldset class="form-group"><div class="'.$this->_getColClass('label', true).' '.$this->_getColClass('input').'">'
+				'checkboxContainer' => '<fieldset class="form-group row"><div class="'.$this->_getColClass('label', true).' '.$this->_getColClass('input').'">'
 					.$this->templates('checkboxContainer').'</div></fieldset>',
-				'radioContainer' => '<fieldset class="form-group">'.$this->templates('radioContainer').'</fieldset>',
+				'radioContainer' => '<fieldset class="form-group row">'.$this->templates('radioContainer').'</fieldset>',
 				'submitContainer' => str_replace('{{content}}', 
 					'<div class="'.$this->_getColClass('label', true).' '.$this->_getColClass('input').'">{{content}}</div>',
 					$this->templates('submitContainer')
-				)
+				),
+				'inputContainer' => str_replace('form-group', 'form-group row', $this->templates('inputContainer')),
+				'inputContainerError' => str_replace('form-group', 'form-group row', $this->templates('inputContainerError')),
 			]);
 		}
 		if ($this->inline) {
