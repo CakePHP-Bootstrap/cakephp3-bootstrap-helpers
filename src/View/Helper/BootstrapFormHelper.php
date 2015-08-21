@@ -344,15 +344,17 @@ class BootstrapFormHelper extends FormHelper {
         if ($help) {
             $append .= '<p class="help-block">'.$help.'</p>' ;
         }
+		
+		$type = strtolower($options['type']) ;
 
-        $inline = $this->_extractOption('inline', $options, '') ;
+        $inline = $this->_extractOption('inline', $options, $type === 'multicheckbox' ? true : false) ;
         unset ($options['inline']) ;
             
 		if (!isset($options['templates'])) $options['templates'] = [] ;
-		$type = $options['type'] ;
-		if ($type === 'radio' || $type === 'checkbox') {
+		if (in_array($type, ['radio', 'checkbox', 'multicheckbox'])) {
+			$custom = $type === 'multicheckbox' ? 'checkbox' : $type ;
             $options['templates'] += [
-				'nestingLabel' => str_replace('c-input', 'c-input c-'.$type, $this->templates('nestingLabel')) 
+				'nestingLabel' => str_replace('c-input', 'c-input c-'.$custom, $this->templates('nestingLabel')) 
 			] ;
 		}
 		if ($type === 'radio') {
@@ -360,6 +362,12 @@ class BootstrapFormHelper extends FormHelper {
 				'formGroup' => str_replace('{{input}}', 
 					'<div class="radio'.($inline ? '' : ' c-inputs-stacked').'">{{input}}</div>',
 					$this->templates('formGroup'))
+			] ;
+		}
+		if ($type === 'multicheckbox' && $inline) {
+			$options['templates'] += [
+				'checkboxWrapper' => '{{label}}',
+				'formGroup' => str_replace('{{input}}', '<div class="checkbox">{{input}}</div>', $this->templates('formGroup'))
 			] ;
 		}
 		
