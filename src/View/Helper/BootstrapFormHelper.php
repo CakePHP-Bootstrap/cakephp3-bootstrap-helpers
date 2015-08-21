@@ -54,8 +54,9 @@ class BootstrapFormHelper extends FormHelper {
             'checkbox' => '<input type="checkbox" name="{{name}}" value="{{value}}"{{attrs}}>',
             'checkboxFormGroup' => '{{label}}',
             'checkboxWrapper' => '<div class="checkbox">{{label}}</div>',
+			'checkboxContainer' => '<div class="checkbox">{{content}}</div>', 
             'dateWidget' => '{{year}}{{month}}{{day}}{{hour}}{{minute}}{{second}}{{meridian}}',
-            'error' => '<span class="help-block">{{content}}</span>',
+            'error' => '<p class="help-block {{attrs.class}}">{{content}}</p>',
             'errorList' => '<ul>{{content}}</ul>',
             'errorItem' => '<li>{{text}}</li>',
             'file' => '<input type="file" name="{{name}}" {{attrs}}>',
@@ -68,7 +69,7 @@ class BootstrapFormHelper extends FormHelper {
             'inputSubmit' => '<input type="{{type}}"{{attrs}}>',
             'inputContainer' => '<fieldset class="form-group {{type}}{{required}}">{{content}}</fieldset>',
             'inputContainerError' => '<fieldset class="form-group has-error {{type}}{{required}}">{{content}}{{error}}</fieldset>',
-            'label' => '<label {{attrs}}>{{text}}</label>',
+            'label' => '<label class="control-label {{attrs.class}}" {{attrs}}>{{text}}</label>',
             'nestingLabel' => '{{hidden}}<label class="c-input {{attrs.class}}" {{attrs}}>{{input}}<span class="c-indicator"></span>{{text}}</label>',
             'legend' => '<legend>{{text}}</legend>',
             'option' => '<option value="{{value}}"{{attrs}}>{{text}}</option>',
@@ -77,6 +78,7 @@ class BootstrapFormHelper extends FormHelper {
             'selectMultiple' => '<select name="{{name}}[]" multiple="multiple" class="form-control {{attrs.class}}" {{attrs}}>{{content}}</select>',
             'radio' => '<input type="radio" name="{{name}}" value="{{value}}"{{attrs}}>',
             'radioWrapper' => '{{label}}',
+			'radioContainer' => '{{content}}', 
             'textarea' => '<textarea name="{{name}}" class="form-control {{attrs.class}}" {{attrs}}>{{value}}</textarea>',
             'submitContainer' => '<fieldset class="form-group">{{content}}</fieldset>',
         ]
@@ -190,18 +192,25 @@ class BootstrapFormHelper extends FormHelper {
      *
     **/
     protected function _setDefaultTemplates () {
-        $this->templates([
-            'formGroup' => '{{label}}'.($this->horizontal ? '<div class="'.$this->_getColClass('input').'">' : '').'{{prepend}}{{input}}{{append}}'.($this->horizontal ? '</div>' : ''),
-            'checkboxContainer' => ($this->horizontal ? '<fieldset class="form-group"><div class="'.$this->_getColClass('label', true).' '.$this->_getColClass('input').'">' : '')
-                        .'<div class="checkbox">{{content}}</div>'
-                    .($this->horizontal ? '</div></fieldset>' : ''),
-            'radioContainer' => ($this->horizontal ? '<fieldset class="form-group">' : '')
-                        .'{{content}}'
-                    .($this->horizontal ? '</fieldset>' : ''),
-            'label' => '<label class="'.($this->horizontal ? $this->_getColClass('label') : '').' '.($this->inline ? 'sr-only' : '').' {{attrs.class}}" {{attrs}}>{{text}}</label>',
-            'error' => '<span class="help-block '.($this->horizontal ? $this->_getColClass('error') : '').'">{{content}}</span>',
-            'submitContainer' => '<fieldset class="form-group">'.($this->horizontal ? '<div class="'.$this->_getColClass('label', true).' '.$this->_getColClass('input').'">' : '').'{{content}}'.($this->horizontal ? '</div>' : '').'</fieldset>',
-        ]) ;
+		if ($this->horizontal) {
+			$this->templates([
+				'formGroup' => '{{label}}<div class="'.$this->_getColClass('input').'">{{prepend}}{{input}}{{append}}</div>',
+				'label' => str_replace('{{attrs.class}}', $this->_getColClass('label').' {{attrs.class}}', $this->templates('label')),
+				'error' => str_replace('{{attrs.class}}', $this->_getColClass('error').' {{attrs.class}}', $this->templates('error')),
+				'checkboxContainer' => '<fieldset class="form-group"><div class="'.$this->_getColClass('label', true).' '.$this->_getColClass('input').'">'
+					.$this->templates('checkboxContainer').'</div></fieldset>',
+				'radioContainer' => '<fieldset class="form-group">'.$this->templates('radioContainer').'</fieldset>',
+				'submitContainer' => str_replace('{{content}}', 
+					'<div class="'.$this->_getColClass('label', true).' '.$this->_getColClass('input').'">{{content}}</div>',
+					$this->templates('submitContainer')
+				)
+			]);
+		}
+		if ($this->inline) {
+			$this->templates([
+				'label' => str_replace('{{attrs.class}}', 'sr-only {{attrs.class}}', $this->templates('label'))
+			]) ;
+		}
     }
 	
     /**
