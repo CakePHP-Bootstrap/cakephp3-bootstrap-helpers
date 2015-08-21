@@ -54,7 +54,6 @@ class BootstrapFormHelper extends FormHelper {
             'checkbox' => '<input type="checkbox" name="{{name}}" value="{{value}}"{{attrs}}>',
             'checkboxFormGroup' => '{{label}}',
             'checkboxWrapper' => '<div class="checkbox">{{label}}</div>',
-            'checkboxContainer' => '<div class="checkbox">{{content}}</div>',
             'dateWidget' => '{{year}}{{month}}{{day}}{{hour}}{{minute}}{{second}}{{meridian}}',
             'error' => '<span class="help-block">{{content}}</span>',
             'errorList' => '<ul>{{content}}</ul>',
@@ -69,16 +68,15 @@ class BootstrapFormHelper extends FormHelper {
             'inputSubmit' => '<input type="{{type}}"{{attrs}}>',
             'inputContainer' => '<fieldset class="form-group {{type}}{{required}}">{{content}}</fieldset>',
             'inputContainerError' => '<fieldset class="form-group has-error {{type}}{{required}}">{{content}}{{error}}</fieldset>',
-            'label' => '<label class="control-label {{attrs.class}}" {{attrs}}>{{text}}</label>',
-            'nestingLabel' => '{{hidden}}<label class="c-input" {{attrs}}>{{input}}<span class="c-indicator"></span>{{text}}</label>',
+            'label' => '<label {{attrs}}>{{text}}</label>',
+            'nestingLabel' => '{{hidden}}<label class="c-input {{attrs.class}}" {{attrs}}>{{input}}<span class="c-indicator"></span>{{text}}</label>',
             'legend' => '<legend>{{text}}</legend>',
             'option' => '<option value="{{value}}"{{attrs}}>{{text}}</option>',
             'optgroup' => '<optgroup label="{{label}}"{{attrs}}>{{content}}</optgroup>',
-            'select' => '<select name="{{name}}" class="form-control {{attrs.class}}" {{attrs}}>{{content}}</select>',
+            'select' => '<select name="{{name}}" class="form-control c-select {{attrs.class}}" {{attrs}}>{{content}}</select>',
             'selectMultiple' => '<select name="{{name}}[]" multiple="multiple" class="form-control {{attrs.class}}" {{attrs}}>{{content}}</select>',
             'radio' => '<input type="radio" name="{{name}}" value="{{value}}"{{attrs}}>',
-            'radioWrapper' => '<div class="radio">{{label}}</div>',
-            'radioContainer' => '<fieldset class="form-group">{{content}}</fieldset>',
+            'radioWrapper' => '{{label}}',
             'textarea' => '<textarea name="{{name}}" class="form-control {{attrs.class}}" {{attrs}}>{{value}}</textarea>',
             'submitContainer' => '<fieldset class="form-group">{{content}}</fieldset>',
         ]
@@ -120,7 +118,7 @@ class BootstrapFormHelper extends FormHelper {
      *
      * @var string
      */
-    protected $_defaultButtonType = 'default' ;
+    protected $_defaultButtonType = 'primary' ;
 
     /**
      * Default colums size.
@@ -133,7 +131,7 @@ class BootstrapFormHelper extends FormHelper {
         'error' => 4
     ];
 
-    private $buttonTypes = ['default', 'primary', 'info', 'success', 'warning', 'danger', 'link'] ;
+    private $buttonTypes = ['primary', 'secondary', 'info', 'success', 'warning', 'danger', 'link'] ;
     private $buttonSizes = ['xs', 'sm', 'lg'] ;
 
     public function __construct (\Cake\View\View $view, array $config = []) {
@@ -197,10 +195,10 @@ class BootstrapFormHelper extends FormHelper {
             'checkboxContainer' => ($this->horizontal ? '<fieldset class="form-group"><div class="'.$this->_getColClass('label', true).' '.$this->_getColClass('input').'">' : '')
                         .'<div class="checkbox">{{content}}</div>'
                     .($this->horizontal ? '</div></fieldset>' : ''),
-            'radioContainer' => ($this->horizontal ? '<fieldset class="form-group"><div class="'.$this->_getColClass('label', true).' '.$this->_getColClass('input').'">' : '')
+            'radioContainer' => ($this->horizontal ? '<fieldset class="form-group">' : '')
                         .'{{content}}'
-                    .($this->horizontal ? '</div></fieldset>' : ''),
-            'label' => '<label class="'.($this->horizontal ? $this->_getColClass('label') : '').' '.($this->inline ? 'sr-only' : 'control-label').' {{attrs.class}}" {{attrs}}>{{text}}</label>',
+                    .($this->horizontal ? '</fieldset>' : ''),
+            'label' => '<label class="'.($this->horizontal ? $this->_getColClass('label') : '').' '.($this->inline ? 'sr-only' : '').' {{attrs.class}}" {{attrs}}>{{text}}</label>',
             'error' => '<span class="help-block '.($this->horizontal ? $this->_getColClass('error') : '').'">{{content}}</span>',
             'submitContainer' => '<fieldset class="form-group">'.($this->horizontal ? '<div class="'.$this->_getColClass('label', true).' '.$this->_getColClass('input').'">' : '').'{{content}}'.($this->horizontal ? '</div>' : '').'</fieldset>',
         ]) ;
@@ -328,7 +326,7 @@ class BootstrapFormHelper extends FormHelper {
      * 	- append: Same as prepend except it add elements after input
      *        
     **/
-    public function input($fieldName, array $options = array()) {
+    public function input($fieldName, array $options = []) {
 
         $options = $this->_parseOptions($fieldName, $options);
 
@@ -350,23 +348,45 @@ class BootstrapFormHelper extends FormHelper {
         $inline = $this->_extractOption('inline', $options, '') ;
         unset ($options['inline']) ;
             
+		if (!isset($options['templates'])) $options['templates'] = [] ;
 		$type = $options['type'] ;
-        if ($type === 'radio' || $type === 'checkbox') {
-            $options['templates'] = [] ;
+		if ($type === 'radio' || $type === 'checkbox') {
+            $options['templates'] += [
+				'nestingLabel' => str_replace('c-input', 'c-input c-'.$type, $this->templates('nestingLabel')) 
+			] ;
+		}
+		if ($type === 'radio') {
+			$options['templates'] += [
+				'formGroup' => str_replace('{{input}}', 
+					'<div class="radio'.($inline ? '' : ' c-inputs-stacked').'">{{input}}</div>',
+					$this->templates('formGroup'))
+			] ;
+		}
+		
+		$label = $this->_extractOption('label', $options, true) ;
+		if ($this->horizontal && !$label) {
+			if (!isset($options['templates']['formGroup'])) $options['templates']['formGroup'] = $this->templates('formGroup') ;
+			$options['templates']['formGroup'] = str_replace($this->_getColClass('input'), 
+				$this->_getColClass('label', true).' '.$this->_getColClass('input'),
+				$options['templates']['formGroup']
+			) ;
+		}
+		
+		/*
             if ($inline) {
-                $options['templates'] = [
-                    'label' => $this->templates('label').'<div></div>',
-                    $type.'Wrapper' => '{{label}}',
-                    'nestingLabel' => '{{hidden}}<label class="c-input c-'.$type.' '.$type.'-inline">{{input}}{{text}}</label>'
+                $options['templates'] += [
+                    // $type.'Wrapper' => '{{label}}',
                 ] ;
             }
             if ($this->horizontal) {
                 $options['templates'][$type.'Container'] = '<fieldset class="form-group">{{content}}</fieldset>';
             }
-            if (empty($options['templates'])) {
-                unset($options['templates']);
-            }
-        }
+            
+        }*/
+		
+		if (empty($options['templates'])) {
+			unset($options['templates']);
+		}
 
         $options['_data'] = [
             'prepend' => $prepend,
