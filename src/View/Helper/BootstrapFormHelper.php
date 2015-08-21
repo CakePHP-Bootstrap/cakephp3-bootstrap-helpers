@@ -129,8 +129,8 @@ class BootstrapFormHelper extends FormHelper {
      */
     protected $_defaultColumnSize = [
         'label' => 2,
-        'input' => 6,
-        'error' => 4
+        'input' => 10,
+        'error' => false
     ];
 
     private $buttonTypes = ['primary', 'secondary', 'info', 'success', 'warning', 'danger', 'link'] ;
@@ -184,6 +184,27 @@ class BootstrapFormHelper extends FormHelper {
     **/
     protected function _matchButton ($html) {
         return strpos($html, '<button') !== FALSE || strpos($html, 'type="submit"') !== FALSE ;
+    }
+
+    /**
+     *
+     * Return the col size class for the specified column (label, input or error).
+     *
+    **/
+    protected function _getColClass ($what, $offset = false) {
+		if ($what === 'error' && $this->colSize[$what] === false) {
+			return $this->_getColClass('label', true).' '.$this->_getColClass ('input') ;
+		}
+        if (isset($this->colSize[$what])) {
+            return 'col-md-'.($offset ? 'offset-' : '').$this->colSize[$what] ;
+        }
+        $classes = [] ;
+        foreach ($this->colSize as $cl => $arr) {
+            if (isset($arr[$what])) {
+                $classes[] = 'col-'.$cl.'-'.($offset ? 'offset-' : '').$arr[$what] ;
+            }
+        }
+        return implode(' ', $classes) ;
     }
 	
     /**
@@ -271,25 +292,6 @@ class BootstrapFormHelper extends FormHelper {
     public function setHorizontal ($horizontal) {
         $this->horizontal = $horizontal ;
         $this->_setDefaultTemplates () ;
-    }
-
-
-    /**
-     *
-     * Return the col size class for the specified column (label, input or error).
-     *
-    **/
-    protected function _getColClass ($what, $offset = false) {
-        if (isset($this->colSize[$what])) {
-            return 'col-md-'.($offset ? 'offset-' : '').$this->colSize[$what] ;
-        }
-        $classes = [] ;
-        foreach ($this->colSize as $cl => $arr) {
-            if (isset($arr[$what])) {
-                $classes[] = 'col-'.$cl.'-'.($offset ? 'offset-' : '').$arr[$what] ;
-            }
-        }
-        return implode(' ', $classes) ;
     }
 
     public function prepend ($input, $prepend) {
