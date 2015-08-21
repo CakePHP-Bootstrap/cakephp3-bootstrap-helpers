@@ -372,18 +372,6 @@ class BootstrapFormHelper extends FormHelper {
 			) ;
 		}
 		
-		/*
-            if ($inline) {
-                $options['templates'] += [
-                    // $type.'Wrapper' => '{{label}}',
-                ] ;
-            }
-            if ($this->horizontal) {
-                $options['templates'][$type.'Container'] = '<fieldset class="form-group">{{content}}</fieldset>';
-            }
-            
-        }*/
-		
 		if (empty($options['templates'])) {
 			unset($options['templates']);
 		}
