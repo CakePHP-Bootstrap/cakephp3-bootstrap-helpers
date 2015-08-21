@@ -208,7 +208,8 @@ class BootstrapFormHelper extends FormHelper {
 		}
 		if ($this->inline) {
 			$this->templates([
-				'label' => str_replace('{{attrs.class}}', 'sr-only {{attrs.class}}', $this->templates('label'))
+				'label' => str_replace('{{attrs.class}}', 'sr-only {{attrs.class}}', $this->templates('label')),
+				'inputContainer' => $this->templates('inputContainer').'&nbsp;'
 			]) ;
 		}
     }
