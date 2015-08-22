@@ -23,6 +23,16 @@
 namespace Bootstrap\View\Helper;
 
 trait BootstrapTrait {
+
+    /**
+     * Default type for buttons.
+     *
+     * @var string
+     */
+    protected $_defaultButtonType = 'primary' ;
+
+    public $buttonTypes = ['primary', 'secondary', 'info', 'success', 'warning', 'danger', 'link'] ;
+    public $buttonSizes = ['sm', 'lg'] ;
     
     /**
      * Adds the given class to the element options
@@ -61,7 +71,7 @@ trait BootstrapTrait {
      * @return The new options with class values (btn, and btn-* according to initial options)
      * 
      */
-    protected function _addButtonClasses ($options) {
+    protected function _addButtonClasses (array $options) {
         $type = $this->_extractOption('bootstrap-type', $options, $this->_defaultButtonType);
         $size = $this->_extractOption('bootstrap-size', $options, FALSE);
         unset($options['bootstrap-size']) ;

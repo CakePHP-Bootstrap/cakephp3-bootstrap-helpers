@@ -29,6 +29,13 @@ class BootstrapHtmlHelper extends HtmlHelper {
     use BootstrapTrait ;
 
     /**
+     * Count the number of created dropdown for id.
+     *
+     * @var int
+     */
+    protected $_dropDownCount = 0 ;
+
+    /**
      * Use font awesome icons instead of glyphicons.
      *
      * @var boolean
@@ -249,15 +256,59 @@ class BootstrapHtmlHelper extends HtmlHelper {
      * @param $options Attributes for the wrapper (change it with tag)
      *
      */
-    public function dropdown (array $menu = [], array $options = []) {
-        $output = '' ;
+    public function dropdown ($title, array $menu = [], array $options = [], array $buttonOptions = [], array $menuOptions = [], array $defaultItemOptions = []) {
+
+        if (isset($options['_button'])) {
+            $buttonOptions = $options['_button'] ;
+            unset ($options['_button']) ;
+        }
+
+        if (isset($options['_menu'])) {
+            $menuOptions = $options['_menu'] ;
+            unset ($options['_menu']) ;
+        }
+
+        if (isset($menuOptions['_item'])) {
+            $defaultItemOptions = $menuOptions['_item'] ;
+            unset($menuOptions['_item']) ;
+        }
+
+        $options = $this->addClass($options, 'dropdown') ;
+        $options += ['tag' => 'div'] ;
+
+        $buttonOptions += [
+            'data-toggle'   => 'dropdown',
+            'aria-haspopup' => 'true',
+            'aria-expanded' => 'false',
+            'id'            => 'dropdownMenu'.(++$this->_dropDownCount),
+            'tag'           => 'a'
+        ] ;
+        $buttonOptions = $this->addClass ($buttonOptions, 'dropdown-toggle'); 
+        $buttonOptions = $this->_addButtonClasses ($buttonOptions);
+
+        $menuOptions   = $this->addClass ($menuOptions, 'dropdown-menu') ;
+        $menuOptions  += [
+            'aria-labelledby' => $buttonOptions['id'],
+            'tag'             => 'div'
+        ] ;
+
+        $innerMenu = '' ;
         foreach ($menu as $action) {
+            $content = '' ;
+            $itemOptions = [] ;
             if ($action === 'divider' || (is_array($action) && $action[0] === 'divider')) {
-                $output .= '<li role="presentation" class="divider"></li>' ;
+                if (is_array($action) && isset($action[1]))
+                    $itemOptions = $action[1] ;
+                $itemOptions += ['tag' => 'div'] ;
+                $itemOptions = $this->addClass ($itemOptions, 'dropdown-divider') ;
             }
             elseif (is_array($action)) {
                 if ($action[0] === 'header') {
-                    $output .= '<li role="presentation" class="dropdown-header">'.$action[1].'</li>' ;
+                    if (isset($action[2]))
+                        $itemOptions = $action[2] ;
+                    $itemOptions += ['tag' => 'h6'] ;
+                    $itemOptions = $this->addClass ($itemOptions, 'dropdown-header') ;
+                    $content     = $action[1] ;
                 }
                 else {
                     if ($action[0] === 'link') {
@@ -265,21 +316,43 @@ class BootstrapHtmlHelper extends HtmlHelper {
                     }
                     $name = array_shift($action) ;
                     $url  = array_shift($action) ;
-                    $action['role'] = 'menuitem' ;
-                    $action['tabindex'] = -1 ;
-                    $output .= '<li role="presentation">'.$this->link($name, $url, $action).'</li>';
+                    if (!empty($action))
+                        $itemOptions = $action ;
+                    $itemOptions = $this->addClass ($itemOptions, 'dropdown-item') ;
+                    $itemOptions += ['tag' => 'a'] ;
+                    $content = $this->link($name, $url, $itemOptions) ;
                 }
             }
             else {
-                $output .= '<li role="presentation">'.$action.'</li>' ;
+                $content = $action ;
+                if (preg_match ('#<([a-z])+(.*)? (class="(.*)?")>(.*)*</\1>#i', $content, $matches)) {
+                    $content = str_replace ('class="', 'class="dropdown-item ', $content);
+                }
+                else {
+                    $content = preg_replace('#<([a-z]+)#i', '<\1 class="dropdown-item" ', $content) ;
+                }
+            }
+            if (!empty($itemOptions)) {
+                $itemTag = $itemOptions['tag'] ;
+                unset ($itemOptions['tag']) ;
+                $innerMenu .= $this->tag($itemTag, $content, $itemOptions);
+            }
+            else {
+                $innerMenu .= $content ;
             }
         }
-        $options = $this->addClass($options, 'dropdown-menu');
-        $options['role'] = 'menu' ;
-        $options += ['tag' => 'div'];
-        $tag = $options['tag'];
+        // Create button
+        $buttonTag = $buttonOptions['tag'] ;
+        unset ($buttonOptions['tag']) ;
+        $button = $this->tag($buttonTag, $title, $buttonOptions) ;
+        // Create menu
+        $menuTag = $menuOptions['tag'] ;
+        unset ($menuOptions['tag']) ;
+        $menu = $this->tag($menuTag, $innerMenu, $menuOptions) ;
+        // Create and return dropdown
+        $tag = $options['tag'] ;
         unset($options['tag']);
-        return $this->tag($tag, $output, $options) ;
+        return $this->tag($tag, $button.$menu, $options) ;
     }
 
     /**

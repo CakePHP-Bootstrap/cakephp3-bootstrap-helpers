@@ -116,13 +116,6 @@ class BootstrapFormHelper extends FormHelper {
     protected $_customFileInput = false ;
 
     /**
-     * Default type for buttons.
-     *
-     * @var string
-     */
-    protected $_defaultButtonType = 'primary' ;
-
-    /**
      * Default colums size.
      *
      * @var array
@@ -132,9 +125,6 @@ class BootstrapFormHelper extends FormHelper {
         'input' => 10,
         'error' => false
     ];
-
-    private $buttonTypes = ['primary', 'secondary', 'info', 'success', 'warning', 'danger', 'link'] ;
-    private $buttonSizes = ['xs', 'sm', 'lg'] ;
 
     public function __construct (\Cake\View\View $view, array $config = []) {
         if (isset($config['buttons'])) {
@@ -621,8 +611,8 @@ class BootstrapFormHelper extends FormHelper {
      * Extra options:
      *  - vertical true/false
      * 
-    **/
-    public function buttonGroup ($buttons, array $options = array()) {
+     */
+    public function buttonGroup ($buttons, array $options = []) {
         $vertical = $this->_extractOption('vertical', $options, false) ;
         unset($options['vertical']) ;
         $options = $this->addClass($options, 'btn-group') ;
@@ -639,38 +629,10 @@ class BootstrapFormHelper extends FormHelper {
      * @param $buttons The groups in the toolbar
      * @param $options Options for div method
      * 
-    **/
-    public function buttonToolbar (array $buttonGroups, array $options = array()) {
+     */
+    public function buttonToolbar (array $buttonGroups, array $options = []) {
         $options = $this->addClass($options, 'btn-toolbar') ;
         return $this->Html->tag('div', implode('', $buttonGroups), $options) ;
-    }
-    
-    /**
-     * 
-     * Create & return a twitter bootstrap dropdown button. This function is a shortcut for:
-     * 
-     *   $this->Form->$buttonGroup([
-     *     $this->Form->button($title, $options), 
-     *     $this->Html->dropdown($menu, [])
-     *   ]);
-     * 
-     * @param $title The text in the button
-     * @param $menu HTML tags corresponding to menu options (which will be wrapped
-     * 		 into <li> tag). To add separator, pass 'divider'.
-     * @param $options Options for button
-     * 
-     */
-    public function dropdownButton ($title, array $menu = [], array $options = []) {
-    
-        $options['type'] = false ;
-        $options['data-toggle'] = 'dropdown' ;
-        $options = $this->addClass($options, "dropdown-toggle") ;
-        
-        return $this->buttonGroup([
-            $this->button($title.' <span class="caret"></span>', $options),
-            $this->bHtml->dropdown($menu)
-        ]);
-
     }
     
     /**
