@@ -69,7 +69,7 @@ class BootstrapFormHelper extends FormHelper {
             'inputSubmit' => '<input type="{{type}}"{{attrs}}>',
             'inputContainer' => '<fieldset class="form-group {{required}}">{{content}}</fieldset>',
             'inputContainerError' => '<fieldset class="form-group has-error {{type}}{{required}}">{{content}}{{error}}</fieldset>',
-            'label' => '<label class="{{attrs.class}}" {{attrs}}>{{text}}</label>',
+            'label' => '<label{{attrs}}>{{text}}</label>',
             'nestingLabel' => '{{hidden}}<label class="c-input {{attrs.class}}" {{attrs}}>{{input}}<span class="c-indicator"></span>{{text}}</label>',
             'legend' => '<legend>{{text}}</legend>',
             'option' => '<option value="{{value}}"{{attrs}}>{{text}}</option>',
@@ -207,8 +207,8 @@ class BootstrapFormHelper extends FormHelper {
 		if ($this->horizontal) {
 			$this->templates([
 				'formGroup' => '{{label}}<div class="'.$this->_getColClass('input').'">{{prepend}}{{input}}{{append}}</div>',
-				'label' => str_replace('{{attrs.class}}', 
-					'form-control-label '.$this->_getColClass('label').' {{attrs.class}}', 
+				'label' => str_replace('{{attrs}}', 
+					' class="form-control-label '.$this->_getColClass('label').' {{attrs.class}}"{{attrs}}', 
 					$this->templates('label')
 				),
 				'error' => str_replace('{{attrs.class}}', $this->_getColClass('error').' {{attrs.class}}', $this->templates('error')),

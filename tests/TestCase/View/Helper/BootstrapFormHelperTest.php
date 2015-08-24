@@ -68,7 +68,6 @@ class BootstrapFormHelperTest extends TestCase {
                 'class' => 'form-group'
             ]],
             ['label' => [
-                'class' => '',
                 'for' => $fieldName
             ]],
             \Cake\Utility\Inflector::humanize($fieldName),
@@ -117,7 +116,6 @@ class BootstrapFormHelperTest extends TestCase {
                 'class' => 'form-group'
             ]],
             ['label' => [
-                'class' => '',
                 'for' => $fieldName
             ]],
             \Cake\Utility\Inflector::humanize($fieldName),
