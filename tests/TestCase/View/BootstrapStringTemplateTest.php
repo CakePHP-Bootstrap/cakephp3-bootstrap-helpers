@@ -8,9 +8,26 @@ use Cake\View\View;
 
 class BootstrapStringTemplateTest extends TestCase {
 
+    /**
+     * Setup
+     *
+     * @return void
+     */
     public function setUp () {
         parent::setUp();
         $this->templater = new BootstrapStringTemplate () ;
+    }
+
+
+    /**
+     * Tear Down
+     *
+     * @return void
+     */
+    public function tearDown()
+    {
+        parent::tearDown();
+        unset($this->templater);
     }
 
     public function test () {

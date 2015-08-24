@@ -7,12 +7,6 @@ use Cake\TestSuite\TestCase;
 use Cake\View\View;
 
 class BootstrapFormHelperTest extends TestCase {
-
-    /**
-     *
-     */
-    public $View ;
-    public $Form ;
     
     public function assertHtml($expected, $string, $fullDebug = false) {
         array_walk ($expected, function (&$value) {
@@ -28,10 +22,27 @@ class BootstrapFormHelperTest extends TestCase {
         return parent::assertHtml ($expected, $string, $fullDebug) ;
     } 
 
+    /**
+     * Setup
+     *
+     * @return void
+     */
     public function setUp() {
         parent::setUp();
         $this->View = new View();
         $this->Form = new BootstrapFormHelper ($this->View);
+    }
+
+    /**
+     * Tear Down
+     *
+     * @return void
+     */
+    public function tearDown()
+    {
+        parent::tearDown();
+        unset($this->Form);
+        unset($this->View);
     }
 
     public function testCreate () {
