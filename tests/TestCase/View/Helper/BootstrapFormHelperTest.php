@@ -146,7 +146,53 @@ class BootstrapFormHelperTest extends TestCase {
     }
 
     public function testInputRadio () {
-
+        $fieldName = 'color' ;
+        $options   = [
+            'type' => 'radio',
+            'options' => [
+                'red' => 'Red',
+                'blue' => 'Blue',
+                'green' => 'Green'
+            ]
+        ] ;
+        $this->Form->create () ;
+        $result = $this->Form->input ($fieldName, $options) ;
+        $expected = [
+            ['label' => true],
+            \Cake\Utility\Inflector::humanize($fieldName),
+            '/label',
+            ['div' => [
+                'class' => ['radio', 'c-inputs-stacked']
+            ]],
+            ['input' => [
+                'type' => 'hidden',
+                'name' => $fieldName,
+                'value' => '',
+                'class' => 'form-control'
+            ]]
+        ] ;
+        foreach ($options['options'] as $key => $value) {
+            $expected = array_merge($expected, [
+                ['label' => [
+                    'class' => ['c-input', 'c-radio'],
+                    'for'   => $fieldName.'-'.$key
+                ]],
+                ['input' => [
+                    'type'  => 'radio',
+                    'name'  => $fieldName,
+                    'value' => $key,
+                    'id'    => $fieldName.'-'.$key
+                ]],
+                ['span' => [
+                    'class' => 'c-indicator'
+                ]],
+                '/span',
+                $value,
+                '/label'
+            ]) ;
+        }
+        $expected = array_merge ($expected, ['/div']) ;
+        $this->assertHtml ($expected, $result) ;
     }
 
     public function testInputCheckbox () {
