@@ -8,7 +8,7 @@ How to... ?
 
 **Installation**
 
-If you want the latest version of the plugin (currently **Boostrap 3**):
+If you want the latest version of the plugin (currently **Boostrap 3**, will automatically switch to **Bootstrap 4** when available):
 ```
 composer require holt59/cakephp3-bootstrap-helpers:dev-master
 ```
