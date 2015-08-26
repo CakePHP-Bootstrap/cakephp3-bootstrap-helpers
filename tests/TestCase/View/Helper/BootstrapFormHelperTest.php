@@ -69,12 +69,20 @@ class BootstrapFormHelperTest extends TestCase {
         ], $result) ; 
     }
     
+    protected function _testInput ($expected, $fieldName, $options = []) {
+        $formOptions = [] ;
+        if (isset($options['_formOptions'])) {
+            $formOptions = $options['_formOptions'] ;
+            unset ($options['_formOptions']) ;
+        }
+        $this->Form->create (null, $formOptions) ;
+        return $this->assertHtml ($expected, $this->Form->input ($fieldName, $options)) ;
+    }
+    
     public function testInput () {
         $fieldName = 'field' ;
         // Standard form
-        $this->Form->create () ;
-        $result = $this->Form->input ($fieldName) ;
-        $this->assertHtml ([
+        $this->_testInput ([
             ['fieldset' => [
                 'class' => 'form-group'
             ]],
@@ -90,11 +98,9 @@ class BootstrapFormHelperTest extends TestCase {
                 'id'    => $fieldName
             ]],
             '/fieldset'
-        ], $result) ;
+        ], $fieldName) ;
         // Horizontal form
-        $this->Form->create (null, ['horizontal' => true]) ;
-        $result = $this->Form->input ($fieldName) ;
-        $this->assertHtml ([
+        $this->_testInput ([
             ['fieldset' => [
                 'class' => ['form-group', 'row']
             ]],
@@ -115,14 +121,14 @@ class BootstrapFormHelperTest extends TestCase {
             ]],
             '/div',
             '/fieldset'
-        ], $result) ;
+        ], $fieldName, [
+            '_formOptions' => ['horizontal' => true]
+        ]) ;
     }
 
     public function testInputText () {
         $fieldName = 'field' ;
-        $this->Form->create () ;
-        $result = $this->Form->input ($fieldName, ['type' => 'text']) ;
-        $this->assertHtml ([
+        $this->_testInput ([
             ['fieldset' => [
                 'class' => 'form-group'
             ]],
@@ -138,7 +144,7 @@ class BootstrapFormHelperTest extends TestCase {
                 'id'    => $fieldName
             ]],
             '/fieldset'
-        ], $result) ;
+        ], $fieldName, ['type' => 'text']) ;
     }
     
     public function testInputSelect () {
@@ -155,8 +161,7 @@ class BootstrapFormHelperTest extends TestCase {
                 'green' => 'Green'
             ]
         ] ;
-        $this->Form->create () ;
-        $result = $this->Form->input ($fieldName, $options) ;
+        // Default
         $expected = [
             ['label' => true],
             \Cake\Utility\Inflector::humanize($fieldName),
@@ -192,11 +197,146 @@ class BootstrapFormHelperTest extends TestCase {
             ]) ;
         }
         $expected = array_merge ($expected, ['/div']) ;
-        $this->assertHtml ($expected, $result) ;
+        $this->_testInput ($expected, $fieldName, $options) ;
+        // Inline
+        $options += [
+            'inline' => true
+        ] ;
+        $expected = [
+            ['label' => true],
+            \Cake\Utility\Inflector::humanize($fieldName),
+            '/label',
+            ['div' => [
+                'class' => ['radio']
+            ]],
+            ['input' => [
+                'type' => 'hidden',
+                'name' => $fieldName,
+                'value' => '',
+                'class' => 'form-control'
+            ]]
+        ] ;
+        foreach ($options['options'] as $key => $value) {
+            $expected = array_merge($expected, [
+                ['label' => [
+                    'class' => ['c-input', 'c-radio'],
+                    'for'   => $fieldName.'-'.$key
+                ]],
+                ['input' => [
+                    'type'  => 'radio',
+                    'name'  => $fieldName,
+                    'value' => $key,
+                    'id'    => $fieldName.'-'.$key
+                ]],
+                ['span' => [
+                    'class' => 'c-indicator'
+                ]],
+                '/span',
+                $value,
+                '/label'
+            ]) ;
+        }
+        $expected = array_merge ($expected, ['/div']) ;
+        $this->_testInput ($expected, $fieldName, $options) ;
+        // Horizontal + Inline
+        $options += [
+            '_formOptions' => ['horizontal' => true]
+        ] ;
+        $options['inline'] = false ;
+        $expected = [
+            ['fieldset' => [
+                'class' => ['form-group', 'row']
+            ]],
+            ['label' => [
+                'class' => ['form-control-label', 'col-md-2']
+            ]],
+            \Cake\Utility\Inflector::humanize($fieldName),
+            '/label',
+            ['div' => [
+                'class' => 'col-md-10'
+            ]],
+            ['div' => [
+                'class' => ['radio', 'c-inputs-stacked']
+            ]],
+            ['input' => [
+                'type' => 'hidden',
+                'name' => $fieldName,
+                'value' => '',
+                'class' => 'form-control'
+            ]]
+        ] ;
+        foreach ($options['options'] as $key => $value) {
+            $expected = array_merge($expected, [
+                ['label' => [
+                    'class' => ['c-input', 'c-radio'],
+                    'for'   => $fieldName.'-'.$key
+                ]],
+                ['input' => [
+                    'type'  => 'radio',
+                    'name'  => $fieldName,
+                    'value' => $key,
+                    'id'    => $fieldName.'-'.$key
+                ]],
+                ['span' => [
+                    'class' => 'c-indicator'
+                ]],
+                '/span',
+                $value,
+                '/label'
+            ]) ;
+        }
+        $expected = array_merge ($expected, ['/div', '/div', '/fieldset']) ;
+        $this->_testInput ($expected, $fieldName, $options) ;
+        // Horizontal + Inline
+        $options['inline'] = true ;
+        $expected = [
+            ['fieldset' => [
+                'class' => ['form-group', 'row']
+            ]],
+            ['label' => [
+                'class' => ['form-control-label', 'col-md-2']
+            ]],
+            \Cake\Utility\Inflector::humanize($fieldName),
+            '/label',
+            ['div' => [
+                'class' => 'col-md-10'
+            ]],
+            ['div' => [
+                'class' => ['radio']
+            ]],
+            ['input' => [
+                'type' => 'hidden',
+                'name' => $fieldName,
+                'value' => '',
+                'class' => 'form-control'
+            ]]
+        ] ;
+        foreach ($options['options'] as $key => $value) {
+            $expected = array_merge($expected, [
+                ['label' => [
+                    'class' => ['c-input', 'c-radio'],
+                    'for'   => $fieldName.'-'.$key
+                ]],
+                ['input' => [
+                    'type'  => 'radio',
+                    'name'  => $fieldName,
+                    'value' => $key,
+                    'id'    => $fieldName.'-'.$key
+                ]],
+                ['span' => [
+                    'class' => 'c-indicator'
+                ]],
+                '/span',
+                $value,
+                '/label'
+            ]) ;
+        }
+        $expected = array_merge ($expected, ['/div', '/div', '/fieldset']) ;
+        $this->_testInput ($expected, $fieldName, $options) ;
     }
 
     public function testInputCheckbox () {
-
+        
     }
 
 }
