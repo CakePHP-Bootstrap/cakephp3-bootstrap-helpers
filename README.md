@@ -8,11 +8,6 @@ How to... ?
 
 **Installation**
 
-If you want the latest version of the plugin (currently **Boostrap 3**, will automatically switch to **Bootstrap 4** when available):
-```
-composer require holt59/cakephp3-bootstrap-helpers:dev-master
-```
-
 If you want the latest **Bootstrap 3** version of the plugin:
 ```
 composer require holt59/cakephp3-bootstrap-helpers:~3.0
