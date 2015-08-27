@@ -81,5 +81,53 @@ class BootstrapHtmlHelperTest extends TestCase {
             '/i'
         ], $this->Html->glIcon($type, $options));        
     }
+    
+    public function testLabel () {
+        $content = 'My Label' ;
+        // Standard test
+        $this->assertHtml ([
+            ['span' => [
+                'class' => 'label label-default'
+            ]],
+            'My Label',
+            '/span'
+        ], $this->Html->label($content)) ;
+        // Type
+        $this->assertHtml ([
+            ['span' => [
+                'class' => 'label label-primary'
+            ]],
+            'My Label',
+            '/span'
+        ], $this->Html->label($content, 'primary')) ;
+        // Type + Options
+        $options = [
+            'class' => 'my-label-class',
+            'id'    => 'my-label-id'
+        ] ;
+        $this->assertHtml ([
+            ['span' => [
+                'class' => $options['class'].' label label-primary',
+                'id'    => $options['id']
+            ]],
+            'My Label',
+            '/span'
+        ], $this->Html->label($content, 'primary', $options)) ;
+        // Only options
+        $options = [
+            'class' => 'my-label-class',
+            'id'    => 'my-label-id',
+            'type'  => 'primary'
+        ] ;
+        $this->assertHtml ([
+            ['span' => [
+                'class' => $options['class'].' label label-primary',
+                'id'    => $options['id']
+            ]],
+            'My Label',
+            '/span'
+        ], $this->Html->label($content, $options)) ;
+        
+    }
 
 }
