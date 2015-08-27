@@ -29,7 +29,7 @@ trait BootstrapTrait {
      *
      * @var string
      */
-    protected $_defaultButtonType = 'primary' ;
+    protected $_defaultButtonType = 'secondary' ;
 
     public $buttonTypes = ['primary', 'secondary', 'info', 'success', 'warning', 'danger', 'link'] ;
     public $buttonSizes = ['sm', 'lg'] ;

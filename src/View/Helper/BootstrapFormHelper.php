@@ -172,7 +172,7 @@ class BootstrapFormHelper extends FormHelper {
      *
     **/
     protected function _matchButton ($html) {
-        return strpos($html, '<button') !== FALSE || strpos($html, 'type="submit"') !== FALSE ;
+        return strpos($html, '<button') !== FALSE || strpos($html, 'type="submit"') !== FALSE || preg_match('#class="(.*)? btn (.*)?"#', $html) ;
     }
 
     /**
@@ -284,14 +284,40 @@ class BootstrapFormHelper extends FormHelper {
         $this->_setDefaultTemplates () ;
     }
 
+    /**
+     *
+     * Wrap the input into span or div with input-group-addon or input-group-btn depending of the
+     * type of the inputs.
+     *
+     * @param $content Inputs - Maybe false (return false), a string or an array.
+     *
+     * @return An HTML string containing the input wrapped into correct span or div.
+     */
+    public function _inputGroup ($content) {
+        if ($content === false) {
+            return $content ;
+        }
+        $tag = 'span' ;
+        $options = [] ;
+        if (is_string($content)) {
+            $content = [$content] ;
+        }
+        $inner = '' ;
+        foreach ($content as $ctn) {
+            $options['class'] = 'input-group-'.($this->_matchButton($ctn) ? 'btn' : 'addon') ;
+            if (preg_match('#^<div(.*)?class="(.*)?dropdown(.*)?"(.*)?</div>$#', $ctn)) {
+                $tag = 'div' ;
+                $ctn = substr($ctn, strpos($ctn, '>') + 1);
+                $ctn = substr($ctn, 0, strlen($ctn) - 6);
+            }
+            $inner .= $ctn ;
+        }
+        return $this->Html->tag ($tag, $inner, $options) ;
+    }
+
     public function prepend ($input, $prepend) {
         if ($prepend) {
-            if (is_string($prepend)) {
-                $prepend = '<span class="input-group-'.($this->_matchButton($prepend) ? 'btn' : 'addon').'">'.$prepend.'</span>' ;
-            }
-            else if ($prepend !== false) {
-                $prepend = '<span class="input-group-btn">'.implode('', $prepend).'</span>' ;
-            }
+            $prepend = $this->_inputGroup ($prepend) ;
         }
         if ($input === null) {
             return '<div class="input-group">'.$prepend ;
@@ -300,12 +326,7 @@ class BootstrapFormHelper extends FormHelper {
     }
 
     public function append ($input, $append) {
-        if (is_string($append)) {
-            $append = '<span class="input-group-'.($this->_matchButton($append) ? 'btn' : 'addon').'">'.$append.'</span>' ;
-        }
-        else if ($append !== false) {
-            $append = '<span class="input-group-btn">'.implode('', $append).'</span>' ;
-        }
+        $append = $this->_inputGroup ($append) ;
         if ($input === null) {
             return $append.'</div>' ;
         }
