@@ -54,7 +54,7 @@ class BootstrapFormHelper extends FormHelper {
             'checkbox' => '<input type="checkbox" name="{{name}}" value="{{value}}"{{attrs}}>',
             'checkboxFormGroup' => '{{label}}',
             'checkboxWrapper' => '<div class="checkbox">{{label}}</div>',
-			'checkboxContainer' => '<div class="checkbox">{{content}}</div>', 
+            'checkboxContainer' => '<div class="checkbox">{{content}}</div>', 
             'dateWidget' => '{{year}}{{month}}{{day}}{{hour}}{{minute}}{{second}}{{meridian}}',
             'error' => '<p class="help-block {{attrs.class}}">{{content}}</p>',
             'errorList' => '<ul>{{content}}</ul>',
@@ -78,7 +78,7 @@ class BootstrapFormHelper extends FormHelper {
             'selectMultiple' => '<select name="{{name}}[]" multiple="multiple" class="form-control {{attrs.class}}" {{attrs}}>{{content}}</select>',
             'radio' => '<input type="radio" name="{{name}}" value="{{value}}"{{attrs}}>',
             'radioWrapper' => '{{label}}',
-			'radioContainer' => '{{content}}', 
+            'radioContainer' => '{{content}}', 
             'textarea' => '<textarea name="{{name}}" class="form-control {{attrs.class}}" {{attrs}}>{{value}}</textarea>',
             'submitContainer' => '<fieldset class="form-group">{{content}}</fieldset>',
         ]
@@ -105,7 +105,6 @@ class BootstrapFormHelper extends FormHelper {
     
     public $horizontal = false ;
     public $inline = false ;
-    public $search = false ;
     public $colSize ;
 
     /**
@@ -182,9 +181,9 @@ class BootstrapFormHelper extends FormHelper {
      *
     **/
     protected function _getColClass ($what, $offset = false) {
-		if ($what === 'error' && $this->colSize[$what] === false) {
-			return $this->_getColClass('label', true).' '.$this->_getColClass ('input') ;
-		}
+        if ($what === 'error' && $this->colSize[$what] === false) {
+            return $this->_getColClass('label', true).' '.$this->_getColClass ('input') ;
+        }
         if (isset($this->colSize[$what])) {
             return 'col-md-'.($offset ? 'offset-' : '').$this->colSize[$what] ;
         }
@@ -196,52 +195,51 @@ class BootstrapFormHelper extends FormHelper {
         }
         return implode(' ', $classes) ;
     }
-	
+    
     /**
      *
      * Set the default templates according to the inner properties of the form ($this->horizontal and $this->inline).
      *
     **/
     protected function _setDefaultTemplates () {
-		$this->templates ($this->_defaultConfig['templates']);
-		if ($this->horizontal) {
-			$this->templates([
-				'formGroup' => '{{label}}<div class="'.$this->_getColClass('input').'">{{prepend}}{{input}}{{append}}</div>',
-				'label' => str_replace('{{attrs}}', 
-					' class="form-control-label '.$this->_getColClass('label').' {{attrs.class}}"{{attrs}}', 
-					$this->templates('label')
-				),
-				'error' => str_replace('{{attrs.class}}', $this->_getColClass('error').' {{attrs.class}}', $this->templates('error')),
-				'checkboxContainer' => '<fieldset class="form-group row"><div class="'.$this->_getColClass('label', true).' '.$this->_getColClass('input').'">'
-					.$this->templates('checkboxContainer').'</div></fieldset>',
-				'radioContainer' => '<fieldset class="form-group row">'.$this->templates('radioContainer').'</fieldset>',
-				'submitContainer' => str_replace('form-group', 'form-group row', str_replace('{{content}}', 
-					'<div class="'.$this->_getColClass('label', true).' '.$this->_getColClass('input').'">{{content}}</div>',
-					$this->templates('submitContainer')
-				)),
-				'inputContainer' => str_replace('form-group', 'form-group row', $this->templates('inputContainer')),
-				'inputContainerError' => str_replace('form-group', 'form-group row', $this->templates('inputContainerError')),
-			]);
-		}
-		if ($this->inline) {
-			$this->templates([
-				'label' => str_replace('{{attrs.class}}', 'sr-only {{attrs.class}}', $this->templates('label')),
-				'inputContainer' => $this->templates('inputContainer').'&nbsp;'
-			]) ;
-		}
+        $this->templates ($this->_defaultConfig['templates']);
+        if ($this->horizontal) {
+            $this->templates([
+                'formGroup' => '{{label}}<div class="'.$this->_getColClass('input').'">{{prepend}}{{input}}{{append}}</div>',
+                'label' => str_replace('{{attrs}}', 
+                    ' class="form-control-label '.$this->_getColClass('label').' {{attrs.class}}"{{attrs}}', 
+                    $this->templates('label')
+                ),
+                'error' => str_replace('{{attrs.class}}', $this->_getColClass('error').' {{attrs.class}}', $this->templates('error')),
+                'checkboxContainer' => '<fieldset class="form-group row"><div class="'.$this->_getColClass('label', true).' '.$this->_getColClass('input').'">'
+                    .$this->templates('checkboxContainer').'</div></fieldset>',
+                'radioContainer' => '<fieldset class="form-group row">'.$this->templates('radioContainer').'</fieldset>',
+                'submitContainer' => str_replace('form-group', 'form-group row', str_replace('{{content}}', 
+                    '<div class="'.$this->_getColClass('label', true).' '.$this->_getColClass('input').'">{{content}}</div>',
+                    $this->templates('submitContainer')
+                )),
+                'inputContainer' => str_replace('form-group', 'form-group row', $this->templates('inputContainer')),
+                'inputContainerError' => str_replace('form-group', 'form-group row', $this->templates('inputContainerError')),
+            ]);
+        }
+        if ($this->inline) {
+            $this->templates([
+                'label' => str_replace('{{attrs.class}}', 'sr-only {{attrs.class}}', $this->templates('label')),
+                'inputContainer' => $this->templates('inputContainer').'&nbsp;'
+            ]) ;
+        }
     }
-	
+    
     /**
      * 
      * Create a Twitter Bootstrap like form. 
      * 
      * New options available:
-     * 	- horizontal: boolean, specify if the form is horizontal
-     * 	- inline: boolean, specify if the form is inline
-     * 	- search: boolean, specify if the form is a search form
+     *     - horizontal: boolean, specify if the form is horizontal
+     *     - inline: boolean, specify if the form is inline
      * 
      * Unusable options:
-     * 	- inputDefaults
+     *     - inputDefaults
      * 
      * @param $model The model corresponding to the form
      * @param $options Options to customize the form
@@ -257,25 +255,24 @@ class BootstrapFormHelper extends FormHelper {
         else {
             $this->colSize = $this->_defaultColumnSize ;
         }
-        $this->horizontal = $this->_extractOption('horizontal', $options, false);
-		unset($options['horizontal']);
-        $this->search = $this->_extractOption('search', $options, false) ;
-        unset($options['search']) ;
-        $this->inline = $this->_extractOption('inline', $options, false) ;
-        unset($options['inline']) ;
-		if ($this->horizontal) {
-			$options = $this->addClass($options, 'form-horizontal') ;
-		}
-        else if ($this->inline) {
-            $options = $this->addClass($options, 'form-inline') ;
+        $this->horizontal = $this->inline = false ;
+        if (isset($options['type'])) {
+            $this->{$options['type']} = true ;
+            unset ($options['type']) ;
         }
-        if ($this->search) {
-            $options = $this->addClass($options, 'form-search') ;
+        else {
+            $this->horizontal = $this->_extractOption('horizontal', $options, false);
+            unset($options['horizontal']);
+            $this->inline = $this->_extractOption('inline', $options, false) ;
+            unset($options['inline']) ;
+        }
+        if ($this->inline) {
+            $options = $this->addClass($options, 'form-inline') ;
         }
         $options['role'] = 'form' ;
         $this->_setDefaultTemplates () ;
-		return parent::create($model, $options) ;
-	}
+        return parent::create($model, $options) ;
+    }
 
     /**
      *
@@ -322,16 +319,16 @@ class BootstrapFormHelper extends FormHelper {
     protected function _wrap ($input, $prepend, $append) {
         return '<div class="input-group">'.$prepend.$input.$append.'</div>' ;
     }
-	
+    
     /** 
      * 
      * Create & return an input block (Twitter Boostrap Like).
      * 
      * New options:
-     * 	- prepend: 
-     * 		-> string: Add <span class="add-on"> before the input
-     * 		-> array: Add elements in array before inputs
-     * 	- append: Same as prepend except it add elements after input
+     *     - prepend: 
+     *         -> string: Add <span class="add-on"> before the input
+     *         -> array: Add elements in array before inputs
+     *     - append: Same as prepend except it add elements after input
      *        
     **/
     public function input($fieldName, array $options = []) {
@@ -352,45 +349,45 @@ class BootstrapFormHelper extends FormHelper {
         if ($help) {
             $append .= '<p class="help-block">'.$help.'</p>' ;
         }
-		
-		$type = strtolower($options['type']) ;
+        
+        $type = strtolower($options['type']) ;
 
         $inline = $this->_extractOption('inline', $options, $type === 'multicheckbox' ? true : false) ;
         unset ($options['inline']) ;
             
-		if (!isset($options['templates'])) $options['templates'] = [] ;
-		if (in_array($type, ['radio', 'checkbox', 'multicheckbox'])) {
-			$custom = $type === 'multicheckbox' ? 'checkbox' : $type ;
+        if (!isset($options['templates'])) $options['templates'] = [] ;
+        if (in_array($type, ['radio', 'checkbox', 'multicheckbox'])) {
+            $custom = $type === 'multicheckbox' ? 'checkbox' : $type ;
             $options['templates'] += [
-				'nestingLabel' => str_replace('c-input', 'c-input c-'.$custom, $this->templates('nestingLabel')) 
-			] ;
-		}
-		if ($type === 'radio') {
-			$options['templates'] += [
-				'formGroup' => str_replace('{{input}}', 
-					'<div class="radio'.($inline ? '' : ' c-inputs-stacked').'">{{input}}</div>',
-					$this->templates('formGroup'))
-			] ;
-		}
-		if ($type === 'multicheckbox' && $inline) {
-			$options['templates'] += [
-				'checkboxWrapper' => '{{label}}',
-				'formGroup' => str_replace('{{input}}', '<div class="checkbox">{{input}}</div>', $this->templates('formGroup'))
-			] ;
-		}
-		
-		$label = $this->_extractOption('label', $options, true) ;
-		if ($this->horizontal && !$label) {
-			if (!isset($options['templates']['formGroup'])) $options['templates']['formGroup'] = $this->templates('formGroup') ;
-			$options['templates']['formGroup'] = str_replace($this->_getColClass('input'), 
-				$this->_getColClass('label', true).' '.$this->_getColClass('input'),
-				$options['templates']['formGroup']
-			) ;
-		}
-		
-		if (empty($options['templates'])) {
-			unset($options['templates']);
-		}
+                'nestingLabel' => str_replace('c-input', 'c-input c-'.$custom, $this->templates('nestingLabel')) 
+            ] ;
+        }
+        if ($type === 'radio') {
+            $options['templates'] += [
+                'formGroup' => str_replace('{{input}}', 
+                    '<div class="radio'.($inline ? '' : ' c-inputs-stacked').'">{{input}}</div>',
+                    $this->templates('formGroup'))
+            ] ;
+        }
+        if ($type === 'multicheckbox' && $inline) {
+            $options['templates'] += [
+                'checkboxWrapper' => '{{label}}',
+                'formGroup' => str_replace('{{input}}', '<div class="checkbox">{{input}}</div>', $this->templates('formGroup'))
+            ] ;
+        }
+        
+        $label = $this->_extractOption('label', $options, true) ;
+        if ($this->horizontal && !$label) {
+            if (!isset($options['templates']['formGroup'])) $options['templates']['formGroup'] = $this->templates('formGroup') ;
+            $options['templates']['formGroup'] = str_replace($this->_getColClass('input'), 
+                $this->_getColClass('label', true).' '.$this->_getColClass('input'),
+                $options['templates']['formGroup']
+            ) ;
+        }
+        
+        if (empty($options['templates'])) {
+            unset($options['templates']);
+        }
 
         $options['_data'] = [
             'prepend' => $prepend,
@@ -641,8 +638,8 @@ class BootstrapFormHelper extends FormHelper {
      * Create & return a Twitter Like submit input.
      * 
      * New options:
-     * 	- bootstrap-type: Twitter bootstrap button type (primary, danger, info, etc.)
-     * 	- bootstrap-size: Twitter bootstrap button size (mini, small, large)
+     *     - bootstrap-type: Twitter bootstrap button type (primary, danger, info, etc.)
+     *     - bootstrap-size: Twitter bootstrap button size (mini, small, large)
      * 
      * Unusable options: div
      * 

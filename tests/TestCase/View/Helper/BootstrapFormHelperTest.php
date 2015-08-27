@@ -38,8 +38,7 @@ class BootstrapFormHelperTest extends TestCase {
      *
      * @return void
      */
-    public function tearDown()
-    {
+    public function tearDown() {
         parent::tearDown();
         unset($this->Form);
         unset($this->View);
@@ -47,7 +46,6 @@ class BootstrapFormHelperTest extends TestCase {
 
     public function testCreate () {
         // Standard form
-        $result  = $this->Form->create () ;
         $this->assertHtml([
             ['form' => [
                 'method',
@@ -55,18 +53,35 @@ class BootstrapFormHelperTest extends TestCase {
                 'role' => 'form',
                 'action'
             ]]
-        ], $result) ; 
+        ], $this->Form->create ()) ; 
         // Horizontal form
-        $result  = $this->Form->create (null, ['horizontal' => true]) ;
+        $result = $this->Form->create (null, ['horizontal' => true]) ;
+        $this->assertEquals($this->Form->horizontal, true) ;
+        // Automatically return to non horizonal form
+        $result = $this->Form->create () ;
+        $this->assertEquals($this->Form->horizontal, false) ;
+        // Inline form
+        $result = $this->Form->create (null, ['inline' => true]) ;
+        $this->assertEquals($this->Form->inline, true) ;
         $this->assertHtml([
             ['form' => [
                 'method',
                 'accept-charset',
                 'role' => 'form',
                 'action',
-                'class' => 'form-horizontal'
+                'class' => 'form-inline'
             ]]
         ], $result) ; 
+        // Automatically return to non horizonal form
+        $result = $this->Form->create () ;
+        $this->assertEquals($this->Form->inline, false) ;
+        // type options
+        $result = $this->Form->create (null, ['type' => 'horizontal']) ;
+        $this->assertEquals($this->Form->horizontal, true) ;
+        $this->assertEquals($this->Form->inline, false) ;
+        $result = $this->Form->create (null, ['type' => 'inline']) ;
+        $this->assertEquals($this->Form->horizontal, false) ;
+        $this->assertEquals($this->Form->inline, true) ;
     }
     
     protected function _testInput ($expected, $fieldName, $options = []) {
