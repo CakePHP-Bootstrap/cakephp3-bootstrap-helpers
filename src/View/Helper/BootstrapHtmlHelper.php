@@ -46,7 +46,7 @@ class BootstrapHtmlHelper extends HtmlHelper {
         if (isset($config['useFontAwesome'])) {
             $this->_useFontAwesome = $config['useFontAwesome'];
         }
-		if (isset($config['useGlyphicon'])) {
+        if (isset($config['useGlyphicon'])) {
             $this->_useFontAwesome = !$config['useGlyphicon'];
         }
         parent::__construct($view, $config);
