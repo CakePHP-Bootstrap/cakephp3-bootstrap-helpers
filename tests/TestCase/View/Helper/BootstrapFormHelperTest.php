@@ -353,5 +353,238 @@ class BootstrapFormHelperTest extends TestCase {
     public function testInputCheckbox () {
         
     }
+    
+    public function testInputGroup () {
+        $fieldName = 'field' ;
+        $options   = [
+            'type' => 'text',
+            'label' => false
+        ] ;
+        // Test with prepend addon
+        $expected = [
+            ['fieldset' => [
+                'class' => 'form-group'
+            ]],
+            ['div' => [
+                'class' => 'input-group'
+            ]],
+            ['span' => [
+                'class' => 'input-group-addon'
+            ]],
+            '@',
+            '/span',
+            ['input' => [
+                'type' => 'text',
+                'class' => 'form-control',
+                'name' => $fieldName,
+                'id' => $fieldName
+            ]],
+            '/div',
+            '/fieldset'
+        ] ;
+        $this->_testInput ($expected, $fieldName, $options + ['prepend' => '@']) ;
+        // Test with append
+        $expected = [
+            ['fieldset' => [
+                'class' => 'form-group'
+            ]],
+            ['div' => [
+                'class' => 'input-group'
+            ]],
+            ['input' => [
+                'type' => 'text',
+                'class' => 'form-control',
+                'name' => $fieldName,
+                'id' => $fieldName
+            ]],
+            ['span' => [
+                'class' => 'input-group-addon'
+            ]],
+            '.00',
+            '/span',
+            '/div',
+            '/fieldset'
+        ] ;
+        $this->_testInput ($expected, $fieldName, $options + ['append' => '.00']) ;
+        // Test with append + prepend
+        $expected = [
+            ['fieldset' => [
+                'class' => 'form-group'
+            ]],
+            ['div' => [
+                'class' => 'input-group'
+            ]],
+            ['span' => [
+                'class' => 'input-group-addon'
+            ]],
+            '$',
+            '/span',
+            ['input' => [
+                'type' => 'text',
+                'class' => 'form-control',
+                'name' => $fieldName,
+                'id' => $fieldName
+            ]],
+            ['span' => [
+                'class' => 'input-group-addon'
+            ]],
+            '.00',
+            '/span',
+            '/div',
+            '/fieldset'
+        ] ;
+        $this->_testInput ($expected, $fieldName, $options + ['prepend' => '$', 'append' => '.00']) ;
+        // Test with prepend button
+        $expected = [
+            ['fieldset' => [
+                'class' => 'form-group'
+            ]],
+            ['div' => [
+                'class' => 'input-group'
+            ]],
+            ['span' => [
+                'class' => 'input-group-btn'
+            ]],
+            ['button' => [
+                'class' => ['btn', 'btn-secondary'],
+                'type'  => 'submit'
+            ]],
+            'Go!',
+            '/button',
+            '/span',
+            ['input' => [
+                'type' => 'text',
+                'class' => 'form-control',
+                'name' => $fieldName,
+                'id' => $fieldName
+            ]],
+            '/div',
+            '/fieldset'
+        ] ;
+        $this->_testInput ($expected, $fieldName, $options + ['prepend' => $this->Form->button('Go!')]) ;
+        // Test with append button
+        $expected = [
+            ['fieldset' => [
+                'class' => 'form-group'
+            ]],
+            ['div' => [
+                'class' => 'input-group'
+            ]],
+            ['input' => [
+                'type' => 'text',
+                'class' => 'form-control',
+                'name' => $fieldName,
+                'id' => $fieldName
+            ]],
+            ['span' => [
+                'class' => 'input-group-btn'
+            ]],
+            ['button' => [
+                'class' => ['btn', 'btn-secondary'],
+                'type'  => 'submit'
+            ]],
+            'Go!',
+            '/button',
+            '/span',
+            '/div',
+            '/fieldset'
+        ] ;
+        $this->_testInput ($expected, $fieldName, $options + ['append' => $this->Form->button('Go!')]) ;
+        // Test with append 2 button
+        $expected = [
+            ['fieldset' => [
+                'class' => 'form-group'
+            ]],
+            ['div' => [
+                'class' => 'input-group'
+            ]],
+            ['input' => [
+                'type' => 'text',
+                'class' => 'form-control',
+                'name' => $fieldName,
+                'id' => $fieldName
+            ]],
+            ['span' => [
+                'class' => 'input-group-btn'
+            ]],
+            ['button' => [
+                'class' => ['btn', 'btn-secondary'],
+                'type'  => 'submit'
+            ]],
+            'Go!',
+            '/button',
+            ['button' => [
+                'class' => ['btn', 'btn-secondary'],
+                'type'  => 'submit'
+            ]],
+            'GoGo!',
+            '/button',
+            '/span',
+            '/div',
+            '/fieldset'
+        ] ;
+        $this->_testInput ($expected, $fieldName, $options + [
+            'append' => [$this->Form->button('Go!'), $this->Form->button('GoGo!')] 
+        ]) ;
+        // Test with append dropdown
+        $html = new \Bootstrap\View\Helper\BootstrapHtmlHelper ($this->View);
+        $expected = [
+            ['fieldset' => [
+                'class' => 'form-group'
+            ]],
+            ['div' => [
+                'class' => 'input-group'
+            ]],
+            ['input' => [
+                'type' => 'text',
+                'class' => 'form-control',
+                'name' => $fieldName,
+                'id' => $fieldName
+            ]],
+            ['div' => [
+                'class' => 'input-group-btn'
+            ]],
+            ['a' => [
+                'data-toggle'   => 'dropdown',
+                'aria-haspopup' => 'true',
+                'aria-expanded' => 'false',
+                'id'            => 'dropdownMenu1',
+                'class'         => ['dropdown-toggle', 'btn', 'btn-secondary']
+            ]],
+            'Action',
+            '/a',
+            ['div' => [
+                'class' => ['dropdown-menu'],
+                'aria-labelledby' => 'dropdownMenu1'
+            ]],
+            ['a' => [
+                'href'  => '#',
+                'class' => 'dropdown-item'
+            ]], 'Link 1', '/a',
+            ['a' => [
+                'href'  => '#',
+                'class' => 'dropdown-item'
+            ]], 'Link 2', '/a',
+            ['div' => [
+                'class' => 'dropdown-divider'
+            ]], '/div',
+            ['a' => [
+                'href'  => '#',
+                'class' => 'dropdown-item'
+            ]], 'Link 3', '/a',
+            '/div',
+            '/div',
+            '/div',
+            '/fieldset'
+        ] ;
+        $this->_testInput ($expected, $fieldName, $options + [
+            'append' => $html->dropdown('Action', [
+                $html->link('Link 1', '#'),
+                $html->link('Link 2', '#'),
+                'divider',
+                $html->link('Link 3', '#')
+            ])
+        ]);
+    }
 
 }
