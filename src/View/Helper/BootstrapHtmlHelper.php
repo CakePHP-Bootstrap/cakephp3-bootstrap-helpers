@@ -295,7 +295,7 @@ class BootstrapHtmlHelper extends HtmlHelper {
         $innerMenu = '' ;
         foreach ($menu as $action) {
             $content = '' ;
-            $itemOptions = [] ;
+            $itemOptions = $defaultItemOptions ;
             if ($action === 'divider' || (is_array($action) && $action[0] === 'divider')) {
                 if (is_array($action) && isset($action[1]))
                     $itemOptions = $action[1] ;
@@ -317,10 +317,10 @@ class BootstrapHtmlHelper extends HtmlHelper {
                     $name = array_shift($action) ;
                     $url  = array_shift($action) ;
                     if (!empty($action))
-                        $itemOptions = $action ;
+                        $itemOptions = array_shift($action) ;
                     $itemOptions = $this->addClass ($itemOptions, 'dropdown-item') ;
-                    $itemOptions += ['tag' => 'a'] ;
                     $content = $this->link($name, $url, $itemOptions) ;
+                    $itemOptions = [] ;
                 }
             }
             else {
