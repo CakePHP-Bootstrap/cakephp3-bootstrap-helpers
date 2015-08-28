@@ -281,7 +281,7 @@ class BootstrapHtmlHelper extends HtmlHelper {
             'aria-haspopup' => 'true',
             'aria-expanded' => 'false',
             'id'            => 'dropdownMenu'.(++$this->_dropDownCount),
-            'tag'           => 'a'
+            'tag'           => 'button'
         ] ;
         $buttonOptions = $this->addClass ($buttonOptions, 'dropdown-toggle'); 
         $buttonOptions = $this->_addButtonClasses ($buttonOptions);

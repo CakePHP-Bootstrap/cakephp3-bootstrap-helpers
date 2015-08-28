@@ -544,7 +544,7 @@ class BootstrapFormHelperTest extends TestCase {
             ['div' => [
                 'class' => 'input-group-btn'
             ]],
-            ['a' => [
+            ['button' => [
                 'data-toggle'   => 'dropdown',
                 'aria-haspopup' => 'true',
                 'aria-expanded' => 'false',
@@ -552,7 +552,7 @@ class BootstrapFormHelperTest extends TestCase {
                 'class'         => ['dropdown-toggle', 'btn', 'btn-secondary']
             ]],
             'Action',
-            '/a',
+            '/button',
             ['div' => [
                 'class' => ['dropdown-menu'],
                 'aria-labelledby' => 'dropdownMenu1'
