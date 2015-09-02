@@ -56,7 +56,7 @@ class BootstrapFormHelper extends FormHelper {
             'checkboxWrapper' => '<div class="checkbox">{{label}}</div>',
             'checkboxContainer' => '<div class="checkbox">{{content}}</div>',
             'dateWidget' => '{{year}}{{month}}{{day}}{{hour}}{{minute}}{{second}}{{meridian}}',
-            'error' => '<span class="help-block">{{content}}</span>',
+            'error' => '<span class="help-block error-message">{{content}}</span>',
             'errorList' => '<ul>{{content}}</ul>',
             'errorItem' => '<li>{{text}}</li>',
             'file' => '<input type="file" name="{{name}}" {{attrs}}>',
@@ -201,7 +201,7 @@ class BootstrapFormHelper extends FormHelper {
                         .'{{content}}'
                     .($this->horizontal ? '</div></div>' : ''),
             'label' => '<label class="'.($this->horizontal ? $this->_getColClass('label') : '').' '.($this->inline ? 'sr-only' : 'control-label').' {{attrs.class}}" {{attrs}}>{{text}}</label>',
-            'error' => '<span class="help-block '.($this->horizontal ? $this->_getColClass('error') : '').'">{{content}}</span>',
+            'error' => '<span class="help-block '.($this->horizontal ? $this->_getColClass('error') : '').' error-message">{{content}}</span>',
             'submitContainer' => '<div class="form-group">'.($this->horizontal ? '<div class="'.$this->_getColClass('label', true).' '.$this->_getColClass('input').'">' : '').'{{content}}'.($this->horizontal ? '</div>' : '').'</div>',
         ]) ;
     }
