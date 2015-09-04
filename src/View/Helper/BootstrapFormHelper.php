@@ -56,7 +56,7 @@ class BootstrapFormHelper extends FormHelper {
             'checkboxWrapper' => '<div class="checkbox">{{label}}</div>',
             'checkboxContainer' => '<div class="checkbox">{{content}}</div>', 
             'dateWidget' => '{{year}}{{month}}{{day}}{{hour}}{{minute}}{{second}}{{meridian}}',
-            'error' => '<p class="help-block {{attrs.class}}">{{content}}</p>',
+            'error' => '<p class="help-block error-message {{attrs.class}}">{{content}}</p>',
             'errorList' => '<ul>{{content}}</ul>',
             'errorItem' => '<li>{{text}}</li>',
             'file' => '<input class="form-control-file" type="file" name="{{name}}" {{attrs}}>',
