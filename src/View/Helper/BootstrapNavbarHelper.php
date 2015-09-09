@@ -154,7 +154,7 @@ class BootstrapNavbarHelper extends Helper {
                 $brand = $this->Html->link ($brand, '/', ['class' => 'navbar-brand', 'escape' => false]) ;
             }
             else if (is_array($brand) && array_key_exists('url', $brand)) {
-                $brandOptions = $this->_extractOption ($brand, 'options', []) ;
+                $brandOptions = $this->_extractOption ('options', $brand, []) ;
                 $brandOptions = $this->addClass ($brandOptions, 'navbar-brand') ;
                 $brand = $this->Html->link ($brand['name'], $brand['url'], $brandOptions) ;
             }
@@ -237,7 +237,7 @@ class BootstrapNavbarHelper extends Helper {
      * 
     **/
     public function text ($text, $options = []) {
-        $tag     = $this->_extractOption ($options, 'tag', 'p') ;
+        $tag     = $this->_extractOption ('tag', $options, 'p') ;
         $options = $this->addClass ($options, 'navbar-text') ;
         $text = preg_replace_callback ('/<a([^>]*)?>([^<]*)?<\/a>/i', function ($matches) {
             $attrs = preg_replace_callback ('/class="(.*)?"/', function ($m) {
@@ -262,7 +262,7 @@ class BootstrapNavbarHelper extends Helper {
      *
     **/
     public function searchForm ($model = null, $options = []) {
-        $align = $this->_extractOption ($options, 'align', 'left') ;
+        $align = $this->_extractOption ('align', $options, 'left') ;
         unset ($options['align']) ;
         $options = $this->addClass($options, ['navbar-form',  'navbar-'.$align]) ;
         return $this->Form->searchForm($model, $options) ;
