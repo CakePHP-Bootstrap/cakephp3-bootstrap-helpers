@@ -13,6 +13,25 @@ If you want the latest **Bootstrap 3** version of the plugin:
 composer require holt59/cakephp3-bootstrap-helpers:~3.0
 ```
 
+When updating from holt59/cakephp3-bootstrap3-helpers it is necessary to change the $helpers variable.
+If you are including the Formhelper the change would look like this.
+Original:
+```
+    public $helpers = [
+        'Form' => [
+            'className' => 'Bootstrap3.BootstrapForm'
+        ]
+    ];
+```
+```
+    public $helpers = [
+        'Form' => [
+            'className' => 'Bootstrap.BootstrapForm'
+        ]
+    ];
+```
+
+
 If you want to test the **Bootstrap 4** version of the plugin (alpha):
 ```
 composer require holt59/cakephp3-bootstrap-helpers:dev-v4.0.0-alpha
