@@ -255,18 +255,14 @@ class BootstrapFormHelper extends FormHelper {
         else {
             $this->colSize = $this->_defaultColumnSize ;
         }
-        $this->horizontal = $this->inline = false ;
-        if (isset($options['type'])) {
-            $this->{$options['type']} = true ;
-            unset ($options['type']) ;
+        $this->horizontal = $this->_extractOption('horizontal', $options, false);
+        unset($options['horizontal']);
+        $this->inline = $this->_extractOption('inline', $options, false) ;
+        unset($options['inline']) ;
+        if ($this->horizontal) {
+            $options = $this->addClass($options, 'form-horizontal') ;
         }
-        else {
-            $this->horizontal = $this->_extractOption('horizontal', $options, false);
-            unset($options['horizontal']);
-            $this->inline = $this->_extractOption('inline', $options, false) ;
-            unset($options['inline']) ;
-        }
-        if ($this->inline) {
+        else if ($this->inline) {
             $options = $this->addClass($options, 'form-inline') ;
         }
         $options['role'] = 'form' ;
