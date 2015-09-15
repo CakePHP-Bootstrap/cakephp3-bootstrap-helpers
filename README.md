@@ -17,14 +17,14 @@ If  you are updating from `holt59/cakephp3-bootstrap3-helpers`, do not forget to
 
 ```php
 // in config/bootstrap.php
-Plugin::load('Bootstrap') ; // instead of Plugin::load('Boostrap3') ;
+Plugin::load('Bootstrap') ; // instead of Plugin::load('Bootstrap3') ;
 ```
 
 ```php
 // in your AppController
 public $helpers = [
     'Form' => [
-        'className' => 'Bootstrap.BootstrapForm' // instead of 'Boostrap3.BootstrapForm'
+        'className' => 'Bootstrap.BootstrapForm' // instead of 'Bootstrap3.BootstrapForm'
     ]
 ] ;
 ```
