@@ -368,7 +368,7 @@ class BootstrapFormHelper extends FormHelper {
         $help = $this->_extractOption('help', $options, '');
         unset($options['help']);
         if ($help) {
-            $append .= '<p class="help-block">'.$help.'</p>' ;
+            $append .= '<small class="text-muted">'.$help.'</small>' ;
         }
         
         $type = strtolower($options['type']) ;
