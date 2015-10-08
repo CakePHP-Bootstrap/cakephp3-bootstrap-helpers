@@ -441,9 +441,13 @@ class BootstrapFormHelper extends FormHelper {
         if (!$this->_customFileInput || (isset($options['default']) && $options['default'])) {
             return parent::file($fieldName, $options);
         }
-        if (!isset($options['id'])) {
-            $options['id'] = $fieldName ;
-        }
+        $defaultOptions = [
+            'id' => $fieldName,
+            'button-class' => '',
+            'input-class' => ''
+        ];
+        $options = array_merge($options, $defaultOptions);
+
         $options += ['secure' => true];
         $options = $this->_initInputField($fieldName, $options);
         unset($options['type']);
