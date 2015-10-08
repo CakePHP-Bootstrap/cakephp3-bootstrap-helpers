@@ -460,13 +460,15 @@ class BootstrapFormHelper extends FormHelper {
         $fakeInput = $this->text($fieldName, array_merge($options, [
             'readonly' => 'readonly',
             'id' => $options['id'].'-input',
-            'onclick' => "document.getElementById('".$options['id']."').click();"
+            'onclick' => "document.getElementById('".$options['id']."').click();",
+            'class' => $options['input-class']
         ]));
         $buttonLabel = $this->_extractOption('button-label', $options, __('Choose File'));
         unset($options['button-label']) ;
         $fakeButton = $this->button($buttonLabel, [
             'type' => 'button',
-            'onclick' => "document.getElementById('".$options['id']."').click();"
+            'onclick' => "document.getElementById('".$options['id']."').click();",
+            'class' => $options['button-class']
         ]);
         return $fileInput.$this->Html->div('input-group', $this->Html->div('input-group-btn', $fakeButton).$fakeInput) ;
     }
