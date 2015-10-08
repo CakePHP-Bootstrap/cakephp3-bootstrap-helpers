@@ -454,19 +454,24 @@ class BootstrapFormHelper extends FormHelper {
             'style' => 'display: none;',
             'onchange' => "document.getElementById('".$options['id']."-input').value = (this.files.length <= 1) ? this.files[0].name : this.files.length + ' ' + '" . $countLabel . "';"
         ]));
-        $fakeInput = $this->text($fieldName, array_merge($options, [
+
+        $fakeInputCustomOptions = $this->_extractOption('_input', $options, []);
+        unset($options['_input']);
+        $fakeButtonCustomOptions = $this->_extractOption('_button', $options, []);
+        unset($options['_button']);
+
+        $fakeInput = $this->text($fieldName, array_merge($options, $fakeInputCustomOptions, [
             'readonly' => 'readonly',
             'id' => $options['id'].'-input',
-            'onclick' => "document.getElementById('".$options['id']."').click();",
-            'class' => $options['input-class']
+            'onclick' => "document.getElementById('".$options['id']."').click();"
         ]));
         $buttonLabel = $this->_extractOption('button-label', $options, __('Choose File'));
         unset($options['button-label']) ;
-        $fakeButton = $this->button($buttonLabel, [
+
+        $fakeButton = $this->button($buttonLabel, array_merge($fakeButtonCustomOptions, [
             'type' => 'button',
-            'onclick' => "document.getElementById('".$options['id']."').click();",
-            'class' => $options['button-class']
-        ]);
+            'onclick' => "document.getElementById('".$options['id']."').click();"
+        ]));
         return $fileInput.$this->Html->div('input-group', $this->Html->div('input-group-btn', $fakeButton).$fakeInput) ;
     }
 
