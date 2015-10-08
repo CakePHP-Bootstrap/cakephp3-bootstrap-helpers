@@ -446,7 +446,7 @@ class BootstrapFormHelper extends FormHelper {
             'button-class' => '',
             'input-class' => ''
         ];
-        $options = array_merge($options, $defaultOptions);
+        $options = array_merge($defaultOptions, $options);
 
         $options += ['secure' => true];
         $options = $this->_initInputField($fieldName, $options);
