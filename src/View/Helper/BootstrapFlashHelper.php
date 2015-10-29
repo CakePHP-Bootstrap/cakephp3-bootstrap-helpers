@@ -86,7 +86,7 @@ class BootstrapFlashHelper extends FlashHelper {
 
         $element = $flash['element'] ;
         if (in_array(basename($element), $this->_bootstrapTemplates)) {
-            $flash['element'] = 'Bootstrap3.'.$element ;
+            $flash['element'] = 'Bootstrap.'.$element ;
         }
 
         return $this->_View->element($flash['element'], $flash);
