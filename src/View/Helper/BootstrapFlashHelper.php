@@ -70,7 +70,7 @@ class BootstrapFlashHelper extends FlashHelper {
      * @throws \UnexpectedValueException If value for flash settings key is not an array.
      */
     public function render($key = 'flash', array $options = []) {
-        if (!$this->request->session()->check("Flash.$key")) {
+         if (!$this->request->session()->check("Flash.$key")) {
             return;
         }
 
@@ -81,15 +81,14 @@ class BootstrapFlashHelper extends FlashHelper {
                 $key
             ));
         }
-        $flash = $options + $flash;
-        $this->request->session()->delete("Flash.$key");
-
-        $element = $flash['element'] ;
-        if (in_array(basename($element), $this->_bootstrapTemplates)) {
-            $flash['element'] = 'Bootstrap.'.$element ;
+        foreach ($flash as &$message) {
+        	if (in_array(basename($message['element']), $this->_bootstrapTemplates)) {
+        		$message['element'] = 'Bootstrap.'.$message['element'];
+        	}
         }
+        $this->request->session()->write("Flash.$key", $flash);
 
-        return $this->_View->element($flash['element'], $flash);
+        return parent::render($key, $options);
     }
 
 }
