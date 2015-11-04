@@ -10,7 +10,7 @@ How to... ?
 
 If you want the latest **Bootstrap 3** version of the plugin:
 ```
-composer require holt59/cakephp3-bootstrap-helpers:~3.0
+composer require holt59/cakephp3-bootstrap-helpers:dev-master
 ```
 
 If  you are updating from `holt59/cakephp3-bootstrap3-helpers`, do not forget to change the the following:
