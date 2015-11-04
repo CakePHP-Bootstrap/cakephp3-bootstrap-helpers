@@ -59,6 +59,10 @@ class BootstrapStringTemplate extends StringTemplate {
         if ($template === null) {
             return '';
         }
+        if (isset($data['templateVars'])) {
+            $data += $data['templateVars'];
+            unset($data['templateVars']);
+        }
         $replace = [];
         foreach ($placeholders as $placeholder) {
             $replace[] = isset($data[$placeholder]) ? $data[$placeholder] : null;
