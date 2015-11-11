@@ -65,7 +65,11 @@ class BootstrapStringTemplate extends StringTemplate {
         }
         $replace = [];
         foreach ($placeholders as $placeholder) {
-            $replace[] = isset($data[$placeholder]) ? $data[$placeholder] : null;
+			$replacement = isset($data[$placeholder]) ? $data[$placeholder] : null;
+            if (is_array($replacement)) {
+                $replacement = implode('', $replacement);
+            }
+            $replace[] = $replacement;
         }
         return vsprintf($template, $replace);
     }
