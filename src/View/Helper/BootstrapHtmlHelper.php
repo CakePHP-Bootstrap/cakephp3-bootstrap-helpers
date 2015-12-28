@@ -49,7 +49,7 @@ class BootstrapHtmlHelper extends HtmlHelper {
      * @param $icon Name of the icon.
      *
     **/
-    public function icon ($icon, $options = array()) {
+    public function icon ($icon, $options = []) {
         return $this->_useFontAwesome ? $this->faIcon($icon, $options) : $this->glIcon($icon, $options);
     }
 
@@ -58,7 +58,7 @@ class BootstrapHtmlHelper extends HtmlHelper {
      *
      * @param $icon Name of the icon.
      */
-    public function faIcon ($icon, $options = array()) {
+    public function faIcon ($icon, $options = []) {
         $options = $this->addClass($options, 'fa');
         $options = $this->addClass($options, 'fa-'.$icon);
 
@@ -70,7 +70,7 @@ class BootstrapHtmlHelper extends HtmlHelper {
      *
      * @param $icon Name of the icon.
      */
-    public function glIcon ($icon, $options = array()) {
+    public function glIcon ($icon, $options = []) {
         $options = $this->addClass($options, 'glyphicon');
         $options = $this->addClass($options, 'glyphicon-'.$icon);
 
@@ -92,7 +92,7 @@ class BootstrapHtmlHelper extends HtmlHelper {
      *  - type The type of the label (useless if $type specified)
      *
     **/
-    public function label ($text, $type = 'default', $options = array()) {
+    public function label ($text, $type = 'default', $options = []) {
         if (is_string($type)) {
             $options['type'] = $type ;
         }
@@ -116,7 +116,7 @@ class BootstrapHtmlHelper extends HtmlHelper {
      *
      *
     **/
-    public function badge ($text, $options = array()) {
+    public function badge ($text, $options = []) {
         $options = $this->addClass($options, 'badge') ;
         return $this->tag('span', $text, $options) ;
     }
@@ -131,7 +131,7 @@ class BootstrapHtmlHelper extends HtmlHelper {
      * Unusable options:
      * 	- Separator
     **/
-    public function getCrumbList(array $options = array(), $startText = false) {
+    public function getCrumbList(array $options = [], $startText = false) {
         $options['separator'] = '' ;
         $options = $this->addClass($options, 'breadcrumb') ;
         return parent::getCrumbList ($options, $startText) ;
@@ -153,7 +153,7 @@ class BootstrapHtmlHelper extends HtmlHelper {
      *    $type is specified)
      *
     **/
-    public function alert ($text, $type = 'warning', $options = array()) {
+    public function alert ($text, $type = 'warning', $options = []) {
         if (is_string($type)) {
             $options['type'] = $type ;
         }
@@ -194,7 +194,7 @@ class BootstrapHtmlHelper extends HtmlHelper {
      * 	- active: boolean, specify if progress bar should be active
      *
     **/
-    public function progress ($widths, $options = array()) {
+    public function progress ($widths, $options = []) {
         $striped = $this->_extractOption('striped', $options, false) || in_array('striped', $options);
         unset($options['striped']) ;
         $active = $this->_extractOption('active', $options, false) || in_array('active', $options);

@@ -120,6 +120,30 @@ trait BootstrapTrait {
         return $type ;
     }
 
+    /**
+     *
+     * This method will the function $callback with the specified argument ($title and $options)
+     * after applying a filter on them.
+     *
+     * @param $callback The method to call.
+     * @param $title    The first argument ($title).
+     * @param $options  The second argument ($options).
+     *
+     * @return Whatever might be returned by $callback.
+     *
+     * Note: Currently this method only works for function that take two arguments ($title and $options).
+     *
+    **/
+    protected function _easyIcon ($callback, $title, $options) {
+        if (preg_match('#i:([a-zA-Z0-9\\-_]+)#', $title, $matches)) {
+            $options += [
+                'escape' => false
+            ];
+            $title = $this->_View->Html->icon($matches[1]);
+        }
+        return call_user_func ($callback, $title, $options) ;
+    }
+
 }
 
 ?>

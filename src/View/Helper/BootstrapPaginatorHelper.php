@@ -107,6 +107,10 @@ class BootstrapPaginatorHelper extends PaginatorHelper {
         return parent::numbers ($options) ;
     }
 
+    public function prev ($title = '<< Previous', array $options = []) {
+        return $this->_easyIcon ('parent::prev', $title, $options);
+    }
+
 
 }
 
