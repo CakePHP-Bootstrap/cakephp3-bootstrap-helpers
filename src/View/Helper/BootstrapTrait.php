@@ -142,12 +142,12 @@ trait BootstrapTrait {
      *
     **/
     protected function _makeIcon ($title, &$converted = false) {
-        $conversion = false ;
+        $converted = false ;
         if (!$this->easyIcon) {
             return $title ;
         }
         if (preg_match('#^i:([a-zA-Z0-9\\-_]+)$#', $title, $matches)) {
-            $conversion = true ;
+            $converted = true ;
             $title = $this->_View->Html->icon($matches[1]);
         }
         return $title ;
