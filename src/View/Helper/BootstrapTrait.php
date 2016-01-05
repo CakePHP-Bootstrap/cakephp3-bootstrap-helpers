@@ -136,7 +136,7 @@ trait BootstrapTrait {
     **/
     protected function _makeIcon ($title, &$converted = false) {
         $conversion = false ;
-        if (preg_match('#i:([a-zA-Z0-9\\-_]+)#', $title, $matches)) {
+        if (preg_match('#^i:([a-zA-Z0-9\\-_]+)$#', $title, $matches)) {
             $conversion = true ;
             $title = $this->_View->Html->icon($matches[1]);
         }
