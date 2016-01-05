@@ -25,6 +25,13 @@ namespace Bootstrap\View\Helper;
 trait BootstrapTrait {
     
     /**
+     * Set to false to disable easy icon processing.
+     *
+     * @var boolean
+     */
+    public $easyIcon = true ;
+    
+    /**
      * Adds the given class to the element options
      *
      * @param array $options Array options/attributes to add a class to
@@ -136,6 +143,9 @@ trait BootstrapTrait {
     **/
     protected function _makeIcon ($title, &$converted = false) {
         $conversion = false ;
+        if (!$this->easyIcon) {
+            return $title ;
+        }
         if (preg_match('#^i:([a-zA-Z0-9\\-_]+)$#', $title, $matches)) {
             $conversion = true ;
             $title = $this->_View->Html->icon($matches[1]);
