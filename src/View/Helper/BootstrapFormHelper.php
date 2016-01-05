@@ -280,16 +280,23 @@ class BootstrapFormHelper extends FormHelper {
         }
         return implode(' ', $classes) ;
     }
-
-    public function prepend ($input, $prepend) {
-        if ($prepend) {
-            if (is_string($prepend)) {
-                $prepend = '<span class="input-group-'.($this->_matchButton($prepend) ? 'btn' : 'addon').'">'.$prepend.'</span>' ;
+    
+    protected function _wrapInputGroup ($addonOrButtons) {
+        if ($addonOrButtons) {
+            if (is_string($addonOrButtons)) {
+                $addonOrButtons = $this->_makeIcon($addonOrButtons);
+                $addonOrButtons = '<span class="input-group-'.
+                    ($this->_matchButton($addonOrButtons) ? 'btn' : 'addon').'">'.$addonOrButtons.'</span>' ;
             }
-            else if ($prepend !== false) {
-                $prepend = '<span class="input-group-btn">'.implode('', $prepend).'</span>' ;
+            else if ($addonOrButtons !== false) {
+                $addonOrButtons = '<span class="input-group-btn">'.implode('', $addonOrButtons).'</span>' ;
             }
         }
+        return $addonOrButtons ;
+    }
+
+    public function prepend ($input, $prepend) {
+        $prepend = $this->_wrapInputGroup ($prepend);
         if ($input === null) {
             return '<div class="input-group">'.$prepend ;
         }
@@ -297,12 +304,7 @@ class BootstrapFormHelper extends FormHelper {
     }
 
     public function append ($input, $append) {
-        if (is_string($append)) {
-            $append = '<span class="input-group-'.($this->_matchButton($append) ? 'btn' : 'addon').'">'.$append.'</span>' ;
-        }
-        else if ($append !== false) {
-            $append = '<span class="input-group-btn">'.implode('', $append).'</span>' ;
-        }
+        $append = $this->_wrapInputGroup($append);
         if ($input === null) {
             return $append.'</div>' ;
         }
@@ -582,7 +584,7 @@ class BootstrapFormHelper extends FormHelper {
      * 
      */
     public function button($title, array $options = []) {
-        return parent::button($title, $this->_createButtonOptions($options)) ;
+        return $this->_easyIcon ('parent::button', $title, $this->_createButtonOptions($options));
     }
     
     /**
