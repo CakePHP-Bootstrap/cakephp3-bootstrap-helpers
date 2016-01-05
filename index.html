@@ -138,6 +138,35 @@
                                 </div>
                             </div>
                         </div>
+                        <h3 id="icons">Icons - Easy icons</h3>
+                        <p>Sometimes, you may want to use <code>BootstrapHtmlHelper::icon</code> in combination with other helpers such as 
+                        <code>BootstrapPaginatorHelper</code> or <code>BootstrapFormHelper</code> to insert <b>icons</b> in buttons or other elements. 
+                        To ease the process, some methods provide a shortcut to use icon: </p>
+                        <pre><code class="language-php">&lt;?php
+    // The following... 
+    echo $this->Form->button($this-&gt;Html-&gt;icon('pencil'), ['escape' => false]);
+    // ...can be easily rewritten as:
+    echo $this->Form->button('i:pencil');
+?&gt;</code></pre>
+                        <p>The <i>easy icon</i> format is <code>i:icon-name</code> where <code>icon-name</code> is the name of the icon.</p>
+                        <p><span class="label label-danger">Warning!</span> The above code may throw errors if the HTML helper defined for the view
+                        is not <code>BootstrapHtmlHelper</code>. The set of icons used (Font Awesome or Glyphicon) is defined by <b>the HTML helper settings</b>.</p>
+                        <p><span class="label label-info">Tip!</span> To disable <i>easy icon</i>, simply do <code>$this->Form->easyIcon = false;</code>
+                        (replace <code>Form</code> by anything relevant).</p>
+                        <p><span class="label label-warning">Warning!</span> The name of the icon is not checked, so you should not use non-existing icon names.</p>
+                        
+                        <p>Places where you can use <i>easy icon</i> (if not specified, the target is <code>$title</code>): </p>
+                        <pre><code class="language-php">// BootstrapPaginatorHelper
+BootstrapPaginatorHelper::prev($title, array $options = []);
+BootstrapPaginatorHelper::next($title, array $options = []);
+BootstrapPaginatorHelper::numbers(array $options = []); // For `prev` and `next` options.
+
+// BootstrapFormatHelper
+BootstrapFormHelper::button($title, array $options = []);
+BootstrapFormHelper::input($fieldName, array $options = []); // For `prepend` and `append` options.
+BootstrapFormHelper::prepend($input, $prepend); // For $prepend.
+BootstrapFormHelper::append($input, $append); // For $append.</code></pre>
+                        
                         <h3 id="icons-fa">Icons - Font Awesome</h3>
                         <pre><code class="language-php">public $helpers = [
     'Html' =&gt; [
