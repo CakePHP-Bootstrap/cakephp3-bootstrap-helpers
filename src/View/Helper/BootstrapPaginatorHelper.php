@@ -27,21 +27,46 @@ use Cake\View\Helper\PaginatorHelper;
 class BootstrapPaginatorHelper extends PaginatorHelper {
 
     use BootstrapTrait ;
-
-    public function __construct ($view, $config = []) {
-        $this->templates([
+    
+    /**
+     * Default config for this class
+     *
+     * Options: Holds the default options for pagination links
+     *
+     * The values that may be specified are:
+     *
+     * - `url` Url of the action. See Router::url()
+     * - `url['sort']`  the key that the recordset is sorted.
+     * - `url['direction']` Direction of the sorting (default: 'asc').
+     * - `url['page']` Page number to use in links.
+     * - `model` The name of the model.
+     * - `escape` Defines if the title field for the link should be escaped (default: true).
+     *
+     * Templates: the templates used by this class
+     *
+     * @var array
+     */
+    protected $_defaultConfig = [
+        'options' => [],
+        'templates' => [
             'nextActive' => '<li><a href="{{url}}">{{text}}</a></li>',
             'nextDisabled' => '<li class="disabled"><a>{{text}}</a></li>',
             'prevActive' => '<li><a href="{{url}}">{{text}}</a></li>',
             'prevDisabled' => '<li class="disabled"><a>{{text}}</a></li>',
+            'counterRange' => '{{start}} - {{end}} of {{count}}',
+            'counterPages' => '{{page}} of {{pages}}',
             'first' => '<li><a href="{{url}}">{{text}}</a></li>',
             'last' => '<li><a href="{{url}}">{{text}}</a></li>',
             'number' => '<li><a href="{{url}}">{{text}}</a></li>',
-            'current ' => '<li class="active"><a href="{{url}}">{{text}}</a></li>'
-        ]);
-        
-        parent::__construct($view, $config);
-    }
+            'current' => '<li class="active"><a href="{{url}}">{{text}}</a></li>',
+            'ellipsis' => '<li class="ellipsis">...</li>',
+            'sort' => '<a href="{{url}}">{{text}}</a>',
+            'sortAsc' => '<a class="asc" href="{{url}}">{{text}}</a>',
+            'sortDesc' => '<a class="desc" href="{{url}}">{{text}}</a>',
+            'sortAscLocked' => '<a class="asc locked" href="{{url}}">{{text}}</a>',
+            'sortDescLocked' => '<a class="desc locked" href="{{url}}">{{text}}</a>',
+        ]
+    ];
     
     /**
      * 
