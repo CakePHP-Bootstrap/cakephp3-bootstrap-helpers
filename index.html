@@ -1009,7 +1009,7 @@ BootstrapFormHelper::append($input, $append); // For $append.</code></pre>
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <p>&copy; 2015, Mikaël Capelle (@Holt59) - Designed and built by <a href="https://github.com/Holt59" target="_blank">Holt59</a> &amp; <a href="https://github.com/Holt59/cakephp3-bootstrap-helpers/graphs/contributors" target="_blank">contributors</a>.</p>
+                        <p>&copy; <span id="year"></span>, Mikaël Capelle (@Holt59) - Designed and built by <a href="https://github.com/Holt59" target="_blank">Holt59</a> &amp; <a href="https://github.com/Holt59/cakephp3-bootstrap-helpers/graphs/contributors" target="_blank">contributors</a>.</p>
                         <p>Code licensed under <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, Version 2.0</a>.</p>
                         <p>Code & Documentation hosted by <a href="https://github.com" target="_blank"><i class="fa fa-github"></i> Github</a>.</p>
                     </div>
@@ -1022,6 +1022,7 @@ BootstrapFormHelper::append($input, $append); // For $append.</code></pre>
         <script src="js/prism.min.js"></script>
 
         <script type="text/javascript">
+            $('#year').text(new Date.getFullYear());
             var sideNavOffset = $('.right-nav').offset().top;
             $('a[href^="#"]:not([role="tab"])').on('click', function (e) {
                 var section = $($(this).attr('href'));
