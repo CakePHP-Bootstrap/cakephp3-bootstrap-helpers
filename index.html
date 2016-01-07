@@ -1022,7 +1022,7 @@ BootstrapFormHelper::append($input, $append); // For $append.</code></pre>
         <script src="js/prism.min.js"></script>
 
         <script type="text/javascript">
-            $('#year').text(new Date.getFullYear());
+            $('#year').text(new Date().getFullYear());
             var sideNavOffset = $('.right-nav').offset().top;
             $('a[href^="#"]:not([role="tab"])').on('click', function (e) {
                 var section = $($(this).attr('href'));
