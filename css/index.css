@@ -55,6 +55,10 @@ a.cake-link {
     color: #c7254e;
 }
 
+a:focus {
+    outline: none;
+}
+
 .btn-custom {
     background-color: #1096D0 ;
     border-color: #0A90CC;
