@@ -7,9 +7,17 @@
 	"require": {
 		"cakephp/cakephp": "~3.0"
 	},
+	"require-dev": {
+		"phpunit/phpunit": "*"
+	}
 	"autoload": {
 		"psr-4": {
  			"Bootstrap\\": "src"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Bootstrap\\Test\\": "tests"
 		}
 	},
 	"extra": {
