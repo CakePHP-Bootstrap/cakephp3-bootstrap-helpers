@@ -407,12 +407,13 @@ BootstrapFormHelper::append($input, $append); // For $append.</code></pre>
                         <p>With <code>horizontal</code>, it is possible to specify the width of each columns:</p>
                         <pre><code class="language-php">echo $this->Form->create(null, [
     'horizontal' => true,
-    'cols' => [ // Total is 12, default is 2 / 6 / 4
+    'cols' => [ // Total is 12, default is 2 / 10 / 0
         'label' => 2,
-        'input' => 6,
-        'error' => 4
+        'input' => 10,
+        'error' => 0
     ]
-]);</code></pre>
+]);
+// 0 for 'error' means that it will be put under the input</code></pre>
                         <p>You can also set column widths for different screens:</p>
                         <div role="tabpanel">
                         <!-- Nav tabs -->
@@ -488,7 +489,7 @@ BootstrapFormHelper::append($input, $append); // For $append.</code></pre>
                         </div>
                     </div>
                         
-                        <p>To avoid compatibility issue with some bootstrap plugins, you can switch from horizontal layout to standard layout by using the <code>BootstrapFormHelper::setHorizontal</code> method.</p>
+                        <p>To avoid compatibility issue with some bootstrap plugins, you can switch from horizontal layout to standard layout by setting the <code>BootstrapFormHelper::horizontal</code> attribute manually.</p>
                         <div role="tabpanel">
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs" role="tablist">
@@ -502,9 +503,9 @@ BootstrapFormHelper::append($input, $append); // For $append.</code></pre>
                                     <pre><code class="language-php">&lt;?php 
     echo $this-&gt;Form-&gt;create(NULL, ['horizontal' =&gt; true]) ;
     echo $this-&gt;Form-&gt;input('horizontal_1'); 
-    echo $this-&gt;Form-&gt;setHorizontal (false) ;
+    echo $this-&gt;Form-&gt;horizontal = false;
     echo $this-&gt;Form-&gt;input('non_horizontal'); 
-    echo $this-&gt;Form-&gt;setHorizontal (true) ;
+    echo $this-&gt;Form-&gt;horizontal = true;
     echo $this-&gt;Form-&gt;input('horizontal_2'); 
     echo $this-&gt;Form-&gt;end() ;
 ?&gt;</code></pre>
