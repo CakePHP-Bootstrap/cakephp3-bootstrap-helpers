@@ -54,33 +54,33 @@ class BootstrapFormHelper extends FormHelper {
             'checkbox' => '<input type="checkbox" name="{{name}}" value="{{value}}"{{attrs}}>',
             'checkboxFormGroup' => '{{label}}',
             'checkboxWrapper' => '<div class="checkbox">{{label}}</div>',
-            'checkboxContainer' => '<div class="checkbox">{{content}}</div>',
+            'checkboxContainer' => '{{h_checkboxContainer_start}}<div class="checkbox">{{content}}</div>{{h_checkboxContainer_end}}',
             'dateWidget' => '{{year}}{{month}}{{day}}{{hour}}{{minute}}{{second}}{{meridian}}',
-            'error' => '<span class="help-block error-message">{{content}}</span>',
+            'error' => '<span class="help-block error-message{{h_errorClass}}">{{content}}</span>',
             'errorList' => '<ul>{{content}}</ul>',
             'errorItem' => '<li>{{text}}</li>',
             'file' => '<input type="file" name="{{name}}" {{attrs}}>',
             'fieldset' => '<fieldset{{attrs}}>{{content}}</fieldset>',
             'formStart' => '<form{{attrs}}>',
             'formEnd' => '</form>',
-            'formGroup' => '{{label}}{{prepend}}{{input}}{{append}}',
+            'formGroup' => '{{label}}{{h_formGroup_start}}{{prepend}}{{input}}{{append}}{{h_formGroup_end}}',
             'hiddenBlock' => '<div style="display:none;">{{content}}</div>',
-            'input' => '<input type="{{type}}" name="{{name}}" class="form-control {{attrs.class}}" {{attrs}} />',
+            'input' => '<input type="{{type}}" name="{{name}}" class="form-control{{attrs.class}}" {{attrs}} />',
             'inputSubmit' => '<input type="{{type}}"{{attrs}}>',
             'inputContainer' => '<div class="form-group {{type}}{{required}}">{{content}}</div>',
             'inputContainerError' => '<div class="form-group has-error {{type}}{{required}}">{{content}}{{error}}</div>',
-            'label' => '<label class="control-label {{attrs.class}}" {{attrs}}>{{text}}</label>',
+            'label' => '<label class="{{s_labelClass}}{{h_labelClass}}{{attrs.class}}" {{attrs}}>{{text}}</label>',
             'nestingLabel' => '{{hidden}}<label{{attrs}}>{{input}}{{text}}</label>',
             'legend' => '<legend>{{text}}</legend>',
             'option' => '<option value="{{value}}"{{attrs}}>{{text}}</option>',
             'optgroup' => '<optgroup label="{{label}}"{{attrs}}>{{content}}</optgroup>',
-            'select' => '<select name="{{name}}" class="form-control {{attrs.class}}" {{attrs}}>{{content}}</select>',
-            'selectMultiple' => '<select name="{{name}}[]" multiple="multiple" class="form-control {{attrs.class}}" {{attrs}}>{{content}}</select>',
+            'select' => '<select name="{{name}}" class="form-control{{attrs.class}}" {{attrs}}>{{content}}</select>',
+            'selectMultiple' => '<select name="{{name}}[]" multiple="multiple" class="form-control{{attrs.class}}" {{attrs}}>{{content}}</select>',
             'radio' => '<input type="radio" name="{{name}}" value="{{value}}"{{attrs}}>',
             'radioWrapper' => '<div class="radio">{{label}}</div>',
-            'radioContainer' => '<div class="form-group">{{content}}</div>',
-            'textarea' => '<textarea name="{{name}}" class="form-control {{attrs.class}}" {{attrs}}>{{value}}</textarea>',
-            'submitContainer' => '<div class="form-group">{{content}}</div>',
+            'radioContainer' => '{{h_radioContainer_start}}<div class="form-group">{{content}}</div>{{h_radioContainer_end}}',
+            'textarea' => '<textarea name="{{name}}" class="form-control{{attrs.class}}" {{attrs}}>{{value}}</textarea>',
+            'submitContainer' => '<div class="form-group">{{h_submitContainer_start}}{{content}}{{h_submitContainer_end}}</div>',
         ]
     ];
 
@@ -129,8 +129,8 @@ class BootstrapFormHelper extends FormHelper {
      */
     protected $_defaultColumnSize = [
         'label' => 2,
-        'input' => 6,
-        'error' => 4
+        'input' => 10,
+        'error' => 0
     ];
 
     private $buttonTypes = ['default', 'primary', 'info', 'success', 'warning', 'danger', 'link'] ;
@@ -185,27 +185,50 @@ class BootstrapFormHelper extends FormHelper {
     protected function _matchButton ($html) {
         return strpos($html, '<button') !== FALSE || strpos($html, 'type="submit"') !== FALSE ;
     }
-	
-    /**
-     *
-     * Set the default templates according to the inner properties of the form ($this->horizontal and $this->inline).
-     *
-    **/
-    protected function _setDefaultTemplates () {
-        $this->templates([
-            'formGroup' => '{{label}}'.($this->horizontal ? '<div class="'.$this->_getColClass('input').'">' : '').'{{prepend}}{{input}}{{append}}'.($this->horizontal ? '</div>' : ''),
-            'checkboxContainer' => ($this->horizontal ? '<div class="form-group"><div class="'.$this->_getColClass('label', true).' '.$this->_getColClass('input').'">' : '')
-                        .'<div class="checkbox">{{content}}</div>'
-                    .($this->horizontal ? '</div></div>' : ''),
-            'radioContainer' => ($this->horizontal ? '<div class="form-group"><div class="'.$this->_getColClass('label', true).' '.$this->_getColClass('input').'">' : '')
-                        .'{{content}}'
-                    .($this->horizontal ? '</div></div>' : ''),
-            'label' => '<label class="'.($this->horizontal ? $this->_getColClass('label') : '').' '.($this->inline ? 'sr-only' : 'control-label').' {{attrs.class}}" {{attrs}}>{{text}}</label>',
-            'error' => '<span class="help-block '.($this->horizontal ? $this->_getColClass('error') : '').' error-message">{{content}}</span>',
-            'submitContainer' => '<div class="form-group">'.($this->horizontal ? '<div class="'.$this->_getColClass('label', true).' '.$this->_getColClass('input').'">' : '').'{{content}}'.($this->horizontal ? '</div>' : '').'</div>',
-        ]) ;
+    
+    protected function _getDefaultTemplateVars (&$options) {
+        $options += [
+            'templateVars' => []
+        ];
+        $options['templateVars'] += [
+            's_labelClass' => 'control-label'
+        ];
+        if ($this->horizontal) {
+            $options['templateVars'] += [
+                'h_formGroup_start' => '<div class="'.$this->_getColClass('input').'">',
+                'h_formGroup_end'   => '</div>',
+                'h_checkboxContainer_start' => '<div class="form-group"><div class="'.$this->_getColClass('label', true)
+                    .' '.$this->_getColClass('input').'">',
+                'h_checkboxContainer_end' => '</div></div>',
+                'h_radioContainer_start' => '<div class="form-group"><div class="'.$this->_getColClass('label', true)
+                    .' '.$this->_getColClass('input').'">',
+                'h_radioContainer_end' => '</div></div>',
+                'h_submitContainer_start' => '<div class="'.$this->_getColClass('label', true).' '.$this->_getColClass('input').'">',
+                'h_submitContainer_end' => '</div>',
+                'h_labelClass' => ' '.$this->_getColClass('label'),
+                'h_errorClass' => ' '.$this->_getColClass('error')
+            ];
+        }
+        if ($this->inline) {
+            $options['templateVars']['s_labelClass'] = 'sr-only';
+        }
+        return $options;
     }
-	
+    
+    public function formatTemplate($name, $data) {
+        return $this->templater()->format($name, $this->_getDefaultTemplateVars($data));
+    }
+    
+    public function widget($name, array $data = []) {
+        return parent::widget($name, $this->_getDefaultTemplateVars($data));
+    }
+    
+    protected function _inputContainerTemplate($options) {
+        return parent::_inputContainerTemplate(array_merge($options, [
+            'options' => $this->_getDefaultTemplateVars($options['options'])
+        ]));
+    }
+    
     /**
      * 
      * Create a Twitter Bootstrap like form. 
@@ -248,20 +271,8 @@ class BootstrapFormHelper extends FormHelper {
             $options = $this->addClass($options, 'form-search') ;
         }
         $options['role'] = 'form' ;
-        $this->_setDefaultTemplates () ;
 	    return parent::create($model, $options) ;
     }
-
-    /**
-     *
-     * Switch horizontal mode on or off.
-     *
-    **/
-    public function setHorizontal ($horizontal) {
-        $this->horizontal = $horizontal ;
-        $this->_setDefaultTemplates () ;
-    }
-
 
     /**
      *
@@ -269,6 +280,9 @@ class BootstrapFormHelper extends FormHelper {
      *
     **/
     protected function _getColClass ($what, $offset = false) {
+        if ($what === 'error' && isset($this->colSize['error']) && $this->colSize['error'] == 0) {
+            return $this->_getColClass('label', true).' '.$this->_getColClass('input');
+        }
         if (isset($this->colSize[$what])) {
             return 'col-md-'.($offset ? 'offset-' : '').$this->colSize[$what] ;
         }
@@ -331,7 +345,7 @@ class BootstrapFormHelper extends FormHelper {
      *        
     **/
     public function input($fieldName, array $options = array()) {
-
+    
         $options = $this->_parseOptions($fieldName, $options);
 
         $prepend = $this->_extractOption('prepend', $options, false) ;
@@ -356,7 +370,7 @@ class BootstrapFormHelper extends FormHelper {
             $options['templates'] = [] ;
             if ($inline) {
                 $options['templates'] = [
-                    'label' => $this->templates('label').'<div></div>',
+                    'label' => $this->templates('label'),
                     'radioWrapper' => '{{label}}',
                     'nestingLabel' => '{{hidden}}<label{{attrs}} class="radio-inline">{{input}}{{text}}</label>'
                 ] ;
@@ -373,7 +387,7 @@ class BootstrapFormHelper extends FormHelper {
             'prepend' => $prepend,
             'append' => $append
         ];
-
+        
         return parent::input($fieldName, $options) ;
     }
 
@@ -397,7 +411,7 @@ class BootstrapFormHelper extends FormHelper {
             $data = array_merge($data, $options['options']['_data']);
             unset($options['options']['_data']);
         }
-        return $this->templater()->format($groupTemplate, $data);
+        return $this->formatTemplate($groupTemplate, $data);
     }
 
     /**

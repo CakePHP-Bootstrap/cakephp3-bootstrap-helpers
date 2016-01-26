@@ -251,7 +251,7 @@ class BootstrapHtmlHelper extends HtmlHelper {
      * Create & return a twitter bootstrap dropdown menu.
      *
      * @param $menu HTML tags corresponding to menu options (which will be wrapped
-     * 		 into <li> tag). To add separator, pass 'divider'.
+     *              into <li> tag). To add separator, pass 'divider'.
      * @param $options Attributes for the wrapper (change it with tag)
      *
      */
@@ -281,8 +281,8 @@ class BootstrapHtmlHelper extends HtmlHelper {
             }
         }
         $options = $this->addClass($options, 'dropdown-menu');
-        $options['role'] = 'menu' ;
-        $options += ['tag' => 'div'];
+        $options['role'] = 'menu';
+        $options += ['tag' => 'ul'];
         $tag = $options['tag'];
         unset($options['tag']);
         return $this->tag($tag, $output, $options) ;
