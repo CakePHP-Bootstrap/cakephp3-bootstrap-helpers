@@ -33,7 +33,7 @@ class BootstrapStringTemplateTest extends TestCase {
     public function test () {
         $this->templater->add([
             'test_default' => '<p{{attrs}}>{{content}}</p>',
-            'test_attrs_class' => '<p class="test-class {{attrs.class}}"{{attrs}}>{{content}}</p>'
+            'test_attrs_class' => '<p class="test-class{{attrs.class}}"{{attrs}}>{{content}}</p>'
         ]) ;
         // Standard test
         $result = $this->templater->format ('test_default', [

@@ -52,34 +52,34 @@ class BootstrapHtmlHelperTest extends TestCase {
             'id' => 'my-home',
             'class' => 'my-home-class'
         ] ;
-        // Default icon (FontAwesome)
-        $this->assertHtml ([
-            ['i' => [
-                'class' => 'fa fa-'.$type
-            ]],
-            '/i'
-        ], $this->Html->icon($type));
-        $this->assertHtml ([
-            ['i' => [
-                'class' => $options['class'].' fa fa-'.$type,
-                'id' => $options['id']
-            ]],
-            '/i'
-        ], $this->Html->icon($type, $options));
-        // Glyphicon icon
+        // Default icon (Glyphicon)
         $this->assertHtml ([
             ['i' => [
                 'class' => 'glyphicon glyphicon-'.$type
             ]],
             '/i'
-        ], $this->Html->glIcon($type));
+        ], $this->Html->icon($type));
         $this->assertHtml ([
             ['i' => [
                 'class' => $options['class'].' glyphicon glyphicon-'.$type,
                 'id' => $options['id']
             ]],
             '/i'
-        ], $this->Html->glIcon($type, $options));        
+        ], $this->Html->icon($type, $options));
+        // FontAwesome icon
+        $this->assertHtml ([
+            ['i' => [
+                'class' => 'fa fa-'.$type
+            ]],
+            '/i'
+        ], $this->Html->faIcon($type));
+        $this->assertHtml ([
+            ['i' => [
+                'class' => $options['class'].' fa fa-'.$type,
+                'id' => $options['id']
+            ]],
+            '/i'
+        ], $this->Html->faIcon($type, $options));        
     }
     
     public function testLabel () {
@@ -130,6 +130,14 @@ class BootstrapHtmlHelperTest extends TestCase {
     }
     
     public function testDropdown () {
+        /**
+          <ul class="dropdown-menu">
+            <li><a href="#">Link 1</a></li>
+            <li><a href="#">Link 2</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Link 3</a></li>
+          </ul>
+        **/
         $title = 'Action' ;
         $menu   = [
             $this->Html->link('Link 1', '#'),
@@ -138,98 +146,25 @@ class BootstrapHtmlHelperTest extends TestCase {
             $this->Html->link('Link 3', '#')
         ] ;
         $expected = [
-            ['div' => [
-                'class' => 'dropdown'
+            ['ul' => [
+                'role'  => 'menu',
+                'class' => 'dropdown-menu'
             ]],
-            ['button' => [
-                'data-toggle'   => 'dropdown',
-                'aria-haspopup' => 'true',
-                'aria-expanded' => 'false',
-                'id'            => 'dropdownMenu1',
-                'class'         => 'dropdown-toggle btn btn-secondary'
-            ]],
-            'Action',
-            '/button',
-            ['div' => [
-                'class' => 'dropdown-menu',
-                'aria-labelledby' => 'dropdownMenu1'
-            ]],
-            ['a' => [
-                'href'  => '#',
-                'class' => 'dropdown-item'
-            ]], 'Link 1', '/a',
-            ['a' => [
-                'href'  => '#',
-                'class' => 'dropdown-item'
-            ]], 'Link 2', '/a',
-            ['div' => [
-                'class' => 'dropdown-divider'
-            ]], '/div',
-            ['a' => [
-                'href'  => '#',
-                'class' => 'dropdown-item'
-            ]], 'Link 3', '/a',
-            '/div',
-            '/div'
+            ['li' => [
+                'role' => 'presentation'
+            ]], ['a' => ['href'  => '#']], 'Link 1', '/a', '/li',
+            ['li' => [
+                'role' => 'presentation'
+            ]], ['a' => ['href'  => '#']], 'Link 2', '/a', '/li',
+            ['li' => [
+                'role' => 'presentation',
+                'class' => 'divider'
+            ]], '/li',
+            ['li' => [
+                'role' => 'presentation'
+            ]], ['a' => ['href'  => '#']], 'Link 3', '/a', '/li',
+            '/ul'
         ] ;
-        // Standard test
-        $this->assertHtml ($expected, $this->Html->dropdown($title, $menu)) ;
-        $menu   = [
-            ['Link 1', '#'],
-            ['Link 2', '#', ['class' => 'my-item-class', 'id' => 'my-item-id']],
-            'divider',
-            ['Link 3', '#']
-        ] ;
-        $options = [
-            'class' => 'my-dropdown',
-            '_button' => [
-                'tag' => 'a',
-                'id'  => 'my-dropdown-id'
-            ],
-            '_menu' => [
-                'class' => 'my-dropdown-menu',
-                '_item' => [
-                    'class' => 'my-dropdown-item'
-                ]
-            ]
-        ] ;
-        $expected = [
-            ['div' => [
-                'class' => $options['class'].' dropdown'
-            ]],
-            [$options['_button']['tag'] => [
-                'data-toggle'   => 'dropdown',
-                'aria-haspopup' => 'true',
-                'aria-expanded' => 'false',
-                'id'            => $options['_button']['id'],
-                'class'         => 'dropdown-toggle btn btn-secondary'
-            ]],
-            'Action',
-            '/'.$options['_button']['tag'],
-            ['div' => [
-                'class' => $options['_menu']['class'].' dropdown-menu',
-                'aria-labelledby' => $options['_button']['id']
-            ]],
-            ['a' => [
-                'href'  => '#',
-                'class' => $options['_menu']['_item']['class'].' dropdown-item'
-            ]], 'Link 1', '/a',
-            ['a' => [
-                'href'  => '#',
-                'class' => $menu[1][2]['class'].' dropdown-item',
-                'id'    => $menu[1][2]['id']
-            ]], 'Link 2', '/a',
-            ['div' => [
-                'class' => $options['_menu']['_item']['class'].' dropdown-divider'
-            ]], '/div',
-            ['a' => [
-                'href'  => '#',
-                'class' => $options['_menu']['_item']['class'].' dropdown-item'
-            ]], 'Link 3', '/a',
-            '/div',
-            '/div'
-        ] ;
-        $this->assertHtml ($expected, $this->Html->dropdown($title, $menu, $options)) ;
         
     }
 
