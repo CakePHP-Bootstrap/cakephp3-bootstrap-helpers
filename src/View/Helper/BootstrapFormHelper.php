@@ -105,7 +105,6 @@ class BootstrapFormHelper extends FormHelper {
     
     public $horizontal = false ;
     public $inline = false ;
-    public $search = false ;
     public $colSize ;
 
     /**
@@ -257,8 +256,6 @@ class BootstrapFormHelper extends FormHelper {
         }
         $this->horizontal = $this->_extractOption('horizontal', $options, false);
         unset($options['horizontal']);
-        $this->search = $this->_extractOption('search', $options, false) ;
-        unset($options['search']) ;
         $this->inline = $this->_extractOption('inline', $options, false) ;
         unset($options['inline']) ;
 	    if ($this->horizontal) {
@@ -266,9 +263,6 @@ class BootstrapFormHelper extends FormHelper {
 	    }
         else if ($this->inline) {
             $options = $this->addClass($options, 'form-inline') ;
-        }
-        if ($this->search) {
-            $options = $this->addClass($options, 'form-search') ;
         }
         $options['role'] = 'form' ;
 	    return parent::create($model, $options) ;
@@ -686,33 +680,68 @@ class BootstrapFormHelper extends FormHelper {
      * 
      * @param $model The model of the form
      * @param $options The options that will be pass to the BootstrapForm::create method
+     * @param $inpOpts The options that will be pass to the BootstrapForm::input method
+     * @param $btnOpts The options that will be pass to the BootstrapForm::button method
      * 
      * Extra options:
-     * 	- label: The input label (default false)
-     * 	- placeholder: The input placeholder (default "Search... ")
-     * 	- button: The search button text (default: "Search")
+     *  - id          ID of the input (and fieldname)
+     *  - label       The input label (default false)
+     *  - placeholder The input placeholder (default "Search... ")
+     *  - button      The search button text (default: "Search")
+     *  - _input      Options for the input (overrided by $inpOpts)
+     *  - _button     Options for the button (overrided by $btnOpts)
      *     
     **/
-    public function searchForm ($model = null, $options = array()) {
+    public function searchForm ($model = null, $options = [], $inpOpts = [], $btnOpts = []) {
         
-        $label = $this->_extractOption('label', $options, false) ;
+        $options += [
+            'id'          => 'search',
+            'label'       => false,
+            'placeholder' => 'Search... ',
+            'button'      => 'Search',
+            '_input'      => [],
+            '_button'     => []
+        ];
+        
+        $options = $this->addClass($options, 'form-search');
+        
+        $btnOpts += $options['_button'];
+        unset($options['_button']);
+        
+        $inpOpts += $options['_input'];
+        unset($options['_input']);
+        
+        $inpOpts += [
+            'id'          => $options['id'],
+            'placeholder' => $options['placeholder'],
+            'label'       => $options['label']
+        ];
+        
+        unset($options['id']) ;
         unset($options['label']) ;
-        $placeholder = $this->_extractOption('placeholder', $options, 'Search... ') ;
         unset($options['placeholder']) ;
-        $button = $this->_extractOption('button', $options, 'Search') ;
+        
+        $btnName = $options['button'];
         unset($options['button']) ;
+        
+        $inpOpts['append'] = $this->button($btnName, $btnOpts);
+        
+        $options['inline'] = (bool)$inpOpts['label'];
         
         $output = '' ;
         
-        $output .= $this->create($model, array_merge(array('search' => true, 'inline' => (bool)$label), $options)) ;
-        $output .= $this->input('search', array(
+        $output .= $this->create($model, $options) ;
+        $output .= $this->input($inpOpts['id'], $inpOpts);
+        $output .= $this->end() ;
+
+/*        array(
             'label' => $label,
             'placeholder' => $placeholder,
             'append' => array(
-                $this->button($button, array('style' => 'vertical-align: middle'))
+                $this->button($button, ['style' => 'vertical-align: middle'])
             )
         )) ;
-        $output .= $this->end() ;
+        $output .= $this->end() ; */
     
         return $output ;
     }
