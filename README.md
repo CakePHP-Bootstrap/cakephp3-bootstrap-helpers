@@ -12,20 +12,18 @@ If you want the latest **Bootstrap 3** version of the plugin:
 ```
 composer require holt59/cakephp3-bootstrap-helpers:dev-master
 ```
-
-If  you are updating from `holt59/cakephp3-bootstrap3-helpers`, do not forget to change the the following:
-
 ```php
 // in config/bootstrap.php
-Plugin::load('Bootstrap') ; // instead of Plugin::load('Bootstrap3') ;
+Plugin::load('Bootstrap') ;
 ```
 
 ```php
 // in your AppController
 public $helpers = [
     'Form' => [
-        'className' => 'Bootstrap.BootstrapForm' // instead of 'Bootstrap3.BootstrapForm'
-    ]
+        'className' => 'Bootstrap.BootstrapForm'
+    ],
+    /* ... */
 ] ;
 ```
 ---
