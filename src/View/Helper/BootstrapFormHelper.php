@@ -29,7 +29,7 @@ class BootstrapFormHelper extends FormHelper {
     use BootstrapTrait ;
 
     public $helpers = [
-        'Html', 
+        'Html',
         'Url',
         'bHtml' => [
             'className' => 'Bootstrap.BootstrapHtml'
@@ -102,7 +102,7 @@ class BootstrapFormHelper extends FormHelper {
         'datetime' => ['Cake\View\Widget\DateTimeWidget', 'select'],
         '_default' => ['Cake\View\Widget\BasicWidget'],
     ];
-    
+
     public $horizontal = false ;
     public $inline = false ;
     public $colSize ;
@@ -151,7 +151,7 @@ class BootstrapFormHelper extends FormHelper {
         $this->_defaultConfig['templateClass'] = 'Bootstrap\View\BootstrapStringTemplate' ;
         parent::__construct($view, $config);
     }
-    
+
     /**
      *
      * Replace the templates with the ones specified by newTemplates, call the specified function
@@ -326,40 +326,48 @@ class BootstrapFormHelper extends FormHelper {
     protected function _wrap ($input, $prepend, $append) {
         return '<div class="input-group">'.$prepend.$input.$append.'</div>' ;
     }
-	
-    /** 
-     * 
+
+    /**
+     *
      * Create & return an input block (Twitter Boostrap Like).
-     * 
+     *
      * New options:
-     * 	- prepend: 
-     * 		-> string: Add <span class="add-on"> before the input
-     * 		-> array: Add elements in array before inputs
-     * 	- append: Same as prepend except it add elements after input
-     *        
+     *      - prepend:
+     *          -> string: Add <span class="add-on"> before the input
+     *          -> array: Add elements in array before inputs
+     *     - append: Same as prepend except it add elements after input
+     *
     **/
     public function input($fieldName, array $options = array()) {
-    
+
+        $options += [
+            'templateVars' => [],
+            'prepend'      => false,
+            'append'       => false,
+            'help'         => false,
+            'inline'       => false
+        ];
+
         $options = $this->_parseOptions($fieldName, $options);
 
-        $prepend = $this->_extractOption('prepend', $options, false) ;
+        $prepend = $options['prepend'];
         unset($options['prepend']);
-        $append = $this->_extractOption('append', $options, false) ;
+        $append = $options['append'];
         unset($options['append']);
         if ($prepend || $append) {
             $prepend = $this->prepend(null, $prepend);
             $append  = $this->append(null, $append);
         }
 
-        $help = $this->_extractOption('help', $options, '');
+        $help = $options['help'];
         unset($options['help']);
         if ($help) {
             $append .= '<p class="help-block">'.$help.'</p>' ;
         }
 
-        $inline = $this->_extractOption('inline', $options, '') ;
+        $inline = $options['inline'];
         unset ($options['inline']) ;
-            
+
         if ($options['type'] === 'radio') {
             $options['templates'] = [] ;
             if ($inline) {
@@ -377,35 +385,12 @@ class BootstrapFormHelper extends FormHelper {
             }
         }
 
-        $options['_data'] = [
+        $options['templateVars'] += [
             'prepend' => $prepend,
             'append' => $append
         ];
-        
-        return parent::input($fieldName, $options) ;
-    }
 
-    /**
-     * Generates an group template element
-     *
-     * @param array $options The options for group template
-     * @return string The generated group template
-     */
-    protected function _groupTemplate($options) {
-        $groupTemplate = $options['options']['type'] . 'FormGroup';
-        if (!$this->templater()->get($groupTemplate)) {
-            $groupTemplate = 'formGroup';
-        }
-        $data = [
-            'input' => $options['input'],
-            'label' => $options['label'],
-            'error' => $options['error']
-        ];
-        if (isset($options['options']['_data'])) {
-            $data = array_merge($data, $options['options']['_data']);
-            unset($options['options']['_data']);
-        }
-        return $this->formatTemplate($groupTemplate, $data);
+        return parent::input($fieldName, $options) ;
     }
 
     /**
@@ -424,7 +409,8 @@ class BootstrapFormHelper extends FormHelper {
         $inputs = [] ;
         foreach ($fields as $field => $in) {
             if ($this->_extractOption($field, $options, $in)) {
-                if ($field === 'timeFormat') $field = 'meridian' ; // Template uses "meridian" instead of timeFormat
+                if ($field === 'timeFormat')
+                    $field = 'meridian' ; // Template uses "meridian" instead of timeFormat
                 $inputs[$field] = '<div class="col-md-{{colsize}}">{{'.$field.'}}</div>';
             }
         }
@@ -436,7 +422,8 @@ class BootstrapFormHelper extends FormHelper {
                 $html .= $inputs[$v] ;
             }
         }
-        return str_replace('{{colsize}}', round(12 / count($inputs)), '<div class="row">'.$html.'</div>') ;
+        return str_replace('{{colsize}}', round(12 / count($inputs)),
+                           '<div class="row">'.$html.'</div>') ;
     }
 
     /**
