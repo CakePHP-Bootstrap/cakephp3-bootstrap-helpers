@@ -1,26 +1,26 @@
 {
-	"name": "holt59/cakephp3-bootstrap-helpers",
-	"description": "Bootstrap Helpers for CakePHP 3.0",
-	"keywords": ["CakePHP", "Bootstrap"],
-	"license": "Apache",
-	"type": "cakephp-plugin",
-	"require": {
-		"cakephp/cakephp": "~3.0"
-	},
-	"require-dev": {
-		"phpunit/phpunit": "*"
-	},
-	"autoload": {
-		"psr-4": {
- 			"Bootstrap\\": "src"
-		}
-	},
-	"autoload-dev": {
-		"psr-4": {
-			"Bootstrap\\Test\\": "tests"
-		}
-	},
-	"extra": {
-		"installer-name": "Bootstrap"
-	}
+    "name": "holt59/cakephp3-bootstrap-helpers",
+    "description": "Bootstrap Helpers for CakePHP 3.0",
+    "keywords": ["CakePHP", "Bootstrap"],
+    "license": "Apache",
+    "type": "cakephp-plugin",
+    "require": {
+        "cakephp/cakephp": "~3.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Bootstrap\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Bootstrap\\Test\\": "tests"
+        }
+    },
+    "extra": {
+        "installer-name": "Bootstrap"
+    }
 }
