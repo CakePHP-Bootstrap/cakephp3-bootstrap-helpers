@@ -14,6 +14,7 @@ env:
     - DB=sqlite db_dsn='sqlite:///:memory:'
   global:
     - DEFAULT=1
+    - PHPCS=0
 
 services:
   - memcached
