@@ -38,6 +38,16 @@ require_once CORE_PATH . 'config/bootstrap.php';
 date_default_timezone_set('UTC');
 mb_internal_encoding('UTF-8');
 
+Configure::write('App', [
+    'namespace' => 'App',
+    'encoding' => 'UTF-8',
+    'base' => false,
+    'baseUrl' => false,
+    'dir' => APP_DIR,
+    'webroot' => 'webroot',
+    'wwwRoot' => WWW_ROOT
+]);
+
 Cache::config([
     '_cake_core_' => [
         'engine' => 'File',
@@ -51,5 +61,6 @@ Cache::config([
     ]
 ]);
 
+ini_set('intl.default_locale', 'en_US');
 
 Plugin::load('Search', ['path' => ROOT]);
