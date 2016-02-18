@@ -14,7 +14,6 @@ env:
     - DB=sqlite db_dsn='sqlite:///:memory:'
   global:
     - DEFAULT=1
-    - PHPCS=0
 
 services:
   - memcached
@@ -33,7 +32,7 @@ matrix:
       env: CODECOVERAGE=1 DEFAULT=0
 
     - php: 7.0
-      env: PHPCS=1 DEFAULT=0
+      env: PHPCS=0 DEFAULT=0
 
     - php: hhvm
       env: HHVM=1 DB=sqlite db_dsn='sqlite:///:memory:'
