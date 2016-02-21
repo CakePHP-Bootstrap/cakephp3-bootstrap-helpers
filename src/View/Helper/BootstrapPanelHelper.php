@@ -59,7 +59,9 @@ class BootstrapPanelHelper extends Helper {
 
         $res = $this->Html->div($class, null, $options);
         if (is_string($title) && $title) {
-            $res .= $this->_createHeader($title, []) ;
+            $res .= $this->_createHeader($title, [
+                'title' => isset($options['title']) ? $options['title'] : true
+            ]) ;
             if (!$nobody) {
                 $res .= $this->_startPart('body');
             }
@@ -69,7 +71,7 @@ class BootstrapPanelHelper extends Helper {
 
     /**
      *
-     * End a panel. If $title is not null, the ModalHelper::footer functions
+     * End a panel. If $title is not null, the PanelHelper::footer functions
      * is called with $title and $options arguments.
      *
      * @param string|null $buttons
@@ -98,21 +100,21 @@ class BootstrapPanelHelper extends Helper {
     }
 
     protected function _createHeader ($title, $options = [], $titleOptions = []) {
-        $options += [
-            '_title' => []
-        ];
-        if (empty($titleOptions))
-            $titleOptions = $options['_title'];
-        unset ($options['_title']);
+        if (empty($titleOptions)) {
+            $titleOptions = $options['title'] ;
+        }
+        unset ($options['title']);
+        if ($titleOptions !== false) {
+            if (!is_array($titleOptions)) {
+                $titleOptions = [];
+            }
+            $titleOptions = $this->addClass($titleOptions, 'panel-title');
+            $title = $titleOptions ? $this->Html->tag('h3', $title, $titleOptions) : $title;
+        }
         $options = $this->addClass($options, 'panel-heading');
         $class   = $options['class'];
         unset ($options['class']);
-        $titleOptions = $this->addClass($titleOptions, 'panel-title');
-        return $this->_cleanCurrent().$this->Html->div($class,
-                                                       $this->Html->tag('h3', $title,
-                                                                        $titleOptions),
-                                                       $options
-        ) ;
+        return $this->_cleanCurrent().$this->Html->div($class, $title, $options);
     }
 
     protected function _createBody ($text, $options = []) {
@@ -149,7 +151,7 @@ class BootstrapPanelHelper extends Helper {
      * Create / Start the header. If $info is specified as a string, create and return the
      * whole header, otherwize only open the header.
      *
-     * @param array|string $info If string, use as the modal title, otherwize works as $options.
+     * @param array|string $info If string, use as the panel title, otherwize works as $options.
      * @param array $options Options for the header div.
      *
      * Special option (if $info is string):
@@ -157,6 +159,9 @@ class BootstrapPanelHelper extends Helper {
      *
      **/
     public function header ($info = null, $options = []) {
+        $options += [
+            'title' => true
+        ];
         if (is_string($info)) {
             return $this->_createHeader($info, $options) ;
         }
@@ -196,8 +201,11 @@ class BootstrapPanelHelper extends Helper {
      * @param array $options Options for the footer div.
      *
      **/
-    public function footer ($text = "", $options = []) {
-        return $this->_createFooter($text, $options) ;
+    public function footer ($text = null, $options = []) {
+        if (is_string($text)) {
+            return $this->_createFooter($text, $options) ;
+        }
+        return $this->_startPart('footer', is_array($text) ? $text : $options);
     }
 
 }
