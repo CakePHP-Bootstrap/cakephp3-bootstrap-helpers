@@ -27,7 +27,7 @@ use Cake\View\Helper\PaginatorHelper;
 class BootstrapPaginatorHelper extends PaginatorHelper {
 
     use BootstrapTrait ;
-    
+
     /**
      * Default config for this class
      *
@@ -59,7 +59,7 @@ class BootstrapPaginatorHelper extends PaginatorHelper {
             'last' => '<li><a href="{{url}}">{{text}}</a></li>',
             'number' => '<li><a href="{{url}}">{{text}}</a></li>',
             'current' => '<li class="active"><a href="{{url}}">{{text}}</a></li>',
-            'ellipsis' => '<li class="ellipsis">...</li>',
+            'ellipsis' => '<li class="ellipsis disabled"><a>...</a></li>',
             'sort' => '<a href="{{url}}">{{text}}</a>',
             'sortAsc' => '<a class="asc" href="{{url}}">{{text}}</a>',
             'sortDesc' => '<a class="desc" href="{{url}}">{{text}}</a>',
@@ -67,26 +67,26 @@ class BootstrapPaginatorHelper extends PaginatorHelper {
             'sortDescLocked' => '<a class="desc locked" href="{{url}}">{{text}}</a>',
         ]
     ];
-    
+
     /**
-     * 
+     *
      * Get pagination link list.
-     * 
+     *
      * @param $options Options for link element
      *
      * Extra options:
      *  - size small/normal/large (default normal)
-     *       
+     *
     **/
-    public function numbers (array $options = array()) {       
-        
-        $class = 'pagination' ;
+    public function numbers (array $options = []) {
 
-        if (isset($options['class'])) {
-            $class .= ' '.$options['class'] ;
-            unset($options['class']) ;
-        }
-        
+        $options += [
+            'class' => ''
+        ];
+
+        $class = 'pagination '.$options['class'] ;
+        unset($options['class']);
+
         if (isset($options['size'])) {
             switch ($options['size']) {
             case 'small':
@@ -98,14 +98,37 @@ class BootstrapPaginatorHelper extends PaginatorHelper {
             }
             unset($options['size']) ;
         }
-          
+
         if (!isset($options['before'])) {
             $options['before'] = '<ul class="'.$class.'">' ;
         }
-        
+
         if (!isset($options['after'])) {
             $options['after'] = '</ul>' ;
         }
+
+        return parent::numbers($options);
+
+    }
+
+    /**
+     * Generates the numbers for the paginator numbers() method.
+     *
+     * @param \Cake\View\StringTemplate $templater StringTemplate instance.
+     * @param array $params Params from the numbers() method.
+     * @param array $options Options from the numbers() method.
+     * @return string Markup output.
+     */
+    protected function _modulusNumbers($templater, $params, $options) {
+
+        $options += [
+            'before' => '',
+            'after'  => ''
+        ];
+
+        $first = $prev = $next = $last = '';
+
+        /* Previous and Next buttons (addition from standard PaginatorHelper). */
 
         if (isset($options['prev'])) {
             $title = $options['prev'] ;
@@ -115,7 +138,8 @@ class BootstrapPaginatorHelper extends PaginatorHelper {
                 unset ($options['prev']['title']) ;
                 $opts  = $options['prev'] ;
             }
-            $options['before'] .= $this->prev($title, $opts) ;
+            $prev = $this->prev($title, $opts) ;
+            unset($options['prev']);
         }
 
         if (isset($options['next'])) {
@@ -126,10 +150,28 @@ class BootstrapPaginatorHelper extends PaginatorHelper {
                 unset ($options['next']['title']);
                 $opts  = $options['next'];
             }
-            $options['after'] = $this->next($title, $opts).$options['after'] ;
+            $next = $this->next($title, $opts);
+            unset($options['next']);
         }
-                
-        return parent::numbers ($options) ;
+
+        /* Custom First and Last. */
+
+        $ellipsis = $templater->format('ellipsis', []);
+        list($start, $end) = $this->_getNumbersStartAndEnd($params, $options);
+
+        if (isset($options['last'])) {
+            $last = $this->_lastNumber($ellipsis, $params, $end, $options);
+        }
+
+        if (isset($options['last'])) {
+            $first = $this->_firstNumber($ellipsis, $params, $start, $options);
+        }
+
+        $options['before'] = $options['before'].$first.$prev;
+        $options['after']  = $next.$last.$options['after'];
+        $options['first']  = $options['last'] = false;
+
+        return parent::_modulusNumbers($templater, $params, $options) ;
     }
 
     public function prev ($title = '<< Previous', array $options = []) {
