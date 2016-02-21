@@ -394,6 +394,25 @@ class BootstrapFormHelper extends FormHelper {
     }
 
     /**
+     * Generates an group template element
+     *
+     * @param array $options The options for group template
+     * @return string The generated group template
+     */
+    protected function _groupTemplate($options) {
+        $groupTemplate = $options['options']['type'] . 'FormGroup';
+        if (!$this->templater()->get($groupTemplate)) {
+            $groupTemplate = 'formGroup';
+        }
+        return $this->formatTemplate($groupTemplate, [
+            'input' => $options['input'],
+            'label' => $options['label'],
+            'error' => $options['error'],
+            'templateVars' => isset($options['options']['templateVars']) ? $options['options']['templateVars'] : []
+        ]);
+    }
+
+    /**
      * Generates an input element
      *
      * @param string $fieldName the field name
