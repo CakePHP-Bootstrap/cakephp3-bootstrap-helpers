@@ -170,7 +170,7 @@ class BootstrapFormHelper extends FormHelper {
         $result = call_user_func_array ($callback, $params) ;
         $this->templates ($oldTemplates) ;
         return $result ;
-    } 
+    }
 
     /**
      *
@@ -184,7 +184,7 @@ class BootstrapFormHelper extends FormHelper {
     protected function _matchButton ($html) {
         return strpos($html, '<button') !== FALSE || strpos($html, 'type="submit"') !== FALSE ;
     }
-    
+
     protected function _getDefaultTemplateVars (&$options) {
         $options += [
             'templateVars' => []
@@ -213,38 +213,38 @@ class BootstrapFormHelper extends FormHelper {
         }
         return $options;
     }
-    
+
     public function formatTemplate($name, $data) {
         return $this->templater()->format($name, $this->_getDefaultTemplateVars($data));
     }
-    
+
     public function widget($name, array $data = []) {
         return parent::widget($name, $this->_getDefaultTemplateVars($data));
     }
-    
+
     protected function _inputContainerTemplate($options) {
         return parent::_inputContainerTemplate(array_merge($options, [
             'options' => $this->_getDefaultTemplateVars($options['options'])
         ]));
     }
-    
+
     /**
-     * 
-     * Create a Twitter Bootstrap like form. 
-     * 
+     *
+     * Create a Twitter Bootstrap like form.
+     *
      * New options available:
-     * 	- horizontal: boolean, specify if the form is horizontal
-     * 	- inline: boolean, specify if the form is inline
-     * 	- search: boolean, specify if the form is a search form
-     * 
+     *     - horizontal: boolean, specify if the form is horizontal
+     *     - inline: boolean, specify if the form is inline
+     *     - search: boolean, specify if the form is a search form
+     *
      * Unusable options:
-     * 	- inputDefaults
-     * 
+     *     - inputDefaults
+     *
      * @param $model The model corresponding to the form
      * @param $options Options to customize the form
-     * 
+     *
      * @return The HTML tags corresponding to the openning of the form
-     * 
+     *
     **/
     public function create($model = null, Array $options = array()) {
         if (isset($options['cols'])) {
@@ -258,14 +258,14 @@ class BootstrapFormHelper extends FormHelper {
         unset($options['horizontal']);
         $this->inline = $this->_extractOption('inline', $options, false) ;
         unset($options['inline']) ;
-	    if ($this->horizontal) {
-		    $options = $this->addClass($options, 'form-horizontal') ;
-	    }
+        if ($this->horizontal) {
+            $options = $this->addClass($options, 'form-horizontal') ;
+        }
         else if ($this->inline) {
             $options = $this->addClass($options, 'form-inline') ;
         }
         $options['role'] = 'form' ;
-	    return parent::create($model, $options) ;
+        return parent::create($model, $options) ;
     }
 
     /**
@@ -288,7 +288,7 @@ class BootstrapFormHelper extends FormHelper {
         }
         return implode(' ', $classes) ;
     }
-    
+
     protected function _wrapInputGroup ($addonOrButtons) {
         if ($addonOrButtons) {
             if (is_string($addonOrButtons)) {
@@ -586,31 +586,31 @@ class BootstrapFormHelper extends FormHelper {
         }
         return $options ;
     }
-    
+
     /**
-     * 
+     *
      * Create & return a Twitter Like button.
-     * 
+     *
      * ### New options:
      *
      * - bootstrap-type: Twitter bootstrap button type (primary, danger, info, etc.)
      * - bootstrap-size: Twitter bootstrap button size (mini, small, large)
-     * 
+     *
      */
     public function button($title, array $options = []) {
         return $this->_easyIcon ('parent::button', $title, $this->_createButtonOptions($options));
     }
-    
+
     /**
-     * 
+     *
      * Create & return a Twitter Like button group.
-     * 
+     *
      * @param $buttons The buttons in the group
      * @param $options Options for div method
      *
      * Extra options:
      *  - vertical true/false
-     * 
+     *
     **/
     public function buttonGroup ($buttons, array $options = array()) {
         $vertical = $this->_extractOption('vertical', $options, false) ;
@@ -621,74 +621,74 @@ class BootstrapFormHelper extends FormHelper {
         }
         return $this->Html->tag('div', implode('', $buttons), $options) ;
     }
-    
+
     /**
-     * 
+     *
      * Create & return a Twitter Like button toolbar.
-     * 
+     *
      * @param $buttons The groups in the toolbar
      * @param $options Options for div method
-     * 
+     *
     **/
     public function buttonToolbar (array $buttonGroups, array $options = array()) {
         $options = $this->addClass($options, 'btn-toolbar') ;
         return $this->Html->tag('div', implode('', $buttonGroups), $options) ;
     }
-    
+
     /**
-     * 
+     *
      * Create & return a twitter bootstrap dropdown button. This function is a shortcut for:
-     * 
+     *
      *   $this->Form->$buttonGroup([
-     *     $this->Form->button($title, $options), 
+     *     $this->Form->button($title, $options),
      *     $this->Html->dropdown($menu, [])
      *   ]);
-     * 
+     *
      * @param $title The text in the button
      * @param $menu HTML tags corresponding to menu options (which will be wrapped
-     * 		 into <li> tag). To add separator, pass 'divider'.
+     *          into <li> tag). To add separator, pass 'divider'.
      * @param $options Options for button
-     * 
+     *
      */
     public function dropdownButton ($title, array $menu = [], array $options = []) {
-    
+
         $options['type'] = false ;
         $options['data-toggle'] = 'dropdown' ;
         $options = $this->addClass($options, "dropdown-toggle") ;
-        
+
         return $this->buttonGroup([
             $this->button($title.' <span class="caret"></span>', $options),
             $this->bHtml->dropdown($menu)
         ]);
 
     }
-    
+
     /**
-     * 
+     *
      * Create & return a Twitter Like submit input.
-     * 
+     *
      * New options:
-     * 	- bootstrap-type: Twitter bootstrap button type (primary, danger, info, etc.)
-     * 	- bootstrap-size: Twitter bootstrap button size (mini, small, large)
-     * 
+     *     - bootstrap-type: Twitter bootstrap button type (primary, danger, info, etc.)
+     *     - bootstrap-size: Twitter bootstrap button size (mini, small, large)
+     *
      * Unusable options: div
-     * 
-    **/    
+     *
+    **/
     public function submit($caption = null, array $options = array()) {
         return parent::submit($caption, $this->_createButtonOptions($options)) ;
     }
-    
+
     /** SPECIAL FORM **/
-    
+
     /**
-     * 
+     *
      * Create a basic bootstrap search form.
-     * 
+     *
      * @param $model The model of the form
      * @param $options The options that will be pass to the BootstrapForm::create method
      * @param $inpOpts The options that will be pass to the BootstrapForm::input method
      * @param $btnOpts The options that will be pass to the BootstrapForm::button method
-     * 
+     *
      * Extra options:
      *  - id          ID of the input (and fieldname)
      *  - label       The input label (default false)
@@ -696,10 +696,10 @@ class BootstrapFormHelper extends FormHelper {
      *  - button      The search button text (default: "Search")
      *  - _input      Options for the input (overrided by $inpOpts)
      *  - _button     Options for the button (overrided by $btnOpts)
-     *     
+     *
     **/
     public function searchForm ($model = null, $options = [], $inpOpts = [], $btnOpts = []) {
-        
+
         $options += [
             'id'          => 'search',
             'label'       => false,
@@ -708,47 +708,38 @@ class BootstrapFormHelper extends FormHelper {
             '_input'      => [],
             '_button'     => []
         ];
-        
+
         $options = $this->addClass($options, 'form-search');
-        
+
         $btnOpts += $options['_button'];
         unset($options['_button']);
-        
+
         $inpOpts += $options['_input'];
         unset($options['_input']);
-        
+
         $inpOpts += [
             'id'          => $options['id'],
             'placeholder' => $options['placeholder'],
             'label'       => $options['label']
         ];
-        
+
         unset($options['id']) ;
         unset($options['label']) ;
         unset($options['placeholder']) ;
-        
+
         $btnName = $options['button'];
         unset($options['button']) ;
-        
+
         $inpOpts['append'] = $this->button($btnName, $btnOpts);
-        
+
         $options['inline'] = (bool)$inpOpts['label'];
-        
+
         $output = '' ;
-        
+
         $output .= $this->create($model, $options) ;
         $output .= $this->input($inpOpts['id'], $inpOpts);
         $output .= $this->end() ;
 
-/*        array(
-            'label' => $label,
-            'placeholder' => $placeholder,
-            'append' => array(
-                $this->button($button, ['style' => 'vertical-align: middle'])
-            )
-        )) ;
-        $output .= $this->end() ; */
-    
         return $output ;
     }
 
