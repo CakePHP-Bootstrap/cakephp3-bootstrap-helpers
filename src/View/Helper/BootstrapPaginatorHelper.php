@@ -80,51 +80,40 @@ class BootstrapPaginatorHelper extends PaginatorHelper {
     **/
     public function numbers (array $options = []) {
 
-        $options += [
-            'class' => ''
+        $defaults = [
+            'before' => null, 'after' => null, 'model' => $this->defaultModel(),
+            'modulus' => 8, 'first' => null, 'last' => null, 'url' => [],
+            'class' => '', 'size' => false
         ];
+        $options += $defaults;
 
-        $class = 'pagination '.$options['class'] ;
+        $options = $this->addClass($options, 'pagination');
+
+        switch ($options['size']) {
+        case 'small':
+            $options = $this->addClass($options, 'pagination-sm') ;
+            break ;
+        case 'large':
+            $options = $this->addClass($options, 'pagination-lg') ;
+            break ;
+        }
+        unset($options['size']) ;
+
+        $options['before'] .= $this->Html->tag('ul', null, ['class' => $options['class']]);
+        $options['after'] = '</ul>'.$options['after'] ;
         unset($options['class']);
 
-        if (isset($options['size'])) {
-            switch ($options['size']) {
-            case 'small':
-                $class .= ' pagination-sm' ;
-                break ;
-            case 'large':
-                $class .= ' pagination-lg' ;
-                break ;
-            }
-            unset($options['size']) ;
+        $params = (array)$this->params($options['model']) + ['page' => 1];
+        if ($params['pageCount'] <= 1) {
+            return false;
         }
 
-        if (!isset($options['before'])) {
-            $options['before'] = '<ul class="'.$class.'">' ;
+        $templater = $this->templater();
+        if (isset($options['templates'])) {
+            $templater->push();
+            $method = is_string($options['templates']) ? 'load' : 'add';
+            $templater->{$method}($options['templates']);
         }
-
-        if (!isset($options['after'])) {
-            $options['after'] = '</ul>' ;
-        }
-
-        return parent::numbers($options);
-
-    }
-
-    /**
-     * Generates the numbers for the paginator numbers() method.
-     *
-     * @param \Cake\View\StringTemplate $templater StringTemplate instance.
-     * @param array $params Params from the numbers() method.
-     * @param array $options Options from the numbers() method.
-     * @return string Markup output.
-     */
-    protected function _modulusNumbers($templater, $params, $options) {
-
-        $options += [
-            'before' => '',
-            'after'  => ''
-        ];
 
         $first = $prev = $next = $last = '';
 
@@ -171,7 +160,17 @@ class BootstrapPaginatorHelper extends PaginatorHelper {
         $options['after']  = $next.$last.$options['after'];
         $options['first']  = $options['last'] = false;
 
-        return parent::_modulusNumbers($templater, $params, $options) ;
+        if ($options['modulus'] !== false && $params['pageCount'] > $options['modulus']) {
+            $out = $this->_modulusNumbers($templater, $params, $options);
+        } else {
+            $out = $this->_numbers($templater, $params, $options);
+        }
+
+        if (isset($options['templates'])) {
+            $templater->pop();
+        }
+
+        return $out;
     }
 
     public function prev ($title = '<< Previous', array $options = []) {
