@@ -31,13 +31,13 @@ class BootstrapModalHelper extends Helper {
     public $helpers = ['Html'];
 
     public $current = NULL ;
-    
+
     /**
-     * 
-     * Create a Twitter Bootstrap like modal. 
+     *
+     * Create a Twitter Bootstrap like modal.
      *
      * @param array|string $title If array, works as $options, otherwize used as the modal title.
-     * @param array $options Options for the main div of the modal. 
+     * @param array $options Options for the main div of the modal.
      *
      * Extra options (useless if $title not specified) :
      *     - close: Add close buttons to header (default true)
@@ -60,24 +60,26 @@ class BootstrapModalHelper extends Helper {
             $options['aria-labelledby'] = $this->currentId.'Label' ;
         }
         $options['size'] = $this->_extractOption('size', $options, '');
-	    switch($options['size']) {
-		    case 'lg':
-		    case 'large':
-		    case 'modal-lg':
-			    $size = 'modal-lg';
-			    break;
-		    case 'sm':
-		    case 'small':
-		    case 'modal-sm':
-			    $size = 'modal-sm';
-			    break;
-		    default:
-			    $size = '';
-			    break;
-	    }
-	    unset($options['size']);
-        
-	    $res = $this->Html->div('modal fade '.$this->_extractOption('class', $options, ''), NULL, $options).$this->Html->div('modal-dialog '.$size).$this->Html->div('modal-content');
+        switch($options['size']) {
+        case 'lg':
+        case 'large':
+        case 'modal-lg':
+            $size = 'modal-lg';
+            break;
+        case 'sm':
+        case 'small':
+        case 'modal-sm':
+            $size = 'modal-sm';
+            break;
+        default:
+            $size = '';
+            break;
+        }
+        unset($options['size']);
+
+        $res = $this->Html->div('modal fade '.$this->_extractOption('class', $options, ''),
+                                null, $options)
+             .$this->Html->div('modal-dialog '.$size).$this->Html->div('modal-content');
         if (is_string($title) && $title) {
             $res .= $this->_createHeader($title, array('close' => $close)) ;
             if (!$nobody) {
@@ -85,15 +87,16 @@ class BootstrapModalHelper extends Helper {
             }
         }
         return $res ;
-	}
-    	
+    }
+
     /**
-     * 
-     * End a modal. If $buttons is not null, the ModalHelper::footer functions is called with $buttons and $options arguments.
+     *
+     * End a modal. If $buttons is not null, the ModalHelper::footer functions is called
+     * with $buttons and $options arguments.
      *
      * @param array|null $buttons
      * @param array $options
-     * 
+     *
     **/
     public function end ($buttons = NULL, $options = array()) {
         $res = '' ;
@@ -105,7 +108,7 @@ class BootstrapModalHelper extends Helper {
             $res .= $this->footer($buttons, $options) ;
         }
         $res .= '</div></div></div>' ;
-		return $res ;
+        return $res ;
     }
 
     protected function _cleanCurrent () {
@@ -120,19 +123,27 @@ class BootstrapModalHelper extends Helper {
         $close = $this->_extractOption('close', $options, true);
         unset($options['close']) ;
         if ($close) {
-            $button = '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' ;
+            $button = '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">'
+                    .'&times;'
+                    .'</button>' ;
         }
         else {
             $button = '' ;
         }
-        return $this->_cleanCurrent().$this->Html->div('modal-header '.$this->_extractOption('class', $options, ''), 
-            $button.$this->Html->tag('h4', $title, array('class' => 'modal-title', 'id' => $this->currentId ? $this->currentId.'Label' : false)), 
-            $options
-        ) ; 
+        return $this->_cleanCurrent()
+            .$this->Html->div('modal-header '.$this->_extractOption('class', $options, ''),
+                              $button.$this->Html->tag('h4', $title, [
+                                  'class' => 'modal-title',
+                                  'id' => $this->currentId ? $this->currentId.'Label' : false
+                              ]),
+                              $options
+        ) ;
     }
 
     protected function _createBody ($text, $options = array()) {
-        return $this->_cleanCurrent().$this->Html->div('modal-body '.$this->_extractOption('class', $options, ''), $text, $options) ; 
+        return $this->_cleanCurrent()
+            .$this->Html->div('modal-body '.$this->_extractOption('class', $options, ''),
+                              $text, $options) ;
     }
 
     protected function _createFooter ($buttons = NULL, $options = array()) {
@@ -140,22 +151,28 @@ class BootstrapModalHelper extends Helper {
             $close = $this->_extractOption('close', $options, true);
             unset($options['close']) ;
             if ($close) {
-                $buttons = '<button type="button" class="btn btn-default" data-dismiss="modal">'.__('Close').'</button>' ;
+                $buttons = '<button type="button" class="btn btn-default" data-dismiss="modal">'
+                         .__('Close')
+                         .'</button>' ;
             }
             else {
                 $buttons = '' ;
             }
         }
-        return $this->_cleanCurrent().$this->Html->div('modal-footer '.$this->_extractOption('class', $options, ''), $buttons, $options) ; 
+        return $this->_cleanCurrent()
+            .$this->Html->div('modal-footer '.$this->_extractOption('class', $options, ''),
+                              $buttons, $options) ;
     }
-    
+
     protected function _startPart ($part, $options = array()) {
         $res = '' ;
         if ($this->current != NULL) {
             $res = $this->_endPart () ;
         }
         $this->current = $part ;
-        return $res.$this->Html->div('modal-'.$part.' '.$this->_extractOption('class', $options, ''), NULL, $options) ;
+        return $res
+            .$this->Html->div('modal-'.$part.' '.$this->_extractOption('class', $options, ''),
+                              null, $options) ;
     }
 
     protected function _endPart () {
@@ -164,11 +181,12 @@ class BootstrapModalHelper extends Helper {
 
     /**
      *
-     * Create / Start the header. If $info is specified as a string, create and return the whole header, otherwize only open the header.
-     * 
+     * Create / Start the header. If $info is specified as a string, create and return the
+     * whole header, otherwize only open the header.
+     *
      * @param array|string $info If string, use as the modal title, otherwize works as $options.
      * @param array $options Options for the header div.
-     * 
+     *
      * Special option (if $info is string):
      *     - close: Add the 'close' button in the header (default true).
      *
@@ -182,11 +200,12 @@ class BootstrapModalHelper extends Helper {
 
     /**
      *
-     * Create / Start the body. If $info is not null, it is used as the body content, otherwize start the body div.
-     * 
+     * Create / Start the body. If $info is not null, it is used as the body content,
+     * otherwize start the body div.
+     *
      * @param array|string $info If string, use as the body content, otherwize works as $options.
      * @param array $options Options for the footer div.
-     * 
+     *
      *
     **/
     public function body ($info = NULL, $options = array()) {
@@ -199,17 +218,15 @@ class BootstrapModalHelper extends Helper {
         return $this->_startPart('body', is_array($info) ? $info : $options) ;
     }
 
-    protected function _isAssociativeArray ($array) {
-        return array_keys($array) !== range(0, count($array) - 1);
-    }
-    
     /**
      *
-     * Create / Start the footer. If $buttons is specified as an associative arrays or as null, start the footer, otherwize create the footer with the specified buttons.
-     * 
-     * @param array|string $buttons If string, use as the footer content, if list, concatenate values in the list as content (use for buttons purpose), otherwize works as $options.
+     * Create / Start the footer. If $buttons is specified as an associative arrays or as null,
+     * start the footer, otherwize create the footer with the specified buttons.
+     *
+     * @param array|string $buttons If string, use as the footer content, if list, concatenate
+     *        values in the list as content (use for buttons purpose), otherwize works as $options.
      * @param array $options Options for the footer div.
-     * 
+     *
      * Special option (if $buttons is NOT NULL but empty):
      *     - close: Add the 'close' button to the footer (default true).
      *
@@ -221,7 +238,8 @@ class BootstrapModalHelper extends Helper {
         if (empty($buttons)) {
             return $this->_createFooter(NULL, $options) ;
         }
-        return $this->_createFooter(is_string($buttons) ? $buttons : implode('', $buttons), $options) ;
+        return $this->_createFooter(is_string($buttons) ? $buttons : implode('', $buttons),
+                                    $options) ;
     }
 
 }
