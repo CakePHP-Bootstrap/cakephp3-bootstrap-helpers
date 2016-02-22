@@ -185,7 +185,7 @@ class BootstrapPaginatorHelper extends PaginatorHelper {
     }
 
     public function first($first = '<< first', array $options = []) {
-        return $this->_easyIcon('parent::first', first, $options);
+        return $this->_easyIcon('parent::first', $first, $options);
     }
 
     public function last($last = 'last >>', array $options = []) {
