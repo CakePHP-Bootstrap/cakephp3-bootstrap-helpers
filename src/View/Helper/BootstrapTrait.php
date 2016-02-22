@@ -153,7 +153,7 @@ trait BootstrapTrait {
     **/
     protected function _makeIcon ($title, &$converted = false) {
         $converted = false ;
-        if (!$this->easyIcon || !is_string($title)) {
+        if (!$this->easyIcon) {
             return $title ;
         }
         $title = preg_replace_callback('#(^|\s+)i:([a-zA-Z0-9\\-_]+)(\s+|$)#', function ($matches) {

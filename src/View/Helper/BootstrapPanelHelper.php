@@ -32,8 +32,6 @@ class BootstrapPanelHelper extends Helper {
 
     public $current = NULL ;
 
-<<<<<<< HEAD
-=======
     /* Protected attributes used to generate ID for collapsible panels. */
     protected $_panelCount         = 0;
     protected $_bodyId      = null;
@@ -85,7 +83,6 @@ class BootstrapPanelHelper extends Helper {
         return $out.'</div>';
     }
 
->>>>>>> panel-helper
     /**
      *
      * Create a Twitter Bootstrap like panel.
@@ -99,28 +96,6 @@ class BootstrapPanelHelper extends Helper {
     public function create($title = null, $options = []) {
 
         if (is_array($title)) {
-<<<<<<< HEAD
-            $options = $title ;
-        }
-
-        $nobody = $this->_extractOption('no-body', $options, false);
-        unset ($options['no-body']);
-        $type   = $this->_extractOption('type', $options, 'default');
-        unset ($options['type']);
-
-        $options = $this->addClass($options, ['panel', 'panel-'.$type]);
-        $class   = $options['class'];
-        unset ($options['class']);
-
-        $res = $this->Html->div($class, null, $options);
-        if (is_string($title) && $title) {
-            $res .= $this->_createHeader($title, []) ;
-            if (!$nobody) {
-                $res .= $this->_startPart('body');
-            }
-        }
-        return $res ;
-=======
             $options = $title;
         }
 
@@ -164,16 +139,11 @@ class BootstrapPanelHelper extends Helper {
         }
 
         return $out ;
->>>>>>> panel-helper
     }
 
     /**
      *
-<<<<<<< HEAD
-     * End a panel. If $title is not null, the ModalHelper::footer functions
-=======
      * End a panel. If $title is not null, the PanelHelper::footer functions
->>>>>>> panel-helper
      * is called with $title and $options arguments.
      *
      * @param string|null $buttons
@@ -181,17 +151,9 @@ class BootstrapPanelHelper extends Helper {
      *
      **/
     public function end ($title = null, $options = []) {
-<<<<<<< HEAD
-        $res = '' ;
-        if ($this->current != null) {
-            $this->current = null ;
-            $res .= $this->_endPart();
-        }
-=======
         $this->_lastPanelClosed = true;
         $res = '' ;
         $res .= $this->_cleanCurrent();
->>>>>>> panel-helper
         if ($title !== null) {
             $res .= $this->footer($title, $options) ;
         }
@@ -200,38 +162,6 @@ class BootstrapPanelHelper extends Helper {
     }
 
     protected function _cleanCurrent () {
-<<<<<<< HEAD
-        if ($this->current) {
-            $this->current = NULL ;
-            return $this->_endPart();
-        }
-        return '' ;
-    }
-
-    protected function _createHeader ($title, $options = [], $titleOptions = []) {
-        $options += [
-            '_title' => []
-        ];
-        if (empty($titleOptions))
-            $titleOptions = $options['_title'];
-        unset ($options['_title']);
-        $options = $this->addClass($options, 'panel-heading');
-        $class   = $options['class'];
-        unset ($options['class']);
-        $titleOptions = $this->addClass($titleOptions, 'panel-title');
-        return $this->_cleanCurrent().$this->Html->div($class,
-                                                       $this->Html->tag('h3', $title,
-                                                                        $titleOptions),
-                                                       $options
-        ) ;
-    }
-
-    protected function _createBody ($text, $options = []) {
-        $options = $this->addClass($options, 'panel-body');
-        $class   = $options['class'];
-        unset ($options['class']);
-        return $this->_cleanCurrent().$this->Html->div($class, $text, $options) ;
-=======
         $res = '';
         if ($this->current) {
             $res .= '</div>';
@@ -293,33 +223,11 @@ class BootstrapPanelHelper extends Helper {
             $this->current = 'body';
         }
         return $body;
->>>>>>> panel-helper
     }
 
     protected function _createFooter ($text = null, $options = []) {
         $options = $this->addClass($options, 'panel-footer');
-<<<<<<< HEAD
-        $class   = $options['class'];
-        unset ($options['class']);
-        return $this->_cleanCurrent().$this->Html->div($class, $text, $options) ;
-    }
-
-    protected function _startPart ($part, $options = []) {
-        $res = '' ;
-        if ($this->current != null) {
-            $res = $this->_endPart () ;
-        }
-        $this->current = $part ;
-        return $res.$this->Html->div('panel-'.$part.' '.$this->_extractOption('class',
-                                                                              $options, ''),
-                                     null, $options) ;
-    }
-
-    protected function _endPart () {
-        return '</div>' ;
-=======
         return $this->_cleanCurrent().$this->Html->tag('div', $text, $options) ;
->>>>>>> panel-helper
     }
 
     /**
@@ -327,11 +235,7 @@ class BootstrapPanelHelper extends Helper {
      * Create / Start the header. If $info is specified as a string, create and return the
      * whole header, otherwize only open the header.
      *
-<<<<<<< HEAD
-     * @param array|string $info If string, use as the modal title, otherwize works as $options.
-=======
      * @param array|string $info If string, use as the panel title, otherwize works as $options.
->>>>>>> panel-helper
      * @param array $options Options for the header div.
      *
      * Special option (if $info is string):
@@ -339,12 +243,6 @@ class BootstrapPanelHelper extends Helper {
      *
      **/
     public function header ($info = null, $options = []) {
-<<<<<<< HEAD
-        if (is_string($info)) {
-            return $this->_createHeader($info, $options) ;
-        }
-        return $this->_startPart('header', is_array($info) ? $info : $options) ;
-=======
         if (is_array($info)) {
             $options = $info;
             $info    = null;
@@ -353,7 +251,6 @@ class BootstrapPanelHelper extends Helper {
             'title' => true
         ];
         return $this->_createHeader($info, $options) ;
->>>>>>> panel-helper
     }
 
     /**
@@ -367,21 +264,11 @@ class BootstrapPanelHelper extends Helper {
      *
      **/
     public function body ($info = null, $options = []) {
-<<<<<<< HEAD
-        if (is_string($info)) {
-            if ($this->current != null) {
-                $this->_endPart() ;
-            }
-            return $this->_createBody($info, $options) ;
-        }
-        return $this->_startPart('body', is_array($info) ? $info : $options) ;
-=======
         if (is_array($info)) {
             $options = $info;
             $info    = null;
         }
         return $this->_createBody($info, $options);
->>>>>>> panel-helper
     }
 
     protected function _isAssociativeArray ($array) {
@@ -397,15 +284,11 @@ class BootstrapPanelHelper extends Helper {
      * @param array $options Options for the footer div.
      *
      **/
-<<<<<<< HEAD
-    public function footer ($text = "", $options = []) {
-=======
     public function footer ($text = null, $options = []) {
         if (is_array($text)) {
             $options = $text;
             $text    = null;
         }
->>>>>>> panel-helper
         return $this->_createFooter($text, $options) ;
     }
 
