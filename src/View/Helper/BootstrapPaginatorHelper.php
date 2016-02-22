@@ -83,7 +83,8 @@ class BootstrapPaginatorHelper extends PaginatorHelper {
         $defaults = [
             'before' => null, 'after' => null, 'model' => $this->defaultModel(),
             'modulus' => 8, 'first' => null, 'last' => null, 'url' => [],
-            'class' => '', 'size' => false
+            'prev' => null, 'next' => null,
+            'ellipsis' => true, 'class' => '', 'size' => false
         ];
         $options += $defaults;
 
@@ -119,7 +120,7 @@ class BootstrapPaginatorHelper extends PaginatorHelper {
 
         /* Previous and Next buttons (addition from standard PaginatorHelper). */
 
-        if (isset($options['prev'])) {
+        if ($options['prev']) {
             $title = $options['prev'] ;
             $opts  = [] ;
             if (is_array($title)) {
@@ -128,10 +129,10 @@ class BootstrapPaginatorHelper extends PaginatorHelper {
                 $opts  = $options['prev'] ;
             }
             $prev = $this->prev($title, $opts) ;
-            unset($options['prev']);
         }
+        unset($options['prev']);
 
-        if (isset($options['next'])) {
+        if ($options['next']) {
             $title = $options['next'] ;
             $opts  = [] ;
             if (is_array($title)) {
@@ -140,19 +141,21 @@ class BootstrapPaginatorHelper extends PaginatorHelper {
                 $opts  = $options['next'];
             }
             $next = $this->next($title, $opts);
-            unset($options['next']);
         }
+        unset($options['next']);
 
         /* Custom First and Last. */
 
-        $ellipsis = $templater->format('ellipsis', []);
+        $ellipsis = $options['ellipsis'];
+        unset($options['ellipsis']);
+        $ellipsis = $ellipsis ? $templater->format('ellipsis', []) : "";
         list($start, $end) = $this->_getNumbersStartAndEnd($params, $options);
 
-        if (isset($options['last'])) {
+        if ($options['last']) {
             $last = $this->_lastNumber($ellipsis, $params, $end, $options);
         }
 
-        if (isset($options['last'])) {
+        if ($options['last']) {
             $first = $this->_firstNumber($ellipsis, $params, $start, $options);
         }
 
@@ -174,13 +177,20 @@ class BootstrapPaginatorHelper extends PaginatorHelper {
     }
 
     public function prev ($title = '<< Previous', array $options = []) {
-        return $this->_easyIcon ('parent::prev', $title, $options);
+        return $this->_easyIcon('parent::prev', $title, $options);
     }
 
     public function next ($title = 'Next >>', array $options = []) {
-        return $this->_easyIcon ('parent::next', $title, $options);
+        return $this->_easyIcon('parent::next', $title, $options);
+    }
+    /*
+    public function first($first = '<< first', array $options = []) {
+        return $this->_easyIcon('parent::first', first, $options);
     }
 
+    public function last($last = 'last >>', array $options = []) {
+        return $this->_easyIcon('parent::last', $last, $options);
+        }*/
 
 }
 
