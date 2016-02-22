@@ -68,13 +68,14 @@ class BootstrapPanelHelper extends Helper {
         $this->_groupPanelOpen     = $options['open'];
         $this->_groupId = $options['id'];
         $options = $this->addClass($options, 'panel-group');
-        $class   = $options['class'];
-        unset($options['class'], $options['open'], $options['collapsible']);
-        return $this->Html->div($class, null, $options);
+        unset($options['open'], $options['collapsible']);
+        return $this->Html->tag('div', null, $options);
     }
 
     public function endGroup() {
         $this->_defaultCollapsible = false;
+        $this->_autoCloseOnCreate  = false;
+        $this->_groupId            = false;
         $out = '';
         if (!$this->_lastPanelClosed) {
             $out = $this->end();
@@ -117,9 +118,6 @@ class BootstrapPanelHelper extends Helper {
             $this->_panelCount++;
         }
 
-        $class   = $options['class'];
-        unset ($options['class']);
-
         $out = '';
 
         if ($this->_autoCloseOnCreate && !$this->_lastPanelClosed) {
@@ -130,13 +128,13 @@ class BootstrapPanelHelper extends Helper {
         /* Increment panel counter for the current group. */
         $this->_groupPanelCount++;
 
-        $out .= $this->Html->div($class, null, $options);
+        $out .= $this->Html->tag('div', null, $options);
         if (is_string($title) && $title) {
             $out .= $this->_createHeader($title, [
                 'title' => isset($options['title']) ? $options['title'] : true
             ]) ;
             if (!$nobody) {
-                $out .= $this->_startPart('body');
+                $out .= $this->_createBody();
             }
         }
 
@@ -166,8 +164,11 @@ class BootstrapPanelHelper extends Helper {
     protected function _cleanCurrent () {
         $res = '';
         if ($this->current) {
-            $res = $this->_endPart();
-            $this->current = NULL ;
+            $res .= '</div>';
+            if ($this->_collapsible && $this->current == 'body') {
+                $res .= '</div>';
+            }
+            $this->current = null ;
         }
         return $res;
     }
@@ -178,8 +179,6 @@ class BootstrapPanelHelper extends Helper {
         }
         unset ($options['title']);
         $options = $this->addClass($options, 'panel-heading');
-        $class   = $options['class'];
-        unset ($options['class']);
         if ($this->_collapsible) {
             $options += [
                 'role' => 'tab',
@@ -203,60 +202,32 @@ class BootstrapPanelHelper extends Helper {
             unset($titleOptions['tag']);
             $title = $titleOptions ? $this->Html->tag($tag, $title, $titleOptions) : $title;
         }
-        return $this->_cleanCurrent().$this->Html->div($class, $title, $options);
+        return $this->_cleanCurrent().$this->Html->tag('div', $title, $options);
     }
 
-    protected function _createBody ($text, $options = []) {
+    protected function _createBody ($text = null, $options = []) {
         $options = $this->addClass($options, 'panel-body');
-        $class   = $options['class'];
-        unset ($options['class']);
-        $body = $this->Html->div($class, $text, $options);
+        $body = $this->Html->tag('div', $text, $options);
         if ($this->_collapsible) {
             $open = ((is_int($this->_groupPanelOpen)
                      && $this->_groupPanelOpen == $this->_groupPanelCount)
                      || $this->_groupPanelOpen == $this->_bodyId) ? ' in' : '';
-            $body = $this->Html->div('panel-collapse collapse'.$open, $body, [
+            $body = $this->Html->div('panel-collapse collapse'.$open, $text ? $body : null, [
                 'role' => 'tabpanel',
                 'aria-labelledby' => $this->_headId,
                 'id' => $this->_bodyId
-            ]);
+            ]).($text ? '' : $body);
         }
-        return $this->_cleanCurrent().$body ;
+        $body = $this->_cleanCurrent().$body;
+        if (!$text) {
+            $this->current = 'body';
+        }
+        return $body;
     }
 
     protected function _createFooter ($text = null, $options = []) {
         $options = $this->addClass($options, 'panel-footer');
-        $class   = $options['class'];
-        unset ($options['class']);
-        return $this->_cleanCurrent().$this->Html->div($class, $text, $options) ;
-    }
-
-    protected function _startPart ($part, $options = []) {
-        $res = '' ;
-        if ($this->current != null) {
-            $res = $this->_endPart () ;
-        }
-        $this->current = $part ;
-        if ($this->_collapsible && $this->current == 'body') {
-            $open = ((is_int($this->_groupPanelOpen)
-                      && $this->_groupPanelOpen === $this->_groupPanelCount)
-                     || $this->_groupPanelOpen === $this->_bodyId) ? ' in' : '';
-            $res .= $this->Html->div('panel-collapse collapse'.$open, null, [
-                'role' => 'tabpanel',
-                'aria-labelledby' => $this->_headId,
-                'id' => $this->_bodyId
-            ]);
-        }
-        return $res.$this->Html->div('panel-'.$part.' '.$this->_extractOption('class',
-                                                                              $options, ''),
-                                     null, $options) ;
-    }
-
-    protected function _endPart () {
-        if ($this->_collapsible && $this->current == 'body') {
-            return '</div></div>';
-        }
-        return '</div>' ;
+        return $this->_cleanCurrent().$this->Html->tag('div', $text, $options) ;
     }
 
     /**
@@ -272,13 +243,14 @@ class BootstrapPanelHelper extends Helper {
      *
      **/
     public function header ($info = null, $options = []) {
+        if (is_array($info)) {
+            $options = $info;
+            $info    = null;
+        }
         $options += [
             'title' => true
         ];
-        if (is_string($info)) {
-            return $this->_createHeader($info, $options) ;
-        }
-        return $this->_startPart('header', is_array($info) ? $info : $options) ;
+        return $this->_createHeader($info, $options) ;
     }
 
     /**
@@ -292,13 +264,11 @@ class BootstrapPanelHelper extends Helper {
      *
      **/
     public function body ($info = null, $options = []) {
-        if (is_string($info)) {
-            if ($this->current != null) {
-                $this->_endPart() ;
-            }
-            return $this->_createBody($info, $options) ;
+        if (is_array($info)) {
+            $options = $info;
+            $info    = null;
         }
-        return $this->_startPart('body', is_array($info) ? $info : $options) ;
+        return $this->_createBody($info, $options);
     }
 
     protected function _isAssociativeArray ($array) {
@@ -315,10 +285,11 @@ class BootstrapPanelHelper extends Helper {
      *
      **/
     public function footer ($text = null, $options = []) {
-        if (is_string($text)) {
-            return $this->_createFooter($text, $options) ;
+        if (is_array($text)) {
+            $options = $text;
+            $text    = null;
         }
-        return $this->_startPart('footer', is_array($text) ? $text : $options);
+        return $this->_createFooter($text, $options) ;
     }
 
 }
