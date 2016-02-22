@@ -83,8 +83,7 @@ class BootstrapPaginatorHelper extends PaginatorHelper {
         $defaults = [
             'before' => null, 'after' => null, 'model' => $this->defaultModel(),
             'modulus' => 8, 'first' => null, 'last' => null, 'url' => [],
-            'prev' => null, 'next' => null,
-            'ellipsis' => true, 'class' => '', 'size' => false
+            'prev' => null, 'next' => null, 'class' => '', 'size' => false
         ];
         $options += $defaults;
 
@@ -146,21 +145,28 @@ class BootstrapPaginatorHelper extends PaginatorHelper {
 
         /* Custom First and Last. */
 
-        $ellipsis = $options['ellipsis'];
-        unset($options['ellipsis']);
-        $ellipsis = $ellipsis ? $templater->format('ellipsis', []) : "";
         list($start, $end) = $this->_getNumbersStartAndEnd($params, $options);
 
         if ($options['last']) {
+            $ellipsis = isset($options['ellipsis']) ?
+                      $options['ellipsis'] : is_int($options['last']);
+            $ellipsis = $ellipsis ? $templater->format('ellipsis', []) : '';
             $last = $this->_lastNumber($ellipsis, $params, $end, $options);
         }
 
-        if ($options['last']) {
+        if ($options['first']) {
+            $ellipsis = isset($options['ellipsis']) ?
+                      $options['ellipsis'] : is_int($options['first']);
+            $ellipsis = $ellipsis ? $templater->format('ellipsis', []) : '';
             $first = $this->_firstNumber($ellipsis, $params, $start, $options);
         }
 
-        $options['before'] = $options['before'].$first.$prev;
-        $options['after']  = $next.$last.$options['after'];
+        unset($options['ellipsis']);
+
+        $before = is_int($options['first']) ? $prev.$first : $first.$prev;
+        $after  = is_int($options['last']) ? $last.$next : $next.$last;
+        $options['before'] = $options['before'].$before;;
+        $options['after']  = $after.$options['after'];
         $options['first']  = $options['last'] = false;
 
         if ($options['modulus'] !== false && $params['pageCount'] > $options['modulus']) {
@@ -172,6 +178,7 @@ class BootstrapPaginatorHelper extends PaginatorHelper {
         if (isset($options['templates'])) {
             $templater->pop();
         }
+
 
         return $out;
     }
