@@ -4,7 +4,7 @@ CakePHP 3.x Helpers for Bootstrap
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
 [![Travis](https://img.shields.io/travis/Holt59/cakephp3-bootstrap-helpers.svg?style=flat-square)](https://travis-ci.org/Holt59/cakephp3-bootstrap-helpers)
 
-CakePHP 3.0 Helpers to generate HTML with @Twitter Boostrap style: `Html`, `Form`, `Modal` and `Paginator` helpers available!
+CakePHP 3.0 Helpers to generate HTML with @Twitter Boostrap style: `Flash`, `Form`, `Html`, `Modal`, `Navbar`, `Panel` and `Paginator` helpers available!
 
 How to... ?
 ===========
