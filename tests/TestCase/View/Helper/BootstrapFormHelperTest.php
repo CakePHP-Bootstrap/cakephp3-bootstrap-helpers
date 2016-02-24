@@ -402,7 +402,8 @@ class BootstrapFormHelperTest extends TestCase {
             '/div',
             '/div'
         ] ;
-        $this->_testInput ($expected, $fieldName, $options + ['prepend' => '$', 'append' => '.00']) ;
+        $this->_testInput ($expected, $fieldName,
+                           $options + ['prepend' => '$', 'append' => '.00']) ;
         // Test with prepend button
         $expected = [
             ['div' => [
@@ -431,7 +432,8 @@ class BootstrapFormHelperTest extends TestCase {
             '/div'
         ] ;
 
-        $this->_testInput ($expected, $fieldName, $options + ['prepend' => $this->Form->button('Go!')]) ;
+        $this->_testInput ($expected, $fieldName,
+                           $options + ['prepend' => $this->Form->button('Go!')]) ;
 
         // Test with append button
         $expected = [
@@ -460,7 +462,8 @@ class BootstrapFormHelperTest extends TestCase {
             '/div',
             '/div'
         ] ;
-        $this->_testInput ($expected, $fieldName, $options + ['append' => $this->Form->button('Go!')]) ;
+        $this->_testInput ($expected, $fieldName,
+                           $options + ['append' => $this->Form->button('Go!')]) ;
         // Test with append 2 button
         $expected = [
             ['div' => [
@@ -555,6 +558,37 @@ class BootstrapFormHelperTest extends TestCase {
                 $this->Form->Html->link('Link 3', '#')
             ])
         ]);
+    }
+
+    public function testInputTemplateVars () {
+        $fieldName = 'field' ;
+        // Add a template with the help placeholder.
+        $help = 'Some help text.';
+        $this->Form->templates([
+            'inputContainer' => '<div class="form-group {{type}}{{required}}">{{content}}<span>{{help}}</span></div>'
+        ]);
+        // Standard form
+        $this->_testInput ([
+            ['div' => [
+                'class' => 'form-group text'
+            ]],
+            ['label' => [
+                'class' => 'control-label',
+                'for'   => $fieldName
+            ]],
+            \Cake\Utility\Inflector::humanize($fieldName),
+            '/label',
+            ['input' => [
+                'type'  => 'text',
+                'class' => 'form-control',
+                'name'  => $fieldName,
+                'id'    => $fieldName
+            ]],
+            ['span' => true],
+            $help,
+            '/span',
+            '/div'
+        ], $fieldName, ['templateVars' => ['help' => $help]]) ;
     }
 
 }

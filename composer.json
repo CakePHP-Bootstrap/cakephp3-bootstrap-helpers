@@ -5,7 +5,7 @@
     "license": "Apache",
     "type": "cakephp-plugin",
     "require": {
-        "cakephp/cakephp": "~3.0"
+        "cakephp/cakephp": ">=3.2.3"
     },
     "require-dev": {
         "phpunit/phpunit": "*",
