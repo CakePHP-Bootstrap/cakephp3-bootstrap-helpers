@@ -42,6 +42,7 @@ class BootstrapModalHelper extends Helper {
      * Extra options (useless if $title not specified) :
      *     - close: Add close buttons to header (default true)
      *     - no-body: Do not open the body after the create (default false)
+     *     - size: Modal size (small, large or custom classes)
     **/
     public function create($title = null, $options = array()) {
 
@@ -72,7 +73,7 @@ class BootstrapModalHelper extends Helper {
             $size = 'modal-sm';
             break;
         default:
-            $size = '';
+            $size = $options['size'];
             break;
         }
         unset($options['size']);
