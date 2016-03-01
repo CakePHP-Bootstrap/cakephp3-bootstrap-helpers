@@ -393,18 +393,6 @@ class BootstrapFormHelper extends FormHelper {
         return parent::input($fieldName, $options) ;
     }
 
-    /**
-     * Generates an input element
-     *
-     * @param string $fieldName the field name
-     * @param array $options The options for the input element
-     * @return string The generated input element
-     */
-    protected function _getInput($fieldName, $options) {
-        unset($options['_data']);
-        return parent::_getInput($fieldName, $options);
-    }
-
     protected function _getDatetimeTemplate ($fields, $options) {
         $inputs = [] ;
         foreach ($fields as $field => $in) {
