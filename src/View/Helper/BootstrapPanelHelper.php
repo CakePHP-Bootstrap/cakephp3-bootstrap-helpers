@@ -26,9 +26,13 @@ use Cake\View\Helper;
 
 class BootstrapPanelHelper extends Helper {
 
-    use BootstrapTrait ;
+    use BootstrapTrait;
 
-    public $helpers = ['Html'];
+    public $helpers = [
+        'Html' => [
+            'className' => 'Bootstrap.BootstrapHtml'
+        ]
+    ];
 
     public $current = NULL ;
 
@@ -96,6 +100,7 @@ class BootstrapPanelHelper extends Helper {
     public function create($title = null, $options = []) {
 
         if (is_array($title)) {
+            $title   = null;
             $options = $title;
         }
 
@@ -178,6 +183,7 @@ class BootstrapPanelHelper extends Helper {
             $titleOptions = $options['title'] ;
         }
         unset ($options['title']);
+        $title   = $this->_makeIcon($title);
         $options = $this->addClass($options, 'panel-heading');
         if ($this->_collapsible) {
             $options += [
