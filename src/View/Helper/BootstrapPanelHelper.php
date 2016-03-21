@@ -100,8 +100,8 @@ class BootstrapPanelHelper extends Helper {
     public function create($title = null, $options = []) {
 
         if (is_array($title)) {
-            $title   = null;
             $options = $title;
+            $title   = null;
         }
 
         $options += [
