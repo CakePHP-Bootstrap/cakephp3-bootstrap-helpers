@@ -201,18 +201,22 @@ class BootstrapPanelHelper extends Helper {
                 'aria-controls' => '#'.$this->_bodyId,
                 'escape'        => $options['escape']
             ]);
+            $options['escape'] = false; // Should not escape after
         }
         if ($titleOptions !== false) {
             if (!is_array($titleOptions)) {
                 $titleOptions = [];
             }
-            $titleOptions += ['tag' => 'h4'];
+            $titleOptions += [
+                'tag'    => 'h4',
+                'escape' => $options['escape']
+            ];
             $titleOptions = $this->addClass($titleOptions, 'panel-title');
             $tag = $titleOptions['tag'];
             unset($titleOptions['tag']);
-            $title = $titleOptions ? $this->Html->tag($tag, $title, $titleOptions) : $title;
             $title = $this->Html->tag($tag, $title, $titleOptions);
         }
+        unset($options['escape']);
         return $this->_cleanCurrent().$this->Html->tag('div', $title, $options);
     }
 
