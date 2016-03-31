@@ -183,7 +183,10 @@ class BootstrapPanelHelper extends Helper {
             $titleOptions = $options['title'] ;
         }
         unset ($options['title']);
-        $title   = $this->_makeIcon($title);
+        $title   = $this->_makeIcon($title, $converted);
+        $options += [
+            'escape' => !$converted
+        ];
         $options = $this->addClass($options, 'panel-heading');
         if ($this->_collapsible) {
             $options += [
@@ -195,7 +198,8 @@ class BootstrapPanelHelper extends Helper {
                 'data-toggle'   => 'collapse',
                 'data-parent'   => $this->_groupId ? '#'.$this->_groupId : false,
                 'aria-expanded' => true,
-                'aria-controls' => '#'.$this->_bodyId
+                'aria-controls' => '#'.$this->_bodyId,
+                'escape'        => $options['escape']
             ]);
         }
         if ($titleOptions !== false) {
