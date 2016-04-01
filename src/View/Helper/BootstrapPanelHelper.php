@@ -225,8 +225,8 @@ class BootstrapPanelHelper extends Helper {
         $body = $this->Html->tag('div', $text, $options);
         if ($this->_collapsible) {
             $open = ((is_int($this->_groupPanelOpen)
-                     && $this->_groupPanelOpen == $this->_groupPanelCount)
-                     || $this->_groupPanelOpen == $this->_bodyId) ? ' in' : '';
+                     && $this->_groupPanelOpen === $this->_groupPanelCount)
+                     || $this->_groupPanelOpen === $this->_bodyId) ? ' in' : '';
             $body = $this->Html->div('panel-collapse collapse'.$open, $text ? $body : null, [
                 'role' => 'tabpanel',
                 'aria-labelledby' => $this->_headId,
