@@ -50,7 +50,10 @@ class BootstrapPanelHelper extends Helper {
     protected $_groupId            = false;
 
     protected $_groupPanelCount = 0;
-    protected $_groupPanelOpen  = 0;
+    protected $_groupPanelOpen  = false;
+
+    /* Attribute set to true when in group. */
+    protected $_groupInGroup = false;
 
     protected $_lastPanelClosed    = true;
     protected $_autoCloseOnCreate  = false;
@@ -59,12 +62,12 @@ class BootstrapPanelHelper extends Helper {
 
     public function startGroup($options = []) {
         $options += [
-            'class' => '',
-            'role'  => 'tablist',
+            'class'                => '',
+            'role'                 => 'tablist',
             'aria-multiselectable' => true,
-            'id'   => 'panelGroup-'.(++$this->_groupCount),
-            'collapsible' => true,
-            'open' => 0
+            'id'                   => 'panelGroup-'.(++$this->_groupCount),
+            'collapsible'          => true,
+            'open'                 => 0
         ];
         $this->config('saved.collapsible', $this->config('collapsible'));
         $this->config('collapsible', $options['collapsible']);
@@ -72,7 +75,8 @@ class BootstrapPanelHelper extends Helper {
         $this->_lastPanelClosed    = true;
         $this->_groupPanelCount    = -1;
         $this->_groupPanelOpen     = $options['open'];
-        $this->_groupId = $options['id'];
+        $this->_groupId            = $options['id'];
+        $this->_groupInGroup       = true;
         $options = $this->addClass($options, 'panel-group');
         unset($options['open'], $options['collapsible']);
         return $this->Html->tag('div', null, $options);
@@ -82,6 +86,8 @@ class BootstrapPanelHelper extends Helper {
         $this->config('collapsible', $this->config('saved.collapsible'));
         $this->_autoCloseOnCreate  = false;
         $this->_groupId            = false;
+        $this->_groupPanelOpen     = false;
+        $this->_groupInGroup       = false;
         $out = '';
         if (!$this->_lastPanelClosed) {
             $out = $this->end();
@@ -109,13 +115,16 @@ class BootstrapPanelHelper extends Helper {
         $options += [
             'no-body'     => false,
             'type'        => 'default',
-            'collapsible' => $this->config('collapsible')
+            'collapsible' => $this->config('collapsible'),
+            'open'        => !$this->_groupInGroup
         ];
 
         $nobody = $options['no-body'];
         $type   = $options['type'];
+        $open   = $options['open'];
         $this->_collapsible = $options['collapsible'];
-        unset ($options['no-body'], $options['collapsible'], $options['type']);
+        unset ($options['no-body'], $options['collapsible'],
+               $options['type'], $options['open']);
 
         $options = $this->addClass($options, ['panel', 'panel-'.$type]);
 
@@ -123,6 +132,9 @@ class BootstrapPanelHelper extends Helper {
             $this->_headId = 'heading-'.($this->_panelCount);
             $this->_bodyId = 'collapse-'.($this->_panelCount);
             $this->_panelCount++;
+            if ($open) {
+                $this->_groupPanelOpen = $this->_bodyId;
+            }
         }
 
         $out = '';
