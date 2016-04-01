@@ -81,7 +81,17 @@ class BootstrapFormHelper extends FormHelper {
             'radioContainer' => '{{h_radioContainer_start}}<div class="form-group">{{content}}</div>{{h_radioContainer_end}}',
             'textarea' => '<textarea name="{{name}}" class="form-control{{attrs.class}}" {{attrs}}>{{value}}</textarea>',
             'submitContainer' => '<div class="form-group">{{h_submitContainer_start}}{{content}}{{h_submitContainer_end}}</div>',
-        ]
+        ],
+        'templateClass' => 'Bootstrap\View\BootstrapStringTemplate',
+        'buttons' => [
+            'type' => 'default'
+        ],
+        'columns' => [
+            'label' => 2,
+            'input' => 10,
+            'error' => 0
+        ],
+        'useCustomFileInput' => false
     ];
 
     /**
@@ -105,52 +115,9 @@ class BootstrapFormHelper extends FormHelper {
 
     public $horizontal = false ;
     public $inline = false ;
-    public $colSize ;
-
-    /**
-     * Use custom file inputs (bootstrap style, with javascript).
-     *
-     * @var boolean
-     */
-    protected $_customFileInput = false ;
-
-    /**
-     * Default type for buttons.
-     *
-     * @var string
-     */
-    protected $_defaultButtonType = 'default' ;
-
-    /**
-     * Default colums size.
-     *
-     * @var array
-     */
-    protected $_defaultColumnSize = [
-        'label' => 2,
-        'input' => 10,
-        'error' => 0
-    ];
 
     private $buttonTypes = ['default', 'primary', 'info', 'success', 'warning', 'danger', 'link'] ;
     private $buttonSizes = ['xs', 'sm', 'lg'] ;
-
-    public function __construct (\Cake\View\View $view, array $config = []) {
-        if (isset($config['buttons'])) {
-            if (isset($config['buttons']['type'])) {
-                $this->_defaultButtonType = $config['buttons']['type'] ;
-            }
-        }
-        if (isset($config['columns'])) {
-            $this->_defaultColumnSize = $config['columns'] ;
-        }
-        if (isset($config['useCustomFileInput'])) {
-            $this->_customFileInput = $config['useCustomFileInput'];
-        }
-        $this->colSize = $this->_defaultColumnSize ;
-        $this->_defaultConfig['templateClass'] = 'Bootstrap\View\BootstrapStringTemplate' ;
-        parent::__construct($view, $config);
-    }
 
     /**
      *
@@ -252,7 +219,7 @@ class BootstrapFormHelper extends FormHelper {
             unset($options['cols']) ;
         }
         else {
-            $this->colSize = $this->_defaultColumnSize ;
+            $this->colSize = $this->config('columns') ;
         }
         $this->horizontal = $this->_extractOption('horizontal', $options, false);
         unset($options['horizontal']);
@@ -423,7 +390,7 @@ class BootstrapFormHelper extends FormHelper {
      * @link http://book.cakephp.org/3.0/en/views/helpers/form.html#creating-file-inputs
      */
     public function file($fieldName, array $options = []) {
-        if (!$this->_customFileInput || (isset($options['default']) && $options['default'])) {
+        if (!$this->config('useCustomFileInput') || (isset($options['default']) && $options['default'])) {
             return parent::file($fieldName, $options);
         }
         if (!isset($options['id'])) {
