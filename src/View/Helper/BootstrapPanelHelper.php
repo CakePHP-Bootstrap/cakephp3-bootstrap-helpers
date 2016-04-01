@@ -34,15 +34,16 @@ class BootstrapPanelHelper extends Helper {
         ]
     ];
 
+    public $_defaultConfig = [
+        'collapsible' => false
+    ];
+
     public $current = NULL ;
 
     /* Protected attributes used to generate ID for collapsible panels. */
     protected $_panelCount         = 0;
     protected $_bodyId      = null;
     protected $_headId      = null;
-
-    /* Default value for "collapsible" option. */
-    protected $_defaultCollapsible = false;
 
     /* Protected attribute used to generate group ID. */
     protected $_groupCount         = 0;
@@ -65,7 +66,8 @@ class BootstrapPanelHelper extends Helper {
             'collapsible' => true,
             'open' => 0
         ];
-        $this->_defaultCollapsible = $options['collapsible'];
+        $this->config('saved.collapsible', $this->config('collapsible'));
+        $this->config('collapsible', $options['collapsible']);
         $this->_autoCloseOnCreate  = true;
         $this->_lastPanelClosed    = true;
         $this->_groupPanelCount    = -1;
@@ -77,7 +79,7 @@ class BootstrapPanelHelper extends Helper {
     }
 
     public function endGroup() {
-        $this->_defaultCollapsible = false;
+        $this->config('collapsible', $this->config('saved.collapsible'));
         $this->_autoCloseOnCreate  = false;
         $this->_groupId            = false;
         $out = '';
@@ -107,7 +109,7 @@ class BootstrapPanelHelper extends Helper {
         $options += [
             'no-body'     => false,
             'type'        => 'default',
-            'collapsible' => $this->_defaultCollapsible
+            'collapsible' => $this->config('collapsible')
         ];
 
         $nobody = $options['no-body'];
