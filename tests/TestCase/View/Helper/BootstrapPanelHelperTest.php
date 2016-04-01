@@ -226,117 +226,99 @@ class BootstrapPanelHelperTest extends TestCase {
 
     }
 
-                          /*
-                            public function testBody () {
-        $content = 'Body';
-        $extraclass = 'my-extra-class';
-        // Test with HTML
-        $result = $this->Modal->body($content);
-        $this->assertHtml([
+    public function testGroup () {
+
+        $panelHeading = 'This is a panel heading';
+        $panelContent = 'A bit of HTML code inside!';
+
+        $result = '';
+        $result .= $this->Panel->startGroup();
+        $result .= $this->Panel->create($panelHeading);
+        $result .= $panelContent;
+        $result .= $this->Panel->create($panelHeading);
+        $result .= $panelContent;
+        $result .= $this->Panel->create($panelHeading);
+        $result .= $panelContent;
+        $result .= $this->Panel->endGroup();
+        $result .= $this->Panel->create($panelHeading);
+        $result .= $panelContent;
+        $result .= $this->Panel->end();
+
+        $expected = [
             ['div' => [
-                'class' => 'modal-body'
+                'id'                   => 'panelGroup-1',
+                'role'                 => 'tablist',
+                'aria-multiselectable' => true,
+                'class'                => 'panel-group'
             ]],
-            $content,
-            '/div'
-        ], $result);
-        // Test option
-        $result = $this->Modal->body($content, ['close' => false, 'class' => $extraclass]);
-        $this->assertHtml([
+        ];
+
+        for ($i = 0; $i < 3; ++$i) {
+            $expected = array_merge($expected, [
+                ['div' => [
+                    'class' => 'panel panel-default'
+                ]],
+                ['div' => [
+                    'role'  => 'tab',
+                    'id'    => 'heading-'.$i,
+                    'class' => 'panel-heading'
+                ]],
+                ['h4' => [
+                    'class' => 'panel-title'
+                ]],
+                ['a' => [
+                    'href'          => '#collapse-'.$i,
+                    'data-toggle'   => 'collapse',
+                    'data-parent'   => '#panelGroup-1',
+                    'aria-expanded' => true,
+                    'aria-controls' => '#collapse-'.$i
+                ]],
+                $panelHeading,
+                '/a',
+                '/h4',
+                '/div',
+                ['div' => [
+                    'id'              => 'collapse-'.$i,
+                    'role'            => 'tabpanel',
+                    'aria-labelledby' => 'heading-'.$i,
+                    'class'           => 'panel-collapse collapse'.($i ? '' : ' in'),
+
+                ]],
+                ['div' => [
+                    'class' => 'panel-body'
+                ]],
+                $panelContent,
+                '/div',
+                '/div',
+                '/div'
+            ]);
+        }
+
+        $expected = array_merge($expected, ['/div']);
+
+        $expected = array_merge($expected, [
             ['div' => [
-                'class' => $extraclass.' modal-body'
+                'class' => 'panel panel-default'
             ]],
-            $content,
-            '/div'
-        ], $result);
-        // Test null first
-        $result = $this->Modal->body(null);
-        $this->assertHtml([
             ['div' => [
-                'class' => 'modal-body'
-            ]]
-        ], $result);
-        // Test option first
-        $this->Modal->create();
-        $result = $this->Modal->body(['class' => $extraclass]);
-        $this->assertHtml([
-            ['div' => [
-                'class' => $extraclass.' modal-body'
-            ]]
-        ], $result);
-        // Test aut close
-        $this->Modal->create();
-        $this->Modal->header(); // Unclosed part
-        $result = $this->Modal->body(['class' => $extraclass]);
-        $this->assertHtml([
+                'class' => 'panel-heading'
+            ]],
+            ['h4' => [
+                'class' => 'panel-title'
+            ]],
+            $panelHeading,
+            '/h4',
             '/div',
             ['div' => [
-                'class' => $extraclass.' modal-body'
-            ]]
-        ], $result);
-    }
-
-    public function testFooter () {
-        $content = 'Footer';
-        $extraclass = 'my-extra-class';
-        // Test with HTML
-        $result = $this->Modal->footer($content);
-        $this->assertHtml([
-            ['div' => [
-                'class' => 'modal-footer'
+                'class' => 'panel-body'
             ]],
-            $content,
-            '/div'
-        ], $result);
-        // Test with Array
-        $result = $this->Modal->footer([$content, $content], ['class' => $extraclass]);
-        $this->assertHtml([
-            ['div' => [
-                'class' => $extraclass.' modal-footer'
-            ]],
-            $content,
-            $content,
-            '/div'
-        ], $result);
-        // Test with null as first arg
-        $result = $this->Modal->footer(null, ['class' => $extraclass]);
-        $this->assertHtml([
-            ['div' => [
-                'class' => $extraclass.' modal-footer'
-            ]]
-        ], $result);
-        // Test with Options as first arg
-        $this->Modal->create();
-        $result = $this->Modal->footer(['class' => $extraclass]);
-        $this->assertHtml([
-            ['div' => [
-                'class' => $extraclass.' modal-footer'
-            ]]
-        ], $result);
-        // Test with automatic close
-        $this->Modal->create($content);
-        $result = $this->Modal->footer();
-        $this->assertHtml([
+            $panelContent,
             '/div',
-            ['div' => [
-                'class' => 'modal-footer'
-            ]]
-        ], $result);
-    }
+            '/div'
+        ]);
 
-    public function testEnd() {
-        $result = $this->Modal->end();
-        // Standard close
-        $this->assertHtml([
-            '/div', '/div', '/div'
-        ], $result);
-        // Close open part
-        $this->Modal->create('Title'); // Create modal with open title
-        $result = $this->Modal->end();
-        $this->assertHtml([
-            '/div', '/div', '/div', '/div'
-        ], $result);
-    }
-    */
+        $this->assertHtml($expected, $result);
 
+    }
 
 }
