@@ -1,24 +1,24 @@
 <?php
 
 /**
-* Bootstrap Modal Helper
-*
-*
-* PHP 5
-*
-*  Licensed under the Apache License, Version 2.0 (the "License");
-*  you may not use this file except in compliance with the License.
-*  You may obtain a copy of the License at
-*
-*      http://www.apache.org/licenses/LICENSE-2.0
-*
-*
-* @copyright Copyright (c) Mikaël Capelle (http://mikael-capelle.fr)
-* @link http://mikael-capelle.fr
-* @package app.View.Helper
-* @since Apache v2
-* @license http://www.apache.org/licenses/LICENSE-2.0
-*/
+ * Bootstrap Modal Helper
+ *
+ *
+ * PHP 5
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *
+ * @copyright Copyright (c) Mikaël Capelle (http://mikael-capelle.fr)
+ * @link http://mikael-capelle.fr
+ * @package app.View.Helper
+ * @since Apache v2
+ * @license http://www.apache.org/licenses/LICENSE-2.0
+ */
 
 namespace Bootstrap\View\Helper;
 
@@ -45,7 +45,7 @@ class BootstrapModalHelper extends Helper {
      *     - close: Add close buttons to header (default true)
      *     - no-body: Do not open the body after the create (default false)
      *     - size: Modal size (small, large or custom classes)
-    **/
+     **/
     public function create($title = null, $options = []) {
 
         if (is_array($title)) {
@@ -115,7 +115,7 @@ class BootstrapModalHelper extends Helper {
      * @param array|null $buttons
      * @param array $options
      *
-    **/
+     **/
     public function end ($buttons = NULL, $options = []) {
         $res = $this->_cleanCurrent();
         if ($buttons !== null) {
@@ -184,9 +184,9 @@ class BootstrapModalHelper extends Helper {
 
         $content = '';
         if (!$buttons && $close) {
-                $content .= '<button type="button" class="btn btn-default" data-dismiss="modal">'
-                         .__('Close')
-                         .'</button>' ;
+            $content .= '<button type="button" class="btn btn-default" data-dismiss="modal">'
+                     .__('Close')
+                     .'</button>' ;
         }
         $content .= $buttons;
 
@@ -205,7 +205,7 @@ class BootstrapModalHelper extends Helper {
      * Special option (if $info is string):
      *     - close: Add the 'close' button in the header (default true).
      *
-    **/
+     **/
     public function header ($info = null, $options = []) {
         if (is_array($info)) {
             $options = $info;
@@ -223,7 +223,7 @@ class BootstrapModalHelper extends Helper {
      * @param array $options Options for the footer div.
      *
      *
-    **/
+     **/
     public function body ($info = null, $options = []) {
         if (is_array($info)) {
             $options = $info;
@@ -244,7 +244,7 @@ class BootstrapModalHelper extends Helper {
      * Special option (if $buttons is NOT NULL but empty):
      *     - close: Add the 'close' button to the footer (default true).
      *
-    **/
+     **/
     public function footer ($buttons = null, $options = []) {
         if (is_array($buttons)) {
             if (!empty($buttons) && $this->_isAssociativeArray($buttons)) {

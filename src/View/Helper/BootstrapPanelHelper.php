@@ -1,24 +1,24 @@
 <?php
 
 /**
-* Bootstrap Modal Helper
-*
-*
-* PHP 5
-*
-*  Licensed under the Apache License, Version 2.0 (the "License");
-*  you may not use this file except in compliance with the License.
-*  You may obtain a copy of the License at
-*
-*      http://www.apache.org/licenses/LICENSE-2.0
-*
-*
-* @copyright Copyright (c) Mikaël Capelle (http://mikael-capelle.fr)
-* @link http://mikael-capelle.fr
-* @package app.View.Helper
-* @since Apache v2
-* @license http://www.apache.org/licenses/LICENSE-2.0
-*/
+ * Bootstrap Modal Helper
+ *
+ *
+ * PHP 5
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *
+ * @copyright Copyright (c) Mikaël Capelle (http://mikael-capelle.fr)
+ * @link http://mikael-capelle.fr
+ * @package app.View.Helper
+ * @since Apache v2
+ * @license http://www.apache.org/licenses/LICENSE-2.0
+ */
 
 namespace Bootstrap\View\Helper;
 
@@ -239,7 +239,7 @@ class BootstrapPanelHelper extends Helper {
         $body = $this->Html->tag('div', $text, $options);
         if ($this->_collapsible) {
             $open = ((is_int($this->_groupPanelOpen)
-                     && $this->_groupPanelOpen === $this->_groupPanelCount)
+                      && $this->_groupPanelOpen === $this->_groupPanelCount)
                      || $this->_groupPanelOpen === $this->_bodyId) ? ' in' : '';
             $body = $this->Html->div('panel-collapse collapse'.$open, $text ? $body : null, [
                 'role' => 'tabpanel',

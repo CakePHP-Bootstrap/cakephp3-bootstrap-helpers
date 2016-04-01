@@ -1,24 +1,24 @@
 <?php
 
 /**
-* Bootstrap Html Helper
-*
-*
-* PHP 5
-*
-*  Licensed under the Apache License, Version 2.0 (the "License");
-*  you may not use this file except in compliance with the License.
-*  You may obtain a copy of the License at
-*
-*      http://www.apache.org/licenses/LICENSE-2.0
-*
-*
-* @copyright Copyright (c) Mikaël Capelle (http://mikael-capelle.fr)
-* @link http://mikael-capelle.fr
-* @package app.View.Helper
-* @since Apache v2
-* @license http://www.apache.org/licenses/LICENSE-2.0
-*/
+ * Bootstrap Html Helper
+ *
+ *
+ * PHP 5
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *
+ * @copyright Copyright (c) Mikaël Capelle (http://mikael-capelle.fr)
+ * @link http://mikael-capelle.fr
+ * @package app.View.Helper
+ * @since Apache v2
+ * @license http://www.apache.org/licenses/LICENSE-2.0
+ */
 
 namespace Bootstrap\View\Helper;
 
@@ -111,7 +111,7 @@ class BootstrapHtmlHelper extends HtmlHelper {
      * Extra options
      *  - type The type of the label (useless if $type specified)
      *
-    **/
+     **/
     public function label ($text, $type = 'default', $options = []) {
         if (is_string($type)) {
             $options['type'] = $type ;
@@ -120,7 +120,7 @@ class BootstrapHtmlHelper extends HtmlHelper {
             $options = $type ;
         }
         $type = $this->_extractType($options, 'type', $default = 'default',
-                    array('default', 'primary', 'success', 'warning', 'info', 'danger')) ;
+                                    array('default', 'primary', 'success', 'warning', 'info', 'danger')) ;
         unset ($options['type']) ;
         $options = $this->addClass($options, 'label') ;
         $options = $this->addClass($options, 'label-'.$type) ;
@@ -135,7 +135,7 @@ class BootstrapHtmlHelper extends HtmlHelper {
      * @param options Options for span
      *
      *
-    **/
+     **/
     public function badge ($text, $options = []) {
         $options = $this->addClass($options, 'badge') ;
         return $this->tag('span', $text, $options) ;
@@ -149,8 +149,8 @@ class BootstrapHtmlHelper extends HtmlHelper {
      * @param $startText Text to insert before list
      *
      * Unusable options:
-     * 	- Separator
-    **/
+     *      - Separator
+     **/
     public function getCrumbList(array $options = [], $startText = false) {
         $options['separator'] = '' ;
         $options = $this->addClass($options, 'breadcrumb') ;
@@ -169,10 +169,10 @@ class BootstrapHtmlHelper extends HtmlHelper {
      * is useless, and the label type can be specified in the $options array).
      *
      * Available BootstrapHtml options:
-     * 	- type: string, type of alert (default, error, info, success ; useless if
+     *      - type: string, type of alert (default, error, info, success ; useless if
      *    $type is specified)
      *
-    **/
+     **/
     public function alert ($text, $type = 'warning', $options = []) {
         if (is_string($type)) {
             $options['type'] = $type ;
@@ -197,8 +197,8 @@ class BootstrapHtmlHelper extends HtmlHelper {
      * Create a Twitter Bootstrap style progress bar.
      *
      * @param $widths
-     * 	- The width (in %) of the bar (style primary, without display)
-     * 	- An array of bar, with (for each bar) :
+     *      - The width (in %) of the bar (style primary, without display)
+     *      - An array of bar, with (for each bar) :
      *        - width (only field required)
      *        - type (primary, info, danger, success, warning, default is primary)
      *        - min (integer, default 0)
@@ -210,10 +210,10 @@ class BootstrapHtmlHelper extends HtmlHelper {
      * specified above.
      *
      * Available BootstrapHtml options:
-     * 	- striped: boolean, specify if progress bar should be striped
-     * 	- active: boolean, specify if progress bar should be active
+     *      - striped: boolean, specify if progress bar should be striped
+     *      - active: boolean, specify if progress bar should be active
      *
-    **/
+     **/
     public function progress ($widths, $options = []) {
         $striped = $this->_extractOption('striped', $options, false) || in_array('striped', $options);
         unset($options['striped']) ;

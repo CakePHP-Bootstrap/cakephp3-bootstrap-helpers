@@ -1,24 +1,24 @@
 <?php
 
 /**
-* Bootstrap Navbar Helper
-*
-*
-* PHP 5
-*
-*  Licensed under the Apache License, Version 2.0 (the "License");
-*  you may not use this file except in compliance with the License.
-*  You may obtain a copy of the License at
-*
-*      http://www.apache.org/licenses/LICENSE-2.0
-*
-*
-* @copyright Copyright (c) Mikaël Capelle (http://mikael-capelle.fr)
-* @link http://mikael-capelle.fr
-* @package app.View.Helper
-* @since Apache v2
-* @license http://www.apache.org/licenses/LICENSE-2.0
-*/
+ * Bootstrap Navbar Helper
+ *
+ *
+ * PHP 5
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *
+ * @copyright Copyright (c) Mikaël Capelle (http://mikael-capelle.fr)
+ * @link http://mikael-capelle.fr
+ * @package app.View.Helper
+ * @since Apache v2
+ * @license http://www.apache.org/licenses/LICENSE-2.0
+ */
 
 namespace Bootstrap\View\Helper;
 
@@ -70,7 +70,7 @@ class BootstrapNavbarHelper extends Helper {
      * @param string|array $class The class name being added.
      * @param string $key the key to use for class.
      * @return array Array of options with $key set.
-    **/
+     **/
     public function addClass(array $options = [], $class = null, $key = 'class') {
         if (is_array($class)) {
             $class = implode(' ', array_unique(array_map('trim', $class))) ;
@@ -104,7 +104,7 @@ class BootstrapNavbarHelper extends Helper {
      *  - inverse: false, true
      *  - fluid: false, true
      *
-    **/
+     **/
     public function create ($brand, $options = []) {
         $this->_fixed = $this->_extractOption('fixed', $options, false) ;
         unset($options['fixed']) ;
@@ -133,18 +133,18 @@ class BootstrapNavbarHelper extends Helper {
         $rightOpen = '' ;
         if ($this->_responsive) {
             $toggleButton = $this->Html->tag('button',
-                implode('', array(
-                    $this->Html->tag('span', __('Toggle navigation'), array('class' => 'sr-only')),
-                    $this->Html->tag('span', '', array('class' => 'icon-bar')),
-                    $this->Html->tag('span', '', array('class' => 'icon-bar')),
-                    $this->Html->tag('span', '', array('class' => 'icon-bar'))
-                )),
-                array(
-                    'type' => 'button',
-                    'class' => 'navbar-toggle collapsed',
-                    'data-toggle' => 'collapse',
-                    'data-target' => '.navbar-collapse'
-                )
+                                             implode('', array(
+                                                 $this->Html->tag('span', __('Toggle navigation'), array('class' => 'sr-only')),
+                                                 $this->Html->tag('span', '', array('class' => 'icon-bar')),
+                                                 $this->Html->tag('span', '', array('class' => 'icon-bar')),
+                                                 $this->Html->tag('span', '', array('class' => 'icon-bar'))
+                                             )),
+                                             array(
+                                                 'type' => 'button',
+                                                 'class' => 'navbar-toggle collapsed',
+                                                 'data-toggle' => 'collapse',
+                                                 'data-target' => '.navbar-collapse'
+                                             )
             ) ;
             $rightOpen = $this->Html->tag('div', null, ['class' => 'navbar-collapse collapse']) ;
         }
@@ -181,7 +181,7 @@ class BootstrapNavbarHelper extends Helper {
      * @param options     Options passed to the tag method (for the li tag)
      * @param linkOptions Options passed to the link method
      *
-    **/
+     **/
     public function link ($name, $url = '', array $options = [], array $linkOptions = []) {
         if ($this->_level == 0 && $this->autoButtonLink) {
             $options = $this->addClass ($options, 'btn btn-default navbar-btn') ;
@@ -200,7 +200,7 @@ class BootstrapNavbarHelper extends Helper {
      * @param name    Text of the button.
      * @param options Options sent to the BootstrapFormHelper::button method.
      *
-    **/
+     **/
     public function button ($name, array $options = []) {
         $options = $this->addClass ($options, 'navbar-btn') ;
         return $this->Form->button ($name, $options) ;
@@ -212,7 +212,7 @@ class BootstrapNavbarHelper extends Helper {
      *
      * @param options Options sent to the tag method.
      *
-    **/
+     **/
     public function divider (array $options = []) {
         $options = $this->addClass ($options, 'divider') ;
         $options['role'] = 'separator' ;
@@ -226,7 +226,7 @@ class BootstrapNavbarHelper extends Helper {
      * @param name    Title of the header.
      * @param options Options sent to the tag method.
      *
-    **/
+     **/
     public function header ($name, array $options = []) {
         $options = $this->addClass ($options, 'dropdown-header') ;
         return $this->Html->tag('li', $name, $options) ;
@@ -242,7 +242,7 @@ class BootstrapNavbarHelper extends Helper {
      * Extra options:
      *  - tag The HTML tag to use (default 'p')
      *
-    **/
+     **/
     public function text ($text, $options = []) {
         $tag     = $this->_extractOption ('tag', $options, 'p') ;
         $options = $this->addClass ($options, 'navbar-text') ;
@@ -267,7 +267,7 @@ class BootstrapNavbarHelper extends Helper {
      * @param model   Model for BootstrapFormHelper::searchForm method.
      * @param options Options for BootstrapFormHelper::searchForm method.
      *
-    **/
+     **/
     public function searchForm ($model = null, $options = []) {
         $align = $this->_extractOption ('align', $options, 'left') ;
         unset ($options['align']) ;
@@ -284,7 +284,7 @@ class BootstrapNavbarHelper extends Helper {
      * @param url A URL for the menu (default null)
      * @param options Options passed to the tag method (+ extra options, see above)
      *
-    **/
+     **/
     public function beginMenu ($name = null, $url = null, $options = [],
                                $linkOptions = [], $listOptions = []) {
         $res = '';
@@ -317,7 +317,7 @@ class BootstrapNavbarHelper extends Helper {
      *
      * End a menu.
      *
-    **/
+     **/
     public function endMenu () {
         $this->_level -= 1 ;
         return '</ul>'.($this->_level == 1 ? '</li>' : '') ;
@@ -327,7 +327,7 @@ class BootstrapNavbarHelper extends Helper {
      *
      * End a navbar.
      *
-    **/
+     **/
     public function end () {
         $res = '</div></div>' ;
         if ($this->_responsive) {

@@ -1,24 +1,24 @@
 <?php
-    
+
 /**
-* Bootstrap Flash Helper
-*
-*
-* PHP 5
-*
-*  Licensed under the Apache License, Version 2.0 (the "License");
-*  you may not use this file except in compliance with the License.
-*  You may obtain a copy of the License at
-*
-*      http://www.apache.org/licenses/LICENSE-2.0
-*
-*
-* @copyright Copyright (c) Mikaël Capelle (http://mikael-capelle.fr)
-* @link http://mikael-capelle.fr
-* @package app.View.Helper
-* @since Apache v2
-* @license http://www.apache.org/licenses/LICENSE-2.0
-*/
+ * Bootstrap Flash Helper
+ *
+ *
+ * PHP 5
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *
+ * @copyright Copyright (c) Mikaël Capelle (http://mikael-capelle.fr)
+ * @link http://mikael-capelle.fr
+ * @package app.View.Helper
+ * @since Apache v2
+ * @license http://www.apache.org/licenses/LICENSE-2.0
+ */
 
 namespace Bootstrap\View\Helper;
 
@@ -70,7 +70,7 @@ class BootstrapFlashHelper extends FlashHelper {
      * @throws \UnexpectedValueException If value for flash settings key is not an array.
      */
     public function render($key = 'flash', array $options = []) {
-         if (!$this->request->session()->check("Flash.$key")) {
+        if (!$this->request->session()->check("Flash.$key")) {
             return;
         }
 
@@ -82,9 +82,9 @@ class BootstrapFlashHelper extends FlashHelper {
             ));
         }
         foreach ($flash as &$message) {
-        	if (in_array(basename($message['element']), $this->_bootstrapTemplates)) {
-        		$message['element'] = 'Bootstrap.'.$message['element'];
-        	}
+            if (in_array(basename($message['element']), $this->_bootstrapTemplates)) {
+                $message['element'] = 'Bootstrap.'.$message['element'];
+            }
         }
         $this->request->session()->write("Flash.$key", $flash);
 
