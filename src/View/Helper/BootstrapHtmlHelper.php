@@ -50,7 +50,8 @@ class BootstrapHtmlHelper extends HtmlHelper {
      *
     **/
     public function icon ($icon, $options = []) {
-        return $this->_useFontAwesome ? $this->faIcon($icon, $options) : $this->glIcon($icon, $options);
+        return $this->_useFontAwesome ?
+            $this->faIcon($icon, $options) : $this->glIcon($icon, $options);
     }
 
     /**
@@ -129,7 +130,7 @@ class BootstrapHtmlHelper extends HtmlHelper {
      * @param $startText Text to insert before list
      *
      * Unusable options:
-     * 	- Separator
+     *      - Separator
     **/
     public function getCrumbList(array $options = [], $startText = false) {
         $options['separator'] = '' ;
@@ -149,7 +150,7 @@ class BootstrapHtmlHelper extends HtmlHelper {
      * is useless, and the label type can be specified in the $options array).
      *
      * Available BootstrapHtml options:
-     * 	- type: string, type of alert (default, error, info, success ; useless if
+     *      - type: string, type of alert (default, error, info, success ; useless if
      *    $type is specified)
      *
     **/
@@ -160,8 +161,8 @@ class BootstrapHtmlHelper extends HtmlHelper {
         else if (is_array($type)) {
             $options = $type ;
         }
-        $button = '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' ;
         $type = $this->_extractType($options, 'type', 'warning', array('info', 'warning', 'success', 'danger')) ;
+        $button = '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">'
         unset($options['type']) ;
         $options = $this->addClass($options, 'alert') ;
         if ($type) {
@@ -177,8 +178,8 @@ class BootstrapHtmlHelper extends HtmlHelper {
      * Create a Twitter Bootstrap style progress bar.
      *
      * @param $widths
-     * 	- The width (in %) of the bar (style primary, without display)
-     * 	- An array of bar, with (for each bar) :
+     *      - The width (in %) of the bar (style primary, without display)
+     *      - An array of bar, with (for each bar) :
      *        - width (only field required)
      *        - type (primary, info, danger, success, warning, default is primary)
      *        - min (integer, default 0)
@@ -190,19 +191,20 @@ class BootstrapHtmlHelper extends HtmlHelper {
      * specified above.
      *
      * Available BootstrapHtml options:
-     * 	- striped: boolean, specify if progress bar should be striped
-     * 	- active: boolean, specify if progress bar should be active
+     *      - striped: boolean, specify if progress bar should be striped
+     *      - active: boolean, specify if progress bar should be active
      *
     **/
     public function progress ($widths, $options = []) {
-        $striped = $this->_extractOption('striped', $options, false) || in_array('striped', $options);
+        $striped = $this->_extractOption('striped', $options, false)
+                 || in_array('striped', $options);
         unset($options['striped']) ;
         $active = $this->_extractOption('active', $options, false) || in_array('active', $options);
         unset($options['active']) ;
         $bars = '' ;
         if (is_array($widths)) {
             foreach ($widths as $w) {
-                $type = $this->_extractType($w, 'type', 'primary', array('info', 'primary', 'success', 'warning', 'danger')) ;
+                $type = $this->_extractOption('type', $w, 'primary');
                 $class = 'progress-bar progress-bar-'.$type ;
                 $min = $this->_extractOption('min', $w, 0);
                 $max = $this->_extractOption('max', $w, 100);
@@ -263,7 +265,9 @@ class BootstrapHtmlHelper extends HtmlHelper {
             }
             elseif (is_array($action)) {
                 if ($action[0] === 'header') {
-                    $output .= '<li role="presentation" class="dropdown-header">'.$action[1].'</li>' ;
+                    $output .= '<li role="presentation" class="dropdown-header">'
+                            .$action[1]
+                            .'</li>' ;
                 }
                 else {
                     if ($action[0] === 'link') {
