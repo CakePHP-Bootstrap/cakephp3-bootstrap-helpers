@@ -113,31 +113,6 @@ trait BootstrapTrait {
     }
 
     /**
-     * Check type values in $options, returning null if no option is found or if
-     * option is not in $avail.
-     * If type == $default, $default is returned (even if it is not in $avail).
-     *
-     * @param $options The array from which to extract the type.
-     * @param $key     The key of the value.
-     * @param $default The default value if the key is not present or if the value is not correct.
-     * @param $avail   An array of possible values.
-     *
-     * @return mixed
-     *
-    **/
-    protected function _extractType ($options, $key = 'type', $default = 'info',
-                                      $avail = array('info', 'success', 'warning', 'error')) {
-        $type = $this->_extractOption($key, $options, $default) ;
-        if ($default !== false && $type == $default) {
-            return $default ;
-        }
-        if (!in_array($type, $avail)) {
-            return null ;
-        }
-        return $type ;
-    }
-
-    /**
      * Try to convert the specified $text to a bootstrap icon. The $text is converted if it matches
      * a format "i:icon-name".
      *

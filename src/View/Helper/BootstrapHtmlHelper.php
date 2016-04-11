@@ -100,8 +100,7 @@ class BootstrapHtmlHelper extends HtmlHelper {
         else if (is_array($type)) {
             $options = $type ;
         }
-        $type = $this->_extractType($options, 'type', $default = 'default',
-                    array('default', 'primary', 'success', 'warning', 'info', 'danger')) ;
+        $type = $this->_extractOption('type', $options, 'default');
         unset ($options['type']) ;
         $options = $this->addClass($options, 'label') ;
         $options = $this->addClass($options, 'label-'.$type) ;
@@ -161,8 +160,9 @@ class BootstrapHtmlHelper extends HtmlHelper {
         else if (is_array($type)) {
             $options = $type ;
         }
-        $type = $this->_extractType($options, 'type', 'warning', array('info', 'warning', 'success', 'danger')) ;
         $button = '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">'
+                .'&times;</button>' ;
+        $type = $this->_extractOption('type', $options, 'warning');
         unset($options['type']) ;
         $options = $this->addClass($options, 'alert') ;
         if ($type) {
@@ -219,7 +219,7 @@ class BootstrapHtmlHelper extends HtmlHelper {
             }
         }
         else {
-            $type = $this->_extractType($options, 'type', 'primary', array('info', 'primary', 'success', 'warning', 'danger')) ;
+            $type = $this->_extractOption('type', $options, 'primary');
             unset($options['type']) ;
             $class = 'progress-bar progress-bar-'.$type ;
             $min = $this->_extractOption('min', $options, 0);
