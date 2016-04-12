@@ -426,6 +426,12 @@ class BootstrapFormHelper extends FormHelper {
         if (!$this->_customFileInput || (isset($options['default']) && $options['default'])) {
             return parent::file($fieldName, $options);
         }
+
+        $fakeInputCustomOptions = $this->_extractOption('_input', $options, []);
+        unset($options['_input']);
+        $fakeButtonCustomOptions = $this->_extractOption('_button', $options, []);
+        unset($options['_button']);
+
         if (!isset($options['id'])) {
             $options['id'] = $fieldName;
         }
@@ -440,12 +446,8 @@ class BootstrapFormHelper extends FormHelper {
             'onchange' => "document.getElementById('".$options['id']."-input').value = (this.files.length <= 1) ? this.files[0].name : this.files.length + ' ' + '" . $countLabel . "';"
         ]));
 
-        $fakeInputCustomOptions = $this->_extractOption('_input', $options, []);
-        unset($options['_input']);
-        $fakeButtonCustomOptions = $this->_extractOption('_button', $options, []);
-        unset($options['_button']);
-
         $fakeInput = $this->text($fieldName, array_merge($options, $fakeInputCustomOptions, [
+            'name' => $fieldName.'-text',
             'readonly' => 'readonly',
             'id' => $options['id'].'-input',
             'onclick' => "document.getElementById('".$options['id']."').click();"
