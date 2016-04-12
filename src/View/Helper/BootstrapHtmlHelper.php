@@ -122,7 +122,10 @@ class BootstrapHtmlHelper extends HtmlHelper {
         else if (is_array($type)) {
             $options = $type ;
         }
-        $type = $this->_extractOption('type', $options, 'default');
+        $options += [
+            'type' => 'default'
+        ];
+        $type = $options['type'];
         unset ($options['type']) ;
         $options = $this->addClass($options, 'label') ;
         $options = $this->addClass($options, 'label-'.$type) ;
@@ -182,9 +185,12 @@ class BootstrapHtmlHelper extends HtmlHelper {
         else if (is_array($type)) {
             $options = $type ;
         }
+        $options += [
+            'type' => 'warning'
+        ];
         $button = '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">'
                 .'&times;</button>' ;
-        $type = $this->_extractOption('type', $options, 'warning');
+        $type = $options['type'];
         unset($options['type']) ;
         $options = $this->addClass($options, 'alert') ;
         if ($type) {
@@ -246,45 +252,55 @@ class BootstrapHtmlHelper extends HtmlHelper {
      *
      **/
     public function progress ($widths, $options = []) {
-        $striped = $this->_extractOption('striped', $options, false)
-                 || in_array('striped', $options);
-        unset($options['striped']) ;
-        $active = $this->_extractOption('active', $options, false) || in_array('active', $options);
-        unset($options['active']) ;
+        $options += [
+            'striped' => false,
+            'active'  => false
+        ];
+        $striped = $options['striped'];
+        $active  = $options['active'];
+        unset($options['active'], $options['striped']) ;
         $bars = '' ;
         if (is_array($widths)) {
-            foreach ($widths as $w) {
-                $type = $this->_extractOption('type', $w, 'primary');
-                $class = 'progress-bar progress-bar-'.$type ;
-                $min = $this->_extractOption('min', $w, 0);
-                $max = $this->_extractOption('max', $w, 100);
-                $display = $this->_extractOption('display', $w, false);
-                $bars .= $this->div($class, $display ? $w['width'].'%' : '', array(
-                    'aria-valuenow' => $w['width'],
-                    'aria-valuemin' => $min,
-                    'aria-valuemax' => $max,
-                    'role' => 'progressbar',
-                    'style' => 'width: '.$w['width'].'%;'
-                )) ;
+            foreach ($widths as $width) {
+                $width += [
+                    'type' => 'primary',
+                    'min'  => 0,
+                    'max'  => 100,
+                    'display' => false
+                ];
+                $class = 'progress-bar progress-bar-'.$width['type'];
+                $bars .= $this->div($class,
+                                    $width['display'] ? $width['width'].'%' : '',
+                                    [
+                                        'aria-valuenow' => $width['width'],
+                                        'aria-valuemin' => $width['min'],
+                                        'aria-valuemax' => $width['max'],
+                                        'role' => 'progressbar',
+                                        'style' => 'width: '.$width['width'].'%;'
+                                    ]
+                );
             }
         }
         else {
-            $type = $this->_extractOption('type', $options, 'primary');
-            unset($options['type']) ;
-            $class = 'progress-bar progress-bar-'.$type ;
-            $min = $this->_extractOption('min', $options, 0);
-            unset ($options['min']) ;
-            $max = $this->_extractOption('max', $options, 100);
-            unset ($options['max']) ;
-            $display = $this->_extractOption('display', $options, false);
-            unset ($options['display']) ;
-            $bars = $this->div($class, $display ? $widths.'%' : '', array(
-                'aria-valuenow' => $widths,
-                'aria-valuemin' => $min,
-                'aria-valuemax' => $max,
-                'role' => 'progressbar',
-                'style' => 'width: '.$widths.'%;'
-            )) ;
+            $options += [
+                'type' => 'primary',
+                'min'  => 0,
+                'max'  => 100,
+                'display' => false
+            ];
+            $class = 'progress-bar progress-bar-'.$options['type'];
+            $bars = $this->div($class,
+                               $options['display'] ? $widths.'%' : '',
+                               [
+                                   'aria-valuenow' => $widths,
+                                   'aria-valuemin' => $options['min'],
+                                   'aria-valuemax' => $options['max'],
+                                   'role' => 'progressbar',
+                                   'style' => 'width: '.$widths.'%;'
+                               ]
+            );
+            unset($options['type'], $options['min'],
+                  $options['max'], $options['display']);
         }
         $options = $this->addClass($options, 'progress') ;
         if ($active) {

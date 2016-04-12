@@ -68,10 +68,13 @@ trait BootstrapTrait {
      *
      */
     protected function _addButtonClasses ($options) {
-        $type = $this->_extractOption('bootstrap-type', $options, $this->config('buttons.type'));
-        $size = $this->_extractOption('bootstrap-size', $options, false);
-        unset($options['bootstrap-size']) ;
-        unset($options['bootstrap-type']) ;
+        $options += [
+            'bootstrap-type' => $this->config('buttons.type'),
+            'bootstrap-size' => false
+        ];
+        $type = $options['bootstrap-type'];
+        $size = $options['bootstrap-size'];
+        unset($options['bootstrap-type'], $options['bootstrap-size']) ;
         $options = $this->addClass($options, 'btn') ;
         if (in_array($type, $this->buttonTypes)) {
             $options = $this->addClass($options, 'btn-'.$type) ;
@@ -80,23 +83,6 @@ trait BootstrapTrait {
             $options = $this->addClass($options, 'btn-'.$size) ;
         }
         return $options ;
-    }
-
-    /**
-     * Extract options from $options, returning $default if $key is not found.
-     *
-     * @param $key     The key to search for.
-     * @param $options The array from which to extract the value.
-     * @param $default The default value returned if the key is not found.
-     *
-     * @return mixed $options[$key] if $key is in $options, otherwize $default.
-     *
-     **/
-    protected function _extractOption ($key, $options, $default = null) {
-        if (isset($options[$key])) {
-            return $options[$key] ;
-        }
-        return $default ;
     }
 
     /**

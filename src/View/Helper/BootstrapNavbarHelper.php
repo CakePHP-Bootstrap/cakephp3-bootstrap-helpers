@@ -106,16 +106,23 @@ class BootstrapNavbarHelper extends Helper {
      *
      **/
     public function create ($brand, $options = []) {
-        $this->_fixed = $this->_extractOption('fixed', $options, false) ;
-        unset($options['fixed']) ;
-        $this->_responsive = $this->_extractOption('responsive', $options, false) ;
-        unset($options['responsive']) ;
-        $this->_static = $this->_extractOption('static', $options, false) ;
-        unset($options['static']) ;
-        $this->_inverse = $this->_extractOption('inverse', $options, false) ;
-        unset($options['inverse']) ;
-        $this->_fluid = $this->_extractOption('fluid', $options, false);
-        unset($options['fluid']);
+
+        $options += [
+            'fixed' => false,
+            'responsive' => false,
+            'static' => false,
+            'inverse' => false,
+            'fluid' => false
+        ];
+
+        $this->_fixed = $options['fixed'];
+        $this->_responsive = $options['responsive'];
+        $this->_static = $options['static'];
+        $this->_inverse = $options['inverse'];
+        $this->_fluid = $options['fluid'];
+        unset($options['fixed'], $options['responsive'],
+              $options['fluid'], $options['static'],
+              $options['inverse']);
 
         /** Generate options for outer div. **/
         $options = $this->addClass($options, 'navbar navbar-default') ;
@@ -157,9 +164,11 @@ class BootstrapNavbarHelper extends Helper {
                 ]) ;
             }
             else if (is_array($brand) && array_key_exists('url', $brand)) {
-                $brandOptions = $this->_extractOption ('options', $brand, []) ;
-                $brandOptions = $this->addClass ($brandOptions, 'navbar-brand') ;
-                $brand = $this->Html->link ($brand['name'], $brand['url'], $brandOptions) ;
+                $brand += [
+                    'options' => []
+                ];
+                $brand['options'] = $this->addClass ($brand['options'], 'navbar-brand') ;
+                $brand = $this->Html->link ($brand['name'], $brand['url'], $brand['options']) ;
             }
             $rightOpen = $this->Html->tag('div', $toggleButton.$brand,
                                           ['class' => 'navbar-header']).$rightOpen ;
@@ -244,7 +253,11 @@ class BootstrapNavbarHelper extends Helper {
      *
      **/
     public function text ($text, $options = []) {
-        $tag     = $this->_extractOption ('tag', $options, 'p') ;
+        $options += [
+            'tag' => 'p'
+        ];
+        $tag     = $options['tag'];
+        unset($options['tag']);
         $options = $this->addClass ($options, 'navbar-text') ;
         $text = preg_replace_callback ('/<a([^>]*)?>([^<]*)?<\/a>/i', function ($matches) {
             $attrs = preg_replace_callback ('/class="(.*)?"/', function ($m) {
@@ -269,7 +282,10 @@ class BootstrapNavbarHelper extends Helper {
      *
      **/
     public function searchForm ($model = null, $options = []) {
-        $align = $this->_extractOption ('align', $options, 'left') ;
+        $options += [
+            'align' => false
+        ];
+        $align = $options['align'];
         unset ($options['align']) ;
         $options = $this->addClass($options, ['navbar-form',  'navbar-'.$align]) ;
         return $this->Form->searchForm($model, $options) ;

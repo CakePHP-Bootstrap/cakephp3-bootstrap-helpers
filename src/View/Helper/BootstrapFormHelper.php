@@ -214,17 +214,15 @@ class BootstrapFormHelper extends FormHelper {
      *
      **/
     public function create($model = null, Array $options = array()) {
-        if (isset($options['cols'])) {
-            $this->colSize = $options['cols'] ;
-            unset($options['cols']) ;
-        }
-        else {
-            $this->colSize = $this->config('columns') ;
-        }
-        $this->horizontal = $this->_extractOption('horizontal', $options, false);
-        unset($options['horizontal']);
-        $this->inline = $this->_extractOption('inline', $options, false) ;
-        unset($options['inline']) ;
+        $options += [
+            'columns' => $this->config('columns'),
+            'horizontal' => false,
+            'inline' => false
+        ];
+        $this->colSize =  $options['columns'];
+        $this->horizontal = $options['horizontal'];
+        $this->inline = $options['inline'];
+        unset($options['columns'], $options['horizontal'], $options['inline']) ;
         if ($this->horizontal) {
             $options = $this->addClass($options, 'form-horizontal') ;
         }
@@ -363,7 +361,8 @@ class BootstrapFormHelper extends FormHelper {
     protected function _getDatetimeTemplate ($fields, $options) {
         $inputs = [] ;
         foreach ($fields as $field => $in) {
-            if ($this->_extractOption($field, $options, $in)) {
+            $in = isset($options[$field]) ? $options[$field] : $in;
+            if ($in) {
                 if ($field === 'timeFormat')
                     $field = 'meridian' ; // Template uses "meridian" instead of timeFormat
                 $inputs[$field] = '<div class="col-md-{{colsize}}">{{'.$field.'}}</div>';
@@ -390,23 +389,28 @@ class BootstrapFormHelper extends FormHelper {
      * @link http://book.cakephp.org/3.0/en/views/helpers/form.html#creating-file-inputs
      */
     public function file($fieldName, array $options = []) {
+
         if (!$this->config('useCustomFileInput') || (isset($options['default']) && $options['default'])) {
             return parent::file($fieldName, $options);
         }
 
-        $fakeInputCustomOptions = $this->_extractOption('_input', $options, []);
-        unset($options['_input']);
-        $fakeButtonCustomOptions = $this->_extractOption('_button', $options, []);
-        unset($options['_button']);
+        $options += [
+            '_input'  => [],
+            '_button' => [],
+            'id' => $fieldName,
+            'secure' => true,
+            'count-label' => __('files selected'),
+            'button-label' => __('Choose File')
+        ];
 
-        if (!isset($options['id'])) {
-            $options['id'] = $fieldName;
-        }
+        $fakeInputCustomOptions = $options['_input'];
+        $fakeButtonCustomOptions = $options['_button'];
+        unset($options['_input'], $options['_button']);
 
         $options += ['secure' => true];
         $options = $this->_initInputField($fieldName, $options);
         unset($options['type']);
-        $countLabel = $this->_extractOption('count-label', $options, __('files selected'));
+        $countLabel = $options['count-label'];
         unset($options['count-label']);
         $fileInput = $this->widget('file', array_merge($options, [
             'style' => 'display: none;',
@@ -419,7 +423,7 @@ class BootstrapFormHelper extends FormHelper {
             'id' => $options['id'].'-input',
             'onclick' => "document.getElementById('".$options['id']."').click();"
         ]));
-        $buttonLabel = $this->_extractOption('button-label', $options, __('Choose File'));
+        $buttonLabel = $options['button-label'];
         unset($options['button-label']) ;
 
         $fakeButton = $this->button($buttonLabel, array_merge($fakeButtonCustomOptions, [
@@ -515,9 +519,12 @@ class BootstrapFormHelper extends FormHelper {
      * Create & return a Cakephp options array from the $options specified.
      *
      */
-    protected function _createButtonOptions (array $options = array()) {
+    protected function _createButtonOptions (array $options = []) {
+        $options += [
+            'bootstrap-block' => false
+        ];
         $options = $this->_addButtonClasses($options);
-        $block = $this->_extractOption('bootstrap-block', $options, false) ;
+        $block = $options['bootstrap-block'];
         unset($options['bootstrap-block']);
         if ($block) {
             $options = $this->addClass($options, 'btn-block') ;
@@ -550,8 +557,11 @@ class BootstrapFormHelper extends FormHelper {
      *  - vertical true/false
      *
      **/
-    public function buttonGroup ($buttons, array $options = array()) {
-        $vertical = $this->_extractOption('vertical', $options, false) ;
+    public function buttonGroup ($buttons, array $options = []) {
+        $options += [
+            'vertical' => false
+        ];
+        $vertical = $options['vertical'];
         unset($options['vertical']) ;
         $options = $this->addClass($options, 'btn-group') ;
         if ($vertical) {
