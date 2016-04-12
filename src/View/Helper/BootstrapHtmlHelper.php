@@ -62,6 +62,15 @@ class BootstrapHtmlHelper extends HtmlHelper {
         'useFontAwesome' => false,
         'tooltip' => [
             'placement' => 'right'
+        ],
+        'label' => [
+            'type' => 'primary'
+        ],
+        'alert' => [
+            'type' => 'warning'
+        ],
+        'progress' => [
+            'type' => 'primary'
         ]
     ];
 
@@ -116,7 +125,7 @@ class BootstrapHtmlHelper extends HtmlHelper {
      *  - type The type of the label (useless if $type specified)
      *
      **/
-    public function label ($text, $type = 'default', $options = []) {
+    public function label ($text, $type = null, $options = []) {
         if (is_string($type)) {
             $options['type'] = $type ;
         }
@@ -124,7 +133,7 @@ class BootstrapHtmlHelper extends HtmlHelper {
             $options = $type ;
         }
         $options += [
-            'type' => 'default'
+            'type' => $this->config('label.type')
         ];
         $type = $options['type'];
         unset ($options['type']) ;
@@ -179,7 +188,7 @@ class BootstrapHtmlHelper extends HtmlHelper {
      *    $type is specified)
      *
      **/
-    public function alert ($text, $type = 'warning', $options = []) {
+    public function alert ($text, $type = null, $options = []) {
         if (is_string($type)) {
             $options['type'] = $type ;
         }
@@ -187,7 +196,7 @@ class BootstrapHtmlHelper extends HtmlHelper {
             $options = $type ;
         }
         $options += [
-            'type' => 'warning'
+            'type' => $this->config('alert.type')
         ];
         $button = $this->tag('button', '&times;', [
             'type' => 'button',
@@ -268,7 +277,7 @@ class BootstrapHtmlHelper extends HtmlHelper {
         if (is_array($widths)) {
             foreach ($widths as $width) {
                 $width += [
-                    'type' => 'primary',
+                    'type' => $this->config('progress.type'),
                     'min'  => 0,
                     'max'  => 100,
                     'display' => false
@@ -288,7 +297,7 @@ class BootstrapHtmlHelper extends HtmlHelper {
         }
         else {
             $options += [
-                'type' => 'primary',
+                'type' => $this->config('progress.type'),
                 'min'  => 0,
                 'max'  => 100,
                 'display' => false
