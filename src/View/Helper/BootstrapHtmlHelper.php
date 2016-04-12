@@ -59,7 +59,10 @@ class BootstrapHtmlHelper extends HtmlHelper {
             'javascriptlink' => '<script src="{{url}}"{{attrs}}></script>',
             'javascriptend' => '</script>'
         ],
-        'useFontAwesome' => false
+        'useFontAwesome' => false,
+        'tooltip' => [
+            'placement' => 'right'
+        ]
     ];
 
     /**
@@ -190,6 +193,34 @@ class BootstrapHtmlHelper extends HtmlHelper {
         $class = $options['class'] ;
         unset($options['class']) ;
         return $this->div($class, $button.$text, $options) ;
+    }
+
+    /**
+     * Create a Twitter Bootstrap style tooltip.
+     *
+     * @param $text The HTML tag inner text.
+     * @param $tooltip The tooltip text.
+     * @param $options
+     *
+     * @options tag The tag to use (default 'span').
+     * @options data-toggle HTML attribute (default 'tooltip').
+     * @options placement HTML attribute (default from config).
+     * @optioms title HTML attribute (default $tooltip).
+     *
+     * @return The text wrapped in the specified tag with a tooltip.
+     *
+     **/
+    public function tooltip($text, $tooltip, $options = []) {
+        $options += [
+            'tag'         => 'span',
+            'data-toggle' => 'tooltip',
+            'placement'   => $this->config('tooltip.placement'),
+            'title'       => $tooltip
+        ];
+        $options['data-placement'] = $options['placement'];
+        $tag = $options['tag'];
+        unset($options['placement'], $options['tag']);
+        return $this->tag($tag, $text, $options);
     }
 
     /**
