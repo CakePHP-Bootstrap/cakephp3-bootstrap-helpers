@@ -1,24 +1,24 @@
 <?php
 
 /**
-* Bootstrap Form Helper
-*
-*
-* PHP 5
-*
-*  Licensed under the Apache License, Version 2.0 (the "License");
-*  you may not use this file except in compliance with the License.
-*  You may obtain a copy of the License at
-*
-*      http://www.apache.org/licenses/LICENSE-2.0
-*
-*
-* @copyright Copyright (c) Mikaël Capelle (http://mikael-capelle.fr)
-* @link http://mikael-capelle.fr
-* @package app.View.Helper
-* @since Apache v2
-* @license http://www.apache.org/licenses/LICENSE-2.0
-*/
+ * Bootstrap Form Helper
+ *
+ *
+ * PHP 5
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *
+ * @copyright Copyright (c) Mikaël Capelle (http://mikael-capelle.fr)
+ * @link http://mikael-capelle.fr
+ * @package app.View.Helper
+ * @since Apache v2
+ * @license http://www.apache.org/licenses/LICENSE-2.0
+ */
 
 namespace Bootstrap\View\Helper;
 
@@ -81,7 +81,17 @@ class BootstrapFormHelper extends FormHelper {
             'radioContainer' => '{{h_radioContainer_start}}<div class="form-group">{{content}}</div>{{h_radioContainer_end}}',
             'textarea' => '<textarea name="{{name}}" class="form-control{{attrs.class}}" {{attrs}}>{{value}}</textarea>',
             'submitContainer' => '<div class="form-group">{{h_submitContainer_start}}{{content}}{{h_submitContainer_end}}</div>',
-        ]
+        ],
+        'templateClass' => 'Bootstrap\View\BootstrapStringTemplate',
+        'buttons' => [
+            'type' => 'default'
+        ],
+        'columns' => [
+            'label' => 2,
+            'input' => 10,
+            'error' => 0
+        ],
+        'useCustomFileInput' => false
     ];
 
     /**
@@ -105,52 +115,9 @@ class BootstrapFormHelper extends FormHelper {
 
     public $horizontal = false ;
     public $inline = false ;
-    public $colSize ;
-
-    /**
-     * Use custom file inputs (bootstrap style, with javascript).
-     *
-     * @var boolean
-     */
-    protected $_customFileInput = false ;
-
-    /**
-     * Default type for buttons.
-     *
-     * @var string
-     */
-    protected $_defaultButtonType = 'default' ;
-
-    /**
-     * Default colums size.
-     *
-     * @var array
-     */
-    protected $_defaultColumnSize = [
-        'label' => 2,
-        'input' => 10,
-        'error' => 0
-    ];
 
     private $buttonTypes = ['default', 'primary', 'info', 'success', 'warning', 'danger', 'link'] ;
     private $buttonSizes = ['xs', 'sm', 'lg'] ;
-
-    public function __construct (\Cake\View\View $view, array $config = []) {
-        if (isset($config['buttons'])) {
-            if (isset($config['buttons']['type'])) {
-                $this->_defaultButtonType = $config['buttons']['type'] ;
-            }
-        }
-        if (isset($config['columns'])) {
-            $this->_defaultColumnSize = $config['columns'] ;
-        }
-        if (isset($config['useCustomFileInput'])) {
-            $this->_customFileInput = $config['useCustomFileInput'];
-        }
-        $this->colSize = $this->_defaultColumnSize ;
-        $this->_defaultConfig['templateClass'] = 'Bootstrap\View\BootstrapStringTemplate' ;
-        parent::__construct($view, $config);
-    }
 
     /**
      *
@@ -163,7 +130,7 @@ class BootstrapFormHelper extends FormHelper {
      *
      * @return The return value of $callback
      *
-    **/
+     **/
     protected function _wrapTemplates ($templates, $callback, $params) {
         $oldTemplates = array_map ([$this, 'templates'], array_combine(array_keys($templates), array_keys($templates))) ;
         $this->templates ($templates) ;
@@ -180,7 +147,7 @@ class BootstrapFormHelper extends FormHelper {
      *
      * @return true if the HTML code contains a button
      *
-    **/
+     **/
     protected function _matchButton ($html) {
         return strpos($html, '<button') !== FALSE || strpos($html, 'type="submit"') !== FALSE ;
     }
@@ -197,10 +164,10 @@ class BootstrapFormHelper extends FormHelper {
                 'h_formGroup_start' => '<div class="'.$this->_getColClass('input').'">',
                 'h_formGroup_end'   => '</div>',
                 'h_checkboxContainer_start' => '<div class="form-group"><div class="'.$this->_getColClass('label', true)
-                    .' '.$this->_getColClass('input').'">',
+                .' '.$this->_getColClass('input').'">',
                 'h_checkboxContainer_end' => '</div></div>',
                 'h_radioContainer_start' => '<div class="form-group"><div class="'.$this->_getColClass('label', true)
-                    .' '.$this->_getColClass('input').'">',
+                .' '.$this->_getColClass('input').'">',
                 'h_radioContainer_end' => '</div></div>',
                 'h_submitContainer_start' => '<div class="'.$this->_getColClass('label', true).' '.$this->_getColClass('input').'">',
                 'h_submitContainer_end' => '</div>',
@@ -245,14 +212,14 @@ class BootstrapFormHelper extends FormHelper {
      *
      * @return The HTML tags corresponding to the openning of the form
      *
-    **/
+     **/
     public function create($model = null, Array $options = array()) {
         if (isset($options['cols'])) {
             $this->colSize = $options['cols'] ;
             unset($options['cols']) ;
         }
         else {
-            $this->colSize = $this->_defaultColumnSize ;
+            $this->colSize = $this->config('columns') ;
         }
         $this->horizontal = $this->_extractOption('horizontal', $options, false);
         unset($options['horizontal']);
@@ -272,7 +239,7 @@ class BootstrapFormHelper extends FormHelper {
      *
      * Return the col size class for the specified column (label, input or error).
      *
-    **/
+     **/
     protected function _getColClass ($what, $offset = false) {
         if ($what === 'error' && isset($this->colSize['error']) && $this->colSize['error'] == 0) {
             return $this->_getColClass('label', true).' '.$this->_getColClass('input');
@@ -294,7 +261,7 @@ class BootstrapFormHelper extends FormHelper {
             if (is_string($addonOrButtons)) {
                 $addonOrButtons = $this->_makeIcon($addonOrButtons);
                 $addonOrButtons = '<span class="input-group-'.
-                    ($this->_matchButton($addonOrButtons) ? 'btn' : 'addon').'">'.$addonOrButtons.'</span>' ;
+                                ($this->_matchButton($addonOrButtons) ? 'btn' : 'addon').'">'.$addonOrButtons.'</span>' ;
             }
             else if ($addonOrButtons !== false) {
                 $addonOrButtons = '<span class="input-group-btn">'.implode('', $addonOrButtons).'</span>' ;
@@ -337,7 +304,7 @@ class BootstrapFormHelper extends FormHelper {
      *          -> array: Add elements in array before inputs
      *     - append: Same as prepend except it add elements after input
      *
-    **/
+     **/
     public function input($fieldName, array $options = array()) {
 
         $options += [
@@ -423,7 +390,7 @@ class BootstrapFormHelper extends FormHelper {
      * @link http://book.cakephp.org/3.0/en/views/helpers/form.html#creating-file-inputs
      */
     public function file($fieldName, array $options = []) {
-        if (!$this->_customFileInput || (isset($options['default']) && $options['default'])) {
+        if (!$this->config('useCustomFileInput') || (isset($options['default']) && $options['default'])) {
             return parent::file($fieldName, $options);
         }
 
@@ -582,7 +549,7 @@ class BootstrapFormHelper extends FormHelper {
      * Extra options:
      *  - vertical true/false
      *
-    **/
+     **/
     public function buttonGroup ($buttons, array $options = array()) {
         $vertical = $this->_extractOption('vertical', $options, false) ;
         unset($options['vertical']) ;
@@ -600,7 +567,7 @@ class BootstrapFormHelper extends FormHelper {
      * @param $buttons The groups in the toolbar
      * @param $options Options for div method
      *
-    **/
+     **/
     public function buttonToolbar (array $buttonGroups, array $options = array()) {
         $options = $this->addClass($options, 'btn-toolbar') ;
         return $this->Html->tag('div', implode('', $buttonGroups), $options) ;
@@ -644,7 +611,7 @@ class BootstrapFormHelper extends FormHelper {
      *
      * Unusable options: div
      *
-    **/
+     **/
     public function submit($caption = null, array $options = array()) {
         return parent::submit($caption, $this->_createButtonOptions($options)) ;
     }
@@ -668,7 +635,7 @@ class BootstrapFormHelper extends FormHelper {
      *  - _input      Options for the input (overrided by $inpOpts)
      *  - _button     Options for the button (overrided by $btnOpts)
      *
-    **/
+     **/
     public function searchForm ($model = null, $options = [], $inpOpts = [], $btnOpts = []) {
 
         $options += [

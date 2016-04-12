@@ -1,24 +1,24 @@
 <?php
 
 /**
-* Bootstrap Html Helper
-*
-*
-* PHP 5
-*
-*  Licensed under the Apache License, Version 2.0 (the "License");
-*  you may not use this file except in compliance with the License.
-*  You may obtain a copy of the License at
-*
-*      http://www.apache.org/licenses/LICENSE-2.0
-*
-*
-* @copyright Copyright (c) Mikaël Capelle (http://mikael-capelle.fr)
-* @link http://mikael-capelle.fr
-* @package app.View.Helper
-* @since Apache v2
-* @license http://www.apache.org/licenses/LICENSE-2.0
-*/
+ * Bootstrap Html Helper
+ *
+ *
+ * PHP 5
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *
+ * @copyright Copyright (c) Mikaël Capelle (http://mikael-capelle.fr)
+ * @link http://mikael-capelle.fr
+ * @package app.View.Helper
+ * @since Apache v2
+ * @license http://www.apache.org/licenses/LICENSE-2.0
+ */
 
 namespace Bootstrap\View\Helper;
 
@@ -28,19 +28,39 @@ class BootstrapHtmlHelper extends HtmlHelper {
 
     use BootstrapTrait ;
 
-    /**
-     * Use font awesome icons instead of glyphicons.
-     *
-     * @var boolean
-     */
-    protected $_useFontAwesome = FALSE;
-
-    public function __construct (\Cake\View\View $view, array $config = []) {
-        if (isset($config['useFontAwesome'])) {
-            $this->_useFontAwesome = $config['useFontAwesome'];
-        }
-        parent::__construct($view, $config);
-    }
+    protected $_defaultConfig = [
+        'templates' => [
+            'meta' => '<meta{{attrs}}/>',
+            'metalink' => '<link href="{{url}}"{{attrs}}/>',
+            'link' => '<a href="{{url}}"{{attrs}}>{{content}}</a>',
+            'mailto' => '<a href="mailto:{{url}}"{{attrs}}>{{content}}</a>',
+            'image' => '<img src="{{url}}"{{attrs}}/>',
+            'tableheader' => '<th{{attrs}}>{{content}}</th>',
+            'tableheaderrow' => '<tr{{attrs}}>{{content}}</tr>',
+            'tablecell' => '<td{{attrs}}>{{content}}</td>',
+            'tablerow' => '<tr{{attrs}}>{{content}}</tr>',
+            'block' => '<div{{attrs}}>{{content}}</div>',
+            'blockstart' => '<div{{attrs}}>',
+            'blockend' => '</div>',
+            'tag' => '<{{tag}}{{attrs}}>{{content}}</{{tag}}>',
+            'tagstart' => '<{{tag}}{{attrs}}>',
+            'tagend' => '</{{tag}}>',
+            'tagselfclosing' => '<{{tag}}{{attrs}}/>',
+            'para' => '<p{{attrs}}>{{content}}</p>',
+            'parastart' => '<p{{attrs}}>',
+            'css' => '<link rel="{{rel}}" href="{{url}}"{{attrs}}/>',
+            'style' => '<style{{attrs}}>{{content}}</style>',
+            'charset' => '<meta charset="{{charset}}"/>',
+            'ul' => '<ul{{attrs}}>{{content}}</ul>',
+            'ol' => '<ol{{attrs}}>{{content}}</ol>',
+            'li' => '<li{{attrs}}>{{content}}</li>',
+            'javascriptblock' => '<script{{attrs}}>{{content}}</script>',
+            'javascriptstart' => '<script>',
+            'javascriptlink' => '<script src="{{url}}"{{attrs}}></script>',
+            'javascriptend' => '</script>'
+        ],
+        'useFontAwesome' => false
+    ];
 
     /**
      *
@@ -48,10 +68,9 @@ class BootstrapHtmlHelper extends HtmlHelper {
      *
      * @param $icon Name of the icon.
      *
-    **/
+     **/
     public function icon ($icon, $options = []) {
-        return $this->_useFontAwesome ?
-            $this->faIcon($icon, $options) : $this->glIcon($icon, $options);
+        return $this->config('useFontAwesome') ? $this->faIcon($icon, $options) : $this->glIcon($icon, $options);
     }
 
     /**
@@ -92,7 +111,7 @@ class BootstrapHtmlHelper extends HtmlHelper {
      * Extra options
      *  - type The type of the label (useless if $type specified)
      *
-    **/
+     **/
     public function label ($text, $type = 'default', $options = []) {
         if (is_string($type)) {
             $options['type'] = $type ;
@@ -115,7 +134,7 @@ class BootstrapHtmlHelper extends HtmlHelper {
      * @param options Options for span
      *
      *
-    **/
+     **/
     public function badge ($text, $options = []) {
         $options = $this->addClass($options, 'badge') ;
         return $this->tag('span', $text, $options) ;
@@ -130,7 +149,7 @@ class BootstrapHtmlHelper extends HtmlHelper {
      *
      * Unusable options:
      *      - Separator
-    **/
+     **/
     public function getCrumbList(array $options = [], $startText = false) {
         $options['separator'] = '' ;
         $options = $this->addClass($options, 'breadcrumb') ;
@@ -152,7 +171,7 @@ class BootstrapHtmlHelper extends HtmlHelper {
      *      - type: string, type of alert (default, error, info, success ; useless if
      *    $type is specified)
      *
-    **/
+     **/
     public function alert ($text, $type = 'warning', $options = []) {
         if (is_string($type)) {
             $options['type'] = $type ;
@@ -194,7 +213,7 @@ class BootstrapHtmlHelper extends HtmlHelper {
      *      - striped: boolean, specify if progress bar should be striped
      *      - active: boolean, specify if progress bar should be active
      *
-    **/
+     **/
     public function progress ($widths, $options = []) {
         $striped = $this->_extractOption('striped', $options, false)
                  || in_array('striped', $options);
