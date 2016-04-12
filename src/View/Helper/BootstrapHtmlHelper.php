@@ -73,7 +73,8 @@ class BootstrapHtmlHelper extends HtmlHelper {
      *
      **/
     public function icon ($icon, $options = []) {
-        return $this->config('useFontAwesome') ? $this->faIcon($icon, $options) : $this->glIcon($icon, $options);
+        return $this->config('useFontAwesome')?
+            $this->faIcon($icon, $options) : $this->glIcon($icon, $options);
     }
 
     /**
@@ -188,8 +189,12 @@ class BootstrapHtmlHelper extends HtmlHelper {
         $options += [
             'type' => 'warning'
         ];
-        $button = '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">'
-                .'&times;</button>' ;
+        $button = $this->tag('button', '&times;', [
+            'type' => 'button',
+            'class' => 'close',
+            'data-dismiss' => 'alert',
+            'aria-hidden' => true
+        ]);
         $type = $options['type'];
         unset($options['type']) ;
         $options = $this->addClass($options, 'alert') ;
@@ -343,7 +348,8 @@ class BootstrapHtmlHelper extends HtmlHelper {
                     $url  = array_shift($action) ;
                     $action['role'] = 'menuitem' ;
                     $action['tabindex'] = -1 ;
-                    $output .= '<li role="presentation">'.$this->link($name, $url, $action).'</li>';
+                    $output .= '<li role="presentation">'
+                            .$this->link($name, $url, $action).'</li>';
                 }
             }
             else {
