@@ -64,7 +64,7 @@ class BootstrapHtmlHelper extends HtmlHelper {
             'placement' => 'right'
         ],
         'label' => [
-            'type' => 'primary'
+            'type' => 'default'
         ],
         'alert' => [
             'type' => 'warning'
