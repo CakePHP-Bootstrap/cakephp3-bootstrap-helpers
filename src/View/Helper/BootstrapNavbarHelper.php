@@ -283,11 +283,10 @@ class BootstrapNavbarHelper extends Helper {
      **/
     public function searchForm ($model = null, $options = []) {
         $options += [
-            'align' => false
+            'align' => 'left'
         ];
-        $align = $options['align'];
+        $options = $this->addClass($options, ['navbar-form',  'navbar-'.$options['align']]) ;
         unset ($options['align']) ;
-        $options = $this->addClass($options, ['navbar-form',  'navbar-'.$align]) ;
         return $this->Form->searchForm($model, $options) ;
     }
 
