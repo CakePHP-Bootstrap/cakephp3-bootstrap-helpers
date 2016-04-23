@@ -60,7 +60,8 @@ trait BootstrapTrait {
     }
 
     /**
-     * Add classes to options according to values of bootstrap-type and bootstrap-size for button.
+     * Add classes to options according to values of bootstrap-type and bootstrap-size
+     * for button.
      *
      * @param $options The initial options with bootstrap-type and/or bootstrat-size values
      *

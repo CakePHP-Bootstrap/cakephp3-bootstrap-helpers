@@ -10,21 +10,21 @@ use Cake\TestSuite\TestCase;
 use Cake\View\View;
 
 class PublicBootstrapTrait {
-    
+
     use BootstrapTrait ;
-    
+
     public function __construct ($View) {
         $this->_View = $View;
     }
-    
+
     public function publicEasyIcon ($callback, $title, $options) {
         return $this->_easyIcon($callback, $title, $options);
     }
-    
+
 };
 
 class BootstrapTraitTemplateTest extends TestCase {
-    
+
     /**
      * Setup
      *
@@ -54,13 +54,14 @@ class BootstrapTraitTemplateTest extends TestCase {
     }
         
     public function testEasyIcon() {
-        
+
         $that = $this;
         $callback = function ($text, $options) use ($that) {
-            $that->assertEquals(isset($options['escape']) ? $options['escape'] : true, $options['expected']['escape']);
+            $that->assertEquals(isset($options['escape']) ? $options['escape'] : true,
+                                $options['expected']['escape']);
             $that->assertHtml($options['expected']['result'], $text);
         };
-                
+
         $this->_Trait->publicEasyIcon($callback, 'i:plus', [
             'expected' => [
                 'escape' => false,
@@ -69,14 +70,14 @@ class BootstrapTraitTemplateTest extends TestCase {
                 ]], '/i']
             ]
         ]);
-        
+
         $this->_Trait->publicEasyIcon($callback, 'Click Me!', [
             'expected' => [
                 'escape' => true,
                 'result' => 'Click Me!'
             ]
         ]);
-        
+
         $this->_Trait->publicEasyIcon($callback, 'i:plus Add', [
             'expected' => [
                 'escape' => false,
@@ -85,7 +86,7 @@ class BootstrapTraitTemplateTest extends TestCase {
                 ]], '/i', ' Add']
             ]
         ]);
-        
+
         $this->_Trait->publicEasyIcon($callback, 'Add i:plus', [
             'expected' => [
                 'escape' => false,
@@ -94,7 +95,7 @@ class BootstrapTraitTemplateTest extends TestCase {
                 ]], '/i']
             ]
         ]);
-        
+
         $this->_Trait->easyIcon = false;
         $this->_Trait->publicEasyIcon($callback, 'i:plus', [
             'expected' => [
@@ -102,11 +103,11 @@ class BootstrapTraitTemplateTest extends TestCase {
                 'result' => 'i:plus'
             ]
         ]);
-        
+
     }
-    
+
     public function testHelperMethods() {
-        
+
         // BootstrapPaginatorHelper - TODO
         // BootstrapPaginatorHelper::prev($title, array $options = []);
         // BootstrapPaginatorHelper::next($title, array $options = []);
