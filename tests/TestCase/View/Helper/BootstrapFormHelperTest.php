@@ -63,6 +63,38 @@ class BootstrapFormHelperTest extends TestCase {
         $this->assertEquals($this->Form->inline, false) ;
     }
 
+    public function testButton () {
+        // default button
+        $button = $this->Form->button('Test');
+        $this->assertHtml([
+            ['button' => [
+                'class' => 'btn btn-default',
+                'type' => 'submit'
+            ]], 'Test', '/button'
+        ], $button);
+        // button with bootstrap-type and bootstrap-size
+        $button = $this->Form->button('Test', [
+            'bootstrap-type' => 'success',
+            'bootstrap-size' => 'sm'
+        ]);
+        $this->assertHtml([
+            ['button' => [
+                'class' => 'btn btn-success btn-sm',
+                'type' => 'submit'
+            ]], 'Test', '/button'
+        ], $button);
+        // button with class
+        $button = $this->Form->button('Test', [
+            'class' => 'btn btn-primary'
+        ]);
+        $this->assertHtml([
+            ['button' => [
+                'class' => 'btn btn-primary',
+                'type' => 'submit'
+            ]], 'Test', '/button'
+        ], $button);
+    }
+
     protected function _testInput ($expected, $fieldName, $options = []) {
         $formOptions = [] ;
         if (isset($options['_formOptions'])) {

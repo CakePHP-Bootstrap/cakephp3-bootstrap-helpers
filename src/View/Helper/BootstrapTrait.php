@@ -75,13 +75,13 @@ trait BootstrapTrait {
         ];
         $type = $options['bootstrap-type'];
         $size = $options['bootstrap-size'];
-        unset($options['bootstrap-type'], $options['bootstrap-size']) ;
-        $options = $this->addClass($options, 'btn') ;
-        if (in_array($type, $this->buttonTypes)) {
-            $options = $this->addClass($options, 'btn-'.$type) ;
+        unset($options['bootstrap-type'], $options['bootstrap-size']);
+        $options = $this->addClass($options, 'btn');
+        if (!preg_match('#btn-[a-z]+#', $options['class'])) {
+            $options = $this->addClass($options, 'btn-'.$type);
         }
-        if (in_array($size, $this->buttonSizes)) {
-            $options = $this->addClass($options, 'btn-'.$size) ;
+        if ($size) {
+            $options = $this->addClass($options, 'btn-'.$size);
         }
         return $options ;
     }

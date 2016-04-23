@@ -116,9 +116,6 @@ class BootstrapFormHelper extends FormHelper {
     public $horizontal = false ;
     public $inline = false ;
 
-    private $buttonTypes = ['default', 'primary', 'info', 'success', 'warning', 'danger', 'link'] ;
-    private $buttonSizes = ['xs', 'sm', 'lg'] ;
-
     /**
      *
      * Replace the templates with the ones specified by newTemplates, call the specified function
