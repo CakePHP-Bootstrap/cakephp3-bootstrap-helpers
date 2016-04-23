@@ -41,21 +41,21 @@ trait BootstrapTrait {
      * @return array Array of options with $key set.
      */
     public function addClass(array $options = [], $class = null, $key = 'class') {
-        if (is_array($class)) {
-            $class = implode(' ', array_unique(array_map('trim', $class))) ;
+        if (!is_array($class)) {
+            $class = explode(' ', trim($class));
         }
+        $optClass = [];
         if (isset($options[$key])) {
             $optClass = $options[$key];
-            if (is_array($optClass)) {
-                $optClass = trim(implode(' ', array_unique(array_map('trim', $optClass))));
+            if (!is_array($optClass)) {
+                $optClass = explode(' ', trim($optClass));
             }
         }
-        if (isset($optClass) && $optClass) {
-            $options[$key] = $optClass.' '.$class ;
-        }
-        else {
-            $options[$key] = $class ;
-        }
+        $class = array_merge($optClass, $class);
+        $class = array_map('trim', $class);
+        $class = array_unique($class);
+        $class = array_filter($class);
+        $options[$key] = implode(' ', $class);
         return $options ;
     }
 

@@ -52,7 +52,23 @@ class BootstrapTraitTemplateTest extends TestCase {
         unset($this->Form);
         unset($this->Paginator);
     }
-        
+
+    public function testAddClass() {
+        // Test with a string
+        $opts = [
+            'class' => 'class-1'
+        ];
+        $opts = $this->_Trait->addClass($opts, '  class-1    class-2  ');
+        $this->assertEquals($opts, [
+            'class' => 'class-1 class-2'
+        ]);
+        // Test with an array
+        $opts = $this->_Trait->addClass($opts, ['class-1', 'class-3']);
+        $this->assertEquals($opts, [
+            'class' => 'class-1 class-2 class-3'
+        ]);
+    }
+
     public function testEasyIcon() {
 
         $that = $this;
