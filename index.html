@@ -407,7 +407,7 @@ BootstrapFormHelper::append($input, $append); // For $append.</code></pre>
                         <p>With <code>horizontal</code>, it is possible to specify the width of each columns:</p>
                         <pre><code class="language-php">echo $this->Form->create(null, [
     'horizontal' => true,
-    'cols' => [ // Total is 12, default is 2 / 10 / 0
+    'columns' => [ // Total is 12, default is 2 / 10 / 0
         'label' => 2,
         'input' => 10,
         'error' => 0
@@ -428,7 +428,7 @@ BootstrapFormHelper::append($input, $append); // For $append.</code></pre>
                                 <pre><code class="language-php">&lt;?php
     echo $this-&gt;Form-&gt;create(null, [
         'horizontal' =&gt; true,
-        'cols' =&gt; [ 
+        'columns' =&gt; [ 
             'sm' =&gt; [
                 'label' =&gt; 4,
                 'input' =&gt; 4,
