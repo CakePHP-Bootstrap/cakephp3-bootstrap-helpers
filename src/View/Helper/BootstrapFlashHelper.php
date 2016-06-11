@@ -1,25 +1,17 @@
 <?php
-
 /**
- * Bootstrap Flash Helper
+ *
+ * Licensed under The MIT License
+ * For full copyright and license information, please see the LICENSE file
+ * Redistributions of files must retain the above copyright notice.
+ * You may obtain a copy of the License at
+ *
+ *     https://opensource.org/licenses/mit-license.php
  *
  *
- * PHP 5
- *
- *  Licensed under the Apache License, Version 2.0 (the "License");
- *  you may not use this file except in compliance with the License.
- *  You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- *
- * @copyright Copyright (c) Mikaël Capelle (http://mikael-capelle.fr)
- * @link http://mikael-capelle.fr
- * @package app.View.Helper
- * @since Apache v2
- * @license http://www.apache.org/licenses/LICENSE-2.0
+ * @copyright Copyright (c) Mikaël Capelle (https://typename.fr)
+ * @license https://opensource.org/licenses/mit-license.php MIT License
  */
-
 namespace Bootstrap\View\Helper;
 
 use Cake\View\Helper\FlashHelper;

@@ -1,4 +1,17 @@
 <?php
+/**
+ *
+ * Licensed under The MIT License
+ * For full copyright and license information, please see the LICENSE file
+ * Redistributions of files must retain the above copyright notice.
+ * You may obtain a copy of the License at
+ *
+ *     https://opensource.org/licenses/mit-license.php
+ *
+ *
+ * @copyright Copyright (c) Mikaël Capelle (https://typename.fr)
+ * @license https://opensource.org/licenses/mit-license.php MIT License
+ */
 namespace Bootstrap\View;
 
 use Cake\View\StringTemplate;
@@ -66,7 +79,7 @@ class BootstrapStringTemplate extends StringTemplate {
         }
         $replace = [];
         foreach ($placeholders as $placeholder) {
-			$replacement = isset($data[$placeholder]) ? $data[$placeholder] : null;
+            $replacement = isset($data[$placeholder]) ? $data[$placeholder] : null;
             if (is_array($replacement)) {
                 $replacement = implode('', $replacement);
             }
@@ -75,4 +88,4 @@ class BootstrapStringTemplate extends StringTemplate {
         return vsprintf($template, $replace);
     }
 
-}; 
+};
