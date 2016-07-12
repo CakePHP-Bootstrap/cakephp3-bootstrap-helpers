@@ -17,7 +17,7 @@ composer require holt59/cakephp3-bootstrap-helpers:dev-master
 ```
 ```php
 // in config/bootstrap.php
-Plugin::load('Bootstrap') ;
+Plugin::load('Bootstrap');
 ```
 
 ```php
@@ -27,7 +27,7 @@ public $helpers = [
         'className' => 'Bootstrap.BootstrapForm'
     ],
     /* ... */
-] ;
+];
 ```
 ---
 
