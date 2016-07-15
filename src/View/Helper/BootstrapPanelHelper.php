@@ -91,7 +91,8 @@ class BootstrapPanelHelper extends Helper {
      *
      * Create a Twitter Bootstrap like panel.
      *
-     * @param array|string $title If array, works as $options, otherwize used as the panel title.
+     * @param array|string $title If array, works as $options, otherwize used as
+     *                            the panel title.
      * @param array $options Options for the main div of the panel.
      *
      * Extra options (useless if $title not specified) :
@@ -256,7 +257,8 @@ class BootstrapPanelHelper extends Helper {
      * Create / Start the header. If $info is specified as a string, create and return the
      * whole header, otherwize only open the header.
      *
-     * @param array|string $info If string, use as the panel title, otherwize works as $options.
+     * @param array|string $info If string, use as the panel title, otherwize works as
+     *                           $options.
      * @param array $options Options for the header div.
      *
      * Special option (if $info is string):
@@ -279,7 +281,8 @@ class BootstrapPanelHelper extends Helper {
      * Create / Start the body. If $info is not null, it is used as the body content, otherwize
      * start the body div.
      *
-     * @param array|string $info If string, use as the body content, otherwize works as $options.
+     * @param array|string $info If string, use as the body content, otherwize works
+     *                           as $options.
      * @param array $options Options for the footer div.
      *
      *
