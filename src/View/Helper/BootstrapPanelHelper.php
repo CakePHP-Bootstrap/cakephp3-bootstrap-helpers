@@ -185,6 +185,19 @@ class BootstrapPanelHelper extends Helper {
         return $res;
     }
 
+    /**
+     *
+     * Return true if the current panel should be open (only for collapsible).
+     *
+     * @return true if the current panel should be open, false otherwize.
+     *
+     **/
+    protected function _isOpen () {
+        return (is_int($this->_groupPanelOpen)
+                && $this->_groupPanelOpen === $this->_groupPanelCount)
+            || $this->_groupPanelOpen === $this->_bodyId;
+    }
+
     protected function _createHeader ($title, $options = [], $titleOptions = []) {
         if (empty($titleOptions)) {
             $titleOptions = $options['title'] ;
@@ -198,13 +211,14 @@ class BootstrapPanelHelper extends Helper {
         if ($this->_collapsible) {
             $options += [
                 'role' => 'tab',
-                'id'   => $this->_headId
+                'id'   => $this->_headId,
+                'open' => $this->_isOpen()
             ];
             $this->_headId = $options['id'];
             $title = $this->Html->link($title, '#'.$this->_bodyId, [
                 'data-toggle'   => 'collapse',
                 'data-parent'   => $this->_groupId ? '#'.$this->_groupId : false,
-                'aria-expanded' => true,
+                'aria-expanded' => json_encode($options['open']),
                 'aria-controls' => '#'.$this->_bodyId,
                 'escape'        => $options['escape']
             ]);
@@ -231,9 +245,7 @@ class BootstrapPanelHelper extends Helper {
         $options = $this->addClass($options, 'panel-body');
         $body = $this->Html->tag('div', $text, $options);
         if ($this->_collapsible) {
-            $open = ((is_int($this->_groupPanelOpen)
-                      && $this->_groupPanelOpen === $this->_groupPanelCount)
-                     || $this->_groupPanelOpen === $this->_bodyId) ? ' in' : '';
+            $open = $this->_isOpen() ? ' in' : '';
             $body = $this->Html->div('panel-collapse collapse'.$open, $text ? $body : null, [
                 'role' => 'tabpanel',
                 'aria-labelledby' => $this->_headId,
