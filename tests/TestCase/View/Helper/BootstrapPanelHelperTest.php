@@ -160,7 +160,7 @@ class BootstrapPanelHelperTest extends TestCase {
             ['a' => [
                 'href'          => '#collapse-0',
                 'data-toggle'   => 'collapse',
-                'aria-expanded' => true,
+                'aria-expanded' => 'true',
                 'aria-controls' => '#collapse-0'
             ]],
             htmlspecialchars($htmlContent),
@@ -185,7 +185,7 @@ class BootstrapPanelHelperTest extends TestCase {
             ['a' => [
                 'href'          => '#collapse-1',
                 'data-toggle'   => 'collapse',
-                'aria-expanded' => true,
+                'aria-expanded' => 'true',
                 'aria-controls' => '#collapse-1'
             ]],
             ['b' => true], $content, '/b',
@@ -211,7 +211,7 @@ class BootstrapPanelHelperTest extends TestCase {
             ['a' => [
                 'href'          => '#collapse-2',
                 'data-toggle'   => 'collapse',
-                'aria-expanded' => true,
+                'aria-expanded' => 'true',
                 'aria-controls' => '#collapse-2'
             ]],
             ['i' => [
@@ -270,7 +270,7 @@ class BootstrapPanelHelperTest extends TestCase {
                     'href'          => '#collapse-'.$i,
                     'data-toggle'   => 'collapse',
                     'data-parent'   => '#panelGroup-1',
-                    'aria-expanded' => true,
+                    'aria-expanded' => $i == 0 ? 'true' : 'false',
                     'aria-controls' => '#collapse-'.$i
                 ]],
                 $panelHeading,
