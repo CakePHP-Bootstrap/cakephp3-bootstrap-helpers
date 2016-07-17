@@ -237,7 +237,7 @@ class BootstrapPanelHelper extends Helper {
             unset($titleOptions['tag']);
             $title = $this->Html->tag($tag, $title, $titleOptions);
         }
-        unset($options['escape']);
+        unset($options['escape'], $options['open']);
         return $this->_cleanCurrent().$this->Html->tag('div', $title, $options);
     }
 
