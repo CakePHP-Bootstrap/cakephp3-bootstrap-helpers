@@ -86,6 +86,9 @@ class BootstrapHtmlHelper extends HtmlHelper {
     public function faIcon ($icon, $options = []) {
         $options = $this->addClass($options, 'fa');
         $options = $this->addClass($options, 'fa-'.$icon);
+        $options += [
+            'aria-hidden' => 'true'
+        ];
 
         return $this->tag('i', '', $options);
     }
@@ -98,6 +101,9 @@ class BootstrapHtmlHelper extends HtmlHelper {
     public function glIcon ($icon, $options = []) {
         $options = $this->addClass($options, 'glyphicon');
         $options = $this->addClass($options, 'glyphicon-'.$icon);
+        $options += [
+            'aria-hidden' => 'true'
+        ];
 
         return $this->tag('i', '', $options);
     }

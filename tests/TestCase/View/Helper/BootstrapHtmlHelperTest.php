@@ -55,31 +55,35 @@ class BootstrapHtmlHelperTest extends TestCase {
         // Default icon (Glyphicon)
         $this->assertHtml ([
             ['i' => [
-                'class' => 'glyphicon glyphicon-'.$type
+                'class' => 'glyphicon glyphicon-'.$type,
+                'aria-hidden' => 'true'
             ]],
             '/i'
         ], $this->Html->icon($type));
         $this->assertHtml ([
             ['i' => [
                 'class' => $options['class'].' glyphicon glyphicon-'.$type,
-                'id' => $options['id']
+                'id' => $options['id'],
+                'aria-hidden' => 'true'
             ]],
             '/i'
         ], $this->Html->icon($type, $options));
         // FontAwesome icon
         $this->assertHtml ([
             ['i' => [
-                'class' => 'fa fa-'.$type
+                'class' => 'fa fa-'.$type,
+                'aria-hidden' => 'true'
             ]],
             '/i'
         ], $this->Html->faIcon($type));
         $this->assertHtml ([
             ['i' => [
                 'class' => $options['class'].' fa fa-'.$type,
-                'id' => $options['id']
+                'id' => $options['id'],
+                'aria-hidden' => 'true'
             ]],
             '/i'
-        ], $this->Html->faIcon($type, $options));        
+        ], $this->Html->faIcon($type, $options));
     }
     
     public function testLabel () {

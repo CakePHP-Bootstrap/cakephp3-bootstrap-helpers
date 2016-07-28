@@ -59,7 +59,8 @@ class BootstrapPaginatorHelperTest extends TestCase {
             ]],
             ['a' => true],
             ['i' => [
-                'class' => 'glyphicon glyphicon-chevron-left'
+                'class' => 'glyphicon glyphicon-chevron-left',
+                'aria-hidden' => 'true'
             ]],
             '/i', '/a', '/li'
         ], $this->Paginator->prev('i:chevron-left'));
@@ -79,7 +80,8 @@ class BootstrapPaginatorHelperTest extends TestCase {
                 'href' => '/index?page=2'
             ]],
             ['i' => [
-                'class' => 'glyphicon glyphicon-chevron-right'
+                'class' => 'glyphicon glyphicon-chevron-right',
+                'aria-hidden' => 'true'
             ]],
             '/i', '/a', '/li'
         ], $this->Paginator->next('i:chevron-right'));

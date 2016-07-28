@@ -82,7 +82,8 @@ class BootstrapTraitTemplateTest extends TestCase {
             'expected' => [
                 'escape' => false,
                 'result' => [['i' => [
-                    'class' => 'glyphicon glyphicon-plus'
+                    'class' => 'glyphicon glyphicon-plus',
+                    'aria-hidden' => 'true'
                 ]], '/i']
             ]
         ]);
@@ -98,7 +99,8 @@ class BootstrapTraitTemplateTest extends TestCase {
             'expected' => [
                 'escape' => false,
                 'result' => [['i' => [
-                    'class' => 'glyphicon glyphicon-plus'
+                    'class' => 'glyphicon glyphicon-plus',
+                    'aria-hidden' => 'true'
                 ]], '/i', ' Add']
             ]
         ]);
@@ -107,7 +109,8 @@ class BootstrapTraitTemplateTest extends TestCase {
             'expected' => [
                 'escape' => false,
                 'result' => ['Add ', ['i' => [
-                    'class' => 'glyphicon glyphicon-plus'
+                    'class' => 'glyphicon glyphicon-plus',
+                    'aria-hidden' => 'true'
                 ]], '/i']
             ]
         ]);
@@ -136,7 +139,8 @@ class BootstrapTraitTemplateTest extends TestCase {
                 'class' => 'btn btn-default',
                 'type'  => 'submit'
             ]], ['i' => [
-                'class' => 'glyphicon glyphicon-plus'
+                'class' => 'glyphicon glyphicon-plus',
+                'aria-hidden' => 'true'
             ]], '/i', '/button'
         ], $result) ;
         $result = $this->Form->input ('fieldname', [
@@ -154,7 +158,10 @@ class BootstrapTraitTemplateTest extends TestCase {
             ['span' => [
                 'class' => 'input-group-addon'
             ]],
-            ['i' => ['class' => 'glyphicon glyphicon-home']], '/i',
+            ['i' => [
+                'class' => 'glyphicon glyphicon-home',
+                'aria-hidden' => 'true'
+            ]], '/i',
             '/span',
             ['input' => [
                 'type' => 'text',
@@ -165,7 +172,10 @@ class BootstrapTraitTemplateTest extends TestCase {
             ['span' => [
                 'class' => 'input-group-addon'
             ]],
-            ['i' => ['class' => 'glyphicon glyphicon-plus']], '/i',
+            ['i' => [
+                'class' => 'glyphicon glyphicon-plus',
+                'aria-hidden' => 'true'
+            ]], '/i',
             '/span',
             '/div',
             '/div'
