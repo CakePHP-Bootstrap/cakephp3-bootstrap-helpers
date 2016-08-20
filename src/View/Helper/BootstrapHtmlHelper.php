@@ -52,6 +52,7 @@ class BootstrapHtmlHelper extends HtmlHelper {
             'javascriptend' => '</script>'
         ],
         'useFontAwesome' => false,
+        'progressTextFormat' => '%d%% Complete',
         'tooltip' => [
             'placement' => 'right'
         ],
@@ -266,53 +267,38 @@ class BootstrapHtmlHelper extends HtmlHelper {
     public function progress ($widths, $options = []) {
         $options += [
             'striped' => false,
-            'active'  => false
+            'active'  => false,
+            'format' => $this->config('progressTextFormat')
         ];
         $striped = $options['striped'];
         $active  = $options['active'];
         unset($options['active'], $options['striped']) ;
         $bars = '' ;
-        if (is_array($widths)) {
-            foreach ($widths as $width) {
-                $width += [
-                    'type' => $this->config('progress.type'),
-                    'min'  => 0,
-                    'max'  => 100,
-                    'display' => false
-                ];
-                $class = 'progress-bar progress-bar-'.$width['type'];
-                $bars .= $this->div($class,
-                                    $width['display'] ? $width['width'].'%' : '',
-                                    [
-                                        'aria-valuenow' => $width['width'],
-                                        'aria-valuemin' => $width['min'],
-                                        'aria-valuemax' => $width['max'],
-                                        'role' => 'progressbar',
-                                        'style' => 'width: '.$width['width'].'%;'
-                                    ]
-                );
-            }
+        if (!is_array($widths)) {
+            $widths = [
+                array_merge([
+                    'width' => $widths
+                ], $options)
+            ];
         }
-        else {
-            $options += [
+        foreach ($widths as $width) {
+            $width += [
                 'type' => $this->config('progress.type'),
                 'min'  => 0,
                 'max'  => 100,
                 'display' => false
             ];
-            $class = 'progress-bar progress-bar-'.$options['type'];
-            $bars = $this->div($class,
-                               $options['display'] ? $widths.'%' : '',
-                               [
-                                   'aria-valuenow' => $widths,
-                                   'aria-valuemin' => $options['min'],
-                                   'aria-valuemax' => $options['max'],
-                                   'role' => 'progressbar',
-                                   'style' => 'width: '.$widths.'%;'
-                               ]
-            );
-            unset($options['type'], $options['min'],
-                  $options['max'], $options['display']);
+            $class = 'progress-bar progress-bar-'.$width['type'];
+            $content = $this->tag('span', sprintf($options['format'], $width['width']), [
+                'class' => $width['display'] ? '': 'sr-only'
+            ]);
+            $bars .= $this->div($class, $content, [
+                'aria-valuenow' => $width['width'],
+                'aria-valuemin' => $width['min'],
+                'aria-valuemax' => $width['max'],
+                'role' => 'progressbar',
+                'style' => 'width: '.$width['width'].'%;'
+            ]);
         }
         $options = $this->addClass($options, 'progress') ;
         if ($active) {
@@ -322,7 +308,8 @@ class BootstrapHtmlHelper extends HtmlHelper {
             $options = $this->addClass($options, 'progress-striped') ;
         }
         $classes = $options['class'];
-        unset($options['class']) ;
+        unset($options['class'], $options['active'], $options['type'],
+              $options['striped'], $options['format']) ;
         return $this->div($classes, $bars, $options) ;
     }
 
