@@ -46,7 +46,7 @@ class BootstrapFormHelper extends FormHelper {
             'checkbox' => '<input type="checkbox" name="{{name}}" value="{{value}}"{{attrs}}>',
             'checkboxFormGroup' => '{{label}}',
             'checkboxWrapper' => '<div class="checkbox">{{label}}</div>',
-            'checkboxContainer' => '{{h_checkboxContainer_start}}<div class="checkbox">{{content}}</div>{{h_checkboxContainer_end}}',
+            'checkboxContainer' => '{{h_checkboxContainer_start}}<div class="checkbox {{required}}">{{content}}</div>{{h_checkboxContainer_end}}',
             'dateWidget' => '{{year}}{{month}}{{day}}{{hour}}{{minute}}{{second}}{{meridian}}',
             'error' => '<span class="help-block error-message{{h_errorClass}}">{{content}}</span>',
             'errorList' => '<ul>{{content}}</ul>',
