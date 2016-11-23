@@ -14,6 +14,9 @@
  */
 
 $helper = new \Bootstrap\View\Helper\BootstrapHtmlHelper ($this) ;
-echo $helper->alert (h($message), 'warning', $params) ;
+if (!isset($params['escape']) || $params['escape'] !== false) {
+    $message = h($message);
+}
+echo $helper->alert($message, 'warning', $params) ;
 
 ?>
