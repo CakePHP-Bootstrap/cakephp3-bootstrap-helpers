@@ -18,7 +18,7 @@ use Cake\View\Helper\FormHelper;
 
 class BootstrapFormHelper extends FormHelper {
 
-    use BootstrapTrait ;
+    use BootstrapTrait;
 
     public $helpers = [
         'Html',
@@ -26,7 +26,7 @@ class BootstrapFormHelper extends FormHelper {
         'bHtml' => [
             'className' => 'Bootstrap.BootstrapHtml'
         ]
-    ] ;
+    ];
 
     /**
      * Default config for the helper.
@@ -105,13 +105,13 @@ class BootstrapFormHelper extends FormHelper {
         '_default' => ['Cake\View\Widget\BasicWidget'],
     ];
 
-    public $horizontal = false ;
-    public $inline = false ;
+    public $horizontal = false;
+    public $inline = false;
 
     /**
      *
-     * Replace the templates with the ones specified by newTemplates, call the specified function
-     * with the specified parameters, and then restore the old templates.
+     * Replace the templates with the ones specified by newTemplates, call the
+     * specified function with the specified parameters, and then restore the old templates.
      *
      * @params $templates The new templates
      * @params $callback  The function to call
@@ -121,11 +121,13 @@ class BootstrapFormHelper extends FormHelper {
      *
      **/
     protected function _wrapTemplates ($templates, $callback, $params) {
-        $oldTemplates = array_map ([$this, 'templates'], array_combine(array_keys($templates), array_keys($templates))) ;
-        $this->templates ($templates) ;
-        $result = call_user_func_array ($callback, $params) ;
-        $this->templates ($oldTemplates) ;
-        return $result ;
+        $oldTemplates = array_map ([$this, 'templates'],
+                                   array_combine(array_keys($templates),
+                                                 array_keys($templates)));
+        $this->templates ($templates);
+        $result = call_user_func_array ($callback, $params);
+        $this->templates ($oldTemplates);
+        return $result;
     }
 
     /**
@@ -138,7 +140,7 @@ class BootstrapFormHelper extends FormHelper {
      *
      **/
     protected function _matchButton ($html) {
-        return strpos($html, '<button') !== FALSE || strpos($html, 'type="submit"') !== FALSE ;
+        return strpos($html, '<button') !== FALSE || strpos($html, 'type="submit"') !== FALSE;
     }
 
     protected function _getDefaultTemplateVars (&$options) {
@@ -211,15 +213,15 @@ class BootstrapFormHelper extends FormHelper {
         $this->colSize =  $options['columns'];
         $this->horizontal = $options['horizontal'];
         $this->inline = $options['inline'];
-        unset($options['columns'], $options['horizontal'], $options['inline']) ;
+        unset($options['columns'], $options['horizontal'], $options['inline']);
         if ($this->horizontal) {
-            $options = $this->addClass($options, 'form-horizontal') ;
+            $options = $this->addClass($options, 'form-horizontal');
         }
         else if ($this->inline) {
-            $options = $this->addClass($options, 'form-inline') ;
+            $options = $this->addClass($options, 'form-inline');
         }
-        $options['role'] = 'form' ;
-        return parent::create($model, $options) ;
+        $options['role'] = 'form';
+        return parent::create($model, $options);
     }
 
     /**
@@ -228,19 +230,20 @@ class BootstrapFormHelper extends FormHelper {
      *
      **/
     protected function _getColClass ($what, $offset = false) {
-        if ($what === 'error' && isset($this->colSize['error']) && $this->colSize['error'] == 0) {
+        if ($what === 'error'
+            && isset($this->colSize['error']) && $this->colSize['error'] == 0) {
             return $this->_getColClass('label', true).' '.$this->_getColClass('input');
         }
         if (isset($this->colSize[$what])) {
-            return 'col-md-'.($offset ? 'offset-' : '').$this->colSize[$what] ;
+            return 'col-md-'.($offset ? 'offset-' : '').$this->colSize[$what];
         }
-        $classes = [] ;
+        $classes = [];
         foreach ($this->colSize as $cl => $arr) {
             if (isset($arr[$what])) {
-                $classes[] = 'col-'.$cl.'-'.($offset ? 'offset-' : '').$arr[$what] ;
+                $classes[] = 'col-'.$cl.'-'.($offset ? 'offset-' : '').$arr[$what];
             }
         }
-        return implode(' ', $classes) ;
+        return implode(' ', $classes);
     }
 
     protected function _wrapInputGroup ($addonOrButtons) {
@@ -248,19 +251,21 @@ class BootstrapFormHelper extends FormHelper {
             if (is_string($addonOrButtons)) {
                 $addonOrButtons = $this->_makeIcon($addonOrButtons);
                 $addonOrButtons = '<span class="input-group-'.
-                                ($this->_matchButton($addonOrButtons) ? 'btn' : 'addon').'">'.$addonOrButtons.'</span>' ;
+                                ($this->_matchButton($addonOrButtons) ?
+                                 'btn' : 'addon').'">'.$addonOrButtons.'</span>';
             }
             else if ($addonOrButtons !== false) {
-                $addonOrButtons = '<span class="input-group-btn">'.implode('', $addonOrButtons).'</span>' ;
+                $addonOrButtons = '<span class="input-group-btn">'
+                                .implode('', $addonOrButtons).'</span>';
             }
         }
-        return $addonOrButtons ;
+        return $addonOrButtons;
     }
 
     public function prepend ($input, $prepend) {
         $prepend = $this->_wrapInputGroup ($prepend);
         if ($input === null) {
-            return '<div class="input-group">'.$prepend ;
+            return '<div class="input-group">'.$prepend;
         }
         return $this->_wrap($input, $prepend, null);
     }
@@ -268,7 +273,7 @@ class BootstrapFormHelper extends FormHelper {
     public function append ($input, $append) {
         $append = $this->_wrapInputGroup($append);
         if ($input === null) {
-            return $append.'</div>' ;
+            return $append.'</div>';
         }
         return $this->_wrap($input, null, $append);
     }
@@ -278,7 +283,7 @@ class BootstrapFormHelper extends FormHelper {
     }
 
     protected function _wrap ($input, $prepend, $append) {
-        return '<div class="input-group">'.$prepend.$input.$append.'</div>' ;
+        return '<div class="input-group">'.$prepend.$input.$append.'</div>';
     }
 
     /**
@@ -316,20 +321,20 @@ class BootstrapFormHelper extends FormHelper {
         $help = $options['help'];
         unset($options['help']);
         if ($help) {
-            $append .= '<p class="help-block">'.$help.'</p>' ;
+            $append .= '<p class="help-block">'.$help.'</p>';
         }
 
         $inline = $options['inline'];
-        unset ($options['inline']) ;
+        unset ($options['inline']);
 
         if ($options['type'] === 'radio') {
-            $options['templates'] = [] ;
+            $options['templates'] = [];
             if ($inline) {
                 $options['templates'] = [
                     'label' => $this->templates('label'),
                     'radioWrapper' => '{{label}}',
                     'nestingLabel' => '{{hidden}}<label{{attrs}} class="radio-inline">{{input}}{{text}}</label>'
-                ] ;
+                ];
             }
             if ($this->horizontal) {
                 $options['templates']['radioContainer'] = '<div class="form-group">{{content}}</div>';
@@ -344,29 +349,29 @@ class BootstrapFormHelper extends FormHelper {
             'append' => $append
         ];
 
-        return parent::input($fieldName, $options) ;
+        return parent::input($fieldName, $options);
     }
 
     protected function _getDatetimeTemplate ($fields, $options) {
-        $inputs = [] ;
+        $inputs = [];
         foreach ($fields as $field => $in) {
             $in = isset($options[$field]) ? $options[$field] : $in;
             if ($in) {
                 if ($field === 'timeFormat')
-                    $field = 'meridian' ; // Template uses "meridian" instead of timeFormat
+                    $field = 'meridian'; // Template uses "meridian" instead of timeFormat
                 $inputs[$field] = '<div class="col-md-{{colsize}}">{{'.$field.'}}</div>';
             }
         }
         $tplt = $this->templates('dateWidget');
         $tplt = explode('}}{{', substr($tplt, 2, count($tplt) - 3));
-        $html = '' ;
+        $html = '';
         foreach ($tplt as $v) {
             if (isset($inputs[$v])) {
-                $html .= $inputs[$v] ;
+                $html .= $inputs[$v];
             }
         }
         return str_replace('{{colsize}}', round(12 / count($inputs)),
-                           '<div class="row">'.$html.'</div>') ;
+                           '<div class="row">'.$html.'</div>');
     }
 
     /**
@@ -379,7 +384,8 @@ class BootstrapFormHelper extends FormHelper {
      */
     public function file($fieldName, array $options = []) {
 
-        if (!$this->config('useCustomFileInput') || (isset($options['default']) && $options['default'])) {
+        if (!$this->config('useCustomFileInput')
+            || (isset($options['default']) && $options['default'])) {
             return parent::file($fieldName, $options);
         }
 
@@ -413,24 +419,28 @@ class BootstrapFormHelper extends FormHelper {
             'onclick' => "document.getElementById('".$options['id']."').click();"
         ]));
         $buttonLabel = $options['button-label'];
-        unset($options['button-label']) ;
+        unset($options['button-label']);
 
         $fakeButton = $this->button($buttonLabel, array_merge($fakeButtonCustomOptions, [
             'type' => 'button',
             'onclick' => "document.getElementById('".$options['id']."').click();"
         ]));
-        return $fileInput.$this->Html->div('input-group', $this->Html->div('input-group-btn', $fakeButton).$fakeInput) ;
+        return $fileInput.$this->Html->div('input-group',
+                                           $this->Html->div('input-group-btn',
+                                                            $fakeButton).$fakeInput);
     }
 
     /**
-     * Returns a set of SELECT elements for a full datetime setup: day, month and year, and then time.
+     * Returns a set of SELECT elements for a full datetime setup: day, month and year, and
+     * then time.
      *
      * ### Date Options:
      *
      * - `empty` - If true, the empty select option is shown. If a string,
      *   that string is displayed as the empty element.
-     * - `value` | `default` The default value to be used by the input. A value in `$this->data`
-     *   matching the field name will override this value. If no default is provided `time()` will be used.
+     * - `value` | `default` The default value to be used by the input. A value in
+     *   `$this->data matching the field name will override this value. If no default is
+     *    provided `time()` will be used.
      * - `monthNames` If false, 2 digit numbers will be used instead of text.
      *   If an array, the given array will be used.
      * - `minYear` The lowest year to use in the year select
@@ -441,11 +451,13 @@ class BootstrapFormHelper extends FormHelper {
      * ### Time options:
      *
      * - `empty` - If true, the empty select option is shown. If a string,
-     * - `value` | `default` The default value to be used by the input. A value in `$this->data`
-     *   matching the field name will override this value. If no default is provided `time()` will be used.
+     * - `value` | `default` The default value to be used by the input. A value in
+     *   `$this->data` matching the field name will override this value. If no default
+     *   is provided `time()` will be used.
      * - `timeFormat` The time format to use, either 12 or 24.
      * - `interval` The interval for the minutes select. Defaults to 1
-     * - `round` - Set to `up` or `down` if you want to force rounding in either direction. Defaults to null.
+     * - `round` - Set to `up` or `down` if you want to force rounding in either direction.
+     *   Defaults to null.
      * - `second` Set to true to enable seconds drop down.
      *
      * To control the order of inputs, and any elements/content between the inputs you
@@ -459,7 +471,9 @@ class BootstrapFormHelper extends FormHelper {
      * @link http://book.cakephp.org/3.0/en/views/helpers/form.html#creating-date-and-time-inputs
      */
     public function dateTime($fieldName, array $options = []) {
-        $fields = ['year' => true, 'month' => true, 'day' => true, 'hour' => true, 'minute' => true, 'second' => false, 'timeFormat' => false];
+        $fields = ['year' => true, 'month' => true, 'day' => true,
+                   'hour' => true, 'minute' => true, 'second' => false,
+                   'timeFormat' => false];
         return $this->_wrapTemplates ([
             'dateWidget' => $this->_getDatetimeTemplate($fields, $options)
         ], 'parent::dateTime', [$fieldName, $options]);
@@ -516,9 +530,9 @@ class BootstrapFormHelper extends FormHelper {
         $block = $options['bootstrap-block'];
         unset($options['bootstrap-block']);
         if ($block) {
-            $options = $this->addClass($options, 'btn-block') ;
+            $options = $this->addClass($options, 'btn-block');
         }
-        return $options ;
+        return $options;
     }
 
     /**
@@ -532,7 +546,8 @@ class BootstrapFormHelper extends FormHelper {
      *
      */
     public function button($title, array $options = []) {
-        return $this->_easyIcon ('parent::button', $title, $this->_createButtonOptions($options));
+        return $this->_easyIcon ('parent::button', $title,
+                                 $this->_createButtonOptions($options));
     }
 
     /**
@@ -551,12 +566,12 @@ class BootstrapFormHelper extends FormHelper {
             'vertical' => false
         ];
         $vertical = $options['vertical'];
-        unset($options['vertical']) ;
-        $options = $this->addClass($options, 'btn-group') ;
+        unset($options['vertical']);
+        $options = $this->addClass($options, 'btn-group');
         if ($vertical) {
-            $options = $this->addClass($options, 'btn-group-vertical') ;
+            $options = $this->addClass($options, 'btn-group-vertical');
         }
-        return $this->Html->tag('div', implode('', $buttons), $options) ;
+        return $this->Html->tag('div', implode('', $buttons), $options);
     }
 
     /**
@@ -568,8 +583,8 @@ class BootstrapFormHelper extends FormHelper {
      *
      **/
     public function buttonToolbar (array $buttonGroups, array $options = array()) {
-        $options = $this->addClass($options, 'btn-toolbar') ;
-        return $this->Html->tag('div', implode('', $buttonGroups), $options) ;
+        $options = $this->addClass($options, 'btn-toolbar');
+        return $this->Html->tag('div', implode('', $buttonGroups), $options);
     }
 
     /**
@@ -589,9 +604,9 @@ class BootstrapFormHelper extends FormHelper {
      */
     public function dropdownButton ($title, array $menu = [], array $options = []) {
 
-        $options['type'] = false ;
-        $options['data-toggle'] = 'dropdown' ;
-        $options = $this->addClass($options, "dropdown-toggle") ;
+        $options['type'] = false;
+        $options['data-toggle'] = 'dropdown';
+        $options = $this->addClass($options, "dropdown-toggle");
 
         return $this->buttonGroup([
             $this->button($title.' <span class="caret"></span>', $options),
@@ -612,7 +627,7 @@ class BootstrapFormHelper extends FormHelper {
      *
      **/
     public function submit($caption = null, array $options = array()) {
-        return parent::submit($caption, $this->_createButtonOptions($options)) ;
+        return parent::submit($caption, $this->_createButtonOptions($options));
     }
 
     /** SPECIAL FORM **/
@@ -660,24 +675,24 @@ class BootstrapFormHelper extends FormHelper {
             'label'       => $options['label']
         ];
 
-        unset($options['id']) ;
-        unset($options['label']) ;
-        unset($options['placeholder']) ;
+        unset($options['id']);
+        unset($options['label']);
+        unset($options['placeholder']);
 
         $btnName = $options['button'];
-        unset($options['button']) ;
+        unset($options['button']);
 
         $inpOpts['append'] = $this->button($btnName, $btnOpts);
 
         $options['inline'] = (bool)$inpOpts['label'];
 
-        $output = '' ;
+        $output = '';
 
-        $output .= $this->create($model, $options) ;
+        $output .= $this->create($model, $options);
         $output .= $this->input($inpOpts['id'], $inpOpts);
-        $output .= $this->end() ;
+        $output .= $this->end();
 
-        return $output ;
+        return $output;
     }
 
 }
