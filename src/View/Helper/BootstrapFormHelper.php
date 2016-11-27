@@ -399,13 +399,9 @@ class BootstrapFormHelper extends FormHelper {
         ];
 
         $fakeInputCustomOptions = $options['_input'];
-        $fakeInputCustomOptions += [
-            'value' => ''
-        ];
         $fakeButtonCustomOptions = $options['_button'];
         unset($options['_input'], $options['_button']);
 
-        $options += ['secure' => true];
         $options = $this->_initInputField($fieldName, $options);
         unset($options['type']);
         $countLabel = $options['count-label'];
@@ -415,6 +411,9 @@ class BootstrapFormHelper extends FormHelper {
             'onchange' => "document.getElementById('".$options['id']."-input').value = (this.files.length <= 1) ? this.files[0].name : this.files.length + ' ' + '" . $countLabel . "';"
         ]));
 
+        $fakeInputCustomOptions += [
+            'value' => $options['val']['name']
+        ];
         $fakeInput = $this->text($fieldName, array_merge($fakeInputCustomOptions, [
             'name' => $fieldName.'-text',
             'readonly' => 'readonly',
