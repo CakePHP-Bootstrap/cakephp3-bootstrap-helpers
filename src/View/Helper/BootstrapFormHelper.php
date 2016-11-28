@@ -408,7 +408,8 @@ class BootstrapFormHelper extends FormHelper {
         unset($options['count-label']);
         $fileInput = $this->widget('file', array_merge($options, [
             'style' => 'display: none;',
-            'onchange' => "document.getElementById('".$options['id']."-input').value = (this.files.length <= 1) ? this.files[0].name : this.files.length + ' ' + '" . $countLabel . "';"
+            'onchange' => "document.getElementById('".$options['id']."-input').value = (this.files.length <= 1) ? this.files[0].name : this.files.length + ' ' + '" . $countLabel . "';",
+            'escape' => false
         ]));
 
         $fakeInputCustomOptions += [
@@ -418,7 +419,8 @@ class BootstrapFormHelper extends FormHelper {
             'name' => $fieldName.'-text',
             'readonly' => 'readonly',
             'id' => $options['id'].'-input',
-            'onclick' => "document.getElementById('".$options['id']."').click();"
+            'onclick' => "document.getElementById('".$options['id']."').click();",
+            'escape' => false
         ]));
         $buttonLabel = $options['button-label'];
         unset($options['button-label']);
