@@ -176,6 +176,8 @@ class BootstrapNavbarHelper extends Helper {
     /**
      *
      * Add a link to the navbar or to a menu.
+     * Links outside a menu are realized as buttons. Encapsulate links with
+     * beginMenu(), endMenu() to create a horizontal hover menu in the navbar.
      *
      * @param name        The link text
      * @param url         The link URL
@@ -284,8 +286,12 @@ class BootstrapNavbarHelper extends Helper {
 
     /**
      *
-     * Start a new menu, 2 levels: If not in submenu, create a dropdown menu,
-     * oterwize create hover menu.
+     * Start a new menu. Two types of menus exist: Horizontal hover menu in the
+     * navbar (level 0) and vertical dropdown menu (level 1). The menu level is
+     * determined automatically: A dropdown menu needs to be part of a hover menu.
+     * In the hover menu case, pass the options array as the first argument.
+     * Populate the menu with link(), divider(), and sub menus.
+     * Use 'class' => 'navbar-right' option for flush right.
      *
      * @param name The name of the menu
      * @param url A URL for the menu (default null)
