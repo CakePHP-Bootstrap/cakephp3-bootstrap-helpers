@@ -37,60 +37,57 @@ class BootstrapPaginatorHelper extends PaginatorHelper {
             'first' => '<li><a href="{{url}}">{{text}}</a></li>',
             'last' => '<li><a href="{{url}}">{{text}}</a></li>',
             'number' => '<li><a href="{{url}}">{{text}}</a></li>',
-            'current ' => '<li class="active"><a href="{{url}}">{{text}}</a></li>'
-        ]);
-        
-        parent::__construct($view, $config);
-    }
-    
+
+
+    protected $_defaultConfig = [
+        'options' => [],
+        'templates' => [
+            'ellipsis' => '<li class="page-item disabled"><a class="page-link">...</a></li>',
+            'nextActive' => '<li class="page-item"><a class="page-link" href="{{url}}">{{text}}</a></li>',
+            'nextDisabled' => '<li class="page-item disabled"><a class="page-link">{{text}}</a></li>',
+            'prevActive' => '<li class="page-item"><a class="page-link" href="{{url}}">{{text}}</a></li>',
+            'prevDisabled' => '<li class="page-item disabled"><a class="page-link">{{text}}</a></li>',
+            'first' => '<li class="page-item"><a class="page-link" href="{{url}}">{{text}}</a></li>',
+            'last' => '<li class="page-item"><a class="page-link" href="{{url}}">{{text}}</a></li>',
+            'number' => '<li class="page-item"><a class="page-link" href="{{url}}">{{text}}</a></li>',
+            'current' => '<li class="page-item active"><a class="page-link" href="{{url}}">{{text}}</a></li>'
+        ]
+    ];
+
     /**
-     * 
+     *
      * Get pagination link list.
-     * 
+     *
      * @param $options Options for link element
      *
      * Extra options:
      *  - size small/normal/large (default normal)
-     *       
-    **/
-    public function numbers (array $options = array()) {       
-        
-        $class = 'pagination' ;
+     *
+     **/
+    public function numbers(array $options = array())
+    {
 
+        $class = 'pagination';
         if (isset($options['class'])) {
-            $class .= ' '.$options['class'] ;
-            unset($options['class']) ;
+            $class .= ' ' . $options['class'];
+            unset($options['class']);
         }
-        
+
         if (isset($options['size'])) {
             switch ($options['size']) {
-            case 'small':
-                $class .= ' pagination-sm' ;
-                break ;
-            case 'large':
-                $class .= ' pagination-lg' ;
-                break ;
+                case 'small':
+                    $class .= ' pagination-sm';
+                    break;
+                case 'large':
+                    $class .= ' pagination-lg';
+                    break;
             }
-            unset($options['size']) ;
-        }
-          
-        if (!isset($options['before'])) {
-            $options['before'] = '<ul class="'.$class.'">' ;
-        }
-        
-        if (!isset($options['after'])) {
-            $options['after'] = '</ul>' ;
+            unset($options['size']);
         }
 
-        if (isset($options['prev'])) {
-            $options['before'] .= $this->prev($options['prev']) ;
-        }
+        $numbers = parent::numbers($options);
 
-        if (isset($options['next'])) {
-            $options['after'] = $this->next($options['next']).$options['after'] ;
-        }
-                
-        return parent::numbers ($options) ;
+        return '<ul class="' . $class . '">' . $numbers . '</ul>';
     }
 
 
