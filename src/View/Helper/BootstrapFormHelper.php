@@ -395,7 +395,7 @@ class BootstrapFormHelper extends FormHelper {
             'id' => $fieldName,
             'secure' => true,
             'count-label' => __('files selected'),
-            'button-label' => __('Choose File')
+            'button-label' => (isset($options['multiple']) && $options['multiple']) ? __('Choose Files') : __('Choose File')
         ];
 
         $fakeInputCustomOptions = $options['_input'];
@@ -412,9 +412,19 @@ class BootstrapFormHelper extends FormHelper {
             'escape' => false
         ]));
 
-        $fakeInputCustomOptions += [
-            'value' => $options['val']['name']
-        ];
+        if (!empty($options['val']) && is_array($options['val'])) {
+            if (isset($options['val']['name']) || count($options['val']) == 1) {
+                $fakeInputCustomOptions += [
+                    'value' => (isset($options['val']['name'])) ? $options['val']['name'] : $options['val'][0]['name']
+                ];
+            }
+            else {
+                $fakeInputCustomOptions += [
+                    'value' => count($options['val']) . ' ' . $countLabel
+                ];
+            }
+        }
+        
         $fakeInput = $this->text($fieldName, array_merge($fakeInputCustomOptions, [
             'name' => $fieldName.'-text',
             'readonly' => 'readonly',
