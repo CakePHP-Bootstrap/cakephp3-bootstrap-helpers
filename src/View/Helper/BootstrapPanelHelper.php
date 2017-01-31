@@ -26,7 +26,7 @@ class BootstrapPanelHelper extends Helper {
         ]
     ];
 
-    public $_defaultConfig = [
+    protected $_defaultConfig = [
         'collapsible' => false
     ];
 
