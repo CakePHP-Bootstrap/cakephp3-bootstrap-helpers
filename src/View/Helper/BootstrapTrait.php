@@ -55,10 +55,8 @@ trait BootstrapTrait {
      * Add classes to options according to values of bootstrap-type and bootstrap-size
      * for button.
      *
-     * @param $options The initial options with bootstrap-type and/or bootstrat-size values
-     *
-     * @return The new options with class values (btn, and btn-* according to initial options)
-     *
+     * @param array $options The initial options with bootstrap-type and/or bootstrat-size values
+     * @return array The new options with class values (btn, and btn-* according to initial options)
      */
     protected function _addButtonClasses ($options) {
         $options += [
@@ -82,9 +80,8 @@ trait BootstrapTrait {
      *
      * Check weither the specified array is associative or not.
      *
-     * @param $array The array to check.
-     *
-     * @return true if the array is associative, false otherwize.
+     * @param array $array The array to check.
+     * @return bool `true` if the array is associative, `false` otherwize.
      *
      **/
     protected function _isAssociativeArray ($array) {
@@ -95,8 +92,8 @@ trait BootstrapTrait {
      * Try to convert the specified $text to a bootstrap icon. The $text is converted if it matches
      * a format "i:icon-name".
      *
-     * @param $title     The text to convert.
-     * @param $converted If specified, will contains true if the text was converted,
+     * @param string $title The text to convert.
+     * @param false $converted If specified, will contains true if the text was converted,
      *                   false otherwize.
      *
      * @return The icon element if the conversion was successful, otherwize $text.
@@ -121,9 +118,9 @@ trait BootstrapTrait {
      * This method will the function $callback with the specified argument ($title and $options)
      * after applying a filter on them.
      *
-     * @param $callback The method to call.
-     * @param $title    The first argument ($title).
-     * @param $options  The second argument ($options).
+     * @param callable $callback The method to call.
+     * @param string   $title    The first argument ($title).
+     * @param array    $options  The second argument ($options).
      *
      * @return Whatever might be returned by $callback.
      *

@@ -64,7 +64,7 @@ class BootstrapPaginatorHelper extends PaginatorHelper {
      *
      * Get pagination link list.
      *
-     * @param $options Options for link element
+     * @param array $options Options for link element
      *
      * Extra options:
      *  - size small/normal/large (default normal)

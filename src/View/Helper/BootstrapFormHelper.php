@@ -105,7 +105,18 @@ class BootstrapFormHelper extends FormHelper {
         '_default' => ['Cake\View\Widget\BasicWidget'],
     ];
 
+    /**
+     * Horizontal mode enabled/disabled.
+     *
+     * @var bool
+     */
     public $horizontal = false;
+
+    /**
+     * Inline mode enabled/disabled.
+     *
+     * @var bool
+     */
     public $inline = false;
 
     /**
@@ -113,11 +124,11 @@ class BootstrapFormHelper extends FormHelper {
      * Replace the templates with the ones specified by newTemplates, call the
      * specified function with the specified parameters, and then restore the old templates.
      *
-     * @params $templates The new templates
-     * @params $callback  The function to call
-     * @params $params    The arguments for the $callback function
+     * @params array $templates The new templates
+     * @params callable $callback The function to call
+     * @params array $params    The arguments for the $callback function
      *
-     * @return The return value of $callback
+     * @return mixed The return value of $callback
      *
      **/
     protected function _wrapTemplates ($templates, $callback, $params) {
@@ -134,9 +145,9 @@ class BootstrapFormHelper extends FormHelper {
      *
      * Try to match the specified HTML code with a button or a input with submit type.
      *
-     * @param $html The HTML code to check
+     * @param string $html The HTML code to check
      *
-     * @return true if the HTML code contains a button
+     * @return bool true if the HTML code contains a button
      *
      **/
     protected function _matchButton ($html) {
@@ -155,10 +166,10 @@ class BootstrapFormHelper extends FormHelper {
                 'h_formGroup_start' => '<div class="'.$this->_getColClass('input').'">',
                 'h_formGroup_end'   => '</div>',
                 'h_checkboxContainer_start' => '<div class="form-group"><div class="'.$this->_getColClass('label', true)
-                .' '.$this->_getColClass('input').'">',
+                                            .' '.$this->_getColClass('input').'">',
                 'h_checkboxContainer_end' => '</div></div>',
                 'h_radioContainer_start' => '<div class="form-group"><div class="'.$this->_getColClass('label', true)
-                .' '.$this->_getColClass('input').'">',
+                                         .' '.$this->_getColClass('input').'">',
                 'h_radioContainer_end' => '</div></div>',
                 'h_submitContainer_start' => '<div class="'.$this->_getColClass('label', true).' '.$this->_getColClass('input').'">',
                 'h_submitContainer_end' => '</div>',
@@ -187,23 +198,39 @@ class BootstrapFormHelper extends FormHelper {
     }
 
     /**
+     * Returns an HTML form element.
      *
-     * Create a Twitter Bootstrap like form.
+     * ### Options:
      *
-     * New options available:
-     *     - horizontal: boolean, specify if the form is horizontal
-     *     - inline: boolean, specify if the form is inline
-     *     - search: boolean, specify if the form is a search form
+     * - `type` Form method defaults to autodetecting based on the form context. If
+     *   the form context's isCreate() method returns false, a PUT request will be done.
+     * - `method` Set the form's method attribute explicitly.
+     * - `action` The controller action the form submits to, (optional). Use this option if you
+     *   don't need to change the controller from the current request's controller. Deprecated since 3.2, use `url`.
+     * - `url` The URL the form submits to. Can be a string or a URL array. If you use 'url'
+     *    you should leave 'action' undefined.
+     * - `encoding` Set the accept-charset encoding for the form. Defaults to `Configure::read('App.encoding')`
+     * - `enctype` Set the form encoding explicitly. By default `type => file` will set `enctype`
+     *   to `multipart/form-data`.
+     * - `templates` The templates you want to use for this form. Any templates will be merged on top of
+     *   the already loaded templates. This option can either be a filename in /config that contains
+     *   the templates you want to load, or an array of templates to use.
+     * - `context` Additional options for the context class. For example the EntityContext accepts a 'table'
+     *   option that allows you to set the specific Table class the form should be based on.
+     * - `idPrefix` Prefix for generated ID attributes.
+     * - `templateVars` Provide template variables for the formStart template.
      *
-     * Unusable options:
-     *     - inputDefaults
+     * - `horizontal` - Boolean specifying if the form should be horizontal.
+     * - `inline` - Boolean specifying if the form should be inlined.
+     * - `search` - Boolean specifying if the form is a search form.
      *
-     * @param $model The model corresponding to the form
-     * @param $options Options to customize the form
-     *
-     * @return The HTML tags corresponding to the openning of the form
-     *
-     **/
+     * @param mixed $model The context for which the form is being defined. Can
+     *   be an ORM entity, ORM resultset, or an array of meta data. You can use false or null
+     *   to make a model-less form.
+     * @param array $options An array of html attributes and options.
+     * @return string An formatted opening FORM tag.
+     * @link http://book.cakephp.org/3.0/en/views/helpers/form.html#Cake\View\Helper\FormHelper::create
+     */
     public function create($model = null, Array $options = array()) {
         $options += [
             'columns' => $this->config('columns'),
@@ -228,6 +255,11 @@ class BootstrapFormHelper extends FormHelper {
      *
      * Return the col size class for the specified column (label, input or error).
      *
+     * @param string $what
+     * @param bool $offset Add the offset prefix.
+     *
+     * @return string
+     *
      **/
     protected function _getColClass ($what, $offset = false) {
         if ($what === 'error'
@@ -251,12 +283,12 @@ class BootstrapFormHelper extends FormHelper {
             if (is_string($addonOrButtons)) {
                 $addonOrButtons = $this->_makeIcon($addonOrButtons);
                 $addonOrButtons = '<span class="input-group-'.
-                                ($this->_matchButton($addonOrButtons) ?
-                                 'btn' : 'addon').'">'.$addonOrButtons.'</span>';
+                                  ($this->_matchButton($addonOrButtons) ?
+                                   'btn' : 'addon').'">'.$addonOrButtons.'</span>';
             }
             else if ($addonOrButtons !== false) {
                 $addonOrButtons = '<span class="input-group-btn">'
-                                .implode('', $addonOrButtons).'</span>';
+                                 .implode('', $addonOrButtons).'</span>';
             }
         }
         return $addonOrButtons;
@@ -287,16 +319,37 @@ class BootstrapFormHelper extends FormHelper {
     }
 
     /**
+     * Generates a form input element complete with label and wrapper div
      *
-     * Create & return an input block (Twitter Boostrap Like).
+     * ### Options
      *
-     * New options:
-     *      - prepend:
-     *          -> string: Add <span class="add-on"> before the input
-     *          -> array: Add elements in array before inputs
-     *     - append: Same as prepend except it add elements after input
+     * See each field type method for more information. Any options that are part of
+     * $attributes or $options for the different **type** methods can be included in `$options` for input().
+     * Additionally, any unknown keys that are not in the list below, or part of the selected type's options
+     * will be treated as a regular HTML attribute for the generated input.
      *
-     **/
+     * - `type` - Force the type of widget you want. e.g. `type => 'select'`
+     * - `label` - Either a string label, or an array of options for the label. See FormHelper::label().
+     * - `options` - For widgets that take options e.g. radio, select.
+     * - `error` - Control the error message that is produced. Set to `false` to disable any kind of error reporting (field
+     *    error and error messages).
+     * - `empty` - String or boolean to enable empty select box options.
+     * - `nestedInput` - Used with checkbox and radio inputs. Set to false to render inputs outside of label
+     *   elements. Can be set to true on any input to force the input inside the label. If you
+     *   enable this option for radio buttons you will also need to modify the default `radioWrapper` template.
+     * - `templates` - The templates you want to use for this input. Any templates will be merged on top of
+     *   the already loaded templates. This option can either be a filename in /config that contains
+     *   the templates you want to load, or an array of templates to use.
+     * - `prepend` - String or array of elements to prepend.
+     * - `append` - String or array of elements to append.
+     * - `help` - String containing an help message for the input.
+     * - `inline`
+     *
+     * @param string $fieldName This should be "modelname.fieldname"
+     * @param array $options Each type of input takes different options.
+     * @return string Completed form widget.
+     * @link http://book.cakephp.org/3.0/en/views/helpers/form.html#creating-form-inputs
+     */
     public function input($fieldName, array $options = array()) {
 
         $options += [
@@ -424,7 +477,7 @@ class BootstrapFormHelper extends FormHelper {
                 ];
             }
         }
-        
+
         $fakeInput = $this->text($fieldName, array_merge($fakeInputCustomOptions, [
             'name' => $fieldName.'-text',
             'readonly' => 'readonly',
@@ -550,14 +603,21 @@ class BootstrapFormHelper extends FormHelper {
     }
 
     /**
+     * Creates a `<button>` tag.
      *
-     * Create & return a Twitter Like button.
+     * The type attribute defaults to `type="submit"`
+     * You can change it to a different value by using `$options['type']`.
      *
-     * ### New options:
+     * ### Options:
      *
-     * - bootstrap-type: Twitter bootstrap button type (primary, danger, info, etc.)
-     * - bootstrap-size: Twitter bootstrap button size (mini, small, large)
+     * - `escape` - HTML entity encode the $title of the button. Defaults to false.
+     * - `bootstrap-type` - Twitter bootstrap button type (primary, danger, info, etc.)
+     * - `bootstrap-size` - Twitter bootstrap button size (mini, small, large)
      *
+     * @param string $title The button's caption. Not automatically HTML encoded
+     * @param array $options Array of options and HTML attributes.
+     * @return string A HTML button tag.
+     * @link http://book.cakephp.org/3.0/en/views/helpers/form.html#creating-button-elements
      */
     public function button($title, array $options = []) {
         return $this->_easyIcon ('parent::button', $title,
@@ -565,16 +625,16 @@ class BootstrapFormHelper extends FormHelper {
     }
 
     /**
-     *
      * Create & return a Twitter Like button group.
      *
-     * @param $buttons The buttons in the group
-     * @param $options Options for div method
+     * ### Options:
      *
-     * Extra options:
-     *  - vertical true/false
+     * - `vertical` - Boolean specifying if the group should be vertical (default false).
      *
-     **/
+     * @param array $buttons The buttons in the group
+     * @param array $options Options for div method
+     * @return string A HTML string containing the button group.
+     */
     public function buttonGroup ($buttons, array $options = []) {
         $options += [
             'vertical' => false
@@ -589,13 +649,13 @@ class BootstrapFormHelper extends FormHelper {
     }
 
     /**
-     *
      * Create & return a Twitter Like button toolbar.
      *
-     * @param $buttons The groups in the toolbar
-     * @param $options Options for div method
+     * @param array $buttons The groups in the toolbar
+     * @param array $options Options for div method
+     * @return string A HTML string containing the button toolbar
      *
-     **/
+     */
     public function buttonToolbar (array $buttonGroups, array $options = array()) {
         $options = $this->addClass($options, 'btn-toolbar');
         return $this->Html->tag('div', implode('', $buttonGroups), $options);
@@ -610,11 +670,11 @@ class BootstrapFormHelper extends FormHelper {
      *     $this->Html->dropdown($menu, [])
      *   ]);
      *
-     * @param $title The text in the button
-     * @param $menu HTML tags corresponding to menu options (which will be wrapped
+     * @param string $title The text in the button
+     * @param array $menu HTML tags corresponding to menu options (which will be wrapped
      *          into <li> tag). To add separator, pass 'divider'.
-     * @param $options Options for button
-     *
+     * @param array $options Options for button
+     * @return string A HTML string containing the dropdown.
      */
     public function dropdownButton ($title, array $menu = [], array $options = []) {
 
@@ -630,16 +690,26 @@ class BootstrapFormHelper extends FormHelper {
     }
 
     /**
+     * Creates a submit button element. This method will generate `<input />` elements that
+     * can be used to submit, and reset forms by using $options. image submits can be created by supplying an
+     * image path for $caption.
      *
-     * Create & return a Twitter Like submit input.
+     * ### Options
      *
-     * New options:
-     *     - bootstrap-type: Twitter bootstrap button type (primary, danger, info, etc.)
-     *     - bootstrap-size: Twitter bootstrap button size (mini, small, large)
+     * - `type` - Set to 'reset' for reset inputs. Defaults to 'submit'
+     * - `templateVars` - Additional template variables for the input element and its container.
+     * - `bootstrap-type` - Twitter bootstrap button type (primary, danger, info, etc.)
+     * - `bootstrap-size` - Twitter bootstrap button size (mini, small, large)
+     * - Other attributes will be assigned to the input element.
      *
-     * Unusable options: div
-     *
-     **/
+     * @param string|null $caption The label appearing on the button OR if string contains :// or the
+     *  extension .jpg, .jpe, .jpeg, .gif, .png use an image if the extension
+     *  exists, AND the first character is /, image is relative to webroot,
+     *  OR if the first character is not /, image is relative to webroot/img.
+     * @param array $options Array of options. See above.
+     * @return string A HTML submit button
+     * @link http://book.cakephp.org/3.0/en/views/helpers/form.html#creating-buttons-and-submit-elements
+     */
     public function submit($caption = null, array $options = array()) {
         return parent::submit($caption, $this->_createButtonOptions($options));
     }
@@ -650,10 +720,10 @@ class BootstrapFormHelper extends FormHelper {
      *
      * Create a basic bootstrap search form.
      *
-     * @param $model The model of the form
-     * @param $options The options that will be pass to the BootstrapForm::create method
-     * @param $inpOpts The options that will be pass to the BootstrapForm::input method
-     * @param $btnOpts The options that will be pass to the BootstrapForm::button method
+     * @param mixed $model The model of the form
+     * @param array $options The options that will be pass to the BootstrapForm::create method
+     * @param array $inpOpts The options that will be pass to the BootstrapForm::input method
+     * @param array $btnOpts The options that will be pass to the BootstrapForm::button method
      *
      * Extra options:
      *  - id          ID of the input (and fieldname)
@@ -664,7 +734,8 @@ class BootstrapFormHelper extends FormHelper {
      *  - _button     Options for the button (overrided by $btnOpts)
      *
      **/
-    public function searchForm ($model = null, $options = [], $inpOpts = [], $btnOpts = []) {
+    public function searchForm($model = null, array $options = [],
+                               array $inpOpts = [], array $btnOpts = []) {
 
         $options += [
             'id'          => 'search',

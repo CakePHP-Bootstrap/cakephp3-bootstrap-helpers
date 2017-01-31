@@ -86,8 +86,8 @@ class BootstrapNavbarHelper extends Helper {
      *
      * Create a new navbar.
      *
-     * @param $brand
-     * @param options Options passed to tag method for outer navbar div
+     * @param string $brand
+     * @param array $options Options passed to tag method for outer navbar div
      *
      * Extra options:
      *  - fixed: false, 'top', 'bottom'
@@ -179,10 +179,10 @@ class BootstrapNavbarHelper extends Helper {
      * Links outside a menu are realized as buttons. Encapsulate links with
      * beginMenu(), endMenu() to create a horizontal hover menu in the navbar.
      *
-     * @param name        The link text
-     * @param url         The link URL
-     * @param options     Options passed to the tag method (for the li tag)
-     * @param linkOptions Options passed to the link method
+     * @param string $name The link text
+     * @param string|array $url The link URL
+     * @param array $options Options passed to the tag method (for the li tag)
+     * @param array $linkOptions Options passed to the link method
      *
      **/
     public function link ($name, $url = '', array $options = [], array $linkOptions = []) {
@@ -200,8 +200,8 @@ class BootstrapNavbarHelper extends Helper {
      *
      * Add a button to the navbar.
      *
-     * @param name    Text of the button.
-     * @param options Options sent to the BootstrapFormHelper::button method.
+     * @param string $name Text of the button.
+     * @param array $options Options sent to the BootstrapFormHelper::button method.
      *
      **/
     public function button ($name, array $options = []) {
@@ -213,7 +213,7 @@ class BootstrapNavbarHelper extends Helper {
      *
      * Add a divider to the navbar or to a menu.
      *
-     * @param options Options sent to the tag method.
+     * @param array $options Options sent to the tag method.
      *
      **/
     public function divider (array $options = []) {
@@ -226,8 +226,8 @@ class BootstrapNavbarHelper extends Helper {
      *
      * Add a header to the navbar or to a menu, should not be used outside a submenu.
      *
-     * @param name    Title of the header.
-     * @param options Options sent to the tag method.
+     * @param string $name Title of the header.
+     * @param array $options Options sent to the tag method.
      *
      **/
     public function header ($name, array $options = []) {
@@ -239,8 +239,8 @@ class BootstrapNavbarHelper extends Helper {
      *
      * Add a text to the navbar.
      *
-     * @param text The text message.
-     * @param options Options passed to the tag method (+ extra options, see above).
+     * @param string $text The text message.
+     * @param array $options Options passed to the tag method (+ extra options, see above).
      *
      * Extra options:
      *  - tag The HTML tag to use (default 'p')
@@ -271,8 +271,8 @@ class BootstrapNavbarHelper extends Helper {
      *
      * Add a serach form to the navbar.
      *
-     * @param model   Model for BootstrapFormHelper::searchForm method.
-     * @param options Options for BootstrapFormHelper::searchForm method.
+     * @param mixed $model Model for BootstrapFormHelper::searchForm method.
+     * @param array $options Options for BootstrapFormHelper::searchForm method.
      *
      **/
     public function searchForm ($model = null, $options = []) {
@@ -293,9 +293,9 @@ class BootstrapNavbarHelper extends Helper {
      * Populate the menu with link(), divider(), and sub menus.
      * Use 'class' => 'navbar-right' option for flush right.
      *
-     * @param name The name of the menu
-     * @param url A URL for the menu (default null)
-     * @param options Options passed to the tag method (+ extra options, see above)
+     * @param string $name The name of the menu
+     * @param string|array $url A URL for the menu (default null)
+     * @param array $options Options passed to the tag method (+ extra options, see above)
      *
      **/
     public function beginMenu ($name = null, $url = null, $options = [],

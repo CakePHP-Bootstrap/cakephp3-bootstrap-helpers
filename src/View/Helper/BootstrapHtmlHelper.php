@@ -71,18 +71,21 @@ class BootstrapHtmlHelper extends HtmlHelper {
      *
      * Create a glyphicon or font awesome icon depending on $this->_useFontAwesome.
      *
-     * @param $icon Name of the icon.
-     *
-     **/
-    public function icon ($icon, $options = []) {
+     * @param string $icon Name of the icon
+     * @param array $options Array of options.
+     * @return string A HTML icon.
+     */
+    public function icon ($icon, array $options = []) {
         return $this->config('useFontAwesome')?
-            $this->faIcon($icon, $options) : $this->glIcon($icon, $options);
+               $this->faIcon($icon, $options) : $this->glIcon($icon, $options);
     }
 
     /**
      * Create a font awesome icon.
      *
-     * @param $icon Name of the icon.
+     * @param string $icon Name of the icon
+     * @param array $options Array of options.
+     * @return string A HTML icon.
      */
     public function faIcon ($icon, $options = []) {
         $options = $this->addClass($options, 'fa');
@@ -97,7 +100,9 @@ class BootstrapHtmlHelper extends HtmlHelper {
     /**
      * Create a glyphicon icon.
      *
-     * @param $icon Name of the icon.
+     * @param string $icon Name of the icon
+     * @param array $options Array of options.
+     * @return string A HTML icon.
      */
     public function glIcon ($icon, $options = []) {
         $options = $this->addClass($options, 'glyphicon');
@@ -113,17 +118,19 @@ class BootstrapHtmlHelper extends HtmlHelper {
      *
      * Create a Twitter Bootstrap span label.
      *
-     * @param text The label text
-     * @param type The label type (default, primary, success, warning, info, danger)
-     * @param options Options for span
-     *
      * The second parameter may either be $type or $options (in this case, the third parameter
      * is useless, and the label type can be specified in the $options array).
      *
-     * Extra options
-     *  - type The type of the label (useless if $type specified)
+     * ### Options
      *
-     **/
+     * - `type` - The type of the label (see label.type in configuration for the default value)
+     * - Other attributes will be assigned to the span element.
+     *
+     * @param string $text The label text
+     * @param string|array $type The label type (default, primary, success, warning, info, danger)
+     * @param array $options Array of options. See above.
+     * @return A HTML label element
+     */
     public function label ($text, $type = null, $options = []) {
         if (is_string($type)) {
             $options['type'] = $type ;
@@ -145,26 +152,34 @@ class BootstrapHtmlHelper extends HtmlHelper {
      *
      * Create a Twitter Bootstrap span badge.
      *
-     * @param text The badge text
-     * @param options Options for span
-     *
-     *
-     **/
+     * @param string $text The badge text
+     * @param array $options Array of attributes for the span element.
+     */
     public function badge ($text, $options = []) {
         $options = $this->addClass($options, 'badge') ;
         return $this->tag('span', $text, $options) ;
     }
 
+
     /**
+     * Returns breadcrumbs as a (x)html list
      *
-     * Get crumb lists in a HTML list, with bootstrap like style.
+     * This method uses HtmlHelper::tag() to generate list and its elements. Works
+     * similar to HtmlHelper::getCrumbs(), so it uses options which every
+     * crumb was added with.
      *
-     * @param $options Options for list
-     * @param $startText Text to insert before list
+     * ### Options
      *
-     * Unusable options:
-     *      - Separator
-     **/
+     * - `firstClass` Class for wrapper tag on the first breadcrumb, defaults to 'first'
+     * - `lastClass` Class for wrapper tag on current active page, defaults to 'last'
+     *
+     * @param array $options Array of HTML attributes to apply to the generated list elements.
+     * @param string|array|bool $startText This will be the first crumb, if false it defaults to first crumb in array. Can
+     *   also be an array, see `HtmlHelper::getCrumbs` for details.
+     * @return string|null Breadcrumbs HTML list.
+     * @link http://book.cakephp.org/3.0/en/views/helpers/html.html#creating-breadcrumb-trails-with-htmlhelper
+     * @deprecated 3.3.6 Use the BreadcrumbsHelper instead
+     */
     public function getCrumbList(array $options = [], $startText = false) {
         $options['separator'] = '' ;
         $options = $this->addClass($options, 'breadcrumb') ;
@@ -175,18 +190,19 @@ class BootstrapHtmlHelper extends HtmlHelper {
      *
      * Create a Twitter Bootstrap style alert block, containing text.
      *
-     * @param $text The alert text
-     * @param $type The type of the alert
-     * @param $options Options that will be passed to Html::div method
-     *
      * The second parameter may either be $type or $options (in this case, the third parameter
      * is useless, and the label type can be specified in the $options array).
      *
-     * Available BootstrapHtml options:
-     *      - type: string, type of alert (default, error, info, success ; useless if
-     *    $type is specified)
+     * ### Options
      *
-     **/
+     * - `type` - The type of the label (see label.type in configuration for the default value)
+     * - Other attributes will be assigned to the span element.
+     *
+     * @param string $text The alert text
+     * @param string|array $type The type of the alert
+     * @param array $options Options that will be passed to Html::div method
+     * @return string A HTML bootstrap alert element
+     */
     public function alert ($text, $type = null, $options = []) {
         if (is_string($type)) {
             $options['type'] = $type ;
@@ -217,16 +233,18 @@ class BootstrapHtmlHelper extends HtmlHelper {
     /**
      * Create a Twitter Bootstrap style tooltip.
      *
-     * @param $text The HTML tag inner text.
-     * @param $tooltip The tooltip text.
-     * @param $options
+     * ### Options
      *
-     * @options tag The tag to use (default 'span').
-     * @options data-toggle HTML attribute (default 'tooltip').
-     * @options placement HTML attribute (default from config).
-     * @optioms title HTML attribute (default $tooltip).
+     * - `tag` - The tag to use (default 'span')
+     * - `data-toggle` - The 'data-toggle' HTML attribute (default 'tooltip')
+     * - `placement` - HTML attribute (see configuration value of tooltip.placement for default)
+     * - `title` - The title of the tooltip (default to $tooltip)
+     * - Other attributes will be assigned to the span element.
      *
-     * @return The text wrapped in the specified tag with a tooltip.
+     * @param string $text The HTML tag inner text.
+     * @param string $tooltip The tooltip text.
+     * @param array $options An array of options. See above.
+     * @return string The text wrapped in the specified HTML tag with a tooltip.
      *
      **/
     public function tooltip($text, $tooltip, $options = []) {
@@ -246,15 +264,15 @@ class BootstrapHtmlHelper extends HtmlHelper {
      *
      * Create a Twitter Bootstrap style progress bar.
      *
-     * @param $widths
-     *      - The width (in %) of the bar (style primary, without display)
-     *      - An array of bar, with (for each bar) :
-     *        - width (only field required)
-     *        - type (primary, info, danger, success, warning, default is primary)
-     *        - min (integer, default 0)
-     *        - max (integer, default 100)
-     *        - display (boolean, default false, for text display)
-     * @param $options Options that will be passed to Html::div method (only for main div)
+     * @param int|array $widths
+     *   - The width (in %) of the bar (style primary, without display)
+     *   - An array of bar, with (for each bar) :
+     *      - width (only field required)
+     *      - type (primary, info, danger, success, warning, default is primary)
+     *      - min (integer, default 0)
+     *      - max (integer, default 100)
+     *      - display (boolean, default false, for text display)
+     * @param array $options Array of options that will be passed to Html::div
      *
      * If $widths is only a integer (first case), $options may contains value for the fields
      * specified above.
@@ -264,7 +282,7 @@ class BootstrapHtmlHelper extends HtmlHelper {
      *      - active: boolean, specify if progress bar should be active
      *
      **/
-    public function progress ($widths, $options = []) {
+    public function progress ($widths, array $options = []) {
         $options += [
             'striped' => false,
             'active'  => false,
@@ -317,9 +335,9 @@ class BootstrapHtmlHelper extends HtmlHelper {
      *
      * Create & return a twitter bootstrap dropdown menu.
      *
-     * @param $menu HTML tags corresponding to menu options (which will be wrapped
+     * @param array $menu HTML tags corresponding to menu options (which will be wrapped
      *              into <li> tag). To add separator, pass 'divider'.
-     * @param $options Attributes for the wrapper (change it with tag)
+     * @param array $options Attributes for the wrapper (change it with tag)
      *
      */
     public function dropdown (array $menu = [], array $options = []) {
@@ -364,9 +382,9 @@ class BootstrapHtmlHelper extends HtmlHelper {
      * displaying, for example, a list of products that would require
      * more than the maximum number of columns per row.
      *
-     * @param $breakIndex int|string divisible index that will trigger a new row
-     * @param $data array collection of data used to render each column
-     * @param $determineContent callable a callback that will be called with the
+     * @param int|string $breakIndex Divisible index that will trigger a new row
+     * @param array $data Collection of data used to render each column
+     * @param callable $determineContent A callback that will be called with the
      * data required to render an individual column
      * @return string
      */
