@@ -25,7 +25,7 @@ class BootstrapBreadcrumbsHelper extends BreadcrumbsHelper {
      */
     protected $_defaultConfig = [
         'templates' => [
-            'wrapper' => '<ol class="breadcrumb{{attrs.class}}"{{attrs}}">{{content}}</ol>',
+            'wrapper' => '<ol class="breadcrumb{{attrs.class}}"{{attrs}}>{{content}}</ol>',
             'item' => '<li{{attrs}}><a href="{{url}}"{{innerAttrs}}>{{title}}</a></li>',
             'itemWithoutLink' => '<li class="active{{attrs.class}}"{{attrs}}>{{title}}</li>',
             'separator' => ''
