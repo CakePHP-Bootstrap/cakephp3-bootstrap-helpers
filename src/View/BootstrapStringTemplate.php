@@ -22,11 +22,12 @@ class BootstrapStringTemplate extends StringTemplate {
     /**
      * Compile templates into a more efficient printf() compatible format.
      *
-     * @param array $templates The template names to compile. If empty all templates will be compiled.
+     * @param array $templates The template names to compile. If empty all templates will
+     * be compiled.
+     *
      * @return void
      */
-    protected function _compileTemplates(array $templates = [])
-    {
+    protected function _compileTemplates(array $templates = []) {
         if (empty($templates)) {
             $templates = array_keys($this->_config);
         }
@@ -35,7 +36,6 @@ class BootstrapStringTemplate extends StringTemplate {
             if ($template === null) {
                 $this->_compiled[$name] = [null, null];
             }
-
             preg_match_all('#\{\{([\w.]+)\}\}#', $template, $matches);
             $this->_compiled[$name] = [
                 str_replace($matches[0], '%s', $template),
@@ -48,23 +48,25 @@ class BootstrapStringTemplate extends StringTemplate {
      * Format a template string with $data
      *
      * @param string $name The template name.
-     * @param array $data The data to insert.
+     * @param array  $data The data to insert.
+     *
      * @return string
     */
-    public function format($name, array $data)
-    {
+    public function format($name, array $data) {
         if (!isset($this->_compiled[$name])) {
             return '';
         }
         list($template, $placeholders) = $this->_compiled[$name];
-        /* If there is a {{attrs.class}} block in $template, remove classes from $data['attrs']
-           and put them in $data['attrs.class']. */
+        // If there is a {{attrs.xxxx}} block in $template, remove the xxxx attribute
+        // from $data['attrs'] and add its content to $data['attrs.class'].
         if (isset($data['attrs'])) {
             foreach ($placeholders as $placeholder) {
                 if (substr($placeholder, 0, 6) == 'attrs.'
                     && in_array('attrs.'.substr($placeholder, 6), $placeholders)
-                    && preg_match('#'.substr($placeholder, 6).'="([^"]+)"#', $data['attrs'], $matches) > 0) {
-                    $data['attrs'] = preg_replace('#'.substr($placeholder, 6).'="[^"]+"#', '', $data['attrs']);
+                    && preg_match('#'.substr($placeholder, 6).'="([^"]+)"#',
+                                  $data['attrs'], $matches) > 0) {
+                    $data['attrs'] = preg_replace('#'.substr($placeholder, 6).'="[^"]+"#',
+                                                  '', $data['attrs']);
                     $data[$placeholder] = ' '.trim($matches[1]);
                 }
             }
