@@ -19,18 +19,18 @@ trait BootstrapTrait {
     /**
      * Set to false to disable easy icon processing.
      *
-     * @var boolean
+     * @var bool
      */
-    public $easyIcon = true ;
+    public $easyIcon = true;
 
     /**
-     * Adds the given class to the element options
+     * Adds the given class to the element options.
      *
-     * @param array $options Array options/attributes to add a class to
-     * @param string|array $class The class name being added.
-     * @param string $key the key to use for class.
+     * @param array        $options Array of options/attributes to add a class to.
+     * @param string|array $class   The class names to be added.
+     * @param string       $key     The key to use for class (default to `'class'`).
      *
-     * @return array Array of options with $key set.
+     * @return array Array of options with `$key` set or updated.
      */
     public function addClass(array $options = [], $class = null, $key = 'class') {
         if (!is_array($class)) {
@@ -48,17 +48,20 @@ trait BootstrapTrait {
         $class = array_unique($class);
         $class = array_filter($class);
         $options[$key] = implode(' ', $class);
-        return $options ;
+        return $options;
     }
 
     /**
-     * Add classes to options according to values of bootstrap-type and bootstrap-size
-     * for button.
+     * Add classes to options according to the default values of bootstrap-type
+     * and bootstrap-size for button (see configuration).
      *
-     * @param array $options The initial options with bootstrap-type and/or bootstrat-size values
-     * @return array The new options with class values (btn, and btn-* according to initial options)
+     * @param array $options The initial options with bootstrap-type and/or
+     * bootstrat-size values.
+     *
+     * @return array The new options with class values (btn, and btn-* according to
+     * initial options).
      */
-    protected function _addButtonClasses ($options) {
+    protected function _addButtonClasses($options) {
         $options += [
             'bootstrap-type' => $this->config('buttons.type'),
             'bootstrap-size' => false
@@ -73,69 +76,68 @@ trait BootstrapTrait {
         if ($size) {
             $options = $this->addClass($options, 'btn-'.$size);
         }
-        return $options ;
+        return $options;
     }
 
     /**
-     *
      * Check weither the specified array is associative or not.
      *
      * @param array $array The array to check.
-     * @return bool `true` if the array is associative, `false` otherwize.
      *
-     **/
-    protected function _isAssociativeArray ($array) {
+     * @return bool `true` if the array is associative, `false` otherwize.
+     */
+    protected function _isAssociativeArray($array) {
         return array_keys($array) !== range(0, count($array) - 1);
     }
 
     /**
-     * Try to convert the specified $text to a bootstrap icon. The $text is converted if it matches
-     * a format "i:icon-name".
+     * Try to convert the specified string to a bootstrap icon. The string is converted if
+     * it matches a format `i:icon-name` (leading and trailing spaces or ignored) and if
+     * easy-icon is activated.
      *
-     * @param string $title The text to convert.
-     * @param false $converted If specified, will contains true if the text was converted,
-     *                   false otherwize.
+     * **Note:** This function will currently fail if the Html helper associated with the
+     * view is not BootstrapHtmlHelper.
      *
-     * @return The icon element if the conversion was successful, otherwize $text.
+     * @param string $text      The string to convert.
+     * @param bool   $converted If specified, will contains `true` if the text was converted,
+     * `false` otherwize.
      *
-     * Note: This function will currently fail if the Html helper associated with the view is not
-     * BootstrapHtmlHelper.
-     *
-    **/
-    protected function _makeIcon ($title, &$converted = false) {
-        $converted = false ;
+     * @return string The text after conversion.
+     */
+    protected function _makeIcon($text, &$converted = false) {
+        $converted = false;
         if (!$this->easyIcon) {
-            return $title ;
+            return $text;
         }
-        $title = preg_replace_callback('#(^|\s+)i:([a-zA-Z0-9\\-_]+)(\s+|$)#', function ($matches) {
-            return $matches[1].$this->_View->Html->icon($matches[2]).$matches[3];
-        }, $title, -1, $count);
+        $text = preg_replace_callback(
+            '#(^|\s+)i:([a-zA-Z0-9\\-_]+)(\s+|$)#', function ($matches) {
+                return $matches[1].$this->_View->Html->icon($matches[2]).$matches[3];
+            }, $text, -1, $count);
         $converted = (bool)$count;
-        return $title ;
+        return $text;
     }
 
     /**
-     * This method will the function $callback with the specified argument ($title and $options)
-     * after applying a filter on them.
+     * This method calls the given callback with the specified argument (`$title` and
+     * `$options`) after applying a filter on them.
      *
-     * @param callable $callback The method to call.
-     * @param string   $title    The first argument ($title).
-     * @param array    $options  The second argument ($options).
-     *
-     * @return Whatever might be returned by $callback.
-     *
-     * Note: Currently this method only works for function that take
+     * **Note:** Currently this method only works for function that take
      * two arguments ($title and $options).
      *
-    **/
-    protected function _easyIcon ($callback, $title, $options) {
-        $title = $this->_makeIcon ($title, $converted);
+     * @param callable $callback The callback.
+     * @param string   $title    The first argument for the callback.
+     * @param array    $options  The second argument for the calback.
+     *
+     * @return mixed Whatever might be returned by $callback.
+     */
+    protected function _easyIcon($callback, $title, $options) {
+        $title = $this->_makeIcon($title, $converted);
         if ($converted) {
             $options += [
                 'escape' => false
             ];
         }
-        return call_user_func ($callback, $title, $options) ;
+        return call_user_func($callback, $title, $options);
     }
 
 }
