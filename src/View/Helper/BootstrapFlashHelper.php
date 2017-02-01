@@ -18,48 +18,27 @@ use Cake\View\Helper\FlashHelper;
 
 class BootstrapFlashHelper extends FlashHelper {
 
-    use BootstrapTrait ;
-
-    protected $_bootstrapTemplates = ['info', 'error', 'success', 'warning'] ;
+    use BootstrapTrait;
 
     /**
-     * Used to render the message set in FlashComponent::set()
+     * Available bootstrap templates for alert.
      *
-     * In your view: $this->Flash->render('somekey');
-     * Will default to flash if no param is passed
+     * @var array
+     */
+    protected $_bootstrapTemplates = ['info', 'error', 'success', 'warning'];
+
+    /**
+     * Used to render the message set in FlashComponent::set().
      *
-     * You can pass additional information into the flash message generation. This allows you
-     * to consolidate all the parameters for a given type of flash message into the view.
+     * @param string $key     The [Flash.]key you are rendering in the view.
+     * @param array  $options Additional options to use for the creation of this
+     * flash message. Supports the 'params', and 'element' keys that are used in the helper.
      *
-     * ```
-     * echo $this->Flash->render('flash', ['params' => ['name' => $user['User']['name']]]);
-     * ```
-     *
-     * This would pass the current user's name into the flash message, so you could create personalized
-     * messages without the controller needing access to that data.
-     *
-     * Lastly you can choose the element that is used for rendering the flash message. Using
-     * custom elements allows you to fully customize how flash messages are generated.
-     *
-     * ```
-     * echo $this->Flash->render('flash', ['element' => 'my_custom_element']);
-     * ```
-     *
-     * If you want to use an element from a plugin for rendering your flash message
-     * you can use the dot notation for the plugin's element name:
-     *
-     * ```
-     * echo $this->Flash->render('flash', [
-     *   'element' => 'MyPlugin.my_custom_element',
-     * ]);
-     * ```
-     *
-     * @param string $key The [Flash.]key you are rendering in the view.
-     * @param array $options Additional options to use for the creation of this flash message.
-     *    Supports the 'params', and 'element' keys that are used in the helper.
      * @return string|void Rendered flash message or null if flash key does not exist
      *   in session.
      * @throws \UnexpectedValueException If value for flash settings key is not an array.
+     *
+     * @link https://book.cakephp.org/3.0/en/views/helpers/flash.html
      */
     public function render($key = 'flash', array $options = []) {
         if (!$this->request->session()->check("Flash.$key")) {
