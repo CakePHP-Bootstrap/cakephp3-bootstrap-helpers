@@ -22,6 +22,7 @@ class BootstrapBreadcrumbsHelper extends BreadcrumbsHelper {
      * Default config for the helper.
      *
      * @var array
+     * @link https://api.cakephp.org/3.3/class-Cake.View.Helper.BreadcrumbsHelper.html
      */
     protected $_defaultConfig = [
         'templates' => [
