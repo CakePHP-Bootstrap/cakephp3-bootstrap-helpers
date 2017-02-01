@@ -54,9 +54,12 @@ class BootstrapHtmlHelper extends HtmlHelper {
         'useFontAwesome' => false,
         'progressTextFormat' => '%d%% Complete',
         'tooltip' => [
-            'placement' => 'right'
+            'tag'       => 'span',
+            'placement' => 'right',
+            'toggle'    => 'tooltip'
         ],
         'label' => [
+            'tag'  => 'span',
             'type' => 'default'
         ],
         'alert' => [
@@ -139,13 +142,15 @@ class BootstrapHtmlHelper extends HtmlHelper {
             $options = $type ;
         }
         $options += [
+            'tag' => $this->config('label.tag'),
             'type' => $this->config('label.type')
         ];
         $type = $options['type'];
-        unset ($options['type']) ;
         $options = $this->addClass($options, 'label') ;
         $options = $this->addClass($options, 'label-'.$type) ;
-        return $this->tag('span', $text, $options) ;
+        $tag = $options['tag'];
+        unset ($options['type'], $options['tag']);
+        return $this->tag($tag, $text, $options);
     }
 
     /**
@@ -249,8 +254,8 @@ class BootstrapHtmlHelper extends HtmlHelper {
      **/
     public function tooltip($text, $tooltip, $options = []) {
         $options += [
-            'tag'         => 'span',
-            'data-toggle' => 'tooltip',
+            'tag'         => $this->config('tooltip.tag'),
+            'data-toggle' => $this->config('tooltip.toggle'),
             'placement'   => $this->config('tooltip.placement'),
             'title'       => $tooltip
         ];
