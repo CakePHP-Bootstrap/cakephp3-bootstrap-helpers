@@ -14,38 +14,38 @@
  */
 namespace Bootstrap\View\Helper;
 
-use Cake\View\Helper ;
+use Cake\View\Helper;
 use Cake\Routing\Router;
 
 class BootstrapNavbarHelper extends Helper {
 
-    use BootstrapTrait ;
+    use BootstrapTrait;
 
     public $helpers = [
         'Html',
         'Form' => [
             'className' => 'Bootstrap.BootstrapForm'
         ]
-    ] ;
+    ];
 
     /**
-     * Automatic detection of active link (class="active").
+     * Automatic detection of active link (`class="active"`).
      *
      * @var bool
      */
-    public $autoActiveLink = true ;
+    public $autoActiveLink = true;
 
     /**
      * Automatic button link when not in a menu.
      *
      * @var bool
      */
-    public $autoButtonLink = true ;
+    public $autoButtonLink = true;
 
-    protected $_fixed = false ;
-    protected $_static = false ;
-    protected $_responsive = false ;
-    protected $_inverse = false ;
+    protected $_fixed = false;
+    protected $_static = false;
+    protected $_responsive = false;
+    protected $_inverse = false;
     protected $_fluid = false;
 
     /**
@@ -58,18 +58,19 @@ class BootstrapNavbarHelper extends Helper {
     /**
      * Create a new navbar.
      *
-     * @param string $brand
-     * @param array $options Options passed to tag method for outer navbar div
+     * ### Options:
+     * - `fixed` - [Fixed navbar](http://getbootstrap.com/components/#navbar-fixed-top). Possible values are `'top'`, `'bottom'`, `false`. Default is `false`.
+     * - `static` - [Static navbar](http://getbootstrap.com/components/#navbar-static-top). Default is `false`.
+     * - `responsive` - Responsive navbar. Default is `true`.
+     * - `inverse` - [Inverted navbar](http://getbootstrap.com/components/#navbar-inverted). Default is `false`.
+     * - `fluid` - Fluid navabar. Default is `false`.
      *
-     * Extra options:
-     *  - fixed: false, 'top', 'bottom'
-     *  - static: false, true (useless if fixed != false)
-     *  - responsive: false, true (if true, a toggle button will be added)
-     *  - inverse: false, true
-     *  - fluid: false, true
+     * @param string $brand   Brand name.
+     * @param array  $options Array of options. See above.
      *
-     **/
-    public function create ($brand, $options = []) {
+     * @return A string containing the HTML starting element of the navbar.
+     */
+    public function create($brand, $options = []) {
 
         $options += [
             'fixed' => false,
@@ -89,35 +90,38 @@ class BootstrapNavbarHelper extends Helper {
               $options['inverse']);
 
         /** Generate options for outer div. **/
-        $options = $this->addClass($options, 'navbar navbar-default') ;
+        $options = $this->addClass($options, 'navbar navbar-default');
         if ($this->_fixed !== false) {
-            $options = $this->addClass($options, 'navbar-fixed-'.$this->_fixed) ;
+            $options = $this->addClass($options, 'navbar-fixed-'.$this->_fixed);
         }
         else if ($this->_static !== false) {
-            $options = $this->addClass($options, 'navbar-static-top') ;
+            $options = $this->addClass($options, 'navbar-static-top');
         }
         if ($this->_inverse !== false) {
-            $options = $this->addClass($options , 'navbar-inverse') ;
+            $options = $this->addClass($options , 'navbar-inverse');
         }
 
-        $toggleButton = '' ;
-        $rightOpen = '' ;
+        $toggleButton = '';
+        $rightOpen = '';
         if ($this->_responsive) {
-            $toggleButton = $this->Html->tag('button',
-                                             implode('', array(
-                                                 $this->Html->tag('span', __('Toggle navigation'), array('class' => 'sr-only')),
-                                                 $this->Html->tag('span', '', array('class' => 'icon-bar')),
-                                                 $this->Html->tag('span', '', array('class' => 'icon-bar')),
-                                                 $this->Html->tag('span', '', array('class' => 'icon-bar'))
-                                             )),
-                                             array(
-                                                 'type' => 'button',
-                                                 'class' => 'navbar-toggle collapsed',
-                                                 'data-toggle' => 'collapse',
-                                                 'data-target' => '.navbar-collapse'
-                                             )
-            ) ;
-            $rightOpen = $this->Html->tag('div', null, ['class' => 'navbar-collapse collapse']) ;
+            $toggleButton = $this->Html->tag(
+                'button',
+                implode('', array(
+                    $this->Html->tag('span', __('Toggle navigation'),
+                                     array('class' => 'sr-only')),
+                    $this->Html->tag('span', '', array('class' => 'icon-bar')),
+                    $this->Html->tag('span', '', array('class' => 'icon-bar')),
+                    $this->Html->tag('span', '', array('class' => 'icon-bar'))
+                )),
+                array(
+                    'type' => 'button',
+                    'class' => 'navbar-toggle collapsed',
+                    'data-toggle' => 'collapse',
+                    'data-target' => '.navbar-collapse'
+                )
+            );
+            $rightOpen = $this->Html->tag(
+                'div', null, ['class' => 'navbar-collapse collapse']);
         }
 
         if ($brand) {
@@ -125,117 +129,121 @@ class BootstrapNavbarHelper extends Helper {
                 $brand = $this->Html->link ($brand, '/', [
                     'class' => 'navbar-brand',
                     'escape' => false
-                ]) ;
+                ]);
             }
             else if (is_array($brand) && array_key_exists('url', $brand)) {
                 $brand += [
                     'options' => []
                 ];
-                $brand['options'] = $this->addClass ($brand['options'], 'navbar-brand') ;
-                $brand = $this->Html->link ($brand['name'], $brand['url'], $brand['options']) ;
+                $brand['options'] = $this->addClass ($brand['options'], 'navbar-brand');
+                $brand = $this->Html->link ($brand['name'], $brand['url'], $brand['options']);
             }
             $rightOpen = $this->Html->tag('div', $toggleButton.$brand,
-                                          ['class' => 'navbar-header']).$rightOpen ;
+                                          ['class' => 'navbar-header']).$rightOpen;
         }
 
         /** Add and return outer div openning. **/
         return $this->Html->tag('div', null, $options)
             .$this->Html->tag('div', null, [
                 'class' => $this->_fluid ? 'container-fluid' : 'container'
-            ]).$rightOpen ;
+            ]).$rightOpen;
     }
 
     /**
-     *
      * Add a link to the navbar or to a menu.
+     *
      * Links outside a menu are realized as buttons. Encapsulate links with
-     * beginMenu(), endMenu() to create a horizontal hover menu in the navbar.
+     * `beginMenu()`, `endMenu()` to create a horizontal hover menu in the navbar.
      *
-     * @param string $name The link text
-     * @param string|array $url The link URL
-     * @param array $options Options passed to the tag method (for the li tag)
-     * @param array $linkOptions Options passed to the link method
+     * @param string       $name        The link text.
+     * @param string|array $url         The link URL (sent to `Html::link` method).
+     * @param array        $options     Array of options for the `<li>` tag.
+     * @param array        $linkOptions Array of options for the `Html::link` method.
      *
-     **/
-    public function link ($name, $url = '', array $options = [], array $linkOptions = []) {
+     * @return string A HTML `<li>` tag wrapping the link.
+     */
+    public function link($name, $url = '', array $options = [], array $linkOptions = []) {
         if ($this->_level == 0 && $this->autoButtonLink) {
-            $options = $this->addClass ($options, 'btn btn-default navbar-btn') ;
-            return $this->Html->link ($name, $url, $options) ;
+            $options = $this->addClass($options, 'btn btn-default navbar-btn');
+            return $this->Html->link($name, $url, $options);
         }
-        if (Router::url() == Router::url ($url) && $this->autoActiveLink) {
-            $options = $this->addClass ($options, 'active');
+        if (Router::url() == Router::url($url) && $this->autoActiveLink) {
+            $options = $this->addClass($options, 'active');
         }
-        return $this->Html->tag('li', $this->Html->link ($name, $url, $linkOptions), $options) ;
+        return $this->Html->tag('li', $this->Html->link($name, $url, $linkOptions),
+                                $options);
     }
 
     /**
-     *
      * Add a button to the navbar.
      *
-     * @param string $name Text of the button.
-     * @param array $options Options sent to the BootstrapFormHelper::button method.
+     * @param string $name    Text of the button.
+     * @param array  $options Options sent to the `Form::button` method.
      *
-     **/
-    public function button ($name, array $options = []) {
-        $options = $this->addClass ($options, 'navbar-btn') ;
-        return $this->Form->button ($name, $options) ;
+     * @return string A HTML navbar button.
+     */
+    public function button($name, array $options = []) {
+        $options = $this->addClass($options, 'navbar-btn');
+        return $this->Form->button($name, $options);
     }
 
     /**
-     *
      * Add a divider to the navbar or to a menu.
      *
-     * @param array $options Options sent to the tag method.
+     * @param array $options Array of options for the `<li>` tag.
      *
-     **/
-    public function divider (array $options = []) {
-        $options = $this->addClass ($options, 'divider') ;
-        $options['role'] = 'separator' ;
-        return $this->Html->tag('li', '', $options) ;
+     * @return A HTML divider `<li>` tag.
+     */
+    public function divider(array $options = []) {
+        $options = $this->addClass ($options, 'divider');
+        $options['role'] = 'separator';
+        return $this->Html->tag('li', '', $options);
     }
 
     /**
-     *
      * Add a header to the navbar or to a menu, should not be used outside a submenu.
      *
-     * @param string $name Title of the header.
-     * @param array $options Options sent to the tag method.
+     * @param string $name    Title of the header.
+     * @param array  $options Array of options for the `<li>` tag.
      *
-     **/
-    public function header ($name, array $options = []) {
-        $options = $this->addClass ($options, 'dropdown-header') ;
-        return $this->Html->tag('li', $name, $options) ;
+     * @return A HTML header `<li>` tag.
+     */
+    public function header($name, array $options = []) {
+        $options = $this->addClass($options, 'dropdown-header');
+        return $this->Html->tag('li', $name, $options);
     }
 
     /**
-     *
      * Add a text to the navbar.
      *
+     * ### Options:
+     *
+     * - `tag` - The HTML tag used to wrap the text. Default is `'p'`.
+     * - Other attributes will be assigned to the wrapper element.
+     *
      * @param string $text The text message.
-     * @param array $options Options passed to the tag method (+ extra options, see above).
+     * @param array  $options Array of options. See above.
      *
-     * Extra options:
-     *  - tag The HTML tag to use (default 'p')
-     *
-     **/
-    public function text ($text, $options = []) {
+     * @return string A HTML element wrapping the text for the navbar.
+     */
+    public function text($text, $options = []) {
         $options += [
             'tag' => 'p'
         ];
         $tag     = $options['tag'];
         unset($options['tag']);
-        $options = $this->addClass ($options, 'navbar-text') ;
-        $text = preg_replace_callback ('/<a([^>]*)?>([^<]*)?<\/a>/i', function ($matches) {
+        $options = $this->addClass($options, 'navbar-text');
+        $text = preg_replace_callback('/<a([^>]*)?>([^<]*)?<\/a>/i', function($matches) {
             $attrs = preg_replace_callback ('/class="(.*)?"/', function ($m) {
-                $cl = $this->addClass (['class' => $m[1]], 'navbar-link') ;
-                return 'class="'.$cl['class'].'"' ;
-            }, $matches[1], -1, $count) ;
+                $cl = $this->addClass (['class' => $m[1]], 'navbar-link');
+                return 'class="'.$cl['class'].'"';
+            }, $matches[1], -1, $count);
             if ($count == 0) {
-                $attrs .= ' class="navbar-link"' ;
+                $attrs .= ' class="navbar-link"';
             }
-            return '<a'.$attrs.'>'.$matches[2].'</a>' ;
+            return '<a'.$attrs.'>'.$matches[2].'</a>';
         }, $text);
-        return $this->Html->tag($tag, $text, $options) ;
+        return $this->Html->tag($tag, $text, $options);
     }
 
 
@@ -251,9 +259,9 @@ class BootstrapNavbarHelper extends Helper {
         $options += [
             'align' => 'left'
         ];
-        $options = $this->addClass($options, ['navbar-form',  'navbar-'.$options['align']]) ;
-        unset ($options['align']) ;
-        return $this->Form->searchForm($model, $options) ;
+        $options = $this->addClass($options, ['navbar-form',  'navbar-'.$options['align']]);
+        unset ($options['align']);
+        return $this->Form->searchForm($model, $options);
     }
 
     /**
@@ -274,9 +282,9 @@ class BootstrapNavbarHelper extends Helper {
                                $linkOptions = [], $listOptions = []) {
         $res = '';
         if ($this->_level == 0) {
-            $options = is_array($name) ? $name : [] ;
+            $options = is_array($name) ? $name : [];
             $options = $this->addClass ($options, ['nav', 'navbar-nav']);
-            $res = $this->Html->tag('ul', null, $options) ;
+            $res = $this->Html->tag('ul', null, $options);
         }
         else {
             $linkOptions += [
@@ -285,18 +293,18 @@ class BootstrapNavbarHelper extends Helper {
                 'aria-haspopup' => 'true',
                 'aria-expanded' => 'false',
                 'escape' => false
-            ] ;
+            ];
             $caret = array_key_exists('caret', $linkOptions) ?
                    $linkOptions['caret'] : '<span class="caret"></span>';
             unset($options['caret']);
             $link  = $this->Html->link ($name.$caret, $url ? $url : '#', $linkOptions);
-            $options     = $this->addClass ($options, 'dropdown') ;
-            $listOptions = $this->addClass ($listOptions, 'dropdown-menu') ;
+            $options     = $this->addClass ($options, 'dropdown');
+            $listOptions = $this->addClass ($listOptions, 'dropdown-menu');
             $res = $this->Html->tag ('li', null, $options)
                  .$link.$this->Html->tag ('ul', null, $listOptions);
         }
-        $this->_level += 1 ;
-        return $res ;
+        $this->_level += 1;
+        return $res;
     }
 
     /**
@@ -305,8 +313,8 @@ class BootstrapNavbarHelper extends Helper {
      *
      **/
     public function endMenu () {
-        $this->_level -= 1 ;
-        return '</ul>'.($this->_level == 1 ? '</li>' : '') ;
+        $this->_level -= 1;
+        return '</ul>'.($this->_level == 1 ? '</li>' : '');
     }
 
     /**
@@ -315,11 +323,11 @@ class BootstrapNavbarHelper extends Helper {
      *
      **/
     public function end () {
-        $res = '</div></div>' ;
+        $res = '</div></div>';
         if ($this->_responsive) {
-            $res .= '</div>' ;
+            $res .= '</div>';
         }
-        return $res ;
+        return $res;
     }
 
 }
