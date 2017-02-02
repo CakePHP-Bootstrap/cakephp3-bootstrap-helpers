@@ -248,13 +248,18 @@ class BootstrapNavbarHelper extends Helper {
 
 
     /**
-     *
      * Add a serach form to the navbar.
      *
-     * @param mixed $model Model for BootstrapFormHelper::searchForm method.
-     * @param array $options Options for BootstrapFormHelper::searchForm method.
+     * ### Options:
      *
-     **/
+     * - `align` - Search form alignment. Default is `'left'`.
+     * - Other options will be passed to the `Form::searchForm` method.
+     *
+     * @param mixed $model   Model for BootstrapFormHelper::searchForm method.
+     * @param array $options Array of options. See above.
+     *
+     * @return string An HTML search form for the navbar.
+     */
     public function searchForm ($model = null, $options = []) {
         $options += [
             'align' => 'left'
@@ -265,25 +270,44 @@ class BootstrapNavbarHelper extends Helper {
     }
 
     /**
+     * Start a new menu.
      *
-     * Start a new menu. Two types of menus exist: Horizontal hover menu in the
-     * navbar (level 0) and vertical dropdown menu (level 1). The menu level is
-     * determined automatically: A dropdown menu needs to be part of a hover menu.
-     * In the hover menu case, pass the options array as the first argument.
-     * Populate the menu with link(), divider(), and sub menus.
-     * Use 'class' => 'navbar-right' option for flush right.
+     * Two types of menus exist:
+     * - Horizontal hover menu in the navbar (level 0).
+     * - Vertical dropdown menu (level 1).
+     * The menu level is determined automatically: A dropdown menu needs to be part of
+     * a hover menu. In the hover menu case, pass the options array as the first argument.
      *
-     * @param string $name The name of the menu
-     * @param string|array $url A URL for the menu (default null)
-     * @param array $options Options passed to the tag method (+ extra options, see above)
+     * You can populate the menu with `link()`, `divider()`, and sub menus.
+     * Use `'class' => 'navbar-right'` option for flush right.
      *
-     **/
-    public function beginMenu ($name = null, $url = null, $options = [],
-                               $linkOptions = [], $listOptions = []) {
+     * **Note:** The `$linkOptions` and `$listOptions` parameters are not used for menu
+     * at level 0 (horizontal menu).
+     *
+     * ### Link Options:
+     *
+     * - `data-toggle` - HTML attribute. Default is `'dropdown'`.
+     * - `role` - HTML attribute. Default is `'button'`.
+     * - `aria-haspopup` - HTML attribute. Default is `'true'`.
+     * - `aria-expanded` - HTML attribute. Default is `'false'`.
+     * - `caret` - HTML caret element. Default is `'<span class="caret"></span>'`.
+     * - `escape` - CakePHP option. Default is `false`.
+     *
+     * @param string       $name        Name of the menu.
+     * @param string|array $url         URL for the menu.
+     * @param array        $options     Array of options for the wrapping `<li>` element.
+     * @param array        $linkOptions Array of options for the link. See above.
+     * element (`Html::link` method).
+     * @param array        $listOptions Array of options for the openning `ul` elements.
+     *
+     * @return string HTML elements to start a menu.
+     */
+    public function beginMenu($name = null, $url = null, $options = [],
+                              $linkOptions = [], $listOptions = []) {
         $res = '';
         if ($this->_level == 0) {
             $options = is_array($name) ? $name : [];
-            $options = $this->addClass ($options, ['nav', 'navbar-nav']);
+            $options = $this->addClass($options, ['nav', 'navbar-nav']);
             $res = $this->Html->tag('ul', null, $options);
         }
         else {
@@ -292,36 +316,35 @@ class BootstrapNavbarHelper extends Helper {
                 'role' => 'button',
                 'aria-haspopup' => 'true',
                 'aria-expanded' => 'false',
+                'caret' => '<span class="caret"></span>',
                 'escape' => false
             ];
-            $caret = array_key_exists('caret', $linkOptions) ?
-                   $linkOptions['caret'] : '<span class="caret"></span>';
             unset($options['caret']);
-            $link  = $this->Html->link ($name.$caret, $url ? $url : '#', $linkOptions);
-            $options     = $this->addClass ($options, 'dropdown');
-            $listOptions = $this->addClass ($listOptions, 'dropdown-menu');
-            $res = $this->Html->tag ('li', null, $options)
-                 .$link.$this->Html->tag ('ul', null, $listOptions);
+            $link  = $this->Html->link($name.$caret, $url ? $url : '#', $linkOptions);
+            $options     = $this->addClass($options, 'dropdown');
+            $listOptions = $this->addClass($listOptions, 'dropdown-menu');
+            $res = $this->Html->tag('li', null, $options)
+                 .$link.$this->Html->tag('ul', null, $listOptions);
         }
         $this->_level += 1;
         return $res;
     }
 
     /**
-     *
      * End a menu.
      *
-     **/
+     * @return string HTML elements to close a menu.
+     */
     public function endMenu () {
         $this->_level -= 1;
         return '</ul>'.($this->_level == 1 ? '</li>' : '');
     }
 
     /**
+     * Close a navbar.
      *
-     * End a navbar.
-     *
-     **/
+     * @return string HTML elements to close the navbar.
+     */
     public function end () {
         $res = '</div></div>';
         if ($this->_responsive) {
