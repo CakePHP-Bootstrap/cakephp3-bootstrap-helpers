@@ -319,6 +319,7 @@ class BootstrapNavbarHelper extends Helper {
                 'caret' => '<span class="caret"></span>',
                 'escape' => false
             ];
+            $caret = $options['caret'];
             unset($options['caret']);
             $link  = $this->Html->link($name.$caret, $url ? $url : '#', $linkOptions);
             $options     = $this->addClass($options, 'dropdown');
