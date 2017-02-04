@@ -25,12 +25,12 @@ class BootstrapHtmlHelper extends HtmlHelper {
      *
      * ### Options:
      *
-     * - `useFontAwesome` - Set to true to use FontAwesome icon instead of glyphicon.
-     * - `progressTextFormat` - Format string to display text in progress bar.
-     * - `tooltip` - Default options for tooltips.
-     * - `label` - Default options for labels.
-     * - `alert` - Default options for alert.
-     * - `progress` - Default options for progress bar.
+     * - `alert` Default options for alert.
+     * - `label` Default options for labels.
+     * - `progress` Default options for progress bar.
+     * - `progressTextFormat` Format string to display text in progress bar.
+     * - `tooltip` Default options for tooltips.
+     * - `useFontAwesome` Set to true to use FontAwesome icon instead of glyphicon.
      * - See [CakePHP documentation](https://api.cakephp.org/3.3/class-Cake.View.Helper.HtmlHelper.html#$_defaultConfig) for extra configuration options.
      *
      * @var array
@@ -147,8 +147,8 @@ class BootstrapHtmlHelper extends HtmlHelper {
      *
      * ### Options
      *
-     * - `tag` - The HTML tag to use.
-     * - `type` - The type of the label.
+     * - `tag` The HTML tag to use.
+     * - `type` The type of the label.
      * - Other attributes will be assigned to the wrapper element.
      *
      * @param string $text The label text
@@ -209,7 +209,7 @@ class BootstrapHtmlHelper extends HtmlHelper {
      *
      * ### Options
      *
-     * - `type` - The type of the label.
+     * - `type` The type of the label.
      * - Other attributes will be assigned to the wrapper element.
      *
      * @param string       $text The alert text.
@@ -250,10 +250,10 @@ class BootstrapHtmlHelper extends HtmlHelper {
      *
      * ### Options
      *
-     * - `tag` - The tag to use.
-     * - `data-toggle` - The 'data-toggle' HTML attribute.
-     * - `placement` - The `data-placement` HTML attribute.
-     * - `title` - The title of the tooltip (default to $tooltip).
+     * - `data-toggle` The 'data-toggle' HTML attribute.
+     * - `placement` The `data-placement` HTML attribute.
+     * - `tag` The tag to use.
+     * - `title` The title of the tooltip (default to $tooltip).
      * - Other attributes will be assigned to the wrapper element.
      *
      * @param string $text    The HTML tag inner text.
@@ -281,19 +281,19 @@ class BootstrapHtmlHelper extends HtmlHelper {
      *
      * ### Options:
      *
-     * - `striped` - `true` to get a striped progress bar. Default is `false`.
-     * - `active` - `true` to get an active progress bar. Default is `false`.
-     * - `type` - A string containing the `type` of the progress bar (primary, info, danger,
+     * - `active` If `true` the progress bar will be active. Default is `false`.
+     * - `format` Format string for the text value (see configuration for default).
+     * - `max` Maximum value for the progress bar. Default is `100`.
+     * - `min` Minimum value for the progress bar. Default is `0`.
+     * - `striped` If `true` the progress bar will be striped. Default is `false`.
+     * - `type` A string containing the `type` of the progress bar (primary, info, danger,
      * success, warning). Default to `'primary'`.
-     * - `min` - Minimum value for the progress bar. Default is `0`.
-     * - `max` - Maximum value for the progress bar. Default is `100`.
-     * - `format` - Format string for the text value (see configuration for default).
      * - Other attributes will be assigned to the wrapper element.
      *
      * @param int|array $widths
-     *   - `int` - The width (in %) of the bar.
-     *   - `array` - An array of bars, with, for each bar, the following fields:
-     *      - `width` - **required** The width of the bar.
+     *   - `int` The width (in %) of the bar.
+     *   - `array` An array of bars, with, for each bar, the following fields:
+     *      - `width` **required** The width of the bar.
      *      - Other options possible (see above).
      * @param array $options Array of options. See above.
      *

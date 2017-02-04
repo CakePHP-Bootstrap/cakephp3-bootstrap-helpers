@@ -59,11 +59,11 @@ class BootstrapNavbarHelper extends Helper {
      * Create a new navbar.
      *
      * ### Options:
-     * - `fixed` - [Fixed navbar](http://getbootstrap.com/components/#navbar-fixed-top). Possible values are `'top'`, `'bottom'`, `false`. Default is `false`.
-     * - `static` - [Static navbar](http://getbootstrap.com/components/#navbar-static-top). Default is `false`.
-     * - `responsive` - Responsive navbar. Default is `true`.
-     * - `inverse` - [Inverted navbar](http://getbootstrap.com/components/#navbar-inverted). Default is `false`.
-     * - `fluid` - Fluid navabar. Default is `false`.
+     * - `fixed` [Fixed navbar](http://getbootstrap.com/components/#navbar-fixed-top). Possible values are `'top'`, `'bottom'`, `false`. Default is `false`.
+     * - `fluid` Fluid navabar. Default is `false`.
+     * - `inverse` [Inverted navbar](http://getbootstrap.com/components/#navbar-inverted). Default is `false`.
+     * - `responsive` Responsive navbar. Default is `true`.
+     * - `static` [Static navbar](http://getbootstrap.com/components/#navbar-static-top). Default is `false`.
      *
      * @param string $brand   Brand name.
      * @param array  $options Array of options. See above.
@@ -218,7 +218,7 @@ class BootstrapNavbarHelper extends Helper {
      *
      * ### Options:
      *
-     * - `tag` - The HTML tag used to wrap the text. Default is `'p'`.
+     * - `tag` The HTML tag used to wrap the text. Default is `'p'`.
      * - Other attributes will be assigned to the wrapper element.
      *
      * @param string $text The text message.
@@ -252,7 +252,7 @@ class BootstrapNavbarHelper extends Helper {
      *
      * ### Options:
      *
-     * - `align` - Search form alignment. Default is `'left'`.
+     * - `align` Search form alignment. Default is `'left'`.
      * - Other options will be passed to the `Form::searchForm` method.
      *
      * @param mixed $model   Model for BootstrapFormHelper::searchForm method.
@@ -286,12 +286,12 @@ class BootstrapNavbarHelper extends Helper {
      *
      * ### Link Options:
      *
-     * - `data-toggle` - HTML attribute. Default is `'dropdown'`.
-     * - `role` - HTML attribute. Default is `'button'`.
-     * - `aria-haspopup` - HTML attribute. Default is `'true'`.
-     * - `aria-expanded` - HTML attribute. Default is `'false'`.
-     * - `caret` - HTML caret element. Default is `'<span class="caret"></span>'`.
-     * - `escape` - CakePHP option. Default is `false`.
+     * - `aria-expanded` HTML attribute. Default is `'false'`.
+     * - `aria-haspopup` HTML attribute. Default is `'true'`.
+     * - `caret` HTML caret element. Default is `'<span class="caret"></span>'`.
+     * - `data-toggle` HTML attribute. Default is `'dropdown'`.
+     * - `escape` CakePHP option. Default is `false`.
+     * - `role` HTML attribute. Default is `'button'`.
      *
      * @param string       $name        Name of the menu.
      * @param string|array $url         URL for the menu.
