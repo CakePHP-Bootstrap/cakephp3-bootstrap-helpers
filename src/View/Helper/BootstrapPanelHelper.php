@@ -309,10 +309,6 @@ class BootstrapPanelHelper extends Helper {
         return $this->_createBody($info, $options);
     }
 
-    protected function _isAssociativeArray ($array) {
-        return array_keys($array) !== range(0, count($array) - 1);
-    }
-
     /**
      *
      * Create / Start the footer. If $buttons is specified as an associative arrays or as null,
