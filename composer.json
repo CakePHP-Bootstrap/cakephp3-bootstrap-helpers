@@ -5,11 +5,12 @@
     "license": "MIT",
     "type": "cakephp-plugin",
     "require": {
+        "php": ">=5.5.9",
         "cakephp/cakephp": ">=3.2.3"
     },
     "require-dev": {
-        "phpunit/phpunit": "*",
-        "cakephp/cakephp-codesniffer": "dev-master"
+        "phpunit/phpunit": "<6.0",
+        "cakephp/cakephp-codesniffer": "~2.1"
     },
     "autoload": {
         "psr-4": {
