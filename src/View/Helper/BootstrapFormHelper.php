@@ -741,8 +741,8 @@ class BootstrapFormHelper extends FormHelper {
         $options += [
             'id'          => 'search',
             'label'       => false,
-            'placeholder' => 'Search... ',
-            'button'      => 'Search',
+            'placeholder' => __('Search').'... ',
+            'button'      => __('Search'),
             '_input'      => [],
             '_button'     => []
         ];
