@@ -30,7 +30,7 @@ class BootstrapPanelHelper extends Helper {
         'collapsible' => false
     ];
 
-    public $current = NULL ;
+    protected $_current = NULL ;
 
     /* Protected attributes used to generate ID for collapsible panels. */
     protected $_panelCount         = 0;
@@ -177,12 +177,12 @@ class BootstrapPanelHelper extends Helper {
 
     protected function _cleanCurrent () {
         $res = '';
-        if ($this->current) {
+        if ($this->_current) {
             $res .= '</div>';
-            if ($this->_collapsible && $this->current == 'body') {
+            if ($this->_collapsible && $this->_current == 'body') {
                 $res .= '</div>';
             }
-            $this->current = null ;
+            $this->_current = null ;
         }
         return $res;
     }
@@ -256,7 +256,7 @@ class BootstrapPanelHelper extends Helper {
         }
         $body = $this->_cleanCurrent().$body;
         if (!$text) {
-            $this->current = 'body';
+            $this->_current = 'body';
         }
         return $body;
     }
