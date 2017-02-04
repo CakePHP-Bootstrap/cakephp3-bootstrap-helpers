@@ -26,35 +26,123 @@ class BootstrapPanelHelper extends Helper {
         ]
     ];
 
+    /**
+     * Default configuration.
+     *
+     * @var array
+     */
     protected $_defaultConfig = [
         'collapsible' => false
     ];
 
+    /**
+     * Current part of the panel (`null`, `'header'`, `'body'`, `'footer'`).
+     *
+     * @var string
+     */
     protected $_current = NULL ;
 
-    /* Protected attributes used to generate ID for collapsible panels. */
-    protected $_panelCount         = 0;
-    protected $_bodyId      = null;
-    protected $_headId      = null;
+    /**
+     * Panel counter (for collapsible groups).
+     *
+     * @var int
+     */
+    protected $_panelCount = 0;
 
-    /* Protected attribute used to generate group ID. */
-    protected $_groupCount         = 0;
-    protected $_groupId            = false;
+    /**
+     * Body HTML id (for collapsible panel).
+     *
+     * @var string
+     */
+    protected $_bodyId = null;
 
+    /**
+     * Header HTML id (for collapsible panel).
+     *
+     * @var string
+     */
+    protected $_headId = null;
+
+    /**
+     * Panel groups counter (for panel groups).
+     *
+     * @var int
+     */
+    protected $_groupCount = 0;
+
+    /**
+     * Panel group HTML id.
+     *
+     * @var mixed
+     */
+    protected $_groupId = false;
+
+    /**
+     * Panel counter inside a group (count the number of panels in a group).
+     *
+     * @var int
+     */
     protected $_groupPanelCount = 0;
-    protected $_groupPanelOpen  = false;
 
-    /* Attribute set to true when in group. */
+    /**
+     * Panel to open inside a group.
+     *
+     * @var mixed
+     */
+    protected $_groupPanelOpen = false;
+
+
+    /**
+     * Indicate if in group mode or not.
+     *
+     * @var bool
+     */
     protected $_groupInGroup = false;
 
+    /**
+     * Indicate if the last panel was closed (in a group).
+     *
+     * @var bool
+     */
     protected $_lastPanelClosed    = true;
+
+    /**
+     * Determine if previous panel should be automatically closed when calling `create()`.
+     *
+     * @var bool
+     */
     protected $_autoCloseOnCreate  = false;
 
+    /**
+     * Indicate if panel should be collapsible or not.
+     *
+     * @var bool
+     */
     protected $_collapsible = false;
 
+    /**
+     * Open a panel group.
+     *
+     * ### Options
+     *
+     * - `aria-multiselectable` HTML attribute. Default is `true`.
+     * - `collapsible` Set to `false` if panels should not be collapsible. Default is `true`.
+     * - `id` Identifier for the group. Default is automatically generated.
+     * - `open` If `collapsible` is `true`, indicate the panel that should be open by default.
+     * Set to `false` to have no panels open. You can also indicate if a panel should be open
+     * in the `create()` method. Default is `0`.
+     * - `role` HTML attribute. Default is `'tablist'`.
+     *
+     * - Other attributes will be passed to the `Html::div()` method.
+     *
+     * @param array $options Array of options. See above.
+     *
+     * @return string A formated opening HTML tag for panel groups.
+     *
+     * @link http://getbootstrap.com/javascript/#collapse-example-accordion
+     */
     public function startGroup($options = []) {
         $options += [
-            'class'                => '',
             'role'                 => 'tablist',
             'aria-multiselectable' => true,
             'id'                   => 'panelGroup-'.(++$this->_groupCount),
@@ -74,6 +162,11 @@ class BootstrapPanelHelper extends Helper {
         return $this->Html->tag('div', null, $options);
     }
 
+    /**
+     * Closes a panel group, closes the last panel if it has not already been closed.
+     *
+     * @return string An HTML string containing closing tags.
+     */
     public function endGroup() {
         $this->config('collapsible', $this->config('saved.collapsible'));
         $this->_autoCloseOnCreate  = false;
@@ -88,16 +181,49 @@ class BootstrapPanelHelper extends Helper {
     }
 
     /**
+     * Open a panel.
      *
-     * Create a Twitter Bootstrap like panel.
+     * If `$title` is a string, the panel header is created using `$title` as its
+     * content and default options (except for the `title` options that can be specified
+     * inside `$options`).
      *
-     * @param array|string $title If array, works as $options, otherwize used as
-     *                            the panel title.
-     * @param array $options Options for the main div of the panel.
+     * ```php
+     * echo $this->Panel->create('My Panel Title', ['title' => ['tag' => 'h2']]);
+     * ```
      *
-     * Extra options (useless if $title not specified) :
-     *     - no-body: Do not open the body after the create (default false)
-     **/
+     * If the panel header is created, the panel body is automatically opened after
+     * it, except if the `no-body` options is specified (see below).
+     *
+     * If `$title` is an array, it is used as `$options`.
+     *
+     * ```php
+     * echo $this->Panel->create(['class' => 'my-panel-class']);
+     * ```
+     *
+     * If the `create()` method is used inside a panel group, the previous panel is
+     * automatically closed.
+     *
+     * ### Options
+     *
+     * - `collapsible` Set to `true` if the panel should be collapsible. Default is fetch
+     * from configuration/
+     * - `no-body` If `$title` is a string, set to `true` to not open the body after the
+     * panel header. Default is `false`.
+     * - `open` Indicate if the panel should be open. If the panel is not inside a group, the
+     * default is `true`, otherwize the default is `false` and the panel is open if its
+     * count matches the specified value in `startGroup()` (set to `true` inside a group to
+     * force the panel to be open).
+     * - `panel-count` Panel counter, can be used to override the default counter when inside
+     * a group. This value is used to generate the panel, header and body ID attribute.
+     * - `type` Type of the panel (`'default'`, `'primary'`, ...). Default is `'default'`.
+     * - Other attributes will be passed to the `Html::div` method for creating the
+     * panel `<div>`.
+     *
+     * @param array|string $title   The panel title or an array of options.
+     * @param array        $options Array of options. See above.
+     *
+     * @return string An HTML string containing opening elements for a panel.
+     */
     public function create($title = null, $options = []) {
 
         if (is_array($title)) {
@@ -156,26 +282,38 @@ class BootstrapPanelHelper extends Helper {
     }
 
     /**
+     * Closes a panel, cleans part that have not been closed correctly and optionaly adds a
+     * footer to the panel.
      *
-     * End a panel. If $title is not null, the PanelHelper::footer functions
-     * is called with $title and $options arguments.
+     * If `$content` is not null, the `footer()` methods will be used to create the panel
+     * footer using `$content` and `$options`.
      *
-     * @param string|null $buttons
-     * @param array $options
+     * ```php
+     * echo $this->Panel->end('Footer Content', ['my-class' => 'my-footer-class']);
+     * ```
      *
-     **/
-    public function end ($title = null, $options = []) {
+     * @param string|null $content   Footer content, or `null`.
+     * @param array       $options Array of options for the footer.
+     *
+     * @return string An HTML string containing closing tags.
+     */
+    public function end($content = null, $options = []) {
         $this->_lastPanelClosed = true;
         $res = '' ;
         $res .= $this->_cleanCurrent();
-        if ($title !== null) {
-            $res .= $this->footer($title, $options) ;
+        if ($content !== null) {
+            $res .= $this->footer($content, $options) ;
         }
         $res .= '</div>' ;
         return $res ;
     }
 
-    protected function _cleanCurrent () {
+    /**
+     * Cleans the current panel part and return necessary HTML closing elements.
+     *
+     * @return string An HTML string containing closing elements.
+     */
+    protected function _cleanCurrent() {
         $res = '';
         if ($this->_current) {
             $res .= '</div>';
@@ -188,23 +326,35 @@ class BootstrapPanelHelper extends Helper {
     }
 
     /**
+     * Check if the current panel should be open or not.
      *
-     * Return true if the current panel should be open (only for collapsible).
-     *
-     * @return true if the current panel should be open, false otherwize.
-     *
-     **/
-    protected function _isOpen () {
+     * @return bool `true` if the current panel should be open, `false` otherwize.
+     */
+    protected function _isOpen() {
         return (is_int($this->_groupPanelOpen)
                 && $this->_groupPanelOpen === $this->_groupPanelCount)
             || $this->_groupPanelOpen === $this->_bodyId;
     }
 
+    /**
+     * Create or open a panel header.
+     *
+     * ### Options
+     *
+     * - `title` See `header()`.
+     * - Other attributes for the panel header `<div>`.
+     *
+     * @param string|null $text The panel header content, or null to only open the header.
+     * @param array       $options Array of options. See above.
+     *
+     * @return string A formated opening tag for the panel header or the complete panel
+     * header.
+     */
     protected function _createHeader ($title, $options = [], $titleOptions = []) {
         if (empty($titleOptions)) {
             $titleOptions = $options['title'] ;
         }
-        unset ($options['title']);
+        unset($options['title']);
         $title   = $this->_makeIcon($title, $converted);
         $options += [
             'escape' => !$converted
@@ -243,6 +393,15 @@ class BootstrapPanelHelper extends Helper {
         return $this->_cleanCurrent().$this->Html->tag('div', $title, $options);
     }
 
+    /**
+     * Create or open a panel body.
+     *
+     * @param string|null $text The panel body content, or null to only open the body.
+     * @param array       $options Array of options for the body `<div>`.
+     *
+     * @return string A formated opening tag for the panel body or the complete panel
+     * body.
+     */
     protected function _createBody ($text = null, $options = []) {
         $options = $this->addClass($options, 'panel-body');
         $body = $this->Html->tag('div', $text, $options);
@@ -261,25 +420,67 @@ class BootstrapPanelHelper extends Helper {
         return $body;
     }
 
+    /**
+     * Create or open a panel footer.
+     *
+     * @param string|null $text The panel footer content, or null to only open the footer.
+     * @param array       $options Array of options for the footer `<div>`.
+     *
+     * @return string A formated opening tag for the panel footer or the complete panel
+     * footer.
+     */
     protected function _createFooter ($text = null, $options = []) {
         $options = $this->addClass($options, 'panel-footer');
         return $this->_cleanCurrent().$this->Html->tag('div', $text, $options) ;
     }
 
     /**
+     * Create or open a panel header.
      *
-     * Create / Start the header. If $info is specified as a string, create and return the
-     * whole header, otherwize only open the header.
+     * If `$text` is a string, create a panel header using the specified content
+     * and `$options`.
      *
-     * @param array|string $info If string, use as the panel title, otherwize works as
-     *                           $options.
-     * @param array $options Options for the header div.
+     * ```php
+     * echo $this->Panel->header('Header Content', ['class' => 'my-class']);
+     * ```
      *
-     * Special option (if $info is string):
-     *     - close: Add the 'close' button in the header (default true).
+     * If `$text` is `null`, create a formated opening tag for a panel header using the
+     * specified `$options`.
      *
-     **/
-    public function header ($info = null, $options = []) {
+     * ```php
+     * echo $this->Panel->header(null, ['class' => 'my-class']);
+     * ```
+     *
+     * If `$text` is an array, used it as `$options` and create a formated opening tag for
+     * a panel header.
+     *
+     * ```php
+     * echo $this->Panel->header(['class' => 'my-class']);
+     * ```
+     *
+     * You can use the `title` option to wrap the content:
+     *
+     * ```php
+     * echo $this->Panel->header('My Title', ['title' => false]);
+     * echo $this->Panel->header('My Title', ['title' => true]);
+     * echo $this->Panel->header('My <Title>', ['title' => ['tag' => 'h2', 'class' => 'my-class', 'escape' => true]]);
+     * ```
+     *
+     * ### Options
+     *
+     * - `title` Can be used to wrap the header content into a title tag (default behavior):
+     *   - If `true`, wraps the content into a `<h4>` tag. You can specify an array instead
+     *     of `true` to control the `tag`. See example above.
+     *   - If `false`, does not wrap the content.
+     * - Other attributes for the panel header `<div>`.
+     *
+     * @param string|array $text The header content, or `null`, or an array of options.
+     * @param array        $options Array of options. See above.
+     *
+     * @return string A formated opening tag for the panel header or the complete panel
+     * header.
+     */
+    public function header($info = null, $options = []) {
         if (is_array($info)) {
             $options = $info;
             $info    = null;
@@ -291,33 +492,73 @@ class BootstrapPanelHelper extends Helper {
     }
 
     /**
+     * Create or open a panel body.
      *
-     * Create / Start the body. If $info is not null, it is used as the body content, otherwize
-     * start the body div.
+     * If `$content` is a string, create a panel body using the specified content and
+     * `$options`.
      *
-     * @param array|string $info If string, use as the body content, otherwize works
-     *                           as $options.
-     * @param array $options Options for the footer div.
+     * ```php
+     * echo $this->Panel->body('Panel Content', ['class' => 'my-class']);
+     * ```
      *
+     * If `$content` is `null`, create a formated opening tag for a panel body using the
+     * specified `$options`.
      *
-     **/
-    public function body ($info = null, $options = []) {
-        if (is_array($info)) {
-            $options = $info;
-            $info    = null;
+     * ```php
+     * echo $this->Panel->body(null, ['class' => 'my-class']);
+     * ```
+     *
+     * If `$content` is an array, used it as `$options` and create a formated opening tag for
+     * a panel body.
+     *
+     * ```php
+     * echo $this->Panel->body(['class' => 'my-class']);
+     * ```
+     *
+     * @param array|string $info The body content, or `null`, or an array of options.
+     * `$options`.
+     * @param array $options Array of options for the panel body `<div>`.
+     *
+     * @return string
+     */
+    public function body($content = null, $options = []) {
+        if (is_array($content)) {
+            $options = $content;
+            $content    = null;
         }
-        return $this->_createBody($info, $options);
+        return $this->_createBody($content, $options);
     }
 
     /**
+     * Create or open a panel footer.
      *
-     * Create / Start the footer. If $buttons is specified as an associative arrays or as null,
-     * start the footer, otherwize create the footer with the specified text.
+     * If `$text` is a string, create a panel footer using the specified content
+     * and `$options`.
      *
-     * @param string $text Use as the footer content.
-     * @param array $options Options for the footer div.
+     * ```php
+     * echo $this->Panel->footer('Footer Content', ['class' => 'my-class']);
+     * ```
      *
-     **/
+     * If `$text` is `null`, create a formated opening tag for a panel footer using the
+     * specified `$options`.
+     *
+     * ```php
+     * echo $this->Panel->footer(null, ['class' => 'my-class']);
+     * ```
+     *
+     * If `$text` is an array, used it as `$options` and create a formated opening tag for
+     * a panel footer.
+     *
+     * ```php
+     * echo $this->Panel->footer(['class' => 'my-class']);
+     * ```
+     *
+     * @param string|array $text The footer content, or `null`, or an array of options.
+     * @param array        $options Array of options for the panel footer `<div>`.
+     *
+     * @return string A formated opening tag for the panel footer or the complete panel
+     * footer.
+     */
     public function footer ($text = null, $options = []) {
         if (is_array($text)) {
             $options = $text;
