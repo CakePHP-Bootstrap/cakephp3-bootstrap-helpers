@@ -34,6 +34,7 @@ class BootstrapFormHelper extends FormHelper {
      * @var array
      */
     protected $_defaultConfig = [
+        'idPrefix' => null,
         'errorClass' => 'has-error',
         'typeMap' => [
             'string' => 'text', 'datetime' => 'datetime', 'boolean' => 'checkbox',
