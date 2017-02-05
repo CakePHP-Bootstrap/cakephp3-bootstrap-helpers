@@ -1,0 +1,7 @@
+# Backup files
+
+*.bak
+
+# Python cache files
+
+**/__pycache__
