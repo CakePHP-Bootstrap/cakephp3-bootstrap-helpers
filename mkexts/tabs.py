@@ -41,28 +41,31 @@ class TabsTreeProcessor(markdown.treeprocessors.Treeprocessor):
     TA_RE = re.compile(r'[ ]*--[ ]*TAB[ ]*:[ ]*(?P<name>.+)')
 
     def run(self, root):
-        in_tags = None
         to_remove = []
-        cur_tabs, cur_tag = None, None
-        for node in root.iter():
+        in_tags = None
+        for node in root:
             if node.text:
                 m = self.SB_RE.search(node.text)
                 if m:
                     in_tags = OrderedDict()
                     cur_tabs = m.group('name')
+                    pr_tag, cur_tag = [], None
                     to_remove.append(node)
                 elif self.EB_RE.search(node.text):
-                    node.tag = 'div'
                     node.clear()
-                    self.createTabs(node, cur_tabs, in_tags)
+                    node.tag = 'div'
+                    node.attrib['class'] = 'tab-panels'
+                    self.createTabs(node, cur_tabs, in_tags, pr_tag)
                     in_tags = None
                 elif in_tags is not None:
                     m = self.TA_RE.search(node.text)
                     if m:
                         cur_tag = m.group('name').strip()
                         in_tags[cur_tag] = []
-                    else:
+                    elif cur_tag is not None:
                         in_tags[cur_tag].append(node)
+                    else:
+                        pr_tag.append(node)
                     to_remove.append(node)
         for node in to_remove:
             root.remove(node)
@@ -74,7 +77,7 @@ class TabsTreeProcessor(markdown.treeprocessors.Treeprocessor):
                       '-'.join(['tab', name, tabName]).lower()) \
             .strip(' -')
 
-    def createTabs(self, node, name, tabs):
+    def createTabs(self, node, name, tabs, prtabs = []):
         """ Create the DOM tree for the given tabs and append it to the
         given node.
 
@@ -83,6 +86,7 @@ class TabsTreeProcessor(markdown.treeprocessors.Treeprocessor):
           - name The name of the tabulation block.
           - tabs An OrderedDict containing name of the tabs as key and
             a list of DOM elements as value.
+          - prtabs List of elements to between the header and the panels.
         """
         activeId = self.makeId(name, list(tabs.keys())[0])
         ulElement = etree.Element('ul')
@@ -103,6 +107,8 @@ class TabsTreeProcessor(markdown.treeprocessors.Treeprocessor):
             liElement.append(aElement)
             ulElement.append(liElement)
         node.append(ulElement)
+        for elem in prtabs:
+            node.append(elem)
         tabContent = etree.Element('div')
         tabContent.attrib['class'] = 'tab-content'
         for tname, elems in tabs.items():
