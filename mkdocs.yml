@@ -1,1 +1,28 @@
-site_name: My Docs
+site_name: CakePHP 3 Bootstrap Helpers
+
+repo_url: https://github.com/Holt59/cakephp3-bootstrap-helpers
+
+pages:
+    - Getting Started: index.md
+    - Html Helper:
+        - Creating icons: html-helper/icons.md
+        - Labels & Badges: html-helper/labels-badges.md
+        - Alerts: html-helper/alerts.md
+        - getCrumbList: html-helper/getcrumblist.md
+    - Form Helper:
+        - Basic usage: form-helper/basics.md
+        - Horizontal forms: form-helper/horizontal.md
+        - Custom file inputs: form-helper/custom-file-inputs.md
+        - Buttons, Groups & Toolbars: form-helper/buttons-et-al.md
+        - New input options: form-helper/new-input-options.md 
+    - Modal Helper:
+        - Basic usage: modal-helper/basics.md
+        - Without HTML: modal-helper/no-html.md
+        - Fully customized modals: modal-helper/custom.md
+
+markdown_extensions:
+    - "mkexts.tabs:TabsExtension"
+    - "mkexts.prism:PrismCodeExtension"
+
+theme: null
+theme_dir: bootstrap-theme
