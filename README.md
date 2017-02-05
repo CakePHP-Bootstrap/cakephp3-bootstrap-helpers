@@ -1,4 +1,5 @@
-### CakePHP 3, Bootstrap Helpers Documentation
+CakePHP 3, Bootstrap Helpers Documentation
+==========================================
 
 This branch of the repository contains the source file for the documentation at 
 [https://holt59.github.io/cakephp3-bootstrap-helpers/](https://holt59.github.io/cakephp3-bootstrap-helpers/).
