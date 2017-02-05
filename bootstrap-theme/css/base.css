@@ -1,0 +1,134 @@
+body {
+    font-family: "Open Sans";
+    font-size: 14px;
+}
+
+a:focus {
+    outline: none;
+}
+
+.btn-custom {
+    background-color: #1096D0 ;
+    border-color: #0A90CC;
+    color: white;
+}
+
+.btn-custom:hover,
+.btn-custom:focus,
+.btn-custom:active,
+.btn-custom.active {
+    background-color: #068CC6 ;
+    border-color: #0080C0;
+    color: white;
+}
+
+.btn-modal {
+    position: absolute;
+    top: 4px;
+    right: 0px;
+}
+
+div[role="main"] h3:first-child {
+    margin-top: 0;
+}
+
+h3 {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+
+div.tab-panels {
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.nav-tabs {
+    margin-bottom: 15px;
+}
+
+footer {
+    padding: 20px 0;
+    margin-top: 20px ;
+    background-color: #f8f8f8;
+    border-top: 1px solid #e7e7e7;
+}
+
+/*
+ * Side navigation
+ *
+ */
+
+.right-nav {
+    width: 263px;
+}
+
+.right-nav-fixed {
+    position: fixed;
+    top: 20px;
+}
+
+.right-nav li a:hover, 
+.right-nav li a:focus, 
+.right-nav li a:active, 
+.right-nav li.active a {
+    background: none;
+}
+
+.right-nav li a {
+    color: #767676 ;
+    padding: 4px 20px;
+    font-size: 13px;
+}
+
+.right-nav li a:hover {
+    color: #1096D0;
+    border-left: 1px solid #1096D0 ;
+    padding-left: 19px;
+}
+
+.right-nav li.active > a {
+    color: #1096D0;
+    border-left: 2px solid #1096D0 ;
+    padding-left: 18px;
+}
+
+.right-nav > ul > li.active > a {
+    font-weight: bold ;
+}
+
+.right-nav li ul,
+.right-nav.scrolling li.active ul {
+    display: none ;
+}
+
+.right-nav li.active ul {
+    display: block ;
+}
+
+.right-nav li li a {
+    padding: 1px 20px 1px 30px;
+    font-size: 12px ;
+}
+
+.right-nav li li a:hover {
+    padding-left: 29px;
+}
+
+.right-nav li li.active a {
+    padding-left: 28px;
+}
+
+.right-nav > a {
+    display: block;
+    padding: 4px 10px;
+    margin-top: 10px;
+    margin-left: 10px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #999;
+}
+
+.right-nav > a:hover {
+    text-decoration: none ;
+    color: #1096D0 ;
+}

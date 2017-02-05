@@ -1,0 +1,21 @@
+<div class="jumbotron">
+    {% if config.repo_name == 'GitHub' %}
+    <a href="{{ config.repo_url }}" id="forkme"><i class="fa fa-github"></i> Fork me on Github</a>
+    {% endif %}
+    <div class="container">
+    <h1>CakePHP 3, Bootstrap Helpers</h1>
+    <p class="headline"><a href="http://cakephp.org/" target="_blank">CakePHP 3.x</a> helpers for the <a href="http://getbootstrap.com/" target="_blank">Bootstrap 3</a> HTML, CSS &amp; JS framework by <a href="https://github.com/Holt59" target="_blank">@Holt59</a>.</p>
+    <p>
+        <a class="btn btn-lg" href="{{ config.repo_url }}" target="_blank">
+            {% if config.repo_name == 'GitHub' %}
+                <i class="fa fa-github"></i>
+            {% elif config.repo_name == 'Bitbucket' %}
+                <i class="fa fa-bitbucket"></i>
+            {% endif %}
+            Code on {{ config.repo_name }}</a>
+        {% if config.repo_name == 'GitHub' %}
+        <a class="btn btn-lg" href="{{ config.repo_url }}/archive/master.zip"><i class="fa fa-download"></i> Download (.zip)</a>
+        {% endif %}
+    </p>
+    </div>
+</div>

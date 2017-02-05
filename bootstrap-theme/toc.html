@@ -1,0 +1,18 @@
+<nav class="right-nav">
+    <ul class="nav">
+    {% for nav_item in nav %}
+        <li {% if nav_item.active %}class="active"{% endif %}>
+            <a href="{% if nav_item.children %}{{ nav_item.children.0.url }}{% else %}{{ nav_item.url }}{% endif %}">{{ nav_item.title }}</a>
+            {% if nav_item.active and nav_item.children %}
+                <ul class="nav">
+                {% for nav_item in nav_item.children %}
+                    <li {% if nav_item.active %}class="active"{% endif %}>
+                        <a href="{{ nav_item.url }}">{{ nav_item.title }}</a>
+                    </li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        </li>
+    {% endfor %}
+    </ul>
+</nav>
