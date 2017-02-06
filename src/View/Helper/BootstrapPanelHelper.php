@@ -315,7 +315,7 @@ class BootstrapPanelHelper extends Helper {
         return $res ;
     }
 
-\    /**
+    /**
      * Cleans the current panel part and return necessary HTML closing elements.
      *
      * @return string An HTML string containing closing elements.
