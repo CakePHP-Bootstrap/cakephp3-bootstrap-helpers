@@ -20,6 +20,11 @@ class BootstrapPanelHelper extends Helper {
 
     use BootstrapTrait;
 
+    /**
+     * Other helpers used by BootstrapPanelHelper.
+     *
+     * @var array
+     */
     public $helpers = [
         'Html' => [
             'className' => 'Bootstrap.BootstrapHtml'
@@ -27,7 +32,9 @@ class BootstrapPanelHelper extends Helper {
     ];
 
     /**
-     * Default configuration.
+     * Default configuration for the helper.
+     *
+     * - `collapsible` Default behavior for collapsible panel.
      *
      * @var array
      */
@@ -216,7 +223,7 @@ class BootstrapPanelHelper extends Helper {
      * - `panel-count` Panel counter, can be used to override the default counter when inside
      * a group. This value is used to generate the panel, header and body ID attribute.
      * - `type` Type of the panel (`'default'`, `'primary'`, ...). Default is `'default'`.
-     * - Other attributes will be passed to the `Html::div` method for creating the
+     * - Other options will be passed to the `Html::div` method for creating the
      * panel `<div>`.
      *
      * @param array|string $title   The panel title or an array of options.

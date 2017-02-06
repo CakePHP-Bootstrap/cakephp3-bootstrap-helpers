@@ -34,7 +34,7 @@ class BootstrapFormHelper extends FormHelper {
     ];
 
     /**
-     * Default config for the helper.
+     * Default configuration for the helper.
      *
      * - `idPrefix` See CakePHP `FormHelper`.
      * - `errorClass` See CakePHP `FormHelper`. Overriden by `'has-error'`.

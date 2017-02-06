@@ -20,24 +20,66 @@ class BootstrapModalHelper extends Helper {
 
     use BootstrapTrait ;
 
+    /**
+     * Other helpers used by BootstrapModalHelper.
+     *
+     * @var array
+     */
     public $helpers = ['Html'];
 
+    /**
+     * Current part of the modal (`null`, `'header'`, `'body'`, `'footer'`).
+     *
+     * @var string
+     */
     protected $_current = null;
 
+    /**
+     * Current id of the modal.
+     *
+     * @var mixed
+     */
     protected $_currentId = null;
 
     /**
+     * Open a modal
      *
-     * Create a Twitter Bootstrap like modal.
+     * If `$title` is a string, the modal header is created using `$title` as its
+     * content and default options.
      *
-     * @param array|string $title If array, works as $options, otherwize used as the modal title.
-     * @param array $options Options for the main div of the modal.
+     * ```php
+     * echo $this->Modal->create('My Modal Title');
+     * ```
      *
-     * Extra options (useless if $title not specified) :
-     *     - close: Add close buttons to header (default true)
-     *     - no-body: Do not open the body after the create (default false)
-     *     - size: Modal size (small, large or custom classes)
-     **/
+     * If the modal header is created, the modal body is automatically opened after
+     * it, except if the `body` options is specified (see below).
+     *
+     * If `$title` is an array, it is used as `$options`.
+     *
+     * ```php
+     * echo $this->Modal->create(['class' => 'my-modal-class']);
+     * ```
+     *
+     * ### Options
+     *
+     * - `aria-hidden` HTML attribute. Default is `'true'`.
+     * - `body` If `$title` is a string, set to `false` to not open the body after
+       * the panel header. Default is `true`.
+     * - `close` Set to `false` to no add a close button to the modal. Default is `true`.
+     * - `id` Identifier of the modal. If specified, a `aria-labelledby` HTML attribute
+     * will be added to the modal and the header will be set accordingly.
+     * - `role` HTML attribute. Default is `'dialog'`.
+     * - `size` Size of the modal. Either a shortcut (`'lg'`/`'large'`/`'modal-lg'` or
+     * (`'sm'`/`'small'`/`'modal-sm'`) or `false` (no size specified) or a custom class.
+     * - `tabindex` HTML attribute. Default is `-1`.
+     * Other options will be passed to the `Html::div` method for creating the
+     * outer modal `<div>`.
+     *
+     * @param array|string $title   The modal title or an array of options.
+     * @param array        $options Array of options. See above.
+     *
+     * @return An HTML string containing opening elements for a modal.
+     */
     public function create($title = null, $options = []) {
 
         if (is_array($title)) {
@@ -100,15 +142,22 @@ class BootstrapModalHelper extends Helper {
     }
 
     /**
+     * Closes a modal, cleans part that have not been closed correctly and optionaly
+     * adds a footer with buttons to the modal.
      *
-     * End a modal. If $buttons is not null, the ModalHelper::footer functions is called
-     * with $buttons and $options arguments.
+     * If `$buttons` is not null, the `footer()` method will be used to create the modal
+     * footer using `$buttons` and `$options`:
      *
-     * @param array|null $buttons
-     * @param array $options
+     * ```
+     * echo $this->Modal->end([$this->Form->button('Save'), $this->Form->button('Close')]);
+     * ```
      *
-     **/
-    public function end ($buttons = NULL, $options = []) {
+     * @param array|null $buttons Array of buttons for the `footer()` method or `null`.
+     * @param array      $options Array of options for the `footer()` method.
+     *
+     * @return string An HTML string containing closing tags for the modal.
+     */
+    public function end($buttons = NULL, $options = []) {
         $res = $this->_cleanCurrent();
         if ($buttons !== null) {
             $res .= $this->footer($buttons, $options) ;
@@ -117,7 +166,12 @@ class BootstrapModalHelper extends Helper {
         return $res ;
     }
 
-    protected function _cleanCurrent () {
+    /**
+     * Cleans the current modal part and return necessary HTML closing elements.
+     *
+     * @return string An HTML string containing closing elements.
+     */
+    protected function _cleanCurrent() {
         if ($this->_current) {
             $this->_current = null ;
             return '</div>';
@@ -125,14 +179,26 @@ class BootstrapModalHelper extends Helper {
         return '' ;
     }
 
-    protected function _part ($part, $content = null, $options = []) {
+    /**
+     * Cleans the current modal part, create a new ones with the given content, and
+     * update the internal `_current` variable if necessary.
+     *
+     * @param string $part    The name of the part (`'header'`, `'body'`, `'footer'`).
+     * @param string $content The content of the part or `null`.
+     * @param array  $options Array of options for the `Html::tag` method.
+     *
+     * @return string
+     */
+    protected function _part($part, $content = null, $options = []) {
         $out = $this->_cleanCurrent().$this->Html->tag('div', $content, $options);
         if (!$content)
             $this->_current = $part;
         return $out;
     }
 
-    protected function _createHeader ($title = null, $options = []) {
+    // TODO: Update doc below this point.
+
+    protected function _createHeader($title = null, $options = []) {
         $options += [
             'close' => true
         ];
