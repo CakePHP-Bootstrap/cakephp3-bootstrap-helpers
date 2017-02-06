@@ -65,7 +65,7 @@ class BootstrapModalHelper extends Helper {
      * - `aria-hidden` HTML attribute. Default is `'true'`.
      * - `body` If `$title` is a string, set to `false` to not open the body after
        * the panel header. Default is `true`.
-     * - `close` Set to `false` to no add a close button to the modal. Default is `true`.
+     * - `close` Set to `false` to not add a close button to the modal. Default is `true`.
      * - `id` Identifier of the modal. If specified, a `aria-labelledby` HTML attribute
      * will be added to the modal and the header will be set accordingly.
      * - `role` HTML attribute. Default is `'dialog'`.
@@ -148,7 +148,7 @@ class BootstrapModalHelper extends Helper {
      * If `$buttons` is not null, the `footer()` method will be used to create the modal
      * footer using `$buttons` and `$options`:
      *
-     * ```
+     * ```php
      * echo $this->Modal->end([$this->Form->button('Save'), $this->Form->button('Close')]);
      * ```
      *
@@ -196,8 +196,22 @@ class BootstrapModalHelper extends Helper {
         return $out;
     }
 
-    // TODO: Update doc below this point.
-
+    /**
+     * Create or open a modal header.
+     *
+     * ### Options
+     *
+     * - `close` Set to `false` to not add a close button to the modal. Default is `true`
+     * - Other attributes for the modal header `<div>`.
+     *
+     * @param string|null $text The modal header content, or null to only open the header.
+     * @param array       $options Array of options. See above.
+     *
+     * @return string A formated opening tag for the modal header or the complete modal
+     * header.
+     *
+     * @see `BootstrapModalHelper::header`
+     */
     protected function _createHeader($title = null, $options = []) {
         $options += [
             'close' => true
@@ -227,44 +241,93 @@ class BootstrapModalHelper extends Helper {
 
         return $this->_part('header', $out, $options);
     }
-
-    protected function _createBody ($text = null, $options = []) {
+    /**
+     * Create or open a modal body.
+     *
+     * @param string|null $text The modal body content, or null to only open the body.
+     * @param array       $options Array of options for the body `<div>`.
+     *
+     * @return string A formated opening tag for the modal body or the complete modal
+     * body.
+     *
+     * @see `BootstrapModalHelper::body`
+     */
+    protected function _createBody($text = null, $options = []) {
         $options = $this->addClass($options, 'modal-body');
         return $this->_part('body', $text, $options);
     }
 
-    protected function _createFooter ($buttons = null, $options = []) {
+    /**
+     * Create or open a modal footer.
+     *
+     * If `$content` is `null` and the `'close'` option (see below) is `true`, a close
+     * button is created inside the footer.
+     *
+     * ### Options
+     *
+     * - `close` Set to `true` to add a close button to the footer if `$content` is
+     * empty. Default is `true`.
+     * Other attributes for the footer div.
+     *
+     * @param string|null $content The modal footer content, or null to only open the footer.
+     * @param array       $options Array of options. See above.
+     *
+     * @return string A formated opening tag for the modal footer or the complete modal
+     * footer.
+     */
+    protected function _createFooter($content = null, $options = []) {
         $options += [
             'close' => true
         ];
         $close = $options['close'];
         unset($options['close']);
 
-        $content = '';
-        if (!$buttons && $close) {
+        if (!$content  && $close) {
             $content .= '<button type="button" class="btn btn-default" data-dismiss="modal">'
                      .__('Close')
                      .'</button>' ;
         }
-        $content .= $buttons;
 
         $options = $this->addClass($options, 'modal-footer');
-        return $this->_part('footer', $buttons, $options);
+        return $this->_part('footer', $content, $options);
     }
 
     /**
+     * Create or open a modal header.
      *
-     * Create / Start the header. If $info is specified as a string, create and return the
-     * whole header, otherwize only open the header.
+     * If `$text` is a string, create a modal header using the specified content
+     * and `$options`.
      *
-     * @param array|string $info If string, use as the modal title, otherwize works as $options.
-     * @param array $options Options for the header div.
+     * ```php
+     * echo $this->Modal->header('Header Content', ['class' => 'my-class']);
+     * ```
      *
-     * Special option (if $info is string):
-     *     - close: Add the 'close' button in the header (default true).
+     * If `$text` is `null`, create a formated opening tag for a modal header using the
+     * specified `$options`.
      *
-     **/
-    public function header ($info = null, $options = []) {
+     * ```php
+     * echo $this->Modal->header(null, ['class' => 'my-class']);
+     * ```
+     *
+     * If `$text` is an array, used it as `$options` and create a formated opening tag for
+     * a modal header.
+     *
+     * ```php
+     * echo $this->Modal->header(['class' => 'my-class']);
+     * ```
+     *
+     * ### Options
+     *
+     * - `close` Set to `false` to not add a close button to the modal. Default is `true`
+     * - Other attributes for the modal header `<div>`.
+     *
+     * @param string|array $text The modal header content, or an array of options.
+     * @param array        $options Array of options. See above.
+     *
+     * @return string A formated opening tag for the modal header or the complete modal
+     * header.
+     */
+    public function header($info = null, $options = []) {
         if (is_array($info)) {
             $options = $info;
             $info = null;
@@ -273,16 +336,36 @@ class BootstrapModalHelper extends Helper {
     }
 
     /**
+     * Create or open a modal body.
      *
-     * Create / Start the body. If $info is not null, it is used as the body content,
-     * otherwize start the body div.
+     * If `$content` is a string, create a modal body using the specified content and
+     * `$options`.
      *
-     * @param array|string $info If string, use as the body content, otherwize works as $options.
-     * @param array $options Options for the footer div.
+     * ```php
+     * echo $this->Modal->body('Modal Content', ['class' => 'my-class']);
+     * ```
      *
+     * If `$content` is `null`, create a formated opening tag for a modal body using the
+     * specified `$options`.
      *
-     **/
-    public function body ($info = null, $options = []) {
+     * ```php
+     * echo $this->Modal->body(null, ['class' => 'my-class']);
+     * ```
+     *
+     * If `$content` is an array, used it as `$options` and create a formated opening tag for
+     * a modal body.
+     *
+     * ```php
+     * echo $this->Modal->body(['class' => 'my-class']);
+     * ```
+     *
+     * @param array|string $info The body content, or `null`, or an array of options.
+     * `$options`.
+     * @param array $options Array of options for the modal body `<div>`.
+     *
+     * @return string
+     */
+    public function body($info = null, $options = []) {
         if (is_array($info)) {
             $options = $info;
             $info = null;
@@ -291,19 +374,43 @@ class BootstrapModalHelper extends Helper {
     }
 
     /**
+     * Create or open a modal footer.
      *
-     * Create / Start the footer. If $buttons is specified as an associative arrays or as null,
-     * start the footer, otherwize create the footer with the specified buttons.
+     * If `$buttons` is a string, create a modal footer using the specified content
+     * and `$options`.
      *
-     * @param array|string $buttons If string, use as the footer content, if list, concatenate
-     *        values in the list as content (use for buttons purpose), otherwize works as $options.
-     * @param array $options Options for the footer div.
+     * ```php
+     * echo $this->Modal->footer('Footer Content', ['class' => 'my-class']);
+     * ```
      *
-     * Special option (if $buttons is NOT NULL but empty):
-     *     - close: Add the 'close' button to the footer (default true).
+     * If `$buttons` is `null`, create a **formated opening tag** for a modal footer using the
+     * specified `$options`.
      *
-     **/
-    public function footer ($buttons = null, $options = []) {
+     * ```php
+     * echo $this->Modal->footer(null, ['class' => 'my-class']);
+     * ```
+     *
+     * If `$buttons` is an associative array, used it as `$options` and create a
+     * **formated opening tag** for a modal footer.
+     *
+     * ```php
+     * echo $this->Modal->footer(['class' => 'my-class']);
+     * ```
+     *
+     * If `$buttons` is a non-associative array, its elements are glued together to
+     * create the content. This can be used to generate a footer with buttons:
+     *
+     * ```php
+     * echo $this->Modal->footer([$this->Form->button('Close'), $this->Form->button('Save')]);
+     * ```
+     *
+     * @param string|array $buttons The footer content, or `null`, or an array of options.
+     * @param array        $options Array of options for the modal footer `<div>`.
+     *
+     * @return string A formated opening tag for the modal footer or the complete modal
+     * footer.
+     */
+    public function footer($buttons = null, $options = []) {
         if (is_array($buttons)) {
             if (!empty($buttons) && $this->_isAssociativeArray($buttons)) {
                 $options = $buttons;

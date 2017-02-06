@@ -315,7 +315,7 @@ class BootstrapPanelHelper extends Helper {
         return $res ;
     }
 
-    /**
+\    /**
      * Cleans the current panel part and return necessary HTML closing elements.
      *
      * @return string An HTML string containing closing elements.
@@ -357,7 +357,7 @@ class BootstrapPanelHelper extends Helper {
      * @return string A formated opening tag for the panel header or the complete panel
      * header.
      */
-    protected function _createHeader ($title, $options = [], $titleOptions = []) {
+    protected function _createHeader($title, $options = [], $titleOptions = []) {
         if (empty($titleOptions)) {
             $titleOptions = $options['title'] ;
         }
@@ -409,7 +409,7 @@ class BootstrapPanelHelper extends Helper {
      * @return string A formated opening tag for the panel body or the complete panel
      * body.
      */
-    protected function _createBody ($text = null, $options = []) {
+    protected function _createBody($text = null, $options = []) {
         $options = $this->addClass($options, 'panel-body');
         $body = $this->Html->tag('div', $text, $options);
         if ($this->_collapsible) {
@@ -436,7 +436,7 @@ class BootstrapPanelHelper extends Helper {
      * @return string A formated opening tag for the panel footer or the complete panel
      * footer.
      */
-    protected function _createFooter ($text = null, $options = []) {
+    protected function _createFooter($text = null, $options = []) {
         $options = $this->addClass($options, 'panel-footer');
         return $this->_cleanCurrent().$this->Html->tag('div', $text, $options) ;
     }
