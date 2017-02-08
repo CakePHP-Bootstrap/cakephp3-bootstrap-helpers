@@ -21,6 +21,11 @@ class BootstrapNavbarHelper extends Helper {
 
     use BootstrapTrait;
 
+    /**
+     * Other helpers used by BootstrapNavbarHelper.
+     *
+     * @var array
+     */
     public $helpers = [
         'Html',
         'Form' => [
@@ -29,18 +34,19 @@ class BootstrapNavbarHelper extends Helper {
     ];
 
     /**
-     * Automatic detection of active link (`class="active"`).
+     * Default configuration for the helper.
      *
-     * @var bool
-     */
-    public $autoActiveLink = true;
-
-    /**
-     * Automatic button link when not in a menu.
+     * - `autoActiveLink` Set to `true` to automatically add `active` class
+     * when given URL for a link matches the current URL. Default is `true`.
+     * - `autoButtonLink` Set to  true` to automatically create buttons instead
+     * of links when outside a menu. Default is `true`.
      *
-     * @var bool
+     * @var array
      */
-    public $autoButtonLink = true;
+    public $_defaultConfig = [
+        'autoActiveLink' => true,
+        'autoButtonLink' => true
+    ];
 
     protected $_fixed = false;
     protected $_static = false;
@@ -172,11 +178,12 @@ class BootstrapNavbarHelper extends Helper {
      * @return string A HTML `<li>` tag wrapping the link.
      */
     public function link($name, $url = '', array $options = [], array $linkOptions = []) {
-        if ($this->_level == 0 && $this->autoButtonLink) {
-            $options = $this->addClass($options, 'btn btn-default navbar-btn');
+        if ($this->_level == 0 && $this->config('autoButtonLink')) {
+            $options = $this->addClass($options, 'navbar-btn');
+            $options = $this->addClass($options, 'btn btn-default');
             return $this->Html->link($name, $url, $options);
         }
-        if (Router::url() == Router::url($url) && $this->autoActiveLink) {
+        if (Router::url() == Router::url($url) && $this->config('autoActiveLink')) {
             $options = $this->addClass($options, 'active');
         }
         return $this->Html->tag('li', $this->Html->link($name, $url, $linkOptions),
