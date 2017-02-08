@@ -264,7 +264,7 @@ class BootstrapNavbarHelperTest extends TestCase {
 
     public function testMenu() {
         // TODO: Add test for this...
-        $this->navbar->autoActiveLink = false;
+        $this->navbar->config('autoActiveLink', false);
         // Basic test:
         $this->navbar->create(null);
         $result = $this->navbar->beginMenu(['class' => 'my-menu']);
@@ -302,6 +302,87 @@ class BootstrapNavbarHelperTest extends TestCase {
         $this->assertHtml($expected, $result);
 
         // TODO: Add more tests...
+    }
+
+    public function testAutoButtonLink() {
+        $this->navbar->create(null);
+
+        // Active and outside a menu:
+        $this->navbar->config('autoButtonLink', true);
+        $result = $this->navbar->link('Button', '/');
+        $expected = [
+            ['a' => ['href' => '/', 'class' => 'navbar-btn btn btn-default']],
+            'Button', '/a'
+        ];
+        $this->assertHtml($expected, $result);
+
+        // Inactive and outside a menu:
+        $this->navbar->config('autoButtonLink', false);
+        $result = $this->navbar->link('Link', '/');
+        $expected = [
+            ['li' => ['class' => 'active']],
+            ['a' => ['href' => '/']], 'Link', '/a',
+            '/li'
+        ];
+        $this->assertHtml($expected, $result);
+
+        // Active and inside a menu:
+        $this->navbar->config('autoButtonLink', true);
+        $this->navbar->beginMenu('');
+        $result = $this->navbar->link('Link', '/');
+        $expected = [
+            ['li' => ['class' => 'active']],
+            ['a' => ['href' => '/']], 'Link', '/a',
+            '/li'
+        ];
+        $this->assertHtml($expected, $result);
+
+    }
+
+    public function testAutoActiveLink() {
+        $this->navbar->create(null);
+        $this->navbar->beginMenu('');
+
+        // Active and correct link:
+        $this->navbar->config('autoActiveLink', true);
+        $result = $this->navbar->link('Link', '/');
+        $expected = [
+            ['li' => ['class' => 'active']],
+            ['a' => ['href' => '/']], 'Link', '/a',
+            '/li'
+        ];
+        $this->assertHtml($expected, $result);
+
+        // Active and incorrect link but more complex:
+        $this->navbar->config('autoActiveLink', true);
+        $result = $this->navbar->link('Link', '/pages');
+        $expected = [
+            ['li' => []],
+            ['a' => ['href' => '/pages']], 'Link', '/a',
+            '/li'
+        ];
+        $this->assertHtml($expected, $result);
+
+        // Unactive and correct link:
+        $this->navbar->config('autoActiveLink', false);
+        $result = $this->navbar->link('Link', '/');
+        $expected = [
+            ['li' => []],
+            ['a' => ['href' => '/']], 'Link', '/a',
+            '/li'
+        ];
+        $this->assertHtml($expected, $result);
+
+        // Unactive and incorrect link:
+        $this->navbar->config('autoActiveLink', false);
+        $result = $this->navbar->link('Link', '/pages');
+        $expected = [
+            ['li' => []],
+            ['a' => ['href' => '/pages']], 'Link', '/a',
+            '/li'
+        ];
+        $this->assertHtml($expected, $result);
+
     }
 
 };
