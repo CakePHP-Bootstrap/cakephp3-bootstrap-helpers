@@ -90,15 +90,18 @@ class BootstrapNavbarHelper extends Helper {
               $options['inverse']);
 
         /** Generate options for outer div. **/
-        $options = $this->addClass($options, 'navbar navbar-default');
+        $options = $this->addClass($options, 'navbar');
+        if ($this->_inverse) {
+            $options = $this->addClass($options , 'navbar-inverse');
+        }
+        else {
+            $options = $this->addClass($options , 'navbar-default');
+        }
         if ($this->_fixed !== false) {
             $options = $this->addClass($options, 'navbar-fixed-'.$this->_fixed);
         }
         else if ($this->_static !== false) {
             $options = $this->addClass($options, 'navbar-static-top');
-        }
-        if ($this->_inverse !== false) {
-            $options = $this->addClass($options , 'navbar-inverse');
         }
 
         $toggleButton = '';
