@@ -2,6 +2,7 @@
 
 *.bak
 
-# Python cache files
+# Python cache and build files
 
 **/__pycache__
+**/*.pyc
