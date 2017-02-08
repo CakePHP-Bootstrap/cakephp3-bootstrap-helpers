@@ -74,7 +74,7 @@ class BootstrapNavbarHelper extends Helper {
 
         $options += [
             'fixed' => false,
-            'responsive' => false,
+            'responsive' => true,
             'static' => false,
             'inverse' => false,
             'fluid' => false
