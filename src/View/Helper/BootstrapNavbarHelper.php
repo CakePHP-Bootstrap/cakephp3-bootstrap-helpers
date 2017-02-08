@@ -359,11 +359,11 @@ class BootstrapNavbarHelper extends Helper {
      * @return string HTML elements to close the navbar.
      */
     public function end () {
-        $res = '</div></div>';
+        $res = '</div>';
         if ($this->_responsive) {
             $res .= '</div>';
         }
-        return $res;
+        return $res.'</nav>';
     }
 
 }
