@@ -251,15 +251,15 @@ class BootstrapNavbarHelperTest extends TestCase {
             '/p'
         ];
         $this->assertHtml($expected, $result);
-        /*
-           $result = $this->navbar->text(
-           'Some text with a <a href="/" class="my-class">link</a>.');
-           $expected = [
-           ['p' => ['class' => 'navbar-text']],
-           'Some text with a <a href="/" class="my-class navbar-link">link</a>.',
-           '/p'
-           ];
-           $this->assertHtml($expected, $result); */
+
+        $result = $this->navbar->text(
+            'Some text with a <a href="/" class="my-class">link</a>.');
+        $expected = [
+            ['p' => ['class' => 'navbar-text']],
+            'Some text with a <a href="/" class="my-class navbar-link">link</a>.',
+            '/p'
+        ];
+        $this->assertHtml($expected, $result);
     }
 
     public function testMenu() {
@@ -276,7 +276,7 @@ class BootstrapNavbarHelperTest extends TestCase {
         $result .= $this->navbar->link('Something else here');
         $result .= $this->navbar->divider();
         $result .= $this->navbar->link('Another action');
-        $result .= $this->navbar->endMenu(); 
+        $result .= $this->navbar->endMenu();
         $result .= $this->navbar->endMenu();
         $expected = [
             ['ul' => ['class' => 'my-menu nav navbar-nav']],
