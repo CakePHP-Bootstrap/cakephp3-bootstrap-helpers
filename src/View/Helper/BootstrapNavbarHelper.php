@@ -143,7 +143,7 @@ class BootstrapNavbarHelper extends Helper {
         }
 
         /** Add and return outer div openning. **/
-        return $this->Html->tag('div', null, $options)
+        return $this->Html->tag('nav', null, $options)
             .$this->Html->tag('div', null, [
                 'class' => $this->_fluid ? 'container-fluid' : 'container'
             ]).$rightOpen;
