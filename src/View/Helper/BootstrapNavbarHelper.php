@@ -104,29 +104,6 @@ class BootstrapNavbarHelper extends Helper {
             $options = $this->addClass($options, 'navbar-static-top');
         }
 
-        $toggleButton = '';
-        $rightOpen = '';
-        if ($this->_responsive) {
-            $toggleButton = $this->Html->tag(
-                'button',
-                implode('', array(
-                    $this->Html->tag('span', __('Toggle navigation'),
-                                     array('class' => 'sr-only')),
-                    $this->Html->tag('span', '', array('class' => 'icon-bar')),
-                    $this->Html->tag('span', '', array('class' => 'icon-bar')),
-                    $this->Html->tag('span', '', array('class' => 'icon-bar'))
-                )),
-                array(
-                    'type' => 'button',
-                    'class' => 'navbar-toggle collapsed',
-                    'data-toggle' => 'collapse',
-                    'data-target' => '.navbar-collapse'
-                )
-            );
-            $rightOpen = $this->Html->tag(
-                'div', null, ['class' => 'navbar-collapse collapse']);
-        }
-
         if ($brand) {
             if (is_string($brand)) {
                 $brand = $this->Html->link ($brand, '/', [
@@ -141,9 +118,38 @@ class BootstrapNavbarHelper extends Helper {
                 $brand['options'] = $this->addClass ($brand['options'], 'navbar-brand');
                 $brand = $this->Html->link ($brand['name'], $brand['url'], $brand['options']);
             }
-            $rightOpen = $this->Html->tag('div', $toggleButton.$brand,
-                                          ['class' => 'navbar-header']).$rightOpen;
         }
+
+        $toggleButton = '';
+        if ($this->_responsive) {
+            $toggleButton = $this->Html->tag(
+                'button', implode('', [
+                    $this->Html->tag('span', __('Toggle navigation'),
+                                     ['class' => 'sr-only']),
+                    $this->Html->tag('span', '', ['class' => 'icon-bar']),
+                    $this->Html->tag('span', '', ['class' => 'icon-bar']),
+                    $this->Html->tag('span', '', ['class' => 'icon-bar'])
+                ]), [
+                    'type' => 'button',
+                    'class' => 'navbar-toggle collapsed',
+                    'data-toggle' => 'collapse',
+                    'data-target' => '.navbar-collapse',
+                    'aria-expanded' => 'false'
+                ]);
+        }
+
+        $rightOpen = '';
+        if ($this->_responsive || $brand) {
+            $rightOpen = $this->Html->tag('div', $toggleButton.$brand,
+                                          ['class' => 'navbar-header']);
+        }
+
+        if ($this->_responsive) {
+            $rightOpen .= $this->Html->tag('div', null, [
+                'class' => 'collapse navbar-collapse'
+            ]);
+        }
+
 
         /** Add and return outer div openning. **/
         return $this->Html->tag('nav', null, $options)
