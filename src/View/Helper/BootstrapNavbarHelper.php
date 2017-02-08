@@ -192,6 +192,9 @@ class BootstrapNavbarHelper extends Helper {
      * @return string A HTML navbar button.
      */
     public function button($name, array $options = []) {
+        $options += [
+            'type' => 'button'
+        ];
         $options = $this->addClass($options, 'navbar-btn');
         return $this->Form->button($name, $options);
     }
