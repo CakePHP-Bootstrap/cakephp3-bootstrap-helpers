@@ -75,7 +75,8 @@ class BootstrapHtmlHelper extends HtmlHelper {
             'alertCloseContent' => '<span aria-hidden="true">&times;</span>',
             'tooltip' => '<{{tag}} data-toggle="{{toggle}}" data-placement="{{placement}}" title="{{tooltip}}">{{content}}</{{tag}}>',
             'progressBar' => 
-                '<div class="progress-bar progress-bar-{{type}}{{attrs.class}}" role="progressbar" aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style="width: {{width}}%%;"{{attrs}}>{{inner}}</div>',
+'<div class="progress-bar progress-bar-{{type}}{{attrs.class}}" role="progressbar" 
+aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style="width: {{width}}%%;"{{attrs}}>{{inner}}</div>',
             'progressBarInner' => '<span class="sr-only">{{width}}%%</span>',
             'progressBarContainer' => '<div class="progress{{attrs.class}}"{{attrs}}>{{content}}</div>'
         ],
