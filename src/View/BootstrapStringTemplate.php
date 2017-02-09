@@ -63,11 +63,14 @@ class BootstrapStringTemplate extends StringTemplate {
             foreach ($placeholders as $placeholder) {
                 if (substr($placeholder, 0, 6) == 'attrs.'
                     && in_array('attrs.'.substr($placeholder, 6), $placeholders)
-                    && preg_match('#'.substr($placeholder, 6).'="([^"]+)"#',
+                    && preg_match('#'.substr($placeholder, 6).'="([^"]*)"#',
                                   $data['attrs'], $matches) > 0) {
-                    $data['attrs'] = preg_replace('#'.substr($placeholder, 6).'="[^"]+"#',
+                    $data['attrs'] = preg_replace('#'.substr($placeholder, 6).'="[^"]*"#',
                                                   '', $data['attrs']);
-                    $data[$placeholder] = ' '.trim($matches[1]);
+                    $data[$placeholder] = trim($matches[1]);
+                    if ($data[$placeholder]) {
+                        $data[$placeholder] = ' '.$data[$placeholder];
+                    }
                 }
             }
             $data['attrs'] = trim($data['attrs']);
