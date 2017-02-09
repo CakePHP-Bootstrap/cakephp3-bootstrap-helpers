@@ -70,7 +70,10 @@ class BootstrapStringTemplate extends StringTemplate {
                     $data[$placeholder] = ' '.trim($matches[1]);
                 }
             }
-            $data['attrs'] = ' '.trim($data['attrs']);
+            $data['attrs'] = trim($data['attrs']);
+            if ($data['attrs']) {
+                $data['attrs'] = ' '.$data['attrs'];
+            }
         }
         if ($template === null) {
             return '';
