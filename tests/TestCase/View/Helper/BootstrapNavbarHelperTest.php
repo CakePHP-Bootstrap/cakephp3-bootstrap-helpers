@@ -231,7 +231,7 @@ class BootstrapNavbarHelperTest extends TestCase {
         // Custom options
         $result = $this->navbar->text('Some text', ['class' => 'my-class']);
         $expected = [
-            ['p' => ['class' => 'my-class navbar-text']],
+            ['p' => ['class' => 'navbar-text my-class']],
             'Some text',
             '/p'
         ];
