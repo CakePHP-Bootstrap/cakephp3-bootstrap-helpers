@@ -28,7 +28,6 @@ class BootstrapHtmlHelper extends HtmlHelper {
      * - `alert` Default options for alert.
      * - `label` Default options for labels.
      * - `progress` Default options for progress bar.
-     * - `progressTextFormat` Format string to display text in progress bar.
      * - `tooltip` Default options for tooltips.
      * - `useFontAwesome` Set to true to use FontAwesome icon instead of glyphicon.
      * - See [CakePHP documentation](https://api.cakephp.org/3.3/class-Cake.View.Helper.HtmlHelper.html#$_defaultConfig) for extra configuration options.
@@ -64,21 +63,34 @@ class BootstrapHtmlHelper extends HtmlHelper {
             'javascriptblock' => '<script{{attrs}}>{{content}}</script>',
             'javascriptstart' => '<script>',
             'javascriptlink' => '<script src="{{url}}"{{attrs}}></script>',
-            'javascriptend' => '</script>'
+            'javascriptend' => '</script>',
+
+            // New templates for Bootstrap
+            'icon' => '<i aria-hidden="true" class="glyphicon glyphicon-{{type}}{{attrs.class}}"{{attrs}}></i>',
+            'label' => '<span class="label label-{{type}}{{attrs.class}}"{{attrs}}>{{content}}</span>',
+            'badge' => '<span class="badge{{attrs.class}}"{{attrs}}>{{content}}</span>',
+            'alert' => '<div class="alert alert-{{type}}{{attrs.class}}" role="alert"{{attrs}}>{{close}}{{content}}</div>',
+            'alertCloseButton' => 
+                '<button type="button" class="close{{attrs.class}}" data-dismiss="alert" aria-label="{{label}}"{{attrs}}>{{content}}</button>',
+            'alertCloseContent' => '<span aria-hidden="true">&times;</span>',
+            'tooltip' => '<{{tag}} data-toggle="{{toggle}}" data-placement="{{placement}}" title="{{tooltip}}">{{content}}</{{tag}}>',
+            'progressBar' => 
+                '<div class="progress-bar progress-bar-{{type}}{{attrs.class}}" role="progressbar" aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style="width: {{width}}%%;"{{attrs}}>{{inner}}</div>',
+            'progressBarInner' => '<span class="sr-only">{{width}}%%</span>',
+            'progressBarContainer' => '<div class="progress{{attrs.class}}"{{attrs}}>{{content}}</div>'
         ],
-        'useFontAwesome' => false,
-        'progressTextFormat' => '%d%% Complete',
+        'templateClass' => 'Bootstrap\View\BootstrapStringTemplate',
         'tooltip' => [
             'tag'       => 'span',
             'placement' => 'right',
             'toggle'    => 'tooltip'
         ],
         'label' => [
-            'tag'  => 'span',
             'type' => 'default'
         ],
         'alert' => [
-            'type' => 'warning'
+            'type' => 'warning',
+            'close' => true
         ],
         'progress' => [
             'type' => 'primary'
@@ -98,44 +110,14 @@ class BootstrapHtmlHelper extends HtmlHelper {
      * @return string The HTML icon.
      */
     public function icon($icon, array $options = []) {
-        return $this->config('useFontAwesome')?
-               $this->faIcon($icon, $options) : $this->glIcon($icon, $options);
-    }
-
-    /**
-     * Create a font awesome icon.
-     *
-     * @param string $icon    Name of the icon
-     * @param array  $options Extra attributes for the `<i>` tag.
-     *
-     * @return string The HTML icon.
-     */
-    public function faIcon($icon, $options = []) {
-        $options = $this->addClass($options, 'fa');
-        $options = $this->addClass($options, 'fa-'.$icon);
         $options += [
-            'aria-hidden' => 'true'
+            'templateVars' => []
         ];
-
-        return $this->tag('i', '', $options);
-    }
-
-    /**
-     * Create a glyphicon icon.
-     *
-     * @param string $icon    Name of the icon
-     * @param array  $options Extra attributes for the `<i>` tag.
-     *
-     * @return string The HTML icon.
-     */
-    public function glIcon($icon, $options = []) {
-        $options = $this->addClass($options, 'glyphicon');
-        $options = $this->addClass($options, 'glyphicon-'.$icon);
-        $options += [
-            'aria-hidden' => 'true'
-        ];
-
-        return $this->tag('i', '', $options);
+        return $this->formatTemplate('icon', [
+            'type' => $icon,
+            'attrs' => $this->templater()->formatAttributes($options),
+            'templateVars' => $options['templateVars']
+        ]);
     }
 
     /**
@@ -166,16 +148,16 @@ class BootstrapHtmlHelper extends HtmlHelper {
         else if (is_array($type)) {
             $options = $type;
         }
-        $options += [
-            'tag' => $this->config('label.tag'),
-            'type' => $this->config('label.type')
+        $options += $this->config('label') + [
+            'templateVars' => []
         ];
         $type = $options['type'];
-        $tag = $options['tag'];
-        unset ($options['type'], $options['tag']);
-        $options = $this->addClass($options, 'label');
-        $options = $this->addClass($options, 'label-'.$type);
-        return $this->tag($tag, $text, $options);
+        return $this->formatTemplate('label', [
+            'type' => $options['type'],
+            'content' => $text,
+            'attrs' => $this->templater()->formatAttributes($options, ['type']),
+            'templateVars' => $options['templateVars']
+        ]);
     }
 
     /**
@@ -186,8 +168,14 @@ class BootstrapHtmlHelper extends HtmlHelper {
      * @param array $options Array of attributes for the span element.
      */
     public function badge($text, $options = []) {
-        $options = $this->addClass($options, 'badge');
-        return $this->tag('span', $text, $options);
+        $options += [
+            'templateVars' => []
+        ];
+        return $this->formatTemplate('badge', [
+            'content' => $text,
+            'attrs' => $this->templater()->formatAttributes($options),
+            'templateVars' => $options['templateVars']
+        ]);
     }
 
 
@@ -197,19 +185,20 @@ class BootstrapHtmlHelper extends HtmlHelper {
     public function getCrumbList(array $options = [], $startText = false) {
         $options['separator'] = '';
         $options = $this->addClass($options, 'breadcrumb');
-        return parent::getCrumbList ($options, $startText);
+        return parent::getCrumbList($options, $startText);
     }
 
     /**
      * Create a Twitter Bootstrap style alert block, containing text.
      *
      * The second parameter may either be `$type` or `$options` (in this case,
-     * the third parameter is not used, and the label type can be specified in the
+     * the third parameter is not used, and the alert type can be specified in the
      * `$options` array).
      *
      * ### Options
      *
-     * - `type` The type of the label.
+     * - `close` Dismissible alert. See configuration for default.
+     * - `type` The type of the alert. See configuration for default.
      * - Other attributes will be assigned to the wrapper element.
      *
      * @param string       $text The alert text.
@@ -225,24 +214,29 @@ class BootstrapHtmlHelper extends HtmlHelper {
         else if (is_array($type)) {
             $options = $type;
         }
-        $options += [
-            'type' => $this->config('alert.type')
+        $options += $this->config('alert') + [
+            'templateVars' => []
         ];
-        $button = $this->tag('button', '&times;', [
-            'type' => 'button',
-            'class' => 'close',
-            'data-dismiss' => 'alert',
-            'aria-hidden' => true
-        ]);
-        $type = $options['type'];
-        unset($options['type']);
-        $options = $this->addClass($options, 'alert');
-        if ($type) {
-            $options = $this->addClass($options, 'alert-'.$type);
+        $close = null;
+        if ($options['close']) {
+            $closeContent = $this->formatTemplate('alertCloseContent', [
+                'templateVars' => $options['templateVars']
+            ]);
+            $close = $this->formatTemplate('alertCloseButton', [
+                'label' => __('Close'),
+                'content' => $closeContent,
+                'attrs' => $this->templater()->formatAttributes([]),
+                'templateVars' => $options['templateVars']
+            ]);
+            $options = $this->addClass($options, 'alert-dismissible');
         }
-        $class = $options['class'];
-        unset($options['class']);
-        return $this->div($class, $button.$text, $options);
+        return $this->formatTemplate('alert', [
+            'type' => $options['type'],
+            'close' => $close,
+            'content' => $text,
+            'attrs' => $this->templater()->formatAttributes($options, ['close', 'type']),
+            'templateVars' => $options['templateVars']
+        ]);
     }
 
     /**
@@ -250,10 +244,9 @@ class BootstrapHtmlHelper extends HtmlHelper {
      *
      * ### Options
      *
-     * - `data-toggle` The 'data-toggle' HTML attribute.
+     * - `toggle` The 'data-toggle' HTML attribute.
      * - `placement` The `data-placement` HTML attribute.
      * - `tag` The tag to use.
-     * - `title` The title of the tooltip (default to $tooltip).
      * - Other attributes will be assigned to the wrapper element.
      *
      * @param string $text    The HTML tag inner text.
@@ -264,31 +257,29 @@ class BootstrapHtmlHelper extends HtmlHelper {
      * @return string The text wrapped in the specified HTML tag with a tooltip.
      */
     public function tooltip($text, $tooltip, $options = []) {
-        $options += [
-            'tag'         => $this->config('tooltip.tag'),
-            'data-toggle' => $this->config('tooltip.toggle'),
-            'placement'   => $this->config('tooltip.placement'),
-            'title'       => $tooltip
+        $options += $this->config('tooltip') + [
+            'tooltip' => $tooltip,
+            'templateVars' => []
         ];
-        $options['data-placement'] = $options['placement'];
-        $tag = $options['tag'];
-        unset($options['placement'], $options['tag']);
-        return $this->tag($tag, $text, $options);
+        return $this->formatTemplate('tooltip', [
+            'content' => $text,
+            'attrs' => $this->templater()->formatAttributes($options, ['tag', 'toggle', 'placement', 'tooltip']),
+            'templateVars' => array_merge($options, $options['templateVars'])
+        ]);
     }
 
     /**
      * Create a Twitter Bootstrap style progress bar.
      *
-     * ### Options:
+     * ### Bar options:
      *
      * - `active` If `true` the progress bar will be active. Default is `false`.
-     * - `format` Format string for the text value (see configuration for default).
      * - `max` Maximum value for the progress bar. Default is `100`.
      * - `min` Minimum value for the progress bar. Default is `0`.
      * - `striped` If `true` the progress bar will be striped. Default is `false`.
      * - `type` A string containing the `type` of the progress bar (primary, info, danger,
      * success, warning). Default to `'primary'`.
-     * - Other attributes will be assigned to the wrapper element.
+     * - Other attributes will be assigned to the progress bar element.
      *
      * @param int|array $widths
      *   - `int` The width (in %) of the bar.
@@ -300,55 +291,52 @@ class BootstrapHtmlHelper extends HtmlHelper {
      * @return string The HTML bootstrap progress bar.
      */
     public function progress($widths, array $options = []) {
-        $options += [
+        $options += $this->config('progress') + [
             'striped' => false,
             'active'  => false,
-            'format' => $this->config('progressTextFormat')
+            'min' => 0,
+            'max' => 100,
+            'templateVars' => []
         ];
-        $striped = $options['striped'];
-        $active  = $options['active'];
-        unset($options['active'], $options['striped']);
-        $bars = '';
         if (!is_array($widths)) {
             $widths = [
-                array_merge([
-                    'width' => $widths
-                ], $options)
+                ['width' => $widths]
             ];
         }
+        $bars = '';
         foreach ($widths as $width) {
-            $width += [
-                'type' => $this->config('progress.type'),
-                'min'  => 0,
-                'max'  => 100
-            ];
-            $class = 'progress-bar progress-bar-'.$width['type'];
-            $content = $this->tag('span', sprintf($options['format'], $width['width']), [
-                'class' => 'sr-only'
+            $width += $options;
+            if ($width['striped']) {
+                $width = $this->addClass($width, 'progress-bar-striped');
+            }
+            if ($width['active']) {
+                $width = $this->addClass($width, 'active');
+            }
+            $inner = $this->formatTemplate('progressBarInner', [
+                'width' => $width['width']
             ]);
-            $bars .= $this->div($class, $content, [
-                'aria-valuenow' => $width['width'],
-                'aria-valuemin' => $width['min'],
-                'aria-valuemax' => $width['max'],
-                'role' => 'progressbar',
-                'style' => 'width: '.$width['width'].'%;'
+
+            $bars .= $this->formatTemplate('progressBar', [
+                'inner' => $inner,
+                'type' => $width['type'],
+                'min' => $width['min'],
+                'max' => $width['max'],
+                'width' => $width['width'],
+                'attrs' => $this->templater()->formatAttributes($width, ['striped', 'active', 'min', 'max', 'type', 'width']),
+                'templateVars' => $width['templateVars']
             ]);
         }
-        $options = $this->addClass($options, 'progress');
-        if ($active) {
-            $options = $this->addClass($options, 'active');
-        }
-        if ($striped) {
-            $options = $this->addClass($options, 'progress-striped');
-        }
-        $classes = $options['class'];
-        unset($options['class'], $options['active'], $options['type'],
-              $options['striped'], $options['format']);
-        return $this->div($classes, $bars, $options);
+        return $this->formatTemplate('progressBarContainer', [
+            'content' => $bars,
+            'attrs' => $this->templater()->formatAttributes([]),
+            'templateVars' => $options['templateVars']
+        ]);
     }
 
     /**
      * Create & return a twitter bootstrap dropdown menu.
+     *
+     * @deprecated 3.0.7 
      *
      * @param array $menu HTML tags corresponding to menu options (which will be wrapped
      *              into `<li>` tag). To add separator, pass `'divider'`.
@@ -356,7 +344,7 @@ class BootstrapHtmlHelper extends HtmlHelper {
      *
      * @return string
      */
-    public function dropdown (array $menu = [], array $options = []) {
+    public function dropdown(array $menu = [], array $options = []) {
         $output = '' ;
         foreach ($menu as $action) {
             if ($action === 'divider' || (is_array($action) && $action[0] === 'divider')) {
@@ -398,6 +386,8 @@ class BootstrapHtmlHelper extends HtmlHelper {
      * displaying, for example, a list of products that would require
      * more than the maximum number of columns per row.
      *
+     * @deprecated 3.0.7
+     *
      * @param int|string $breakIndex       Divisible index that will trigger a new row
      * @param array      $data             Collection of data used to render each column
      * @param callable   $determineContent A callback that will be called with the
@@ -405,7 +395,7 @@ class BootstrapHtmlHelper extends HtmlHelper {
      *
      * @return string
      */
-    public function splicedRows ($breakIndex, array $data, callable $determineContent) {
+    public function splicedRows($breakIndex, array $data, callable $determineContent) {
         $rowsHtml = '<div class="row">';
 
         $count = 1;
