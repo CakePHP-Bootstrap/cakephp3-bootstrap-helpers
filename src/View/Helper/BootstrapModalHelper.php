@@ -18,7 +18,8 @@ use Cake\View\Helper;
 
 class BootstrapModalHelper extends Helper {
 
-    use BootstrapTrait ;
+    use \Cake\View\StringTemplateTrait;
+    use BootstrapTrait;
 
     /**
      * Other helpers used by BootstrapModalHelper.
@@ -28,7 +29,35 @@ class BootstrapModalHelper extends Helper {
     public $helpers = ['Html'];
 
     /**
-     * Current part of the modal (`null`, `'header'`, `'body'`, `'footer'`).
+     * Default configuration for the BootstrapModalHelper.
+     *
+     * @var array
+     */
+    public $_defaultConfig = [
+        'templates' => [
+            'modalStart' => '<div class="modal fade{{attrs.class}}" tabindex="-1" role="dialog"{{attrs}}>{{dialogStart}}{{contentStart}}',
+            'modalEnd' => '{{contentEnd}}{{dialogEnd}}</div>',
+            'modalDialogStart' => '<div class="modal-dialog{{attrs.class}}" role="document"{{attrs}}>',
+            'modalDialogEnd' => '</div>',
+            'modalContentStart' => '<div class="modal-content{{attrs.class}}"{{attrs}}>',
+            'modalContentEnd' => '</div>',
+            'headerStart' => '<div class="modal-header{{attrs.class}}"{{attrs}}>',
+            'headerEnd' => '</div>',
+            'modalHeaderCloseButton' =>
+                '<button type="button" class="close{{attrs.class}}" data-dismiss="modal" aria-label="{{label}}"{{attrs}}>{{content}}</button>',
+            'modalHeaderCloseContent' => '<span aria-hidden="true">&times;</span>',
+            'modalTitle' => '<h4 class="modal-title{{attrs.class}}"{{attrs}}>{{content}}</h4>',
+            'bodyStart' => '<div class="modal-body{{attrs.class}}"{{attrs}}>',
+            'bodyEnd' => '</div>',
+            'footerStart' => '<div class="modal-footer{{attrs.class}}"{{attrs}}>',
+            'footerEnd' => '</div>',
+            'modalFooterCloseButton' => '<button type="button" class="btn btn-default{{attrs.class}}" data-dismiss="modal"{{attrs}}>{{content}}</button>'
+        ],
+        'templateClass' => 'Bootstrap\View\BootstrapStringTemplate',
+    ];
+
+    /**
+     * Current part of the modal(`null`, `'header'`, `'body'`, `'footer'`).
      *
      * @var string
      */
@@ -52,7 +81,7 @@ class BootstrapModalHelper extends Helper {
      * ```
      *
      * If the modal header is created, the modal body is automatically opened after
-     * it, except if the `body` options is specified (see below).
+     * it, except if the `body` options is specified(see below).
      *
      * If `$title` is an array, it is used as `$options`.
      *
@@ -62,16 +91,13 @@ class BootstrapModalHelper extends Helper {
      *
      * ### Options
      *
-     * - `aria-hidden` HTML attribute. Default is `'true'`.
      * - `body` If `$title` is a string, set to `false` to not open the body after
        * the panel header. Default is `true`.
      * - `close` Set to `false` to not add a close button to the modal. Default is `true`.
      * - `id` Identifier of the modal. If specified, a `aria-labelledby` HTML attribute
      * will be added to the modal and the header will be set accordingly.
-     * - `role` HTML attribute. Default is `'dialog'`.
-     * - `size` Size of the modal. Either a shortcut (`'lg'`/`'large'`/`'modal-lg'` or
-     * (`'sm'`/`'small'`/`'modal-sm'`) or `false` (no size specified) or a custom class.
-     * - `tabindex` HTML attribute. Default is `-1`.
+     * - `size` Size of the modal. Either a shortcut(`'lg'`/`'large'`/`'modal-lg'` or
+     *(`'sm'`/`'small'`/`'modal-sm'`) or `false`(no size specified) or a custom class.
      * Other options will be passed to the `Html::div` method for creating the
      * outer modal `<div>`.
      *
@@ -82,8 +108,8 @@ class BootstrapModalHelper extends Helper {
      */
     public function create($title = null, $options = []) {
 
-        if (is_array($title)) {
-            $options = $title ;
+        if(is_array($title)) {
+            $options = $title;
         }
 
         $this->_currentId = null;
@@ -93,20 +119,13 @@ class BootstrapModalHelper extends Helper {
             'id' => null,
             'close' => true,
             'body' => true,
-            'tabindex' => -1,
-            'role' => 'dialog',
-            'aria-hidden' => 'true',
-            'size' => false
+            'size' => false,
+            'templateVars' => []
         ];
 
-        $close = $options['close'];
-        $body  = $options['body'];
-        unset ($options['close'], $options['body']) ;
-
-
-        if ($options['id']) {
-            $this->_currentId = $options['id'] ;
-            $options['aria-labelledby'] = $this->_currentId.'Label' ;
+        if($options['id']) {
+            $this->_currentId = $options['id'];
+            $options['aria-labelledby'] = $this->_currentId.'Label';
         }
 
         switch($options['size']) {
@@ -127,18 +146,23 @@ class BootstrapModalHelper extends Helper {
             $size = ' '.$options['size'];
             break;
         }
-        unset($options['size']);
+        $options = $this->addClass($options, $size);
 
-        $options = $this->addClass($options, 'modal fade');
-        $res = $this->Html->tag('div', null, $options)
-             .$this->Html->div('modal-dialog'.$size).$this->Html->div('modal-content');
-        if (is_string($title) && $title) {
-            $res .= $this->_createHeader($title, ['close' => $close]) ;
-            if ($body) {
+        $dialogStart = $this->formatTemplate('modalDialogStart', []);
+        $contentStart = $this->formatTemplate('modalContentStart', []);
+        $res = $this->formatTemplate('modalStart', [
+            'dialogStart' => $dialogStart,
+            'contentStart' => $contentStart,
+            'attrs' => $this->templater()->formatAttributes($options, ['body', 'close', 'size']),
+            'templateVars' => $options['templateVars']
+        ]);
+        if(is_string($title) && $title) {
+            $res .= $this->_createHeader($title, ['close' => $options['close']]);
+            if($options['body']) {
                 $res .= $this->_createBody();
             }
         }
-        return $res ;
+        return $res;
     }
 
     /**
@@ -159,11 +183,14 @@ class BootstrapModalHelper extends Helper {
      */
     public function end($buttons = NULL, $options = []) {
         $res = $this->_cleanCurrent();
-        if ($buttons !== null) {
-            $res .= $this->footer($buttons, $options) ;
+        if($buttons !== null) {
+            $res .= $this->footer($buttons, $options);
         }
-        $res .= '</div></div></div>' ;
-        return $res ;
+        $res .= $this->formatTemplate('modalEnd', [
+            'contentEnd' => $this->formatTemplate('modalContentEnd', []),
+            'dialogEnd' => $this->formatTemplate('modalDialogEnd', [])
+        ]);
+        return $res;
     }
 
     /**
@@ -172,27 +199,38 @@ class BootstrapModalHelper extends Helper {
      * @return string An HTML string containing closing elements.
      */
     protected function _cleanCurrent() {
-        if ($this->_current) {
-            $this->_current = null ;
-            return '</div>';
+        if($this->_current) {
+            $current = $this->_current;
+            $this->_current = null;
+            return $this->formatTemplate($current.'End', []);
         }
-        return '' ;
+        return '';
     }
 
     /**
      * Cleans the current modal part, create a new ones with the given content, and
      * update the internal `_current` variable if necessary.
      *
-     * @param string $part    The name of the part (`'header'`, `'body'`, `'footer'`).
+     * @param string $part    The name of the part(`'header'`, `'body'`, `'footer'`).
      * @param string $content The content of the part or `null`.
      * @param array  $options Array of options for the `Html::tag` method.
      *
      * @return string
      */
     protected function _part($part, $content = null, $options = []) {
-        $out = $this->_cleanCurrent().$this->Html->tag('div', $content, $options);
-        if (!$content)
-            $this->_current = $part;
+        $options += [
+            'templateVars' => []
+        ];
+        $out = $this->_cleanCurrent();
+        $out .= $this->formatTemplate($part.'Start', [
+            'attrs' => $this->templater()->formatAttributes($options, ['close']),
+            'templateVars' => $options
+        ]);
+        $this->_current = $part;
+        if ($content) {
+            $out .= $content;
+            $out .= $this->_cleanCurrent();
+        }
         return $out;
     }
 
@@ -216,26 +254,20 @@ class BootstrapModalHelper extends Helper {
         $options += [
             'close' => true
         ];
-
-        $close = $options['close'];
-        unset($options['close']) ;
-
-        $options = $this->addClass($options, 'modal-header');
-
         $out = null;
-        if ($title) {
+        if($title) {
             $out = '';
-            if ($close) {
-                $out .= $this->Html->tag('button', '&times;', [
-                    'type' => 'button',
-                    'class' => 'close',
-                    'data-dismiss' => 'modal',
-                    'aria-hidden' => 'true'
+            if($options['close']) {
+                $out .= $this->formatTemplate('modalHeaderCloseButton', [
+                    'content' => $this->formatTemplate('modalHeaderCloseContent', []),
+                    'label' => __('Close')
                 ]);
             }
-            $out .= $this->Html->tag('h4', $title, [
-                'class' => 'modal-title',
-                'id' => $this->_currentId ? $this->_currentId.'Label' : false
+            $out .= $this->formatTemplate('modalTitle', [
+                'content' => $title,
+                'attrs' => $this->templater()->formatAttributes([
+                    'id' => $this->_currentId ? $this->_currentId.'Label' : false
+                ])
             ]);
         }
 
@@ -253,14 +285,13 @@ class BootstrapModalHelper extends Helper {
      * @see `BootstrapModalHelper::body`
      */
     protected function _createBody($text = null, $options = []) {
-        $options = $this->addClass($options, 'modal-body');
         return $this->_part('body', $text, $options);
     }
 
     /**
      * Create or open a modal footer.
      *
-     * If `$content` is `null` and the `'close'` option (see below) is `true`, a close
+     * If `$content` is `null` and the `'close'` option(see below) is `true`, a close
      * button is created inside the footer.
      *
      * ### Options
@@ -279,16 +310,11 @@ class BootstrapModalHelper extends Helper {
         $options += [
             'close' => true
         ];
-        $close = $options['close'];
-        unset($options['close']);
-
-        if (!$content  && $close) {
-            $content .= '<button type="button" class="btn btn-default" data-dismiss="modal">'
-                     .__('Close')
-                     .'</button>' ;
+        if(!$content  && $options['close']) {
+            $content .= $this->formatTemplate('modalFooterCloseButton', [
+                'content' => __('Close')
+            ]);
         }
-
-        $options = $this->addClass($options, 'modal-footer');
         return $this->_part('footer', $content, $options);
     }
 
@@ -328,11 +354,11 @@ class BootstrapModalHelper extends Helper {
      * header.
      */
     public function header($info = null, $options = []) {
-        if (is_array($info)) {
+        if(is_array($info)) {
             $options = $info;
             $info = null;
         }
-        return $this->_createHeader($info, $options) ;
+        return $this->_createHeader($info, $options);
     }
 
     /**
@@ -366,11 +392,11 @@ class BootstrapModalHelper extends Helper {
      * @return string
      */
     public function body($info = null, $options = []) {
-        if (is_array($info)) {
+        if(is_array($info)) {
             $options = $info;
             $info = null;
         }
-        return $this->_createBody($info, $options) ;
+        return $this->_createBody($info, $options);
     }
 
     /**
@@ -411,8 +437,8 @@ class BootstrapModalHelper extends Helper {
      * footer.
      */
     public function footer($buttons = null, $options = []) {
-        if (is_array($buttons)) {
-            if (!empty($buttons) && $this->_isAssociativeArray($buttons)) {
+        if(is_array($buttons)) {
+            if(!empty($buttons) && $this->_isAssociativeArray($buttons)) {
                 $options = $buttons;
                 $buttons = null;
             }
@@ -420,7 +446,7 @@ class BootstrapModalHelper extends Helper {
                 $buttons = implode('', $buttons);
             }
         }
-        return $this->_createFooter($buttons, $options) ;
+        return $this->_createFooter($buttons, $options);
     }
 
 }

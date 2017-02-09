@@ -9,30 +9,37 @@ use Cake\View\View;
 class BootstrapModalHelperTest extends TestCase {
 
     /**
+     * Instance of BootstrapModalHelper.
+     *
+     * @var BootstrapModalHelper
+     */
+    public $modal;
+
+    /**
      * Setup
      *
      * @return void
      */
     public function setUp() {
         parent::setUp();
-        $this->View = new View();
-        $this->Modal = new BootstrapModalHelper ($this->View);
+        $view = new View();
+        $this->modal = new BootstrapModalHelper($view);
     }
 
-    public function testCreate () {
+    public function testCreate() {
         $title = "My Modal";
         $id = "myModalId";
         // Test standard create without ID
-        $result = $this->Modal->create($title);
-        $this->assertHtml([
+        $result = $this->modal->create($title);
+        $expected = [
             ['div' => [
                 'tabindex' => '-1',
                 'role' => 'dialog',
-                'aria-hidden' => 'true',
                 'class' => 'modal fade'
             ]],
             ['div' => [
-                'class' => 'modal-dialog'
+                'class' => 'modal-dialog',
+                'role' => 'document'
             ]],
             ['div' => [
                 'class' => 'modal-content'
@@ -44,9 +51,9 @@ class BootstrapModalHelperTest extends TestCase {
                 'type' => 'button',
                 'class' => 'close',
                 'data-dismiss' => 'modal',
-                'aria-hidden' => 'true'
+                'aria-label' => __('Close')
             ]],
-            '&times;',
+            ['span' => ['aria-hidden' => 'true']], '&times;', '/span',
             '/button',
             ['h4' => [
                 'class' => 'modal-title'
@@ -57,20 +64,21 @@ class BootstrapModalHelperTest extends TestCase {
             ['div' => [
                 'class' => 'modal-body'
             ]]
-        ], $result);
+        ];
+        $this->assertHtml($expected, $result);
         // Test standard create with ID
-        $result = $this->Modal->create($title, ['id' => $id]);
-        $this->assertHtml([
+        $result = $this->modal->create($title, ['id' => $id]);
+        $expected = [
             ['div' => [
                 'id' => $id,
                 'tabindex' => '-1',
                 'role' => 'dialog',
-                'aria-hidden' => 'true',
                 'aria-labelledby' => $id.'Label',
                 'class' => 'modal fade'
             ]],
             ['div' => [
-                'class' => 'modal-dialog'
+                'class' => 'modal-dialog',
+                'role' => 'document'
             ]],
             ['div' => [
                 'class' => 'modal-content'
@@ -82,9 +90,9 @@ class BootstrapModalHelperTest extends TestCase {
                 'type' => 'button',
                 'class' => 'close',
                 'data-dismiss' => 'modal',
-                'aria-hidden' => 'true'
+                'aria-label' => __('Close')
             ]],
-            '&times;',
+            ['span' => ['aria-hidden' => 'true']], '&times;', '/span',
             '/button',
             ['h4' => [
                 'class' => 'modal-title',
@@ -96,20 +104,22 @@ class BootstrapModalHelperTest extends TestCase {
             ['div' => [
                 'class' => 'modal-body'
             ]]
-        ], $result);
+        ];
+        $this->assertHtml($expected, $result);
         // Create without body
-        $result = $this->Modal->create($title, ['id' => $id, 'body' => false]);
-        $this->assertHtml([
+        $result =
+        $this->modal->create($title, ['id' => $id, 'body' => false]);
+        $expected = [
             ['div' => [
                 'id' => $id,
                 'tabindex' => '-1',
                 'role' => 'dialog',
-                'aria-hidden' => 'true',
                 'aria-labelledby' => $id.'Label',
                 'class' => 'modal fade'
             ]],
             ['div' => [
-                'class' => 'modal-dialog'
+                'class' => 'modal-dialog',
+                'role' => 'document'
             ]],
             ['div' => [
                 'class' => 'modal-content'
@@ -121,9 +131,9 @@ class BootstrapModalHelperTest extends TestCase {
                 'type' => 'button',
                 'class' => 'close',
                 'data-dismiss' => 'modal',
-                'aria-hidden' => 'true'
+                'aria-label' => __('Close')
             ]],
-            '&times;',
+            ['span' => ['aria-hidden' => 'true']], '&times;', '/span',
             '/button',
             ['h4' => [
                 'class' => 'modal-title',
@@ -132,20 +142,21 @@ class BootstrapModalHelperTest extends TestCase {
             $title,
             '/h4',
             '/div'
-        ], $result);
+        ];
+        $this->assertHtml($expected, $result);
         // Create without close
-        $result = $this->Modal->create($title, ['id' => $id, 'close' => false]);
-        $this->assertHtml([
+        $result = $this->modal->create($title, ['id' => $id, 'close' => false]);
+        $expected = [
             ['div' => [
                 'id' => $id,
                 'tabindex' => '-1',
                 'role' => 'dialog',
-                'aria-hidden' => 'true',
                 'aria-labelledby' => $id.'Label',
                 'class' => 'modal fade'
             ]],
             ['div' => [
-                'class' => 'modal-dialog'
+                'class' => 'modal-dialog',
+                'role' => 'document'
             ]],
             ['div' => [
                 'class' => 'modal-content'
@@ -163,31 +174,33 @@ class BootstrapModalHelperTest extends TestCase {
             ['div' => [
                 'class' => 'modal-body'
             ]]
-        ], $result);
+        ];
+        $this->assertHtml($expected, $result);
         // Create without title / no id
-        $result = $this->Modal->create();
-        $this->assertHtml([
+        $result = $this->modal->create();
+        $expected = [
             ['div' => [
                 'tabindex' => '-1',
                 'role' => 'dialog',
-                'aria-hidden' => 'true',
                 'class' => 'modal fade'
             ]],
             ['div' => [
-                'class' => 'modal-dialog'
+                'class' => 'modal-dialog',
+                'role' => 'document'
             ]],
             ['div' => [
                 'class' => 'modal-content'
             ]]
-        ], $result);
+        ];
+        $this->assertHtml($expected, $result);
     }
 
-    public function testHeader () {
+    public function testHeader() {
         $content = 'Header';
         $extraclass = 'my-extra-class';
         // Test with HTML
-        $result = $this->Modal->header($content);
-        $this->assertHtml([
+        $result = $this->modal->header($content);
+        $expected = [
             ['div' => [
                 'class' => 'modal-header'
             ]],
@@ -195,9 +208,9 @@ class BootstrapModalHelperTest extends TestCase {
                 'type' => 'button',
                 'class' => 'close',
                 'data-dismiss' => 'modal',
-                'aria-hidden' => 'true'
+                'aria-label' => __('Close')
             ]],
-            '&times;',
+            ['span' => ['aria-hidden' => 'true']], '&times;', '/span',
             '/button',
             ['h4' => [
                 'class' => 'modal-title'
@@ -205,10 +218,11 @@ class BootstrapModalHelperTest extends TestCase {
             $content,
             '/h4',
             '/div'
-        ], $result);
+        ];
+        $this->assertHtml($expected, $result);
         // Test no close HTML
-        $result = $this->Modal->header($content, ['close' => false]);
-        $this->assertHtml([
+        $result = $this->modal->header($content, ['close' => false]);
+        $expected = [
             ['div' => [
                 'class' => 'modal-header'
             ]],
@@ -218,12 +232,13 @@ class BootstrapModalHelperTest extends TestCase {
             $content,
             '/h4',
             '/div'
-        ], $result);
+        ];
+        $this->assertHtml($expected, $result);
         // Test option
-        $result = $this->Modal->header($content, ['close' => false, 'class' => $extraclass]);
-        $this->assertHtml([
+        $result = $this->modal->header($content, ['close' => false, 'class' => $extraclass]);
+        $expected = [
             ['div' => [
-                'class' => $extraclass.' modal-header'
+                'class' => 'modal-header '.$extraclass
             ]],
             ['h4' => [
                 'class' => 'modal-title'
@@ -231,140 +246,155 @@ class BootstrapModalHelperTest extends TestCase {
             $content,
             '/h4',
             '/div'
-        ], $result);
+        ];
+        $this->assertHtml($expected, $result);
         // Test null first
-        $result = $this->Modal->header(null);
-        $this->assertHtml([
+        $result = $this->modal->header(null);
+        $expected = [
             ['div' => [
                 'class' => 'modal-header'
             ]]
-        ], $result);
+        ]; $this->assertHtml($expected, $result);
         // Test option first
-        $this->Modal->create();
-        $result = $this->Modal->header(['class' => $extraclass]);
-        $this->assertHtml([
+        $this->modal->create();
+        $result = $this->modal->header(['class' => $extraclass]);
+        $expected = [
             ['div' => [
-                'class' => $extraclass.' modal-header'
+                'class' => 'modal-header '.$extraclass
             ]]
-        ], $result);
+        ];
+        $this->assertHtml($expected, $result);
         // Test aut close
-        $this->Modal->create($content);
-        $result = $this->Modal->header(['class' => $extraclass]);
-        $this->assertHtml([
+        $this->modal->create($content);
+        $result = $this->modal->header(['class' => $extraclass]);
+        $expected = [
             '/div',
             ['div' => [
-                'class' => $extraclass.' modal-header'
+                'class' => 'modal-header '.$extraclass
             ]]
-        ], $result);
+        ];
+        $this->assertHtml($expected, $result);
     }
-    public function testBody () {
+
+    public function testBody() {
         $content = 'Body';
         $extraclass = 'my-extra-class';
         // Test with HTML
-        $result = $this->Modal->body($content);
-        $this->assertHtml([
+        $result = $this->modal->body($content);
+        $expected = [
             ['div' => [
                 'class' => 'modal-body'
             ]],
             $content,
             '/div'
-        ], $result);
+        ];
+        $this->assertHtml($expected, $result);
         // Test option
-        $result = $this->Modal->body($content, ['close' => false, 'class' => $extraclass]);
-        $this->assertHtml([
+        $result = $this->modal->body($content, ['close' => false, 'class' => $extraclass]);
+        $expected = [
             ['div' => [
-                'class' => $extraclass.' modal-body'
+                'class' => 'modal-body '.$extraclass
             ]],
             $content,
             '/div'
-        ], $result);
+        ];
+        $this->assertHtml($expected, $result);
         // Test null first
-        $result = $this->Modal->body(null);
-        $this->assertHtml([
+        $result = $this->modal->body(null);
+        $expected = [
             ['div' => [
                 'class' => 'modal-body'
             ]]
-        ], $result);
+        ];
+        $this->assertHtml($expected, $result);
         // Test option first
-        $this->Modal->create();
-        $result = $this->Modal->body(['class' => $extraclass]);
-        $this->assertHtml([
+        $this->modal->create();
+        $result = $this->modal->body(['class' => $extraclass]);
+        $expected = [
             ['div' => [
-                'class' => $extraclass.' modal-body'
+                'class' => 'modal-body '.$extraclass
             ]]
-        ], $result);
+        ]; $this->assertHtml($expected, $result);
         // Test aut close
-        $this->Modal->create();
-        $this->Modal->header(); // Unclosed part
-        $result = $this->Modal->body(['class' => $extraclass]);
-        $this->assertHtml([
+        $this->modal->create();
+        $this->modal->header(); // Unclosed part
+        $result = $this->modal->body(['class' => $extraclass]);
+        $expected = [
             '/div',
             ['div' => [
-                'class' => $extraclass.' modal-body'
+                'class' => 'modal-body '.$extraclass
             ]]
-        ], $result);
+        ];
+        $this->assertHtml($expected, $result);
     }
 
-    public function testFooter () {
+    public function testFooter() {
         $content = 'Footer';
         $extraclass = 'my-extra-class';
         // Test with HTML
-        $result = $this->Modal->footer($content);
-        $this->assertHtml([
+        $result = $this->modal->footer($content);
+        $expected = [
             ['div' => [
                 'class' => 'modal-footer'
             ]],
             $content,
             '/div'
-        ], $result);
+        ];
+        $this->assertHtml($expected, $result);
         // Test with Array
-        $result = $this->Modal->footer([$content, $content], ['class' => $extraclass]);
-        $this->assertHtml([
+        $result = $this->modal->footer([$content, $content], ['class' => $extraclass]);
+        $expected = [
             ['div' => [
-                'class' => $extraclass.' modal-footer'
+                'class' => 'modal-footer '.$extraclass
             ]],
             $content,
             $content,
             '/div'
-        ], $result);
+        ];
+        $this->assertHtml($expected, $result);
         // Test with null as first arg
-        $result = $this->Modal->footer(null, ['class' => $extraclass]);
-        $this->assertHtml([
+        $result = $this->modal->footer(null, ['class' => $extraclass]);
+        $expected = [
             ['div' => [
-                'class' => $extraclass.' modal-footer'
+                'class' => 'modal-footer '.$extraclass
             ]]
-        ], $result);
+        ];
+        $this->assertHtml($expected, $result);
         // Test with Options as first arg
-        $this->Modal->create();
-        $result = $this->Modal->footer(['class' => $extraclass]);
-        $this->assertHtml([
+        $this->modal->create();
+        $result = $this->modal->footer(['class' => $extraclass]);
+        $expected = [
             ['div' => [
-                'class' => $extraclass.' modal-footer'
+                'class' => 'modal-footer '.$extraclass
             ]]
-        ], $result);
+        ];
+        $this->assertHtml($expected, $result);
         // Test with automatic close
-        $this->Modal->create($content);
-        $result = $this->Modal->footer();
-        $this->assertHtml([
+        $this->modal->create($content);
+        $result = $this->modal->footer();
+        $expected = [
             '/div',
             ['div' => [
                 'class' => 'modal-footer'
             ]]
-        ], $result);
+        ];
+        $this->assertHtml($expected, $result);
     }
 
     public function testEnd() {
-        $result = $this->Modal->end();
+        $result = $this->modal->end();
         // Standard close
-        $this->assertHtml([
+        $expected = [
             '/div', '/div', '/div'
-        ], $result);
+        ];
+        $this->assertHtml($expected, $result);
         // Close open part
-        $this->Modal->create('Title'); // Create modal with open title
-        $result = $this->Modal->end();
-        $this->assertHtml([
+        $this->modal->create('Title'); // Create modal with open title
+        $result = $this->modal->end();
+        $expected = [
             '/div', '/div', '/div', '/div'
-        ], $result);
+        ];
+        $this->assertHtml($expected, $result);
     }
 
 }
