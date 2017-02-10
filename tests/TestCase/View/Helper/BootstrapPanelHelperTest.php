@@ -10,26 +10,33 @@ use Cake\View\View;
 class BootstrapPanelHelperTest extends TestCase {
 
     /**
+     * Instance of BootstrapPanelHelper.
+     *
+     * @var BootstrapPanelHelper
+     */
+    public $panel;
+
+    /**
      * Setup
      *
      * @return void
      */
     public function setUp() {
         parent::setUp();
-        $this->View = new View();
-        $this->View->Html = new BootstrapHtmlHelper($this->View);
-        $this->Panel = new BootstrapPanelHelper($this->View);
+        $view = new View();
+        $html = new BootstrapHtmlHelper($view);
+        $this->panel = new BootstrapPanelHelper($view);
     }
 
-    protected function reset () {
-        $this->Panel->end();
+    protected function reset() {
+        $this->panel->end();
     }
 
-    public function testCreate () {
+    public function testCreate() {
         $title = "My Modal";
         $id = "myModalId";
         // Test standard create with title
-        $result = $this->Panel->create($title);
+        $result = $this->panel->create($title);
         $this->assertHtml([
             ['div' => [
                 'class' => 'panel panel-default'
@@ -49,7 +56,7 @@ class BootstrapPanelHelperTest extends TestCase {
         ], $result);
         $this->reset();
         // Test standard create with title
-        $result = $this->Panel->create($title, ['no-body' => true]);
+        $result = $this->panel->create($title, ['body' => false]);
         $this->assertHtml([
             ['div' => [
                 'class' => 'panel panel-default'
@@ -66,7 +73,7 @@ class BootstrapPanelHelperTest extends TestCase {
         ], $result);
         $this->reset();
         // Test standard create without title
-        $result = $this->Panel->create();
+        $result = $this->panel->create();
         $this->assertHtml([
             ['div' => [
                 'class' => 'panel panel-default'
@@ -75,13 +82,13 @@ class BootstrapPanelHelperTest extends TestCase {
         $this->reset();
     }
 
-    public function testHeader () {
+    public function testHeader() {
         $content = 'Header';
         $htmlContent = '<b>'.$content.'</b>';
         $extraclass = 'my-extra-class';
 
         // Simple test
-        $result = $this->Panel->header($content);
+        $result = $this->panel->header($content);
         $this->assertHtml([
             ['div' => [
                 'class' => 'panel-heading'
@@ -96,7 +103,7 @@ class BootstrapPanelHelperTest extends TestCase {
         $this->reset();
 
         // Test with HTML content (should be escaped)
-        $result = $this->Panel->header($htmlContent);
+        $result = $this->panel->header($htmlContent);
         $this->assertHtml([
             ['div' => [
                 'class' => 'panel-heading'
@@ -111,7 +118,7 @@ class BootstrapPanelHelperTest extends TestCase {
         $this->reset();
 
         // Test with HTML content (should NOT be escaped)
-        $result = $this->Panel->header($htmlContent, ['escape' => false]);
+        $result = $this->panel->header($htmlContent, ['escape' => false]);
         $this->assertHtml([
             ['div' => [
                 'class' => 'panel-heading'
@@ -127,7 +134,7 @@ class BootstrapPanelHelperTest extends TestCase {
 
         // Test with icon
         $iconContent = 'i:home Home';
-        $result = $this->Panel->header($iconContent);
+        $result = $this->panel->header($iconContent);
         $this->assertHtml([
             ['div' => [
                 'class' => 'panel-heading'
@@ -147,22 +154,23 @@ class BootstrapPanelHelperTest extends TestCase {
         // Test with collapsible (should NOT be escaped)
 
         // Test with HTML content (should be escaped)
-        $this->Panel->create(null, ['collapsible' => true]);
-        $result = $this->Panel->header($htmlContent);
+        $tmp = $this->panel->create(null, ['collapsible' => true]);
+        $result = $this->panel->header($htmlContent);
         $this->assertHtml([
             ['div' => [
+                'class' => 'panel-heading',
                 'role'  => 'tab',
-                'id'    => 'heading-0',
-                'class' => 'panel-heading'
+                'id'    => 'heading-0'
             ]],
             ['h4' => [
                 'class' => 'panel-title'
             ]],
             ['a' => [
-                'href'          => '#collapse-0',
+                'role'          => 'button',
                 'data-toggle'   => 'collapse',
+                'href'          => '#collapse-0',
                 'aria-expanded' => 'true',
-                'aria-controls' => '#collapse-0'
+                'aria-controls' => 'collapse-0'
             ]],
             htmlspecialchars($htmlContent),
             '/a',
@@ -172,8 +180,8 @@ class BootstrapPanelHelperTest extends TestCase {
         $this->reset();
 
         // Test with HTML content (should NOT be escaped)
-        $this->Panel->create(null, ['collapsible' => true]);
-        $result = $this->Panel->header($htmlContent, ['escape' => false]);
+        $this->panel->create(null, ['collapsible' => true]);
+        $result = $this->panel->header($htmlContent, ['escape' => false]);
         $this->assertHtml([
             ['div' => [
                 'role'  => 'tab',
@@ -184,10 +192,11 @@ class BootstrapPanelHelperTest extends TestCase {
                 'class' => 'panel-title'
             ]],
             ['a' => [
-                'href'          => '#collapse-1',
+                'role'          => 'button',
                 'data-toggle'   => 'collapse',
+                'href'          => '#collapse-1',
                 'aria-expanded' => 'true',
-                'aria-controls' => '#collapse-1'
+                'aria-controls' => 'collapse-1'
             ]],
             ['b' => true], $content, '/b',
             '/a',
@@ -198,8 +207,8 @@ class BootstrapPanelHelperTest extends TestCase {
 
         // Test with icon
         $iconContent = 'i:home Home';
-        $this->Panel->create(null, ['collapsible' => true]);
-        $result = $this->Panel->header($iconContent);
+        $this->panel->create(null, ['collapsible' => true]);
+        $result = $this->panel->header($iconContent);
         $this->assertHtml([
             ['div' => [
                 'role'  => 'tab',
@@ -210,10 +219,11 @@ class BootstrapPanelHelperTest extends TestCase {
                 'class' => 'panel-title'
             ]],
             ['a' => [
-                'href'          => '#collapse-2',
+                'role'          => 'button',
                 'data-toggle'   => 'collapse',
+                'href'          => '#collapse-2',
                 'aria-expanded' => 'true',
-                'aria-controls' => '#collapse-2'
+                'aria-controls' => 'collapse-2'
             ]],
             ['i' => [
                 'class' => 'glyphicon glyphicon-home',
@@ -222,37 +232,35 @@ class BootstrapPanelHelperTest extends TestCase {
             '/a',
             '/h4',
             '/div'
-        ], $result);
+        ], $result, true);
         $this->reset();
-
-
     }
 
-    public function testGroup () {
+    public function testGroup() {
 
         $panelHeading = 'This is a panel heading';
         $panelContent = 'A bit of HTML code inside!';
 
         $result = '';
-        $result .= $this->Panel->startGroup();
-        $result .= $this->Panel->create($panelHeading);
+        $result .= $this->panel->startGroup();
+        $result .= $this->panel->create($panelHeading);
         $result .= $panelContent;
-        $result .= $this->Panel->create($panelHeading);
+        $result .= $this->panel->create($panelHeading);
         $result .= $panelContent;
-        $result .= $this->Panel->create($panelHeading);
+        $result .= $this->panel->create($panelHeading);
         $result .= $panelContent;
-        $result .= $this->Panel->endGroup();
-        $result .= $this->Panel->create($panelHeading);
+        $result .= $this->panel->endGroup();
+        $result .= $this->panel->create($panelHeading);
         $result .= $panelContent;
-        $result .= $this->Panel->end();
+        $result .= $this->panel->end();
 
         $expected = [
             ['div' => [
-                'id'                   => 'panelGroup-1',
+                'class'                => 'panel-group',
                 'role'                 => 'tablist',
-                'aria-multiselectable' => true,
-                'class'                => 'panel-group'
-            ]],
+                'aria-multiselectable' => 'true',
+                'id'                   => 'panelGroup-1'
+            ]]
         ];
 
         for ($i = 0; $i < 3; ++$i) {
@@ -261,30 +269,30 @@ class BootstrapPanelHelperTest extends TestCase {
                     'class' => 'panel panel-default'
                 ]],
                 ['div' => [
+                    'class' => 'panel-heading',
                     'role'  => 'tab',
-                    'id'    => 'heading-'.$i,
-                    'class' => 'panel-heading'
+                    'id'    => 'heading-'.$i
                 ]],
                 ['h4' => [
                     'class' => 'panel-title'
                 ]],
                 ['a' => [
-                    'href'          => '#collapse-'.$i,
+                    'role'          => 'button',
                     'data-toggle'   => 'collapse',
-                    'data-parent'   => '#panelGroup-1',
-                    'aria-expanded' => $i == 0 ? 'true' : 'false',
-                    'aria-controls' => '#collapse-'.$i
+                    'href'          => '#collapse-'.$i,
+                    'aria-expanded' => $i ? 'false' : 'true',
+                    'aria-controls' => 'collapse-'.$i,
+                    'data-parent'   => '#panelGroup-1'
                 ]],
                 $panelHeading,
                 '/a',
                 '/h4',
                 '/div',
                 ['div' => [
-                    'id'              => 'collapse-'.$i,
+                    'class'           => 'panel-collapse collapse'.($i ? '' : ' in'),
                     'role'            => 'tabpanel',
                     'aria-labelledby' => 'heading-'.$i,
-                    'class'           => 'panel-collapse collapse'.($i ? '' : ' in'),
-
+                    'id'              => 'collapse-'.$i
                 ]],
                 ['div' => [
                     'class' => 'panel-body'
@@ -319,8 +327,7 @@ class BootstrapPanelHelperTest extends TestCase {
             '/div'
         ]);
 
-        $this->assertHtml($expected, $result);
-
+        $this->assertHtml($expected, $result, true);
     }
 
 }
