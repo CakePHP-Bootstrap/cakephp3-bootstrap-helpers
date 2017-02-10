@@ -53,7 +53,7 @@ class BootstrapModalHelper extends Helper {
             'footerEnd' => '</div>',
             'modalFooterCloseButton' => '<button type="button" class="btn btn-default{{attrs.class}}" data-dismiss="modal"{{attrs}}>{{content}}</button>'
         ],
-        'templateClass' => 'Bootstrap\View\BootstrapStringTemplate',
+        'templateClass' => 'Bootstrap\View\BootstrapStringTemplate'
     ];
 
     /**

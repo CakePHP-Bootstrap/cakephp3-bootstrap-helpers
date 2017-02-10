@@ -126,16 +126,16 @@ class BootstrapPaginatorHelper extends PaginatorHelper {
 
         switch ($options['size']) {
         case 'small':
-            $options = $this->addClass($options, 'pagination-sm') ;
-            break ;
+            $options = $this->addClass($options, 'pagination-sm');
+            break;
         case 'large':
-            $options = $this->addClass($options, 'pagination-lg') ;
-            break ;
+            $options = $this->addClass($options, 'pagination-lg');
+            break;
         }
-        unset($options['size']) ;
+        unset($options['size']);
 
         $options['before'] .= $this->Html->tag('ul', null, ['class' => $options['class']]);
-        $options['after'] = '</ul>'.$options['after'] ;
+        $options['after'] = '</ul>'.$options['after'];
         unset($options['class']);
 
         $params = (array)$this->params($options['model']) + ['page' => 1];
@@ -155,20 +155,20 @@ class BootstrapPaginatorHelper extends PaginatorHelper {
         /* Previous and Next buttons (addition from standard PaginatorHelper). */
 
         if ($options['prev']) {
-            $title = $options['prev'] ;
-            $opts  = [] ;
+            $title = $options['prev'];
+            $opts  = [];
             if (is_array($title)) {
-                $title = $title['title'] ;
-                unset ($options['prev']['title']) ;
-                $opts  = $options['prev'] ;
+                $title = $title['title'];
+                unset ($options['prev']['title']);
+                $opts  = $options['prev'];
             }
-            $prev = $this->prev($title, $opts) ;
+            $prev = $this->prev($title, $opts);
         }
         unset($options['prev']);
 
         if ($options['next']) {
-            $title = $options['next'] ;
-            $opts  = [] ;
+            $title = $options['next'];
+            $opts  = [];
             if (is_array($title)) {
                 $title = $title['title'];
                 unset ($options['next']['title']);
