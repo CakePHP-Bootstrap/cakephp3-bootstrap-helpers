@@ -16,6 +16,18 @@ namespace Bootstrap\View\Helper;
 
 use Cake\View\Helper\FormHelper;
 
+/**
+ * Form helper library.
+ *
+ * Automatic generation of HTML FORMs from given data.
+ *
+ * @property bool $horizontal
+ * @property bool $inline
+ * @property \Bootstrap\View\Helper\BootstrapHtmlHelper $Html
+ * @property \Cake\View\Helper\UrlHelper $Url
+ *
+ * @link http://book.cakephp.org/3.0/en/views/helpers/form.html
+ */
 class BootstrapFormHelper extends FormHelper {
 
     use BootstrapTrait;

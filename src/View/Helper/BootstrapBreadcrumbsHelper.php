@@ -16,6 +16,11 @@ namespace Bootstrap\View\Helper;
 
 use Cake\View\Helper\BreadcrumbsHelper;
 
+/**
+ * BreadcrumbsHelper to register and display a breadcrumb trail for your views
+ *
+ * @property \Cake\View\Helper\UrlHelper $Url
+ */
 class BootstrapBreadcrumbsHelper extends BreadcrumbsHelper {
 
     /**

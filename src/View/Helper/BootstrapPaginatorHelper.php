@@ -16,6 +16,16 @@ namespace Bootstrap\View\Helper;
 
 use Cake\View\Helper\PaginatorHelper;
 
+/**
+ * Pagination Helper class for easy generation of pagination links.
+ *
+ * PaginationHelper encloses all methods needed when working with pagination.
+ *
+ * @property \Cake\View\Helper\UrlHelper $Url
+ * @property \Cake\View\Helper\NumberHelper $Number
+ * @property \Bootstrap\View\Helper\BootstrapHtmlHelper $Html
+ * @link http://book.cakephp.org/3.0/en/views/helpers/paginator.html
+ */
 class BootstrapPaginatorHelper extends PaginatorHelper {
 
     use EasyIconTrait;

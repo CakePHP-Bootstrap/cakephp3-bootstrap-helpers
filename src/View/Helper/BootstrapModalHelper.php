@@ -16,6 +16,13 @@ namespace Bootstrap\View\Helper;
 
 use Cake\View\Helper;
 
+/**
+ * Modal helper library.
+ *
+ * Automatic generation of Bootstrap HTML modals.
+ *
+ * @property \Bootstrap\View\Helper\BootstrapHtmlHelper $Html
+ */
 class BootstrapModalHelper extends Helper {
 
     use \Cake\View\StringTemplateTrait;

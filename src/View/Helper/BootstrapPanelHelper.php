@@ -16,6 +16,13 @@ namespace Bootstrap\View\Helper;
 
 use Cake\View\Helper;
 
+/**
+ * Panel helper library.
+ *
+ * Automatic generation of Bootstrap HTML panels.
+ *
+ * @property \Bootstrap\View\Helper\BootstrapHtmlHelper $Html
+ */
 class BootstrapPanelHelper extends Helper {
 
     use \Cake\View\StringTemplateTrait;

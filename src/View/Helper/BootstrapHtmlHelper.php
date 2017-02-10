@@ -16,6 +16,15 @@ namespace Bootstrap\View\Helper;
 
 use Cake\View\Helper\HtmlHelper;
 
+/**
+ * Html Helper class for easy use of HTML widgets.
+ *
+ * HtmlHelper encloses all methods needed while working with HTML pages.
+ *
+ * @property UrlHelper $Url
+ *
+ * @link http://book.cakephp.org/3.0/en/views/helpers/html.html
+ */
 class BootstrapHtmlHelper extends HtmlHelper {
 
     use BootstrapTrait;

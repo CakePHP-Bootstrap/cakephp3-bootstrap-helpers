@@ -16,6 +16,15 @@ namespace Bootstrap\View\Helper;
 
 use Cake\View\Helper;
 
+/**
+ * Navbar helper library.
+ *
+ * Automatic generation of Bootstrap HTML navbars.
+ *
+ * @property \Bootstrap\View\Helper\BootstrapFormHelper $Form
+ * @property \Bootstrap\View\Helper\BootstrapHtmlHelper $Html
+ * @property \Cake\View\Helper\UrlHelper $Url
+ */
 class BootstrapNavbarHelper extends Helper {
 
     use \Cake\View\StringTemplateTrait;
