@@ -22,13 +22,6 @@ namespace Bootstrap\View\Helper;
 trait BootstrapTrait {
 
     /**
-     * Set to false to disable easy icon processing.
-     *
-     * @var bool
-     */
-    public $easyIcon = true;
-
-    /**
      * Adds the given class to the element options.
      *
      * @param array        $options Array of options/attributes to add a class to.
