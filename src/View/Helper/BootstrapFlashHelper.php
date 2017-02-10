@@ -18,8 +18,6 @@ use Cake\View\Helper\FlashHelper;
 
 class BootstrapFlashHelper extends FlashHelper {
 
-    use BootstrapTrait;
-
     /**
      * Available bootstrap templates for alert.
      *

@@ -19,6 +19,7 @@ use Cake\View\Helper\FormHelper;
 class BootstrapFormHelper extends FormHelper {
 
     use BootstrapTrait;
+    use EasyIconTrait;
 
     /**
      * Other helpers used by BootstrapFormHelper.

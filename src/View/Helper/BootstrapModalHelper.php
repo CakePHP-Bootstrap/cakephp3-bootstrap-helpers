@@ -19,6 +19,7 @@ use Cake\View\Helper;
 class BootstrapModalHelper extends Helper {
 
     use \Cake\View\StringTemplateTrait;
+    use EasyIconTrait;
     use BootstrapTrait;
 
     /**
@@ -26,7 +27,11 @@ class BootstrapModalHelper extends Helper {
      *
      * @var array
      */
-    public $helpers = ['Html'];
+    public $helpers = [
+        'Html' => [
+            'className' => 'BootstrapBootstrapHtml'
+        ]
+    ];
 
     /**
      * Default configuration for the BootstrapModalHelper.

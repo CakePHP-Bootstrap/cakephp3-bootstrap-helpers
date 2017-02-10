@@ -19,6 +19,7 @@ use Cake\View\Helper;
 class BootstrapPanelHelper extends Helper {
 
     use \Cake\View\StringTemplateTrait;
+    use EasyIconTrait;
     use BootstrapTrait;
 
     /**

@@ -19,6 +19,7 @@ use Cake\View\Helper;
 class BootstrapNavbarHelper extends Helper {
 
     use \Cake\View\StringTemplateTrait;
+    use EasyIconTrait;
     use BootstrapTrait;
 
     /**
@@ -30,7 +31,9 @@ class BootstrapNavbarHelper extends Helper {
         'Form' => [
             'className' => 'Bootstrap.BootstrapForm'
         ],
-        'Html',
+        'Html' => [
+            'className' => 'Bootstrap.BootstrapHtml'
+        ],
         'Url'
     ];
 

@@ -18,6 +18,7 @@ use Cake\View\Helper\PaginatorHelper;
 
 class BootstrapPaginatorHelper extends PaginatorHelper {
 
+    use EasyIconTrait;
     use BootstrapTrait;
 
     /**
