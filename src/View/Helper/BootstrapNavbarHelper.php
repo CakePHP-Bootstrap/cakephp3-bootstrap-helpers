@@ -30,6 +30,7 @@ class BootstrapNavbarHelper extends Helper {
     use \Cake\View\StringTemplateTrait;
     use EasyIconTrait;
     use BootstrapTrait;
+    use UrlComparerTrait;
 
     /**
      * Other helpers used by BootstrapNavbarHelper.
@@ -237,7 +238,7 @@ aria-haspopup="true" aria-expanded="false">{{content}}{{caret}}</a>',
     public function link($name, $url = '', array $options = [], array $linkOptions = []) {
         $url = $this->Url->build($url);
         $options += [
-            'active' => $this->Url->build() == $url && $this->config('autoActiveLink'),
+            'active' => $this->config('autoActiveLink') && $this->compareUrls($url),
             'templateVars' => []
         ];
         $linkOptions += [

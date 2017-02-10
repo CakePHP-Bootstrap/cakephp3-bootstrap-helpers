@@ -3,9 +3,6 @@
 namespace Bootstrap\Test\TestCase\View\Helper;
 
 use Bootstrap\View\Helper\BootstrapTrait;
-use Bootstrap\View\Helper\BootstrapFormHelper;
-use Bootstrap\View\Helper\BootstrapHtmlHelper;
-use Bootstrap\View\Helper\BootstrapPaginatorHelper;
 use Cake\TestSuite\TestCase;
 use Cake\View\View;
 
