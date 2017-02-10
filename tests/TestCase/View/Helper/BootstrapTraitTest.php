@@ -11,13 +11,13 @@ use Cake\View\View;
 
 class PublicBootstrapTrait {
 
-    use BootstrapTrait ;
+    use BootstrapTrait;
 
-    public function __construct ($View) {
-        $this->_View = $View;
+    public function __construct($view) {
+        $this->Html = new BootstrapHtmlHelper($view);
     }
 
-    public function publicEasyIcon ($callback, $title, $options) {
+    public function publicEasyIcon($callback, $title, $options) {
         return $this->_easyIcon($callback, $title, $options);
     }
 
@@ -26,31 +26,37 @@ class PublicBootstrapTrait {
 class BootstrapTraitTemplateTest extends TestCase {
 
     /**
+     * Instance of PublicBootstrapTrait.
+     *
+     * @var PublicBootstrapTrait
+     */
+    public $trait;
+
+    /**
+     * Instance of BootstrapFormHelper.
+     *
+     * @var BootstrapFormHelper
+     */
+    public $form;
+
+    /**
+     * Instance of BootstrapPaginatorHelper.
+     *
+     * @var BootstrapPaginatorHelper
+     */
+    public $paginator;
+
+    /**
      * Setup
      *
      * @return void
      */
-    public function setUp () {
+    public function setUp() {
         parent::setUp();
-        $this->View = new View();
-        $this->_Trait = new PublicBootstrapTrait($this->View);
-        $this->View->Html = new BootstrapHtmlHelper ($this->View);
-        $this->Form = new BootstrapFormHelper ($this->View);
-        $this->Paginator = new BootstrapPaginatorHelper ($this->View);
-    }
-
-
-    /**
-     * Tear Down
-     *
-     * @return void
-     */
-    public function tearDown() {
-        parent::tearDown();
-        unset($this->View->Html);
-        unset($this->View);
-        unset($this->Form);
-        unset($this->Paginator);
+        $view = new View();
+        $this->trait = new PublicBootstrapTrait($view);
+        $this->form = new BootstrapFormHelper($view);
+        $this->paginator = new BootstrapPaginatorHelper($view);
     }
 
     public function testAddClass() {
@@ -58,12 +64,12 @@ class BootstrapTraitTemplateTest extends TestCase {
         $opts = [
             'class' => 'class-1'
         ];
-        $opts = $this->_Trait->addClass($opts, '  class-1    class-2  ');
+        $opts = $this->trait->addClass($opts, '  class-1    class-2  ');
         $this->assertEquals($opts, [
             'class' => 'class-1 class-2'
         ]);
         // Test with an array
-        $opts = $this->_Trait->addClass($opts, ['class-1', 'class-3']);
+        $opts = $this->trait->addClass($opts, ['class-1', 'class-3']);
         $this->assertEquals($opts, [
             'class' => 'class-1 class-2 class-3'
         ]);
@@ -72,13 +78,13 @@ class BootstrapTraitTemplateTest extends TestCase {
     public function testEasyIcon() {
 
         $that = $this;
-        $callback = function ($text, $options) use ($that) {
+        $callback = function($text, $options) use($that) {
             $that->assertEquals(isset($options['escape']) ? $options['escape'] : true,
                                 $options['expected']['escape']);
             $that->assertHtml($options['expected']['result'], $text);
         };
 
-        $this->_Trait->publicEasyIcon($callback, 'i:plus', [
+        $this->trait->publicEasyIcon($callback, 'i:plus', [
             'expected' => [
                 'escape' => false,
                 'result' => [['i' => [
@@ -88,14 +94,14 @@ class BootstrapTraitTemplateTest extends TestCase {
             ]
         ]);
 
-        $this->_Trait->publicEasyIcon($callback, 'Click Me!', [
+        $this->trait->publicEasyIcon($callback, 'Click Me!', [
             'expected' => [
                 'escape' => true,
                 'result' => 'Click Me!'
             ]
         ]);
 
-        $this->_Trait->publicEasyIcon($callback, 'i:plus Add', [
+        $this->trait->publicEasyIcon($callback, 'i:plus Add', [
             'expected' => [
                 'escape' => false,
                 'result' => [['i' => [
@@ -105,7 +111,7 @@ class BootstrapTraitTemplateTest extends TestCase {
             ]
         ]);
 
-        $this->_Trait->publicEasyIcon($callback, 'Add i:plus', [
+        $this->trait->publicEasyIcon($callback, 'Add i:plus', [
             'expected' => [
                 'escape' => false,
                 'result' => ['Add ', ['i' => [
@@ -115,8 +121,8 @@ class BootstrapTraitTemplateTest extends TestCase {
             ]
         ]);
 
-        $this->_Trait->easyIcon = false;
-        $this->_Trait->publicEasyIcon($callback, 'i:plus', [
+        $this->trait->easyIcon = false;
+        $this->trait->publicEasyIcon($callback, 'i:plus', [
             'expected' => [
                 'escape' => true,
                 'result' => 'i:plus'
@@ -133,7 +139,7 @@ class BootstrapTraitTemplateTest extends TestCase {
         // BootstrapPaginatorHelper::numbers(array $options = []); // For `prev` and `next` options.
 
         // BootstrapFormatHelper
-        $result = $this->Form->button ('i:plus') ;
+        $result = $this->form->button('i:plus');
         $this->assertHtml([
             ['button' => [
                 'class' => 'btn btn-default',
@@ -142,12 +148,12 @@ class BootstrapTraitTemplateTest extends TestCase {
                 'class' => 'glyphicon glyphicon-plus',
                 'aria-hidden' => 'true'
             ]], '/i', '/button'
-        ], $result) ;
-        $result = $this->Form->input ('fieldname', [
+        ], $result);
+        $result = $this->form->input('fieldname', [
             'prepend' => 'i:home',
             'append'  => 'i:plus',
             'label'   => false
-        ]) ;
+        ]);
         $this->assertHtml([
             ['div' => [
                 'class' => 'form-group text'
@@ -179,7 +185,7 @@ class BootstrapTraitTemplateTest extends TestCase {
             '/span',
             '/div',
             '/div'
-        ], $result) ;
+        ], $result);
         //BootstrapFormHelper::prepend($input, $prepend); // For $prepend.
         //BootstrapFormHelper::append($input, $append); // For $append.
     }

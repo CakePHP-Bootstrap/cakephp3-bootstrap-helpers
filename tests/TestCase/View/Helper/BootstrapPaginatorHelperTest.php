@@ -13,6 +13,13 @@ use Cake\View\View;
 class BootstrapPaginatorHelperTest extends TestCase {
 
     /**
+     * Instance of BootstrapPaginatorHelper.
+     *
+     * @var BootstrapPaginatorHelper
+     */
+    public $paginator;
+
+    /**
      * setUp method
      *
      * @return void
@@ -20,11 +27,10 @@ class BootstrapPaginatorHelperTest extends TestCase {
     public function setUp()
     {
         parent::setUp();
-        $this->View = new View();
-        $this->View->Html = new BootstrapHtmlHelper($this->View);
-        $this->Paginator = new BootstrapPaginatorHelper($this->View);
-        $this->Paginator->request = new Request();
-        $this->Paginator->request->addParams([
+        $view = new View();
+        $this->paginator = new BootstrapPaginatorHelper($view);
+        $this->paginator->request = new Request();
+        $this->paginator->request->addParams([
             'paging' => [
                 'Article' => [
                     'page' => 1,
@@ -45,14 +51,14 @@ class BootstrapPaginatorHelperTest extends TestCase {
         Router::connect('/:plugin/:controller/:action/*');
     }
 
-    public function testPrev () {
+    public function testPrev() {
         $this->assertHtml([
             ['li' => [
                 'class' => 'disabled'
             ]],
             ['a' => true], '&lt;', '/a',
             '/li'
-        ], $this->Paginator->prev('<'));
+        ], $this->paginator->prev('<'));
         $this->assertHtml([
             ['li' => [
                 'class' => 'disabled'
@@ -63,17 +69,17 @@ class BootstrapPaginatorHelperTest extends TestCase {
                 'aria-hidden' => 'true'
             ]],
             '/i', '/a', '/li'
-        ], $this->Paginator->prev('i:chevron-left'));
+        ], $this->paginator->prev('i:chevron-left'));
     }
 
-    public function testNext () {
+    public function testNext() {
         $this->assertHtml([
             ['li' => true],
             ['a' => [
                 'href' => '/index?page=2'
             ]], '&gt;', '/a',
             '/li'
-        ], $this->Paginator->next('>'));
+        ], $this->paginator->next('>'));
         $this->assertHtml([
             ['li' => true],
             ['a' => [
@@ -84,7 +90,7 @@ class BootstrapPaginatorHelperTest extends TestCase {
                 'aria-hidden' => 'true'
             ]],
             '/i', '/a', '/li'
-        ], $this->Paginator->next('i:chevron-right'));
+        ], $this->paginator->next('i:chevron-right'));
     }
 
 };

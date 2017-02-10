@@ -240,7 +240,7 @@ class BootstrapHtmlHelperTest extends TestCase {
         $result = $this->html->progress([
             ['width' => 20, 'class' => 'my-class'],
             ['width' => 15, 'id' => 'my-id'],
-            ['width' => 10, 'active' => true] 
+            ['width' => 10, 'active' => true]
         ], ['striped' => true]);
         $expected = [
             ['div' => ['class' => 'progress']],

@@ -9,34 +9,29 @@ use Cake\View\View;
 class BootstrapStringTemplateTest extends TestCase {
 
     /**
+     * Instance of BootstrapStringTemplate.
+     *
+     * @var BootstrapStringTemplate
+     */
+    public $templater;
+
+    /**
      * Setup
      *
      * @return void
      */
-    public function setUp () {
+    public function setUp() {
         parent::setUp();
-        $this->templater = new BootstrapStringTemplate () ;
+        $this->templater = new BootstrapStringTemplate();
     }
 
-
-    /**
-     * Tear Down
-     *
-     * @return void
-     */
-    public function tearDown()
-    {
-        parent::tearDown();
-        unset($this->templater);
-    }
-
-    public function test () {
+    public function test() {
         $this->templater->add([
             'test_default' => '<p{{attrs}}>{{content}}</p>',
             'test_attrs_class' => '<p class="test-class{{attrs.class}}"{{attrs}}>{{content}}</p>'
-        ]) ;
+        ]);
         // Standard test
-        $result = $this->templater->format ('test_default', [
+        $result = $this->templater->format('test_default', [
             'attrs' => ' id="test-id" class="test-class"',
             'content' => 'Hello World!'
         ]);
@@ -47,9 +42,9 @@ class BootstrapStringTemplateTest extends TestCase {
             ]],
             'Hello World!',
             '/p'
-        ], $result) ;
+        ], $result);
         // Test with class test
-        $result = $this->templater->format ('test_attrs_class', [
+        $result = $this->templater->format('test_attrs_class', [
             'attrs' => ' id="test-id" class="test-class-2"',
             'content' => 'Hello World!'
         ]);
@@ -60,9 +55,9 @@ class BootstrapStringTemplateTest extends TestCase {
             ]],
             'Hello World!',
             '/p'
-        ], $result) ;
+        ], $result);
         // Test with class test
-        $result = $this->templater->format ('test_attrs_class', [
+        $result = $this->templater->format('test_attrs_class', [
             'attrs' => 'class="test-class-2" id="test-id"',
             'content' => 'Hello World!'
         ]);
@@ -73,7 +68,7 @@ class BootstrapStringTemplateTest extends TestCase {
             ]],
             'Hello World!',
             '/p'
-        ], $result) ;
+        ], $result);
     }
 
-} 
+}
