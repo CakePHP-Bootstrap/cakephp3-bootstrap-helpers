@@ -505,7 +505,7 @@ class BootstrapPanelHelper extends Helper {
         $options += [
             'templateVars' => []
         ];
-        $out = $this->_cleantCurrent();
+        $out = $this->_cleanCurrent();
         $this->_current = 'body';
         $out .= $this->formatTemplate('footerStart', [
             'attrs' => $this->templater()->formatAttributes($options),
