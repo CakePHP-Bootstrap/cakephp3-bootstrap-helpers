@@ -355,6 +355,8 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
     /**
      * Create & return a twitter bootstrap dropdown menu.
      *
+     * @deprecated 3.1.0
+     *
      * @param array $menu HTML tags corresponding to menu options (which will be wrapped
      *              into `<li>` tag). To add separator, pass `'divider'`.
      * @param array $options Attributes for the wrapper (change it with tag).
@@ -403,7 +405,7 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
      * displaying, for example, a list of products that would require
      * more than the maximum number of columns per row.
      *
-     * @deprecated 3.0.7
+     * @deprecated 3.1.0
      *
      * @param int|string $breakIndex       Divisible index that will trigger a new row
      * @param array      $data             Collection of data used to render each column

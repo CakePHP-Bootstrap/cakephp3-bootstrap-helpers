@@ -361,6 +361,8 @@ aria-haspopup="true" aria-expanded="false">{{content}}{{caret}}</a>',
      * - `align` Search form alignment. Default is `'left'`.
      * - Other options will be passed to the `Form::searchForm` method.
      *
+     * @deprecated 3.1.0
+     *
      * @param mixed $model   Model for BootstrapFormHelper::searchForm method.
      * @param array $options Array of options. See above.
      *
