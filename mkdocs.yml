@@ -15,10 +15,14 @@ pages:
         - Custom file inputs: form-helper/custom-file-inputs.md
         - Buttons, Groups & Toolbars: form-helper/buttons-et-al.md
         - New input options: form-helper/new-input-options.md 
+    - Navbar Helper:
+        - Basic usage: navbar-helper/basics.md
     - Modal Helper:
         - Basic usage: modal-helper/basics.md
         - Without HTML: modal-helper/no-html.md
         - Fully customized modals: modal-helper/custom.md
+    - Panel Helper:
+        - Basic usage: panel-helper/basics.md
 
 markdown_extensions:
     - "mkexts.tabs:TabsExtension"
