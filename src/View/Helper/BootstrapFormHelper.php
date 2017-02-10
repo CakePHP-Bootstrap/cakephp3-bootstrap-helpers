@@ -26,9 +26,8 @@ class BootstrapFormHelper extends FormHelper {
      * @var array
      */
     public $helpers = [
-        'Html',
         'Url',
-        'bHtml' => [
+        'Html' => [
             'className' => 'Bootstrap.BootstrapHtml'
         ]
     ];
@@ -841,7 +840,7 @@ class BootstrapFormHelper extends FormHelper {
 
         return $this->buttonGroup([
             $this->button($title.' <span class="caret"></span>', $options),
-            $this->bHtml->dropdown($menu)
+            $this->Html->dropdown($menu)
         ]);
 
     }

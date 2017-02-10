@@ -18,7 +18,19 @@ use Cake\View\Helper\PaginatorHelper;
 
 class BootstrapPaginatorHelper extends PaginatorHelper {
 
-    use BootstrapTrait ;
+    use BootstrapTrait;
+
+    /**
+     * Other helpers used by BootstrapPanelHelper.
+     *
+     * @var array
+     */
+    public $helpers = [
+        'Url', 'Number',
+        'Html' => [
+            'className' => 'Bootstrap.BootstrapHtml'
+        ]
+    ];
 
     /**
      * Default config for this class.

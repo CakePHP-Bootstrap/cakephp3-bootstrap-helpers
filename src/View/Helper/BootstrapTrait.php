@@ -111,7 +111,7 @@ trait BootstrapTrait {
         }
         $text = preg_replace_callback(
             '#(^|\s+)i:([a-zA-Z0-9\\-_]+)(\s+|$)#', function ($matches) {
-                return $matches[1].$this->_View->Html->icon($matches[2]).$matches[3];
+                return $matches[1].$this->Html->icon($matches[2]).$matches[3];
             }, $text, -1, $count);
         $converted = (bool)$count;
         return $text;
