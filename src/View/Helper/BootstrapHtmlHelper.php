@@ -38,7 +38,6 @@ class BootstrapHtmlHelper extends HtmlHelper {
      * - `label` Default options for labels.
      * - `progress` Default options for progress bar.
      * - `tooltip` Default options for tooltips.
-     * - `useFontAwesome` Set to true to use FontAwesome icon instead of glyphicon.
      * - See [CakePHP documentation](https://api.cakephp.org/3.3/class-Cake.View.Helper.HtmlHelper.html#$_defaultConfig) for extra configuration options.
      *
      * @var array
@@ -108,14 +107,15 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
     ];
 
     /**
-     * Create a glyphicon or font awesome icon depending on the value of the configuration
-     * option `useFontAwesome`.
+     * Create an icon using the template `icon`.
      *
-     * **Note:** This method is a generic way of calling faIcon or glIcon depending on default
-     * chosen type of icons.
+     * ### Options
      *
-     * @param string $icon    Name of the icon
-     * @param array  $options Extra attributes for the `<i>` tag.
+     * - `templateVars` Provide template variables for the `icon` template.
+     * - Other attributes will be assigned to the wrapper element.
+     *
+     * @param string $icon Name of the icon.
+     * @param array $options Array of options. See above.
      *
      * @return string The HTML icon.
      */
@@ -133,7 +133,7 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
     /**
      * Create a Twitter Bootstrap span label.
      *
-     * The second parameter may either be `$type` or `$options` (in this case,
+     * The second parameter may either be `$type` or `$options` (in which case 
      * the third parameter is not used, and the label type can be specified in the
      * `$options` array).
      *
@@ -141,6 +141,7 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
      *
      * - `tag` The HTML tag to use.
      * - `type` The type of the label.
+     * - `templateVars` Provide template variables for the `label` template.
      * - Other attributes will be assigned to the wrapper element.
      *
      * @param string $text The label text
@@ -172,6 +173,11 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
 
     /**
      * Create a Twitter Bootstrap badge.
+     *
+     * ### Options
+     *
+     * - `templateVars` Provide template variables for the `badge` template.
+     * - Other attributes will be assigned to the wrapper element.
      *
      * @param string $text The badge text.
      *
@@ -209,11 +215,12 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
      *
      * - `close` Dismissible alert. See configuration for default.
      * - `type` The type of the alert. See configuration for default.
+     * - `templateVars` Provide template variables for the `alert` template.
      * - Other attributes will be assigned to the wrapper element.
      *
-     * @param string       $text The alert text.
+     * @param string $text The alert text.
      * @param string|array $type The type of the alert.
-     * @param array        $options Options that will be passed to the `Html::div` method.
+     * @param array $options Array of options. See above.
      *
      * @return string A HTML bootstrap alert element.
      */
@@ -257,9 +264,10 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
      * - `toggle` The 'data-toggle' HTML attribute.
      * - `placement` The `data-placement` HTML attribute.
      * - `tag` The tag to use.
+     * - `templateVars` Provide template variables for the `tooltip` template.
      * - Other attributes will be assigned to the wrapper element.
      *
-     * @param string $text    The HTML tag inner text.
+     * @param string $text The HTML tag inner text.
      * @param string $tooltip The tooltip text.
      * @param array  $options An array of options. See above. Default values are retrieved
      * from the configuration.
@@ -289,6 +297,7 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
      * - `striped` If `true` the progress bar will be striped. Default is `false`.
      * - `type` A string containing the `type` of the progress bar (primary, info, danger,
      * success, warning). Default to `'primary'`.
+     * - `templateVars` Provide template variables for the `progressBar` template.
      * - Other attributes will be assigned to the progress bar element.
      *
      * @param int|array $widths
@@ -345,8 +354,6 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
 
     /**
      * Create & return a twitter bootstrap dropdown menu.
-     *
-     * @deprecated 3.0.7 
      *
      * @param array $menu HTML tags corresponding to menu options (which will be wrapped
      *              into `<li>` tag). To add separator, pass `'divider'`.

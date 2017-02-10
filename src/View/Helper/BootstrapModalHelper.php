@@ -113,8 +113,8 @@ class BootstrapModalHelper extends Helper {
      * Other options will be passed to the `Html::div` method for creating the
      * outer modal `<div>`.
      *
-     * @param array|string $title   The modal title or an array of options.
-     * @param array        $options Array of options. See above.
+     * @param array|string $title The modal title or an array of options.
+     * @param array $options Array of options. See above.
      *
      * @return An HTML string containing opening elements for a modal.
      */
@@ -188,8 +188,8 @@ class BootstrapModalHelper extends Helper {
      * echo $this->Modal->end([$this->Form->button('Save'), $this->Form->button('Close')]);
      * ```
      *
-     * @param array|null $buttons Array of buttons for the `footer()` method or `null`.
-     * @param array      $options Array of options for the `footer()` method.
+     * @param array $buttons Array of buttons for the `footer()` method or `null`.
+     * @param array $options Array of options for the `footer()` method.
      *
      * @return string An HTML string containing closing tags for the modal.
      */
@@ -223,9 +223,9 @@ class BootstrapModalHelper extends Helper {
      * Cleans the current modal part, create a new ones with the given content, and
      * update the internal `_current` variable if necessary.
      *
-     * @param string $part    The name of the part(`'header'`, `'body'`, `'footer'`).
+     * @param string $part The name of the part(`'header'`, `'body'`, `'footer'`).
      * @param string $content The content of the part or `null`.
-     * @param array  $options Array of options for the `Html::tag` method.
+     * @param array $options Array of options for the `Html::tag` method.
      *
      * @return string
      */
@@ -251,11 +251,12 @@ class BootstrapModalHelper extends Helper {
      *
      * ### Options
      *
-     * - `close` Set to `false` to not add a close button to the modal. Default is `true`
-     * - Other attributes for the modal header `<div>`.
+     * - `close` Set to `false` to not add a close button to the modal. Default is `true`.
+     * - `templateVars` Provide template variables for the `headerStart` template.
+     * - Other attributes will be assigned to the modal header element.
      *
-     * @param string|null $text The modal header content, or null to only open the header.
-     * @param array       $options Array of options. See above.
+     * @param string $text The modal header content, or null to only open the header.
+     * @param array $options Array of options. See above.
      *
      * @return string A formated opening tag for the modal header or the complete modal
      * header.
@@ -282,14 +283,17 @@ class BootstrapModalHelper extends Helper {
                 ])
             ]);
         }
-
         return $this->_part('header', $out, $options);
     }
     /**
      * Create or open a modal body.
      *
-     * @param string|null $text The modal body content, or null to only open the body.
-     * @param array       $options Array of options for the body `<div>`.
+     * ### Options
+     * - `templateVars` Provide template variables for the `bodyStart` template.
+     * - Other attributes will be assigned to the modal body element.
+     *
+     * @param string $text The modal body content, or `null` to only open the body.
+     * @param array $options Array of options. See above.
      *
      * @return string A formated opening tag for the modal body or the complete modal
      * body.
@@ -310,10 +314,11 @@ class BootstrapModalHelper extends Helper {
      *
      * - `close` Set to `true` to add a close button to the footer if `$content` is
      * empty. Default is `true`.
-     * Other attributes for the footer div.
+     * - `templateVars` Provide template variables for the `footerStart` template.
+     * - Other attributes will be assigned to the modal footer element.
      *
-     * @param string|null $content The modal footer content, or null to only open the footer.
-     * @param array       $options Array of options. See above.
+     * @param string $content The modal footer content, or `null` to only open the footer.
+     * @param array $options Array of options. See above.
      *
      * @return string A formated opening tag for the modal footer or the complete modal
      * footer.
@@ -356,11 +361,12 @@ class BootstrapModalHelper extends Helper {
      *
      * ### Options
      *
-     * - `close` Set to `false` to not add a close button to the modal. Default is `true`
-     * - Other attributes for the modal header `<div>`.
+     * - `close` Set to `false` to not add a close button to the modal. Default is `true`.
+     * - `templateVars` Provide template variables for the `headerStart` template.
+     * - Other attributes will be assigned to the modal header element.
      *
      * @param string|array $text The modal header content, or an array of options.
-     * @param array        $options Array of options. See above.
+     * @param array $options Array of options. See above.
      *
      * @return string A formated opening tag for the modal header or the complete modal
      * header.
@@ -397,11 +403,17 @@ class BootstrapModalHelper extends Helper {
      * echo $this->Modal->body(['class' => 'my-class']);
      * ```
      *
+     * ### Options
+     *
+     * - `templateVars` Provide template variables for the `bodyStart` template.
+     * - Other attributes will be assigned to the modal body element.
+     *
      * @param array|string $info The body content, or `null`, or an array of options.
      * `$options`.
-     * @param array $options Array of options for the modal body `<div>`.
+     * @param array $options Array of options. See above.
      *
-     * @return string
+     * @return string A formated opening tag for the modal body or the complete modal
+     * body.
      */
     public function body($info = null, $options = []) {
         if(is_array($info)) {
@@ -442,8 +454,13 @@ class BootstrapModalHelper extends Helper {
      * echo $this->Modal->footer([$this->Form->button('Close'), $this->Form->button('Save')]);
      * ```
      *
+     * ### Options
+     *
+     * - `templateVars` Provide template variables for the `footerStart` template.
+     * - Other attributes will be assigned to the modal footer element.
+     *
      * @param string|array $buttons The footer content, or `null`, or an array of options.
-     * @param array        $options Array of options for the modal footer `<div>`.
+     * @param array        $options Array of options. See above.
      *
      * @return string A formated opening tag for the modal footer or the complete modal
      * footer.

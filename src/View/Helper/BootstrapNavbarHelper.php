@@ -122,9 +122,11 @@ aria-haspopup="true" aria-expanded="false">{{content}}{{caret}}</a>',
      * - `inverse` [Inverted navbar](http://getbootstrap.com/components/#navbar-inverted). Default is `false`.
      * - `responsive` Responsive navbar. Default is `true`.
      * - `static` [Static navbar](http://getbootstrap.com/components/#navbar-static-top). Default is `false`.
+     * - `templateVars` Provide template variables for the template.
+     * - Other attributes will be assigned to the navbar element.
      *
-     * @param string $brand   Brand name.
-     * @param array  $options Array of options. See above.
+     * @param string $brand Brand name.
+     * @param array $options Array of options. See above.
      *
      * @return A string containing the HTML starting element of the navbar.
      */
@@ -222,11 +224,13 @@ aria-haspopup="true" aria-expanded="false">{{content}}{{caret}}</a>',
      *
      * - `active` Indicates if the link is the current one. Default is automatically
      * deduced if `autoActiveLink` is on, otherwize default is `false`.
+     * - `templateVars` Provide template variables for the templates.
+     * - Other attributes will be assigned to the navbar link element.
      *
-     * @param string       $name        The link text.
-     * @param string|array $url         The link URL (CakePHP way).
-     * @param array        $options     Array of attributes for the wrapper tag.
-     * @param array        $linkOptions Array of attributes for the link.
+     * @param string $name The link text.
+     * @param string|array $url The link URL (CakePHP way).
+     * @param array $options Array of attributes for the wrapper tag.
+     * @param array $linkOptions Array of attributes for the link.
      *
      * @return string A HTML tag wrapping the link.
      */
@@ -259,8 +263,8 @@ aria-haspopup="true" aria-expanded="false">{{content}}{{caret}}</a>',
     /**
      * Add a button to the navbar.
      *
-     * @param string $name    Text of the button.
-     * @param array  $options Options sent to the `Form::button` method.
+     * @param string $name Text of the button.
+     * @param array $options Options sent to the `Form::button` method.
      *
      * @return string A HTML navbar button.
      */
@@ -275,7 +279,12 @@ aria-haspopup="true" aria-expanded="false">{{content}}{{caret}}</a>',
     /**
      * Add a divider to an inner menu of the navbar.
      *
-     * @param array $options Array of options for the `<li>` tag.
+     * ### Options
+     *
+     * - `templateVars` Provide template variables for the divider template.
+     * - Other attributes will be assigned to the divider element.
+     *
+     * @param array $options Array of options. See above.
      *
      * @return A HTML dropdown divider tag.
      */
@@ -290,8 +299,13 @@ aria-haspopup="true" aria-expanded="false">{{content}}{{caret}}</a>',
     /**
      * Add a header to an inner menu of the navbar.
      *
-     * @param string $name    Title of the header.
-     * @param array  $options Array of options for the wrapper tag.
+     * ### Options
+     *
+     * - `templateVars` Provide template variables for the header template.
+     * - Other attributes will be assigned to the header element.
+     **
+     * @param string $name Title of the header.
+     * @param array $options Array of options for the wrapper tag.
      *
      * @return A HTML header tag.
      */
@@ -307,8 +321,13 @@ aria-haspopup="true" aria-expanded="false">{{content}}{{caret}}</a>',
     /**
      * Add a text to the navbar.
      *
+     * ### Options
+     *
+     * - `templateVars` Provide template variables for the text template.
+     * - Other attributes will be assigned to the text element.
+     *
      * @param string $text The text message.
-     * @param array  $options Array attributes for the wrapper element.
+     * @param array $options Array attributes for the wrapper element.
      *
      * @return string A HTML element wrapping the text for the navbar.
      */
@@ -335,9 +354,9 @@ aria-haspopup="true" aria-expanded="false">{{content}}{{caret}}</a>',
 
 
     /**
-     * Add a serach form to the navbar.
+     * Add a search form to the navbar.
      *
-     * ### Options:
+     * ### Options
      *
      * - `align` Search form alignment. Default is `'left'`.
      * - Other options will be passed to the `Form::searchForm` method.
@@ -371,15 +390,25 @@ aria-haspopup="true" aria-expanded="false">{{content}}{{caret}}</a>',
      * **Note:** The `$linkOptions` and `$listOptions` parameters are not used for menu
      * at level 0 (horizontal menu).
      *
-     * ### Link Options:
+     * ### Options
+     *
+     * - `templateVars` Provide template variables for the menu template.
+     * - Other attributes will be assigned to the menu element.
+     *
+     * ### Link Options
      *
      * - `caret` HTML caret element. Default is `'<span class="caret"></span>'`.
+     * - Other attributes will be assigned to the link element.
      *
-     * @param string       $name        Name of the menu.
-     * @param string|array $url         URL for the menu.
-     * @param array        $options     Array of options for the wrapping element.
-     * @param array        $linkOptions Array of options for the link. See above.
-     * @param array        $listOptions Array of options for the openning `ul` elements.
+     * ### List Options
+     *
+     * - Other attributes will be assigned to the list element.
+     *
+     * @param string $name Name of the menu.
+     * @param string|array $url URL for the menu.
+     * @param array $options Array of options for the wrapping element.
+     * @param array $linkOptions Array of options for the link. See above.
+     * @param array $listOptions Array of options for the openning `ul` elements.
      *
      * @return string HTML elements to start a menu.
      */

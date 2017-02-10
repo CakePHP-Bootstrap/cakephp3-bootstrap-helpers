@@ -382,10 +382,11 @@ class BootstrapPanelHelper extends Helper {
      * ### Options
      *
      * - `title` See `header()`.
-     * - Other attributes for the panel header `<div>`.
+     * - `templateVars` Provide template variables for the header template.
+     * - Other attributes will be assigned to the header element.
      *
-     * @param string|null $text The panel header content, or null to only open the header.
-     * @param array       $options Array of options. See above.
+     * @param string $text The panel header content, or null to only open the header.
+     * @param array $options Array of options. See above.
      *
      * @return string A formated opening tag for the panel header or the complete panel
      * header.
@@ -446,8 +447,13 @@ class BootstrapPanelHelper extends Helper {
     /**
      * Create or open a panel body.
      *
+     * ### Options
+     *
+     * - `templateVars` Provide template variables for the body template.
+     * - Other attributes will be assigned to the body element.
+     *
      * @param string|null $text The panel body content, or null to only open the body.
-     * @param array       $options Array of options for the body `<div>`.
+     * @param array $options Array of options for the body `<div>`.
      *
      * @return string A formated opening tag for the panel body or the complete panel
      * body.
@@ -484,8 +490,13 @@ class BootstrapPanelHelper extends Helper {
     /**
      * Create or open a panel footer.
      *
-     * @param string|null $text The panel footer content, or null to only open the footer.
-     * @param array       $options Array of options for the footer `<div>`.
+     * ### Options
+     *
+     * - `templateVars` Provide template variables for the footer template.
+     * - Other attributes will be assigned to the footer element.
+     *
+     * @param string $text The panel footer content, or null to only open the footer.
+     * @param array $options Array of options for the footer `<div>`.
      *
      * @return string A formated opening tag for the panel footer or the complete panel
      * footer.
@@ -545,7 +556,8 @@ class BootstrapPanelHelper extends Helper {
      *   - If `true`, wraps the content into a `<h4>` tag. You can specify an array instead
      *     of `true` to control the `tag`. See example above.
      *   - If `false`, does not wrap the content.
-     * - Other attributes for the panel header `<div>`.
+     * - `templateVars` Provide template variables for the header template.
+     * - Other attributes will be assigned to the header element.
      *
      * @param string|array $text The header content, or `null`, or an array of options.
      * @param array        $options Array of options. See above.
@@ -588,6 +600,11 @@ class BootstrapPanelHelper extends Helper {
      * echo $this->Panel->body(['class' => 'my-class']);
      * ```
      *
+     * ### Options
+     *
+     * - `templateVars` Provide template variables for the body template.
+     * - Other attributes will be assigned to the body element.
+     *
      * @param array|string $info The body content, or `null`, or an array of options.
      * `$options`.
      * @param array $options Array of options for the panel body `<div>`.
@@ -626,13 +643,18 @@ class BootstrapPanelHelper extends Helper {
      * echo $this->Panel->footer(['class' => 'my-class']);
      * ```
      *
+     * ### Options
+     *
+     * - `templateVars` Provide template variables for the footer template.
+     * - Other attributes will be assigned to the footer element.
+     *
      * @param string|array $text The footer content, or `null`, or an array of options.
      * @param array        $options Array of options for the panel footer `<div>`.
      *
      * @return string A formated opening tag for the panel footer or the complete panel
      * footer.
      */
-    public function footer ($text = null, $options = []) {
+    public function footer($text = null, $options = []) {
         if (is_array($text)) {
             $options = $text;
             $text    = null;
