@@ -23,6 +23,7 @@ pages:
         - Fully customized modals: modal-helper/custom.md
     - Panel Helper:
         - Basic usage: panel-helper/basics.md
+        - Panel groups: panel-helper/groups.md
 
 markdown_extensions:
     - "mkexts.tabs:TabsExtension"
