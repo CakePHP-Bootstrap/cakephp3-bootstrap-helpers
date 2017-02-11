@@ -5,11 +5,9 @@
 -- TAB: PHP
 
 ```php
-<?php
-    echo $this->Html->label('My Label', 'primary') ;
-    echo $this->Html->label('My Label', 'danger') ;
-    echo $this->Html->label('My Label', 'success') ;
-?>
+echo $this->Html->label('My Label', 'primary') ;
+echo $this->Html->label('My Label', 'danger') ;
+echo $this->Html->label('My Label', 'success') ;
 ```
 
 -- TAB: Markup
@@ -35,11 +33,9 @@
 -- TAB: PHP
 
 ```php
-<?php
-    echo $this->Html->badge('1') ;
-    echo $this->Html->badge('2') ;
-    echo $this->Html->badge('3') ;
-?>
+echo $this->Html->badge('1') ;
+echo $this->Html->badge('2') ;
+echo $this->Html->badge('3') ;
 ```
 
 -- TAB: Markup

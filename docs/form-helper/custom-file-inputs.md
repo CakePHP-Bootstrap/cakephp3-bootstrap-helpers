@@ -19,9 +19,7 @@ Your file inputs will now look much better:
 -- TAB: PHP
 
 ```php
-<?php
-    echo $this->Form->file('file');
-?>
+echo $this->Form->file('file');
 ```
 
 -- TAB: Markup

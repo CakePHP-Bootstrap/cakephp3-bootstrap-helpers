@@ -6,12 +6,10 @@ Overload of [Cake\View\Helper\HTMLHelper::getCrumbList](http://api.cakephp.org/3
 
 -- TAB: PHP
 ```php
-<?php
-    $this->Html->addCrumb('Home', '/');
-    $this->Html->addCrumb('Pages', ['controller' => 'pages']); 
-    $this->Html->addCrumb('About', ['controller' => 'pages', 'action' => 'about']);
-    echo $this->Html->getCrumbList();
-?>
+$this->Html->addCrumb('Home', '/');
+$this->Html->addCrumb('Pages', ['controller' => 'pages']);
+$this->Html->addCrumb('About', ['controller' => 'pages', 'action' => 'about']);
+echo $this->Html->getCrumbList();
 ```
 
 -- TAB: Markup

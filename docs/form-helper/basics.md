@@ -1,6 +1,6 @@
 ### Create a Bootstrap form
 
-Bootstrap form are created using the standard CakePHP way of creating forms (the `Form` helper should be 
+Bootstrap form are created using the standard CakePHP way of creating forms (the `Form` helper should be
 correctly configured, see [Installation](../index.md#Installation):
 
 -- TABS: forms-basics
@@ -8,14 +8,12 @@ correctly configured, see [Installation](../index.md#Installation):
 -- TAB: PHP
 
 ```php
-<?php
-    echo $this->Form->create();
-    echo $this->Form->input('username', ['type' => 'text']) ;
-    echo $this->Form->input('password', ['type' => 'password']) ;
-    echo $this->Form->input('remember', ['type' => 'checkbox']) ;
-    echo $this->Form->submit('Log In') ;
-    echo $this->Form->end() ;
-?>
+echo $this->Form->create();
+echo $this->Form->input('username', ['type' => 'text']) ;
+echo $this->Form->input('password', ['type' => 'password']) ;
+echo $this->Form->input('remember', ['type' => 'checkbox']) ;
+echo $this->Form->submit('Log In') ;
+echo $this->Form->end() ;
 ```
 
 -- TAB: Markup

@@ -7,14 +7,12 @@ You can create Bootstrap [horizontal forms](http://getbootstrap.com/css/#forms-h
 -- TAB: PHP
 
 ```php
-<?php
-    echo $this->Form->create(null, ['horizontal' => true]);
-    echo $this->Form->input('username', ['type' => 'text']) ;
-    echo $this->Form->input('password', ['type' => 'password']) ;
-    echo $this->Form->input('remember', ['type' => 'checkbox']) ;
-    echo $this->Form->submit('Log In') ;
-    echo $this->Form->end() ;
-?>
+echo $this->Form->create(null, ['horizontal' => true]);
+echo $this->Form->input('username', ['type' => 'text']) ;
+echo $this->Form->input('password', ['type' => 'password']) ;
+echo $this->Form->input('remember', ['type' => 'checkbox']) ;
+echo $this->Form->submit('Log In') ;
+echo $this->Form->end() ;
 ```
 
 -- TAB: Markup
@@ -115,28 +113,26 @@ You can also specify different widths for different display sizes:
 -- TAB: PHP
 
 ```php
-<?php
-    echo $this->Form->create(null, [
-        'horizontal' => true,
-        'columns' => [ 
-            'sm' => [
-                'label' => 4,
-                'input' => 4,
-                'error' => 4
-            ],
-            'md' => [
-                'label' => 2,
-                'input' => 6,
-                'error' => 4
-            ]
+echo $this->Form->create(null, [
+    'horizontal' => true,
+    'columns' => [
+        'sm' => [
+            'label' => 4,
+            'input' => 4,
+            'error' => 4
+        ],
+        'md' => [
+            'label' => 2,
+            'input' => 6,
+            'error' => 4
         ]
-    ]);
-    echo $this->Form->input('username', ['type' => 'text']) ;
-    echo $this->Form->input('password', ['type' => 'password']) ;
-    echo $this->Form->input('remember', ['type' => 'checkbox']) ;
-    echo $this->Form->submit('Log In') ;
-    echo $this->Form->end() ;
-?>
+    ]
+]);
+echo $this->Form->input('username', ['type' => 'text']) ;
+echo $this->Form->input('password', ['type' => 'password']) ;
+echo $this->Form->input('remember', ['type' => 'checkbox']) ;
+echo $this->Form->submit('Log In') ;
+echo $this->Form->end() ;
 ```
 
 -- TAB: Markup
@@ -221,7 +217,7 @@ You can set the default column widths when configuring the helper:
 public $helpers = [
     'Form' => [
         'className' => 'Bootstrap.BootstrapForm',
-        'columns' => [ 
+        'columns' => [
             'sm' => [
                 'label' => 4,
                 'input' => 4,
@@ -248,13 +244,13 @@ reset it to `true` after:
 -- TAB: PHP
 
 ```php
-<?php 
+<?php
     echo $this->Form->create(NULL, ['horizontal' => true]) ;
-    echo $this->Form->input('horizontal_1'); 
+    echo $this->Form->input('horizontal_1');
     echo $this->Form->horizontal = false;
-    echo $this->Form->input('non_horizontal'); 
+    echo $this->Form->input('non_horizontal');
     echo $this->Form->horizontal = true;
-    echo $this->Form->input('horizontal_2'); 
+    echo $this->Form->input('horizontal_2');
     echo $this->Form->end() ;
 ?>
 ```

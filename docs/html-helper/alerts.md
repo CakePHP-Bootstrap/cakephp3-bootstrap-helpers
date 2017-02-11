@@ -5,14 +5,12 @@
 -- TAB: PHP
 
 ```php
-<?php
-    echo $this->Html->alert('This is a warning alert!') ;
-    echo $this->Html->alert('This is a success alert!', 'success');
-    echo $this->Html->alert('This is a info alert with a specific id!', [
-        'id' => 'alert-info',
-        'type' => 'info'
-    ]);
-?>
+echo $this->Html->alert('This is a warning alert!') ;
+echo $this->Html->alert('This is a success alert!', 'success');
+echo $this->Html->alert('This is a info alert with a specific id!', [
+    'id' => 'alert-info',
+    'type' => 'info'
+]);
 ```
 
 -- TAB: Markup

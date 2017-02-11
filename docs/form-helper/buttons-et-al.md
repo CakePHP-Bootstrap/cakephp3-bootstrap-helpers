@@ -9,9 +9,7 @@ You can create [button groups](http://getbootstrap.com/components/#btn-groups) u
 -- TAB: PHP
 
 ```php
-<?php
-    echo $this->Form->buttonGroup([$this->Form->button('1'), $this->Form->button('2')]) ;
-?>
+echo $this->Form->buttonGroup([$this->Form->button('1'), $this->Form->button('2')]) ;
 ```
 
 -- TAB: Markup
@@ -42,12 +40,10 @@ combining multiple button groups:
 -- TAB: PHP
 
 ```php
-<?php
-    echo $this->Form->buttonToolbar([
-        $this->Form->buttonGroup([$this->Form->button('1'), $this->Form->button('2')]),
-        $this->Form->buttonGroup([$this->Form->button('3'), $this->Form->button('4')])
-    ]) ;
-?>
+echo $this->Form->buttonToolbar([
+    $this->Form->buttonGroup([$this->Form->button('1'), $this->Form->button('2')]),
+    $this->Form->buttonGroup([$this->Form->button('3'), $this->Form->button('4')])
+]) ;
 ```
 
 -- TAB: Markup
@@ -89,14 +85,12 @@ You can create [dropdown buttons](http://getbootstrap.com/components/#btn-dropdo
 -- TAB: PHP
 
 ```php
-<?php
-    echo $this->Form->dropdownButton('My Dropdown', [
-        $this->Html->link('Link 1', '#'),
-        $this->Html->link('Link 2', '#'),
-        'divider',
-        $this->Html->link('Link 3', '#')
-    ]);
-?>
+echo $this->Form->dropdownButton('My Dropdown', [
+    $this->Html->link('Link 1', '#'),
+    $this->Html->link('Link 2', '#'),
+    'divider',
+    $this->Html->link('Link 3', '#')
+]);
 ```
 
 -- TAB: Markup

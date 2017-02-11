@@ -7,12 +7,10 @@ You can prepend and append add-ons or buttons to inputs using custom options of 
 -- TAB: PHP
 
 ```php
-<?php
-    echo $this->Form->input('mail', [
-        'prepend' => '@', 
-        'append' => $this->Form->button('Send')
-    ]) ;
-?>
+echo $this->Form->input('mail', [
+    'prepend' => '@',
+    'append' => $this->Form->button('Send')
+]) ;
 ```
 
 -- TAB: Markup
@@ -55,19 +53,17 @@ combined with the `BootstrapFormHelper::dropdown` method.
 -- TAB: PHP
 
 ```php
-<?php
-    echo $this->Form->input('mail', [
-        'append' => [
-            $this->Form->button('Button'),
-            $this->Form->dropdownButton('Dropdown', [
-                $this->Html->link('A', '#'), 
-                $this->Html->link('B', '#'),
-                'divider', 
-                $this->Html->link('C', '#')
-            ])
-        ]
-    ]) ;
-?>
+echo $this->Form->input('mail', [
+    'append' => [
+        $this->Form->button('Button'),
+        $this->Form->dropdownButton('Dropdown', [
+            $this->Html->link('A', '#'),
+            $this->Html->link('B', '#'),
+            'divider',
+            $this->Html->link('C', '#')
+        ])
+    ]
+]) ;
 ```
 
 -- TAB: Markup
@@ -125,11 +121,9 @@ You can add help messages to inputs by specifying the `help` option:
 -- TAB: PHP
 
 ```php
-<?php
-    echo $this->Form->input('mail', [
-        'help' => 'Hey guy, you need some help?'
-    ]) ;
-?>
+echo $this->Form->input('mail', [
+    'help' => 'Hey guy, you need some help?'
+]) ;
 ```
 
 -- TAB: Markup
