@@ -1,0 +1,166 @@
+{default $robots = true}
+{default $active = ''}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="robots" content="noindex" n:if="!$robots">
+
+	<title>{include title}{if 'overview' !== $active && $config->title} | {$config->title}{/if}</title>
+
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+		integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="{='resources/style.css'|staticFile}">
+	<link n:if="$config->googleCseId" rel="search" type="application/opensearchdescription+xml" title="{$config->title}" href="{$config->baseUrl}/opensearch.xml">
+
+</head>
+
+<body>
+	<nav id="navigation" class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<!-- Expander button -->
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a href="/" class="navbar-brand">{if $config->title}{$config->title}{else}Overview{/if}</a>
+			</div>
+			<div class="collapse navbar-collapse">
+
+				<ul class="nav navbar-nav">
+					<li>
+						<a href="/">Getting Started</a>
+					</li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">The helpers <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+						<!-- helpers -->
+						</ul>
+					</li>
+					<li class="active"><a href="/api">API</a></li>
+				</ul>
+
+				<!-- Search, Navigation and Repo links -->
+				<ul class="nav navbar-nav navbar-right">
+					<li>
+						<a href="https://github.com/holt59/cakephp3-bootstrap-helpers">
+							<i class="fa fa-github"></i> Github
+						</a>
+					</li>
+				</ul>
+                <form{if $config->googleCseId} action="http://www.google.com/cse"{/if} id="search" class="navbar-form navbar-right" role="search">
+                    <input type="hidden" name="cx" value="{$config->googleCseId}">
+                    <input type="hidden" name="ie" value="UTF-8">
+                    <div class="form-group">
+                        <input type="text" name="q" class="search-query form-control" placeholder="Search"{if 'overview' === $active} autofocus{/if}>
+					</div>
+				</form>
+
+			</div>
+		</div>
+	</nav>
+
+	<div id="left">
+	<div id="menu">
+		{define group}
+			<ul>
+				{foreach $groups as $group}
+					{var $nextLevel = substr_count($iterator->nextValue, '\\') > substr_count($group, '\\')}
+					<li n:class="$actualGroup === $group || 0 === strpos($actualGroup, $group . '\\') ? active, $config->main && 0 === strpos($group, $config->main) ? main">
+						<a href="{if $groupBy === 'package'}{$group|packageUrl}{else}{$group|namespaceUrl}{/if}">
+							{$group|subgroupName}<span n:tag-if="$nextLevel"></span>
+						</a>
+						{if $nextLevel}
+							<ul>
+						{else}
+							</li>
+							{if substr_count($iterator->nextValue, '\\') < substr_count($group, '\\')}
+								{='</ul></li>'|repeat:substr_count($group, '\\') - substr_count($iterator->nextValue, '\\')|noescape}
+							{/if}
+						{/if}
+				{/foreach}
+			</ul>
+		{/define}
+
+		<div id="groups">
+			{if $namespaces}
+				<h3>Namespaces</h3>
+				{include group, groups => $namespaces, actualGroup => $namespace, groupBy => 'namespace'}
+			{elseif $packages}
+				<h3>Packages</h3>
+				{include group, groups => $packages, actualGroup => $package, groupBy => 'package'}
+			{/if}
+		</div>
+
+		{define elements}
+			<ul>
+				<li n:foreach="$elements as $element" n:class="$activeElement === $element ? active"><a n:class="$element->deprecated ? deprecated, !$element->valid ? invalid" href="{$element|elementUrl}">{if $namespace}{$element->shortName}{else}{$element->name}{/if}</a></li>
+			</ul>
+		{/define}
+
+		<div id="elements">
+			{if $classes}
+			<h3>Classes</h3>
+			{include elements, elements => $classes, activeElement => $class}
+			{/if}
+
+			{if $interfaces}
+			<h3>Interfaces</h3>
+			{include elements, elements => $interfaces, activeElement => $class}
+			{/if}
+
+			{if $traits}
+			<h3>Traits</h3>
+			{include elements, elements => $traits, activeElement => $class}
+			{/if}
+
+			{if $exceptions}
+			<h3>Exceptions</h3>
+			{include elements, elements => $exceptions, activeElement => $class}
+			{/if}
+
+			{if $constants}
+			<h3>Constants</h3>
+			{include elements, elements => $constants, activeElement => $constant}
+			{/if}
+
+			{if $functions}
+			<h3>Functions</h3>
+			{include elements, elements => $functions, activeElement => $function}
+			{/if}
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+	<div id="rightInner">
+		{include content}
+	</div>
+
+</div>
+
+<footer>
+	<div class="container">
+		<div class="col-md-12">
+			<p>&copy; {date('Y')}, Mikaël Capelle (@Holt59)
+			- Designed and built by <a href="https://github.com/Holt59" target="_blank">Holt59</a> &amp;
+			<a href="https://github.com/Holt59/cakephp3-bootstrap-helpers/graphs/contributors" target="_blank">contributors</a>.</p>
+			<p>Code licensed under <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, Version 2.0</a>.</p>
+			<p>Code &amp; Documentation hosted by <a href="https://github.com" target="_blank"><i class="fa fa-github"></i> Github</a>.</p>
+			<p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> and <a href="http://www.apigen.org/">Apigen</a>.
+		</div>
+	</div>
+</footer>
+
+<script src="{='resources/combined.js'|staticFile}"></script>
+<script src="{='elementlist.js'|staticFile}"></script>
+</body>
+</html>

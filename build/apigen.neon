@@ -1,0 +1,28 @@
+# List of allowed file extensions
+extensions: [php]
+
+# Main project namespace/package prefix
+title: CakePHP 3 Bootstrap Helpers
+
+# Generate documentation for methods and properties with given access level
+accessLevels: [public, protected]
+
+# Generate documentation for elements marked as internal and display internal documentation parts
+internal: No
+
+# Generate documentation for PHP internal classes
+php: No
+
+# Generate tree view of classes, interfaces and exceptions
+tree: Yes
+
+# Generate highlighted source code files
+sourceCode: Yes
+
+# Add a link to download documentation as a ZIP archive
+download: Yes
+
+# Generate documentation for deprecated classes, methods, properties and constants
+annotationGroups: [deprecated] # event, api
+
+templateConfig: ./templates/bootstrap/config.neon
