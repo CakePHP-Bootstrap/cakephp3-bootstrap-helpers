@@ -116,7 +116,7 @@ class BootstrapModalHelper extends Helper {
      * @param array|string $title The modal title or an array of options.
      * @param array $options Array of options. See above.
      *
-     * @return An HTML string containing opening elements for a modal.
+     * @return string An HTML string containing opening elements for a modal.
      */
     public function create($title = null, $options = []) {
 
