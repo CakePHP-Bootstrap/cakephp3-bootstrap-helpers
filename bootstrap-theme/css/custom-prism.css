@@ -1,4 +1,4 @@
-:not(pre) > code[class*="language-"], 
+:not(pre) > code[class*="language-"],
 pre[class*="language-"] {
     padding: 16px;
     background-color: #f7f7f7;
@@ -8,4 +8,11 @@ pre[class*="language-"] {
     border: 1px solid #eee;
     word-break: normal;
     word-wrap: normal;
+}
+
+code {
+    font-size: 100%;
+    color: #DD4A68;
+    background-color: #f7f7f7;
+    border-radius: 4px;
 }

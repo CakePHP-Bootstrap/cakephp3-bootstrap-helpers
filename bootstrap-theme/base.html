@@ -18,7 +18,7 @@
         {%- block styles %}
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"
             integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" 
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
             integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
         <link href="{{ base_url }}/css/prism.min.css" rel="stylesheet">
         <link href="{{ base_url }}/css/custom-prism.css" rel="stylesheet">
@@ -50,11 +50,15 @@
         {%- block extrahead %} {% endblock %}
     </head>
 
-    <body>
+    <body{% if page.title|lower == 'getting started' %} class="no-padding"{% endif %} data-spy="scroll" data-target=".right-nav" data-offset="70">
 
     {# {% include "nav.html" %} #}
 
+    {% if page.title|lower == "getting started" %}
     {% include "header.html" %}
+    {% endif %}
+
+    {% include "nav.html" %}
 
     <div class="container">
         {%- block content %}
@@ -67,8 +71,8 @@
         <div class="container">
             <div class="col-md-12">
                 {%- block footer %}
-                <p>&copy; {{ build_date_utc.year }}, Mikaël Capelle (@Holt59) 
-                - Designed and built by <a href="https://github.com/Holt59" target="_blank">Holt59</a> &amp; 
+                <p>&copy; {{ build_date_utc.year }}, Mikaël Capelle (@Holt59)
+                - Designed and built by <a href="https://github.com/Holt59" target="_blank">Holt59</a> &amp;
                 <a href="https://github.com/Holt59/cakephp3-bootstrap-helpers/graphs/contributors" target="_blank">contributors</a>.</p>
                 <p>Code licensed under <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, Version 2.0</a>.</p>
                 <p>Code &amp; Documentation hosted by <a href="https://github.com" target="_blank"><i class="fa fa-github"></i> Github</a>.</p>
@@ -82,7 +86,7 @@
         <script src="https://code.jquery.com/jquery-1.12.4.min.js"
               integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
               crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" 
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
               integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
         <script src="{{ base_url }}/js/prism.min.js"></script>
         <script src="{{ base_url }}/js/base.js"></script>
@@ -90,6 +94,22 @@
         {%- for path in extra_javascript %}
         <script src="{{ path }}"></script>
         {%- endfor %}
+
+        {% if page.title|lower == 'getting started' %}
+        <script type="text/javascript">
+            var topNavOffset = $('.navbar').offset().top;
+            $(window).on('scroll', function (e) {
+                if ($(window).scrollTop() > topNavOffset) {
+                    $('.navbar').addClass('navbar-fixed-top');
+                    $('.jumbotron').addClass('more-padding');
+                }
+                else {
+                    $('.navbar').removeClass('navbar-fixed-top');
+                    $('.jumbotron').removeClass('more-padding');
+                }
+            });
+        </script>
+        {% endif %}
 
         {%- endblock %}
     </body>

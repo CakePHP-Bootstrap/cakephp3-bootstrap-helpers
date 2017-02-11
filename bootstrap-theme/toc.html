@@ -1,6 +1,45 @@
-<nav class="right-nav">
+{#
+<div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    {% if page %}
+    {% for toc_item in page.toc %}
+        <li class="main {% if toc_item.active %}active{% endif %}"><a href="{{ toc_item.url }}">{{ toc_item.title }}</a></li>
+        {% for toc_item in toc_item.children %}
+            <li><a href="{{ toc_item.url }}">{{ toc_item.title }}</a></li>
+        {% endfor %}
+    {% endfor %}
+    {% endif %}
+    </ul>
+</div>
+#}
+
+<nav class="right-nav right-nav-fixed">
     <ul class="nav">
+
+{% if page.title|lower == "getting started" %}
+
+{% else %}
+
     {% for nav_item in nav %}
+    {% if nav_item.children and page in nav_item.children %}
+    <li class="nav-header">{{ nav_item.title }}</li>
+    {% for nav_item in nav_item.children %}
+    {% if nav_item.url == './' or nav_item.url.split('/').1 != '..' %}
+    <li {% if nav_item.active %}class="active"{% endif %}>
+        <a href="{% if nav_item.children %}{{ nav_item.children.0.url }}{% else %}{{ nav_item.url }}{% endif %}">{{ nav_item.title }}</a>
+        {% if nav_item.active %}
+        <ul class="nav">
+        {% for toc_item in page.toc %}
+            <li class="main {% if toc_item.active %}active{% endif %}"><a href="{{ toc_item.url }}">{{ toc_item.title }}</a></li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+    </li>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+
+{#
         <li {% if nav_item.active %}class="active"{% endif %}>
             <a href="{% if nav_item.children %}{{ nav_item.children.0.url }}{% else %}{{ nav_item.url }}{% endif %}">{{ nav_item.title }}</a>
             {% if nav_item.active and nav_item.children %}
@@ -12,7 +51,12 @@
                 {% endfor %}
                 </ul>
             {% endif %}
-        </li>
+        </li>#}
     {% endfor %}
+
+{% endif %}
+
     </ul>
 </nav>
+
+
