@@ -54,7 +54,7 @@
 
     {# {% include "nav.html" %} #}
 
-    {% if page.title|lower == "getting started" %}
+    {% if page.is_homepage %}
     {% include "header.html" %}
     {% endif %}
 
@@ -95,7 +95,7 @@
         <script src="{{ path }}"></script>
         {%- endfor %}
 
-        {% if page.title|lower == 'getting started' %}
+        {% if page.is_homepage %}
         <script type="text/javascript">
             var topNavOffset = $('.navbar').offset().top;
             $(window).on('scroll', function (e) {

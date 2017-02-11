@@ -1,5 +1,6 @@
 site_name: CakePHP 3 Bootstrap Helpers
 
+site_url: https://holt59.github.com/cakephp3-bootstrap-helpers/
 repo_url: https://github.com/Holt59/cakephp3-bootstrap-helpers
 
 pages:
@@ -14,7 +15,7 @@ pages:
         - Horizontal forms: form-helper/horizontal.md
         - Custom file inputs: form-helper/custom-file-inputs.md
         - Buttons, Groups & Toolbars: form-helper/buttons-et-al.md
-        - New input options: form-helper/new-input-options.md 
+        - New input options: form-helper/new-input-options.md
     - Navbar Helper:
         - Basic usage: navbar-helper/basics.md
     - Modal Helper:

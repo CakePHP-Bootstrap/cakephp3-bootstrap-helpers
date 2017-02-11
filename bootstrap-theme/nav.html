@@ -28,14 +28,14 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ nav_item.title }} <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                     {% for nav_item in nav_item.children %}
-                        <li {% if nav_item.active %}class="active"{% endif %}>
+                        <li{% if nav_item.active %} class="active"{% endif %}>
                             <a href="{{ nav_item.url }}">{{ nav_item.title }}</a>
                         </li>
                     {% endfor %}
                     </ul>
                 </li>
             {% else %}
-                <li {% if nav_item.active %}class="active"{% endif %}>
+                <li{% if nav_item.active %} class="active"{% endif %}>
                     <a href="{{ nav_item.url }}">{{ nav_item.title }}</a>
                 </li>
             {% endif %}
@@ -44,9 +44,10 @@
             <li class="dropdown{% for nav_item in nav %}{% if 'helper' in nav_item.title|lower and nav_item.active %} active{% endif %}{% endfor %}">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">The helpers <b class="caret"></b></a>
                 <ul class="dropdown-menu">
+                <!-- helpers -->
                 {% for nav_item in nav %}
                 {% if 'helper' in nav_item.title|lower %}
-                    <li {% if nav_item.active %}class="active"{% endif %}>
+                    <li{% if nav_item.active %} class="active"{% endif %}>
                         <a href="{{ nav_item.children.0.url }}">{{ nav_item.title }}</a>
                     </li>
                 {% endif %}
