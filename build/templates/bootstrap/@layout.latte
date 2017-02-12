@@ -17,7 +17,7 @@
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
 		integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">
-	<link rel="stylesheet" href="{='resources/prism.min.css'|staticFile}">
+	<link rel="stylesheet" href="{='resources/prism.css'|staticFile}">
 	<link rel="stylesheet" href="{='resources/custom-prism.css'|staticFile}">
 	<link rel="stylesheet" href="{='resources/style.css'|staticFile}">
 	<link n:if="$config->googleCseId" rel="search" type="application/opensearchdescription+xml" title="{$config->title}" href="{$config->baseUrl}/opensearch.xml">
@@ -182,7 +182,20 @@
 			}
 		});
 	});
+	Prism.hooks.add("complete", function() {
+		var $counter = 0;
+		$('.line-numbers-rows > span').each(function () {
+			$(this).attr('id', ++$counter);
+		});
+		if (window.location.hash) {
+			var $hash = window.location.hash.split('-')[0];
+			var $navigationHeight = $('#navigation').outerHeight();
+			window.scrollTo(0, $($hash).offset().top - $navigationHeight);
+		}
+	});
+
 	Prism.highlightAll();
 </script>
+
 </body>
 </html>

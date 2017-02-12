@@ -45,6 +45,13 @@ li.active a {
     font-weight: bold;
 }
 
+.nav-list li a {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: keep-all;
+}
+
 #groups ul {
     padding: 0;
     margin: 0 0 1em 0;

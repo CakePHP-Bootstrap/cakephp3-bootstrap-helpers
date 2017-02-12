@@ -2,6 +2,7 @@
 
 push=0
 branch=master
+commit="Update documentation."
 
 function abort_with_message() {
     echo $* > /dev/stderr
@@ -20,6 +21,10 @@ while [ $# -gt 0 ]; do
         ;;
         --branch)
         branch="$2"
+        shift
+        ;;
+        -c|--commit)
+        commit="$2"
         shift
         ;;
         -h|--help)
@@ -91,6 +96,7 @@ if [ $push -eq 1 ]; then
     cd gh-pages
     rm ./* -rf
     mv ../site/* ./
-    git add * && git commit -a -m "Update documentation."
+    git add --all
+    git commit -m "$commit"
     git push --set-upstream origin gh-pages
 fi

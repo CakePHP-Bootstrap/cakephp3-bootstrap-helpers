@@ -10,6 +10,10 @@ pre[class*="language-"] {
     word-wrap: normal;
 }
 
+pre[class*="language-"].line-numbers {
+    padding-left: 3.8em;
+}
+
 code {
     font-size: 100%;
     color: #DD4A68;

@@ -5,8 +5,7 @@
 
 {block content}
 <div id="source">
-	{var $lineRegex = '~<span class="line">(\s*)(\d+):(\s*)</span>([^\\n]*(?:\\n|$))~'}
-	<pre class="numbers"><code>{$source|replaceRE:$lineRegex,'<span class="l"><a href="#$2">$1$2$3</a></span>'|noescape}</code></pre>
-	<pre class="code"><code>{$source|replaceRE:$lineRegex,'<span id="$2" class="l">$4</span>'|noescape}</code></pre>
+	<pre class="language-php line-numbers" data-src="https://raw.githubusercontent.com/Holt59/cakephp3-bootstrap-helpers/master/src/{$fileName}"><code></code></pre>
 </div>
 {/block}
+
