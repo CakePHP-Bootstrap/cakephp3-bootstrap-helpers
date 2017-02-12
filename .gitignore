@@ -6,3 +6,12 @@
 
 **/__pycache__
 **/*.pyc
+
+# Site build
+
+site
+build/site
+build/gh-pages
+build/repo
+build/templates/bootstrap/helpers-menu.latte
+build/apigen.phar
