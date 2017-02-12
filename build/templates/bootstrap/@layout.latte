@@ -40,7 +40,7 @@
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">The helpers <b class="caret"></b></a>
 						<ul class="dropdown-menu">
-						<!-- helpers -->
+						{include 'helpers-menu.latte'}
 						</ul>
 					</li>
 					<li class="active"><a href="/api">API</a></li>
@@ -160,6 +160,11 @@
 	</div>
 </footer>
 
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"
+		integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+		crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+		integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <script src="{='resources/combined.js'|staticFile}"></script>
 <script src="{='elementlist.js'|staticFile}"></script>
 </body>
