@@ -1,0 +1,18 @@
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+    padding: 16px;
+    background-color: #f7f7f7;
+    font-size: 13.6px;
+    line-height: 1.45;
+    border-radius: 3px;
+    border: 1px solid #eee;
+    word-break: normal;
+    word-wrap: normal;
+}
+
+code {
+    font-size: 100%;
+    color: #DD4A68;
+    background-color: #f7f7f7;
+    border-radius: 4px;
+}
