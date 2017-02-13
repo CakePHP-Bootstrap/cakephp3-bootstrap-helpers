@@ -78,14 +78,14 @@ class BootstrapHtmlHelper extends HtmlHelper {
             'label' => '<span class="label label-{{type}}{{attrs.class}}"{{attrs}}>{{content}}</span>',
             'badge' => '<span class="badge{{attrs.class}}"{{attrs}}>{{content}}</span>',
             'alert' => '<div class="alert alert-{{type}}{{attrs.class}}" role="alert"{{attrs}}>{{close}}{{content}}</div>',
-            'alertCloseButton' => 
+            'alertCloseButton' =>
                 '<button type="button" class="close{{attrs.class}}" data-dismiss="alert" aria-label="{{label}}"{{attrs}}>{{content}}</button>',
             'alertCloseContent' => '<span aria-hidden="true">&times;</span>',
             'tooltip' => '<{{tag}} data-toggle="{{toggle}}" data-placement="{{placement}}" title="{{tooltip}}">{{content}}</{{tag}}>',
-            'progressBar' => 
-'<div class="progress-bar progress-bar-{{type}}{{attrs.class}}" role="progressbar" 
-aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style="width: {{width}}%%;"{{attrs}}>{{inner}}</div>',
-            'progressBarInner' => '<span class="sr-only">{{width}}%%</span>',
+            'progressBar' =>
+'<div class="progress-bar progress-bar-{{type}}{{attrs.class}}" role="progressbar"
+aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style="width: {{width}}%;"{{attrs}}>{{inner}}</div>',
+            'progressBarInner' => '<span class="sr-only">{{width}}%</span>',
             'progressBarContainer' => '<div class="progress{{attrs.class}}"{{attrs}}>{{content}}</div>'
         ],
         'templateClass' => 'Bootstrap\View\BootstrapStringTemplate',
@@ -133,7 +133,7 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
     /**
      * Create a Twitter Bootstrap span label.
      *
-     * The second parameter may either be `$type` or `$options` (in which case 
+     * The second parameter may either be `$type` or `$options` (in which case
      * the third parameter is not used, and the label type can be specified in the
      * `$options` array).
      *
