@@ -73,22 +73,22 @@ class BootstrapFormHelper extends FormHelper {
             'checkbox' => '<input type="checkbox" name="{{name}}" value="{{value}}"{{attrs}}>',
             'checkboxFormGroup' => '{{label}}',
             'checkboxWrapper' => '<div class="checkbox">{{label}}</div>',
-            'checkboxContainer' => '{{h_checkboxContainer_start}}<div class="checkbox {{required}}">{{content}}</div>{{h_checkboxContainer_end}}',
+            'checkboxContainer' => '{{checkboxContainerHorizontalStart}}<div class="checkbox {{required}}">{{content}}</div>{{checkboxContainerHorizontalEnd}}',
             'dateWidget' => '{{year}}{{month}}{{day}}{{hour}}{{minute}}{{second}}{{meridian}}',
-            'error' => '<span class="help-block error-message{{h_errorClass}}">{{content}}</span>',
+            'error' => '<span class="help-block error-message{{errorClassHorizontal}}">{{content}}</span>',
             'errorList' => '<ul>{{content}}</ul>',
             'errorItem' => '<li>{{text}}</li>',
             'file' => '<input type="file" name="{{name}}" {{attrs}}>',
             'fieldset' => '<fieldset{{attrs}}>{{content}}</fieldset>',
             'formStart' => '<form{{attrs}}>',
             'formEnd' => '</form>',
-            'formGroup' => '{{label}}{{h_formGroup_start}}{{prepend}}{{input}}{{append}}{{h_formGroup_end}}',
+            'formGroup' => '{{label}}{{formGroupHorizontalStart}}{{prepend}}{{input}}{{append}}{{formGroupHorizontalEnd}}',
             'hiddenBlock' => '<div style="display:none;">{{content}}</div>',
             'input' => '<input type="{{type}}" name="{{name}}" class="form-control{{attrs.class}}" {{attrs}} />',
             'inputSubmit' => '<input type="{{type}}"{{attrs}}>',
             'inputContainer' => '<div class="form-group {{type}}{{required}}">{{content}}</div>',
             'inputContainerError' => '<div class="form-group has-error {{type}}{{required}}">{{content}}{{error}}</div>',
-            'label' => '<label class="{{s_labelClass}}{{h_labelClass}}{{attrs.class}}" {{attrs}}>{{text}}</label>',
+            'label' => '<label class="{{labelClassExtra}}{{labelClassHorizontal}}{{attrs.class}}" {{attrs}}>{{text}}</label>',
             'nestingLabel' => '{{hidden}}<label{{attrs}}>{{input}}{{text}}</label>',
             'legend' => '<legend>{{text}}</legend>',
             'option' => '<option value="{{value}}"{{attrs}}>{{text}}</option>',
@@ -97,9 +97,18 @@ class BootstrapFormHelper extends FormHelper {
             'selectMultiple' => '<select name="{{name}}[]" multiple="multiple" class="form-control{{attrs.class}}" {{attrs}}>{{content}}</select>',
             'radio' => '<input type="radio" name="{{name}}" value="{{value}}"{{attrs}}>',
             'radioWrapper' => '<div class="radio">{{label}}</div>',
-            'radioContainer' => '{{h_radioContainer_start}}<div class="form-group">{{content}}</div>{{h_radioContainer_end}}',
+            'radioContainer' => '{{radioContainerHorizontalStart}}<div class="form-group">{{content}}</div>{{radioContainerHorizontalEnd}}',
             'textarea' => '<textarea name="{{name}}" class="form-control{{attrs.class}}" {{attrs}}>{{value}}</textarea>',
-            'submitContainer' => '<div class="form-group">{{h_submitContainer_start}}{{content}}{{h_submitContainer_end}}</div>',
+            'submitContainer' => '<div class="form-group">{{submitContainerHorizontalStart}}{{content}}{{submitContainerHorizontalEnd}}</div>',
+
+            'inputGroup' => '{{inputGroupStart}}{{input}}{{inputGroupEnd}}',
+            'inputGroupStart' => '<div class="input-group">{{prepend}}',
+            'inputGroupEnd' => '{{append}}</div>',
+            'inputGroupAddons' => '<span class="input-group-addon">{{content}}</span>',
+            'inputGroupButtons' => '<span class="input-group-btn">{{content}}</span>',
+            'buttonGroup' => '<div class="btn-group{{attrs.class}}"{{attrs}}>{{content}}</div>',
+            'buttonToolbar' => '<div class="btn-toolbar{{attrs.class}}"{{attrs}}>{{content}}</div>',
+            'customFileInput' => '{{fileInput}}<div class="input-group"><div class="input-group-btn">{{button}}</div>{{input}}</div>'
         ],
         'templateClass' => 'Bootstrap\View\BootstrapStringTemplate',
         'buttons' => [
@@ -194,26 +203,26 @@ class BootstrapFormHelper extends FormHelper {
             'templateVars' => []
         ];
         $options['templateVars'] += [
-            's_labelClass' => 'control-label'
+            'labelClassExtra' => 'control-label'
         ];
         if ($this->horizontal) {
             $options['templateVars'] += [
-                'h_formGroup_start' => '<div class="'.$this->_getColClass('input').'">',
-                'h_formGroup_end'   => '</div>',
-                'h_checkboxContainer_start' => '<div class="form-group"><div class="'.$this->_getColClass('label', true)
+                'formGroupHorizontalStart' => '<div class="'.$this->_getColClass('input').'">',
+                'formGroupHorizontalEnd'   => '</div>',
+                'checkboxContainerHorizontalStart' => '<div class="form-group"><div class="'.$this->_getColClass('label', true)
                                             .' '.$this->_getColClass('input').'">',
-                'h_checkboxContainer_end' => '</div></div>',
-                'h_radioContainer_start' => '<div class="form-group"><div class="'.$this->_getColClass('label', true)
+                'checkboxContainerHorizontalEnd' => '</div></div>',
+                'radioContainerHorizontalStart' => '<div class="form-group"><div class="'.$this->_getColClass('label', true)
                                          .' '.$this->_getColClass('input').'">',
-                'h_radioContainer_end' => '</div></div>',
-                'h_submitContainer_start' => '<div class="'.$this->_getColClass('label', true).' '.$this->_getColClass('input').'">',
-                'h_submitContainer_end' => '</div>',
-                'h_labelClass' => ' '.$this->_getColClass('label'),
-                'h_errorClass' => ' '.$this->_getColClass('error')
+                'radioContainerHorizontalEnd' => '</div></div>',
+                'submitContainerHorizontalStart' => '<div class="'.$this->_getColClass('label', true).' '.$this->_getColClass('input').'">',
+                'submitContainerHorizontalEnd' => '</div>',
+                'labelClassHorizontal' => ' '.$this->_getColClass('label'),
+                'errorClassHorizontal' => ' '.$this->_getColClass('error')
             ];
         }
         if ($this->inline) {
-            $options['templateVars']['s_labelClass'] = 'sr-only';
+            $options['templateVars']['labelClassExtra'] = 'sr-only';
         }
         return $options;
     }
@@ -371,16 +380,19 @@ class BootstrapFormHelper extends FormHelper {
      */
     protected function _wrapInputGroup($addonOrButtons) {
         if ($addonOrButtons) {
+            $template = 'inputGroupButtons';
             if (is_string($addonOrButtons)) {
                 $addonOrButtons = $this->_makeIcon($addonOrButtons);
-                $addonOrButtons = '<span class="input-group-'.
-                                  ($this->_matchButton($addonOrButtons) ?
-                                   'btn' : 'addon').'">'.$addonOrButtons.'</span>';
+                if (!$this->_matchButton($addonOrButtons)) {
+                    $template = 'inputGroupAddons';
+                }
             }
-            else if ($addonOrButtons !== false) {
-                $addonOrButtons = '<span class="input-group-btn">'
-                                 .implode('', $addonOrButtons).'</span>';
+            else {
+                $addonOrButtons = implode('', $addonOrButtons);
             }
+            $addonOrButtons = $this->formatTemplate($template, [
+                'content' => $addonOrButtons
+            ]);
         }
         return $addonOrButtons;
     }
@@ -396,7 +408,15 @@ class BootstrapFormHelper extends FormHelper {
      * an input group `<div>`.
      */
     protected function _wrap($input, $prepend, $append) {
-        return '<div class="input-group">'.$prepend.$input.$append.'</div>';
+        return $this->formatTemplate('inputGroup', [
+            'inputGroupStart' => $this->formatTemplate('inputGroupStart', [
+                'prepend' => $prepend
+            ]),
+            'input' => $input,
+            'inputGroupEnd' => $this->formatTemplate('inputGroupEnd', [
+                'append' => $append
+            ])
+        ]);
     }
 
     /**
@@ -412,7 +432,7 @@ class BootstrapFormHelper extends FormHelper {
     public function prepend($input, $prepend) {
         $prepend = $this->_wrapInputGroup($prepend);
         if ($input === null) {
-            return '<div class="input-group">'.$prepend;
+            return $this->formatTemplate('inputGroupStart', ['prepend' => $prepend]);
         }
         return $this->_wrap($input, $prepend, null);
     }
@@ -430,7 +450,7 @@ class BootstrapFormHelper extends FormHelper {
     public function append($input, $append) {
         $append = $this->_wrapInputGroup($append);
         if ($input === null) {
-            return $append.'</div>';
+            return $this->formatTemplate('inputGroupEnd', ['append' => $append]);
         }
         return $this->_wrap($input, null, $append);
     }
@@ -601,7 +621,8 @@ class BootstrapFormHelper extends FormHelper {
             'id' => $fieldName,
             'secure' => true,
             'count-label' => __('files selected'),
-            'button-label' => (isset($options['multiple']) && $options['multiple']) ? __('Choose Files') : __('Choose File')
+            'button-label' => (isset($options['multiple']) && $options['multiple']) ? __('Choose Files') : __('Choose File'),
+            'templateVars' => []
         ];
 
         $fakeInputCustomOptions = $options['_input'];
@@ -645,9 +666,13 @@ class BootstrapFormHelper extends FormHelper {
             'type' => 'button',
             'onclick' => "document.getElementById('".$options['id']."').click();"
         ]));
-        return $fileInput.$this->Html->div('input-group',
-                                           $this->Html->div('input-group-btn',
-                                                            $fakeButton).$fakeInput);
+        return $this->formatTemplate('customFileInput', [
+            'fileInput' => $fileInput,
+            'button' => $fakeButton, 
+            'input' => $fakeInput,
+            'attrs' => $this->templater()->formatAttributes($options),
+            'templateVars' => $options['templateVars']
+        ]);
     }
 
     /**
@@ -802,15 +827,17 @@ class BootstrapFormHelper extends FormHelper {
      */
     public function buttonGroup($buttons, array $options = []) {
         $options += [
-            'vertical' => false
+            'vertical' => false,
+            'templateVars' => []
         ];
-        $vertical = $options['vertical'];
-        unset($options['vertical']);
-        $options = $this->addClass($options, 'btn-group');
-        if ($vertical) {
+        if ($options['vertical']) {
             $options = $this->addClass($options, 'btn-group-vertical');
         }
-        return $this->Html->tag('div', implode('', $buttons), $options);
+        return $this->formatTemplate('buttonGroup', [
+            'content' => implode('', $buttons),
+            'attrs' => $this->templater()->formatAttributes($options, ['vertical']),
+            'templateVars' => $options['templateVars']
+        ]);
     }
 
     /**
@@ -822,8 +849,14 @@ class BootstrapFormHelper extends FormHelper {
      * @return string A HTML string containing the button toolbar.
      */
     public function buttonToolbar(array $buttonGroups, array $options = array()) {
-        $options = $this->addClass($options, 'btn-toolbar');
-        return $this->Html->tag('div', implode('', $buttonGroups), $options);
+        $options += [
+            'templateVars' => []
+        ];
+        return $this->formatTemplate('buttonToolbar', [
+            'content' => implode('', $buttonGroups),
+            'attrs' => $this->templater()->formatAttributes($options, ['vertical']),
+            'templateVars' => $options['templateVars']
+        ]);
     }
 
     /**
