@@ -165,15 +165,15 @@ the file LICENSE.md that was distributed with this source code.
 
 				<span class="attributes">
 					{if $property->protected}
-					<span class="label">protected</span>
+					<span class="label label-warning">protected</span>
 					{elseif $property->private}
-					<span class="label">private</span>
+					<span class="label label-danger">private</span>
 					{else}
-					<span class="label">public</span>
+					<span class="label label-success">public</span>
 					{/if}
 
 					{if $property->static}
-					<span class="label">static</span>
+					<span class="label label-default">static</span>
 					{/if}
 				</span>
 			</div>
@@ -263,23 +263,23 @@ the file LICENSE.md that was distributed with this source code.
 	{define #method_visibility}
 	{var $annotations = $method->annotations}
 		{if !$class->interface && $method->abstract}
-			<span class="label">abstract</span>
+			<span class="label label-default">abstract</span>
 		{elseif $method->final}
-			<span class="label">final</span>
+			<span class="label label-default">final</span>
 		{/if}
 
-		<span class="label">{block|strip}
-			{if $method->protected}
-				protected
-			{elseif $method->private}
-				private
-			{else}
-				public
-			{/if}
+		{block|strip}
+		{if $method->protected}
+			<span class="label label-warning">protected</span>
+		{elseif $method->private}
+			<span class="label label-danger">private</span>
+		{else}
+			<span class="label label-success">public</span>
+		{/if}
 		{/block}</span>
 
 		{if $method->static}
-		<span class="label">static</span>
+		<span class="label label-default">static</span>
 		{/if}
 	{/define}
 
@@ -485,19 +485,19 @@ the file LICENSE.md that was distributed with this source code.
 
 		<div class="attributes">
 			{if $property->protected}
-				<span class="label">protected</span>
+				<span class="label label-warning">protected</span>
 			{elseif $property->private}
-				<span class="label">private</span>
+				<span class="label label-danger">private</span>
 			{else}
-				<span class="label">public</span>
+				<span class="label label-success">public</span>
 			{/if}
 			{if $property->static}
-				<span class="label">static</span>
+				<span class="label label-default">static</span>
 			{/if}
 			{if $property->readOnly}
-				<span class="label">read-only</span>
+				<span class="label label-default">read-only</span>
 			{elseif $property->writeOnly}
-				<span class="label">write-only</span>
+				<span class="label label-default">write-only</span>
 			{/if}
 			{php
 				$type = $property->typeHint;

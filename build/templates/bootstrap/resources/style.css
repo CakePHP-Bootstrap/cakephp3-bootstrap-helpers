@@ -8,6 +8,7 @@ body {
 
 footer {
     padding: 20px 0;
+    margin-top: 20px;
     background-color: #f8f8f8;
     border-top: 1px solid #e7e7e7;
 }
@@ -105,11 +106,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .label {
     font-weight: normal;
-    background: #ECECE9;
-    color: #666;
     font-size: 12px;
     line-height: 1.3em;
     vertical-align: middle;
+    opacity: 0.7;
 }
 
 .permalink {
