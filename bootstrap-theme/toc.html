@@ -15,11 +15,8 @@
 
 <nav class="right-nav right-nav-fixed">
     <ul class="nav">
-
 {% if page.is_homepage %}
-
 {% else %}
-
     {% for nav_item in nav %}
     {% if nav_item.children and page in nav_item.children %}
     <li class="nav-header">{{ nav_item.title }}</li>
@@ -38,24 +35,8 @@
     {% endif %}
     {% endfor %}
     {% endif %}
-
-{#
-        <li {% if nav_item.active %}class="active"{% endif %}>
-            <a href="{% if nav_item.children %}{{ nav_item.children.0.url }}{% else %}{{ nav_item.url }}{% endif %}">{{ nav_item.title }}</a>
-            {% if nav_item.active and nav_item.children %}
-                <ul class="nav">
-                {% for nav_item in nav_item.children %}
-                    <li {% if nav_item.active %}class="active"{% endif %}>
-                        <a href="{{ nav_item.url }}">{{ nav_item.title }}</a>
-                    </li>
-                {% endfor %}
-                </ul>
-            {% endif %}
-        </li>#}
     {% endfor %}
-
 {% endif %}
-
     </ul>
 </nav>
 

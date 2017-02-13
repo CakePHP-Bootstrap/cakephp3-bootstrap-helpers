@@ -5,6 +5,23 @@ body {
     position: relative;
 }
 
+@media(max-width: 992px) {
+
+    body {
+        padding-top: 0;
+    }
+
+    .jumbotron {
+        display: none;
+    }
+
+    .navbar-fixed-top {
+        position: relative;
+        margin-bottom: 0;
+        border-bottom: none;
+    }
+}
+
 body.no-padding {
     padding-top: 0px;
 }
@@ -74,6 +91,7 @@ footer {
 
 .right-nav {
     width: 263px;
+    display: block;
 }
 
 .right-nav-fixed {
