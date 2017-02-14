@@ -15,7 +15,6 @@
 namespace Bootstrap\View;
 
 use Cake\View\StringTemplate;
-use Cake\Utility\Hash;
 use RuntimeException;
 
 class EnhancedStringTemplate extends StringTemplate {
@@ -33,21 +32,6 @@ class EnhancedStringTemplate extends StringTemplate {
      * @var array
      */
     protected $_callbacks = null;
-
-    /**
-     * Constructor.
-     *
-     * @param array $config A set of templates to add.
-     * @param callable $callback A general callback that will be called before
-     * retrieving any templates.
-     * @param arra $callbacks An array of callbacks.
-     */
-    public function __construct(array $config = [], callable $callback = null, array $callbacks = [])
-    {
-        $this->add($config);
-        $this->_callback = $callback;
-        $this->_callbacks = $callbacks;
-    }
 
     /**
      * Compile templates into a more efficient printf() compatible format.
@@ -84,7 +68,6 @@ class EnhancedStringTemplate extends StringTemplate {
      * @return string
     */
     public function format($name, array $data) {
-        $name = $this->_getTemplateName($name, $data);
         if (!isset($this->_compiled[$name])) {
             throw new RuntimeException("Cannot find template named '$name'.");
         }
@@ -111,62 +94,5 @@ class EnhancedStringTemplate extends StringTemplate {
         }
         return parent::format($name, $data);
     }
-
-    /**
-     * Returns a space-delimited string with items of the $options array. If a key
-     * of $options array happens to be one of those listed
-     * in `StringTemplate::$_compactAttributes` and its value is one of:
-     *
-     * - '1' (string)
-     * - 1 (integer)
-     * - true (boolean)
-     * - 'true' (string)
-     *
-     * Then the value will be reset to be identical with key's name.
-     * If the value is not one of these 4, the parameter is not output.
-     *
-     * 'escape' is a special option in that it controls the conversion of
-     * attributes to their HTML-entity encoded equivalents. Set to false to disable HTML-encoding.
-     *
-     * If value for any option key is set to `null` or `false`, that option will be excluded from output.
-     *
-     * This method uses the 'attribute' and 'compactAttribute' templates. Each of
-     * these templates uses the `name` and `value` variables. You can modify these
-     * templates to change how attributes are formatted.
-     *
-     * @param array|null $options Array of options.
-     * @param array|null $exclude Array of options to be excluded, the options here will not be part of the return.
-     * @return string Composed attributes.
-     */
-    public function formatAttributes($options, $exclude = null) {
-        if (!is_array($exclude)) {
-            $exclude = [];
-        }
-        $exclude += ['callbackVars'];
-        return parent::formatAttributes($options, $exclude);
-    }
-
-    /**
-     * Retrieve a template name after checking the various callbacks.
-     *
-     * @param string $name The original name of the template.
-     * @param array $data The data to update.
-     *
-     * @return string The new name of the template.
-     */
-    protected function _getTemplateName(string $name, array &$data = []) {
-        if (isset($this->_callbacks[$name])) {
-            $data = call_user_func($this->_callbacks[$name], $data);
-        }
-        if ($this->_callback) {
-            $data = call_user_func($this->_callback, $name, $data);
-        }
-        if (isset($data['templateName'])) {
-            $name = $data['templateName'];
-            unset($data['templateName']);
-        }
-        return $name;
-    }
-
 
 };

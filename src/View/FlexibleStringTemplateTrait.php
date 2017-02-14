@@ -38,7 +38,7 @@ trait FlexibleStringTemplateTrait {
      */
     public function templater() {
         if ($this->_templater === null) {
-            $class = $this->getConfig('templateClass') ?: 'Bootstrap\View\EnhancedStringTemplate';
+            $class = $this->getConfig('templateClass') ?: 'Bootstrap\View\FlexibleStringTemplate';
             $callback = $this->getConfig('templateCallback') ?: null;
             $callbacks = $this->getConfig('templateCallbacks') ?: [];
             $this->_templater = new $class([], $callback, $callbacks);

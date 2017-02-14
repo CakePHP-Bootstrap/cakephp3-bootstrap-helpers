@@ -15,7 +15,6 @@
 namespace Bootstrap\View\Helper;
 
 use Cake\View\Helper\BreadcrumbsHelper;
-use Bootstrap\View\FlexibleStringTemplateTrait;
 
 /**
  * BreadcrumbsHelper to register and display a breadcrumb trail for your views.
@@ -23,8 +22,6 @@ use Bootstrap\View\FlexibleStringTemplateTrait;
  * @property \Cake\View\Helper\UrlHelper $Url
  */
 class BootstrapBreadcrumbsHelper extends BreadcrumbsHelper {
-
-    use FlexibleStringTemplateTrait;
 
     /**
      * Default config for the helper.
@@ -38,7 +35,8 @@ class BootstrapBreadcrumbsHelper extends BreadcrumbsHelper {
             'item' => '<li{{attrs}}><a href="{{url}}"{{innerAttrs}}>{{title}}</a></li>',
             'itemWithoutLink' => '<li class="active{{attrs.class}}"{{attrs}}>{{title}}</li>',
             'separator' => ''
-        ]
+        ],
+        'templateClass' => 'Bootstrap\View\EnhancedStringTemplate'
     ];
 
 };

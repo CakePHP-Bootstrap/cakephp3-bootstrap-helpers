@@ -15,7 +15,6 @@
 namespace Bootstrap\View\Helper;
 
 use Cake\View\Helper\PaginatorHelper;
-use Bootstrap\View\FlexibleStringTemplateTrait;
 
 /**
  * Pagination Helper class for easy generation of pagination links.
@@ -81,7 +80,8 @@ class BootstrapPaginatorHelper extends PaginatorHelper {
             'sortDesc' => '<a class="desc" href="{{url}}">{{text}}</a>',
             'sortAscLocked' => '<a class="asc locked" href="{{url}}">{{text}}</a>',
             'sortDescLocked' => '<a class="desc locked" href="{{url}}">{{text}}</a>',
-        ]
+        ],
+        'templateClass' => 'Bootstrap\View\EnhancedStringTemplate',
     ];
 
     /**
