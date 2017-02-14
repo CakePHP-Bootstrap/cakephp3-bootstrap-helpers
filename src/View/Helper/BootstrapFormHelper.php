@@ -321,7 +321,7 @@ class BootstrapFormHelper extends FormHelper {
      */
     public function create($model = null, Array $options = array()) {
         $options += [
-            'columns' => $this->config('columns'),
+            'columns' => $this->getConfig('columns'),
             'horizontal' => false,
             'inline' => false
         ];
@@ -610,7 +610,7 @@ class BootstrapFormHelper extends FormHelper {
      */
     public function file($fieldName, array $options = []) {
 
-        if (!$this->config('useCustomFileInput')
+        if (!$this->getConfig('useCustomFileInput')
             || (isset($options['default']) && $options['default'])) {
             return parent::file($fieldName, $options);
         }

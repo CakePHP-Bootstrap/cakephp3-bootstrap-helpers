@@ -238,7 +238,7 @@ aria-haspopup="true" aria-expanded="false">{{content}}{{caret}}</a>',
     public function link($name, $url = '', array $options = [], array $linkOptions = []) {
         $url = $this->Url->build($url);
         $options += [
-            'active' => $this->config('autoActiveLink') && $this->compareUrls($url),
+            'active' => $this->getConfig('autoActiveLink') && $this->compareUrls($url),
             'templateVars' => []
         ];
         $linkOptions += [

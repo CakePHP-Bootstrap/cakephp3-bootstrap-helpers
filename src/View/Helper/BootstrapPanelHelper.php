@@ -182,8 +182,8 @@ class BootstrapPanelHelper extends Helper {
             'open'                 => 0,
             'templateVars' => []
         ];
-        $this->config('saved.collapsible', $this->config('collapsible'));
-        $this->config('collapsible', $options['collapsible']);
+        $this->setConfig('saved.collapsible', $this->getConfig('collapsible'));
+        $this->setConfig('collapsible', $options['collapsible']);
         $this->_autoCloseOnCreate  = true;
         $this->_lastPanelClosed    = true;
         $this->_groupPanelCount    = -1;
@@ -202,7 +202,7 @@ class BootstrapPanelHelper extends Helper {
      * @return string An HTML string containing closing tags.
      */
     public function endGroup() {
-        $this->config('collapsible', $this->config('saved.collapsible'));
+        $this->setConfig('collapsible', $this->getConfig('saved.collapsible'));
         $this->_autoCloseOnCreate  = false;
         $this->_groupId            = false;
         $this->_groupPanelOpen     = false;
@@ -270,7 +270,7 @@ class BootstrapPanelHelper extends Helper {
         $options += [
             'body'     => true,
             'type'        => 'default',
-            'collapsible' => $this->config('collapsible'),
+            'collapsible' => $this->getConfig('collapsible'),
             'open'        => !$this->_groupInGroup,
             'panel-count' => $this->_panelCount,
             'title' => [],

@@ -61,7 +61,7 @@ trait BootstrapTrait {
      */
     protected function _addButtonClasses($options) {
         $options += [
-            'bootstrap-type' => $this->config('buttons.type'),
+            'bootstrap-type' => $this->getConfig('buttons.type'),
             'bootstrap-size' => false
         ];
         $type = $options['bootstrap-type'];

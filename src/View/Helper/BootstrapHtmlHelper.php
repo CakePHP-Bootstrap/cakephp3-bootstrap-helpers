@@ -159,7 +159,7 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
         else if (is_array($type)) {
             $options = $type;
         }
-        $options += $this->config('label') + [
+        $options += $this->getConfig('label') + [
             'templateVars' => []
         ];
         $type = $options['type'];
@@ -231,7 +231,7 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
         else if (is_array($type)) {
             $options = $type;
         }
-        $options += $this->config('alert') + [
+        $options += $this->getConfig('alert') + [
             'templateVars' => []
         ];
         $close = null;
@@ -275,7 +275,7 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
      * @return string The text wrapped in the specified HTML tag with a tooltip.
      */
     public function tooltip($text, $tooltip, $options = []) {
-        $options += $this->config('tooltip') + [
+        $options += $this->getConfig('tooltip') + [
             'tooltip' => $tooltip,
             'templateVars' => []
         ];
@@ -310,7 +310,7 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
      * @return string The HTML bootstrap progress bar.
      */
     public function progress($widths, array $options = []) {
-        $options += $this->config('progress') + [
+        $options += $this->getConfig('progress') + [
             'striped' => false,
             'active'  => false,
             'min' => 0,
