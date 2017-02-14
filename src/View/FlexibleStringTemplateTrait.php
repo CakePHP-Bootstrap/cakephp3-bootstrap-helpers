@@ -25,13 +25,6 @@ namespace Bootstrap\View;
 trait FlexibleStringTemplateTrait {
 
     /**
-     * Templater instance (default EnhancedStringTemplate).
-     *
-     * @var \Cake\View\EnhancedStringTemplate
-     */
-    protected $_templater;
-
-    /**
      * Returns the templater instance.
      *
      * @return \Cake\View\StringTemplate
@@ -47,7 +40,7 @@ trait FlexibleStringTemplateTrait {
                 if (is_string($templates)) {
                     $this->_templater->add($this->_defaultConfig['templates']);
                     $this->_templater->load($templates);
-                } 
+                }
                 else {
                     $this->_templater->add($templates);
                 }
