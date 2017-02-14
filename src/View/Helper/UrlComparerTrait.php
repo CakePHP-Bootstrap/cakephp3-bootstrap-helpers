@@ -23,25 +23,63 @@ use Cake\Routing\Router;
 trait UrlComparerTrait {
 
     /**
+     * Retrieve the relative path of the root URL from hostname.
+     *
+     * @return string The relative path.
+     */
+    protected function _relative() {
+        return trim(Router::url('/'), '/');
+    }
+
+    /**
+     * Retrieve the hostname (if any).
+     *
+     * @return string|null The hostname, or `null`.
+     */
+    protected function _hostname() {
+        $components = parse_url(Router::url('/', true));
+        if (isset($components['host'])) {
+            return $components['host'];
+        }
+        return null;
+    }
+
+    /**
+     * Checks if the given URL components match the current host.
+     *
+     * @param array $urlComponents URL components, typically retrieved
+     * from `parse_url`.
+     *
+     * @return bool `true` if the components match, `false` otherwize.
+     */
+    protected function _matchHost($urlComponents) {
+        if (isset($urlComponents['host']) && $urlComponents['host'] != $this->_hostname()) {
+            return null;
+        }
+        $rela = $this->_relative();
+        $path = trim($urlComponents['path'], '/');
+        if ($rela && strpos($path, $rela) === false) {
+            return null;
+        }
+        return '/'.trim(substr($path, strlen($rela)), '/');
+    }
+
+    /**
      * Normalize an URL.
      *
      * @param string $url URL to normalize.
-     * @param bool $query Remove query parameters. Default is `true`.
-     * @param bool $hash Remove hash. Default is `true`.
      *
      * @return string Normalized URL.
      */
-    protected function _normalize($url, $query = true, $hash = true) {
-        $url = Router::normalize($url);
-        if ($hash) {
-            list($url, ) = explode('#', $url);
+    protected function _normalize($url) {
+        $url = Router::normalize(Router::url($url, true));
+        $url = $this->_matchHost(parse_url($url));
+        if (!$url) {
+            return null;
         }
-        if ($query) {
-            $url = Router::parse($url);
-            unset($url['?'], $url['#'], $url['plugin'], $url['pass'], $url['_matchedRoute']);
-            $url = Router::normalize(Router::url($url));
-        }
-        return $url;
+        $url = Router::parse($url);
+        unset($url['?'], $url['#'], $url['plugin'], $url['pass'], $url['_matchedRoute']);
+        return Router::url($url);
     }
 
     /**
@@ -56,9 +94,9 @@ trait UrlComparerTrait {
         if ($rhs == null) {
             $rhs = Router::url();
         }
-        $lhs = Router::url($lhs, true);
-        $rhs = Router::url($rhs, true);
-        return $this->_normalize($lhs) == $this->_normalize($rhs);
+        $lhs = $this->_normalize($lhs);
+        $rhs = $this->_normalize($rhs);
+        return $lhs !== null && $rhs !== null && $lhs == $rhs;
     }
 }
 
