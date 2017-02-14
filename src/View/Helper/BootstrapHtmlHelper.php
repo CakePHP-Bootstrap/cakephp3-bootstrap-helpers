@@ -433,6 +433,29 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
 
     }
 
+    /**
+     * Provide Bootstrap tooltip for text/element
+     *
+     * If the text starts with a HTML tag, the tooltip is inserted into this tag.
+     * Otherwise, the text is wrapped with a <span> containing the tooltip.
+     *
+     * Bootstrap Tooltips are an opt-in functionality. You can initialize this
+     * functionality (also for dynamically appearing content) via this JS:
+     * $("body").tooltip({ selector: '[data-toggle="tooltip"]' });
+     *
+     * @param $text string text to be outfitted with a tooltip
+     * @param $tooltip string tooltip text
+     * @param string $placement tooltip placement (left, top, bottom, right)
+     * @return mixed|string
+     */
+    public function tooltip($text, $tooltip, $placement = 'right') {
+        $attrs = " data-toggle='tooltip' data-placement='$placement' title='$tooltip'";
+        if ($text[0] === '<') {
+            $pos = strpos($text, '>');
+            return substr_replace($text, $attrs, $pos, 0);
+        }
+        return "<span$attrs>$text</span>";
+    }
 }
 
 ?>
