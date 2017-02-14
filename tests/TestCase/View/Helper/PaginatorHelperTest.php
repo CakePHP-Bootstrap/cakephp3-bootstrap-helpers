@@ -2,20 +2,19 @@
 
 namespace Bootstrap\Test\TestCase\View\Helper;
 
-use Bootstrap\View\Helper\BootstrapHtmlHelper;
-use Bootstrap\View\Helper\BootstrapPaginatorHelper;
+use Bootstrap\View\Helper\PaginatorHelper;
 use Cake\Core\Configure;
 use Cake\Network\Request;
 use Cake\Routing\Router;
 use Cake\TestSuite\TestCase;
 use Cake\View\View;
 
-class BootstrapPaginatorHelperTest extends TestCase {
+class PaginatorHelperTest extends TestCase {
 
     /**
-     * Instance of BootstrapPaginatorHelper.
+     * Instance of PaginatorHelper.
      *
-     * @var BootstrapPaginatorHelper
+     * @var PaginatorHelper
      */
     public $paginator;
 
@@ -28,7 +27,7 @@ class BootstrapPaginatorHelperTest extends TestCase {
     {
         parent::setUp();
         $view = new View();
-        $this->paginator = new BootstrapPaginatorHelper($view);
+        $this->paginator = new PaginatorHelper($view);
         $this->paginator->request = new Request();
         $this->paginator->request->addParams([
             'paging' => [

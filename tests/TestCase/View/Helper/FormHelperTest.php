@@ -2,17 +2,17 @@
 
 namespace Bootstrap\Test\TestCase\View\Helper;
 
-use Bootstrap\View\Helper\BootstrapFormHelper;
+use Bootstrap\View\Helper\FormHelper;
 use Cake\Core\Configure;
 use Cake\TestSuite\TestCase;
 use Cake\View\View;
 
-class BootstrapFormHelperTest extends TestCase {
+class FormHelperTest extends TestCase {
 
     /**
-     * Instance of BootstrapFormHelper.
+     * Instance of FormHelper.
      *
-     * @var BootstrapFormHelper
+     * @var FormHelper
      */
     public $form;
 
@@ -24,7 +24,7 @@ class BootstrapFormHelperTest extends TestCase {
     public function setUp() {
         parent::setUp();
         $view = new View();
-        $this->form = new BootstrapFormHelper($view);
+        $this->form = new FormHelper($view);
 
         $this->dateRegex = [
             'daysRegex' => 'preg:/(?:<option value="0?([\d]+)">\\1<\/option>[\r\n]*)*/',

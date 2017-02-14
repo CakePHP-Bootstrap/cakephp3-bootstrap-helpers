@@ -2,16 +2,16 @@
 
 namespace Bootstrap\Test\TestCase\View\Helper;
 
-use Bootstrap\View\Helper\BootstrapHtmlHelper;
+use Bootstrap\View\Helper\HtmlHelper;
 use Cake\TestSuite\TestCase;
 use Cake\View\View;
 
-class BootstrapHtmlHelperTest extends TestCase {
+class HtmlHelperTest extends TestCase {
 
     /**
-     * Instance of BootstrapHtmlHelper.
+     * Instance of HtmlHelper.
      *
-     * @var BootstrapHtmlHelper
+     * @var HtmlHelper
      */
     public $html;
 
@@ -23,7 +23,7 @@ class BootstrapHtmlHelperTest extends TestCase {
     public function setUp() {
         parent::setUp();
         $view = new View();
-        $this->html = new BootstrapHtmlHelper($view);
+        $this->html = new HtmlHelper($view);
     }
 
     public function testIcon() {

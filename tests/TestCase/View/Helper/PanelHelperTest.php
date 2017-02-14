@@ -2,17 +2,16 @@
 
 namespace Bootstrap\Test\TestCase\View\Helper;
 
-use Bootstrap\View\Helper\BootstrapHtmlHelper;
-use Bootstrap\View\Helper\BootstrapPanelHelper;
+use Bootstrap\View\Helper\PanelHelper;
 use Cake\TestSuite\TestCase;
 use Cake\View\View;
 
-class BootstrapPanelHelperTest extends TestCase {
+class PanelHelperTest extends TestCase {
 
     /**
-     * Instance of BootstrapPanelHelper.
+     * Instance of PanelHelper.
      *
-     * @var BootstrapPanelHelper
+     * @var PanelHelper
      */
     public $panel;
 
@@ -24,8 +23,7 @@ class BootstrapPanelHelperTest extends TestCase {
     public function setUp() {
         parent::setUp();
         $view = new View();
-        $html = new BootstrapHtmlHelper($view);
-        $this->panel = new BootstrapPanelHelper($view);
+        $this->panel = new PanelHelper($view);
     }
 
     protected function reset() {

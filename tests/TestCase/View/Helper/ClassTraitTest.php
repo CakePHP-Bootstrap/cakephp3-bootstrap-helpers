@@ -2,13 +2,13 @@
 
 namespace Bootstrap\Test\TestCase\View\Helper;
 
-use Bootstrap\View\Helper\BootstrapTrait;
+use Bootstrap\View\Helper\ClassTrait;
 use Cake\TestSuite\TestCase;
 use Cake\View\View;
 
-class PublicBootstrapTrait {
+class PublicClassTrait {
 
-    use BootstrapTrait;
+    use ClassTrait;
 
     public function __construct($view) {
     }
@@ -18,9 +18,9 @@ class PublicBootstrapTrait {
 class BootstrapTraitTest extends TestCase {
 
     /**
-     * Instance of PublicBootstrapTrait.
+     * Instance of PublicClassTrait.
      *
-     * @var PublicBootstrapTrait
+     * @var PublicClassTrait
      */
     public $trait;
 
@@ -32,7 +32,7 @@ class BootstrapTraitTest extends TestCase {
     public function setUp() {
         parent::setUp();
         $view = new View();
-        $this->trait = new PublicBootstrapTrait($view);
+        $this->trait = new PublicClassTrait($view);
     }
 
     public function testAddClass() {

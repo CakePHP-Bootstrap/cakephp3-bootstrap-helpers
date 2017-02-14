@@ -2,16 +2,16 @@
 
 namespace Bootstrap\Test\TestCase\View\Helper;
 
-use Bootstrap\View\Helper\BootstrapBreadcrumbsHelper;
+use Bootstrap\View\Helper\BreadcrumbsHelper;
 use Cake\TestSuite\TestCase;
 use Cake\View\View;
 
-class BootstrapBreadcrumbsHelperTest extends TestCase {
+class BreadcrumbsHelperTest extends TestCase {
 
     /**
-     * Instance of the BoostrapBreadcrumbsHelper.
+     * Instance of the BreadcrumbsHelper.
      *
-     * @var BootstrapBreadcrumbsHelper
+     * @var BreadcrumbsHelper
      */
     public $breadcrumbs;
 
@@ -23,7 +23,7 @@ class BootstrapBreadcrumbsHelperTest extends TestCase {
     public function setUp() {
         parent::setUp();
         $view = new View();
-        $this->breadcrumbs = new BootstrapBreadcrumbsHelper($view);
+        $this->breadcrumbs = new BreadcrumbsHelper($view);
     }
 
 

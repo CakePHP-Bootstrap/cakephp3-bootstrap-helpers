@@ -3,9 +3,9 @@
 namespace Bootstrap\Test\TestCase\View\Helper;
 
 use Bootstrap\View\Helper\EasyIconTrait;
-use Bootstrap\View\Helper\BootstrapFormHelper;
-use Bootstrap\View\Helper\BootstrapHtmlHelper;
-use Bootstrap\View\Helper\BootstrapPaginatorHelper;
+use Bootstrap\View\Helper\FormHelper;
+use Bootstrap\View\Helper\HtmlHelper;
+use Bootstrap\View\Helper\PaginatorHelper;
 use Cake\TestSuite\TestCase;
 use Cake\View\View;
 
@@ -14,7 +14,7 @@ class PublicEasyIconTrait {
     use EasyIconTrait;
 
     public function __construct($view) {
-        $this->Html = new BootstrapHtmlHelper($view);
+        $this->Html = new HtmlHelper($view);
     }
 
     public function publicEasyIcon($callback, $title, $options) {
@@ -33,16 +33,16 @@ class EasyIconTraitTest extends TestCase {
     public $trait;
 
     /**
-     * Instance of BootstrapFormHelper.
+     * Instance of FormHelper.
      *
-     * @var BootstrapFormHelper
+     * @var FormHelper
      */
     public $form;
 
     /**
-     * Instance of BootstrapPaginatorHelper.
+     * Instance of PaginatorHelper.
      *
-     * @var BootstrapPaginatorHelper
+     * @var PaginatorHelper
      */
     public $paginator;
 
@@ -55,8 +55,8 @@ class EasyIconTraitTest extends TestCase {
         parent::setUp();
         $view = new View();
         $this->trait = new PublicEasyIconTrait($view);
-        $this->form = new BootstrapFormHelper($view);
-        $this->paginator = new BootstrapPaginatorHelper($view);
+        $this->form = new FormHelper($view);
+        $this->paginator = new PaginatorHelper($view);
     }
 
     public function testEasyIcon() {

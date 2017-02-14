@@ -2,16 +2,16 @@
 
 namespace Bootstrap\Test\TestCase\View\Helper;
 
-use Bootstrap\View\Helper\BootstrapModalHelper;
+use Bootstrap\View\Helper\ModalHelper;
 use Cake\TestSuite\TestCase;
 use Cake\View\View;
 
-class BootstrapModalHelperTest extends TestCase {
+class ModalHelperTest extends TestCase {
 
     /**
-     * Instance of BootstrapModalHelper.
+     * Instance of ModalHelper.
      *
-     * @var BootstrapModalHelper
+     * @var ModalHelper
      */
     public $modal;
 
@@ -23,7 +23,7 @@ class BootstrapModalHelperTest extends TestCase {
     public function setUp() {
         parent::setUp();
         $view = new View();
-        $this->modal = new BootstrapModalHelper($view);
+        $this->modal = new ModalHelper($view);
     }
 
     public function testCreate() {

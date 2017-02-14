@@ -2,16 +2,16 @@
 
 namespace Bootstrap\Test\TestCase\View\Helper;
 
-use Bootstrap\View\Helper\BootstrapNavbarHelper;
+use Bootstrap\View\Helper\NavbarHelper;
 use Cake\TestSuite\TestCase;
 use Cake\View\View;
 
-class BootstrapNavbarHelperTest extends TestCase {
+class NavbarHelperTest extends TestCase {
 
     /**
-     * Instance of the BootstrapNavbarHelper.
+     * Instance of the NavbarHelper.
      *
-     * @var BootstrapNavbarHelper
+     * @var NavbarHelper
      */
     public $navbar;
 
@@ -23,7 +23,7 @@ class BootstrapNavbarHelperTest extends TestCase {
     public function setUp() {
         parent::setUp();
         $view = new View();
-        $this->navbar = new BootstrapNavbarHelper($view);
+        $this->navbar = new NavbarHelper($view);
     }
 
     public function testCreate() {

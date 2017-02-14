@@ -14,12 +14,9 @@
  */
 namespace Bootstrap\View\Widget;
 
-use Bootstrap\View\Helper\BootstrapTrait;
 use Cake\View\Widget\WidgetInterface;
 
 class FancyFileWidget implements WidgetInterface {
-
-    use BootstrapTrait;
 
     /**
      * Templates

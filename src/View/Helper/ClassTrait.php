@@ -19,7 +19,7 @@ namespace Bootstrap\View\Helper;
  * A trait that provides useful methods to generate bootstrap html specific
  * code.
  */
-trait BootstrapTrait {
+trait ClassTrait {
 
     /**
      * Adds the given class to the element options.
