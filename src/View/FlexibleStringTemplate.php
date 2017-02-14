@@ -101,7 +101,7 @@ class FlexibleStringTemplate extends EnhancedStringTemplate {
      *
      * @return string The new name of the template.
      */
-    protected function _getTemplateName(string $name, array &$data = []) {
+    protected function _getTemplateName($name, array &$data = []) {
         if (isset($this->_callbacks[$name])) {
             $data = call_user_func($this->_callbacks[$name], $data);
         }
