@@ -22,8 +22,6 @@ use Bootstrap\View\FlexibleStringTemplateTrait;
  *
  * Automatic generation of HTML FORMs from given data.
  *
- * @property bool $horizontal
- * @property bool $inline
  * @property \Bootstrap\View\Helper\BootstrapHtmlHelper $Html
  * @property \Cake\View\Helper\UrlHelper $Url
  *
@@ -137,7 +135,7 @@ class BootstrapFormHelper extends FormHelper {
     ];
 
     /**
-     * Default widgets
+     * Default widgets.
      *
      * @var array
      */
@@ -174,10 +172,7 @@ class BootstrapFormHelper extends FormHelper {
     public $inline = false;
 
     /**
-     * Construct the widgets and binds the default context providers
-     *
-     * @param \Cake\View\View $View The View this helper is being attached to.
-     * @param array $config Configuration settings for the helper.
+     * {@inheritDoc}
      */
     public function __construct(\Cake\View\View $View, array $config = []) {
         if (!isset($config['templateCallback'])) {
@@ -216,36 +211,28 @@ class BootstrapFormHelper extends FormHelper {
     /**
      * Returns an HTML form element.
      *
-     * ### Bootstrap specific options
+     * ### Options
      *
-     * - `horizontal` Boolean specifying if the form should be horizontal.
-     * - `inline` Boolean specifying if the form should be inlined.
-     * - `search` Boolean specifying if the form is a search form.
-     *
-     * ### Options:
-     *
-     * - `type` Form method defaults to autodetecting based on the form context. If
-     *   the form context's isCreate() method returns false, a PUT request will be done.
-     * - `method` Set the form's method attribute explicitly.
-     * - `action` The controller action the form submits to, (optional). Use this option
-     * if you don't need to change the controller from the current request's controller.
-     * Deprecated since 3.2, use `url`.
-     * - `url` The URL the form submits to. Can be a string or a URL array. If you use 'url'
-     *    you should leave 'action' undefined.
+     * - `context` Additional options for the context class. For example the
+     * EntityContext accepts a 'table' option that allows you to set the specific Table 
+     * class the form should be based on.
      * - `encoding` Set the accept-charset encoding for the form. Defaults to
-     * `Configure::read('App.encoding')`
+     * `Configure::read('App.encoding')`.
      * - `enctype` Set the form encoding explicitly. By default `type => file` will set
-     * `enctype`
-     *   to `multipart/form-data`.
+     * `enctype` to `multipart/form-data`.
+     * - `horizontal` Boolean specifying if the form should be horizontal.
+     * - `idPrefix` Prefix for generated ID attributes.
+     * - `inline` Boolean specifying if the form should be inlined.
+     * - `method` Set the form's method attribute explicitly.
      * - `templates` The templates you want to use for this form. Any templates will be
      * merged on top of the already loaded templates. This option can either be a filename
      * in /config that contains the templates you want to load, or an array of templates
      * to use.
-     * - `context` Additional options for the context class. For example the
-     * EntityContext accepts a 'table'
-     *   option that allows you to set the specific Table class the form should be based on.
-     * - `idPrefix` Prefix for generated ID attributes.
      * - `templateVars` Provide template variables for the formStart template.
+     * - `type` Form method defaults to autodetecting based on the form context. If
+     *   the form context's isCreate() method returns false, a PUT request will be done.
+     * - `url` The URL the form submits to. Can be a string or a URL array. If you use 'url'
+     *    you should leave 'action' undefined.
      *
      * @param mixed $model The context for which the form is being defined. Can
      *   be an ORM entity, ORM resultset, or an array of meta data. You can use false or null
@@ -253,8 +240,6 @@ class BootstrapFormHelper extends FormHelper {
      * @param array $options An array of html attributes and options.
      *
      * @return string An formatted opening FORM tag.
-     *
-     * @link http://book.cakephp.org/3.0/en/views/helpers/form.html#Cake\View\Helper\FormHelper::create
      */
     public function create($model = null, Array $options = array()) {
         $options += [
@@ -336,11 +321,11 @@ class BootstrapFormHelper extends FormHelper {
     /**
      * Concatenates and wraps `$input`, `$prepend` and `$append` inside an input group.
      *
-     * @param string $input   The input content.
+     * @param string $input The input content.
      * @param string $prepend The content to prepend to `$input`.
-     * @param string $append  The content to append to `$input`.
+     * @param string $append The content to append to `$input`.
      *
-     * @return A string containing the three elements concatenated an wrapped inside
+     * @return string A string containing the three elements concatenated an wrapped inside
      * an input group `<div>`.
      */
     protected function _wrap($input, $prepend, $append) {
@@ -358,7 +343,7 @@ class BootstrapFormHelper extends FormHelper {
     /**
      * Prepend the given content to the given input or create an opening input group.
      *
-     * @param string|null  $input   Input to which `$prepend` will be prepend, or
+     * @param string|null $input Input to which `$prepend` will be prepend, or
      * null to create an opening input group.
      * @param string|array $prepend The content to prepend.,
      *
@@ -376,7 +361,7 @@ class BootstrapFormHelper extends FormHelper {
     /**
      * Append the given content to the given input or close an input group.
      *
-     * @param string|null  $input   Input to which `$append` will be append, or
+     * @param string|null $input Input to which `$append` will be append, or
      * null to create a closing element for an input group.
      * @param string|array $append The content to append.,
      *
@@ -394,9 +379,9 @@ class BootstrapFormHelper extends FormHelper {
     /**
      * Wrap the given `$input` between `$prepend` and `$append`.
      *
-     * @param string       $input   The input to be wrapped (see `prepend()` and `append()`).
+     * @param string $input The input to be wrapped (see `prepend()` and `append()`).
      * @param string|array $prepend The content to prepend (see `prepend()`).
-     * @param string|array $append  The content to append (see `append()`).
+     * @param string|array $append The content to append (see `append()`).
      *
      * @return string A string containing the given `$input` wrapped between `$prepend` and
      * `$append` according to the behavior of `prepend()` and `append()`.
@@ -406,14 +391,7 @@ class BootstrapFormHelper extends FormHelper {
     }
 
     /**
-     * Generates a form input element complete with label and wrapper div
-     *
-     * ### Bootstrap specific options
-     *
-     * - `prepend` Content or array of elements to prepend (see `prepend()`).
-     * - `append` Content or array of elements to append (see `append()`).
-     * - `help` String containing an help message for the input.
-     * - `inline` For multiple checkbox or radio buttons, set to `true` to have inlined group.
+     * Generates a form input element complete with label and wrapper div.
      *
      * ### Options
      *
@@ -424,29 +402,34 @@ class BootstrapFormHelper extends FormHelper {
      * selected type's options will be treated as a regular HTML attribute for the
      * generated input.
      *
-     * - `type` Force the type of widget you want. e.g. `type => 'select'`
-     * - `label` Either a string label, or an array of options for the label.
-     * See FormHelper::label().
-     * - `options` For widgets that take options e.g. radio, select.
+     * - `append` Content to append to the input, may be a string or an array of buttons.
+     * - `empty` String or boolean to enable empty select box options.
      * - `error` Control the error message that is produced. Set to `false` to disable
      * any kind of error reporting (field error and error messages).
-     * - `empty` String or boolean to enable empty select box options.
+     * - `help` Help message to add below the input.
+     * - `label` Either a string label, or an array of options for the label.
+     * See FormHelper::label().
+     * - `labelOptions` - Either `false` to disable label around nestedWidgets e.g. radio, multicheckbox or an array
+     *   of attributes for the label tag. `selected` will be added to any classes e.g. `class => 'myclass'` where
+     *   widget is checked.
      * - `nestedInput` Used with checkbox and radio inputs. Set to false to render
      * inputs outside of label elements. Can be set to true on any input to force the
      * input inside the label. If you enable this option for radio buttons you will also
      * need to modify the default `radioWrapper` template.
+     * - `inline` Only used with radio inputs, set to `true` to have inlined radio buttons. 
+     * - `options` For widgets that take options e.g. radio, select.
      * - `templates` The templates you want to use for this input. Any templates will be
      * merged on top of the already loaded templates. This option can either be a filename
      * in /config that contains the templates you want to load, or an array of templates
      * to use.
-     * - `labelOptions` - Either `false` to disable label around nestedWidgets e.g. radio, multicheckbox or an array
-     *   of attributes for the label tag. `selected` will be added to any classes e.g. `class => 'myclass'` where
-     *   widget is checked
+     * - `prepend` Content to prepend to the input, may be a string or an array of buttons.
+     * - `templateVars` Array of template variables.
+     * - `type` Force the type of widget you want. e.g. `type => 'select'`
      *
      * @param string $fieldName This should be "modelname.fieldname"
      * @param array $options Each type of input takes different options.
+     *
      * @return string Completed form widget.
-     * @link http://book.cakephp.org/3.0/en/views/helpers/form.html#creating-form-inputs
      */
     public function control($fieldName, array $options = array()) {
 
@@ -489,11 +472,7 @@ class BootstrapFormHelper extends FormHelper {
     }
 
     /**
-     * Generates an input element
-     *
-     * @param string $fieldName the field name
-     * @param array $options The options for the input element
-     * @return string The generated input element
+     * {@inheritDoc}
      */
     protected function _getInput($fieldName, $options) {
         $label = $options['labelOptions'];
@@ -525,8 +504,8 @@ class BootstrapFormHelper extends FormHelper {
      * @param string $fieldName Name of a field, like this "modelname.fieldname"
      * @param array|\Traversable $options Radio button options array.
      * @param array $attributes Array of attributes.
+     *
      * @return string Completed radio widget set.
-     * @link http://book.cakephp.org/3.0/en/views/helpers/form.html#creating-radio-buttons
      */
     public function inlineRadio($fieldName, $options = [], array $attributes = []) {
         $attributes['options'] = $options;
@@ -556,8 +535,6 @@ class BootstrapFormHelper extends FormHelper {
      * @param array $options Array of HTML attributes.
      *
      * @return string A generated file input.
-     *
-     * @link http://book.cakephp.org/3.0/en/views/helpers/form.html#creating-file-inputs
      */
     public function file($fieldName, array $options = []) {
         $options += ['secure' => true];
@@ -577,13 +554,10 @@ class BootstrapFormHelper extends FormHelper {
      * The type attribute defaults to `type="submit"`
      * You can change it to a different value by using `$options['type']`.
      *
-     * ### Bootstrap specific options
+     * ### Options
      *
      * - `bootstrap-type` Twitter bootstrap button type (primary, danger, info, etc.)
      * - `bootstrap-size` Twitter bootstrap button size (mini, small, large)
-     *
-     * ### Options:
-     *
      * - `escape` HTML entity encode the $title of the button. Defaults to `false`.
      *
      * @param string $title The button's caption. Not automatically HTML encoded
