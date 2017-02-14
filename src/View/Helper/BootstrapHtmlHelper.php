@@ -15,6 +15,7 @@
 namespace Bootstrap\View\Helper;
 
 use Cake\View\Helper\HtmlHelper;
+use Bootstrap\View\FlexibleStringTemplateTrait;
 
 /**
  * Html Helper class for easy use of HTML widgets.
@@ -28,6 +29,7 @@ use Cake\View\Helper\HtmlHelper;
 class BootstrapHtmlHelper extends HtmlHelper {
 
     use BootstrapTrait;
+    use FlexibleStringTemplateTrait;
 
     /**
      * Default config for the helper.
@@ -88,7 +90,6 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
             'progressBarInner' => '<span class="sr-only">{{width}}%</span>',
             'progressBarContainer' => '<div class="progress{{attrs.class}}"{{attrs}}>{{content}}</div>'
         ],
-        'templateClass' => 'Bootstrap\View\BootstrapStringTemplate',
         'tooltip' => [
             'tag'       => 'span',
             'placement' => 'right',

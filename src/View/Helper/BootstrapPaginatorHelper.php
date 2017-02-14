@@ -15,6 +15,7 @@
 namespace Bootstrap\View\Helper;
 
 use Cake\View\Helper\PaginatorHelper;
+use Bootstrap\View\FlexibleStringTemplateTrait;
 
 /**
  * Pagination Helper class for easy generation of pagination links.

@@ -15,6 +15,8 @@
 namespace Bootstrap\View\Helper;
 
 use Cake\View\Helper;
+use Cake\View\StringTemplateTrait;
+use Bootstrap\View\FlexibleStringTemplateTrait;
 
 /**
  * Panel helper library.
@@ -25,9 +27,11 @@ use Cake\View\Helper;
  */
 class BootstrapPanelHelper extends Helper {
 
-    use \Cake\View\StringTemplateTrait;
-    use EasyIconTrait;
     use BootstrapTrait;
+    use EasyIconTrait;
+    use StringTemplateTrait, FlexibleStringTemplateTrait {
+        FlexibleStringTemplateTrait::templater insteadof StringTemplateTrait;
+    }
 
     /**
      * Other helpers used by BootstrapPanelHelper.
@@ -67,7 +71,6 @@ class BootstrapPanelHelper extends Helper {
             'footerStart' => '<div class="panel-footer{{attrs.class}}"{{attrs}}>',
             'footerEnd' => '</div>'
         ],
-        'templateClass' => 'Bootstrap\View\BootstrapStringTemplate',
         'collapsible' => false
     ];
 

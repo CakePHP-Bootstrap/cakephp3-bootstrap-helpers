@@ -3,6 +3,7 @@
 namespace Bootstrap\Test\TestCase\View\Helper;
 
 use Bootstrap\View\Helper\BootstrapFormHelper;
+use Cake\Core\Configure;
 use Cake\TestSuite\TestCase;
 use Cake\View\View;
 
@@ -24,6 +25,16 @@ class BootstrapFormHelperTest extends TestCase {
         parent::setUp();
         $view = new View();
         $this->form = new BootstrapFormHelper($view);
+
+        $this->dateRegex = [
+            'daysRegex' => 'preg:/(?:<option value="0?([\d]+)">\\1<\/option>[\r\n]*)*/',
+            'monthsRegex' => 'preg:/(?:<option value="[\d]+">[\w]+<\/option>[\r\n]*)*/',
+            'yearsRegex' => 'preg:/(?:<option value="([\d]+)">\\1<\/option>[\r\n]*)*/',
+            'hoursRegex' => 'preg:/(?:<option value="0?([\d]+)">\\1<\/option>[\r\n]*)*/',
+            'minutesRegex' => 'preg:/(?:<option value="([\d]+)">0?\\1<\/option>[\r\n]*)*/',
+            'meridianRegex' => 'preg:/(?:<option value="(am|pm)">\\1<\/option>[\r\n]*)*/',
+        ];
+        Configure::write('debug', true);
     }
 
     public function testCreate() {
@@ -91,14 +102,15 @@ class BootstrapFormHelperTest extends TestCase {
         ], $button);
     }
 
-    protected function _testInput($expected, $fieldName, $options = []) {
+    protected function _testInput($expected, $fieldName, $options = [], $debug = false) {
         $formOptions = [];
         if(isset($options['_formOptions'])) {
             $formOptions = $options['_formOptions'];
             unset($options['_formOptions']);
         }
         $this->form->create(null, $formOptions);
-        return $this->assertHtml($expected, $this->form->input($fieldName, $options));
+        $result = $this->form->input($fieldName, $options);
+        $assert = $this->assertHtml($expected, $result, $debug);
     }
 
     public function testInput() {
@@ -232,7 +244,8 @@ class BootstrapFormHelperTest extends TestCase {
                 'class' => 'form-group'
             ]],
             ['label' => [
-                'class' => 'control-label'
+                'class' => 'control-label',
+                'for' => $fieldName
             ]],
             \Cake\Utility\Inflector::humanize($fieldName),
             '/label',
@@ -313,7 +326,8 @@ class BootstrapFormHelperTest extends TestCase {
                 'class' => 'form-group'
             ]],
             ['label' => [
-                'class' => 'control-label col-md-2'
+                'class' => 'control-label col-md-2',
+                'for' => $fieldName
             ]],
             \Cake\Utility\Inflector::humanize($fieldName),
             '/label',
@@ -617,6 +631,285 @@ class BootstrapFormHelperTest extends TestCase {
             '/span',
             '/div'
         ], $fieldName, ['templateVars' => ['help' => $help]]);
+    }
+
+    public function testDateTime() {
+        extract($this->dateRegex);
+
+        $result = $this->form->dateTime('Contact.date', ['default' => true]);
+        $now = strtotime('now');
+        $expected = [
+            ['div' => ['class' => 'col-md-2']],
+            ['select' => ['name' => 'Contact[date][year]', 'class' => 'form-control']],
+            ['option' => ['value' => '']],
+            '/option',
+            $yearsRegex,
+            ['option' => ['value' => date('Y', $now), 'selected' => 'selected']],
+            date('Y', $now),
+            '/option',
+            '*/select',
+            '/div',
+            ['div' => ['class' => 'col-md-2']],
+            ['select' => ['name' => 'Contact[date][month]', 'class' => 'form-control']],
+            ['option' => ['value' => '']],
+            '/option',
+            $monthsRegex,
+            ['option' => ['value' => date('m', $now), 'selected' => 'selected']],
+            date('F', $now),
+            '/option',
+            '*/select',
+            '/div',
+            ['div' => ['class' => 'col-md-2']],
+            ['select' => ['name' => 'Contact[date][day]', 'class' => 'form-control']],
+            ['option' => ['value' => '']],
+            '/option',
+            $daysRegex,
+            ['option' => ['value' => date('d', $now), 'selected' => 'selected']],
+            date('j', $now),
+            '/option',
+            '*/select',
+            '/div',
+            ['div' => ['class' => 'col-md-2']],
+            ['select' => ['name' => 'Contact[date][hour]', 'class' => 'form-control']],
+            ['option' => ['value' => '']],
+            '/option',
+            $hoursRegex,
+            ['option' => ['value' => date('H', $now), 'selected' => 'selected']],
+            date('G', $now),
+            '/option',
+            '*/select',
+            '/div',
+            ['div' => ['class' => 'col-md-2']],
+            ['select' => ['name' => 'Contact[date][minute]', 'class' => 'form-control']],
+            ['option' => ['value' => '']],
+            '/option',
+            $minutesRegex,
+            ['option' => ['value' => date('i', $now), 'selected' => 'selected']],
+            date('i', $now),
+            '/option',
+            '*/select',
+            '/div'
+        ];
+        $this->assertHtml($expected, $result);
+
+        // Empty=>false implies Default=>true, as selecting the "first" dropdown value is useless
+        $result = $this->form->dateTime('Contact.date', ['empty' => false]);
+        $now = strtotime('now');
+        $expected = [
+            ['div' => ['class' => 'col-md-2']],
+            ['select' => ['name' => 'Contact[date][year]', 'class' => 'form-control']],
+            $yearsRegex,
+            ['option' => ['value' => date('Y', $now), 'selected' => 'selected']],
+            date('Y', $now),
+            '/option',
+            '*/select',
+            '/div',
+            ['div' => ['class' => 'col-md-2']],
+            ['select' => ['name' => 'Contact[date][month]', 'class' => 'form-control']],
+            $monthsRegex,
+            ['option' => ['value' => date('m', $now), 'selected' => 'selected']],
+            date('F', $now),
+            '/option',
+            '*/select',
+            '/div',
+            ['div' => ['class' => 'col-md-2']],
+            ['select' => ['name' => 'Contact[date][day]', 'class' => 'form-control']],
+            $daysRegex,
+            ['option' => ['value' => date('d', $now), 'selected' => 'selected']],
+            date('j', $now),
+            '/option',
+            '*/select',
+            '/div',
+            ['div' => ['class' => 'col-md-2']],
+            ['select' => ['name' => 'Contact[date][hour]', 'class' => 'form-control']],
+            $hoursRegex,
+            ['option' => ['value' => date('H', $now), 'selected' => 'selected']],
+            date('G', $now),
+            '/option',
+            '*/select',
+            '/div',
+            ['div' => ['class' => 'col-md-2']],
+            ['select' => ['name' => 'Contact[date][minute]', 'class' => 'form-control']],
+            $minutesRegex,
+            ['option' => ['value' => date('i', $now), 'selected' => 'selected']],
+            date('i', $now),
+            '/option',
+            '*/select',
+            '/div'
+        ];
+        $this->assertHtml($expected, $result);
+
+        // year => false implies 4 column, thus column size => 3
+        $result = $this->form->dateTime('Contact.date', ['default' => true, 'year' => false]);
+        $now = strtotime('now');
+        $expected = [
+            ['div' => ['class' => 'col-md-3']],
+            ['select' => ['name' => 'Contact[date][month]', 'class' => 'form-control']],
+            ['option' => ['value' => '']],
+            '/option',
+            $monthsRegex,
+            ['option' => ['value' => date('m', $now), 'selected' => 'selected']],
+            date('F', $now),
+            '/option',
+            '*/select',
+            '/div',
+            ['div' => ['class' => 'col-md-3']],
+            ['select' => ['name' => 'Contact[date][day]', 'class' => 'form-control']],
+            ['option' => ['value' => '']],
+            '/option',
+            $daysRegex,
+            ['option' => ['value' => date('d', $now), 'selected' => 'selected']],
+            date('j', $now),
+            '/option',
+            '*/select',
+            '/div',
+            ['div' => ['class' => 'col-md-3']],
+            ['select' => ['name' => 'Contact[date][hour]', 'class' => 'form-control']],
+            ['option' => ['value' => '']],
+            '/option',
+            $hoursRegex,
+            ['option' => ['value' => date('H', $now), 'selected' => 'selected']],
+            date('G', $now),
+            '/option',
+            '*/select',
+            '/div',
+            ['div' => ['class' => 'col-md-3']],
+            ['select' => ['name' => 'Contact[date][minute]', 'class' => 'form-control']],
+            ['option' => ['value' => '']],
+            '/option',
+            $minutesRegex,
+            ['option' => ['value' => date('i', $now), 'selected' => 'selected']],
+            date('i', $now),
+            '/option',
+            '*/select',
+            '/div'
+        ];
+        $this->assertHtml($expected, $result);
+
+        // year => false, month => false, day => false implies 2 column, thus column size => 6
+        $result = $this->form->dateTime('Contact.date', ['default' => true, 'year' => false,
+                                                         'month' => false, 'day' => false]);
+        $now = strtotime('now');
+        $expected = [
+            ['div' => ['class' => 'col-md-6']],
+            ['select' => ['name' => 'Contact[date][hour]', 'class' => 'form-control']],
+            ['option' => ['value' => '']],
+            '/option',
+            $hoursRegex,
+            ['option' => ['value' => date('H', $now), 'selected' => 'selected']],
+            date('G', $now),
+            '/option',
+            '*/select',
+            '/div',
+            ['div' => ['class' => 'col-md-6']],
+            ['select' => ['name' => 'Contact[date][minute]', 'class' => 'form-control']],
+            ['option' => ['value' => '']],
+            '/option',
+            $minutesRegex,
+            ['option' => ['value' => date('i', $now), 'selected' => 'selected']],
+            date('i', $now),
+            '/option',
+            '*/select',
+            '/div'
+        ];
+        $this->assertHtml($expected, $result);
+    }
+
+    public function testSubmit() {
+        $this->form->horizontal = false;
+        $result = $this->form->submit('Submit');
+        $expected = [
+            ['div' => ['class' => 'form-group']],
+            ['input' => [
+                'type' => 'submit',
+                'class' => 'btn btn-default',
+                'value' => 'Submit'
+            ]],
+            '/div'
+        ];
+        $this->assertHtml($expected, $result);
+
+        // horizontal forms
+        $this->form->horizontal = true;
+        $result = $this->form->submit('Submit');
+        $expected = [
+            ['div' => ['class' => 'form-group']],
+            ['div' => ['class' => 'col-md-offset-2 col-md-10']],
+            ['input' => [
+                'type' => 'submit',
+                'class' => 'btn btn-default',
+                'value' => 'Submit'
+            ]],
+            '/div',
+            '/div'
+        ];
+        $this->assertHtml($expected, $result);
+    }
+
+    public function testCustomFileInput() {
+        $this->form->setConfig('useCustomFileInput', true);
+        $result = $this->form->file('Contact.picture');
+        $expected = [
+            ['input' => [
+                'type' => 'file', 
+                'name' => 'Contact[picture]', 
+                'id' => 'Contact[picture]',
+                'style' => 'display: none;',
+                'onchange' => "document.getElementById('Contact[picture]-input').value = (this.files.length <= 1) ? this.files[0].name : this.files.length + ' ' + 'files selected';"
+            ]],
+            ['div' => ['class' => 'input-group']],
+            ['div' => ['class' => 'input-group-btn']],
+            ['button' => [
+                'class' => 'btn btn-default',
+                'type' => 'button',
+                'onclick' => "document.getElementById('Contact[picture]').click();"
+            ]],
+            __('Choose File'),
+            '/button',
+            '/div',
+            ['input' => [
+                'type' => 'text',
+                'name' => 'Contact[picture]-text',
+                'class' => 'form-control',
+                'readonly' => 'readonly',
+                'id' => 'Contact[picture]-input',
+                'onclick' => "document.getElementById('Contact[picture]').click();"
+            ]],
+            '/div',
+        ];
+        $this->assertHtml($expected, $result);
+
+        $result = $this->form->file('Contact.picture', ['multiple' => true]);
+        $expected = [
+            ['input' => [
+                'type' => 'file',
+                'multiple' => 'multiple',
+                'name' => 'Contact[picture]', 
+                'id' => 'Contact[picture]',
+                'style' => 'display: none;',
+                'onchange' => "document.getElementById('Contact[picture]-input').value = (this.files.length <= 1) ? this.files[0].name : this.files.length + ' ' + 'files selected';"
+            ]],
+            ['div' => ['class' => 'input-group']],
+            ['div' => ['class' => 'input-group-btn']],
+            ['button' => [
+                'class' => 'btn btn-default',
+                'type' => 'button',
+                'onclick' => "document.getElementById('Contact[picture]').click();"
+            ]],
+            __('Choose Files'),
+            '/button',
+            '/div',
+            ['input' => [
+                'type' => 'text',
+                'name' => 'Contact[picture]-text',
+                'class' => 'form-control',
+                'readonly' => 'readonly',
+                'id' => 'Contact[picture]-input',
+                'onclick' => "document.getElementById('Contact[picture]').click();"
+            ]],
+            '/div',
+        ];
+        $this->assertHtml($expected, $result);
     }
 
 }

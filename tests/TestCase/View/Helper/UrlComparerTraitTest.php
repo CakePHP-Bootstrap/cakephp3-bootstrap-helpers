@@ -37,7 +37,8 @@ class UrlComparerTraitTest extends TestCase {
             ['/', '#anchor'],
             ['/', []],
             ['/pages/test', '/pages/test#anchor'],
-            ['/pages', '/pages?param=value']
+            ['/pages', '/pages?param=value'],
+            ['/https://example.com/test', '/https://example.com/test']
         ];
         foreach ($cmpTrue as $urls) {
             list($lhs, $rhs) = $urls;

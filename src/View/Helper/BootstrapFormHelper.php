@@ -15,6 +15,7 @@
 namespace Bootstrap\View\Helper;
 
 use Cake\View\Helper\FormHelper;
+use Bootstrap\View\FlexibleStringTemplateTrait;
 
 /**
  * Form helper library.
@@ -32,6 +33,7 @@ class BootstrapFormHelper extends FormHelper {
 
     use BootstrapTrait;
     use EasyIconTrait;
+    use FlexibleStringTemplateTrait;
 
     /**
      * Other helpers used by BootstrapFormHelper.
@@ -68,49 +70,61 @@ class BootstrapFormHelper extends FormHelper {
             'date' => 'date', 'float' => 'number', 'integer' => 'number',
             'decimal' => 'number', 'binary' => 'file', 'uuid' => 'string'
         ],
+
         'templates' => [
             'button' => '<button{{attrs}}>{{text}}</button>',
             'checkbox' => '<input type="checkbox" name="{{name}}" value="{{value}}"{{attrs}}>',
             'checkboxFormGroup' => '{{label}}',
             'checkboxWrapper' => '<div class="checkbox">{{label}}</div>',
-            'checkboxContainer' => '{{checkboxContainerHorizontalStart}}<div class="checkbox {{required}}">{{content}}</div>{{checkboxContainerHorizontalEnd}}',
+            'checkboxContainer' => '<div class="checkbox {{required}}">{{content}}</div>',
+            'checkboxContainerHorizontal' => '<div class="form-group"><div class="{{inputColumnOffsetClass}} {{inputColumnClass}}"><div class="checkbox {{required}}">{{content}}</div></div></div>',
             'dateWidget' => '{{year}}{{month}}{{day}}{{hour}}{{minute}}{{second}}{{meridian}}',
-            'error' => '<span class="help-block error-message{{errorClassHorizontal}}">{{content}}</span>',
+            'error' => '<span class="help-block error-message">{{content}}</span>',
+            'errorHorizontal' => '<span class="help-block error-message {{errorColumnClass}}">{{content}}</span>',
             'errorList' => '<ul>{{content}}</ul>',
             'errorItem' => '<li>{{text}}</li>',
             'file' => '<input type="file" name="{{name}}" {{attrs}}>',
             'fieldset' => '<fieldset{{attrs}}>{{content}}</fieldset>',
             'formStart' => '<form{{attrs}}>',
             'formEnd' => '</form>',
-            'formGroup' => '{{label}}{{formGroupHorizontalStart}}{{prepend}}{{input}}{{append}}{{formGroupHorizontalEnd}}',
+            'formGroup' => '{{label}}{{prepend}}{{input}}{{append}}',
+            'formGroupHorizontal' => '{{label}}<div class="{{inputColumnClass}}">{{prepend}}{{input}}{{append}}</div>',
             'hiddenBlock' => '<div style="display:none;">{{content}}</div>',
             'input' => '<input type="{{type}}" name="{{name}}" class="form-control{{attrs.class}}" {{attrs}} />',
             'inputSubmit' => '<input type="{{type}}"{{attrs}}>',
             'inputContainer' => '<div class="form-group {{type}}{{required}}">{{content}}</div>',
             'inputContainerError' => '<div class="form-group has-error {{type}}{{required}}">{{content}}{{error}}</div>',
-            'label' => '<label class="{{labelClassExtra}}{{labelClassHorizontal}}{{attrs.class}}" {{attrs}}>{{text}}</label>',
+            'label' => '<label class="control-label{{attrs.class}}"{{attrs}}>{{text}}</label>',
+            'labelHorizontal' => '<label class="control-label {{labelColumnClass}}{{attrs.class}}"{{attrs}}>{{text}}</label>',
+            'labelInline' => '<label class="sr-only{{attrs.class}}"{{attrs}}>{{text}}</label>',
             'nestingLabel' => '{{hidden}}<label{{attrs}}>{{input}}{{text}}</label>',
             'legend' => '<legend>{{text}}</legend>',
             'option' => '<option value="{{value}}"{{attrs}}>{{text}}</option>',
             'optgroup' => '<optgroup label="{{label}}"{{attrs}}>{{content}}</optgroup>',
             'select' => '<select name="{{name}}" class="form-control{{attrs.class}}" {{attrs}}>{{content}}</select>',
+            'selectColumn' => '<div class="col-md-{{columnSize}}"><select name="{{name}}" class="form-control{{attrs.class}}" {{attrs}}>{{content}}</select></div>',
             'selectMultiple' => '<select name="{{name}}[]" multiple="multiple" class="form-control{{attrs.class}}" {{attrs}}>{{content}}</select>',
             'radio' => '<input type="radio" name="{{name}}" value="{{value}}"{{attrs}}>',
             'radioWrapper' => '<div class="radio">{{label}}</div>',
-            'radioContainer' => '{{radioContainerHorizontalStart}}<div class="form-group">{{content}}</div>{{radioContainerHorizontalEnd}}',
+            'radioContainer' => '<div class="form-group">{{content}}</div>',
+            'inlineRadio' => '<input type="radio" name="{{name}}" value="{{value}}"{{attrs}}>',
+            'inlineRadioWrapper' => '{{label}}',
+            'inlineRadioContainer' => '<div class="form-group">{{content}}</div>',
+            'inlineRadioNestingLabel' => '{{hidden}}<label{{attrs}} class="radio-inline">{{input}}{{text}}</label>',
             'textarea' => '<textarea name="{{name}}" class="form-control{{attrs.class}}" {{attrs}}>{{value}}</textarea>',
             'submitContainer' => '<div class="form-group">{{submitContainerHorizontalStart}}{{content}}{{submitContainerHorizontalEnd}}</div>',
+            'submitContainerHorizontal' => '<div class="form-group"><div class="{{inputColumnOffsetClass}} {{inputColumnClass}}">{{content}}</div></div>',
 
             'inputGroup' => '{{inputGroupStart}}{{input}}{{inputGroupEnd}}',
             'inputGroupStart' => '<div class="input-group">{{prepend}}',
             'inputGroupEnd' => '{{append}}</div>',
             'inputGroupAddons' => '<span class="input-group-addon">{{content}}</span>',
             'inputGroupButtons' => '<span class="input-group-btn">{{content}}</span>',
+            'helpBlock' => '<p class="help-block">{{content}}</p>',
             'buttonGroup' => '<div class="btn-group{{attrs.class}}"{{attrs}}>{{content}}</div>',
             'buttonToolbar' => '<div class="btn-toolbar{{attrs.class}}"{{attrs}}>{{content}}</div>',
-            'customFileInput' => '{{fileInput}}<div class="input-group"><div class="input-group-btn">{{button}}</div>{{input}}</div>'
+            'fancyFileInput' => '{{fileInput}}<div class="input-group"><div class="input-group-btn">{{button}}</div>{{input}}</div>'
         ],
-        'templateClass' => 'Bootstrap\View\BootstrapStringTemplate',
         'buttons' => [
             'type' => 'default'
         ],
@@ -128,17 +142,21 @@ class BootstrapFormHelper extends FormHelper {
      * @var array
      */
     protected $_defaultWidgets = [
+        '_default' => ['Cake\View\Widget\BasicWidget'],
         'button' => ['Cake\View\Widget\ButtonWidget'],
         'checkbox' => ['Cake\View\Widget\CheckboxWidget'],
         'file' => ['Cake\View\Widget\FileWidget'],
+        'fancyFile' => ['Bootstrap\View\Widget\FancyFileWidget', 'file', 'button', 'basic'],
         'label' => ['Cake\View\Widget\LabelWidget'],
         'nestingLabel' => ['Cake\View\Widget\NestingLabelWidget'],
         'multicheckbox' => ['Cake\View\Widget\MultiCheckboxWidget', 'nestingLabel'],
         'radio' => ['Cake\View\Widget\RadioWidget', 'nestingLabel'],
+        'inlineRadioNestingLabel' => ['Bootstrap\View\Widget\InlineRadioNestingLabelWidget'],
+        'inlineRadio' => ['Bootstrap\View\Widget\InlineRadioWidget', 'inlineRadioNestingLabel'],
         'select' => ['Cake\View\Widget\SelectBoxWidget'],
+        'selectColumn' => ['Bootstrap\View\Widget\ColumnSelectBoxWidget'],
         'textarea' => ['Cake\View\Widget\TextareaWidget'],
-        'datetime' => ['Cake\View\Widget\DateTimeWidget', 'select'],
-        '_default' => ['Cake\View\Widget\BasicWidget'],
+        'datetime' => ['Bootstrap\View\Widget\DateTimeWidget', 'selectColumn']
     ];
 
     /**
@@ -156,23 +174,31 @@ class BootstrapFormHelper extends FormHelper {
     public $inline = false;
 
     /**
-     * Replaces the current templates with the ones specified by newTemplates, calls the
-     * specified function with the specified parameters, and then restores the old templates.
+     * Construct the widgets and binds the default context providers
      *
-     * @params array    $templates The new templates.
-     * @params callable $callback  The function to call.
-     * @params array    $params    The arguments for the `$callback` function.
-     *
-     * @return mixed The return value of `$callback`.
+     * @param \Cake\View\View $View The View this helper is being attached to.
+     * @param array $config Configuration settings for the helper.
      */
-    protected function _wrapTemplates($templates, $callback, $params) {
-        $oldTemplates = array_map([$this, 'templates'],
-                                  array_combine(array_keys($templates),
-                                                array_keys($templates)));
-        $this->templates($templates);
-        $result = call_user_func_array($callback, $params);
-        $this->templates($oldTemplates);
-        return $result;
+    public function __construct(\Cake\View\View $View, array $config = []) {
+        if (!isset($config['templateCallback'])) {
+            $that = $this;
+            $config['templateCallback'] = function ($name, $data) use ($that) {
+                $data['templateName'] = $name;
+                if ($that->horizontal) $data['templateName'] .= 'Horizontal';
+                else if ($that->inline) $data['templateName'] .= 'Inline';
+                $data += [
+                    'inputColumnClass' => $this->_getColumnClass('input'),
+                    'labelColumnClass' => $this->_getColumnClass('label'),
+                    'errorColumnClass' => $this->_getColumnClass('error'),
+                    'inputColumnOffsetClass' => $this->_getColumnClass('label', true),
+                ];
+                if (!$that->templates($data['templateName'])) {
+                    $data['templateName'] = $name;
+                }
+                return $data;
+            };
+        }
+        parent::__construct($View, $config);
     }
 
     /**
@@ -185,95 +211,6 @@ class BootstrapFormHelper extends FormHelper {
      */
     protected function _matchButton($html) {
         return strpos($html, '<button') !== FALSE || strpos($html, 'type="submit"') !== FALSE;
-    }
-
-    /**
-     * Update the given array of options with template variables depending on the current
-     * mode enabled for the form.
-     *
-     * The current values inside the `$options['templateVars']` array are not modified to
-     * allow users to override the templates.
-     *
-     * @param array $options The array of options to update.
-     *
-     * @return array The given array of options (`$options`).
-     */
-    protected function _getDefaultTemplateVars(&$options) {
-        $options += [
-            'templateVars' => []
-        ];
-        $options['templateVars'] += [
-            'labelClassExtra' => 'control-label'
-        ];
-        if ($this->horizontal) {
-            $options['templateVars'] += [
-                'formGroupHorizontalStart' => '<div class="'.$this->_getColClass('input').'">',
-                'formGroupHorizontalEnd'   => '</div>',
-                'checkboxContainerHorizontalStart' => '<div class="form-group"><div class="'.$this->_getColClass('label', true)
-                                            .' '.$this->_getColClass('input').'">',
-                'checkboxContainerHorizontalEnd' => '</div></div>',
-                'radioContainerHorizontalStart' => '<div class="form-group"><div class="'.$this->_getColClass('label', true)
-                                         .' '.$this->_getColClass('input').'">',
-                'radioContainerHorizontalEnd' => '</div></div>',
-                'submitContainerHorizontalStart' => '<div class="'.$this->_getColClass('label', true).' '.$this->_getColClass('input').'">',
-                'submitContainerHorizontalEnd' => '</div>',
-                'labelClassHorizontal' => ' '.$this->_getColClass('label'),
-                'errorClassHorizontal' => ' '.$this->_getColClass('error')
-            ];
-        }
-        if ($this->inline) {
-            $options['templateVars']['labelClassExtra'] = 'sr-only';
-        }
-        return $options;
-    }
-
-    /**
-     * Format a template string with $data.
-     *
-     * **Note:** This is a method from `StringTemplateTrait::formatTemplate` which is
-     * overriden in order to automatically update the default template variables
-     * using `_getDefaultTemplateVars()` whenever a template is rendered.
-     *
-     * @param string $name The template name.
-     * @param array $data The data to insert.
-     * @return string
-     */
-    public function formatTemplate($name, $data) {
-        return $this->templater()->format($name, $this->_getDefaultTemplateVars($data));
-    }
-
-    /**
-     * Render a named widget.
-     *
-     * This is a lower level method. For built-in widgets, you should be using
-     * methods like `text`, `hidden`, and `radio`. If you are using additional
-     * widgets you should use this method render the widget without the label
-     * or wrapping div.
-     *
-     * **Note:** This method is overriden in order to insert the default template
-     * variables inside `$data` using `_getDefaultTemplateVars()`.
-     *
-     * @param string $name The name of the widget. e.g. 'text'.
-     * @param array $data The data to render.
-     * @return string
-     */
-    public function widget($name, array $data = []) {
-        return parent::widget($name, $this->_getDefaultTemplateVars($data));
-    }
-
-    /**
-     * Generates an input container template
-     *
-     * **Note:** This method is overriden in order to insert the default template
-     * variables inside `$data` using `_getDefaultTemplateVars()`.
-     *
-     * @param array $options The options for input container template
-     * @return string The generated input container template
-     */
-    protected function _inputContainerTemplate($options) {
-        return parent::_inputContainerTemplate(array_merge($options, [
-            'options' => $this->_getDefaultTemplateVars($options['options'])
-        ]));
     }
 
     /**
@@ -321,14 +258,12 @@ class BootstrapFormHelper extends FormHelper {
      */
     public function create($model = null, Array $options = array()) {
         $options += [
-            'columns' => $this->getConfig('columns'),
             'horizontal' => false,
             'inline' => false
         ];
-        $this->colSize =  $options['columns'];
         $this->horizontal = $options['horizontal'];
         $this->inline = $options['inline'];
-        unset($options['columns'], $options['horizontal'], $options['inline']);
+        unset($options['horizontal'], $options['inline']);
         if ($this->horizontal) {
             $options = $this->addClass($options, 'form-horizontal');
         }
@@ -348,16 +283,17 @@ class BootstrapFormHelper extends FormHelper {
      *
      * @return string The classes for the size or offset of the specified column.
      */
-    protected function _getColClass($what, $offset = false) {
+    protected function _getColumnClass($what, $offset = false) {
+        $columns = $this->getConfig('columns');
         if ($what === 'error'
-            && isset($this->colSize['error']) && $this->colSize['error'] == 0) {
-            return $this->_getColClass('label', true).' '.$this->_getColClass('input');
+            && isset($columns['error']) && $columns['error'] == 0) {
+            return $this->_getColumnClass('label', true).' '.$this->_getColumnClass('input');
         }
-        if (isset($this->colSize[$what])) {
-            return 'col-md-'.($offset ? 'offset-' : '').$this->colSize[$what];
+        if (isset($columns[$what])) {
+            return 'col-md-'.($offset ? 'offset-' : '').$columns[$what];
         }
         $classes = [];
-        foreach ($this->colSize as $cl => $arr) {
+        foreach ($columns as $cl => $arr) {
             if (isset($arr[$what])) {
                 $classes[] = 'col-'.$cl.'-'.($offset ? 'offset-' : '').$arr[$what];
             }
@@ -503,13 +439,16 @@ class BootstrapFormHelper extends FormHelper {
      * merged on top of the already loaded templates. This option can either be a filename
      * in /config that contains the templates you want to load, or an array of templates
      * to use.
+     * - `labelOptions` - Either `false` to disable label around nestedWidgets e.g. radio, multicheckbox or an array
+     *   of attributes for the label tag. `selected` will be added to any classes e.g. `class => 'myclass'` where
+     *   widget is checked
      *
      * @param string $fieldName This should be "modelname.fieldname"
      * @param array $options Each type of input takes different options.
      * @return string Completed form widget.
      * @link http://book.cakephp.org/3.0/en/views/helpers/form.html#creating-form-inputs
      */
-    public function input($fieldName, array $options = array()) {
+    public function control($fieldName, array $options = array()) {
 
         $options += [
             'templateVars' => [],
@@ -522,38 +461,23 @@ class BootstrapFormHelper extends FormHelper {
         $options = $this->_parseOptions($fieldName, $options);
 
         $prepend = $options['prepend'];
-        unset($options['prepend']);
         $append = $options['append'];
-        unset($options['append']);
+        $help = $options['help'];
+        $inline = $options['inline'];
+        unset($options['prepend'], $options['append'], 
+            $options['help'], $options['inline']);
+
         if ($prepend || $append) {
             $prepend = $this->prepend(null, $prepend);
             $append  = $this->append(null, $append);
         }
 
-        $help = $options['help'];
-        unset($options['help']);
         if ($help) {
-            $append .= '<p class="help-block">'.$help.'</p>';
+            $append .= $this->formatTemplate('helpBlock', ['content' => $help]);
         }
 
-        $inline = $options['inline'];
-        unset ($options['inline']);
-
-        if ($options['type'] === 'radio') {
-            $options['templates'] = [];
-            if ($inline) {
-                $options['templates'] = [
-                    'label' => $this->templates('label'),
-                    'radioWrapper' => '{{label}}',
-                    'nestingLabel' => '{{hidden}}<label{{attrs}} class="radio-inline">{{input}}{{text}}</label>'
-                ];
-            }
-            if ($this->horizontal) {
-                $options['templates']['radioContainer'] = '<div class="form-group">{{content}}</div>';
-            }
-            if (empty($options['templates'])) {
-                unset($options['templates']);
-            }
+        if ($options['type'] === 'radio' && $inline) {
+            $options['type'] = 'inlineRadio';
         }
 
         $options['templateVars'] += [
@@ -561,38 +485,65 @@ class BootstrapFormHelper extends FormHelper {
             'append' => $append
         ];
 
-        return parent::input($fieldName, $options);
+        return parent::control($fieldName, $options);
     }
 
     /**
-     * Create a template for a datetime input depending on the given fields and options.
+     * Generates an input element
      *
-     * @parem array $fields  An associative array indicating, for each field, if it should
-     * be included or not.
-     * @param array $options Array of options.
-     *
-     * @return string A template for a datetime input.
+     * @param string $fieldName the field name
+     * @param array $options The options for the input element
+     * @return string The generated input element
      */
-    protected function _getDatetimeTemplate($fields, $options) {
-        $inputs = [];
-        foreach ($fields as $field => $in) {
-            $in = isset($options[$field]) ? $options[$field] : $in;
-            if ($in) {
-                if ($field === 'timeFormat')
-                    $field = 'meridian'; // Template uses "meridian" instead of timeFormat
-                $inputs[$field] = '<div class="col-md-{{colsize}}">{{'.$field.'}}</div>';
-            }
+    protected function _getInput($fieldName, $options) {
+        $label = $options['labelOptions'];
+        switch (strtolower($options['type'])) {
+            case 'inlineradio':
+                $opts = $options['options'];
+                unset($options['options'], $options['labelOptions']);
+                return $this->inlineRadio($fieldName, $opts, $options + ['label' => $label]);
         }
-        $tplt = $this->templates('dateWidget');
-        $tplt = explode('}}{{', substr($tplt, 2, count($tplt) - 3));
-        $html = '';
-        foreach ($tplt as $v) {
-            if (isset($inputs[$v])) {
-                $html .= $inputs[$v];
-            }
+        return parent::_getInput($fieldName, $options);
+    }
+
+
+    /**
+     * Creates a set of inline radio widgets.
+     *
+     * ### Attributes:
+     *
+     * - `value` - Indicates the value when this radio button is checked.
+     * - `label` - Either `false` to disable label around the widget or an array of attributes for
+     *    the label tag. `selected` will be added to any classes e.g. `'class' => 'myclass'` where widget
+     *    is checked
+     * - `hiddenField` - boolean to indicate if you want the results of radio() to include
+     *    a hidden input with a value of ''. This is useful for creating radio sets that are non-continuous.
+     * - `disabled` - Set to `true` or `disabled` to disable all the radio buttons.
+     * - `empty` - Set to `true` to create an input with the value '' as the first option. When `true`
+     *   the radio label will be 'empty'. Set this option to a string to control the label value.
+     *
+     * @param string $fieldName Name of a field, like this "modelname.fieldname"
+     * @param array|\Traversable $options Radio button options array.
+     * @param array $attributes Array of attributes.
+     * @return string Completed radio widget set.
+     * @link http://book.cakephp.org/3.0/en/views/helpers/form.html#creating-radio-buttons
+     */
+    public function inlineRadio($fieldName, $options = [], array $attributes = []) {
+        $attributes['options'] = $options;
+        $attributes['idPrefix'] = $this->_idPrefix;
+        $attributes = $this->_initInputField($fieldName, $attributes);
+        $hiddenField = isset($attributes['hiddenField']) ? $attributes['hiddenField'] : true;
+        unset($attributes['hiddenField']);
+        $radio = $this->widget('inlineRadio', $attributes);
+        $hidden = '';
+        if ($hiddenField) {
+            $hidden = $this->hidden($fieldName, [
+                'value' => '',
+                'form' => isset($attributes['form']) ? $attributes['form'] : null,
+                'name' => $attributes['name'],
+            ]);
         }
-        return str_replace('{{colsize}}', round(12 / count($inputs)),
-                           '<div class="row">'.$html.'</div>');
+        return $hidden . $radio;
     }
 
     /**
@@ -609,180 +560,15 @@ class BootstrapFormHelper extends FormHelper {
      * @link http://book.cakephp.org/3.0/en/views/helpers/form.html#creating-file-inputs
      */
     public function file($fieldName, array $options = []) {
-
-        if (!$this->getConfig('useCustomFileInput')
-            || (isset($options['default']) && $options['default'])) {
-            return parent::file($fieldName, $options);
-        }
-
-        $options += [
-            '_input'  => [],
-            '_button' => [],
-            'id' => $fieldName,
-            'secure' => true,
-            'count-label' => __('files selected'),
-            'button-label' => (isset($options['multiple']) && $options['multiple']) ? __('Choose Files') : __('Choose File'),
-            'templateVars' => []
-        ];
-
-        $fakeInputCustomOptions = $options['_input'];
-        $fakeButtonCustomOptions = $options['_button'];
-        unset($options['_input'], $options['_button']);
-
+        $options += ['secure' => true];
         $options = $this->_initInputField($fieldName, $options);
         unset($options['type']);
-        $countLabel = $options['count-label'];
-        unset($options['count-label']);
-        $fileInput = $this->widget('file', array_merge($options, [
-            'style' => 'display: none;',
-            'onchange' => "document.getElementById('".$options['id']."-input').value = (this.files.length <= 1) ? this.files[0].name : this.files.length + ' ' + '" . $countLabel . "';",
-            'escape' => false
-        ]));
-
-        if (!empty($options['val']) && is_array($options['val'])) {
-            if (isset($options['val']['name']) || count($options['val']) == 1) {
-                $fakeInputCustomOptions += [
-                    'value' => (isset($options['val']['name'])) ? $options['val']['name'] : $options['val'][0]['name']
-                ];
-            }
-            else {
-                $fakeInputCustomOptions += [
-                    'value' => count($options['val']) . ' ' . $countLabel
-                ];
-            }
+        if (!$this->getConfig('useCustomFileInput')) {
+            return $this->widget('file', $options);
         }
-
-        $fakeInput = $this->text($fieldName, array_merge($fakeInputCustomOptions, [
-            'name' => $fieldName.'-text',
-            'readonly' => 'readonly',
-            'id' => $options['id'].'-input',
-            'onclick' => "document.getElementById('".$options['id']."').click();",
-            'escape' => false
-        ]));
-        $buttonLabel = $options['button-label'];
-        unset($options['button-label']);
-
-        $fakeButton = $this->button($buttonLabel, array_merge($fakeButtonCustomOptions, [
-            'type' => 'button',
-            'onclick' => "document.getElementById('".$options['id']."').click();"
-        ]));
-        return $this->formatTemplate('customFileInput', [
-            'fileInput' => $fileInput,
-            'button' => $fakeButton, 
-            'input' => $fakeInput,
-            'attrs' => $this->templater()->formatAttributes($options),
-            'templateVars' => $options['templateVars']
-        ]);
-    }
-
-    /**
-     * Returns a set of SELECT elements for a full datetime setup: day, month and year, and
-     * then time.
-     *
-     * ### Date Options:
-     *
-     * - `empty` If true, the empty select option is shown. If a string,
-     *   that string is displayed as the empty element.
-     * - `value` | `default` The default value to be used by the input. A value in
-     *   `$this->data matching the field name will override this value. If no default is
-     *    provided `time()` will be used.
-     * - `monthNames` If false, 2 digit numbers will be used instead of text.
-     *   If an array, the given array will be used.
-     * - `minYear` The lowest year to use in the year select
-     * - `maxYear` The maximum year to use in the year select
-     * - `orderYear` Order of year values in select options.
-     *   Possible values 'asc', 'desc'. Default 'desc'.
-     *
-     * ### Time options:
-     *
-     * - `empty` If true, the empty select option is shown. If a string,
-     * - `value` | `default` The default value to be used by the input. A value in
-     *   `$this->data` matching the field name will override this value. If no default
-     *   is provided `time()` will be used.
-     * - `timeFormat` The time format to use, either 12 or 24.
-     * - `interval` The interval for the minutes select. Defaults to 1
-     * - `round` Set to `up` or `down` if you want to force rounding in either direction.
-     *   Defaults to null.
-     * - `second` Set to true to enable seconds drop down.
-     *
-     * To control the order of inputs, and any elements/content between the inputs you
-     * can override the `dateWidget` template. By default the `dateWidget` template is:
-     *
-     * `{{month}}{{day}}{{year}}{{hour}}{{minute}}{{second}}{{meridian}}`
-     *
-     * @param string $fieldName Prefix name for the SELECT element
-     * @param array $options Array of Options
-     *
-     * @return string Generated set of select boxes for the date and time formats chosen.
-     *
-     * @link http://book.cakephp.org/3.0/en/views/helpers/form.html#creating-date-and-time-inputs
-     */
-    public function dateTime($fieldName, array $options = []) {
-        $fields = ['year' => true, 'month' => true, 'day' => true,
-                   'hour' => true, 'minute' => true, 'second' => false,
-                   'timeFormat' => false];
-        return $this->_wrapTemplates ([
-            'dateWidget' => $this->_getDatetimeTemplate($fields, $options)
-        ], 'parent::dateTime', [$fieldName, $options]);
-    }
-
-    /**
-     * Generate time inputs.
-     *
-     * ### Options:
-     *
-     * See dateTime() for time options.
-     *
-     * @param string $fieldName Prefix name for the SELECT element
-     * @param array $options Array of Options
-     * @return string Generated set of select boxes for time formats chosen.
-     * @see Cake\View\Helper\FormHelper::dateTime() for templating options.
-     */
-    public function time($fieldName, array $options = []) {
-        $fields = ['hour' => true, 'minute' => true, 'second' => false, 'timeFormat' => false];
-        return $this->_wrapTemplates ([
-            'dateWidget' => $this->_getDatetimeTemplate($fields, $options)
-        ], 'parent::time', [$fieldName, $options]);
-    }
-
-    /**
-     * Generate date inputs.
-     *
-     * ### Options:
-     *
-     * See dateTime() for date options.
-     *
-     * @param string $fieldName Prefix name for the SELECT element
-     * @param array $options Array of Options
-     * @return string Generated set of select boxes for time formats chosen.
-     * @see Cake\View\Helper\FormHelper::dateTime() for templating options.
-     */
-    public function date($fieldName, array $options = []) {
-        $fields = ['year' => true, 'month' => true, 'day' => true];
-        return $this->_wrapTemplates ([
-            'dateWidget' => $this->_getDatetimeTemplate($fields, $options)
-        ], 'parent::date', [$fieldName, $options]);
-    }
-
-    /**
-     * Update and returns an array of options containing bootstrap specific buttons
-     * options. See also `BootstrapTrait::_addButtonClasses()`.
-     *
-     * @param array $options Array of options to update.
-     *
-     * @return array The updated array of options.
-     */
-    protected function _createButtonOptions(array $options = []) {
-        $options += [
-            'bootstrap-block' => false
-        ];
-        $options = $this->_addButtonClasses($options);
-        $block = $options['bootstrap-block'];
-        unset($options['bootstrap-block']);
-        if ($block) {
-            $options = $this->addClass($options, 'btn-block');
-        }
-        return $options;
+        $options += ['_button' => []];
+        $options['_button'] = $this->_addButtonClasses($options['_button']);
+        return $this->widget('fancyFile', $options);
     }
 
     /**
@@ -809,7 +595,7 @@ class BootstrapFormHelper extends FormHelper {
      */
     public function button($title, array $options = []) {
         return $this->_easyIcon('parent::button', $title,
-                                $this->_createButtonOptions($options));
+                                $this->_addButtonClasses($options));
     }
 
     /**
@@ -878,8 +664,7 @@ class BootstrapFormHelper extends FormHelper {
      *
      * @return string A HTML string containing the button dropdown.
      */
-    public function dropdownButton ($title, array $menu = [], array $options = []) {
-
+    public function dropdownButton($title, array $menu = [], array $options = []) {
         $options['type'] = false;
         $options['data-toggle'] = 'dropdown';
         $options = $this->addClass($options, "dropdown-toggle");
@@ -915,78 +700,7 @@ class BootstrapFormHelper extends FormHelper {
      * @link http://book.cakephp.org/3.0/en/views/helpers/form.html#creating-buttons-and-submit-elements
      */
     public function submit($caption = null, array $options = array()) {
-        return parent::submit($caption, $this->_createButtonOptions($options));
-    }
-
-    /** SPECIAL FORM **/
-
-    /**
-     * Create a basic search form.
-     *
-     * ### Options
-     *
-     * - `id` HTML id for the form. Default is `'search'`.
-     * - `label` Label for the text input. This option controls if the form is inlined
-     * or not (the form is not inlined if `label != false`). Default is `false`.
-     * - `placeholder` Placeholder for the text input. Default is `__('Search').'... '`.
-     * - `button` Text for the button. Default is `__('Search')`.
-     * - `_input` Options for the text input that will be merged to `$inpOpts`.
-     * Default is `[]`.
-     * - `_button` Options for the button that will be merged to `$btnOpts`.
-     * Default is `[]`.
-     * - Other options will be passed to the `create()` method.
-     *
-     * @param mixed $model   The model of the form. See `create()`.
-     * @param array $options Array of options. See above.
-     * @param array $inpOpts The options for the text input. See `input()`.
-     * @param array $btnOpts The options for the search button. See `button()`.
-     *
-     * @return string A complete form suitable for searching.
-     */
-    public function searchForm($model = null, array $options = [],
-                               array $inpOpts = [], array $btnOpts = []) {
-
-        $options += [
-            'id'          => 'search',
-            'label'       => false,
-            'placeholder' => __('Search').'... ',
-            'button'      => __('Search'),
-            '_input'      => [],
-            '_button'     => []
-        ];
-
-        $options = $this->addClass($options, 'form-search');
-
-        $btnOpts += $options['_button'];
-        unset($options['_button']);
-
-        $inpOpts += $options['_input'];
-        unset($options['_input']);
-
-        $inpOpts += [
-            'id'          => $options['id'],
-            'placeholder' => $options['placeholder'],
-            'label'       => $options['label']
-        ];
-
-        unset($options['id']);
-        unset($options['label']);
-        unset($options['placeholder']);
-
-        $btnName = $options['button'];
-        unset($options['button']);
-
-        $inpOpts['append'] = $this->button($btnName, $btnOpts);
-
-        $options['inline'] = (bool)$inpOpts['label'];
-
-        $output = '';
-
-        $output .= $this->create($model, $options);
-        $output .= $this->input($inpOpts['id'], $inpOpts);
-        $output .= $this->end();
-
-        return $output;
+        return parent::submit($caption, $this->_addButtonClasses($options));
     }
 
 }

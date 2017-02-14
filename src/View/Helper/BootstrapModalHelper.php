@@ -15,6 +15,8 @@
 namespace Bootstrap\View\Helper;
 
 use Cake\View\Helper;
+use Cake\View\StringTemplateTrait;
+use Bootstrap\View\FlexibleStringTemplateTrait;
 
 /**
  * Modal helper library.
@@ -25,9 +27,11 @@ use Cake\View\Helper;
  */
 class BootstrapModalHelper extends Helper {
 
-    use \Cake\View\StringTemplateTrait;
-    use EasyIconTrait;
     use BootstrapTrait;
+    use EasyIconTrait;
+    use StringTemplateTrait, FlexibleStringTemplateTrait {
+        FlexibleStringTemplateTrait::templater insteadof StringTemplateTrait;
+    }
 
     /**
      * Other helpers used by BootstrapModalHelper.
@@ -64,8 +68,7 @@ class BootstrapModalHelper extends Helper {
             'footerStart' => '<div class="modal-footer{{attrs.class}}"{{attrs}}>',
             'footerEnd' => '</div>',
             'modalFooterCloseButton' => '<button type="button" class="btn btn-default{{attrs.class}}" data-dismiss="modal"{{attrs}}>{{content}}</button>'
-        ],
-        'templateClass' => 'Bootstrap\View\BootstrapStringTemplate'
+        ]
     ];
 
     /**

@@ -2,16 +2,16 @@
 
 namespace Bootstrap\Test\TestCase\View;
 
-use Bootstrap\View\BootstrapStringTemplate;
+use Bootstrap\View\EnhancedStringTemplate;
 use Cake\TestSuite\TestCase;
 use Cake\View\View;
 
-class BootstrapStringTemplateTest extends TestCase {
+class EnhancedStringTemplateTest extends TestCase {
 
     /**
-     * Instance of BootstrapStringTemplate.
+     * Instance of EnhancedStringTemplate.
      *
-     * @var BootstrapStringTemplate
+     * @var EnhancedStringTemplate
      */
     public $templater;
 
@@ -22,7 +22,7 @@ class BootstrapStringTemplateTest extends TestCase {
      */
     public function setUp() {
         parent::setUp();
-        $this->templater = new BootstrapStringTemplate();
+        $this->templater = new EnhancedStringTemplate();
     }
 
     public function test() {

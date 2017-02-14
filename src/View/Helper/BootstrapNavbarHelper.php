@@ -15,6 +15,8 @@
 namespace Bootstrap\View\Helper;
 
 use Cake\View\Helper;
+use Cake\View\StringTemplateTrait;
+use Bootstrap\View\FlexibleStringTemplateTrait;
 
 /**
  * Navbar helper library.
@@ -27,9 +29,11 @@ use Cake\View\Helper;
  */
 class BootstrapNavbarHelper extends Helper {
 
-    use \Cake\View\StringTemplateTrait;
-    use EasyIconTrait;
     use BootstrapTrait;
+    use EasyIconTrait;
+    use StringTemplateTrait, FlexibleStringTemplateTrait {
+        FlexibleStringTemplateTrait::templater insteadof StringTemplateTrait;
+    }
     use UrlComparerTrait;
 
     /**
@@ -96,7 +100,6 @@ aria-haspopup="true" aria-expanded="false">{{content}}{{caret}}</a>',
             'outerMenuItemLinkActive' => '<a href="{{url}}"{{attrs}}>{{content}}</a>',
             'navbarText' => '<p class="navbar-text{{attrs.class}}"{{attrs}}>{{content}}</p>',
         ],
-        'templateClass' => 'Bootstrap\View\BootstrapStringTemplate',
         'autoActiveLink' => true
     ];
 
