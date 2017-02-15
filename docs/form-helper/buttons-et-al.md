@@ -2,7 +2,7 @@
 
 ### Button groups
 
-You can create [button groups](http://getbootstrap.com/components/#btn-groups) using the `BootstrapFormHelper`:
+You can create [button groups](http://getbootstrap.com/components/#btn-groups) using the `Bootstrap.FormHelper`:
 
 -- TABS: button-groups-1
 
@@ -32,7 +32,7 @@ echo $this->Form->buttonGroup([$this->Form->button('1'), $this->Form->button('2'
 
 ### Button toolbars
 
-You can create [button toolbars](http://getbootstrap.com/components/#btn-groups-toolbar) using the `BootstrapFormHelper` by
+You can create [button toolbars](http://getbootstrap.com/components/#btn-groups-toolbar) using the `Bootstrap.FormHelper` by
 combining multiple button groups:
 
 -- TABS: button-toolbars-1
@@ -78,7 +78,7 @@ echo $this->Form->buttonToolbar([
 
 ### Dropdown buttons
 
-You can create [dropdown buttons](http://getbootstrap.com/components/#btn-dropdowns) using the `BootstrapFormHelper`:
+You can create [dropdown buttons](http://getbootstrap.com/components/#btn-dropdowns) using the `Bootstrap.FormHelper`:
 
 -- TABS: button-dropdowns-1
 

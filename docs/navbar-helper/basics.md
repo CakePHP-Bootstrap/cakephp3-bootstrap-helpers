@@ -1,11 +1,11 @@
 ### Create a Bootstrap navbar
 
-The `BootstrapNavbarHelper` works in a similar way to the standard form helper, you first need to load it:
+The `Bootstrap.NavbarHelper` works in a similar way to the standard form helper, you first need to load it:
 
 ```php
 public $helpers = [
     'Navbar' => [
-        'className' => 'Bootstrap.BootstrapNavbarHelper',
+        'className' => 'Bootstrap.NavbarHelper',
         'autoActiveLink' => true // This is the default value, see below for more information.
     ]
 ];

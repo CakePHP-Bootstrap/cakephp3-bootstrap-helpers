@@ -1,12 +1,12 @@
 ### Custom file inputs
 
-Boostrap (until v3) does not customize the file inputs, so you can choose to customize them with the `BootstrapFormHelper`. To do
+Boostrap (until v3) does not customize the file inputs, so you can choose to customize them with the `Bootstrap.FormHelper`. To do
 so, enable the feature in the helper configuration:
 
 ```php
 public $helpers = [
     'Form' => [
-        'className' => 'Bootstrap.BootstrapForm',
+        'className' => 'Bootstrap.Form',
         'useCustomFileInput' => true
     ]
 ];

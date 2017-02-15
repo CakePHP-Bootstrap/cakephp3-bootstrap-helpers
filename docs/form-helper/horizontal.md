@@ -216,7 +216,7 @@ You can set the default column widths when configuring the helper:
 ```php
 public $helpers = [
     'Form' => [
-        'className' => 'Bootstrap.BootstrapForm',
+        'className' => 'Bootstrap.Form',
         'columns' => [
             'sm' => [
                 'label' => 4,

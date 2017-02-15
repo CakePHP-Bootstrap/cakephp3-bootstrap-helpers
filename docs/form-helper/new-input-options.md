@@ -1,6 +1,6 @@
 ### Prepend or append content to inputs
 
-You can prepend and append add-ons or buttons to inputs using custom options of the `BootstrapFormHelper::input` method.
+You can prepend and append add-ons or buttons to inputs using custom options of the `Bootstrap.FormHelper::input` method.
 
 -- TABS: form-new-options-1
 
@@ -45,8 +45,8 @@ echo $this->Form->input('mail', [
 
 ### Add dropdown buttons
 
-You can easily prepend or append dropdown buttons to inputs by using custom options of the `BootstrapFormHelper::input` method
-combined with the `BootstrapFormHelper::dropdown` method.
+You can easily prepend or append dropdown buttons to inputs by using custom options of the `Bootstrap.FormHelper::input` method
+combined with the `Bootstrap.FormHelper::dropdown` method.
 
 -- TABS: form-new-options-2
 

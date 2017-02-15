@@ -52,23 +52,39 @@ Plugin::load('Bootstrap' ['autoload' => true]);
 
 ### Using the helpers
 
-Once the plugin is loaded, you just need to enable them into your `AppController` like this:
+Once the plugin is loaded, you need to enable them into your `AppController`:
 
 ```php
 public $helpers = [
-    'Html' => [
-        'className' => 'Bootstrap.BootstrapHtml'
-    ],
     'Form' => [
-        'className' => 'Bootstrap.BootstrapForm'
-    ],
-    'Paginator' => [
-        'className' => 'Bootstrap.BootstrapPaginator'
+        'className' => 'Bootstrap.Form'
+    ],    
+    'Html' => [
+        'className' => 'Bootstrap.Html'
     ],
     'Modal' => [
-        'className' => 'Bootstrap.BootstrapModal'
+        'className' => 'Bootstrap.Modal'
+    ],
+    'Navbar' => [
+        'className' => 'Bootstrap.Navbar'
+    ],
+    'Paginator' => [
+        'className' => 'Bootstrap.Paginator'
+    ],
+    'Panel' => [
+        'className' => 'Bootstrap.Panel'
     ]
 ];
+```
+
+And add the bootstrap style and script files to your view (e.g. in `Layout/default.ctp`):
+
+```php
+echo $this->Html->css('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css');
+echo $this->Html->script([
+    'https://code.jquery.com/jquery-1.12.4.min.js',
+    'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'
+]);
 ```
 
 See [CakePHP documentation](http://book.cakephp.org/3.0/en/views/helpers.html) for more information on how to enable helpers in your 

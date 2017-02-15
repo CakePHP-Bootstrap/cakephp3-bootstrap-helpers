@@ -17,8 +17,8 @@ echo $this->Html->icon('pencil');
 
 ### Icons - Easy icons
 
-Sometimes, you may want to use the `BootstrapHtmlHelper::icon` method in combination with other helpers such as `BootstrapPaginatorHelper`
-or `BootstrapFormHelper` to insert icons in buttons or other elements. To ease the process, some methods provide a shortcut to insert icons:
+Sometimes, you may want to use the `Bootstrap.HtmlHelper::icon` method in combination with other helpers such as `Bootstrap.PaginatorHelper`
+or `Bootstrap.FormHelper` to insert icons in buttons or other elements. To ease the process, some methods provide a shortcut to insert icons:
 
 ```php
 // The following...

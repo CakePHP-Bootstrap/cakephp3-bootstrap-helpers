@@ -1,11 +1,11 @@
 ### Create a Bootstrap panel
 
-The `BootstrapPanelHelper` works in a similar way to the standard modal helper, you first need to load the helper:
+The `Bootstrap.PanelHelper` works in a similar way to the standard modal helper, you first need to load the helper:
 
 ```php
 public $helpers = [
     'Panel' => [
-        'className' => 'Bootstrap.BootstrapPanelHelper'
+        'className' => 'Bootstrap.PanelHelper'
     ]
 ];
 ```
@@ -152,7 +152,7 @@ echo $this->Panel->end();
 ### Playing with the panel parts
 
 A panel is made of three part: a header, a body and a footer. If you specify a title to the `create()` method, a header is
-automatically created and a body opened (except if you specify the `'body' => false` option). The `BootstrapPanelHelper` will
+automatically created and a body opened (except if you specify the `'body' => false` option). The `Bootstrap.PanelHelper` will
 automatically close any part when you create or open a new one, or when you end the panel.
 
 -- TABS: panel-basics-2

@@ -1,6 +1,6 @@
 ### Panel Groups
 
-You can create (collapsible) panel groups easily using the `BootstrapPanelHelper`:
+You can create (collapsible) panel groups easily using the `Bootstrap.PanelHelper`:
 
 -- TABS: panel-grousp-1
 
