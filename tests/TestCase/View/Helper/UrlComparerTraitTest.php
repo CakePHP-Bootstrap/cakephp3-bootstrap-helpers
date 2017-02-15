@@ -14,6 +14,10 @@ class PublicUrlComparerTrait {
 
     use UrlComparerTrait;
 
+    public function normalize($url) {
+        return $this->_normalize($url);
+    }
+
 };
 
 class UrlComparerTraitTest extends TestCase {
@@ -32,9 +36,13 @@ class UrlComparerTraitTest extends TestCase {
      */
     public function setUp() {
         parent::setUp();
+        Configure::write('debug', true);
         Router::scope('/', function (RouteBuilder $routes) {
-            $routes->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
-            $routes->connect('/pages/*', ['controller' => 'Pages', 'action' => 'display']);
+            $routes->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']); // (1)
+            $routes->connect('/pages/*', ['controller' => 'Pages', 'action' => 'display']); // (2)
+            $routes->fallbacks(DashedRoute::class);
+        });
+        Router::prefix('admin', function ($routes) {
             $routes->fallbacks(DashedRoute::class);
         });
         $this->_urlsMatchTrue = [
@@ -55,6 +63,47 @@ class UrlComparerTraitTest extends TestCase {
             ['https://github.com', '/']
         ];
         $this->trait = new PublicUrlComparerTrait();
+    }
+
+    public function _testNormalize() {
+        $tests = [
+            ['/pages/test', '/pages'], // normalize as /pages due to (2)
+            ['/users/login', '/users/login'],
+            ['/users/login/whatever?query=no', '/users/login'],
+            ['/pages/display/test', '/pages'],
+            ['/admin/users/login', '/admin/users/login']
+        ];
+        foreach ($tests as $test) {
+            list($lhs, $rhs) = $test;
+            $nm = $this->trait->normalize($lhs);
+            $this->assertTrue($nm == $rhs, sprintf("%s is not normalized as %s but %s.", $lhs, $rhs, $nm));
+        }
+        Router::fullBaseUrl('');
+        Configure::write('App.fullBaseUrl', 'http://localhost');
+        $request = new Request();
+        $request->addParams([
+            'action' => 'view',
+            'plugin' => null,
+            'controller' => 'pages',
+            'pass' => ['1']
+        ]);
+        $request->base = '/cakephp';
+        $request->here = '/cakephp/pages/view/1';
+        Router::setRequestInfo($request);
+        $tests = [
+            ['/pages/test', '/cakephp/pages'], // normalize as /pages due to (2)
+            ['/users/login', '/cakephp/users/login'],
+            ['/users/login/whatever?query=no', '/cakephp/users/login'],
+            ['/pages/display/test', '/cakephp/pages'],
+            ['/admin/users/login', '/cakephp/admin/users/login'],
+            ['/cakephp/admin/rights', '/cakephp/admin/rights'],
+            ['/cakephp/admin/users/edit/1', '/cakephp/admin/users/edit']
+        ];
+        foreach ($tests as $test) {
+            list($lhs, $rhs) = $test;
+            $nm = $this->trait->normalize($lhs);
+            $this->assertTrue($nm == $rhs, sprintf("%s is not normalized as %s but %s.", $lhs, $rhs, $nm));
+        }
     }
 
     public function _testCompare($matchTrue, $matchFalse) {
