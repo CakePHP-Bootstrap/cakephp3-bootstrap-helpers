@@ -52,16 +52,26 @@ trait UrlComparerTrait {
      *
      * @return bool `true` if the components match, `false` otherwize.
      */
-    protected function _matchHost($urlComponents) {
-        if (isset($urlComponents['host']) && $urlComponents['host'] != $this->_hostname()) {
-            return null;
-        }
+    protected function _matchHost($url) {
+        $components = parse_url($url);
+        return !(isset($components['host']) && $components['host'] != $this->_hostname());
+    }
+
+    /**
+     * Remove relative part an URL (if any).
+     *
+     * @param string $url URL from which the relative part should be removed.
+     *
+     * @param string The new URL.
+     */
+    protected function _removeRelative($url) {
+        $components = parse_url($url);
         $rela = $this->_relative();
-        $path = trim($urlComponents['path'], '/');
-        if ($rela && strpos($path, $rela) === false) {
-            return null;
+        $path = trim($components['path'], '/');
+        if ($rela && strpos($path, $rela) !== false) {
+            $path = trim(substr($path, strlen($rela)), '/');
         }
-        return '/'.trim(substr($path, strlen($rela)), '/');
+        return '/'.$path;
     }
 
     /**
@@ -72,14 +82,15 @@ trait UrlComparerTrait {
      * @return string Normalized URL.
      */
     protected function _normalize($url) {
-        $url = Router::normalize(Router::url($url, true));
-        $url = $this->_matchHost(parse_url($url));
-        if (!$url) {
+        if (!is_string($url)) {
+            $url = Router::url($url);
+        }
+        if (!$this->_matchHost($url)) {
             return null;
         }
-        $url = Router::parse($url);
+        $url = Router::parse($this->_removeRelative($url));
         unset($url['?'], $url['#'], $url['plugin'], $url['pass'], $url['_matchedRoute']);
-        return Router::url($url);
+        return $this->_removeRelative(Router::url($url));
     }
 
     /**

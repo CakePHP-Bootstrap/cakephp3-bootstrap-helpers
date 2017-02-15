@@ -65,7 +65,7 @@ class UrlComparerTraitTest extends TestCase {
         $this->trait = new PublicUrlComparerTrait();
     }
 
-    public function _testNormalize() {
+    public function testNormalize() {
         $tests = [
             ['/pages/test', '/pages'], // normalize as /pages due to (2)
             ['/users/login', '/users/login'],
@@ -91,13 +91,13 @@ class UrlComparerTraitTest extends TestCase {
         $request->here = '/cakephp/pages/view/1';
         Router::setRequestInfo($request);
         $tests = [
-            ['/pages/test', '/cakephp/pages'], // normalize as /pages due to (2)
-            ['/users/login', '/cakephp/users/login'],
-            ['/users/login/whatever?query=no', '/cakephp/users/login'],
-            ['/pages/display/test', '/cakephp/pages'],
-            ['/admin/users/login', '/cakephp/admin/users/login'],
-            ['/cakephp/admin/rights', '/cakephp/admin/rights'],
-            ['/cakephp/admin/users/edit/1', '/cakephp/admin/users/edit']
+            ['/pages/test', '/pages'], // normalize as /pages due to (2)
+            ['/users/login', '/users/login'],
+            ['/users/login/whatever?query=no', '/users/login'],
+            ['/pages/display/test', '/pages'],
+            ['/admin/users/login', '/admin/users/login'],
+            ['/cakephp/admin/rights', '/admin/rights'],
+            ['/cakephp/admin/users/edit/1', '/admin/users/edit']
         ];
         foreach ($tests as $test) {
             list($lhs, $rhs) = $test;
@@ -139,7 +139,14 @@ class UrlComparerTraitTest extends TestCase {
             [[], ['controller' => 'pages', 'action' => 'view']],
             [[], 'http://localhost/cakephp/pages/view/1'],
             [[], 'https://localhost/cakephp/pages/view/1'],
-            [[], '/pages/view/1']
+            [[], '/pages/view/1'],
+            ['/pages/test', '/pages'], // normalize as /pages due to (2)
+            ['/users/login', '/users/login'],
+            ['/users/login/whatever?query=no', '/users/login'],
+            ['/pages/display/test', '/pages'],
+            ['/admin/users/login', '/admin/users/login'],
+            ['/cakephp/admin/rights', '/admin/rights'],
+            ['/cakephp/admin/users/edit/1', '/admin/users/edit']
         ]);
         $matchFalse = $this->_urlsMatchFalse;
         $this->_testCompare($matchTrue, $matchFalse);
