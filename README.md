@@ -38,7 +38,7 @@ The plugin is versioned in the following way:
 | Version | Bootstrap version | CakePHP version | Information |
 |---------|-------------------|-----------------|-------------|
 | master | 3 | >= 3.4.0 | Current active branch. |
-| > 3.0.5, <= 3.1.1 | 3 | >= 3.2.3 | Bug will be fixed (latest version only). | 
+| > 3.0.5, <= 3.1.1 | 3 | >= 3.2.3, < 3.4.0 | Bug will be fixed (latest version only). | 
 | <= 3.0.5 | 3 | >= 3.0.0 | Not actively maintained (open an issue if necessary). |
 | 4.0.0-alpha | 4 | N/A | Outdated, do not use. |
 | 4.0.1-alpha | 4 | >= 3.4.0 | Coming soon... |
