@@ -71,7 +71,7 @@ class UrlComparerTraitTest extends TestCase {
             ['/users/login', '/users/login'],
             ['/users/login/whatever?query=no', '/users/login'],
             ['/pages/display/test', '/pages'],
-            ['/admin/users/login', '/admin/users/login']
+            ['/admin/users/login', '/admin/users/login'],
         ];
         foreach ($tests as $test) {
             list($lhs, $rhs) = $test;
@@ -91,13 +91,42 @@ class UrlComparerTraitTest extends TestCase {
         $request->here = '/cakephp/pages/view/1';
         Router::setRequestInfo($request);
         $tests = [
-            ['/pages/test', '/pages'], // normalize as /pages due to (2)
-            ['/users/login', '/users/login'],
-            ['/users/login/whatever?query=no', '/users/login'],
+            ['/pages', '/pages'],
             ['/pages/display/test', '/pages'],
+            ['/pages/test', '/pages'], // normalize as /pages due to (2)
+            ['/pages?query=no', '/pages'],
+            ['/pages#anchor', '/pages'],
+            ['/pages?query=no#anchor', '/pages'],
+            ['/users/login', '/users/login'],
+            ['/users/login/whatever', '/users/login'],
+            ['/users/login?query=no', '/users/login'],
+            ['/users/login#anchor', '/users/login'],
+            ['/users/login/whatever?query=no#anchor', '/users/login'],
             ['/admin/users/login', '/admin/users/login'],
-            ['/cakephp/admin/rights', '/admin/rights'],
-            ['/cakephp/admin/users/edit/1', '/admin/users/edit']
+            ['/admin/users/login/whatever', '/admin/users/login'],
+            ['/admin/users/login?query=no', '/admin/users/login'],
+            ['/admin/users/login#anchor', '/admin/users/login'],
+            ['/admin/users/login/whatever?query=no#anchor', '/admin/users/login'],
+            ['/cakephp/admin/users/login', '/admin/users/login'],
+            ['/cakephp/admin/users/login/whatever', '/admin/users/login'],
+            ['/cakephp/admin/users/login?query=no', '/admin/users/login'],
+            ['/cakephp/admin/users/login#anchor', '/admin/users/login'],
+            ['/cakephp/admin/users/login/whatever?query=no#anchor', '/admin/users/login'],
+            ['http://localhost/cakephp/pages', '/pages'],
+            ['http://localhost/cakephp/pages/display/test', '/pages'],
+            ['http://localhost/cakephp/pages/test', '/pages'], // normalize as /pages due to (2)
+            ['http://localhost/cakephp/pages?query=no', '/pages'],
+            ['http://localhost/cakephp/pages#anchor', '/pages'],
+            ['http://localhost/cakephp/pages?query=no#anchor', '/pages'],
+            ['http://localhost/cakephp/admin/users/login', '/admin/users/login'],
+            ['http://localhost/cakephp/admin/users/login/whatever', '/admin/users/login'],
+            ['http://localhost/cakephp/admin/users/login?query=no', '/admin/users/login'],
+            ['http://localhost/cakephp/admin/users/login#anchor', '/admin/users/login'],
+            ['http://localhost/cakephp/admin/users/login/whatever?query=no#anchor', '/admin/users/login'],
+            ['http://github.com/cakephp/admin/users', null],
+            ['http://localhost/notcakephp', null],
+            ['http://localhost/somewhere/cakephp', null]
+
         ];
         foreach ($tests as $test) {
             list($lhs, $rhs) = $test;

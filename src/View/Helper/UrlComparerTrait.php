@@ -47,14 +47,34 @@ trait UrlComparerTrait {
     /**
      * Checks if the given URL components match the current host.
      *
-     * @param array $urlComponents URL components, typically retrieved
-     * from `parse_url`.
+     * @param string $url URL to check.
      *
-     * @return bool `true` if the components match, `false` otherwize.
+     * @return bool `true` if the URL matches, `false` otherwise.
      */
     protected function _matchHost($url) {
         $components = parse_url($url);
         return !(isset($components['host']) && $components['host'] != $this->_hostname());
+    }
+
+    /**
+     * Checks if the given URL components match the current relative URL. This
+     * methods only works with full URL, and do not check the host.
+     * 
+     * @param string $url URL to check.
+     *
+     * @return bool `true` if the URL matches, `false` otherwise.
+     */
+    protected function _matchRelative($url) {
+        $relative = $this->_relative();
+        if (!$relative) {
+            return true;
+        }
+        $components = parse_url($url);
+        if (!isset($components['host'])) {
+            return true;
+        }
+        $path = trim($components['path'], '/');
+        return strpos($path, $relative) === 0;
     }
 
     /**
@@ -66,10 +86,10 @@ trait UrlComparerTrait {
      */
     protected function _removeRelative($url) {
         $components = parse_url($url);
-        $rela = $this->_relative();
+        $relative = $this->_relative();
         $path = trim($components['path'], '/');
-        if ($rela && strpos($path, $rela) !== false) {
-            $path = trim(substr($path, strlen($rela)), '/');
+        if ($relative && strpos($path, $relative) === 0) {
+            $path = trim(substr($path, strlen($relative)), '/');
         }
         return '/'.$path;
     }
@@ -86,6 +106,9 @@ trait UrlComparerTrait {
             $url = Router::url($url);
         }
         if (!$this->_matchHost($url)) {
+            return null;
+        }
+        if (!$this->_matchRelative($url)) {
             return null;
         }
         $url = Router::parse($this->_removeRelative($url));
