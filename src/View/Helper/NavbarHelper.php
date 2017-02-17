@@ -39,13 +39,7 @@ class NavbarHelper extends Helper {
      * @var array
      */
     public $helpers = [
-        'Form' => [
-            'className' => 'Bootstrap.Form'
-        ],
-        'Html' => [
-            'className' => 'Bootstrap.Html'
-        ],
-        'Url'
+        'Form', 'Html', 'Url'
     ];
 
     /**

@@ -35,10 +35,7 @@ class PaginatorHelper extends \Cake\View\Helper\PaginatorHelper {
      * @var array
      */
     public $helpers = [
-        'Url', 'Number',
-        'Html' => [
-            'className' => 'Bootstrap.Html'
-        ]
+        'Url', 'Number', 'Html'
     ];
 
     /**

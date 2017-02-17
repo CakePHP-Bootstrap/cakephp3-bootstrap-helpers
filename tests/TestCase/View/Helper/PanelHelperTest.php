@@ -23,6 +23,9 @@ class PanelHelperTest extends TestCase {
     public function setUp() {
         parent::setUp();
         $view = new View();
+        $view->loadHelper('Html', [
+            'className' => 'Bootstrap.Html'
+        ]);
         $this->panel = new PanelHelper($view);
     }
 

@@ -24,8 +24,10 @@ class FormHelperTest extends TestCase {
     public function setUp() {
         parent::setUp();
         $view = new View();
+        $view->loadHelper('Html', [
+            'className' => 'Bootstrap.Html'
+        ]);
         $this->form = new FormHelper($view);
-
         $this->dateRegex = [
             'daysRegex' => 'preg:/(?:<option value="0?([\d]+)">\\1<\/option>[\r\n]*)*/',
             'monthsRegex' => 'preg:/(?:<option value="[\d]+">[\w]+<\/option>[\r\n]*)*/',

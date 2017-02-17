@@ -23,6 +23,9 @@ class ModalHelperTest extends TestCase {
     public function setUp() {
         parent::setUp();
         $view = new View();
+        $view->loadHelper('Html', [
+            'className' => 'Bootstrap.Html'
+        ]);
         $this->modal = new ModalHelper($view);
     }
 

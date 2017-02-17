@@ -38,10 +38,7 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
      * @var array
      */
     public $helpers = [
-        'Url',
-        'Html' => [
-            'className' => 'Bootstrap.Html'
-        ]
+        'Url', 'Html'
     ];
 
     /**
