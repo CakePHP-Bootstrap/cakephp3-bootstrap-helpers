@@ -28,6 +28,9 @@ class BootstrapPaginatorHelperTest extends TestCase {
     {
         parent::setUp();
         $view = new View();
+        $view->loadHelper('Html', [
+            'className' => 'Bootstrap.BootstrapHtml'
+        ]);
         $this->paginator = new BootstrapPaginatorHelper($view);
         $this->paginator->request = new Request();
         $this->paginator->request->addParams([

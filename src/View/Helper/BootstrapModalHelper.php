@@ -35,9 +35,7 @@ class BootstrapModalHelper extends Helper {
      * @var array
      */
     public $helpers = [
-        'Html' => [
-            'className' => 'BootstrapBootstrapHtml'
-        ]
+        'Html'
     ];
 
     /**

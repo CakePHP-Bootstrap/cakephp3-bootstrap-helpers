@@ -23,6 +23,12 @@ class BootstrapNavbarHelperTest extends TestCase {
     public function setUp() {
         parent::setUp();
         $view = new View();
+        $view->loadHelper('Html', [
+            'className' => 'Bootstrap.BootstrapHtml'
+        ]);
+        $view->loadHelper('Form', [
+            'className' => 'Bootstrap.BootstrapForm'
+        ]);
         $this->navbar = new BootstrapNavbarHelper($view);
     }
 

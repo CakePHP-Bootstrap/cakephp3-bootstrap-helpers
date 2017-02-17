@@ -37,10 +37,7 @@ class BootstrapPaginatorHelper extends PaginatorHelper {
      * @var array
      */
     public $helpers = [
-        'Url', 'Number',
-        'Html' => [
-            'className' => 'Bootstrap.BootstrapHtml'
-        ]
+        'Url', 'Number', 'Html'
     ];
 
     /**

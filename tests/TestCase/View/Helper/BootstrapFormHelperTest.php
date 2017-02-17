@@ -23,6 +23,9 @@ class BootstrapFormHelperTest extends TestCase {
     public function setUp() {
         parent::setUp();
         $view = new View();
+        $view->loadHelper('Html', [
+            'className' => 'Bootstrap.BootstrapHtml'
+        ]);
         $this->form = new BootstrapFormHelper($view);
     }
 

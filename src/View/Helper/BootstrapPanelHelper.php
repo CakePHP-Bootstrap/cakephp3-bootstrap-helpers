@@ -35,9 +35,7 @@ class BootstrapPanelHelper extends Helper {
      * @var array
      */
     public $helpers = [
-        'Html' => [
-            'className' => 'Bootstrap.BootstrapHtml'
-        ]
+        'Html'
     ];
 
     /**

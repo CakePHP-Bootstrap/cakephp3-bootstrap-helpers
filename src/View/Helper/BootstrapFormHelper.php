@@ -39,10 +39,7 @@ class BootstrapFormHelper extends FormHelper {
      * @var array
      */
     public $helpers = [
-        'Url',
-        'Html' => [
-            'className' => 'Bootstrap.BootstrapHtml'
-        ]
+        'Url', 'Html'
     ];
 
     /**

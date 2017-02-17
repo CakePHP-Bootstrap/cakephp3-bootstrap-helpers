@@ -54,6 +54,9 @@ class EasyIconTraitTest extends TestCase {
     public function setUp() {
         parent::setUp();
         $view = new View();
+        $view->loadHelper('Html', [
+            'className' => 'Bootstrap.BootstrapHtml'
+        ]);
         $this->trait = new PublicEasyIconTrait($view);
         $this->form = new BootstrapFormHelper($view);
         $this->paginator = new BootstrapPaginatorHelper($view);
