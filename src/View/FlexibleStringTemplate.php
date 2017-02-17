@@ -60,40 +60,6 @@ class FlexibleStringTemplate extends EnhancedStringTemplate {
     }
 
     /**
-     * Returns a space-delimited string with items of the $options array. If a key
-     * of $options array happens to be one of those listed
-     * in `StringTemplate::$_compactAttributes` and its value is one of:
-     *
-     * - '1' (string)
-     * - 1 (integer)
-     * - true (boolean)
-     * - 'true' (string)
-     *
-     * Then the value will be reset to be identical with key's name.
-     * If the value is not one of these 4, the parameter is not output.
-     *
-     * 'escape' is a special option in that it controls the conversion of
-     * attributes to their HTML-entity encoded equivalents. Set to false to disable HTML-encoding.
-     *
-     * If value for any option key is set to `null` or `false`, that option will be excluded from output.
-     *
-     * This method uses the 'attribute' and 'compactAttribute' templates. Each of
-     * these templates uses the `name` and `value` variables. You can modify these
-     * templates to change how attributes are formatted.
-     *
-     * @param array|null $options Array of options.
-     * @param array|null $exclude Array of options to be excluded, the options here will not be part of the return.
-     * @return string Composed attributes.
-     */
-    public function formatAttributes($options, $exclude = null) {
-        if (!is_array($exclude)) {
-            $exclude = [];
-        }
-        $exclude += ['callbackVars'];
-        return parent::formatAttributes($options, $exclude);
-    }
-
-    /**
      * Retrieve a template name after checking the various callbacks.
      *
      * @param string $name The original name of the template.
