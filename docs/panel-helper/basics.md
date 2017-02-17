@@ -53,7 +53,7 @@ echo $this->Panel->end();
 
 ### Creating fancy panels
 
-You can customize your panel easily by specifying the `type` option and using [easy icons](http://localhost:8000/html-helper/icons/) in
+You can customize your panel easily by specifying the `type` option and using [easy icons](../html-helper/icons.md) in
 your headings:
 
 -- TABS: panel-fancy

@@ -25,6 +25,7 @@ pages:
     - Panel Helper:
         - Basic usage: panel-helper/basics.md
         - Panel groups: panel-helper/groups.md
+    - FAQ: faq.md
 
 markdown_extensions:
     - "mkexts.tabs:TabsExtension"
