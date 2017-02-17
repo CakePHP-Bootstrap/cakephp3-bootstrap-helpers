@@ -84,7 +84,12 @@ class HtmlHelper extends \Cake\View\Helper\HtmlHelper {
 '<div class="progress-bar progress-bar-{{type}}{{attrs.class}}" role="progressbar"
 aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style="width: {{width}}%;"{{attrs}}>{{inner}}</div>',
             'progressBarInner' => '<span class="sr-only">{{width}}%</span>',
-            'progressBarContainer' => '<div class="progress{{attrs.class}}"{{attrs}}>{{content}}</div>'
+            'progressBarContainer' => '<div class="progress{{attrs.class}}"{{attrs}}>{{content}}</div>',
+
+            'dropdownMenu' => '<ul class="dropdown-menu{{attrs.class}}"{{attrs}}>{{content}}</ul>',
+            'dropdownMenuItem' => '<li{{attrs}}>{{content}}</li>',
+            'dropdownMenuHeader' => '<li role="presentation" class="dropdown-header{{attrs.class}}"{{attrs}}>{{content}}</li>',
+            'dropdownMenuDivider' => '<li role="separator" class="divider{{attrs.class}}"{{attrs}}></li>'
         ],
         'templateClass' => 'Bootstrap\View\EnhancedStringTemplate',
         'tooltip' => [
@@ -353,6 +358,26 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
     /**
      * Create & return a twitter bootstrap dropdown menu.
      *
+     * ```php
+     * [
+     *   // Divider
+     *   'divider',
+     *   ['divider'],
+     *   ['divider' => true]
+     *   // Header
+     *   ['header', $title],
+     *   ['header' => $title],
+     *   ['header' => ['title' => $title, ...]] // Remaining options
+     *   // Link item
+     *   [$name, $url, ...] // Remaining options
+     *   ['link', $name, $url, ...] // Remaining options
+     *   ['item' => ['title' => $title, 'url' => $url, ...]] // Remaining options
+     *   // Non-link item
+     *   ['item' => ['title' => $title, ...]] // Remaining options
+     *   'My Item'
+     * ]
+     * ```
+     *
      * @deprecated 3.1.0
      *
      * @param array $menu HTML tags corresponding to menu options (which will be wrapped
@@ -362,39 +387,85 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
      * @return string
      */
     public function dropdown(array $menu = [], array $options = []) {
-        $output = '' ;
-        foreach ($menu as $action) {
-            if ($action === 'divider' || (is_array($action) && $action[0] === 'divider')) {
-                $output .= '<li role="presentation" class="divider"></li>' ;
+        $normalized = [];
+        foreach ($menu as $key => $value) {
+            if (!is_numeric($key)) {
+                $value = [$key => $value];
             }
-            elseif (is_array($action)) {
-                if ($action[0] === 'header') {
-                    $output .= '<li role="presentation" class="dropdown-header">'
-                            .$action[1]
-                            .'</li>' ;
+            // Normalized item...
+            if (!is_array($value)) {
+                if ($value === 'divider') {
+                    $value = ['divider' => []];
                 }
                 else {
-                    if ($action[0] === 'link') {
-                        array_shift($action); // Remove first cell
-                    }
-                    $name = array_shift($action) ;
-                    $url  = array_shift($action) ;
-                    $action['role'] = 'menuitem' ;
-                    $action['tabindex'] = -1 ;
-                    $output .= '<li role="presentation">'
-                            .$this->link($name, $url, $action).'</li>';
+                    $value = ['item' => ['title' => $value]];
                 }
             }
-            else {
-                $output .= '<li role="presentation">'.$action.'</li>' ;
+            if (isset($value[0])) {
+                if ($value[0] == 'header') {
+                    $value = ['header' => ['title' => $value[1]]];
+                }
+                else if ($value[0] == 'divider') {
+                    $value = ['divider' => []];
+                }
+                else {
+                    if ($value[0] == 'link') {
+                        array_shift($value);
+                    }
+                    $title = array_shift($value);
+                    $url = array_shift($value);
+                    $value = ['item' => array_merge([
+                        'title' => $title, 'url' => $url], $value)
+                    ];
+                }
+            }
+            if (isset($value['header']) && is_string($value['header'])) {
+                $value = ['header' => ['title' => $value['header']]];
+            }
+            if (isset($value['divider']) && !is_array($value['divider'])) {
+                $value['divider'] = [];
+            }
+            $normalized[] = $value;
+        }
+        $content = '';
+        foreach ($normalized as $item) {
+            foreach ($item as $key => $value) {
+                $value += [
+                    'templateVars' => []
+                ];
+                if ($key == 'divider') {
+                    $content .= $this->formatTemplate('dropdownMenuDivider', [
+                        'attrs' => $this->templater()->formatAttributes($value),
+                        'templateVars' => $value['templateVars']
+                    ]);
+                }
+                if ($key == 'header') {
+                    $content .= $this->formatTemplate('dropdownMenuHeader', [
+                        'content' => $value['title'],
+                        'attrs' => $this->templater()->formatAttributes($value, ['title']),
+                        'templateVars' => $value['templateVars']
+                    ]);
+                }
+                if ($key == 'item') {
+                    if (isset($value['url'])) {
+                        $value['title'] = $this->link($value['title'], $value['url']);
+                    }
+                    $content .= $this->formatTemplate('dropdownMenuItem', [
+                        'content' => $value['title'],
+                        'attrs' => $this->templater()->formatAttributes($value, ['title', 'url']),
+                        'templateVars' => $value['templateVars']
+                    ]);
+                }
             }
         }
-        $options = $this->addClass($options, 'dropdown-menu');
-        $options['role'] = 'menu';
-        $options += ['tag' => 'ul'];
-        $tag = $options['tag'];
-        unset($options['tag']);
-        return $this->tag($tag, $output, $options) ;
+        $options += [
+            'templateVars' => []
+        ];
+        return $this->formatTemplate('dropdownMenu', [
+            'content' => $content,
+            'attrs' => $this->templater()->formatAttributes($options),
+            'templateVars' => $options['templateVars']
+        ]);
     }
 
     /**

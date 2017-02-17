@@ -35,8 +35,8 @@ trait EasyIconTrait {
      * **Note:** This function will currently fail if the Html helper associated with the
      * view is not BootstrapHtmlHelper.
      *
-     * @param string $text      The string to convert.
-     * @param bool   $converted If specified, will contains `true` if the text was converted,
+     * @param string $text The string to convert.
+     * @param bool $converted If specified, will contains `true` if the text was converted,
      * `false` otherwize.
      *
      * @return string The text after conversion.
@@ -62,8 +62,8 @@ trait EasyIconTrait {
      * two arguments ($title and $options).
      *
      * @param callable $callback The callback.
-     * @param string   $title    The first argument for the callback.
-     * @param array    $options  The second argument for the calback.
+     * @param string $title The first argument for the callback.
+     * @param array $options The second argument for the calback.
      *
      * @return mixed Whatever might be returned by $callback.
      */

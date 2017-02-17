@@ -572,22 +572,15 @@ class FormHelperTest extends TestCase {
             ['span' => ['class' => 'caret']], '/span',
             '/button',
             ['ul' => [
-                'class' => 'dropdown-menu',
-                'role'  => 'menu'
+                'class' => 'dropdown-menu'
             ]],
+            ['li' => []], ['a' => ['href'  => '#']], 'Link 1', '/a', '/li',
+            ['li' => []], ['a' => ['href'  => '#']], 'Link 2', '/a', '/li',
             ['li' => [
-                'role' => 'presentation'
-            ]], ['a' => ['href'  => '#']], 'Link 1', '/a', '/li',
-            ['li' => [
-                'role' => 'presentation'
-            ]], ['a' => ['href'  => '#']], 'Link 2', '/a', '/li',
-            ['li' => [
-                'role' => 'presentation',
+                'role' => 'separator',
                 'class' => 'divider'
             ]], '/li',
-            ['li' => [
-                'role' => 'presentation'
-            ]], ['a' => ['href'  => '#']], 'Link 3', '/a', '/li',
+            ['li' => []], ['a' => ['href'  => '#']], 'Link 3', '/a', '/li',
             '/ul',
             '/div',
             '/span',
@@ -853,8 +846,8 @@ class FormHelperTest extends TestCase {
         $result = $this->form->file('Contact.picture');
         $expected = [
             ['input' => [
-                'type' => 'file', 
-                'name' => 'Contact[picture]', 
+                'type' => 'file',
+                'name' => 'Contact[picture]',
                 'id' => 'Contact[picture]',
                 'style' => 'display: none;',
                 'onchange' => "document.getElementById('Contact[picture]-input').value = (this.files.length <= 1) ? this.files[0].name : this.files.length + ' ' + 'files selected';"
@@ -886,7 +879,7 @@ class FormHelperTest extends TestCase {
             ['input' => [
                 'type' => 'file',
                 'multiple' => 'multiple',
-                'name' => 'Contact[picture]', 
+                'name' => 'Contact[picture]',
                 'id' => 'Contact[picture]',
                 'style' => 'display: none;',
                 'onchange' => "document.getElementById('Contact[picture]-input').value = (this.files.length <= 1) ? this.files[0].name : this.files.length + ' ' + 'files selected';"

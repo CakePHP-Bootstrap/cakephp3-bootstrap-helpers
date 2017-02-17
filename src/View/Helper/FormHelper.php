@@ -210,7 +210,7 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
      * ### Options
      *
      * - `context` Additional options for the context class. For example the
-     * EntityContext accepts a 'table' option that allows you to set the specific Table 
+     * EntityContext accepts a 'table' option that allows you to set the specific Table
      * class the form should be based on.
      * - `encoding` Set the accept-charset encoding for the form. Defaults to
      * `Configure::read('App.encoding')`.
@@ -412,7 +412,7 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
      * inputs outside of label elements. Can be set to true on any input to force the
      * input inside the label. If you enable this option for radio buttons you will also
      * need to modify the default `radioWrapper` template.
-     * - `inline` Only used with radio inputs, set to `true` to have inlined radio buttons. 
+     * - `inline` Only used with radio inputs, set to `true` to have inlined radio buttons.
      * - `options` For widgets that take options e.g. radio, select.
      * - `templates` The templates you want to use for this input. Any templates will be
      * merged on top of the already loaded templates. This option can either be a filename
@@ -443,7 +443,7 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
         $append = $options['append'];
         $help = $options['help'];
         $inline = $options['inline'];
-        unset($options['prepend'], $options['append'], 
+        unset($options['prepend'], $options['append'],
             $options['help'], $options['inline']);
 
         if ($prepend || $append) {
@@ -638,7 +638,6 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
         $options['type'] = false;
         $options['data-toggle'] = 'dropdown';
         $options = $this->addClass($options, "dropdown-toggle");
-
         return $this->buttonGroup([
             $this->button($title.' <span class="caret"></span>', $options),
             $this->Html->dropdown($menu)

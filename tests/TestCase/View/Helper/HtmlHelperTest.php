@@ -280,4 +280,46 @@ class HtmlHelperTest extends TestCase {
         $this->assertHtml($expected, $result);
     }
 
+    public function testDropdown() {
+        $result = $this->html->dropdown([
+            ['header' => 'Header 1'],
+            'divider',
+            ['header', 'Header 2'],
+            ['divider'],
+            ['item' => [
+                'title' => 'Link 1',
+                'url' => '#'
+            ]],
+            ['divider' => true],
+            ['header' => [
+                'title' => 'Header 3',
+            ]],
+            'Item 1',
+            ['Item 2', '#'],
+            ['item' => [
+                'title' => 'Item 3'
+            ]],
+            ['item' => [
+                'title' => 'Item 4',
+                'url' => '#',
+                'class' => 'my-class-4'
+            ]]
+        ]);
+        $expected = [
+            ['ul' => ['class' => 'dropdown-menu']],
+            ['li' => ['role' => 'presentation', 'class' => 'dropdown-header']], 'Header 1', '/li',
+            ['li' => ['role' => 'separator', 'class' => 'divider']], '/li',
+            ['li' => ['role' => 'presentation', 'class' => 'dropdown-header']], 'Header 2', '/li',
+            ['li' => ['role' => 'separator', 'class' => 'divider']], '/li',
+            ['li' => []], ['a' => ['href' => '#']], 'Link 1', '/a', '/li',
+            ['li' => ['role' => 'separator', 'class' => 'divider']], '/li',
+            ['li' => ['role' => 'presentation', 'class' => 'dropdown-header']], 'Header 3', '/li',
+            ['li' => []], 'Item 1', '/li',
+            ['li' => []], ['a' => ['href' => '#']], 'Item 2', '/a', '/li',
+            ['li' => []], 'Item 3', '/li',
+            ['li' => ['class' => 'my-class-4']], ['a' => ['href' => '#']], 'Item 4', '/a', '/li',
+        ];
+        $this->assertHtml($expected, $result);
+    }
+
 }
