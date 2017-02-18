@@ -269,6 +269,24 @@ class UrlComparerTraitTest extends TestCase {
             ['/cakephp/admin/users/edit/1', '/admin/users/edit']
         ];
         $this->_testCompare($urlsMatchTrue, $urlsMatchFalse);
+
+        $request = new Request();
+        $request->addParams([
+            'action' => 'display',
+            'plugin' => null,
+            'controller' => 'pages',
+            'pass' => ['faq']
+        ]);
+        $request->base = '/cakephp';
+        $request->here = '/cakephp/pages/faq';
+        Router::setRequestInfo($request);
+        $this->_testCompare([
+            ['/pages/faq', []],
+            [['controller' => 'Pages', 'action' => 'display', 'faq'], []],
+            ['/pages', []]
+        ], [
+            ['/pages/credits', []]
+        ]);
     }
 
 };
