@@ -23,6 +23,13 @@ use Cake\Routing\Router;
 trait UrlComparerTrait {
 
     /**
+     * Parts of the URL used for normalization.
+     *
+     * @var array
+     */
+    protected $_parts = ['plugin', 'prefix', 'controller', 'action', 'pass'];
+
+    /**
      * Retrieve the relative path of the root URL from hostname.
      *
      * @return string The relative path.
@@ -98,11 +105,11 @@ trait UrlComparerTrait {
      * Normalize an URL.
      *
      * @param string $url URL to normalize.
-     * @param bool $pass Include pass parameters.
+     * @param array $pass Include pass parameters.
      *
      * @return string Normalized URL.
      */
-    protected function _normalize($url, $pass = false) {
+    protected function _normalize($url, array $parts = []) {
         if (!is_string($url)) {
             $url = Router::url($url);
         }
@@ -114,19 +121,19 @@ trait UrlComparerTrait {
         }
         $url = Router::parse($this->_removeRelative($url));
         $arr = [];
-        if (isset($url['plugin'])) {
-            $arr[] = $url['plugin'];
+        foreach ($this->_parts as $part) {
+            if (!isset($url[$part]) || (isset($parts[$part]) && !$parts[$part])) {
+                continue;
+            }
+            if (is_array($url[$part])) {
+                $url[$part] = implode('/', $url[$part]);
+            }
+            if ($part != 'pass') {
+                $url[$part] = strtolower($url[$part]);
+            }
+            $arr[] = $url[$part];
         }
-        if (isset($url['prefix'])) {
-            $arr[] = $url['prefix'];
-        }
-        $arr[] = $url['controller'];
-        $arr[] = $url['action'];
-        $out = '/'.strtolower(implode('/', $arr));
-        if ($pass && isset($url['pass'])) {
-            $out .= '/'.implode('/', $url['pass']);
-        }
-        return $this->_removeRelative(Router::normalize($out));
+        return $this->_removeRelative(Router::normalize('/'.implode('/', $arr)));
     }
 
     /**
@@ -138,12 +145,12 @@ trait UrlComparerTrait {
      *
      * @return bool `true` if both URL match, `false` otherwise.
      */
-    public function compareUrls($lhs, $rhs = null) {
+    public function compareUrls($lhs, $rhs = null, $parts = []) {
         if ($rhs == null) {
             $rhs = Router::url();
         }
-        $lhs = $this->_normalize($lhs, true);
-        $rhs = $this->_normalize($rhs, true);
+        $lhs = $this->_normalize($lhs, $parts);
+        $rhs = $this->_normalize($rhs);
         return $lhs !== null && $rhs !== null && strpos($rhs, $lhs) === 0;
     }
 }
