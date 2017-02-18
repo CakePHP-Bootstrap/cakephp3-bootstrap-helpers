@@ -61,7 +61,7 @@ class NavbarHelper extends Helper {
             'responsiveStart' => '<div class="collapse navbar-collapse{{attrs.class}}" id="{{id}}"{{attrs}}>',
             'responsiveEnd' => '</div>',
             'header' => '<div class="navbar-header{{attrs.class}}"{{attrs}}>{{toggleButton}}{{brand}}</div>',
-            'toggleButton' => 
+            'toggleButton' =>
 '<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#{{id}}" aria-expanded="false">
     <span class="sr-only">{{content}}</span>
     <span class="icon-bar"></span>
@@ -72,12 +72,12 @@ class NavbarHelper extends Helper {
             'brandImage' => '<img alt="{{brandname}}" src="{{src}}"{{attrs}} />',
             'dropdownMenuStart' => '<ul class="dropdown-menu{{attrs.class}}"{{attrs}}>',
             'dropdownMenuEnd' => '</ul>',
-            'dropdownLink' => 
-'<a href="{{url}}" class="dropdown-toggle{{attrs.class}}" data-toggle="dropdown" role="button" 
+            'dropdownLink' =>
+'<a href="{{url}}" class="dropdown-toggle{{attrs.class}}" data-toggle="dropdown" role="button"
 aria-haspopup="true" aria-expanded="false">{{content}}{{caret}}</a>',
             'innerMenuStart' => '<li class="dropdown{{attrs.class}}"{{attrs}}>{{dropdownLink}}{{dropdownMenuStart}}',
             'innerMenuEnd' => '{{dropdownMenuEnd}}</li>',
-            'innerMenuItem' => '<li{{attrs}}>{{link}}</li>',            
+            'innerMenuItem' => '<li{{attrs}}>{{link}}</li>',
             'innerMenuItemLink' => '<a href="{{url}}"{{attrs}}>{{content}}</a>',
             'innerMenuItemActive' => '<li class="active{{attrs.class}}"{{attrs}}>{{link}}</li>',
             'innerMenuItemLinkActive' => '<a href="{{url}}"{{attrs}}>{{content}}</a>',
@@ -213,7 +213,7 @@ aria-haspopup="true" aria-expanded="false">{{content}}{{caret}}</a>',
     /**
      * Add a link to the navbar or to a menu.
      *
-     *  Encapsulate links with `beginMenu()`, `endMenu()` to create 
+     *  Encapsulate links with `beginMenu()`, `endMenu()` to create
      * a horizontal hover menu in the navbar or a dropdown menu.
      *
      * ### Options
@@ -233,12 +233,18 @@ aria-haspopup="true" aria-expanded="false">{{content}}{{caret}}</a>',
     public function link($name, $url = '', array $options = [], array $linkOptions = []) {
         $url = $this->Url->build($url);
         $options += [
-            'active' => $this->getConfig('autoActiveLink') && $this->compareUrls($url),
+            'active' => [],
             'templateVars' => []
         ];
         $linkOptions += [
             'templateVars' => []
         ];
+        if (is_string($options['active'])) {
+            $options['active'] = [];
+        }
+        if ($this->config('autoActiveLink') && is_array($options['active'])) {
+            $options['active'] = $this->compareUrls($url, null, $options['active']);
+        }
         $active = $options['active'] ? 'Active' : '';
         $level = $this->_level > 1 ? 'inner' : 'outer';
         $template = $level.'MenuItem'.$active;
@@ -454,7 +460,7 @@ aria-haspopup="true" aria-expanded="false">{{content}}{{caret}}</a>',
             $template = 'innerMenuEnd';
             $options['dropdownMenuEnd'] = $this->formatTemplate('dropdownMenuEnd', []);
         }
-        $this->_level -= 1; 
+        $this->_level -= 1;
         return $this->formatTemplate($template, $options);
     }
 

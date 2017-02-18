@@ -14,7 +14,7 @@ class PublicUrlComparerTrait {
 
     use UrlComparerTrait;
 
-    public function normalize($url, $pass = false) {
+    public function normalize($url, $pass = []) {
         return $this->_normalize($url, $pass);
     }
 
@@ -58,7 +58,7 @@ class UrlComparerTraitTest extends TestCase {
         ];
         foreach ($tests as $test) {
             list($lhs, $rhs) = $test;
-            $nm = $this->trait->normalize($lhs);
+            $nm = $this->trait->normalize($lhs, ['pass' => false]);
             $this->assertTrue($nm == $rhs, sprintf("%s is not normalized as %s but %s.", $lhs, $rhs, $nm));
         }
         Router::fullBaseUrl('');
@@ -113,7 +113,7 @@ class UrlComparerTraitTest extends TestCase {
         ];
         foreach ($tests as $test) {
             list($lhs, $rhs) = $test;
-            $nm = $this->trait->normalize($lhs);
+            $nm = $this->trait->normalize($lhs, ['pass' => false]);
             $this->assertTrue($nm == $rhs, sprintf("%s is not normalized as %s but %s.", $lhs, $rhs, $nm));
         }
     }
@@ -127,7 +127,7 @@ class UrlComparerTraitTest extends TestCase {
         ];
         foreach ($tests as $test) {
             list($lhs, $rhs) = $test;
-            $nm = $this->trait->normalize($lhs, true);
+            $nm = $this->trait->normalize($lhs);
             $this->assertTrue($nm == $rhs, sprintf("%s is not normalized as %s but %s.", $lhs, $rhs, $nm));
         }
         Router::fullBaseUrl('');
@@ -180,19 +180,19 @@ class UrlComparerTraitTest extends TestCase {
         ];
         foreach ($tests as $test) {
             list($lhs, $rhs) = $test;
-            $nm = $this->trait->normalize($lhs, true);
+            $nm = $this->trait->normalize($lhs);
             $this->assertTrue($nm == $rhs, sprintf("%s is not normalized as %s but %s.", $lhs, $rhs, $nm));
         }
     }
 
-    public function _testCompare($matchTrue, $matchFalse) {
+    public function _testCompare($matchTrue, $matchFalse, $parts = []) {
         foreach ($matchTrue as $urls) {
             list($lhs, $rhs) = $urls;
-            $this->assertTrue($this->trait->compareUrls($lhs, $rhs), sprintf('%s != %s', Router::url($lhs), Router::url($rhs)));
+            $this->assertTrue($this->trait->compareUrls($lhs, $rhs, $parts), sprintf('%s != %s', Router::url($lhs), Router::url($rhs)));
         }
         foreach ($matchFalse as $urls) {
             list($lhs, $rhs) = $urls;
-            $this->assertTrue(!$this->trait->compareUrls($lhs, $rhs), sprintf('%s == %s', Router::url($lhs), Router::url($rhs)));
+            $this->assertTrue(!$this->trait->compareUrls($lhs, $rhs, $parts), sprintf('%s == %s', Router::url($lhs), Router::url($rhs)));
         }
     }
 
@@ -286,6 +286,13 @@ class UrlComparerTraitTest extends TestCase {
         ], [
             ['/pages/credits', []]
         ]);
+    }
+
+    public function testCompareCustom() {
+        $tests = [
+            [['controller' => 'Apartments', 'action' => 'index'], '/apartments/edit']
+        ];
+        $this->_testCompare($tests, [], ['action' => false, 'pass' => false]);
     }
 
 };
