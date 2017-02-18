@@ -63,6 +63,14 @@ div[role="main"] h3:first-child {
     margin-top: 0;
 }
 
+table code,
+table code[class*="language-"],
+table pre[class*="language-"] {
+    font-size: 13px;
+    background: none;
+    color: inherit;
+}
+
 h3 {
     border-bottom: 1px solid #ddd;
     padding-bottom: 10px;

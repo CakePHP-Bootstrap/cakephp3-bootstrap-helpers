@@ -18,10 +18,10 @@ You are now ready to create your navbar, see the basic example below.
 -- TAB: PHP
 
 ```php
-echo $this->Navbar->create('Holt59', array('fixed' => 'top', 'responsive' => 'false', 'inverse' => true));
+echo $this->Navbar->create('Holt59', ['fixed' => 'top', 'inverse' => true]);
 echo $this->Navbar->beginMenu();
     echo $this->Navbar->link('Link', '/', ['class' => 'active']);
-    echo $this->Navbar->link('Blog', array('controller' => 'pages', 'action' => 'test'));
+    echo $this->Navbar->link('Blog', ['controller' => 'pages', 'action' => 'test']);
     echo $this->Navbar->beginMenu('Dropdown');
         echo $this->Navbar->header('Header 1');
         echo $this->Navbar->link('Action');
@@ -101,25 +101,3 @@ echo $this->Navbar->end();
 
 -- TABS
 
-### Automatic deduction of the active links
-
-The `autoActiveLink` configuration option allows the navbar helper to deduce the active link automatically and add an `active` class. This feature
-is based on the [`UrlComparerTrait`]() class, and may not work everywhere.
-
-```php
-// Assume the current URL is /
-$this->Navbar->config('autoActiveLink', true);
-echo $this->Navbar->link('Link', '/');
-// <li class="active">...</li>
-echo $this->Navbar->link('Link', '/pages/test');
-// <li>...</li>
-echo $this->Navbar->link('Link', '#anchor');
-// <li class="active">...</li>
-
-// You can disable it easily (here or directly when loading the helper):
-$this->Navbar->config('autoActiveLink', false);
-echo $this->Navbar->link('Link', '/');
-// <li>...</li>
-```
-
-If you found a bug in the `UrlComparerTrait`, do not hesitate to open an [issue](https://github.com/Holt59/cakephp3-bootstrap-helpers/issues/new).
