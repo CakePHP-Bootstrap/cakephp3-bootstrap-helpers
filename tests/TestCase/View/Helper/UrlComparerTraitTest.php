@@ -50,10 +50,10 @@ class UrlComparerTraitTest extends TestCase {
 
     public function testNormalizedWithoutPass() {
         $tests = [
-            ['/pages/test', '/pages'], // normalize as /pages due to (2)
+            ['/pages/test', '/pages/display'], // normalize as /pages due to (2)
             ['/users/login', '/users/login'],
             ['/users/login/whatever?query=no', '/users/login'],
-            ['/pages/display/test', '/pages'],
+            ['/pages/display/test', '/pages/display'],
             ['/admin/users/login', '/admin/users/login'],
         ];
         foreach ($tests as $test) {
@@ -74,12 +74,12 @@ class UrlComparerTraitTest extends TestCase {
         $request->here = '/cakephp/pages/view/1';
         Router::setRequestInfo($request);
         $tests = [
-            ['/pages', '/pages'],
-            ['/pages/display/test', '/pages'],
-            ['/pages/test', '/pages'], // normalize as /pages due to (2)
-            ['/pages?query=no', '/pages'],
-            ['/pages#anchor', '/pages'],
-            ['/pages?query=no#anchor', '/pages'],
+            ['/pages', '/pages/display'],
+            ['/pages/display/test', '/pages/display'],
+            ['/pages/test', '/pages/display'], // normalize as /pages due to (2)
+            ['/pages?query=no', '/pages/display'],
+            ['/pages#anchor', '/pages/display'],
+            ['/pages?query=no#anchor', '/pages/display'],
             ['/users/login', '/users/login'],
             ['/users/login/whatever', '/users/login'],
             ['/users/login?query=no', '/users/login'],
@@ -95,12 +95,12 @@ class UrlComparerTraitTest extends TestCase {
             ['/cakephp/admin/users/login?query=no', '/admin/users/login'],
             ['/cakephp/admin/users/login#anchor', '/admin/users/login'],
             ['/cakephp/admin/users/login/whatever?query=no#anchor', '/admin/users/login'],
-            ['http://localhost/cakephp/pages', '/pages'],
-            ['http://localhost/cakephp/pages/display/test', '/pages'],
-            ['http://localhost/cakephp/pages/test', '/pages'], // normalize as /pages due to (2)
-            ['http://localhost/cakephp/pages?query=no', '/pages'],
-            ['http://localhost/cakephp/pages#anchor', '/pages'],
-            ['http://localhost/cakephp/pages?query=no#anchor', '/pages'],
+            ['http://localhost/cakephp/pages', '/pages/display'],
+            ['http://localhost/cakephp/pages/display/test', '/pages/display'],
+            ['http://localhost/cakephp/pages/test', '/pages/display'], // normalize as /pages due to (2)
+            ['http://localhost/cakephp/pages?query=no', '/pages/display'],
+            ['http://localhost/cakephp/pages#anchor', '/pages/display'],
+            ['http://localhost/cakephp/pages?query=no#anchor', '/pages/display'],
             ['http://localhost/cakephp/admin/users/login', '/admin/users/login'],
             ['http://localhost/cakephp/admin/users/login/whatever', '/admin/users/login'],
             ['http://localhost/cakephp/admin/users/login?query=no', '/admin/users/login'],
@@ -120,10 +120,9 @@ class UrlComparerTraitTest extends TestCase {
 
     public function testNormalizedWithPass() {
         $tests = [
-            ['/pages/test', '/pages/test'], // normalize as /pages due to (2)
+            ['/pages/test', '/pages/display/test'], // normalize as /pages due to (2)
             ['/users/login', '/users/login'],
             ['/users/login/whatever?query=no', '/users/login/whatever'],
-            ['/pages/display/test', '/pages/display/test'],
             ['/admin/users/login', '/admin/users/login'],
         ];
         foreach ($tests as $test) {
@@ -144,12 +143,11 @@ class UrlComparerTraitTest extends TestCase {
         $request->here = '/cakephp/pages/view/1';
         Router::setRequestInfo($request);
         $tests = [
-            ['/pages', '/pages'],
-            ['/pages/display/test', '/pages/display/test'],
-            ['/pages/test', '/pages/test'], // normalize as /pages due to (2)
-            ['/pages?query=no', '/pages'],
-            ['/pages#anchor', '/pages'],
-            ['/pages?query=no#anchor', '/pages'],
+            ['/pages', '/pages/display'],
+            ['/pages/test', '/pages/display/test'],
+            ['/pages?query=no', '/pages/display'],
+            ['/pages#anchor', '/pages/display'],
+            ['/pages?query=no#anchor', '/pages/display'],
             ['/users/login', '/users/login'],
             ['/users/login/whatever', '/users/login/whatever'],
             ['/users/login?query=no', '/users/login'],
@@ -165,12 +163,11 @@ class UrlComparerTraitTest extends TestCase {
             ['/cakephp/admin/users/login?query=no', '/admin/users/login'],
             ['/cakephp/admin/users/login#anchor', '/admin/users/login'],
             ['/cakephp/admin/users/login/whatever?query=no#anchor', '/admin/users/login/whatever'],
-            ['http://localhost/cakephp/pages', '/pages'],
-            ['http://localhost/cakephp/pages/display/test', '/pages/display/test'],
-            ['http://localhost/cakephp/pages/test', '/pages/test'],
-            ['http://localhost/cakephp/pages?query=no', '/pages'],
-            ['http://localhost/cakephp/pages#anchor', '/pages'],
-            ['http://localhost/cakephp/pages?query=no#anchor', '/pages'],
+            ['http://localhost/cakephp/pages', '/pages/display'],
+            ['http://localhost/cakephp/pages/test', '/pages/display/test'],
+            ['http://localhost/cakephp/pages?query=no', '/pages/display'],
+            ['http://localhost/cakephp/pages#anchor', '/pages/display'],
+            ['http://localhost/cakephp/pages?query=no#anchor', '/pages/display'],
             ['http://localhost/cakephp/admin/users/login', '/admin/users/login'],
             ['http://localhost/cakephp/admin/users/login/whatever', '/admin/users/login/whatever'],
             ['http://localhost/cakephp/admin/users/login?query=no', '/admin/users/login'],
@@ -211,13 +208,15 @@ class UrlComparerTraitTest extends TestCase {
             ['/pages/test', ['controller' => 'Pages', 'action' => 'display', 'test']],
             ['/pages/test/id', ['controller' => 'Pages', 'action' => 'display', 'test', 'id']],
             // Controller routes
-            ['/user/login', ['controller' => 'user', 'action' => 'login']],
-            ['/user/login/myself?query=no', ['controller' => 'user', 'action' => 'login', 'myself']],
+            ['/users/login', ['controller' => 'users', 'action' => 'login']],
+            ['/users/login/myself?query=no', ['controller' => 'users', 'action' => 'login', 'myself']],
+            ['/users', '/users'],
         ];
         $urlsMatchFalse = [
             ['https://github.com', '/'],
             ['/pages/url', '/pages'],
-            ['/pages/url', '/pages/something']
+            ['/pages/url', '/pages/something'],
+            [['controller' => 'users', 'action' => 'index'], '/users/edit']
         ];
         $this->_testCompare($urlsMatchTrue, $urlsMatchFalse);
     }

@@ -113,11 +113,20 @@ trait UrlComparerTrait {
             return null;
         }
         $url = Router::parse($this->_removeRelative($url));
-        unset($url['?'], $url['#'], $url['plugin'],  $url['_matchedRoute']);
-        if (!$pass) {
-            unset($url['pass']);
+        $arr = [];
+        if (isset($url['plugin'])) {
+            $arr[] = $url['plugin'];
         }
-        return $this->_removeRelative(Router::reverse($url));
+        if (isset($url['prefix'])) {
+            $arr[] = $url['prefix'];
+        }
+        $arr[] = $url['controller'];
+        $arr[] = $url['action'];
+        $out = '/'.strtolower(implode('/', $arr));
+        if ($pass && isset($url['pass'])) {
+            $out .= '/'.implode('/', $url['pass']);
+        }
+        return $this->_removeRelative(Router::normalize($out));
     }
 
     /**
