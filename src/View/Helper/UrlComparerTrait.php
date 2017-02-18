@@ -59,7 +59,7 @@ trait UrlComparerTrait {
     /**
      * Checks if the given URL components match the current relative URL. This
      * methods only works with full URL, and do not check the host.
-     * 
+     *
      * @param string $url URL to check.
      *
      * @return bool `true` if the URL matches, `false` otherwise.
@@ -98,10 +98,11 @@ trait UrlComparerTrait {
      * Normalize an URL.
      *
      * @param string $url URL to normalize.
+     * @param bool $pass Include pass parameters.
      *
      * @return string Normalized URL.
      */
-    protected function _normalize($url) {
+    protected function _normalize($url, $pass = false) {
         if (!is_string($url)) {
             $url = Router::url($url);
         }
@@ -112,12 +113,16 @@ trait UrlComparerTrait {
             return null;
         }
         $url = Router::parse($this->_removeRelative($url));
-        unset($url['?'], $url['#'], $url['plugin'], $url['pass'], $url['_matchedRoute']);
-        return $this->_removeRelative(Router::url($url));
+        unset($url['?'], $url['#'], $url['plugin'],  $url['_matchedRoute']);
+        if (!$pass) {
+            unset($url['pass']);
+        }
+        return $this->_removeRelative(Router::reverse($url));
     }
 
     /**
-     * Compare URL without regards to query parameters or hash.
+     * Check if first URL is a parent of the right URL, without regards to query
+     * parameters or hash.
      *
      * @param string|array $lhs First URL to compare.
      * @param string|array $rhs Second URL to compare. Default is current URL (`Router::url()`).
@@ -128,9 +133,9 @@ trait UrlComparerTrait {
         if ($rhs == null) {
             $rhs = Router::url();
         }
-        $lhs = $this->_normalize($lhs);
-        $rhs = $this->_normalize($rhs);
-        return $lhs !== null && $rhs !== null && $lhs == $rhs;
+        $lhs = $this->_normalize($lhs, true);
+        $rhs = $this->_normalize($rhs, true);
+        return $lhs !== null && $rhs !== null && strpos($rhs, $lhs) === 0;
     }
 }
 
