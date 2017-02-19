@@ -78,6 +78,16 @@ public $helpers = [
 ];
 ```
 
+If you are using a version prior to 3.1.2, add the `Bootstrap` prefix to the class, e.g.:
+
+```php
+public $helpers = [
+    'Form' => [
+        'className' => 'Bootstrap.BootstrapForm'
+    ]
+];
+```
+
 You should be careful when mixing the Bootstrap helpers with other helpers, see the [FAQ](faq.md).
 Do not forget to add the bootstrap style and script files to your view (e.g. in `Layout/default.ctp`):
 
