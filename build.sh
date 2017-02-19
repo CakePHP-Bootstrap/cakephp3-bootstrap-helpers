@@ -83,8 +83,9 @@ if [ ! -e apigen.phar ]; then
     fi
 fi
 
+exclude=$(cd repo/src && ls View/Helper/Bootstrap* | tr "\n" ",")
 rm -rf api
-php apigen.phar generate -s ./repo/src -d api  --debug
+php apigen.phar generate -s ./repo/src -d api  --debug --exclude $exclude
 
 rm -rf ./site
 mv ../site ./site
