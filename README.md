@@ -31,9 +31,7 @@ Plugin::load('Bootstrap');
 ```php
 $this->loadHelper('Html', [
     'className' => 'Bootstrap.Html',
-    'templates' => [
-        'icon' => '<i class="fa fa-{{type}}"></i>'
-    ]
+    // Other configuration options...
 ]);
 ```
 
