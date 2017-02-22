@@ -247,7 +247,7 @@ class PaginatorHelper extends \Cake\View\Helper\PaginatorHelper {
      *
      * @link http://book.cakephp.org/3.0/en/views/helpers/paginator.html#creating-jump-links
      */
-    public function prev ($title = '<< Previous', array $options = []) {
+    public function prev($title = '<< Previous', array $options = []) {
         return $this->_easyIcon('parent::prev', $title, $options);
     }
 
@@ -273,7 +273,7 @@ class PaginatorHelper extends \Cake\View\Helper\PaginatorHelper {
      *
      * @link http://book.cakephp.org/3.0/en/views/helpers/paginator.html#creating-jump-links
      */
-    public function next ($title = 'Next >>', array $options = []) {
+    public function next($title = 'Next >>', array $options = []) {
         return $this->_easyIcon('parent::next', $title, $options);
     }
 
