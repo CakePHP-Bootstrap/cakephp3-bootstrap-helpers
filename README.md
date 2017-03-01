@@ -68,11 +68,9 @@ templates instead of the standard `tag()` and `div()` method.
     - There might be escaping issue since the old `div()` and `tag()` methods did not escape content be default, while
 the template based methods do. Feel free to open an [issue](https://github.com/Holt59/cakephp3-bootstrap-helpers/issues/new) if 
 you encounter problems with escaping.
-- The new `EasyIconTrait` now depends on the `Html` property, and not on the `_View->Html` property, meaning that easy icon
-can be used even if the `Html` helper associated to the view is not `BootstrapHtmlHelper`.
 
 Some minor changes that do not impact the user interface:
-- The `BootstrapTrait` class has been split in two classes: `BootstrapTrait` and `EasyIconTrait`. 
+- The `BootstrapTrait` class has been split in two classes: `ClassTrait` and `EasyIconTrait`. 
 - The test cases have been updated and strenghten to avoid bad modification in the code.
 
 #### Migrating to 3.1
