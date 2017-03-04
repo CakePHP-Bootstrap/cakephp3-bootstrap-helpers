@@ -1,21 +1,28 @@
 <?php
 /**
- * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
  * Licensed under The MIT License
- * For full copyright and license information, please see the LICENSE.txt
+ * For full copyright and license information, please see the LICENSE file
  * Redistributions of files must retain the above copyright notice.
+ * You may obtain a copy of the License at
  *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
- * @link          http://cakephp.org CakePHP(tm) Project
- * @since         3.0.0
- * @license       http://www.opensource.org/licenses/mit-license.php MIT License
+ *     https://opensource.org/licenses/mit-license.php
+ *
+ *
+ * @copyright Copyright (c) Mikaël Capelle (https://typename.fr)
+ * @license https://opensource.org/licenses/mit-license.php MIT License
  */
 namespace Bootstrap\View\Widget;
 
 use Cake\View\Widget\WidgetInterface;
 
+/**
+ * Form 'widget' for creating fancy file widgets made of a button
+ * and a text input.
+ *
+ * Generally this element is used by other widgets,
+ * and FormHelper itself.
+ */
 class FancyFileWidget implements WidgetInterface {
 
     /**
@@ -45,7 +52,7 @@ class FancyFileWidget implements WidgetInterface {
      * @var Cake\View\Widget\BasicWidget
      */
     protected $_input;
-     
+
 
     /**
      * Constructor
@@ -68,7 +75,11 @@ class FancyFileWidget implements WidgetInterface {
      *
      * Data supports the following keys:
      *
+     * - `_input` - Options for the input element.
+     * - `_button` - Options for the button element.
      * - `name` - Set the input name.
+     * - `count-label` - Label for multiple files. Default is `__('files selected')`.
+     * - `button-label` - Button text. Default is `__('Choose File')`.
      * - `escape` - Set to false to disable HTML escaping.
      *
      * All other keys will be converted into HTML attributes.
@@ -124,7 +135,7 @@ class FancyFileWidget implements WidgetInterface {
             'onclick' => "document.getElementById('".$data['id']."').click();",
             'escape' => false
         ], $context);
-        
+
         $fakeButton = $this->_button->render($fakeButtonCustomOptions + [
             'type' => 'button',
             'text' => $buttonLabel,
@@ -133,7 +144,7 @@ class FancyFileWidget implements WidgetInterface {
 
         return $this->_templates->format('fancyFileInput', [
             'fileInput' => $fileInput,
-            'button' => $fakeButton, 
+            'button' => $fakeButton,
             'input' => $fakeInput,
             'attrs' => $this->_templates->formatAttributes($data),
             'templateVars' => $data['templateVars']
