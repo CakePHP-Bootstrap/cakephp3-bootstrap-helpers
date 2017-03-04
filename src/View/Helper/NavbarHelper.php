@@ -354,31 +354,6 @@ aria-haspopup="true" aria-expanded="false">{{content}}{{caret}}</a>',
         ]);
     }
 
-
-    /**
-     * Add a search form to the navbar.
-     *
-     * ### Options
-     *
-     * - `align` Search form alignment. Default is `'left'`.
-     * - Other options will be passed to the `Form::searchForm` method.
-     *
-     * @deprecated 3.1.0
-     *
-     * @param mixed $model   Model for BootstrapFormHelper::searchForm method.
-     * @param array $options Array of options. See above.
-     *
-     * @return string An HTML search form for the navbar.
-     */
-    public function searchForm($model = null, $options = []) {
-        $options += [
-            'align' => 'left'
-        ];
-        $options = $this->addClass($options, ['navbar-form',  'navbar-'.$options['align']]);
-        unset ($options['align']);
-        return $this->Form->searchForm($model, $options);
-    }
-
     /**
      * Start a new menu.
      *
