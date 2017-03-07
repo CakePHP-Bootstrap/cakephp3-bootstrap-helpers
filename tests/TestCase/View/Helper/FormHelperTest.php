@@ -634,6 +634,7 @@ class FormHelperTest extends TestCase {
         $result = $this->form->dateTime('Contact.date', ['default' => true]);
         $now = strtotime('now');
         $expected = [
+            ['div' => ['class' => 'row']],
             ['div' => ['class' => 'col-md-2']],
             ['select' => ['name' => 'Contact[date][year]', 'class' => 'form-control']],
             ['option' => ['value' => '']],
@@ -683,6 +684,7 @@ class FormHelperTest extends TestCase {
             date('i', $now),
             '/option',
             '*/select',
+            '/div',
             '/div'
         ];
         $this->assertHtml($expected, $result);
@@ -691,6 +693,7 @@ class FormHelperTest extends TestCase {
         $result = $this->form->dateTime('Contact.date', ['empty' => false]);
         $now = strtotime('now');
         $expected = [
+            ['div' => ['class' => 'row']],
             ['div' => ['class' => 'col-md-2']],
             ['select' => ['name' => 'Contact[date][year]', 'class' => 'form-control']],
             $yearsRegex,
@@ -730,6 +733,7 @@ class FormHelperTest extends TestCase {
             date('i', $now),
             '/option',
             '*/select',
+            '/div',
             '/div'
         ];
         $this->assertHtml($expected, $result);
@@ -738,6 +742,7 @@ class FormHelperTest extends TestCase {
         $result = $this->form->dateTime('Contact.date', ['default' => true, 'year' => false]);
         $now = strtotime('now');
         $expected = [
+            ['div' => ['class' => 'row']],
             ['div' => ['class' => 'col-md-3']],
             ['select' => ['name' => 'Contact[date][month]', 'class' => 'form-control']],
             ['option' => ['value' => '']],
@@ -777,6 +782,7 @@ class FormHelperTest extends TestCase {
             date('i', $now),
             '/option',
             '*/select',
+            '/div',
             '/div'
         ];
         $this->assertHtml($expected, $result);
@@ -786,6 +792,7 @@ class FormHelperTest extends TestCase {
                                                          'month' => false, 'day' => false]);
         $now = strtotime('now');
         $expected = [
+            ['div' => ['class' => 'row']],
             ['div' => ['class' => 'col-md-6']],
             ['select' => ['name' => 'Contact[date][hour]', 'class' => 'form-control']],
             ['option' => ['value' => '']],
@@ -805,6 +812,49 @@ class FormHelperTest extends TestCase {
             date('i', $now),
             '/option',
             '*/select',
+            '/div',
+            '/div'
+        ];
+        $this->assertHtml($expected, $result);
+
+        // Test with input()
+        $result = $this->form->input('Contact.date', ['type' => 'date']);
+        $now = strtotime('now');
+        $expected = [
+            ['div' => [
+                'class' => 'form-group date'
+            ]],
+            ['label' => [
+                'class' => 'control-label'
+            ]],
+            'Date',
+            '/label',
+            ['div' => ['class' => 'row']],
+            ['div' => ['class' => 'col-md-4']],
+            ['select' => ['name' => 'Contact[date][year]', 'class' => 'form-control']],
+            $yearsRegex,
+            ['option' => ['value' => date('Y', $now), 'selected' => 'selected']],
+            date('Y', $now),
+            '/option',
+            '*/select',
+            '/div',
+            ['div' => ['class' => 'col-md-4']],
+            ['select' => ['name' => 'Contact[date][month]', 'class' => 'form-control']],
+            $monthsRegex,
+            ['option' => ['value' => date('m', $now), 'selected' => 'selected']],
+            date('F', $now),
+            '/option',
+            '*/select',
+            '/div',
+            ['div' => ['class' => 'col-md-4']],
+            ['select' => ['name' => 'Contact[date][day]', 'class' => 'form-control']],
+            $daysRegex,
+            ['option' => ['value' => date('d', $now), 'selected' => 'selected']],
+            date('j', $now),
+            '/option',
+            '*/select',
+            '/div',
+            '/div',
             '/div'
         ];
         $this->assertHtml($expected, $result);
