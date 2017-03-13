@@ -196,6 +196,78 @@ class ModalHelperTest extends TestCase {
             ]]
         ];
         $this->assertHtml($expected, $result);
+        // Test standard create with size
+        $result = $this->modal->create($title, ['size' => 'lg']);
+        $expected = [
+            ['div' => [
+                'tabindex' => '-1',
+                'role' => 'dialog',
+                'class' => 'modal fade'
+            ]],
+            ['div' => [
+                'class' => 'modal-dialog modal-lg',
+                'role' => 'document'
+            ]],
+            ['div' => [
+                'class' => 'modal-content'
+            ]],
+            ['div' => [
+                'class' => 'modal-header'
+            ]],
+            ['button' => [
+                'type' => 'button',
+                'class' => 'close',
+                'data-dismiss' => 'modal',
+                'aria-label' => __('Close')
+            ]],
+            ['span' => ['aria-hidden' => 'true']], '&times;', '/span',
+            '/button',
+            ['h4' => [
+                'class' => 'modal-title'
+            ]],
+            $title,
+            '/h4',
+            '/div',
+            ['div' => [
+                'class' => 'modal-body'
+            ]]
+        ];
+        // Test standard create with custom size
+        $result = $this->modal->create($title, ['size' => 'modal-big']);
+        $expected = [
+            ['div' => [
+                'tabindex' => '-1',
+                'role' => 'dialog',
+                'class' => 'modal fade'
+            ]],
+            ['div' => [
+                'class' => 'modal-dialog modal-big',
+                'role' => 'document'
+            ]],
+            ['div' => [
+                'class' => 'modal-content'
+            ]],
+            ['div' => [
+                'class' => 'modal-header'
+            ]],
+            ['button' => [
+                'type' => 'button',
+                'class' => 'close',
+                'data-dismiss' => 'modal',
+                'aria-label' => __('Close')
+            ]],
+            ['span' => ['aria-hidden' => 'true']], '&times;', '/span',
+            '/button',
+            ['h4' => [
+                'class' => 'modal-title'
+            ]],
+            $title,
+            '/h4',
+            '/div',
+            ['div' => [
+                'class' => 'modal-body'
+            ]]
+        ];
     }
 
     public function testHeader() {

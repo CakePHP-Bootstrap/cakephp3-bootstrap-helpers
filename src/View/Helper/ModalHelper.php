@@ -134,6 +134,8 @@ class ModalHelper extends Helper {
             'templateVars' => []
         ];
 
+        $dialogOptions = [];
+
         if($options['id']) {
             $this->_currentId = $options['id'];
             $options['aria-labelledby'] = $this->_currentId.'Label';
@@ -157,9 +159,11 @@ class ModalHelper extends Helper {
             $size = ' '.$options['size'];
             break;
         }
-        $options = $this->addClass($options, $size);
+        $dialogOptions = $this->addClass($dialogOptions, $size);
 
-        $dialogStart = $this->formatTemplate('modalDialogStart', []);
+        $dialogStart = $this->formatTemplate('modalDialogStart', [
+            'attrs' => $this->templater()->formatAttributes($dialogOptions)
+        ]);
         $contentStart = $this->formatTemplate('modalContentStart', []);
         $res = $this->formatTemplate('modalStart', [
             'dialogStart' => $dialogStart,
