@@ -378,8 +378,6 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
      * ]
      * ```
      *
-     * @deprecated 3.1.0
-     *
      * @param array $menu HTML tags corresponding to menu options (which will be wrapped
      *              into `<li>` tag). To add separator, pass `'divider'`.
      * @param array $options Attributes for the wrapper (change it with tag).
