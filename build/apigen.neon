@@ -25,4 +25,16 @@ download: Yes
 # Generate documentation for deprecated classes, methods, properties and constants
 annotationGroups: [deprecated] # event, api
 
+# Template
 templateConfig: ./templates/bootstrap/config.neon
+
+# Source file or directory to parse
+source:
+    - ./repo/src
+
+# Directory where to save the generated documentation
+destination: './api'
+
+# Mask to exclude file or directory from processing
+exclude:
+    - View/Helper/Bootstrap*

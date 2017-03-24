@@ -73,7 +73,7 @@ if [ ! -e repo ]; then
     git clone https://github.com/holt59/cakephp3-bootstrap-helpers.git repo
 fi
 
-cd repo && git fetch && git checkout $branch && cd ..
+cd repo && git fetch && git checkout $branch && git pull && cd ..
 
 if [ ! -e apigen.phar ]; then
     echo "Fetching apigen.phar... "
@@ -84,7 +84,7 @@ if [ ! -e apigen.phar ]; then
 fi
 
 rm -rf api
-php apigen.phar generate -s ./repo/src -d api  --debug
+php apigen.phar generate
 
 rm -rf ./site
 mv ../site ./site
