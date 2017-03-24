@@ -83,6 +83,7 @@ if [ ! -e apigen.phar ]; then
     fi
 fi
 
+exclude=$(cd repo/src && ls View/Helper/Bootstrap* | tr "\n" ",")
 rm -rf api
 php apigen.phar generate
 

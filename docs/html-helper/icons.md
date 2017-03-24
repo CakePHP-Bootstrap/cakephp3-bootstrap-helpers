@@ -31,6 +31,20 @@ This process is called *easy icon*, the easy icon format is `i:icon-name` where 
 helpers, so you can use custom icon names if you want). You can use easy icon in most methods of the Bootstrap helpers, if you find a method which does
 not work, do not hesitate to open an issue so that I can add support for it!
 
+**Important:** The helpers used internally by other helpers are linked to the `View` instance in CakePHP, this means that the easy-icon feature will
+only work if the `Html` helper associated with your `View` is `Bootstrap.Html` (or a class with a `icon()` compatible method):
+
+```php
+public $helpers = [
+    'Html', // Standard cakephp helper
+    'Form' => [
+        'className' => 'Bootstrap.Form'
+    ]
+];
+
+echo $this->Form->button('i:pencil'); // Error: \Cake\View\Helper\HtmlHelper::icon does not exist!
+```
+
 **Tip:** To disable easy icon, simply do `$this->MyHelper->easyIcon = false;` (replace `MyHelper` by anything relevant).
 
 ### Icons - Custom set of icons
@@ -59,11 +73,9 @@ echo $this->Html->icon('home');
 
 -- TABS
 
-**Note:** At the moment, if you want to use another set of icons with easy icon, the only way is to customize the templates of the `Html` property of
-each of your helpers, e.g.:
-
+If you want to use another set of icons with easy icon, you need to customize the templates of the `Html` helper used by your views:
 ```php
-$this->Form->Html->templates([
+$this->Html->templates([
     'icon' => '<i class="fa fa-{{type}}{{attrs.class}}"{{attrs}}></i>'
 ]);
 ```

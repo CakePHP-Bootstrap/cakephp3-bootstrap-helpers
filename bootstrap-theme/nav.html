@@ -21,40 +21,26 @@
             {%- block site_nav %}
             <!-- Main navigation -->
             <ul class="nav navbar-nav">
-            {% for nav_item in nav %}
-            {% if 'helper' not in nav_item.title|lower %}
-            {% if nav_item.children %}
-                <li class="dropdown{% if nav_item.active %} active{% endif %}">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ nav_item.title }} <b class="caret"></b></a>
+                <li{% if (nav|first).active %} class="active"{% endif %}>
+                    <a href="{{ (nav|first).url }}">{{ (nav|first).title }}</a>
+                </li>
+                <li class="dropdown{% for nav_item in nav %}{% if 'helper' in nav_item.title|lower and nav_item.active %} active{% endif %}{% endfor %}">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">The helpers <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                    {% for nav_item in nav_item.children %}
+                    <!-- helpers -->
+                    {% for nav_item in nav %}
+                    {% if 'helper' in nav_item.title|lower %}
                         <li{% if nav_item.active %} class="active"{% endif %}>
-                            <a href="{{ nav_item.url }}">{{ nav_item.title }}</a>
+                            <a href="{{ nav_item.children.0.url }}">{{ nav_item.title }}</a>
                         </li>
+                    {% endif %}
                     {% endfor %}
                     </ul>
                 </li>
-            {% else %}
-                <li{% if nav_item.active %} class="active"{% endif %}>
-                    <a href="{{ nav_item.url }}">{{ nav_item.title }}</a>
+                <li><a href="{{config.site_url}}/api/">API</a></li>
+                <li{% if (nav|list|last).active %} class="active"{% endif %}>
+                    <a href="{{ (nav|list|last).url }}">{{ (nav|list|last).title }}</a>
                 </li>
-            {% endif %}
-            {% endif %}
-            {% endfor %}
-            <li class="dropdown{% for nav_item in nav %}{% if 'helper' in nav_item.title|lower and nav_item.active %} active{% endif %}{% endfor %}">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">The helpers <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                <!-- helpers -->
-                {% for nav_item in nav %}
-                {% if 'helper' in nav_item.title|lower %}
-                    <li{% if nav_item.active %} class="active"{% endif %}>
-                        <a href="{{ nav_item.children.0.url }}">{{ nav_item.title }}</a>
-                    </li>
-                {% endif %}
-                {% endfor %}
-                </ul>
-            </li>
-            <li><a href="{{config.site_url}}/api/">API</a></li>
             </ul>
             {%- endblock %}
 
