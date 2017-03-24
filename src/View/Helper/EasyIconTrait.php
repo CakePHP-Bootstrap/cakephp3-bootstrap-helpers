@@ -41,14 +41,14 @@ trait EasyIconTrait {
      *
      * @return string The text after conversion.
      */
-    protected function _makeIcon($text, &$converted = false) {
+    protected function _makeIcon($text, &$converted = false, $options = []) {
         $converted = false;
         if (!$this->easyIcon) {
             return $text;
         }
         $text = preg_replace_callback(
-            '#(^|\s+)i:([a-zA-Z0-9\\-_]+)(\s+|$)#', function ($matches) {
-                return $matches[1].$this->Html->icon($matches[2]).$matches[3];
+            '#(^|\s+)i:([a-zA-Z0-9\\-_]+)(\s+|$)#', function ($matches) use ($options) {
+                return $matches[1].$this->Html->icon($matches[2], $options).$matches[3];
             }, $text, -1, $count);
         $converted = (bool)$count;
         return $text;
