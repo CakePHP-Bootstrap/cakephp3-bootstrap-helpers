@@ -93,17 +93,15 @@ echo $this->Form->end() ;
 
 ### Specifying the width of the columns
 
-You can specify the width of the various columns when creating an horizontal forms:
+You can change the widths of the columns at any time using the `setConfig` method:
 
 ```php
-echo $this->Form->create(null, [
-    'horizontal' => true,
-    'columns' => [ // Total is 12, default is 2 / 10 / 0
-        'label' => 2,
-        'input' => 10,
-        'error' => 0 // 0 for 'error' means that it will be put under the input
-    ]
+echo $this->Form->setConfig('columns', [ // Total is 12, default is 2 / 10 / 0
+    'label' => 2,
+    'input' => 10,
+    'error' => 0 // 0 for 'error' means that it will be put under the input
 ]);
+echo $this->Form->create(null, ['horizontal' => true]);
 ```
 
 You can also specify different widths for different display sizes:
@@ -113,21 +111,19 @@ You can also specify different widths for different display sizes:
 -- TAB: PHP
 
 ```php
-echo $this->Form->create(null, [
-    'horizontal' => true,
-    'columns' => [
-        'sm' => [
-            'label' => 4,
-            'input' => 4,
-            'error' => 4
-        ],
-        'md' => [
-            'label' => 2,
-            'input' => 6,
-            'error' => 4
-        ]
+$this->Form->setConfig('columns', [
+    'sm' => [
+        'label' => 4,
+        'input' => 4,
+        'error' => 4
+    ],
+    'md' => [
+        'label' => 2,
+        'input' => 6,
+        'error' => 4
     ]
 ]);
+echo $this->Form->create(null, ['horizontal' => true]);
 echo $this->Form->input('username', ['type' => 'text']) ;
 echo $this->Form->input('password', ['type' => 'password']) ;
 echo $this->Form->input('remember', ['type' => 'checkbox']) ;
