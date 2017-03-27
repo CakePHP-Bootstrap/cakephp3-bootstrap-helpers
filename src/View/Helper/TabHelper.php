@@ -24,10 +24,11 @@ use Cake\View\StringTemplateTrait;
  *
  * @property \Bootstrap\View\Helper\HtmlHelper $Html
  */
-class PanelHelper extends Helper {
+class TabHelper extends Helper {
 
     use ClassTrait;
     use EasyIconTrait;
+    use SectionTrait;
     use StringTemplateTrait;
 
     /**
@@ -46,17 +47,68 @@ class PanelHelper extends Helper {
      */
     protected $_defaultConfig = [
         'templates' => [
-            'tabStart' => '</div>',
-            'tabHeadingStart' => '<ul class="nav nav-{{type}}{{attrs.class}}" role="tablist"{{attrs>}}',
-            'tabContentStart' => '<div class="tab-content{{attrs.class}}"{{attrs}}>',
-            'tabPanelStart' => '<div role="tabpanel" class="tab-pane{{attrs.class}}" id="{{panelId}}"{{attrs}}>',
+            'tabStart' => '<div>',
             'tabEnd' => '</div>',
-            'tabHeadingEnd' => '</ul>',
-            'tabContentEnd' => '</div>',
-            'tabPanelEnd' => '</div>'
+            'headerStart' => '<ul class="nav nav-{{type}}{{attrs.class}}" role="tablist"{{attrs>}}',
+            'headerEnd' => '</ul>',
+            'contentStart' => '<div class="tab-content{{attrs.class}}"{{attrs}}>',
+            'contentEnd' => '</div>',
+            'contentPanelStart' => '<div role="tabpanel" class="tab-pane{{attrs.class}}" id="{{panelId}}"{{attrs}}>',
+            'contentPanelEnd' => '<div>'
         ],
         'templateClass' => 'Bootstrap\View\EnhancedStringTemplate'
     ];
+
+    /**
+     * Fade enabled or not.
+     *
+     * @var boolean
+     */
+    protected $_fade = true;
+
+    /**
+     * Type of the tab.
+     *
+     * @var string
+     */
+    protected $_type = 'tabs';
+
+
+    /**
+     * Create or open the tab header.
+     *
+     * ### Options
+     *
+     * - `templateVars` Provide template variables for the header template.
+     * - Other attributes will be assigned to the header element.
+     *
+     * @param array $titles The panel header content, or null to only open the header.
+     * @param array $options Array of options. See above.
+     *
+     * @return string A formated opening tag for the panel header or the complete panel
+     * header.
+     */
+    protected function _createHeader($titles, $options = []) {
+        $options += [
+            'type' => $this->_type,
+            'templateVars' => []
+        ];
+        $out = $this->_openSection('header', [
+            'type' => $options['type'],
+            'attrs' => $this->templater()->formatAttributes($options, ['type'])
+        ]);
+        if ($titles) {
+            foreach ($titles as $key => $val) {
+                // if key is numeric, there are no options specified
+                if (is_numeric($key)) {
+                    $key = $val;
+                    $val = [];
+                }
+//                $out .= $this->_createTab($key, null, )
+            }
+        }
+        return $out;
+    }
 
     /**
      * Open a navigation tabs (or pills) with the specified titles.
@@ -67,7 +119,7 @@ class PanelHelper extends Helper {
      * - `fade` Make tabs fade or not. Default is `true`.
      * - Other attributes will be added to the wrapping element.
      *
-     * @param array $title Titles for the navigations tabs / pills.
+     * @param array $title Titles for the navigations tabs / pills. See `header()`.
      * @param array $options Array of options. See above.
      *
      * @return string An HTML string containing opening elements for a
@@ -79,6 +131,16 @@ class PanelHelper extends Helper {
             'fade' => true,
             'templateVars' => []
         ];
+        $this->_fade = $options['fade'];
+        $this->_type = $options['type'];
+        $out = $this->_openSection('tab', [
+            'attrs' => $this->templater()->formatAttributes($options, ['type', 'fade']),
+            'templateVars' => $options['templateVars']
+        ]);
+        if ($titles) {
+            $out .= $this->_createHeader($titles);
+        }
+        return $out;
     }
 
     /**
@@ -87,7 +149,7 @@ class PanelHelper extends Helper {
      * @return string An HTML string containing closing tags.
      */
     public function end() {
-        return $this->_cleanCurrent().$this->formatTemplate('tabEnd', []);
+        return $this->_clearSections();
     }
 
 }
