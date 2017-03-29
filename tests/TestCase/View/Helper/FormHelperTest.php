@@ -72,6 +72,49 @@ class FormHelperTest extends TestCase {
         $this->assertEquals($this->form->inline, false);
     }
 
+    public function testColumnSizes() {
+        $oldConfig = $this->form->getConfig('columns');
+
+        $this->form->setConfig('columns', [
+            'md' => [
+                'label' => 2,
+                'input' => 6,
+                'error' => 4
+            ],
+            'sm' => [
+                'label' => 12,
+                'input' => 12,
+                'error' => 12
+            ]
+        ]);
+        $this->form->create(null, ['horizontal' => true]);
+        $result = $this->form->input('test', ['type' => 'text']);
+        $expected = [
+            ['div' => [
+                'class' => 'form-group text'
+            ]],
+            ['label' => [
+                'class' => 'control-label col-md-2 col-sm-12',
+                'for' => 'test'
+            ]],
+            'Test',
+            '/label',
+            ['div' => [
+                'class' => 'col-md-6 col-sm-12'
+            ]],
+            ['input' => [
+                'type'  => 'text',
+                'class' => 'form-control',
+                'name'  => 'test',
+                'id'    => 'test'
+            ]],
+            '/div',
+            '/div'
+        ];
+        $this->assertHtml($expected, $result);
+        $this->form->setConfig('columns', $oldConfig);
+    }
+
     public function testButton() {
         // default button
         $button = $this->form->button('Test');

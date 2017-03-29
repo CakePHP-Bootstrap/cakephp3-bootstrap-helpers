@@ -123,9 +123,11 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
             'type' => 'default'
         ],
         'columns' => [
-            'label' => 2,
-            'input' => 10,
-            'error' => 0
+            'md' => [
+                'label' => 2,
+                'input' => 10,
+                'error' => 0
+            ]
         ],
         'useCustomFileInput' => false
     ];
