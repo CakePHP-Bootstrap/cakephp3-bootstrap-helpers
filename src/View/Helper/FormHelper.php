@@ -258,6 +258,26 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
     }
 
     /**
+     * Get the column sizes configuration associated with the
+     * form helper.
+     *
+     * @return array
+     */
+    public function getColumnSizes() {
+        return $this->getConfig('columns');
+    }
+
+    /**
+     * Set the column sizes configuration associated with the
+     * form helper.
+     *
+     * @return array
+     */
+    public function setColumnSizes($columns) {
+        return $this->setConfig('columns', $columns, false);
+    }
+
+    /**
      * Retrieve classes for the size of the specified column (label, input or error),
      * optionally adding the offset prefix to the classes.
      *
@@ -268,17 +288,18 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
      */
     protected function _getColumnClass($what, $offset = false) {
         $columns = $this->getConfig('columns');
-        if ($what === 'error'
-            && isset($columns['error']) && $columns['error'] == 0) {
-            return $this->_getColumnClass('label', true).' '.$this->_getColumnClass('input');
-        }
-        if (isset($columns[$what])) {
-            return 'col-md-'.($offset ? 'offset-' : '').$columns[$what];
-        }
         $classes = [];
         foreach ($columns as $cl => $arr) {
-            if (isset($arr[$what])) {
-                $classes[] = 'col-'.$cl.'-'.($offset ? 'offset-' : '').$arr[$what];
+            if (!isset($arr[$what])) {
+                continue;
+            }
+            $value = $arr[$what];
+            if ($what === 'error' && $value == 0) {
+                $classes[] = 'col-'.$cl.'-offset-'.$arr['label'];
+                $classes[] = 'col-'.$cl.'-'.(12 - $arr['label']);
+            }
+            else {
+                $classes[] = 'col-'.$cl.'-'.($offset ? 'offset-' : '').$value;
             }
         }
         return implode(' ', $classes);

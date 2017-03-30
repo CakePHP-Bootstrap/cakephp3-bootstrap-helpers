@@ -36,6 +36,23 @@ class FormHelperTest extends TestCase {
             'minutesRegex' => 'preg:/(?:<option value="([\d]+)">0?\\1<\/option>[\r\n]*)*/',
             'meridianRegex' => 'preg:/(?:<option value="(am|pm)">\\1<\/option>[\r\n]*)*/',
         ];
+
+        // from CakePHP FormHelperTest
+        $this->article = [
+            'schema' => [
+                'id' => ['type' => 'integer'],
+                'author_id' => ['type' => 'integer', 'null' => true],
+                'title' => ['type' => 'string', 'null' => true],
+                'body' => 'text',
+                'published' => ['type' => 'string', 'length' => 1, 'default' => 'N'],
+                '_constraints' => ['primary' => ['type' => 'primary', 'columns' => ['id']]]
+            ],
+            'required' => [
+                'author_id' => true,
+                'title' => true,
+            ]
+        ];
+
         Configure::write('debug', true);
     }
 
@@ -73,8 +90,6 @@ class FormHelperTest extends TestCase {
     }
 
     public function testColumnSizes() {
-        $oldConfig = $this->form->getConfig('columns');
-
         $this->form->setConfig('columns', [
             'md' => [
                 'label' => 2,
@@ -86,9 +101,9 @@ class FormHelperTest extends TestCase {
                 'input' => 12,
                 'error' => 12
             ]
-        ]);
+        ], false);
         $this->form->create(null, ['horizontal' => true]);
-        $result = $this->form->input('test', ['type' => 'text']);
+        $result = $this->form->control('test', ['type' => 'text']);
         $expected = [
             ['div' => [
                 'class' => 'form-group text'
@@ -112,7 +127,56 @@ class FormHelperTest extends TestCase {
             '/div'
         ];
         $this->assertHtml($expected, $result);
-        $this->form->setConfig('columns', $oldConfig);
+
+        $this->article['errors'] = [
+            'Article' => [
+                'title' => 'error message',
+                'content' => 'some <strong>test</strong> data with <a href="#">HTML</a> chars'
+            ]
+        ];
+
+        $this->form->setConfig('columns', [
+            'md' => [
+                'label' => 2,
+                'input' => 6,
+                'error' => 4
+            ],
+            'sm' => [
+                'label' => 4,
+                'input' => 8,
+                'error' => 0
+            ]
+        ], false);
+        $this->form->create($this->article, ['horizontal' => true]);
+        $result = $this->form->control('Article.title', ['type' => 'text']);
+        $expected = [
+            ['div' => [
+                'class' => 'form-group has-error text'
+            ]],
+            ['label' => [
+                'class' => 'control-label col-md-2 col-sm-4',
+                'for' => 'article-title'
+            ]],
+            'Title',
+            '/label',
+            ['div' => [
+                'class' => 'col-md-6 col-sm-8'
+            ]],
+            ['input' => [
+                'type'  => 'text',
+                'class' => 'form-control has-error',
+                'name'  => 'Article[title]',
+                'id'    => 'article-title'
+            ]],
+            '/div',
+            ['span' => [
+                'class' => 'help-block error-message col-md-4 col-sm-offset-4 col-sm-8'
+            ]],
+            'error message',
+            '/span',
+            '/div'
+        ];
+        $this->assertHtml($expected, $result);
     }
 
     public function testButton() {
