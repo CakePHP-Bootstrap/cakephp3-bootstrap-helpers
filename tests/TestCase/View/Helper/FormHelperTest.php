@@ -170,7 +170,7 @@ class FormHelperTest extends TestCase {
             ]],
             '/div',
             ['span' => [
-                'class' => 'help-block error-message col-md-4 col-sm-offset-4 col-sm-8'
+                'class' => 'help-block error-message col-md-offset-0 col-md-4 col-sm-offset-4 col-sm-8'
             ]],
             'error message',
             '/span',

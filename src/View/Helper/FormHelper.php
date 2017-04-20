@@ -294,9 +294,16 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
                 continue;
             }
             $value = $arr[$what];
-            if ($what === 'error' && $value == 0) {
-                $classes[] = 'col-'.$cl.'-offset-'.$arr['label'];
-                $classes[] = 'col-'.$cl.'-'.(12 - $arr['label']);
+            if ($what === 'error') {
+                if ($value == 0) {
+                    $offset = $arr['label'];
+                    $value = 12 - $arr['label'];
+                }
+                else {
+                    $offset = 0;
+                }
+                $classes[] = 'col-'.$cl.'-offset-'.$offset;
+                $classes[] = 'col-'.$cl.'-'.$value;
             }
             else {
                 $classes[] = 'col-'.$cl.'-'.($offset ? 'offset-' : '').$value;
