@@ -1064,4 +1064,52 @@ class FormHelperTest extends TestCase {
         $this->assertHtml($expected, $result);
     }
 
+    public function testUploadCustomFileInput() {
+        $expected = [
+            ['input' => [
+                'type' => 'file',
+                'name' => 'Contact[picture]',
+                'id' => 'Contact[picture]',
+                'style' => 'display: none;',
+                'onchange' => "document.getElementById('Contact[picture]-input').value = (this.files.length <= 1) ? this.files[0].name : this.files.length + ' ' + 'files selected';"
+            ]],
+            ['div' => ['class' => 'input-group']],
+            ['div' => ['class' => 'input-group-btn']],
+            ['button' => [
+                'class' => 'btn btn-default',
+                'type' => 'button',
+                'onclick' => "document.getElementById('Contact[picture]').click();"
+            ]],
+            __('Choose File'),
+            '/button',
+            '/div',
+            ['input' => [
+                'type' => 'text',
+                'name' => 'Contact[picture]-text',
+                'class' => 'form-control',
+                'readonly' => 'readonly',
+                'id' => 'Contact[picture]-input',
+                'onclick' => "document.getElementById('Contact[picture]').click();"
+            ]],
+            '/div',
+        ];
+        $this->form->setConfig('useCustomFileInput', true);
+
+        $result = $this->form->file('Contact.picture');
+        $this->assertHtml($expected, $result);
+
+        $this->form->request->data['Contact']['picture'] = [
+            'name' => '', 'type' => '', 'tmp_name' => '',
+            'error' => 4, 'size' => 0
+        ];
+        $result = $this->form->file('Contact.picture');
+        $this->assertHtml($expected, $result);
+
+        $this->form->request->data['Contact']['picture'] = 'no data should be set in value';
+        $result = $this->form->file('Contact.picture');
+        $this->assertHtml($expected, $result);
+
+        // Test with filename, see issue #56
+    }
+
 }
