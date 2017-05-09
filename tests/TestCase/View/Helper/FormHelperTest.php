@@ -1021,7 +1021,7 @@ class FormHelperTest extends TestCase {
             '/div',
             ['input' => [
                 'type' => 'text',
-                'name' => 'Contact[picture]-text',
+                'name' => 'Contact[picture][text]',
                 'class' => 'form-control',
                 'readonly' => 'readonly',
                 'id' => 'Contact[picture]-input',
@@ -1053,7 +1053,7 @@ class FormHelperTest extends TestCase {
             '/div',
             ['input' => [
                 'type' => 'text',
-                'name' => 'Contact[picture]-text',
+                'name' => 'Contact[picture][text]',
                 'class' => 'form-control',
                 'readonly' => 'readonly',
                 'id' => 'Contact[picture]-input',
@@ -1085,7 +1085,7 @@ class FormHelperTest extends TestCase {
             '/div',
             ['input' => [
                 'type' => 'text',
-                'name' => 'Contact[picture]-text',
+                'name' => 'Contact[picture][text]',
                 'class' => 'form-control',
                 'readonly' => 'readonly',
                 'id' => 'Contact[picture]-input',
@@ -1108,8 +1108,19 @@ class FormHelperTest extends TestCase {
         $this->form->request->data['Contact']['picture'] = 'no data should be set in value';
         $result = $this->form->file('Contact.picture');
         $this->assertHtml($expected, $result);
+    }
 
+    public function testFormSecuredFileControl() {
+        $this->form->setConfig('useCustomFileInput', true);
         // Test with filename, see issue #56
+        $this->assertEquals([], $this->form->fields);
+        $this->form->file('Contact.picture');
+        $expected = [
+            'Contact.picture.name', 'Contact.picture.type',
+            'Contact.picture.tmp_name', 'Contact.picture.error',
+            'Contact.picture.size', 'Contact.picture.text'
+        ];
+        $this->assertEquals($expected, $this->form->fields);
     }
 
 }

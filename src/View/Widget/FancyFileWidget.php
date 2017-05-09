@@ -129,7 +129,7 @@ class FancyFileWidget implements WidgetInterface {
         }
 
         $fakeInput = $this->_input->render($fakeInputCustomOptions + [
-            'name' => $data['name'].'-text',
+            'name' => $data['name'].'[text]',
             'readonly' => 'readonly',
             'id' => $data['id'].'-input',
             'onclick' => "document.getElementById('".$data['id']."').click();",
@@ -154,12 +154,12 @@ class FancyFileWidget implements WidgetInterface {
     /**
      * {@inheritDoc}
      */
-    public function secureFields(array $data)
-    {
-        if (!isset($data['name']) || $data['name'] === '') {
-            return [];
+    public function secureFields(array $data) {
+        $fields = [];
+        foreach (['name', 'type', 'tmp_name', 'error', 'size', 'text'] as $suffix) {
+            $fields[] = $data['name'] . '[' . $suffix . ']';
         }
-        return [$data['name']];
+        return $fields;
     }
 
 };
