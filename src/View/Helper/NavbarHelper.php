@@ -124,7 +124,7 @@ aria-haspopup="true" aria-expanded="false">{{content}}{{caret}}</a>',
      * @param string $brand Brand name.
      * @param array $options Array of options. See above.
      *
-     * @return A string containing the HTML starting element of the navbar.
+     * @return string containing the HTML starting element of the navbar.
      */
     public function create($brand, $options = []) {
 
