@@ -1007,7 +1007,7 @@ class FormHelperTest extends TestCase {
                 'name' => 'Contact[picture]',
                 'id' => 'Contact[picture]',
                 'style' => 'display: none;',
-                'onchange' => "document.getElementById('Contact[picture]-input').value = (this.files.length <= 1) ? this.files[0].name : this.files.length + ' ' + 'files selected';"
+                'onchange' => "document.getElementById('Contact[picture]-input').value = (this.files.length <= 1) ? (this.files.length ? this.files[0].name : '') : this.files.length + ' ' + 'files selected';"
             ]],
             ['div' => ['class' => 'input-group']],
             ['div' => ['class' => 'input-group-btn']],
@@ -1021,7 +1021,7 @@ class FormHelperTest extends TestCase {
             '/div',
             ['input' => [
                 'type' => 'text',
-                'name' => 'Contact[picture][text]',
+                'name' => 'Contact[picture]-text',
                 'class' => 'form-control',
                 'readonly' => 'readonly',
                 'id' => 'Contact[picture]-input',
@@ -1039,7 +1039,7 @@ class FormHelperTest extends TestCase {
                 'name' => 'Contact[picture]',
                 'id' => 'Contact[picture]',
                 'style' => 'display: none;',
-                'onchange' => "document.getElementById('Contact[picture]-input').value = (this.files.length <= 1) ? this.files[0].name : this.files.length + ' ' + 'files selected';"
+                'onchange' => "document.getElementById('Contact[picture]-input').value = (this.files.length <= 1) ? (this.files.length ? this.files[0].name : '') : this.files.length + ' ' + 'files selected';"
             ]],
             ['div' => ['class' => 'input-group']],
             ['div' => ['class' => 'input-group-btn']],
@@ -1053,7 +1053,7 @@ class FormHelperTest extends TestCase {
             '/div',
             ['input' => [
                 'type' => 'text',
-                'name' => 'Contact[picture][text]',
+                'name' => 'Contact[picture]-text',
                 'class' => 'form-control',
                 'readonly' => 'readonly',
                 'id' => 'Contact[picture]-input',
@@ -1071,7 +1071,7 @@ class FormHelperTest extends TestCase {
                 'name' => 'Contact[picture]',
                 'id' => 'Contact[picture]',
                 'style' => 'display: none;',
-                'onchange' => "document.getElementById('Contact[picture]-input').value = (this.files.length <= 1) ? this.files[0].name : this.files.length + ' ' + 'files selected';"
+                'onchange' => "document.getElementById('Contact[picture]-input').value = (this.files.length <= 1) ? (this.files.length ? this.files[0].name : '') : this.files.length + ' ' + 'files selected';"
             ]],
             ['div' => ['class' => 'input-group']],
             ['div' => ['class' => 'input-group-btn']],
@@ -1085,7 +1085,7 @@ class FormHelperTest extends TestCase {
             '/div',
             ['input' => [
                 'type' => 'text',
-                'name' => 'Contact[picture][text]',
+                'name' => 'Contact[picture]-text',
                 'class' => 'form-control',
                 'readonly' => 'readonly',
                 'id' => 'Contact[picture]-input',
@@ -1116,9 +1116,10 @@ class FormHelperTest extends TestCase {
         $this->assertEquals([], $this->form->fields);
         $this->form->file('Contact.picture');
         $expected = [
+            'Contact.picture-text',
             'Contact.picture.name', 'Contact.picture.type',
             'Contact.picture.tmp_name', 'Contact.picture.error',
-            'Contact.picture.size', 'Contact.picture.text'
+            'Contact.picture.size'
         ];
         $this->assertEquals($expected, $this->form->fields);
     }
