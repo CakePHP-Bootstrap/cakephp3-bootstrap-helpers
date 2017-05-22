@@ -113,7 +113,10 @@ class FancyFileWidget implements WidgetInterface {
 
         $fileInput = $this->_file->render($data + [
             'style' => 'display: none;',
-            'onchange' => "document.getElementById('".$data['id']."-input').value = (this.files.length <= 1) ? this.files[0].name : this.files.length + ' ' + '" . $countLabel . "';",
+            'onchange' => "document.getElementById('".$data['id']."-input').value = " .
+                "(this.files.length <= 1) ? " .
+                "(this.files.length ? this.files[0].name : '') " .
+                ": this.files.length + ' ' + '" . $countLabel . "';",
             'escape' => false
         ], $context);
 
