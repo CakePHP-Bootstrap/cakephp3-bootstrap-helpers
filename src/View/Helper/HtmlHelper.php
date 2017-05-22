@@ -79,7 +79,7 @@ class HtmlHelper extends \Cake\View\Helper\HtmlHelper {
             'alertCloseButton' =>
                 '<button type="button" class="close{{attrs.class}}" data-dismiss="alert" aria-label="{{label}}"{{attrs}}>{{content}}</button>',
             'alertCloseContent' => '<span aria-hidden="true">&times;</span>',
-            'tooltip' => '<{{tag}} data-toggle="{{toggle}}" data-placement="{{placement}}" title="{{tooltip}}">{{content}}</{{tag}}>',
+            'tooltip' => '<{{tag}} data-toggle="{{toggle}}" data-placement="{{placement}}" title="{{tooltip}}"{{attrs}}>{{content}}</{{tag}}>',
             'progressBar' =>
 '<div class="progress-bar progress-bar-{{type}}{{attrs.class}}" role="progressbar"
 aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style="width: {{width}}%;"{{attrs}}>{{inner}}</div>',
