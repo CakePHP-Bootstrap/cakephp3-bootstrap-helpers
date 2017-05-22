@@ -108,6 +108,8 @@ class FancyFileWidget implements WidgetInterface {
         unset($data['_input'], $data['_button'],
             $data['type'], $data['count-label'],
             $data['button-label']);
+        // avoid javascript errors due to invisible control
+        unset($data['required']);
 
         $fileInput = $this->_file->render($data + [
             'style' => 'display: none;',
