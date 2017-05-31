@@ -33,6 +33,13 @@ class EasyIconTraitTest extends TestCase {
     public $trait;
 
     /**
+     * Instance of HtmlHelper.
+     *
+     * @var HtmlHelper
+     */
+    public $html;
+
+    /**
      * Instance of FormHelper.
      *
      * @var FormHelper
@@ -57,6 +64,7 @@ class EasyIconTraitTest extends TestCase {
         $view->loadHelper('Html', [
             'className' => 'Bootstrap.BootstrapHtml'
         ]);
+        $this->html = $view->Html;
         $this->trait = new PublicEasyIconTrait($view);
         $this->form = new FormHelper($view);
         $this->paginator = new PaginatorHelper($view);
@@ -118,14 +126,34 @@ class EasyIconTraitTest extends TestCase {
 
     }
 
-    public function testHelperMethods() {
+    public function testHtmlHelperMethods() {
+
+        // BootstrapHtmlHelper
+        $result = $this->html->link('i:dashboard Dashboard', '/dashboard');
+        $this->assertHtml([
+            ['a' => [
+                'href' => '/dashboard'
+            ]],
+            ['i' => [
+                'class' => 'glyphicon glyphicon-dashboard',
+                'aria-hidden' => 'true'
+            ]], '/i', 'Dashboard', '/a'
+        ], $result);
+
+    }
+
+    public function testPaginatorHelperMethods() {
 
         // BootstrapPaginatorHelper - TODO
         // BootstrapPaginatorHelper::prev($title, array $options = []);
         // BootstrapPaginatorHelper::next($title, array $options = []);
         // BootstrapPaginatorHelper::numbers(array $options = []); // For `prev` and `next` options.
 
-        // BootstrapFormatHelper
+    }
+
+    public function testFormHelperMethod() {
+
+        // BootstrapFormHelper
         $result = $this->form->button('i:plus');
         $this->assertHtml([
             ['button' => [

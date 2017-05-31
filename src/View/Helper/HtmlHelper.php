@@ -26,6 +26,7 @@ namespace Bootstrap\View\Helper;
 class HtmlHelper extends \Cake\View\Helper\HtmlHelper {
 
     use ClassTrait;
+    use EasyIconTrait;
 
     /**
      * Default config for the helper.
@@ -131,6 +132,13 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
             'attrs' => $this->templater()->formatAttributes($options),
             'templateVars' => $options['templateVars']
         ]);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function link($title, $url = null, array $options = []) {
+        return $this->_easyIcon('parent::link', 0, 2, [$title, $url, $options]);
     }
 
     /**

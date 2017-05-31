@@ -46,35 +46,50 @@ trait EasyIconTrait {
         if (!$this->easyIcon) {
             return $text;
         }
+        if (method_exists($this, 'icon')) {
+            $ficon = [$this, 'icon'];
+        }
+        else {
+            $ficon = [$this->Html, 'icon'];
+        }
         $text = preg_replace_callback(
-            '#(^|\s+)i:([a-zA-Z0-9\\-_]+)(\s+|$)#', function ($matches) use ($options) {
-                return $matches[1].$this->Html->icon($matches[2], $options).$matches[3];
+            '#(^|\s+)i:([a-zA-Z0-9\\-_]+)(\s+|$)#', function ($matches) use ($ficon, $options) {
+                return $matches[1].call_user_func($ficon, $matches[2], $options).$matches[3];
             }, $text, -1, $count);
         $converted = (bool)$count;
         return $text;
     }
 
     /**
-     * This method calls the given callback with the specified argument (`$title` and
-     * `$options`) after applying a filter on them.
+     * This method calls the given callback with the given list of parameters after
+     * applying an easy-icon filter on them.
      *
-     * **Note:** Currently this method only works for function that take
-     * two arguments ($title and $options).
+     * Note: For compatibility issue, this function can still be called with a callback,
+     * a string (title) and an array of options.
      *
      * @param callable $callback The callback.
-     * @param string $title The first argument for the callback.
-     * @param array $options The second argument for the calback.
+     * @param int $indexTitle Index of the title to which the easy-icon processing
+     * will be applied.
+     * @param int $indexOptions Index of the options in the $args array.
+     * @param array $args Arguments for the callback.
      *
      * @return mixed Whatever might be returned by $callback.
      */
-    protected function _easyIcon($callback, $title, $options) {
+    protected function _easyIcon(callable $callback, $indexTitle, $indexOptions, $args = null) {
+        if ($args === null) {
+            $args = [$indexTitle, $indexOptions];
+            $indexTitle = 0;
+            $indexOptions = 1;
+        }
+        $title = &$args[$indexTitle];
+        $options = &$args[$indexOptions];
         $title = $this->_makeIcon($title, $converted);
         if ($converted) {
             $options += [
                 'escape' => false
             ];
         }
-        return call_user_func($callback, $title, $options);
+        return call_user_func_array($callback, $args);
     }
 
 }
