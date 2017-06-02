@@ -665,14 +665,23 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
      * @return string A HTML string containing the button dropdown.
      */
     public function dropdownButton($title, array $menu = [], array $options = []) {
-        $align = (isset($options['align'])) ? $options['align'] : 'left';
-        unset($options['align']);
-        $options['type'] = false;
-        $options['data-toggle'] = 'dropdown';
+        // List of options to send to the dropdown() method
+        $optsForHtml = ['align'];
+        $ulOptions = [];
+        foreach ($optsForHtml as $opt) {
+            if (isset($options[$opt])) {
+                $ulOptions[$opt] = $options[$opt];
+                unset($options[$opt]);
+            }
+        }
+        $options += [
+            'type' => false,
+            'data-toggle' => 'dropdown'
+        ];
         $options = $this->addClass($options, "dropdown-toggle");
         return $this->buttonGroup([
             $this->button($title.' <span class="caret"></span>', $options),
-            $this->Html->dropdown($menu, ['class' => ["dropdown-menu-{$align}"]])
+            $this->Html->dropdown($menu, $ulOptions)
         ]);
 
     }

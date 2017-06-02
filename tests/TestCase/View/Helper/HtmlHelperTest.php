@@ -306,7 +306,7 @@ class HtmlHelperTest extends TestCase {
             ]]
         ]);
         $expected = [
-            ['ul' => ['class' => 'dropdown-menu']],
+            ['ul' => ['class' => 'dropdown-menu dropdown-menu-left']],
             ['li' => ['role' => 'presentation', 'class' => 'dropdown-header']], 'Header 1', '/li',
             ['li' => ['role' => 'separator', 'class' => 'divider']], '/li',
             ['li' => ['role' => 'presentation', 'class' => 'dropdown-header']], 'Header 2', '/li',

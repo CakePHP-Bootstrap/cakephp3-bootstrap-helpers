@@ -465,11 +465,13 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
             }
         }
         $options += [
+            'align' => 'left',
             'templateVars' => []
         ];
+        $options = $this->addClass($options, 'dropdown-menu-'.$options['align']);
         return $this->formatTemplate('dropdownMenu', [
             'content' => $content,
-            'attrs' => $this->templater()->formatAttributes($options),
+            'attrs' => $this->templater()->formatAttributes($options, ['align']),
             'templateVars' => $options['templateVars']
         ]);
     }

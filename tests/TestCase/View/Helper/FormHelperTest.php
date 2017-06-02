@@ -679,7 +679,7 @@ class FormHelperTest extends TestCase {
             ['span' => ['class' => 'caret']], '/span',
             '/button',
             ['ul' => [
-                'class' => 'dropdown-menu'
+                'class' => 'dropdown-menu dropdown-menu-left'
             ]],
             ['li' => []], ['a' => ['href'  => '#']], 'Link 1', '/a', '/li',
             ['li' => []], ['a' => ['href'  => '#']], 'Link 2', '/a', '/li',
