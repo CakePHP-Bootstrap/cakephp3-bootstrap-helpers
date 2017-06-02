@@ -1007,7 +1007,7 @@ class FormHelperTest extends TestCase {
                 'name' => 'Contact[picture]',
                 'id' => 'Contact[picture]',
                 'style' => 'display: none;',
-                'onchange' => "document.getElementById('Contact[picture]-input').value = (this.files.length <= 1) ? this.files[0].name : this.files.length + ' ' + 'files selected';"
+                'onchange' => "document.getElementById('Contact[picture]-input').value = (this.files.length <= 1) ? (this.files.length ? this.files[0].name : '') : this.files.length + ' ' + 'files selected';"
             ]],
             ['div' => ['class' => 'input-group']],
             ['div' => ['class' => 'input-group-btn']],
@@ -1021,7 +1021,7 @@ class FormHelperTest extends TestCase {
             '/div',
             ['input' => [
                 'type' => 'text',
-                'name' => 'Contact[picture]-text',
+                'name' => 'Contact[picture-text]',
                 'class' => 'form-control',
                 'readonly' => 'readonly',
                 'id' => 'Contact[picture]-input',
@@ -1039,7 +1039,7 @@ class FormHelperTest extends TestCase {
                 'name' => 'Contact[picture]',
                 'id' => 'Contact[picture]',
                 'style' => 'display: none;',
-                'onchange' => "document.getElementById('Contact[picture]-input').value = (this.files.length <= 1) ? this.files[0].name : this.files.length + ' ' + 'files selected';"
+                'onchange' => "document.getElementById('Contact[picture]-input').value = (this.files.length <= 1) ? (this.files.length ? this.files[0].name : '') : this.files.length + ' ' + 'files selected';"
             ]],
             ['div' => ['class' => 'input-group']],
             ['div' => ['class' => 'input-group-btn']],
@@ -1053,7 +1053,7 @@ class FormHelperTest extends TestCase {
             '/div',
             ['input' => [
                 'type' => 'text',
-                'name' => 'Contact[picture]-text',
+                'name' => 'Contact[picture-text]',
                 'class' => 'form-control',
                 'readonly' => 'readonly',
                 'id' => 'Contact[picture]-input',
@@ -1071,7 +1071,7 @@ class FormHelperTest extends TestCase {
                 'name' => 'Contact[picture]',
                 'id' => 'Contact[picture]',
                 'style' => 'display: none;',
-                'onchange' => "document.getElementById('Contact[picture]-input').value = (this.files.length <= 1) ? this.files[0].name : this.files.length + ' ' + 'files selected';"
+                'onchange' => "document.getElementById('Contact[picture]-input').value = (this.files.length <= 1) ? (this.files.length ? this.files[0].name : '') : this.files.length + ' ' + 'files selected';"
             ]],
             ['div' => ['class' => 'input-group']],
             ['div' => ['class' => 'input-group-btn']],
@@ -1085,7 +1085,7 @@ class FormHelperTest extends TestCase {
             '/div',
             ['input' => [
                 'type' => 'text',
-                'name' => 'Contact[picture]-text',
+                'name' => 'Contact[picture-text]',
                 'class' => 'form-control',
                 'readonly' => 'readonly',
                 'id' => 'Contact[picture]-input',
@@ -1108,8 +1108,24 @@ class FormHelperTest extends TestCase {
         $this->form->request->data['Contact']['picture'] = 'no data should be set in value';
         $result = $this->form->file('Contact.picture');
         $this->assertHtml($expected, $result);
-
-        // Test with filename, see issue #56
     }
 
+    public function testFormSecuredFileControl() {
+        $this->form->setConfig('useCustomFileInput', true);
+        // Test with filename, see issues #56, #123
+        $this->assertEquals([], $this->form->fields);
+        $this->form->file('picture');
+        $this->form->file('Contact.picture');
+        $expected = [
+            'picture-text',
+            'picture.name', 'picture.type',
+            'picture.tmp_name', 'picture.error',
+            'picture.size',
+            'Contact.picture-text',
+            'Contact.picture.name', 'Contact.picture.type',
+            'Contact.picture.tmp_name', 'Contact.picture.error',
+            'Contact.picture.size'
+        ];
+        $this->assertEquals($expected, $this->form->fields);
+    }
 }

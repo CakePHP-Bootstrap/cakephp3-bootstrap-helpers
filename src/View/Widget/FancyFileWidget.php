@@ -108,10 +108,15 @@ class FancyFileWidget implements WidgetInterface {
         unset($data['_input'], $data['_button'],
             $data['type'], $data['count-label'],
             $data['button-label']);
+        // avoid javascript errors due to invisible control
+        unset($data['required']);
 
         $fileInput = $this->_file->render($data + [
             'style' => 'display: none;',
-            'onchange' => "document.getElementById('".$data['id']."-input').value = (this.files.length <= 1) ? this.files[0].name : this.files.length + ' ' + '" . $countLabel . "';",
+            'onchange' => "document.getElementById('".$data['id']."-input').value = " .
+                "(this.files.length <= 1) ? " .
+                "(this.files.length ? this.files[0].name : '') " .
+                ": this.files.length + ' ' + '" . $countLabel . "';",
             'escape' => false
         ], $context);
 
@@ -129,7 +134,7 @@ class FancyFileWidget implements WidgetInterface {
         }
 
         $fakeInput = $this->_input->render($fakeInputCustomOptions + [
-            'name' => $data['name'].'-text',
+            'name' => $this->_fakeFieldName($data['name']),
             'readonly' => 'readonly',
             'id' => $data['id'].'-input',
             'onclick' => "document.getElementById('".$data['id']."').click();",
@@ -154,12 +159,22 @@ class FancyFileWidget implements WidgetInterface {
     /**
      * {@inheritDoc}
      */
-    public function secureFields(array $data)
-    {
-        if (!isset($data['name']) || $data['name'] === '') {
-            return [];
+    public function secureFields(array $data) {
+        // the extra input for display
+        $fields = [$this->_fakeFieldName($data['name'])];
+        // the file array
+        foreach (['name', 'type', 'tmp_name', 'error', 'size'] as $suffix) {
+            $fields[] = $data['name'] . '[' . $suffix . ']';
         }
-        return [$data['name']];
+        return $fields;
     }
 
+    /**
+     * Determine name of fake input field
+     * @param string $fieldName original field name
+     * @return string fake field name
+     */
+    protected static function _fakeFieldName($fieldName) {
+        return preg_replace('/(\]?)$/', '-text$1', $fieldName, 1);
+    }
 };
