@@ -651,6 +651,14 @@ class FormHelperTest extends TestCase {
         $this->_testInput($expected, $fieldName, $options + [
             'append' => [$this->form->button('Go!'), $this->form->button('GoGo!')]
         ]);
+    }
+
+    public function testAppendDropdown() {
+        $fieldName = 'field';
+        $options   = [
+            'type' => 'text',
+            'label' => false
+        ];
         // Test with append dropdown
         $expected = [
             ['div' => [
@@ -701,6 +709,58 @@ class FormHelperTest extends TestCase {
                 'divider',
                 $this->form->Html->link('Link 3', '#')
             ])
+        ]);
+
+        // Test with append dropup
+        $expected = [
+            ['div' => [
+                'class' => 'form-group text'
+            ]],
+            ['div' => [
+                'class' => 'input-group'
+            ]],
+            ['input' => [
+                'type' => 'text',
+                'class' => 'form-control',
+                'name' => $fieldName,
+                'id' => $fieldName
+            ]],
+            ['span' => [
+                'class' => 'input-group-btn'
+            ]],
+            ['div' => [
+                'class' => 'btn-group dropup'
+            ]],
+            ['button' => [
+                'data-toggle' => 'dropdown',
+                'class' => 'dropdown-toggle btn btn-default'
+            ]],
+            'Action',
+            ['span' => ['class' => 'caret']], '/span',
+            '/button',
+            ['ul' => [
+                'class' => 'dropdown-menu dropdown-menu-left'
+            ]],
+            ['li' => []], ['a' => ['href'  => '#']], 'Link 1', '/a', '/li',
+            ['li' => []], ['a' => ['href'  => '#']], 'Link 2', '/a', '/li',
+            ['li' => [
+                'role' => 'separator',
+                'class' => 'divider'
+            ]], '/li',
+            ['li' => []], ['a' => ['href'  => '#']], 'Link 3', '/a', '/li',
+            '/ul',
+            '/div',
+            '/span',
+            '/div',
+            '/div'
+        ];
+        $this->_testInput($expected, $fieldName, $options + [
+            'append' => $this->form->dropdownButton('Action', [
+                $this->form->Html->link('Link 1', '#'),
+                $this->form->Html->link('Link 2', '#'),
+                'divider',
+                $this->form->Html->link('Link 3', '#')
+            ], ['dropup' => true])
         ]);
     }
 

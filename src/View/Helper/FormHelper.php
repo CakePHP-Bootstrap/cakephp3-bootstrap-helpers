@@ -676,13 +676,22 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
         }
         $options += [
             'type' => false,
+            'dropup' => false,
             'data-toggle' => 'dropdown'
         ];
-        $options = $this->addClass($options, "dropdown-toggle");
+        $dropup = $options['dropup'];
+        unset($options['dropup']);
+
+        $bGroupOptions = [];
+        if ($dropup) {
+            $bGroupOptions = $this->addClass($bGroupOptions, 'dropup');
+        }
+
+        $options = $this->addClass($options, 'dropdown-toggle');
         return $this->buttonGroup([
             $this->button($title.' <span class="caret"></span>', $options),
             $this->Html->dropdown($menu, $ulOptions)
-        ]);
+        ], $bGroupOptions);
 
     }
 
