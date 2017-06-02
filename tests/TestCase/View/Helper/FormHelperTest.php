@@ -1112,28 +1112,19 @@ class FormHelperTest extends TestCase {
 
     public function testFormSecuredFileControl() {
         $this->form->setConfig('useCustomFileInput', true);
-        // Test with filename, see issue #56
-        $this->assertEquals([], $this->form->fields);
-        $this->form->file('Contact.picture');
-        $expected = [
-            'Contact.picture-text',
-            'Contact.picture.name', 'Contact.picture.type',
-            'Contact.picture.tmp_name', 'Contact.picture.error',
-            'Contact.picture.size'
-        ];
-        $this->assertEquals($expected, $this->form->fields);
-    }
-
-    public function testFormSecuredFileControl2() {
-        $this->form->setConfig('useCustomFileInput', true);
-        // Test with filename, see issue #56
+        // Test with filename, see issues #56, #123
         $this->assertEquals([], $this->form->fields);
         $this->form->file('picture');
+        $this->form->file('Contact.picture');
         $expected = [
             'picture-text',
             'picture.name', 'picture.type',
             'picture.tmp_name', 'picture.error',
-            'picture.size'
+            'picture.size',
+            'Contact.picture-text',
+            'Contact.picture.name', 'Contact.picture.type',
+            'Contact.picture.tmp_name', 'Contact.picture.error',
+            'Contact.picture.size'
         ];
         $this->assertEquals($expected, $this->form->fields);
     }
