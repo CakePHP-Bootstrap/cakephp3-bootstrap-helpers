@@ -134,7 +134,7 @@ class FancyFileWidget implements WidgetInterface {
         }
 
         $fakeInput = $this->_input->render($fakeInputCustomOptions + [
-            'name' => $data['name'].'-text',
+            'name' => $this->_fakeFieldName($data['name']),
             'readonly' => 'readonly',
             'id' => $data['id'].'-input',
             'onclick' => "document.getElementById('".$data['id']."').click();",
@@ -161,7 +161,7 @@ class FancyFileWidget implements WidgetInterface {
      */
     public function secureFields(array $data) {
         // the extra input for display
-        $fields = [$data['name'].'-text'];
+        $fields = [$this->_fakeFieldName($data['name'])];
         // the file array
         foreach (['name', 'type', 'tmp_name', 'error', 'size'] as $suffix) {
             $fields[] = $data['name'] . '[' . $suffix . ']';
@@ -169,4 +169,12 @@ class FancyFileWidget implements WidgetInterface {
         return $fields;
     }
 
+    /**
+     * Determine name of fake input field
+     * @param string $fieldName original field name
+     * @return string fake field name
+     */
+    protected static function _fakeFieldName($fieldName) {
+        return preg_replace('/(\]?)$/', '-text$1', $fieldName, 1);
+    }
 };
