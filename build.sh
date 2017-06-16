@@ -40,8 +40,6 @@ while [ $# -gt 0 ]; do
     shift
 done
 
-
-
 which mkdocs && mkdocs --version > /dev/null
 
 if [ $? -ne 0 ]; then
@@ -85,7 +83,11 @@ fi
 
 exclude=$(cd repo/src && ls View/Helper/Bootstrap* | tr "\n" ",")
 rm -rf api
-php apigen.phar generate
+php apigen.phar generate --source repo --destination api
+
+if [ $? -ne 0 ]; then
+    abort_with_message "Unable to generate API documentation."
+fi
 
 rm -rf ./site
 mv ../site ./site
