@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        <link rel="canonical" href="https://holt59.github.io/cakephp3-bootstrap-helpers/form-helper/new-input-options/">
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>New input options - CakePHP 3 Bootstrap Helpers</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+            integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        <link href="../../css/prism.css" rel="stylesheet">
+        <link href="../../css/custom-prism.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">
+        <link href="../../css/jumbotron.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+         
+    </head>
+
+    <body data-spy="scroll" data-target=".right-nav" data-offset="70">
+
+    
+
+    
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="../..">CakePHP 3 Bootstrap Helpers</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse" id="main-navbar">
+            <!-- Main navigation -->
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="../..">Getting Started</a>
+                </li>
+                <li class="dropdown active">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">The helpers <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    <!-- helpers -->
+                    
+                    
+                    
+                    
+                        <li class="active">
+                            <a href="../basics/">Form Helper</a>
+                        </li>
+                    
+                    
+                    
+                        <li>
+                            <a href="../../html-helper/icons/">Html Helper</a>
+                        </li>
+                    
+                    
+                    
+                        <li>
+                            <a href="../../modal-helper/basics/">Modal Helper</a>
+                        </li>
+                    
+                    
+                    
+                        <li>
+                            <a href="../../navbar-helper/basics/">Navbar Helper</a>
+                        </li>
+                    
+                    
+                    
+                        <li>
+                            <a href="../../panel-helper/basics/">Panel Helper</a>
+                        </li>
+                    
+                    
+                    
+                    
+                    </ul>
+                </li>
+                <li><a href="https://holt59.github.io/cakephp3-bootstrap-helpers/api/">API</a></li>
+                <li>
+                    <a href="../../faq/">FAQ</a>
+                </li>
+            </ul>
+
+            <!-- Search, Navigation and Repo links -->
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li>
+                    <a href="https://github.com/Holt59/cakephp3-bootstrap-helpers">
+                        
+                            <i class="fa fa-github"></i>
+                        
+                        GitHub
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="navbar navbar-default hidden-md hidden-lg" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#sub-navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            
+            
+            
+            
+            <a class="navbar-brand" href="../basics/">
+                Form Helper</a>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse" id="sub-navbar">
+            <!-- Main navigation -->
+            <ul class="nav navbar-nav">
+                
+                
+                
+                
+                
+                
+                <li >
+                    <a href="../basics/">Basic usage</a>
+                
+                
+                
+                <li >
+                    <a href="../horizontal/">Horizontal forms</a>
+                
+                
+                
+                <li >
+                    <a href="../custom-file-inputs/">Custom file inputs</a>
+                
+                
+                
+                <li >
+                    <a href="../buttons-et-al/">Buttons, Groups & Toolbars</a>
+                
+                
+                
+                <li class="active">
+                    <a href="./">New input options</a>
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+    <div class="container">
+            <div class="col-md-9" role="main">
+
+<h3 id="prepend-or-append-content-to-inputs">Prepend or append content to inputs</h3>
+<p>You can prepend and append add-ons or buttons to inputs using custom options of the <code>Bootstrap.FormHelper::input</code> method.</p>
+<div class="tab-panels"><ul class="nav nav-tabs" role="tablist"><li class="active" role="presentation"><a aria-controls="tab-form-new-options-1-php" data-toggle="tab" href="#tab-form-new-options-1-php" role="tab">PHP</a></li><li role="presentation"><a aria-controls="tab-form-new-options-1-markup" data-toggle="tab" href="#tab-form-new-options-1-markup" role="tab">Markup</a></li><li role="presentation"><a aria-controls="tab-form-new-options-1-output" data-toggle="tab" href="#tab-form-new-options-1-output" role="tab">Output</a></li></ul><div class="tab-content"><div class="tab-pane active" id="tab-form-new-options-1-php" role="tabpanel"><pre><code class="language-php">echo $this-&gt;Form-&gt;input('mail', [
+    'prepend' =&gt; '@',
+    'append' =&gt; $this-&gt;Form-&gt;button('Send')
+]) ;
+</code></pre>
+
+</div><div class="tab-pane" id="tab-form-new-options-1-markup" role="tabpanel"><pre><code class="language-markup">&lt;div class=&quot;form-group text&quot;&gt;
+    &lt;label class=&quot; control-label&quot;  for=&quot;mail&quot;&gt;Mail&lt;/label&gt;
+    &lt;div class=&quot;input-group&quot;&gt;
+        &lt;span class=&quot;input-group-addon&quot;&gt;@&lt;/span&gt;
+        &lt;input type=&quot;text&quot; name=&quot;mail&quot; class=&quot;form-control &quot; id=&quot;mail&quot; /&gt;
+        &lt;span class=&quot;input-group-btn&quot;&gt;
+            &lt;button class=&quot;btn btn-default&quot; type=&quot;submit&quot;&gt;Send&lt;/button&gt;
+        &lt;/span&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+</div><div class="tab-pane" id="tab-form-new-options-1-output" role="tabpanel"><div class="form-group text">
+    <label class=" control-label"  for="mail">Mail</label>
+    <div class="input-group">
+        <span class="input-group-addon">@</span>
+        <input type="text" name="mail" class="form-control " id="mail" />
+        <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Send</button>
+        </span>
+    </div>
+</div>
+
+</div></div></div><h3 id="add-dropdown-buttons">Add dropdown buttons</h3>
+<p>You can easily prepend or append dropdown buttons to inputs by using custom options of the <code>Bootstrap.FormHelper::input</code> method
+combined with the <code>Bootstrap.FormHelper::dropdown</code> method.</p>
+<div class="tab-panels"><ul class="nav nav-tabs" role="tablist"><li class="active" role="presentation"><a aria-controls="tab-form-new-options-2-php" data-toggle="tab" href="#tab-form-new-options-2-php" role="tab">PHP</a></li><li role="presentation"><a aria-controls="tab-form-new-options-2-markup" data-toggle="tab" href="#tab-form-new-options-2-markup" role="tab">Markup</a></li><li role="presentation"><a aria-controls="tab-form-new-options-2-output" data-toggle="tab" href="#tab-form-new-options-2-output" role="tab">Output</a></li></ul><div class="tab-content"><div class="tab-pane active" id="tab-form-new-options-2-php" role="tabpanel"><pre><code class="language-php">echo $this-&gt;Form-&gt;input('mail', [
+    'append' =&gt; [
+        $this-&gt;Form-&gt;button('Button'),
+        $this-&gt;Form-&gt;dropdownButton('Dropdown', [
+            $this-&gt;Html-&gt;link('A', '#'),
+            $this-&gt;Html-&gt;link('B', '#'),
+            'divider',
+            $this-&gt;Html-&gt;link('C', '#')
+        ])
+    ]
+]) ;
+</code></pre>
+
+</div><div class="tab-pane" id="tab-form-new-options-2-markup" role="tabpanel"><pre><code class="language-markup">&lt;div class=&quot;form-group text&quot;&gt;
+    &lt;label class=&quot; control-label&quot;  for=&quot;mail&quot;&gt;Mail&lt;/label&gt;
+    &lt;div class=&quot;input-group&quot;&gt;
+        &lt;input type=&quot;text&quot; name=&quot;mail&quot; class=&quot;form-control &quot;  id=&quot;mail&quot; /&gt;
+        &lt;span class=&quot;input-group-btn&quot;&gt;
+            &lt;button class=&quot;btn btn-default&quot; type=&quot;submit&quot;&gt;Button&lt;/button&gt;
+            &lt;div class=&quot;btn-group&quot;&gt;
+                &lt;button data-toggle=&quot;dropdown&quot; class=&quot;dropdown-toggle btn btn-default&quot;&gt;Dropdown &lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;&lt;/button&gt;
+                &lt;ul class=&quot;dropdown-menu&quot;&gt;
+                    &lt;li&gt;&lt;a href=&quot;#&quot;&gt;A&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&quot;#&quot;&gt;B&lt;/a&gt;&lt;/li&gt;
+                    &lt;li class=&quot;divider&quot;&gt;&lt;/li&gt;
+                    &lt;li&gt;&lt;a href=&quot;#&quot;&gt;C&lt;/a&gt;&lt;/li&gt;
+                &lt;/ul&gt;
+            &lt;/div&gt;
+        &lt;/span&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+</div><div class="tab-pane" id="tab-form-new-options-2-output" role="tabpanel"><div class="form-group text">
+    <label class=" control-label"  for="mail">Mail</label>
+    <div class="input-group">
+        <input type="text" name="mail" class="form-control "  id="mail" />
+        <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Button</button>
+            <div class="btn-group">
+                <button data-toggle="dropdown" class="dropdown-toggle btn btn-default">Dropdown <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                    <li><a href="#">A</a></li>
+                    <li><a href="#">B</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">C</a></li>
+                </ul>
+            </div>
+        </span>
+    </div>
+</div>
+
+</div></div></div><h3 id="add-help-message-to-inputs">Add help message to inputs</h3>
+<p>You can add help messages to inputs by specifying the <code>help</code> option:</p>
+<div class="tab-panels"><ul class="nav nav-tabs" role="tablist"><li class="active" role="presentation"><a aria-controls="tab-form-new-options-help-php" data-toggle="tab" href="#tab-form-new-options-help-php" role="tab">PHP</a></li><li role="presentation"><a aria-controls="tab-form-new-options-help-markup" data-toggle="tab" href="#tab-form-new-options-help-markup" role="tab">Markup</a></li><li role="presentation"><a aria-controls="tab-form-new-options-help-output" data-toggle="tab" href="#tab-form-new-options-help-output" role="tab">Output</a></li></ul><div class="tab-content"><div class="tab-pane active" id="tab-form-new-options-help-php" role="tabpanel"><pre><code class="language-php">echo $this-&gt;Form-&gt;input('mail', [
+    'help' =&gt; 'Hey guy, you need some help?'
+]) ;
+</code></pre>
+
+</div><div class="tab-pane" id="tab-form-new-options-help-markup" role="tabpanel"><pre><code class="language-markup">&lt;div class=&quot;form-group text&quot;&gt;
+    &lt;label class=&quot; control-label&quot;  for=&quot;mail&quot;&gt;Mail&lt;/label&gt;
+    &lt;input type=&quot;text&quot; name=&quot;mail&quot; class=&quot;form-control &quot; id=&quot;mail&quot; /&gt;
+    &lt;p class=&quot;help-block&quot;&gt;Hey guy, you need some help?&lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+
+</div><div class="tab-pane" id="tab-form-new-options-help-output" role="tabpanel"><div class="form-group text">
+    <label class=" control-label"  for="mail">Mail</label>
+    <input type="text" name="mail" class="form-control " id="mail" />
+    <p class="help-block">Hey guy, you need some help?</p>
+</div>
+
+</div></div></div></div>
+            <div class="col-md-3 hidden-sm hidden-xs">
+
+<nav class="right-nav right-nav-fixed">
+    <ul class="nav">
+
+    
+    
+    
+    
+    <li class="nav-header">Form Helper</li>
+    
+    
+    <li >
+        <a href="../basics/">Basic usage</a>
+        
+    </li>
+    
+    
+    
+    <li >
+        <a href="../horizontal/">Horizontal forms</a>
+        
+    </li>
+    
+    
+    
+    <li >
+        <a href="../custom-file-inputs/">Custom file inputs</a>
+        
+    </li>
+    
+    
+    
+    <li >
+        <a href="../buttons-et-al/">Buttons, Groups & Toolbars</a>
+        
+    </li>
+    
+    
+    
+    <li class="active">
+        <a href="./">New input options</a>
+        
+        <ul class="nav">
+        
+            <li class="main active"><a href="#prepend-or-append-content-to-inputs">Prepend or append content to inputs</a></li>
+        
+            <li class="main "><a href="#add-dropdown-buttons">Add dropdown buttons</a></li>
+        
+            <li class="main "><a href="#add-help-message-to-inputs">Add help message to inputs</a></li>
+        
+        </ul>
+    
+    </li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    </ul>
+</nav>
+
+</div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="col-md-12">
+                <p>&copy; 2017, Mikaël Capelle (@Holt59)
+                - Designed and built by <a href="https://github.com/Holt59" target="_blank">Holt59</a> &amp;
+                <a href="https://github.com/Holt59/cakephp3-bootstrap-helpers/graphs/contributors" target="_blank">contributors</a>.</p>
+                <p>Code licensed under <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, Version 2.0</a>.</p>
+                <p>Code &amp; Documentation hosted by <a href="https://github.com" target="_blank"><i class="fa fa-github"></i> Github</a>.</p>
+                <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> and <a href="http://www.apigen.org/">Apigen</a>.
+            </div>
+        </div>
+    </footer>
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+              integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+              crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+              integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <script src="../../js/prism.min.js"></script>
+        <script src="../../js/base.js"></script>
+
+        
+    </body>
+</html>

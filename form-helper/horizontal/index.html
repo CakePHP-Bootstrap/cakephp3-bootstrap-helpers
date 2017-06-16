@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        <link rel="canonical" href="https://holt59.github.io/cakephp3-bootstrap-helpers/form-helper/horizontal/">
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Horizontal forms - CakePHP 3 Bootstrap Helpers</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+            integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        <link href="../../css/prism.css" rel="stylesheet">
+        <link href="../../css/custom-prism.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">
+        <link href="../../css/jumbotron.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+         
+    </head>
+
+    <body data-spy="scroll" data-target=".right-nav" data-offset="70">
+
+    
+
+    
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="../..">CakePHP 3 Bootstrap Helpers</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse" id="main-navbar">
+            <!-- Main navigation -->
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="../..">Getting Started</a>
+                </li>
+                <li class="dropdown active">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">The helpers <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    <!-- helpers -->
+                    
+                    
+                    
+                    
+                        <li class="active">
+                            <a href="../basics/">Form Helper</a>
+                        </li>
+                    
+                    
+                    
+                        <li>
+                            <a href="../../html-helper/icons/">Html Helper</a>
+                        </li>
+                    
+                    
+                    
+                        <li>
+                            <a href="../../modal-helper/basics/">Modal Helper</a>
+                        </li>
+                    
+                    
+                    
+                        <li>
+                            <a href="../../navbar-helper/basics/">Navbar Helper</a>
+                        </li>
+                    
+                    
+                    
+                        <li>
+                            <a href="../../panel-helper/basics/">Panel Helper</a>
+                        </li>
+                    
+                    
+                    
+                    
+                    </ul>
+                </li>
+                <li><a href="https://holt59.github.io/cakephp3-bootstrap-helpers/api/">API</a></li>
+                <li>
+                    <a href="../../faq/">FAQ</a>
+                </li>
+            </ul>
+
+            <!-- Search, Navigation and Repo links -->
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li>
+                    <a href="https://github.com/Holt59/cakephp3-bootstrap-helpers">
+                        
+                            <i class="fa fa-github"></i>
+                        
+                        GitHub
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="navbar navbar-default hidden-md hidden-lg" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#sub-navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            
+            
+            
+            
+            <a class="navbar-brand" href="../basics/">
+                Form Helper</a>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse" id="sub-navbar">
+            <!-- Main navigation -->
+            <ul class="nav navbar-nav">
+                
+                
+                
+                
+                
+                
+                <li >
+                    <a href="../basics/">Basic usage</a>
+                
+                
+                
+                <li class="active">
+                    <a href="./">Horizontal forms</a>
+                
+                
+                
+                <li >
+                    <a href="../custom-file-inputs/">Custom file inputs</a>
+                
+                
+                
+                <li >
+                    <a href="../buttons-et-al/">Buttons, Groups & Toolbars</a>
+                
+                
+                
+                <li >
+                    <a href="../new-input-options/">New input options</a>
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+    <div class="container">
+            <div class="col-md-9" role="main">
+
+<h3 id="creating-an-horizontal">Creating an horizontal</h3>
+<p>You can create Bootstrap <a href="http://getbootstrap.com/css/#forms-horizontal">horizontal forms</a> quite easily:</p>
+<div class="tab-panels"><ul class="nav nav-tabs" role="tablist"><li class="active" role="presentation"><a aria-controls="tab-forms-horizontal-php" data-toggle="tab" href="#tab-forms-horizontal-php" role="tab">PHP</a></li><li role="presentation"><a aria-controls="tab-forms-horizontal-markup" data-toggle="tab" href="#tab-forms-horizontal-markup" role="tab">Markup</a></li><li role="presentation"><a aria-controls="tab-forms-horizontal-output" data-toggle="tab" href="#tab-forms-horizontal-output" role="tab">Output</a></li></ul><div class="tab-content"><div class="tab-pane active" id="tab-forms-horizontal-php" role="tabpanel"><pre><code class="language-php">echo $this-&gt;Form-&gt;create(null, ['horizontal' =&gt; true]);
+echo $this-&gt;Form-&gt;input('username', ['type' =&gt; 'text']) ;
+echo $this-&gt;Form-&gt;input('password', ['type' =&gt; 'password']) ;
+echo $this-&gt;Form-&gt;input('remember', ['type' =&gt; 'checkbox']) ;
+echo $this-&gt;Form-&gt;submit('Log In') ;
+echo $this-&gt;Form-&gt;end() ;
+</code></pre>
+
+</div><div class="tab-pane" id="tab-forms-horizontal-markup" role="tabpanel"><pre><code class="language-markup">&lt;form method=&quot;post&quot; accept-charset=&quot;utf-8&quot; class=&quot;form-horizontal&quot; role=&quot;form&quot; action=&quot;#&quot;&gt;
+    &lt;div style=&quot;display:none;&quot;&gt;
+        &lt;input type=&quot;hidden&quot; name=&quot;_method&quot; class=&quot;form-control &quot;  value=&quot;POST&quot; /&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;form-group text&quot;&gt;
+        &lt;label class=&quot;col-md-2 control-label&quot;  for=&quot;username&quot;&gt;Username&lt;/label&gt;
+        &lt;div class=&quot;col-md-6&quot;&gt;
+            &lt;input type=&quot;text&quot; name=&quot;username&quot; class=&quot;form-control &quot;  id=&quot;username&quot; /&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;form-group password&quot;&gt;
+        &lt;label class=&quot;col-md-2 control-label&quot;  for=&quot;password&quot;&gt;Password&lt;/label&gt;
+        &lt;div class=&quot;col-md-6&quot;&gt;
+            &lt;input type=&quot;password&quot; name=&quot;password&quot; class=&quot;form-control &quot;  id=&quot;password&quot; /&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;form-group&quot;&gt;
+        &lt;div class=&quot;col-md-offset-2 col-md-6&quot;&gt;
+            &lt;div class=&quot;checkbox&quot;&gt;
+                &lt;input type=&quot;hidden&quot; name=&quot;remember&quot; class=&quot;form-control &quot;  value=&quot;0&quot; /&gt;
+                &lt;label for=&quot;remember&quot;&gt;
+                    &lt;input type=&quot;checkbox&quot; name=&quot;remember&quot; value=&quot;1&quot; id=&quot;remember&quot;&gt;
+                    Remember
+                &lt;/label&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;form-group&quot;&gt;
+        &lt;div class=&quot;col-md-offset-2 col-md-6&quot;&gt;
+            &lt;input type=&quot;submit&quot; class=&quot;btn btn-default&quot; value=&quot;Log In&quot;&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/form&gt;
+</code></pre>
+
+</div><div class="tab-pane" id="tab-forms-horizontal-output" role="tabpanel"><form method="post" accept-charset="utf-8" class="form-horizontal" role="form" action="#">
+    <div style="display:none;">
+        <input type="hidden" name="_method" class="form-control "  value="POST" />
+    </div>
+    <div class="form-group text">
+        <label class="col-md-2 control-label"  for="username">Username</label>
+        <div class="col-md-6">
+            <input type="text" name="username" class="form-control "  id="username" />
+        </div>
+    </div>
+    <div class="form-group password">
+        <label class="col-md-2 control-label"  for="password">Password</label>
+        <div class="col-md-6">
+            <input type="password" name="password" class="form-control "  id="password" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-6">
+            <div class="checkbox">
+                <input type="hidden" name="remember" class="form-control "  value="0" />
+                <label for="remember">
+                    <input type="checkbox" name="remember" value="1" id="remember">
+                    Remember
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-6">
+            <input type="submit" class="btn btn-default" value="Log In">
+        </div>
+    </div>
+</form>
+
+</div></div></div><h3 id="specifying-the-width-of-the-columns">Specifying the width of the columns</h3>
+<p>You can change the widths of the columns at any time using the <code>setConfig</code> method:</p>
+<pre><code class="language-php">echo $this-&gt;Form-&gt;setConfig('columns', [ // Total is 12, default is 2 / 10 / 0
+    'label' =&gt; 2,
+    'input' =&gt; 10,
+    'error' =&gt; 0 // 0 for 'error' means that it will be put under the input
+]);
+echo $this-&gt;Form-&gt;create(null, ['horizontal' =&gt; true]);
+</code></pre>
+
+<p>You can also specify different widths for different display sizes:</p>
+<div class="tab-panels"><ul class="nav nav-tabs" role="tablist"><li class="active" role="presentation"><a aria-controls="tab-form-horizontals-sizes-1-php" data-toggle="tab" href="#tab-form-horizontals-sizes-1-php" role="tab">PHP</a></li><li role="presentation"><a aria-controls="tab-form-horizontals-sizes-1-markup" data-toggle="tab" href="#tab-form-horizontals-sizes-1-markup" role="tab">Markup</a></li><li role="presentation"><a aria-controls="tab-form-horizontals-sizes-1-output" data-toggle="tab" href="#tab-form-horizontals-sizes-1-output" role="tab">Output</a></li></ul><div class="tab-content"><div class="tab-pane active" id="tab-form-horizontals-sizes-1-php" role="tabpanel"><pre><code class="language-php">$this-&gt;Form-&gt;setConfig('columns', [
+    'sm' =&gt; [
+        'label' =&gt; 4,
+        'input' =&gt; 4,
+        'error' =&gt; 4
+    ],
+    'md' =&gt; [
+        'label' =&gt; 2,
+        'input' =&gt; 6,
+        'error' =&gt; 4
+    ]
+]);
+echo $this-&gt;Form-&gt;create(null, ['horizontal' =&gt; true]);
+echo $this-&gt;Form-&gt;input('username', ['type' =&gt; 'text']) ;
+echo $this-&gt;Form-&gt;input('password', ['type' =&gt; 'password']) ;
+echo $this-&gt;Form-&gt;input('remember', ['type' =&gt; 'checkbox']) ;
+echo $this-&gt;Form-&gt;submit('Log In') ;
+echo $this-&gt;Form-&gt;end() ;
+</code></pre>
+
+</div><div class="tab-pane" id="tab-form-horizontals-sizes-1-markup" role="tabpanel"><pre><code class="language-markup">&lt;form method=&quot;post&quot; accept-charset=&quot;utf-8&quot; class=&quot;form-horizontal&quot; role=&quot;form&quot; action=&quot;#&quot;&gt;
+    &lt;div style=&quot;display:none;&quot;&gt;
+        &lt;input type=&quot;hidden&quot; name=&quot;_method&quot; class=&quot;form-control &quot;  value=&quot;POST&quot; /&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;form-group text&quot;&gt;
+        &lt;label class=&quot;col-sm-4 col-md-2 control-label&quot;  for=&quot;username&quot;&gt;Username&lt;/label&gt;
+        &lt;div class=&quot;col-sm-4 col-md-6&quot;&gt;
+            &lt;input type=&quot;text&quot; name=&quot;username&quot; class=&quot;form-control &quot;  id=&quot;username&quot; /&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;form-group password&quot;&gt;
+        &lt;label class=&quot;col-sm-4 col-md-2 control-label&quot;  for=&quot;password&quot;&gt;Password&lt;/label&gt;
+        &lt;div class=&quot;col-sm-4 col-md-6&quot;&gt;
+            &lt;input type=&quot;password&quot; name=&quot;password&quot; class=&quot;form-control &quot;  id=&quot;password&quot; /&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;form-group&quot;&gt;
+        &lt;div class=&quot;col-sm-offset-4 col-md-offset-2 col-sm-4 col-md-6&quot;&gt;
+            &lt;div class=&quot;checkbox&quot;&gt;
+                &lt;input type=&quot;hidden&quot; name=&quot;remember&quot; class=&quot;form-control &quot;  value=&quot;0&quot; /&gt;
+                &lt;label for=&quot;remember&quot;&gt;
+                    &lt;input type=&quot;checkbox&quot; name=&quot;remember&quot; value=&quot;1&quot; id=&quot;remember&quot;&gt;
+                    Remember
+                &lt;/label&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;form-group&quot;&gt;
+        &lt;div class=&quot;col-sm-offset-4 col-md-offset-2 col-sm-4 col-md-6&quot;&gt;
+            &lt;input type=&quot;submit&quot; class=&quot;btn btn-default&quot; value=&quot;Log In&quot;&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/form&gt;
+</code></pre>
+
+</div><div class="tab-pane" id="tab-form-horizontals-sizes-1-output" role="tabpanel"><form method="post" accept-charset="utf-8" class="form-horizontal" role="form" action="#">
+    <div style="display:none;">
+        <input type="hidden" name="_method" class="form-control "  value="POST" />
+    </div>
+    <div class="form-group text">
+        <label class="col-sm-4 col-md-2 control-label"  for="username">Username</label>
+        <div class="col-sm-4 col-md-6">
+            <input type="text" name="username" class="form-control "  id="username" />
+        </div>
+    </div>
+    <div class="form-group password">
+        <label class="col-sm-4 col-md-2 control-label"  for="password">Password</label>
+        <div class="col-sm-4 col-md-6">
+            <input type="password" name="password" class="form-control "  id="password" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-4 col-md-offset-2 col-sm-4 col-md-6">
+            <div class="checkbox">
+                <input type="hidden" name="remember" class="form-control "  value="0" />
+                <label for="remember">
+                    <input type="checkbox" name="remember" value="1" id="remember">
+                    Remember
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-4 col-md-offset-2 col-sm-4 col-md-6">
+            <input type="submit" class="btn btn-default" value="Log In">
+        </div>
+    </div>
+</form>
+
+</div></div></div><p>You can set the default column widths when configuring the helper:</p>
+<pre><code class="language-php">public $helpers = [
+    'Form' =&gt; [
+        'className' =&gt; 'Bootstrap.Form',
+        'columns' =&gt; [
+            'sm' =&gt; [
+                'label' =&gt; 4,
+                'input' =&gt; 4,
+                'error' =&gt; 4
+            ],
+            'md' =&gt; [
+                'label' =&gt; 2,
+                'input' =&gt; 6,
+                'error' =&gt; 4
+            ]
+        ]
+    ]
+];
+</code></pre>
+
+<h3 id="non-horizontal-input-inside-horizontal-form">Non horizontal input inside horizontal form</h3>
+<p>It is possible to create a non-horizontal input inside an horizontal form, for instance to avoid compatibility
+issue for various plugins. To do so, simply set the <code>horizontal</code> attribute to <code>false</code> before the input, and
+reset it to <code>true</code> after:</p>
+<div class="tab-panels"><ul class="nav nav-tabs" role="tablist"><li class="active" role="presentation"><a aria-controls="tab-form-horizontals-nh-php" data-toggle="tab" href="#tab-form-horizontals-nh-php" role="tab">PHP</a></li><li role="presentation"><a aria-controls="tab-form-horizontals-nh-markup" data-toggle="tab" href="#tab-form-horizontals-nh-markup" role="tab">Markup</a></li><li role="presentation"><a aria-controls="tab-form-horizontals-nh-output" data-toggle="tab" href="#tab-form-horizontals-nh-output" role="tab">Output</a></li></ul><div class="tab-content"><div class="tab-pane active" id="tab-form-horizontals-nh-php" role="tabpanel"><pre><code class="language-php">&lt;?php
+    echo $this-&gt;Form-&gt;create(NULL, ['horizontal' =&gt; true]) ;
+    echo $this-&gt;Form-&gt;input('horizontal_1');
+    echo $this-&gt;Form-&gt;horizontal = false;
+    echo $this-&gt;Form-&gt;input('non_horizontal');
+    echo $this-&gt;Form-&gt;horizontal = true;
+    echo $this-&gt;Form-&gt;input('horizontal_2');
+    echo $this-&gt;Form-&gt;end() ;
+?&gt;
+</code></pre>
+
+</div><div class="tab-pane" id="tab-form-horizontals-nh-markup" role="tabpanel"><pre><code class="language-markup">
+
+&lt;form accept-charset=&quot;utf-8&quot; action=&quot;#&quot; class=&quot;form-horizontal&quot; method=&quot;post&quot;&gt;
+    &lt;div style=&quot;display:none;&quot;&gt;
+        &lt;input class=&quot;form-control&quot; name=&quot;_method&quot; type=&quot;hidden&quot; value=&quot;POST&quot;&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;form-group text&quot;&gt;
+        &lt;label class=&quot;col-md-2 control-label&quot; for=&quot;horizontal-1&quot;&gt;Horizontal 1&lt;/label&gt;
+        &lt;div class=&quot;col-md-6&quot;&gt;
+            &lt;input class=&quot;form-control&quot; id=&quot;horizontal-1&quot; name=&quot;horizontal_1&quot; type=&quot;text&quot;&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;form-group text&quot;&gt;
+        &lt;label class=&quot; control-label&quot; for=&quot;non-horizontal&quot;&gt;Non Horizontal&lt;/label&gt;
+        &lt;input class=&quot;form-control&quot; id=&quot;non-horizontal&quot; name=&quot;non_horizontal&quot; type=&quot;text&quot;&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;form-group text&quot;&gt;
+        &lt;label class=&quot;col-md-2 control-label&quot; for=&quot;horizontal-2&quot;&gt;Horizontal 2&lt;/label&gt;
+        &lt;div class=&quot;col-md-6&quot;&gt;
+            &lt;input class=&quot;form-control&quot; id=&quot;horizontal-2&quot; name=&quot;horizontal_2&quot; type=&quot;text&quot;&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/form&gt;
+</code></pre>
+
+</div><div class="tab-pane" id="tab-form-horizontals-nh-output" role="tabpanel"><form accept-charset="utf-8" action="#" class="form-horizontal" method="post">
+    <div style="display:none;">
+        <input class="form-control" name="_method" type="hidden" value="POST">
+    </div>
+    <div class="form-group text">
+        <label class="col-md-2 control-label" for="horizontal-1">Horizontal 1</label>
+        <div class="col-md-6">
+            <input class="form-control" id="horizontal-1" name="horizontal_1" type="text">
+        </div>
+    </div>
+    <div class="form-group text">
+        <label class=" control-label" for="non-horizontal">Non Horizontal</label>
+        <input class="form-control" id="non-horizontal" name="non_horizontal" type="text">
+    </div>
+    <div class="form-group text">
+        <label class="col-md-2 control-label" for="horizontal-2">Horizontal 2</label>
+        <div class="col-md-6">
+            <input class="form-control" id="horizontal-2" name="horizontal_2" type="text">
+        </div>
+    </div>
+</form>
+
+</div></div></div></div>
+            <div class="col-md-3 hidden-sm hidden-xs">
+
+<nav class="right-nav right-nav-fixed">
+    <ul class="nav">
+
+    
+    
+    
+    
+    <li class="nav-header">Form Helper</li>
+    
+    
+    <li >
+        <a href="../basics/">Basic usage</a>
+        
+    </li>
+    
+    
+    
+    <li class="active">
+        <a href="./">Horizontal forms</a>
+        
+        <ul class="nav">
+        
+            <li class="main active"><a href="#creating-an-horizontal">Creating an horizontal</a></li>
+        
+            <li class="main "><a href="#specifying-the-width-of-the-columns">Specifying the width of the columns</a></li>
+        
+            <li class="main "><a href="#non-horizontal-input-inside-horizontal-form">Non horizontal input inside horizontal form</a></li>
+        
+        </ul>
+    
+    </li>
+    
+    
+    
+    <li >
+        <a href="../custom-file-inputs/">Custom file inputs</a>
+        
+    </li>
+    
+    
+    
+    <li >
+        <a href="../buttons-et-al/">Buttons, Groups & Toolbars</a>
+        
+    </li>
+    
+    
+    
+    <li >
+        <a href="../new-input-options/">New input options</a>
+        
+    </li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    </ul>
+</nav>
+
+</div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="col-md-12">
+                <p>&copy; 2017, Mikaël Capelle (@Holt59)
+                - Designed and built by <a href="https://github.com/Holt59" target="_blank">Holt59</a> &amp;
+                <a href="https://github.com/Holt59/cakephp3-bootstrap-helpers/graphs/contributors" target="_blank">contributors</a>.</p>
+                <p>Code licensed under <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, Version 2.0</a>.</p>
+                <p>Code &amp; Documentation hosted by <a href="https://github.com" target="_blank"><i class="fa fa-github"></i> Github</a>.</p>
+                <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> and <a href="http://www.apigen.org/">Apigen</a>.
+            </div>
+        </div>
+    </footer>
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+              integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+              crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+              integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <script src="../../js/prism.min.js"></script>
+        <script src="../../js/base.js"></script>
+
+        
+    </body>
+</html>

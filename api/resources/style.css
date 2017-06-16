@@ -1,0 +1,216 @@
+body {
+    font-family: "Open Sans";
+    font-size: 14px;
+    padding-top: 70px;
+    position: relative;
+    line-height: 26px;
+}
+
+footer {
+    padding: 20px 0;
+    margin-top: 20px;
+    background-color: #f8f8f8;
+    border-top: 1px solid #e7e7e7;
+}
+
+a:hover, a:focus, a:active, .btn:hover, .btn:focus, .btn:active, button:hover, button:focus, button:active {
+    text-decoration: none;
+    outline: 0;
+    box-shadow: none;
+    -webkit-transition: all 0.2s easeout;
+    transition: all 0.2s ease-out;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 300;
+    margin: 9px 0 9px 0;
+}
+
+/* Left menu */
+
+.left-menu .nav-title {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
+}
+
+.left-menu .nav-list {
+    margin: 0 0 1em 0;
+}
+
+.left-menu .nav-list li {
+    list-style: none;
+}
+
+.left-menu li.active > a {
+    color: inherit;
+    font-weight: bold;
+}
+
+.left-menu .nav-list li a {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: keep-all;
+}
+
+#groups ul {
+    padding: 0;
+    margin: 0 0 1em 0;
+}
+
+#groups ul ul {
+    padding-left: 10px;
+}
+
+#groups li {
+    white-space: nowrap;
+    position: relative;
+    list-style: none;
+}
+
+#groups ul.collapsed {
+    display: none;
+}
+
+#groups span {
+    position: absolute;
+    top: 6px;
+    right: 3px;
+    cursor: pointer;
+    display: block;
+    width: 12px;
+    height: 12px;
+    background: url('collapsed.png') transparent 0 0 no-repeat;
+}
+
+#groups span.collapsed {
+    background-position: 0 -12px;
+}
+
+#groups span.collapsed:hover {
+    background-position: -12px -12px;
+}
+
+#groups span:hover {
+    background-position: -12px 0;
+}
+
+/* Fix conflict with prism. */
+.section.namespace {
+    opacity: 1;
+}
+
+.section h3 {
+    line-height: 50px;
+}
+
+.label {
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 1.3em;
+    vertical-align: middle;
+    opacity: 0.7;
+}
+
+.permalink {
+    display: none;
+}
+
+ul, ol {
+    margin: 0 0 20px 30px;
+    padding: 0;
+}
+
+ul {
+    list-style: disc outside;
+}
+
+.summary-list {
+    margin: 0;
+}
+
+.summary-list li {
+    list-style: none;
+}
+
+.summary-list h5 {
+    font-size: 1.8rem;
+    line-height: 1;
+}
+
+.summary-list p {
+    margin-left: 2em;
+}
+
+.method-detail {
+    margin-bottom: 3em;
+}
+
+.member-summary {
+    margin: 0 0 2em 0;
+}
+
+.member-summary li {
+    list-style: none;
+    margin-bottom: 1em;
+    clear: both;
+}
+
+.member-summary li:hover .permalink, .method-name:hover .permalink, .property-name:hover .permalink {
+    display: inline;
+}
+
+.name, .attributes {
+    white-space: nowrap;
+}
+
+.description h1, .description h2, .description h3 {
+    font-size: 22px;
+    margin-bottom: 0.5em;
+}
+
+.description h6 {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.list, .parameter-list {
+    padding-left: 20px;
+    margin-bottom: 1em;
+}
+
+.parameter-list dt {
+    margin-bottom: 0.3em;
+}
+
+.parameter-list dt code {
+    padding: 0;
+    background: none;
+    border: none;
+    font-weight: normal;
+}
+
+.parameter-list dt code.optional .token.operator.default-assign::before {
+    content: '[optional] ';
+    opacity: 0.8;
+}
+
+.parameter-list dd {
+    margin-bottom: 1em;
+}
+
+/* Classes */
+
+.class .method .name {
+    width: auto;
+    white-space: normal;
+}
+
+/* Anchor */
+
+*:target:before {
+    content:"";
+    display:block;
+    height: 50px; /* fixed header height*/
+    margin: -50px 0 0; /* negative fixed header height */
+}

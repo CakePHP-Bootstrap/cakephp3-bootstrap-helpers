@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        <link rel="canonical" href="https://holt59.github.io/cakephp3-bootstrap-helpers/panel-helper/basics/">
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Basic usage - CakePHP 3 Bootstrap Helpers</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+            integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        <link href="../../css/prism.css" rel="stylesheet">
+        <link href="../../css/custom-prism.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">
+        <link href="../../css/jumbotron.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+         
+    </head>
+
+    <body data-spy="scroll" data-target=".right-nav" data-offset="70">
+
+    
+
+    
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="../..">CakePHP 3 Bootstrap Helpers</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse" id="main-navbar">
+            <!-- Main navigation -->
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="../..">Getting Started</a>
+                </li>
+                <li class="dropdown active">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">The helpers <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    <!-- helpers -->
+                    
+                    
+                    
+                    
+                        <li>
+                            <a href="../../form-helper/basics/">Form Helper</a>
+                        </li>
+                    
+                    
+                    
+                        <li>
+                            <a href="../../html-helper/icons/">Html Helper</a>
+                        </li>
+                    
+                    
+                    
+                        <li>
+                            <a href="../../modal-helper/basics/">Modal Helper</a>
+                        </li>
+                    
+                    
+                    
+                        <li>
+                            <a href="../../navbar-helper/basics/">Navbar Helper</a>
+                        </li>
+                    
+                    
+                    
+                        <li class="active">
+                            <a href="./">Panel Helper</a>
+                        </li>
+                    
+                    
+                    
+                    
+                    </ul>
+                </li>
+                <li><a href="https://holt59.github.io/cakephp3-bootstrap-helpers/api/">API</a></li>
+                <li>
+                    <a href="../../faq/">FAQ</a>
+                </li>
+            </ul>
+
+            <!-- Search, Navigation and Repo links -->
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li>
+                    <a href="https://github.com/Holt59/cakephp3-bootstrap-helpers">
+                        
+                            <i class="fa fa-github"></i>
+                        
+                        GitHub
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="navbar navbar-default hidden-md hidden-lg" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#sub-navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <a class="navbar-brand" href="./">
+                Panel Helper</a>
+            
+            
+            
+            
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse" id="sub-navbar">
+            <!-- Main navigation -->
+            <ul class="nav navbar-nav">
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                <li class="active">
+                    <a href="./">Basic usage</a>
+                
+                
+                
+                <li >
+                    <a href="../groups/">Panel groups</a>
+                
+                
+                
+                
+                
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+    <div class="container">
+            <div class="col-md-9" role="main">
+
+<h3 id="create-a-bootstrap-panel">Create a Bootstrap panel</h3>
+<p>The <code>Bootstrap.PanelHelper</code> works in a similar way to the standard modal helper, you first need to load the helper:</p>
+<pre><code class="language-php">public $helpers = [
+    'Panel' =&gt; [
+        'className' =&gt; 'Bootstrap.PanelHelper'
+    ]
+];
+</code></pre>
+
+<p>Below is a basic example:</p>
+<div class="tab-panels"><ul class="nav nav-tabs" role="tablist"><li class="active" role="presentation"><a aria-controls="tab-panel-basics-php" data-toggle="tab" href="#tab-panel-basics-php" role="tab">php</a></li><li role="presentation"><a aria-controls="tab-panel-basics-markup" data-toggle="tab" href="#tab-panel-basics-markup" role="tab">Markup</a></li><li role="presentation"><a aria-controls="tab-panel-basics-output" data-toggle="tab" href="#tab-panel-basics-output" role="tab">Output</a></li></ul><div class="tab-content"><div class="tab-pane active" id="tab-panel-basics-php" role="tabpanel"><pre><code class="language-php">echo $this-&gt;Panel-&gt;create('My Panel Heading');
+?&gt;
+&lt;p&gt;Here I can write my panel content... &lt;/p&gt;
+&lt;?php
+echo $this-&gt;Panel-&gt;end();
+</code></pre>
+
+</div><div class="tab-pane" id="tab-panel-basics-markup" role="tabpanel"><pre><code class="language-markup">&lt;div class=&quot;panel panel-default&quot;&gt;
+    &lt;div class=&quot;panel-heading&quot;&gt;
+        &lt;h4 class=&quot;panel-title&quot;&gt;My Panel Heading&lt;/h4&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;panel-body&quot;&gt;
+        &lt;p&gt;Here I can write my panel content... &lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+</code></pre>
+
+</div><div class="tab-pane" id="tab-panel-basics-output" role="tabpanel"><div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">My Panel Heading</h4>
+    </div>
+    <div class="panel-body">
+        <p>Here I can write my panel content... </p>
+    </div>
+</div>
+
+</div></div></div><h3 id="creating-fancy-panels">Creating fancy panels</h3>
+<p>You can customize your panel easily by specifying the <code>type</code> option and using <a href="../../html-helper/icons/">easy icons</a> in
+your headings:</p>
+<div class="tab-panels"><ul class="nav nav-tabs" role="tablist"><li class="active" role="presentation"><a aria-controls="tab-panel-fancy-php" data-toggle="tab" href="#tab-panel-fancy-php" role="tab">php</a></li><li role="presentation"><a aria-controls="tab-panel-fancy-markup" data-toggle="tab" href="#tab-panel-fancy-markup" role="tab">Markup</a></li><li role="presentation"><a aria-controls="tab-panel-fancy-output" data-toggle="tab" href="#tab-panel-fancy-output" role="tab">Output</a></li></ul><div class="tab-content"><div class="tab-pane active" id="tab-panel-fancy-php" role="tabpanel"><pre><code class="language-php">echo $this-&gt;Panel-&gt;create('i:home Home');
+echo '&lt;p&gt;Here I can write my panel content... &lt;/p&gt;';
+echo $this-&gt;Panel-&gt;end();
+echo $this-&gt;Panel-&gt;create('i:cloud My Cloud', ['type' =&gt; 'primary']);
+echo '&lt;p&gt;Here I can write my panel content... &lt;/p&gt;';
+echo $this-&gt;Panel-&gt;end();
+echo $this-&gt;Panel-&gt;create('i:book My Books', ['type' =&gt; 'success']);
+echo '&lt;p&gt;Here I can write my panel content... &lt;/p&gt;';
+echo $this-&gt;Panel-&gt;end();
+echo $this-&gt;Panel-&gt;create('i:user My Profile', ['type' =&gt; 'danger']);
+echo '&lt;p&gt;Here I can write my panel content... &lt;/p&gt;';
+echo $this-&gt;Panel-&gt;end();
+</code></pre>
+
+</div><div class="tab-pane" id="tab-panel-fancy-markup" role="tabpanel"><pre><code class="language-markup">&lt;div class=&quot;panel panel-default&quot;&gt;
+    &lt;div class=&quot;panel-heading&quot;&gt;
+        &lt;h4 class=&quot;panel-title&quot;&gt;&lt;i aria-hidden=&quot;true&quot; class=&quot;glyphicon glyphicon-home&quot;&gt;&lt;/i&gt; Home&lt;/h4&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;panel-body&quot;&gt;
+        &lt;p&gt;Here I can write my panel content... &lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;panel panel-primary&quot;&gt;
+    &lt;div class=&quot;panel-heading&quot;&gt;
+        &lt;h4 class=&quot;panel-title&quot;&gt;&lt;i aria-hidden=&quot;true&quot; class=&quot;glyphicon glyphicon-cloud&quot;&gt;&lt;/i&gt; My Cloud&lt;/h4&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;panel-body&quot;&gt;
+        &lt;p&gt;Here I can write my panel content... &lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;panel panel-success&quot;&gt;
+    &lt;div class=&quot;panel-heading&quot;&gt;
+        &lt;h4 class=&quot;panel-title&quot;&gt;&lt;i aria-hidden=&quot;true&quot; class=&quot;glyphicon glyphicon-book&quot;&gt;&lt;/i&gt; My Books&lt;/h4&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;panel-body&quot;&gt;
+        &lt;p&gt;Here I can write my panel content... &lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;panel panel-danger&quot;&gt;
+    &lt;div class=&quot;panel-heading&quot;&gt;
+        &lt;h4 class=&quot;panel-title&quot;&gt;&lt;i aria-hidden=&quot;true&quot; class=&quot;glyphicon glyphicon-user&quot;&gt;&lt;/i&gt; My Profile&lt;/h4&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;panel-body&quot;&gt;
+        &lt;p&gt;Here I can write my panel content... &lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+</div><div class="tab-pane" id="tab-panel-fancy-output" role="tabpanel"><div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title"><i aria-hidden="true" class="glyphicon glyphicon-home"></i> Home</h4>
+    </div>
+    <div class="panel-body">
+        <p>Here I can write my panel content... </p>
+    </div>
+</div>
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h4 class="panel-title"><i aria-hidden="true" class="glyphicon glyphicon-cloud"></i> My Cloud</h4>
+    </div>
+    <div class="panel-body">
+        <p>Here I can write my panel content... </p>
+    </div>
+</div>
+
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <h4 class="panel-title"><i aria-hidden="true" class="glyphicon glyphicon-book"></i> My Books</h4>
+    </div>
+    <div class="panel-body">
+        <p>Here I can write my panel content... </p>
+    </div>
+</div>
+
+<div class="panel panel-danger">
+    <div class="panel-heading">
+        <h4 class="panel-title"><i aria-hidden="true" class="glyphicon glyphicon-user"></i> My Profile</h4>
+    </div>
+    <div class="panel-body">
+        <p>Here I can write my panel content... </p>
+    </div>
+</div>
+
+</div></div></div><h3 id="playing-with-the-panel-parts">Playing with the panel parts</h3>
+<p>A panel is made of three part: a header, a body and a footer. If you specify a title to the <code>create()</code> method, a header is
+automatically created and a body opened (except if you specify the <code>'body' =&gt; false</code> option). The <code>Bootstrap.PanelHelper</code> will
+automatically close any part when you create or open a new one, or when you end the panel.</p>
+<div class="tab-panels"><ul class="nav nav-tabs" role="tablist"><li class="active" role="presentation"><a aria-controls="tab-panel-basics-2-php" data-toggle="tab" href="#tab-panel-basics-2-php" role="tab">php</a></li><li role="presentation"><a aria-controls="tab-panel-basics-2-markup" data-toggle="tab" href="#tab-panel-basics-2-markup" role="tab">Markup</a></li><li role="presentation"><a aria-controls="tab-panel-basics-2-output" data-toggle="tab" href="#tab-panel-basics-2-output" role="tab">Output</a></li></ul><div class="tab-content"><div class="tab-pane active" id="tab-panel-basics-2-php" role="tabpanel"><pre><code class="language-php">echo $this-&gt;Panel-&gt;create(); // No heading...
+echo $this-&gt;Panel-&gt;body(); // ...so you need to open the next part manually.
+echo '&lt;p&gt;Here I can write my panel content... &lt;/p&gt;';
+echo $this-&gt;Panel-&gt;end();
+
+echo $this-&gt;Panel-&gt;create(); // No heading...
+echo $this-&gt;Panel-&gt;header(); // ...but you can still have one!
+echo '&lt;h4&gt;My Title&lt;/h4&gt;';
+echo $this-&gt;Panel-&gt;body(); // The previous part is automatically close!
+echo '&lt;p&gt;Here I can write my panel content... &lt;/p&gt;';
+echo $this-&gt;Panel-&gt;footer(); // And you can add a footer!
+echo '&lt;p&gt;Some footer content... &lt;/p&gt;';
+echo $this-&gt;Panel-&gt;end();
+</code></pre>
+
+</div><div class="tab-pane" id="tab-panel-basics-2-markup" role="tabpanel"><pre><code class="language-markup">&lt;div class=&quot;panel panel-default&quot;&gt;
+    &lt;div class=&quot;panel-body&quot;&gt;
+        &lt;p&gt;Here I can write my panel content... &lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;panel panel-default&quot;&gt;
+    &lt;div class=&quot;panel-heading&quot;&gt;
+        &lt;h4&gt;My Title&lt;/h4&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;panel-body&quot;&gt;
+        &lt;p&gt;Here I can write my panel content... &lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;panel-footer&quot;&gt;
+        &lt;p&gt;Some footer content... &lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+</div><div class="tab-pane" id="tab-panel-basics-2-output" role="tabpanel"><div class="panel panel-default">
+    <div class="panel-body">
+        <p>Here I can write my panel content... </p>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4>My Title</h4>
+    </div>
+    <div class="panel-body">
+        <p>Here I can write my panel content... </p>
+    </div>
+    <div class="panel-footer">
+        <p>Some footer content... </p>
+    </div>
+</div>
+
+</div></div></div></div>
+            <div class="col-md-3 hidden-sm hidden-xs">
+
+<nav class="right-nav right-nav-fixed">
+    <ul class="nav">
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <li class="nav-header">Panel Helper</li>
+    
+    
+    <li class="active">
+        <a href="./">Basic usage</a>
+        
+        <ul class="nav">
+        
+            <li class="main active"><a href="#create-a-bootstrap-panel">Create a Bootstrap panel</a></li>
+        
+            <li class="main "><a href="#creating-fancy-panels">Creating fancy panels</a></li>
+        
+            <li class="main "><a href="#playing-with-the-panel-parts">Playing with the panel parts</a></li>
+        
+        </ul>
+    
+    </li>
+    
+    
+    
+    <li >
+        <a href="../groups/">Panel groups</a>
+        
+    </li>
+    
+    
+    
+    
+    
+    
+
+    </ul>
+</nav>
+
+</div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="col-md-12">
+                <p>&copy; 2017, Mikaël Capelle (@Holt59)
+                - Designed and built by <a href="https://github.com/Holt59" target="_blank">Holt59</a> &amp;
+                <a href="https://github.com/Holt59/cakephp3-bootstrap-helpers/graphs/contributors" target="_blank">contributors</a>.</p>
+                <p>Code licensed under <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, Version 2.0</a>.</p>
+                <p>Code &amp; Documentation hosted by <a href="https://github.com" target="_blank"><i class="fa fa-github"></i> Github</a>.</p>
+                <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> and <a href="http://www.apigen.org/">Apigen</a>.
+            </div>
+        </div>
+    </footer>
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+              integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+              crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+              integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <script src="../../js/prism.min.js"></script>
+        <script src="../../js/base.js"></script>
+
+        
+    </body>
+</html>

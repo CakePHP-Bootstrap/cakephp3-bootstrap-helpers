@@ -1,0 +1,608 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>Class Bootstrap\View\Widget\FancyFileWidget | CakePHP 3 Bootstrap Helpers</title>
+
+	<link rel="stylesheet" href="resources/bootstrap.min.css?071b3c2a8dd3bf21f24cec7c6955fbf9beff6181">
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+		integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="resources/prism.css?e1a34f60039ca474453ea496a4887cf6f73c7e22">
+	<link rel="stylesheet" href="resources/custom-prism.css?a178cd22915f6b0ba261d3cc7edc719b234de9c1">
+	<link rel="stylesheet" href="resources/style.css?4f8c93c97a8296200ebbc4320e4d19208862e348">
+
+</head>
+
+<body>
+	<nav id="navigation" class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<!-- Expander button -->
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a href="https://holt59.github.io/cakephp3-bootstrap-helpers" class="navbar-brand">CakePHP 3 Bootstrap Helpers</a>
+			</div>
+			<div class="collapse navbar-collapse">
+
+				<ul class="nav navbar-nav">
+					<li>
+						<a href="https://holt59.github.io/cakephp3-bootstrap-helpers">Getting Started</a>
+					</li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">The helpers <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+<li> <a href="https://holt59.github.io/cakephp3-bootstrap-helpers/form-helper/basics/">Form Helper</a> </li>
+<li> <a href="https://holt59.github.io/cakephp3-bootstrap-helpers/html-helper/icons/">Html Helper</a> </li>
+<li> <a href="https://holt59.github.io/cakephp3-bootstrap-helpers/modal-helper/basics/">Modal Helper</a> </li>
+<li> <a href="https://holt59.github.io/cakephp3-bootstrap-helpers/navbar-helper/basics/">Navbar Helper</a> </li>
+<li> <a href="https://holt59.github.io/cakephp3-bootstrap-helpers/panel-helper/basics/">Panel Helper</a> </li>
+						</ul>
+					</li>
+					<li class="active"><a href="https://holt59.github.io/cakephp3-bootstrap-helpers/api/">API</a></li>
+					<li>
+						<a href="https://holt59.github.io/cakephp3-bootstrap-helpers/faq">FAQ</a>
+					</li>
+				</ul>
+
+				<!-- Search, Navigation and Repo links -->
+				<ul class="nav navbar-nav navbar-right">
+					<li>
+						<a href="https://github.com/Holt59/cakephp3-bootstrap-helpers">
+							<i class="fa fa-github"></i> GitHub
+						</a>
+					</li>
+				</ul>
+                <form id="search" class="navbar-form navbar-right" role="search">
+                    <input type="hidden" name="cx" value="">
+                    <input type="hidden" name="ie" value="UTF-8">
+                    <div class="form-group">
+                        <input type="text" name="q" class="search-query form-control" placeholder="Search">
+					</div>
+				</form>
+
+			</div>
+		</div>
+	</nav>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3 hidden-sm hidden-xs left-menu">
+
+				<div id="groups">
+						<h3 class="nav-title">Namespaces</h3>
+					<ul>
+							<li class="active">
+								<a href="namespace-Bootstrap.html">
+									Bootstrap<span></span>
+								</a>
+									<ul>
+							<li class="active">
+								<a href="namespace-Bootstrap.View.html">
+									View<span></span>
+								</a>
+									<ul>
+							<li>
+								<a href="namespace-Bootstrap.View.Helper.html">
+									Helper								</a>
+									</li>
+							<li class="active">
+								<a href="namespace-Bootstrap.View.Widget.html">
+									Widget								</a>
+									</li>
+										</ul></li></ul></li>
+					</ul>
+				</div>
+
+
+				<div id="elements">
+					<h3 class="nav-title">Classes</h3>
+					<ul class="nav-list">
+						<li><a href="class-Bootstrap.View.Widget.ColumnSelectBoxWidget.html">ColumnSelectBoxWidget</a></li>
+						<li><a href="class-Bootstrap.View.Widget.DateTimeWidget.html">DateTimeWidget</a></li>
+						<li class="active"><a href="class-Bootstrap.View.Widget.FancyFileWidget.html">FancyFileWidget</a></li>
+						<li><a href="class-Bootstrap.View.Widget.InlineRadioNestingLabelWidget.html">InlineRadioNestingLabelWidget</a></li>
+						<li><a href="class-Bootstrap.View.Widget.InlineRadioWidget.html">InlineRadioWidget</a></li>
+					</ul>
+
+
+
+
+
+				</div>
+			</div>
+
+			<div class="col-md-9">
+				<div id="rightInner">
+<div id="content" class="class">
+	<h1>Class FancyFileWidget</h1>
+
+
+	<div class="description">
+	<p>Form 'widget' for creating fancy file widgets made of a button
+and a text input.</p>
+
+<p>Generally this element is used by other widgets,
+and FormHelper itself.</p>
+	</div>
+
+	<dl class="tree">
+		<dd style="padding-left:0px">
+				<b><span>Bootstrap\View\Widget\FancyFileWidget</span></b>
+			 implements 
+<span>Cake\View\Widget\WidgetInterface</span>
+			
+			
+		</dd>
+	</dl>
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-Bootstrap.html">Bootstrap</a>\<a href="namespace-Bootstrap.View.html">View</a>\<a href="namespace-Bootstrap.View.Widget.html">Widget</a><br>
+		
+
+		<b>Location:</b> <a href="source-class-Bootstrap.View.Widget.FancyFileWidget.html#19-180" title="Go to source code">View/Widget/FancyFileWidget.php</a><br>
+	</div>
+
+
+
+
+	<div class="section">
+		<h2>Properties summary</h2>
+		<ul class="member-summary properties">
+		<li class="clearfix">
+			<div class="name">
+					<code><a href="class-Bootstrap.View.Widget.FancyFileWidget.html#$_button">$_button</a></code>
+
+				<span class="attributes">
+					<span class="label label-warning">protected</span>
+
+				</span>
+			</div>
+
+			<div class="property-type">
+					<code><code><a href="https://api.cakephp.org/3.4/class-Cake.View.Widget.ButtonWidget.html" target="_blank">Cake\View\Widget\ButtonWidget</a></code></code>
+
+			<div class="description">
+				ButtonWidget instance.
+			</div>
+		</li>
+		<li class="clearfix">
+			<div class="name">
+					<code><a href="class-Bootstrap.View.Widget.FancyFileWidget.html#$_file">$_file</a></code>
+
+				<span class="attributes">
+					<span class="label label-warning">protected</span>
+
+				</span>
+			</div>
+
+			<div class="property-type">
+					<code><code><a href="https://api.cakephp.org/3.4/class-Cake.View.Widget.FileWidget.html" target="_blank">Cake\View\Widget\FileWidget</a></code></code>
+
+			<div class="description">
+				FileWidget instance.
+			</div>
+		</li>
+		<li class="clearfix">
+			<div class="name">
+					<code><a href="class-Bootstrap.View.Widget.FancyFileWidget.html#$_input">$_input</a></code>
+
+				<span class="attributes">
+					<span class="label label-warning">protected</span>
+
+				</span>
+			</div>
+
+			<div class="property-type">
+					<code><code><a href="https://api.cakephp.org/3.4/class-Cake.View.Widget.BasicWidget.html" target="_blank">Cake\View\Widget\BasicWidget</a></code></code>
+
+			<div class="description">
+				Text widget instance.
+			</div>
+		</li>
+		<li class="clearfix">
+			<div class="name">
+					<code><a href="class-Bootstrap.View.Widget.FancyFileWidget.html#$_templates">$_templates</a></code>
+
+				<span class="attributes">
+					<span class="label label-warning">protected</span>
+
+				</span>
+			</div>
+
+			<div class="property-type">
+					<code><code><a href="https://api.cakephp.org/3.4/class-Cake.View.StringTemplate.html" target="_blank">\Cake\View\StringTemplate</a></code></code>
+
+			<div class="description">
+				Templates
+			</div>
+		</li>
+		</ul>
+	</div>
+
+
+
+
+
+
+
+
+	<div class="section">
+		<h2>Method Summary</h2>
+		<ul class="member-summary">
+		<li class="clearfix">
+			<h3 class="method-name">
+					<a href="class-Bootstrap.View.Widget.FancyFileWidget.html#___construct">__construct()</a>
+
+
+<span class="label label-success">public</span></span>
+
+			</h3>
+			<div class="description detailed">
+				Constructor
+			</div>
+		</li>
+		<li class="clearfix">
+			<h3 class="method-name">
+					<a href="class-Bootstrap.View.Widget.FancyFileWidget.html#__fakeFieldName">_fakeFieldName()</a>
+
+
+<span class="label label-warning">protected</span></span>
+
+		<span class="label label-default">static</span>
+			</h3>
+			<div class="description detailed">
+				Determine name of fake input field
+			</div>
+		</li>
+		<li class="clearfix">
+			<h3 class="method-name">
+					<a href="class-Bootstrap.View.Widget.FancyFileWidget.html#_render">render()</a>
+
+
+<span class="label label-success">public</span></span>
+
+			</h3>
+			<div class="description detailed">
+				Render a custom file upload form widget.
+			</div>
+		</li>
+		<li class="clearfix">
+			<h3 class="method-name">
+					<a href="class-Bootstrap.View.Widget.FancyFileWidget.html#_secureFields">secureFields()</a>
+
+
+<span class="label label-success">public</span></span>
+
+			</h3>
+			<div class="description detailed">
+				
+			</div>
+		</li>
+		</ul>
+	</div>
+
+
+
+	<div class="section">
+		<h2>Method Detail</h2>
+		<div class="method-detail">
+				<a id="___construct"></a>
+		<a id="method-Bootstrap\View\Widget\FancyFileWidget__construct"></a>
+		<h3 class="method-name">
+<a href="source-class-Bootstrap.View.Widget.FancyFileWidget.html#57-70" title="Go to source code">__construct()</a>
+
+<span class="label label-success">public</span></span>
+
+			<a href="#___construct" class="permalink" title="Permalink to this method">¶</a>
+		</h3>
+		<pre class="language-php method-signature">
+<code>__construct($templates, $file, $button, $input)</code></pre>
+
+		<div class="description detailed">
+			<p>Constructor</p>
+
+
+				<h6>Parameters</h6>
+				<div class="parameter-list list">
+				<dl>
+					<dt>
+						<code class="language-php ">\Cake\View\StringTemplate $templates</code>
+					</dt>
+					<dd>Templates list.</dd>
+					<dt>
+						<code class="language-php ">\Cake\View\Widget\FileWidget $file</code>
+					</dt>
+					<dd>A file widget.</dd>
+					<dt>
+						<code class="language-php ">\Cake\View\Widget\ButtonWidget $button</code>
+					</dt>
+					<dd>A button widget.</dd>
+					<dt>
+						<code class="language-php ">\Cake\View\Widget\BasicWidget $input</code>
+					</dt>
+					<dd>A text input widget.</dd>
+				</dl>
+				</div>
+
+
+
+
+
+		</div>
+		</div>
+		<div class="method-detail">
+				<a id="__fakeFieldName"></a>
+		<a id="method-Bootstrap\View\Widget\FancyFileWidget_fakeFieldName"></a>
+		<h3 class="method-name">
+<a href="source-class-Bootstrap.View.Widget.FancyFileWidget.html#172-179" title="Go to source code">_fakeFieldName()</a>
+
+<span class="label label-warning">protected</span></span>
+
+		<span class="label label-default">static</span>
+			<a href="#__fakeFieldName" class="permalink" title="Permalink to this method">¶</a>
+		</h3>
+		<pre class="language-php method-signature">
+<code>_fakeFieldName($fieldName)</code></pre>
+
+		<div class="description detailed">
+			<p>Determine name of fake input field</p>
+
+
+				<h6>Parameters</h6>
+				<div class="parameter-list list">
+				<dl>
+					<dt>
+						<code class="language-php ">string $fieldName</code>
+					</dt>
+					<dd>original field name</dd>
+				</dl>
+				</div>
+
+				<h6>Returns</h6>
+				<div class="list">
+					string<br>fake field name<br>
+				</div>
+
+
+
+
+		</div>
+		</div>
+		<div class="method-detail">
+				<a id="_render"></a>
+		<a id="method-Bootstrap\View\Widget\FancyFileWidgetrender"></a>
+		<h3 class="method-name">
+<a href="source-class-Bootstrap.View.Widget.FancyFileWidget.html#73-157" title="Go to source code">render()</a>
+
+<span class="label label-success">public</span></span>
+
+			<a href="#_render" class="permalink" title="Permalink to this method">¶</a>
+		</h3>
+		<pre class="language-php method-signature">
+<code>render($data, $context)</code></pre>
+
+		<div class="description detailed">
+			<p>Render a custom file upload form widget.</p>
+
+<p>Data supports the following keys:</p>
+
+<ul>
+<li><code>_input</code> - Options for the input element.</li>
+<li><code>_button</code> - Options for the button element.</li>
+<li><code>name</code> - Set the input name.</li>
+<li><code>count-label</code> - Label for multiple files. Default is <code>__('files selected')</code>.</li>
+<li><code>button-label</code> - Button text. Default is <code>__('Choose File')</code>.</li>
+<li><code>escape</code> - Set to false to disable HTML escaping.</li>
+</ul>
+
+<p>All other keys will be converted into HTML attributes.
+Unlike other input objects the <code>val</code> property will be specifically
+ignored.</p>
+
+
+				<h6>Parameters</h6>
+				<div class="parameter-list list">
+				<dl>
+					<dt>
+						<code class="language-php ">array $data</code>
+					</dt>
+					<dd>The data to build a file input with.</dd>
+					<dt>
+						<code class="language-php ">Cake\View\Form\ContextInterface $context</code>
+					</dt>
+					<dd>The current form context.</dd>
+				</dl>
+				</div>
+
+				<h6>Returns</h6>
+				<div class="list">
+					string<br>HTML elements.<br>
+				</div>
+
+
+
+
+		</div>
+		</div>
+		<div class="method-detail">
+				<a id="_secureFields"></a>
+		<a id="method-Bootstrap\View\Widget\FancyFileWidgetsecureFields"></a>
+		<h3 class="method-name">
+<a href="source-class-Bootstrap.View.Widget.FancyFileWidget.html#159-170" title="Go to source code">secureFields()</a>
+
+<span class="label label-success">public</span></span>
+
+			<a href="#_secureFields" class="permalink" title="Permalink to this method">¶</a>
+		</h3>
+		<pre class="language-php method-signature">
+<code>secureFields($data)</code></pre>
+
+		<div class="description detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div>
+	</div>
+
+
+
+
+
+
+
+	<div class="section">
+		<h2>Properties detail</h2>
+	<div class="property-detail">
+		<a id="$_button"></a>
+
+		<h3 class="property-name">
+				<a href="source-class-Bootstrap.View.Widget.FancyFileWidget.html#42-47" title="Go to source code"><var>$_button</var></a>
+				<a href="#$_button" class="permalink" title="Permalink to this property">¶</a>
+		</h3>
+
+		<div class="attributes">
+				<span class="label label-warning">protected</span>
+				<code><a href="https://api.cakephp.org/3.4/class-Cake.View.Widget.ButtonWidget.html" target="_blank">Cake\View\Widget\ButtonWidget</a></code>
+		</div>
+
+		<div class="description detailed">
+			<p>ButtonWidget instance.</p>
+
+
+		</div>
+	</div>
+	<div class="property-detail">
+		<a id="$_file"></a>
+
+		<h3 class="property-name">
+				<a href="source-class-Bootstrap.View.Widget.FancyFileWidget.html#35-40" title="Go to source code"><var>$_file</var></a>
+				<a href="#$_file" class="permalink" title="Permalink to this property">¶</a>
+		</h3>
+
+		<div class="attributes">
+				<span class="label label-warning">protected</span>
+				<code><a href="https://api.cakephp.org/3.4/class-Cake.View.Widget.FileWidget.html" target="_blank">Cake\View\Widget\FileWidget</a></code>
+		</div>
+
+		<div class="description detailed">
+			<p>FileWidget instance.</p>
+
+
+		</div>
+	</div>
+	<div class="property-detail">
+		<a id="$_input"></a>
+
+		<h3 class="property-name">
+				<a href="source-class-Bootstrap.View.Widget.FancyFileWidget.html#49-54" title="Go to source code"><var>$_input</var></a>
+				<a href="#$_input" class="permalink" title="Permalink to this property">¶</a>
+		</h3>
+
+		<div class="attributes">
+				<span class="label label-warning">protected</span>
+				<code><a href="https://api.cakephp.org/3.4/class-Cake.View.Widget.BasicWidget.html" target="_blank">Cake\View\Widget\BasicWidget</a></code>
+		</div>
+
+		<div class="description detailed">
+			<p>Text widget instance.</p>
+
+
+		</div>
+	</div>
+	<div class="property-detail">
+		<a id="$_templates"></a>
+
+		<h3 class="property-name">
+				<a href="source-class-Bootstrap.View.Widget.FancyFileWidget.html#28-33" title="Go to source code"><var>$_templates</var></a>
+				<a href="#$_templates" class="permalink" title="Permalink to this property">¶</a>
+		</h3>
+
+		<div class="attributes">
+				<span class="label label-warning">protected</span>
+				<code><a href="https://api.cakephp.org/3.4/class-Cake.View.StringTemplate.html" target="_blank">\Cake\View\StringTemplate</a></code>
+		</div>
+
+		<div class="description detailed">
+			<p>Templates</p>
+
+
+		</div>
+	</div>
+	</div>
+
+
+</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer>
+		<div class="container">
+			<div class="col-md-12">
+				<p>&copy; 2017, Mikaël Capelle (@Holt59)
+				- Designed and built by <a href="https://github.com/Holt59" target="_blank">Holt59</a> &amp;
+				<a href="https://github.com/Holt59/cakephp3-bootstrap-helpers/graphs/contributors" target="_blank">contributors</a>.</p>
+				<p>Code licensed under <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, Version 2.0</a>.</p>
+				<p>Code &amp; Documentation hosted by <a href="https://github.com" target="_blank"><i class="fa fa-github"></i> Github</a>.</p>
+				<p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> and <a href="http://www.apigen.org/">Apigen</a>.
+			</div>
+		</div>
+	</footer>
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"
+		integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+		crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+		integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="resources/combined.js"></script>
+<script src="elementlist.js"></script>
+<script type="text/javascript">
+	delete Prism.languages.php.markup;
+
+	Prism.hooks.add("after-highlight", function() {
+		$('.optional .token.operator').each(function () {
+			if ($(this).text() == '=') {
+				$(this).addClass('default-assign');
+			}
+		});
+	});
+	Prism.hooks.add("complete", function() {
+		var $counter = 0;
+		$('.line-numbers-rows > span').each(function () {
+			$(this).attr('id', ++$counter);
+		});
+		if (window.location.hash) {
+			var $hash = window.location.hash.split('-')[0];
+			var $navigationHeight = $('#navigation').outerHeight();
+			window.scrollTo(0, $($hash).offset().top - $navigationHeight);
+		}
+	});
+
+	Prism.highlightAll();
+</script>
+
+</body>
+</html>

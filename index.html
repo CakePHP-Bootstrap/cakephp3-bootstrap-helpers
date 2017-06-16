@@ -1,1057 +1,264 @@
 <!DOCTYPE html>
-<html lang="en-us" id="top">
+<html lang="en">
     <head>
-        <meta charset="UTF-8">
-        <title>CakePHP 3, Bootstrap 3 Helpers by Holt59</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" media="screen">
-        <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" media="screen">
-        <link rel="stylesheet" type="text/css" href="css/prism.min.css" media="screen">
-        <link rel="stylesheet" type="text/css" href="css/index.css" media="screen">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        <link rel="canonical" href="https://holt59.github.io/cakephp3-bootstrap-helpers/">
+        <link rel="shortcut icon" href="./img/favicon.ico">
+        <title>Getting Started - CakePHP 3 Bootstrap Helpers</title>
+        <link href="./css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+            integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        <link href="./css/prism.css" rel="stylesheet">
+        <link href="./css/custom-prism.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">
+        <link href="./css/jumbotron.css" rel="stylesheet">
+        <link href="./css/base.css" rel="stylesheet">
+         
     </head>
-    <body data-spy="scroll" data-target=".right-nav" data-offset="22">
 
-        <div class="jumbotron">
-            <a href="https://github.com/Holt59/cakephp3-bootstrap-helpers" id="forkme"><i class="fa fa-github"></i> Fork me on Github</a>
-            <div class="container">
-            <h1>CakePHP 3, Bootstrap Helpers</h1>
-            <p class="headline"><a href="http://cakephp.org/" target="_blank">CakePHP 3.x</a> helpers for the <a href="http://getbootstrap.com/" target="_blank">Bootstrap 3</a> HTML, CSS &amp; JS framework by <a href="https://github.com/Holt59" target="_blank">@Holt59</a>.</p>
-            <p>
-                <a class="btn btn-lg" href="https://github.com/Holt59/cakephp3-bootstrap-helpers" target="_blank"><i class="fa fa-github"></i> Code on Github</a>
-                <a class="btn btn-lg" href="https://github.com/Holt59/cakephp3-bootstrap-helpers/archive/master.zip"><i class="fa fa-download"></i> Download (.zip)</a>
-            </p>
-            </div>
+    <body class="no-padding" data-spy="scroll" data-target=".right-nav" data-offset="70">
+
+    
+
+    
+    <div class="jumbotron">
+    
+    <a href="https://github.com/Holt59/cakephp3-bootstrap-helpers" id="forkme"><i class="fa fa-github"></i> Fork me on Github</a>
+    
+    <div class="container">
+    <h1>CakePHP 3, Bootstrap Helpers</h1>
+    <p class="headline"><a href="http://cakephp.org/" target="_blank">CakePHP 3.x</a> helpers for the <a href="http://getbootstrap.com/" target="_blank">Bootstrap 3</a> HTML, CSS &amp; JS framework by <a href="https://github.com/Holt59" target="_blank">@Holt59</a>.</p>
+    <p>
+        <a class="btn btn-lg" href="https://github.com/Holt59/cakephp3-bootstrap-helpers" target="_blank">
+            
+                <i class="fa fa-github"></i>
+            
+            Code on GitHub</a>
+        
+        <a class="btn btn-lg" href="https://github.com/Holt59/cakephp3-bootstrap-helpers/archive/master.zip"><i class="fa fa-download"></i> Download (.zip)</a>
+        
+    </p>
+    </div>
+</div>
+    
+
+    <div class="navbar navbar-default" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href=".">CakePHP 3 Bootstrap Helpers</a>
         </div>
 
-        <div class="container">
-            <div class="row">
-                <div id="content" class="col-md-9">
-                    <section id="getting-started">
-                        <h1>Getting Started</h1>
-                        <h3>Dependencies</h3>
-                        <p>This repository contains a set of <b>helpers</b> that will help you combine <b>CakePHP</b> and <b>Bootstrap</b>. These helpers do not require any dependencies except
-                        the two obvious ones:</p>
-                        <ul>
-                            <li><a href="http://cakephp.org/" target="_blank">CakePHP 3.x</a> - The helpers have been developped since CakePHP 3 beta, and will be kept up to date with the current CakePHP developpment.</li>
-                            <li><a href="http://getbootstrap.com/" target="_blank">Bootstrap CSS</a></li>
-                        </ul>
-                        <h3>Installation</h3>
-                        <div role="tabpanel">
-                            <!-- Nav tabs -->
-                            <ul class="nav nav-tabs" role="tablist">
-                                <li role="presentation" class="active"><a href="#install-composer" aria-controls="install-composer" role="tab" data-toggle="tab">Composer</a></li>
-                                <li role="presentation"><a href="#install-manual" aria-controls="install-manual" role="tab" data-toggle="tab">Manual</a></li>
-                            </ul>
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse" id="main-navbar">
+            <!-- Main navigation -->
+            <ul class="nav navbar-nav">
+                <li class="active">
+                    <a href=".">Getting Started</a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">The helpers <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    <!-- helpers -->
+                    
+                    
+                    
+                    
+                        <li>
+                            <a href="form-helper/basics/">Form Helper</a>
+                        </li>
+                    
+                    
+                    
+                        <li>
+                            <a href="html-helper/icons/">Html Helper</a>
+                        </li>
+                    
+                    
+                    
+                        <li>
+                            <a href="modal-helper/basics/">Modal Helper</a>
+                        </li>
+                    
+                    
+                    
+                        <li>
+                            <a href="navbar-helper/basics/">Navbar Helper</a>
+                        </li>
+                    
+                    
+                    
+                        <li>
+                            <a href="panel-helper/basics/">Panel Helper</a>
+                        </li>
+                    
+                    
+                    
+                    
+                    </ul>
+                </li>
+                <li><a href="https://holt59.github.io/cakephp3-bootstrap-helpers/api/">API</a></li>
+                <li>
+                    <a href="faq/">FAQ</a>
+                </li>
+            </ul>
 
-                            <!-- Tab panes -->
-                            <div class="tab-content">
-                                <div role="tabpanel" class="tab-pane active" id="install-composer">
-                                    <p>Since v3, CakePHP uses composer, the easiest way to set up the Bootstrap helpers is by either running</p>
-                                    <pre><code class="language-javascript">composer require holt59/cakephp3-bootstrap-helpers:dev-master</code></pre>
-                                    <p>or adding the following to your <code>composer.json</code> and run <code>composer update</code>:</p>
-                                    <pre><code class="language-bash">"require": {
-    "holt59/cakephp3-bootstrap-helpers": "dev-master"
-}</code></pre>
-                                    <p>Do not forget to load the plugin by adding the following line into your <code>/config/bootstrap.php</code> file:</p>
-                                    <pre><code class="language-php">Plugin::load('Bootstrap');</code></pre>
-                                </div>
-                                <div role="tabpanel" class="tab-pane" id="install-manual">
-                                    <p>If you do not use <code>composer</code>, simply clone the repository into your <code>plugins/Bootstrap</code> folder by running:</p>
-                                    <pre><code class="language-javascript">git clone https://github.com/Holt59/cakephp3-bootstrap-helpers.git plugins/Bootstrap</code></pre>
-                                    <p>And then load the plugin with <code>autoload</code> set to <code>true</code> in your <code>/config/bootstrap.php</code> file:</p>
-                                    <pre><code class="language-php">Plugin::load('Bootstrap' ['autoload' => true]);</code></pre>
-                                </div>
-                            </div>
-
-                        </div>
-                        <h3>Using the helpers</h3>
-                        <p>Once the plugin is loaded, you just need to enable them into your <code>AppController</code> like this:</p>
-                        <pre><code class="language-php">public $helpers = [
-    'Html' => [
-        'className' => 'Bootstrap.BootstrapHtml'
-    ],
-    'Form' => [
-        'className' => 'Bootstrap.BootstrapForm'
-    ],
-    'Paginator' => [
-        'className' => 'Bootstrap.BootstrapPaginator'
-    ],
-    'Modal' => [
-        'className' => 'Bootstrap.BootstrapModal'
-    ]
-];</code></pre>
-                        <p>See <a href="http://book.cakephp.org/3.0/en/views/helpers.html" target="_blank">CakePHP documentation</a> for more information on how to enable helpers in your controllers (especially if you want to use the default <b>CakePHP</b> helpers together with these helpers).</p>
-                        <p><span class="label label-info">Tip!</span> Do not forget to <a href="http://getbootstrap.com/getting-started/#download">add bootstrap CSS (and javascript) files</a> to your pages for the helpers to work.</p>
-                    </section>
-                    <section id="helpers-html">
-                        <h1>HTML Helper</h1>
-                        <h3 class="method" id="getcrumblist">getCrumbList</h3>
-                        <p>Overload of <a class="cake-link" href="http://api.cakephp.org/3.0/class-Cake.View.Helper.HtmlHelper.html#_getCrumbList" target="_blank"><code>Cake\View\Helper\HTMLHelper::getCrumbList</code></a>.</p>
-                        <div role="tabpanel">
-                            <!-- Nav tabs -->
-                            <ul class="nav nav-tabs" role="tablist">
-                                <li role="presentation" class="active"><a href="#getcrumblist-php" aria-controls="getcrumblist-php" role="tab" data-toggle="tab">PHP</a></li>
-                                <li role="presentation"><a href="#getcrumblist-markup" aria-controls="getcrumblist-markup" role="tab" data-toggle="tab">Markup</a></li>
-                                <li role="presentation"><a href="#getcrumblist-output" aria-controls="getcrumblist-output" role="tab" data-toggle="tab">Output</a></li>
-                            </ul>
-
-                            <!-- Tab panes -->
-                            <div class="tab-content">
-                                <div role="tabpanel" class="tab-pane active" id="getcrumblist-php">
-                                    <pre><code class="language-php">&lt;?php
-    $this->Html->addCrumb('Home', '/');
-    $this->Html->addCrumb('Pages', ['controller' => 'pages']); 
-    $this->Html->addCrumb('About', ['controller' => 'pages', 'action' => 'about']);
-    echo $this->Html->getCrumbList();
-?&gt;</code></pre>
-                                </div>
-                                <div role="tabpanel" class="tab-pane" id="getcrumblist-markup">
-                                    <pre><code class="language-markup">&lt;ul class=&quot;breadcrumb&quot;&gt;
-    &lt;li class=&quot;first&quot;&gt;&lt;a href=&quot;/&quot;&gt;Home&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href=&quot;/pages&quot;&gt;Pages&lt;/a&gt;&lt;/li&gt;
-    &lt;li class=&quot;last&quot;&gt;&lt;a href=&quot;/pages/about&quot;&gt;About&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</code></pre>
-                                </div>
-                                <div role="tabpanel" class="tab-pane" id="getcrumblist-output">
-                                    <ul class="breadcrumb"><li class="first"><a href="#">Home</a></li><li><a href="#">Pages</a></li><li class="last"><a href="#">About</a></li></ul>
-                                </div>
-                            </div>
-
-                        </div>
-                        <h3 id="icons">Icons</h3>
-                        <div role="tabpanel">
-                            <!-- Nav tabs -->
-                            <ul class="nav nav-tabs" role="tablist">
-                                <li role="presentation" class="active"><a href="#icons-php" aria-controls="icons-php" role="tab" data-toggle="tab">PHP</a></li>
-                                <li role="presentation"><a href="#icons-markup" aria-controls="icons-markup" role="tab" data-toggle="tab">Markup</a></li>
-                            </ul>
-                            <!-- Tab panes -->
-                            <div class="tab-content">
-                                <div role="tabpanel" class="tab-pane active" id="icons-php">
-                                    <pre><code class="language-php">&lt;?php
-    echo $this-&gt;Html-&gt;icon('pencil');
-?&gt;</code></pre>
-                                </div>
-                                <div role="tabpanel" class="tab-pane" id="icons-markup">
-                                    <pre><code class="language-markup">&lt;i class=&quot;glyphicon glyphicon-pencil&quot;&gt;&lt;/i&gt;</code></pre>
-                                </div>
-                            </div>
-                        </div>
-                        <h3 id="icons-easy">Icons - Easy icons</h3>
-                        <p>Sometimes, you may want to use <code>BootstrapHtmlHelper::icon</code> in combination with other helpers such as 
-                        <code>BootstrapPaginatorHelper</code> or <code>BootstrapFormHelper</code> to insert <b>icons</b> in buttons or other elements. 
-                        To ease the process, some methods provide a shortcut to use icon: </p>
-                        <pre><code class="language-php">&lt;?php
-    // The following... 
-    echo $this->Form->button($this-&gt;Html-&gt;icon('pencil'), ['escape' => false]);
-    // ...can be easily rewritten as:
-    echo $this->Form->button('i:pencil');
-?&gt;</code></pre>
-                        <p>The <i>easy icon</i> format is <code>i:icon-name</code> where <code>icon-name</code> is the name of the icon.</p>
-                        <p><span class="label label-danger">Warning!</span> The above code may throw errors if the HTML helper defined for the view
-                        is not <code>BootstrapHtmlHelper</code>. The set of icons used (Font Awesome or Glyphicon) is defined by <b>the HTML helper settings</b>.</p>
-                        <p><span class="label label-info">Tip!</span> To disable <i>easy icon</i>, simply do <code>$this->Form->easyIcon = false;</code>
-                        (replace <code>Form</code> by anything relevant).</p>
-                        <p><span class="label label-warning">Warning!</span> The name of the icon is not checked, so you should not use non-existing icon names.</p>
+            <!-- Search, Navigation and Repo links -->
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li>
+                    <a href="https://github.com/Holt59/cakephp3-bootstrap-helpers">
                         
-                        <p>Places where you can use <i>easy icon</i> (if not specified, the target is <code>$title</code>): </p>
-                        <pre><code class="language-php">// BootstrapPaginatorHelper
-BootstrapPaginatorHelper::prev($title, array $options = []);
-BootstrapPaginatorHelper::next($title, array $options = []);
-BootstrapPaginatorHelper::numbers(array $options = []); // For `prev` and `next` options.
-
-// BootstrapFormatHelper
-BootstrapFormHelper::button($title, array $options = []);
-BootstrapFormHelper::input($fieldName, array $options = []); // For `prepend` and `append` options.
-BootstrapFormHelper::prepend($input, $prepend); // For $prepend.
-BootstrapFormHelper::append($input, $append); // For $append.</code></pre>
+                            <i class="fa fa-github"></i>
                         
-                        <h3 id="icons-fa">Icons - Font Awesome</h3>
-                        <pre><code class="language-php">public $helpers = [
+                        GitHub
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+    <div class="container">
+            <div class="col-md-9" role="main">
+
+<h3 id="dependencies">Dependencies</h3>
+<p>This repository contains a set of <strong>helpers</strong> that will help you combine <strong>CakePHP</strong> and <strong>Bootstrap</strong>.
+These helpers do not require any dependencies except the two obvious ones:</p>
+<ul>
+<li><a href="http://cakephp.org/">CakePHP 3.x</a> The helpers have been developped since CakePHP 3 beta, and will be kept up to date
+with the current CakePHP developpment.</li>
+<li><a href="http://getbootstrap.com/">Bootstrap</a> The helpers currently work with Bootstrap 3, but will be updated soon to
+work with Bootstrap 4.</li>
+</ul>
+<h3 id="installation">Installation</h3>
+<div class="tab-panels"><ul class="nav nav-tabs" role="tablist"><li class="active" role="presentation"><a aria-controls="tab-installation-composer" data-toggle="tab" href="#tab-installation-composer" role="tab">Composer</a></li><li role="presentation"><a aria-controls="tab-installation-manual" data-toggle="tab" href="#tab-installation-manual" role="tab">Manual</a></li></ul><div class="tab-content"><div class="tab-pane active" id="tab-installation-composer" role="tabpanel"><p>Since v3, CakePHP uses <code>composer</code>, the easiest way to set up the Bootstrap helpers is by either running:</p>
+<pre><code class="language-bash">composer require holt59/cakephp3-bootstrap-helpers:dev-master
+</code></pre>
+
+<p>or adding the following to your <code>composer.json</code> and run <code>composer update</code>:</p>
+<pre><code class="language-javascript">&quot;require&quot;: {
+    &quot;holt59/cakephp3-bootstrap-helpers&quot;: &quot;dev-master&quot;
+}
+</code></pre>
+
+<p>Do not forget to load the plugin by adding the following line into your /config/bootstrap.php file:</p>
+<pre><code class="language-php">Plugin::load('Bootstrap');
+</code></pre>
+
+</div><div class="tab-pane" id="tab-installation-manual" role="tabpanel"><p>If you do not use <code>composer</code>, simply clone the repository into a <code>plugins/Bootstrap</code> folder by running:</p>
+<pre><code class="language-bash">git clone https://github.com/Holt59/cakephp3-bootstrap-helpers.git plugins/Bootstrap
+</code></pre>
+
+<p>And then load the plugin with autoload set to true in your <code>config/bootstrap.php</code> file:</p>
+<pre><code class="language-php">Plugin::load('Bootstrap' ['autoload' =&gt; true]);
+</code></pre>
+
+</div></div></div><h3 id="using-the-helpers">Using the helpers</h3>
+<p>Once the plugin is loaded, you need to enable them:</p>
+<pre><code class="language-php">// In your AppController class for instance:
+public $helpers = [
+    'Form' =&gt; [
+        'className' =&gt; 'Bootstrap.Form'
+    ],
     'Html' =&gt; [
-        'className' => 'Bootstrap.BootstrapHtml',
-        'useFontAwesome' => true // Add this line to set font awesome as default
+        'className' =&gt; 'Bootstrap.Html'
+    ],
+    'Modal' =&gt; [
+        'className' =&gt; 'Bootstrap.Modal'
+    ],
+    'Navbar' =&gt; [
+        'className' =&gt; 'Bootstrap.Navbar'
+    ],
+    'Paginator' =&gt; [
+        'className' =&gt; 'Bootstrap.Paginator'
+    ],
+    'Panel' =&gt; [
+        'className' =&gt; 'Bootstrap.Panel'
     ]
-];</code></pre>
-                        <div role="tabpanel">
-                            <!-- Nav tabs -->
-                            <ul class="nav nav-tabs" role="tablist">
-                                <li role="presentation" class="active"><a href="#icons-fa-php" aria-controls="icons-fa-php" role="tab" data-toggle="tab">PHP</a></li>
-                                <li role="presentation"><a href="#icons-fa-markup" aria-controls="icons-fa-markup" role="tab" data-toggle="tab">Markup</a></li>
-                            </ul>
-                            <!-- Tab panes -->
-                            <div class="tab-content">
-                                <div role="tabpanel" class="tab-pane active" id="icons-fa-php">
-                                    <pre><code class="language-php">&lt;?php
-    echo $this-&gt;Html-&gt;icon('pencil');
-    echo $this-&gt;Html-&gt;glIcon('pencil'); // Glyphicon icons are still available with BootstrapHtmlHelper::glIcon
-    echo $this-&gt;Html-&gt;faIcon('pencil'); // FontAwesome are always available using BootstrapHtmlHelper::faIcon
-?&gt;</code></pre>
-                                </div>
-                                <div role="tabpanel" class="tab-pane" id="icons-fa-markup">
-                                    <pre><code class="language-markup">&lt;i class=&quot;fa fa-pencil&quot;&gt;&lt;/i&gt;
-&lt;i class=&quot;fa fa-pencil&quot;&gt;&lt;/i&gt;
-&lt;i class=&quot;glyphicon glyphicon-pencil&quot;&gt;&lt;/i&gt;</code></pre>
+];
+</code></pre>
 
-                                </div>
-                            </div>
-                        </div>
-                        <h3 id="labels">Labels</h3>
-                        <div role="tabpanel">
-                            <!-- Nav tabs -->
-                            <ul class="nav nav-tabs" role="tablist">
-                                <li role="presentation" class="active"><a href="#label-php" aria-controls="label-php" role="tab" data-toggle="tab">PHP</a></li>
-                                <li role="presentation"><a href="#label-markup" aria-controls="label-markup" role="tab" data-toggle="tab">Markup</a></li>
-                                <li role="presentation"><a href="#label-output" aria-controls="label-output" role="tab" data-toggle="tab">Output</a></li>
-                            </ul>
-                            <!-- Tab panes -->
-                            <div class="tab-content">
-                                <div role="tabpanel" class="tab-pane active" id="label-php">
-                                    <pre><code class="language-php">&lt;?php
-    echo $this-&gt;Html-&gt;label('My Label', 'primary') ;
-    echo $this-&gt;Html-&gt;label('My Label', 'danger') ;
-    echo $this-&gt;Html-&gt;label('My Label', 'success') ;
-?&gt;</code></pre>
-                                </div>
-                                <div role="tabpanel" class="tab-pane" id="label-markup">
-                                    <pre><code class="language-markup">&lt;span class=&quot;label label-primary&quot;&gt;My Label&lt;/span&gt;
-&lt;span class=&quot;label label-danger&quot;&gt;My Label&lt;/span&gt;
-&lt;span class=&quot;label label-success&quot;&gt;My Label&lt;/span&gt;</code></pre>
-                                </div>
-                                <div role="tabpanel" class="tab-pane" id="label-output">
-                                    <span class="label label-primary">My Label</span><span class="label label-danger">My Label</span><span class="label label-success">My Label</span>
-                                </div>
-                            </div>
-                        </div>
-                        <h3 id="badges">Badges</h3>
-                        <div role="tabpanel">
-                        <!-- Nav tabs -->
-                        <ul class="nav nav-tabs" role="tablist">
-                            <li role="presentation" class="active"><a href="#badge-php" aria-controls="badge-php" role="tab" data-toggle="tab">PHP</a></li>
-                            <li role="presentation"><a href="#badge-markup" aria-controls="badge-markup" role="tab" data-toggle="tab">Markup</a></li>
-                            <li role="presentation"><a href="#badge-output" aria-controls="badge-output" role="tab" data-toggle="tab">Output</a></li>
-                        </ul>
-                        <!-- Tab panes -->
-                        <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane active" id="badge-php">
-                                <pre><code class="language-php">&lt;?php
-    echo $this-&gt;Html-&gt;badge('1') ;
-    echo $this-&gt;Html-&gt;badge('2') ;
-    echo $this-&gt;Html-&gt;badge('3') ;
-?&gt;</code></pre>
-                            </div>
-                            <div role="tabpanel" class="tab-pane" id="badge-markup">
-                                <pre><code class="language-markup">&lt;span class=&quot;badge&quot;&gt;1&lt;/span&gt;
-&lt;span class=&quot;badge&quot;&gt;2&lt;/span&gt;
-&lt;span class=&quot;badge&quot;&gt;3&lt;/span&gt;</code></pre>
-                            </div>
-                            <div role="tabpanel" class="tab-pane" id="badge-output">
-                                <span class="badge">1</span><span class="badge">2</span><span class="badge">3</span>
-                            </div>
-                        </div>
-                    </div>
-                    <h3 id="alerts">Alerts</h3>
-                    <div role="tabpanel">
-                        <!-- Nav tabs -->
-                        <ul class="nav nav-tabs" role="tablist">
-                            <li role="presentation" class="active"><a href="#alert-php" aria-controls="alert-php" role="tab" data-toggle="tab">PHP</a></li>
-                            <li role="presentation"><a href="#alert-markup" aria-controls="alert-markup" role="tab" data-toggle="tab">Markup</a></li>
-                            <li role="presentation"><a href="#alert-output" aria-controls="alert-output" role="tab" data-toggle="tab">Output</a></li>
-                        </ul>
-                        <!-- Tab panes -->
-                        <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane active" id="alert-php">
-                                <pre><code class="language-php">&lt;?php
-    echo $this-&gt;Html-&gt;alert('This is a warning alert!') ;
-    echo $this-&gt;Html-&gt;alert('This is a success alert!', 'success');
-    echo $this-&gt;Html-&gt;alert('This is a info alert with a specific id!', [
-        'id' =&gt; 'alert-info',
-        'type' =&gt; 'info'
-    ]);
-?&gt;</code></pre>
-                            </div>
-                            <div role="tabpanel" class="tab-pane" id="alert-markup">
-                                <pre><code class="language-markup">&lt;div class=&quot;alert alert-warning&quot;&gt;
-    &lt;button type=&quot;button&quot; class=&quot;close&quot; data-dismiss=&quot;alert&quot; aria-hidden=&quot;true&quot;&gt;&amp;times;&lt;/button&gt;
-    This is a warning alert!
-&lt;/div&gt;
-&lt;div class=&quot;alert alert-success&quot;&gt;
-    &lt;button type=&quot;button&quot; class=&quot;close&quot; data-dismiss=&quot;alert&quot; aria-hidden=&quot;true&quot;&gt;&amp;times;&lt;/button&gt;
-    This is a success alert!
-&lt;/div&gt;
-&lt;div id=&quot;alert-info&quot; class=&quot;alert alert-info&quot;&gt;
-    &lt;button type=&quot;button&quot; class=&quot;close&quot; data-dismiss=&quot;alert&quot; aria-hidden=&quot;true&quot;&gt;&amp;times;&lt;/button&gt;
-    This is a info alert with a specific id!
-&lt;/div&gt;</code></pre>
-                            </div>
-                            <div role="tabpanel" class="tab-pane" id="alert-output">
-                                <div class="alert alert-warning"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>This is a warning alert!</div><div class="alert alert-success"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>This is a success alert!</div><div id="alert-info" class="alert alert-info"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>This is a info alert with a specific id!</div>
-                            </div>
-                        </div>
-                    </div>
-                    </section>
-                    <section id="helpers-form">
-                        <h1>Form Helper</h1>
-                        <h3 id="form-standard-use">Standard Use</h3>
-                        <p>Standard CakePHP code working with this helper, you do not need to worry about anything!</p>
-                        <div role="tabpanel">
-                            <!-- Nav tabs -->
-                            <ul class="nav nav-tabs" role="tablist">
-                                <li role="presentation" class="active"><a href="#form-1-php" aria-controls="form-1-php" role="tab" data-toggle="tab">PHP</a></li>
-                                <li role="presentation"><a href="#form-1-markup" aria-controls="form-1-markup" role="tab" data-toggle="tab">Markup</a></li>
-                                <li role="presentation"><a href="#form-1-output" aria-controls="form-1-output" role="tab" data-toggle="tab">Output</a></li>
-                            </ul>
-                            <!-- Tab panes -->
-                            <div class="tab-content">
-                                <div role="tabpanel" class="tab-pane active" id="form-1-php">
-                                    <pre><code class="language-php">&lt;?php
-    echo $this-&gt;Form-&gt;create();
-    echo $this-&gt;Form-&gt;input('username', ['type' =&gt; 'text']) ;
-    echo $this-&gt;Form-&gt;input('password', ['type' =&gt; 'password']) ;
-    echo $this-&gt;Form-&gt;input('remember', ['type' =&gt; 'checkbox']) ;
-    echo $this-&gt;Form-&gt;submit('Log In') ;
-    echo $this-&gt;Form-&gt;end() ;
-?&gt;</code></pre>
-                                </div>
-                                <div role="tabpanel" class="tab-pane" id="form-1-markup">
-                                    <pre><code class="language-markup">&lt;form method=&quot;post&quot; accept-charset=&quot;utf-8&quot; role=&quot;form&quot; action=&quot;#&quot;&gt;
-    &lt;div style=&quot;display:none;&quot;&gt;
-        &lt;input type=&quot;hidden&quot; name=&quot;_method&quot; class=&quot;form-control &quot;  value=&quot;POST&quot; /&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;form-group text&quot;&gt;
-        &lt;label class=&quot; control-label&quot; for=&quot;username&quot;&gt;Username&lt;/label&gt;
-        &lt;input type=&quot;text&quot; name=&quot;username&quot; class=&quot;form-control &quot;  id=&quot;username&quot; /&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;form-group password&quot;&gt;
-        &lt;label class=&quot; control-label&quot;  for=&quot;password&quot;&gt;Password&lt;/label&gt;
-        &lt;input type=&quot;password&quot; name=&quot;password&quot; class=&quot;form-control &quot;  id=&quot;password&quot; /&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;form-group&quot;&gt;
-        &lt;div class=&quot;checkbox&quot;&gt;
-            &lt;input type=&quot;hidden&quot; name=&quot;remember&quot; class=&quot;form-control &quot;  value=&quot;0&quot; /&gt;
-            &lt;label for=&quot;remember&quot;&gt;&lt;input type=&quot;checkbox&quot; name=&quot;remember&quot; value=&quot;1&quot; id=&quot;remember&quot;&gt;Remember&lt;/label&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;form-group&quot;&gt;
-        &lt;input type=&quot;submit&quot; class=&quot;btn btn-default&quot; value=&quot;Log In&quot;&gt;
-    &lt;/div&gt;
-&lt;/form&gt;</code></pre>
-                                </div>
-                                <div role="tabpanel" class="tab-pane" id="form-1-output">
-                                    <form method="post" accept-charset="utf-8" role="form" action="#"><div style="display:none;"><input type="hidden" name="_method" class="form-control "  value="POST" /></div><div class="form-group text"><label class=" control-label"  for="username">Username</label><input type="text" name="username" class="form-control "  id="username" /></div><div class="form-group password"><label class=" control-label"  for="password">Password</label><input type="password" name="password" class="form-control "  id="password" /></div><div class="form-group"><div class="checkbox"><input type="hidden" name="remember" class="form-control "  value="0" /><label for="remember"><input type="checkbox" name="remember" value="1" id="remember">Remember</label></div></div><div class="form-group"><input type="submit" class="btn btn-default" value="Log In"></div></form>
-                                </div>
-                            </div>
-                        </div>
-                        <h3 id="horizontal-forms">Horizontal Forms</h3>
-                        <div role="tabpanel">
-                            <!-- Nav tabs -->
-                            <ul class="nav nav-tabs" role="tablist">
-                                <li role="presentation" class="active"><a href="#form-horizontal-php" aria-controls="form-horizontal-php" role="tab" data-toggle="tab">PHP</a></li>
-                                <li role="presentation"><a href="#form-horizontal-markup" aria-controls="form-horizontal-markup" role="tab" data-toggle="tab">Markup</a></li>
-                                <li role="presentation"><a href="#form-horizontal-output" aria-controls="form-horizontal-output" role="tab" data-toggle="tab">Output</a></li>
-                            </ul>
-                            <!-- Tab panes -->
-                            <div class="tab-content">
-                                <div role="tabpanel" class="tab-pane active" id="form-horizontal-php">
-                                    <pre><code class="language-php">&lt;?php
-    echo $this-&gt;Form-&gt;create(null, ['horizontal' =&gt; true]);
-    echo $this-&gt;Form-&gt;input('username', ['type' =&gt; 'text']) ;
-    echo $this-&gt;Form-&gt;input('password', ['type' =&gt; 'password']) ;
-    echo $this-&gt;Form-&gt;input('remember', ['type' =&gt; 'checkbox']) ;
-    echo $this-&gt;Form-&gt;submit('Log In') ;
-    echo $this-&gt;Form-&gt;end() ;
-?&gt;</code></pre>
-                                </div>
-                                <div role="tabpanel" class="tab-pane" id="form-horizontal-markup">
-                                    <pre><code class="language-markup">&lt;form method=&quot;post&quot; accept-charset=&quot;utf-8&quot; class=&quot;form-horizontal&quot; role=&quot;form&quot; action=&quot;#&quot;&gt;
-    &lt;div style=&quot;display:none;&quot;&gt;
-        &lt;input type=&quot;hidden&quot; name=&quot;_method&quot; class=&quot;form-control &quot;  value=&quot;POST&quot; /&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;form-group text&quot;&gt;
-        &lt;label class=&quot;col-md-2 control-label&quot;  for=&quot;username&quot;&gt;Username&lt;/label&gt;
-        &lt;div class=&quot;col-md-6&quot;&gt;
-            &lt;input type=&quot;text&quot; name=&quot;username&quot; class=&quot;form-control &quot;  id=&quot;username&quot; /&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;form-group password&quot;&gt;
-        &lt;label class=&quot;col-md-2 control-label&quot;  for=&quot;password&quot;&gt;Password&lt;/label&gt;
-        &lt;div class=&quot;col-md-6&quot;&gt;
-            &lt;input type=&quot;password&quot; name=&quot;password&quot; class=&quot;form-control &quot;  id=&quot;password&quot; /&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;form-group&quot;&gt;
-        &lt;div class=&quot;col-md-offset-2 col-md-6&quot;&gt;
-            &lt;div class=&quot;checkbox&quot;&gt;
-                &lt;input type=&quot;hidden&quot; name=&quot;remember&quot; class=&quot;form-control &quot;  value=&quot;0&quot; /&gt;
-                &lt;label for=&quot;remember&quot;&gt;
-                    &lt;input type=&quot;checkbox&quot; name=&quot;remember&quot; value=&quot;1&quot; id=&quot;remember&quot;&gt;
-                    Remember
-                &lt;/label&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;form-group&quot;&gt;
-        &lt;div class=&quot;col-md-offset-2 col-md-6&quot;&gt;
-            &lt;input type=&quot;submit&quot; class=&quot;btn btn-default&quot; value=&quot;Log In&quot;&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/form&gt;</code></pre>
-                                </div>
-                                <div role="tabpanel" class="tab-pane" id="form-horizontal-output">
-                                    <form method="post" accept-charset="utf-8" class="form-horizontal" role="form" action="#"><div style="display:none;"><input type="hidden" name="_method" class="form-control "  value="POST" /></div><div class="form-group text"><label class="col-md-2 control-label"  for="username">Username</label><div class="col-md-6"><input type="text" name="username" class="form-control "  id="username" /></div></div><div class="form-group password"><label class="col-md-2 control-label"  for="password">Password</label><div class="col-md-6"><input type="password" name="password" class="form-control "  id="password" /></div></div><div class="form-group"><div class="col-md-offset-2 col-md-6"><div class="checkbox"><input type="hidden" name="remember" class="form-control "  value="0" /><label for="remember"><input type="checkbox" name="remember" value="1" id="remember">Remember</label></div></div></div><div class="form-group"><div class="col-md-offset-2 col-md-6"><input type="submit" class="btn btn-default" value="Log In"></div></div></form>
-                                </div>
-                            </div>
-                        </div>
-
-                        <p>With <code>horizontal</code>, it is possible to specify the width of each columns:</p>
-                        <pre><code class="language-php">echo $this->Form->create(null, [
-    'horizontal' => true,
-    'columns' => [ // Total is 12, default is 2 / 10 / 0
-        'label' => 2,
-        'input' => 10,
-        'error' => 0
+<p>If you are using a version prior to 3.1.2, add the <code>Bootstrap</code> prefix to the class, e.g.:</p>
+<pre><code class="language-php">public $helpers = [
+    'Form' =&gt; [
+        'className' =&gt; 'Bootstrap.BootstrapForm'
     ]
+];
+</code></pre>
+
+<p>You should be careful when mixing the Bootstrap helpers with other helpers, see the <a href="faq/">FAQ</a>.
+Do not forget to add the bootstrap style and script files to your view (e.g. in <code>Layout/default.ctp</code>):</p>
+<pre><code class="language-php">echo $this-&gt;Html-&gt;css('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css');
+echo $this-&gt;Html-&gt;script([
+    'https://code.jquery.com/jquery-1.12.4.min.js',
+    'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'
 ]);
-// 0 for 'error' means that it will be put under the input</code></pre>
-                        <p>You can also set column widths for different screens:</p>
-                        <div role="tabpanel">
-                        <!-- Nav tabs -->
-                        <ul class="nav nav-tabs" role="tablist">
-                            <li role="presentation" class="active"><a href="#form-horizontal-2-php" aria-controls="form-horizontal-2-php" role="tab" data-toggle="tab">PHP</a></li>
-                            <li role="presentation"><a href="#form-horizontal-2-markup" aria-controls="form-horizontal-2-markup" role="tab" data-toggle="tab">Markup</a></li>
-                            <li role="presentation"><a href="#form-horizontal-2-output" aria-controls="form-horizontal-2-output" role="tab" data-toggle="tab">Output</a></li>
-                        </ul>
-                        <!-- Tab panes -->
-                        <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane active" id="form-horizontal-2-php">
-                                <pre><code class="language-php">&lt;?php
-    echo $this-&gt;Form-&gt;create(null, [
-        'horizontal' =&gt; true,
-        'columns' =&gt; [ 
-            'sm' =&gt; [
-                'label' =&gt; 4,
-                'input' =&gt; 4,
-                'error' =&gt; 4
-            ],
-            'md' =&gt; [
-                'label' =&gt; 2,
-                'input' =&gt; 6,
-                'error' =&gt; 4
-            ]
-        ]
-    ]);
-    echo $this-&gt;Form-&gt;input('username', ['type' =&gt; 'text']) ;
-    echo $this-&gt;Form-&gt;input('password', ['type' =&gt; 'password']) ;
-    echo $this-&gt;Form-&gt;input('remember', ['type' =&gt; 'checkbox']) ;
-    echo $this-&gt;Form-&gt;submit('Log In') ;
-    echo $this-&gt;Form-&gt;end() ;
-?&gt;</code></pre>
-                            </div>
-                            <div role="tabpanel" class="tab-pane" id="form-horizontal-2-markup">
-                                <pre><code class="language-markup">&lt;form method=&quot;post&quot; accept-charset=&quot;utf-8&quot; class=&quot;form-horizontal&quot; role=&quot;form&quot; action=&quot;#&quot;&gt;
-    &lt;div style=&quot;display:none;&quot;&gt;
-        &lt;input type=&quot;hidden&quot; name=&quot;_method&quot; class=&quot;form-control &quot;  value=&quot;POST&quot; /&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;form-group text&quot;&gt;
-        &lt;label class=&quot;col-sm-4 col-md-2 control-label&quot;  for=&quot;username&quot;&gt;Username&lt;/label&gt;
-        &lt;div class=&quot;col-sm-4 col-md-6&quot;&gt;
-            &lt;input type=&quot;text&quot; name=&quot;username&quot; class=&quot;form-control &quot;  id=&quot;username&quot; /&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;form-group password&quot;&gt;
-        &lt;label class=&quot;col-sm-4 col-md-2 control-label&quot;  for=&quot;password&quot;&gt;Password&lt;/label&gt;
-        &lt;div class=&quot;col-sm-4 col-md-6&quot;&gt;
-            &lt;input type=&quot;password&quot; name=&quot;password&quot; class=&quot;form-control &quot;  id=&quot;password&quot; /&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;form-group&quot;&gt;
-        &lt;div class=&quot;col-sm-offset-4 col-md-offset-2 col-sm-4 col-md-6&quot;&gt;
-            &lt;div class=&quot;checkbox&quot;&gt;
-                &lt;input type=&quot;hidden&quot; name=&quot;remember&quot; class=&quot;form-control &quot;  value=&quot;0&quot; /&gt;
-                &lt;label for=&quot;remember&quot;&gt;
-                    &lt;input type=&quot;checkbox&quot; name=&quot;remember&quot; value=&quot;1&quot; id=&quot;remember&quot;&gt;
-                    Remember
-                &lt;/label&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;form-group&quot;&gt;
-        &lt;div class=&quot;col-sm-offset-4 col-md-offset-2 col-sm-4 col-md-6&quot;&gt;
-            &lt;input type=&quot;submit&quot; class=&quot;btn btn-default&quot; value=&quot;Log In&quot;&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/form&gt;</code></pre>
-                            </div>
-                            <div role="tabpanel" class="tab-pane" id="form-horizontal-2-output">
-                                <form method="post" accept-charset="utf-8" class="form-horizontal" role="form" action="#"><div style="display:none;"><input type="hidden" name="_method" class="form-control "  value="POST" /></div><div class="form-group text"><label class="col-sm-4 col-md-2 control-label"  for="username">Username</label><div class="col-sm-4 col-md-6"><input type="text" name="username" class="form-control "  id="username" /></div></div><div class="form-group password"><label class="col-sm-4 col-md-2 control-label"  for="password">Password</label><div class="col-sm-4 col-md-6"><input type="password" name="password" class="form-control "  id="password" /></div></div><div class="form-group"><div class="col-sm-offset-4 col-md-offset-2 col-sm-4 col-md-6"><div class="checkbox"><input type="hidden" name="remember" class="form-control "  value="0" /><label for="remember"><input type="checkbox" name="remember" value="1" id="remember">Remember</label></div></div></div><div class="form-group"><div class="col-sm-offset-4 col-md-offset-2 col-sm-4 col-md-6"><input type="submit" class="btn btn-default" value="Log In"></div></div></form>
-                            </div>
-                        </div>
-                    </div>
-                        
-                        <p>To avoid compatibility issue with some bootstrap plugins, you can switch from horizontal layout to standard layout by setting the <code>BootstrapFormHelper::horizontal</code> attribute manually.</p>
-                        <div role="tabpanel">
-                            <!-- Nav tabs -->
-                            <ul class="nav nav-tabs" role="tablist">
-                                <li role="presentation" class="active"><a href="#form-sethorizontal-php" aria-controls="form-sethorizontal-php" role="tab" data-toggle="tab">PHP</a></li>
-                                <li role="presentation"><a href="#form-sethorizontal-markup" aria-controls="form-sethorizontal-markup" role="tab" data-toggle="tab">Markup</a></li>
-                                <li role="presentation"><a href="#form-sethorizontal-output" aria-controls="form-sethorizontal-output" role="tab" data-toggle="tab">Output</a></li>
-                            </ul>
-                            <!-- Tab panes -->
-                            <div class="tab-content">
-                                <div role="tabpanel" class="tab-pane active" id="form-sethorizontal-php">
-                                    <pre><code class="language-php">&lt;?php 
-    echo $this-&gt;Form-&gt;create(NULL, ['horizontal' =&gt; true]) ;
-    echo $this-&gt;Form-&gt;input('horizontal_1'); 
-    echo $this-&gt;Form-&gt;horizontal = false;
-    echo $this-&gt;Form-&gt;input('non_horizontal'); 
-    echo $this-&gt;Form-&gt;horizontal = true;
-    echo $this-&gt;Form-&gt;input('horizontal_2'); 
-    echo $this-&gt;Form-&gt;end() ;
-?&gt;</code></pre>
-                                </div>
-                                <div role="tabpanel" class="tab-pane" id="form-sethorizontal-markup">
-                                    <pre><code class="language-markup">&lt;form accept-charset=&quot;utf-8&quot; action=&quot;#&quot; class=&quot;form-horizontal&quot; method=&quot;post&quot;&gt;
-    &lt;div style=&quot;display:none;&quot;&gt;
-        &lt;input class=&quot;form-control&quot; name=&quot;_method&quot; type=&quot;hidden&quot; value=&quot;POST&quot;&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;form-group text&quot;&gt;
-        &lt;label class=&quot;col-md-2 control-label&quot; for=&quot;horizontal-1&quot;&gt;Horizontal 1&lt;/label&gt;
-        &lt;div class=&quot;col-md-6&quot;&gt;
-            &lt;input class=&quot;form-control&quot; id=&quot;horizontal-1&quot; name=&quot;horizontal_1&quot; type=&quot;text&quot;&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;form-group text&quot;&gt;
-        &lt;label class=&quot; control-label&quot; for=&quot;non-horizontal&quot;&gt;Non Horizontal&lt;/label&gt;
-        &lt;input class=&quot;form-control&quot; id=&quot;non-horizontal&quot; name=&quot;non_horizontal&quot; type=&quot;text&quot;&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;form-group text&quot;&gt;
-        &lt;label class=&quot;col-md-2 control-label&quot; for=&quot;horizontal-2&quot;&gt;Horizontal 2&lt;/label&gt;
-        &lt;div class=&quot;col-md-6&quot;&gt;
-            &lt;input class=&quot;form-control&quot; id=&quot;horizontal-2&quot; name=&quot;horizontal_2&quot; type=&quot;text&quot;&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/form&gt;</code></pre>
-                                </div>
-                                <div role="tabpanel" class="tab-pane" id="form-sethorizontal-output">
-                                    <form method="post" accept-charset="utf-8" class="form-horizontal" role="form" action="#"><div style="display:none;"><input type="hidden" name="_method" class="form-control " value="POST"></div><div class="form-group text"><label class="col-md-2 control-label " for="horizontal-1">Horizontal 1</label><div class="col-md-6"><input type="text" name="horizontal_1" class="form-control " id="horizontal-1"></div></div><div class="form-group text"><label class=" control-label " for="non-horizontal">Non Horizontal</label><input type="text" name="non_horizontal" class="form-control " id="non-horizontal"></div><div class="form-group text"><label class="col-md-2 control-label " for="horizontal-2">Horizontal 2</label><div class="col-md-6"><input type="text" name="horizontal_2" class="form-control " id="horizontal-2"></div></div></form>                               
-                                </div>
-                            </div>
-                        </div>
+</code></pre>
+
+<p>See <a href="http://book.cakephp.org/3.0/en/views/helpers.html">CakePHP documentation</a> for more information on how to enable helpers in your
+controllers (especially if you want to use the default CakePHP helpers together with these helpers).</p></div>
+            <div class="col-md-3 hidden-sm hidden-xs">
+
+<nav class="right-nav right-nav-fixed">
+    <ul class="nav">
 
 
-                    <h3 id="custom-file-input">Custom File Input</h3>
-                    <p>Bootstrap do not customize (ugly) file inputs, so you can choose to customize it with the helpers. To enable the custom file inputs (see demo bellow), set <code>useCustomFileInput</code> to <code>true</code> when enabling the helper:</p>
-                    <pre><code class="language-php">public $helpers = [
-    'Form' => [
-        'className' => 'Bootstrap.BootstrapForm',
-        'useCustomFileInput' => true
-    ]
-];</code></pre>
-                    <div role="tabpanel">
-                        <!-- Nav tabs -->
-                        <ul class="nav nav-tabs" role="tablist">
-                            <li role="presentation" class="active"><a href="#form-fileinput-php" aria-controls="form-fileinput-php" role="tab" data-toggle="tab">PHP</a></li>
-                            <li role="presentation"><a href="#form-fileinput-markup" aria-controls="form-fileinput-markup" role="tab" data-toggle="tab">Markup</a></li>
-                            <li role="presentation"><a href="#form-fileinput-output" aria-controls="form-fileinput-output" role="tab" data-toggle="tab">Output</a></li>
-                        </ul>
-                        <!-- Tab panes -->
-                        <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane active" id="form-fileinput-php">
-                                <pre><code class="language-php">&lt;?php
-    echo $this-&gt;Form-&gt;file('file');
-?&gt;</code></pre>
-                            </div>
-                            <div role="tabpanel" class="tab-pane" id="form-fileinput-markup">
-                                <pre><code class="language-markup">&lt;input type=&quot;file&quot; name=&quot;file&quot;  id=&quot;file&quot; style=&quot;display: none;&quot; onchange=&quot;document.getElementById('file-input').value = this.files[0].name;&quot;&gt;
-&lt;div class=&quot;input-group&quot;&gt;
-    &lt;div class=&quot;input-group-btn&quot;&gt;
-        &lt;button type=&quot;button&quot; onclick=&quot;document.getElementById('file').click();&quot; class=&quot;btn btn-default&quot;&gt;Choose File&lt;/button&gt;
-    &lt;/div&gt;
-    &lt;input type=&quot;text&quot; name=&quot;file&quot; class=&quot;form-control &quot;  id=&quot;file-input&quot; readonly=&quot;readonly&quot; onclick=&quot;document.getElementById('file').click();&quot; /&gt;
-&lt;/div&gt;</code></pre>
-                            </div>
-                            <div role="tabpanel" class="tab-pane" id="form-fileinput-output">
-                                <input type="file" name="file"  id="file" style="display: none;" onchange="document.getElementById(&#039;file-input&#039;).value = this.files[0].name;"><div class="input-group"><div class="input-group-btn"><button type="button" onclick="document.getElementById('file').click();" class="btn btn-default">Choose File</button></div><input type="text" name="file" class="form-control "  id="file-input" readonly="readonly" onclick="document.getElementById(&#039;file&#039;).click();" /></div>
-                            </div>
-                        </div>
-                        <p>You can also pass custom options to the button and input generated by the helper via the <code>_button</code> and <code>_input</code> options. This adds greater control over the elements</p>
-                        <p><strong>Note:</strong> Any classes you add here will be appended to the ones used by the Bootstrap helper and not override them.  Also <code>readonly</code>, <code>onclick</code> and <code>id</code> have special significance on the input and cannot be overridden.  The same applies to <code>type</code> and <code>onclick</code> on the button.</p>
-                    <pre><code class="language-php">$this->Form->file('file', [
-    '_button' => ['class' => 'my-custom-button-class'],
-    '_input' => ['data-attr' => 'my-data-attr', 'class' => 'my-input-class']
-]);</code></pre>
-                    </div>
-                    <h3 id="button-groups-etc">Button Group, Toolbar & Dropdown</h3>
-                    <div role="tabpanel">
-                        <!-- Nav tabs -->
-                        <ul class="nav nav-tabs" role="tablist">
-                            <li role="presentation" class="active"><a href="#buttons-1-php" aria-controls="buttons-1-php" role="tab" data-toggle="tab">PHP</a></li>
-                            <li role="presentation"><a href="#buttons-1-markup" aria-controls="buttons-1-markup" role="tab" data-toggle="tab">Markup</a></li>
-                            <li role="presentation"><a href="#buttons-1-output" aria-controls="buttons-1-output" role="tab" data-toggle="tab">Output</a></li>
-                        </ul>
-                        <!-- Tab panes -->
-                        <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane active" id="buttons-1-php">
-                                <pre><code class="language-php">&lt;?php
-    echo $this-&gt;Form-&gt;buttonGroup([$this-&gt;Form-&gt;button('1'), $this-&gt;Form-&gt;button('2')]) ;
-?&gt;</code></pre>
-                            </div>
-                            <div role="tabpanel" class="tab-pane" id="buttons-1-markup">
-                                <pre><code class="language-markup">&lt;div class=&quot;btn-group&quot;&gt;
-    &lt;button class=&quot;btn btn-default&quot; type=&quot;submit&quot;&gt;1&lt;/button&gt;
-    &lt;button class=&quot;btn btn-default&quot; type=&quot;submit&quot;&gt;2&lt;/button&gt;
-&lt;/div&gt;</code></pre>
-                            </div>
-                            <div role="tabpanel" class="tab-pane" id="buttons-1-output">
-                                <div class="btn-group"><button class="btn btn-default" type="submit">1</button><button class="btn btn-default" type="submit">2</button></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div role="tabpanel">
-                        <!-- Nav tabs -->
-                        <ul class="nav nav-tabs" role="tablist">
-                            <li role="presentation" class="active"><a href="#buttons-2-php" aria-controls="buttons-2-php" role="tab" data-toggle="tab">PHP</a></li>
-                            <li role="presentation"><a href="#buttons-2-markup" aria-controls="buttons-2-markup" role="tab" data-toggle="tab">Markup</a></li>
-                            <li role="presentation"><a href="#buttons-2-output" aria-controls="buttons-2-output" role="tab" data-toggle="tab">Output</a></li>
-                        </ul>
-                        <!-- Tab panes -->
-                        <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane active" id="buttons-2-php">
-                                <pre><code class="language-php">&lt;?php
-    echo $this-&gt;Form-&gt;buttonToolbar([
-        $this-&gt;Form-&gt;buttonGroup([$this-&gt;Form-&gt;button('1'), $this-&gt;Form-&gt;button('2')]),
-        $this-&gt;Form-&gt;buttonGroup([$this-&gt;Form-&gt;button('3'), $this-&gt;Form-&gt;button('4')])
-    ]) ;
-?&gt;</code></pre>
-                            </div>
-                            <div role="tabpanel" class="tab-pane" id="buttons-2-markup">
-                                <pre><code class="language-markup">&lt;div class=&quot;btn-toolbar&quot;&gt;
-    &lt;div class=&quot;btn-group&quot;&gt;
-        &lt;button class=&quot;btn btn-default&quot; type=&quot;submit&quot;&gt;1&lt;/button&gt;
-        &lt;button class=&quot;btn btn-default&quot; type=&quot;submit&quot;&gt;2&lt;/button&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;btn-group&quot;&gt;
-        &lt;button class=&quot;btn btn-default&quot; type=&quot;submit&quot;&gt;3&lt;/button&gt;
-        &lt;button class=&quot;btn btn-default&quot; type=&quot;submit&quot;&gt;4&lt;/button&gt;
-    &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-                            </div>
-                            <div role="tabpanel" class="tab-pane" id="buttons-2-output">
-                                <div class="btn-toolbar"><div class="btn-group"><button class="btn btn-default" type="submit">1</button><button class="btn btn-default" type="submit">2</button></div><div class="btn-group"><button class="btn btn-default" type="submit">3</button><button class="btn btn-default" type="submit">4</button></div></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div role="tabpanel">
-                        <!-- Nav tabs -->
-                        <ul class="nav nav-tabs" role="tablist">
-                            <li role="presentation" class="active"><a href="#buttons-3-php" aria-controls="buttons-3-php" role="tab" data-toggle="tab">PHP</a></li>
-                            <li role="presentation"><a href="#buttons-3-markup" aria-controls="buttons-3-markup" role="tab" data-toggle="tab">Markup</a></li>
-                            <li role="presentation"><a href="#buttons-3-output" aria-controls="buttons-3-output" role="tab" data-toggle="tab">Output</a></li>
-                        </ul>
-                        <!-- Tab panes -->
-                        <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane active" id="buttons-3-php">
-                                <pre><code class="language-php">&lt;?php
-    echo $this-&gt;Form-&gt;dropdownButton('My Dropdown', [
-        $this-&gt;Html-&gt;link('Link 1', '#'),
-        $this-&gt;Html-&gt;link('Link 2', '#'),
-        'divider',
-        $this-&gt;Html-&gt;link('Link 3', '#')
-    ]);
-?&gt;</code></pre>
-                            </div>
-                            <div role="tabpanel" class="tab-pane" id="buttons-3-markup">
-                                <pre><code class="language-markup">&lt;div class=&quot;btn-group&quot;&gt;
-    &lt;button data-toggle=&quot;dropdown&quot; class=&quot;dropdown-toggle btn btn-default&quot;&gt;My Dropdown &lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;&lt;/button&gt;
-    &lt;ul class=&quot;dropdown-menu&quot;&gt;
-        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Link 1&lt;/a&gt;&lt;/li&gt;
-        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Link 2&lt;/a&gt;&lt;/li&gt;
-        &lt;li class=&quot;divider&quot;&gt;&lt;/li&gt;
-        &lt;li&gt;&lt;a href=&quot;#&quot;&gt;Link 3&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-&lt;/div&gt;</code></pre>
-                            </div>
-                            <div role="tabpanel" class="tab-pane" id="buttons-3-output">
-                                <div class="btn-group"><button data-toggle="dropdown" class="dropdown-toggle btn btn-default">My Dropdown <span class="caret"></span></button><ul class="dropdown-menu"><li><a href="#">Link 1</a></li><li><a href="#">Link 2</a></li><li class="divider"></li><li><a href="#">Link 3</a></li></ul></div>
-                            </div>
-                        </div>
-                    </div>
-                    <h3 id="form-new-options">New input options</h3>
-                    <div role="tabpanel">
-                        <!-- Nav tabs -->
-                        <ul class="nav nav-tabs" role="tablist">
-                            <li role="presentation" class="active"><a href="#preapp-1-php" aria-controls="preapp-1-php" role="tab" data-toggle="tab">PHP</a></li>
-                            <li role="presentation"><a href="#preapp-1-markup" aria-controls="preapp-1-markup" role="tab" data-toggle="tab">Markup</a></li>
-                            <li role="presentation"><a href="#preapp-1-output" aria-controls="preapp-1-output" role="tab" data-toggle="tab">Output</a></li>
-                        </ul>
-                        <!-- Tab panes -->
-                        <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane active" id="preapp-1-php">
-                                <pre><code class="language-php">&lt;?php
-    echo $this-&gt;Form-&gt;input('mail', [
-        'prepend' =&gt; '@', 
-        'help' =&gt; 'Hey guy, you need some help?',
-        'append' =&gt; $this-&gt;Form-&gt;button('Send')
-    ]) ;
-?&gt;</code></pre>
-                            </div>
-                            <div role="tabpanel" class="tab-pane" id="preapp-1-markup">
-                                <pre><code class="language-markup">&lt;div class=&quot;form-group text&quot;&gt;
-    &lt;label class=&quot; control-label&quot;  for=&quot;mail&quot;&gt;Mail&lt;/label&gt;
-    &lt;div class=&quot;input-group&quot;&gt;
-        &lt;span class=&quot;input-group-addon&quot;&gt;@&lt;/span&gt;
-        &lt;input type=&quot;text&quot; name=&quot;mail&quot; class=&quot;form-control &quot; id=&quot;mail&quot; /&gt;
-        &lt;span class=&quot;input-group-btn&quot;&gt;
-            &lt;button class=&quot;btn btn-default&quot; type=&quot;submit&quot;&gt;Send&lt;/button&gt;
-        &lt;/span&gt;
-    &lt;/div&gt;
-    &lt;p class=&quot;help-block&quot;&gt;Hey guy, you need some help?&lt;/p&gt;
-&lt;/div&gt;</code></pre>
-                            </div>
-                            <div role="tabpanel" class="tab-pane" id="preapp-1-output">
-                                <div class="form-group text"><label class=" control-label"  for="mail">Mail</label><div class="input-group"><span class="input-group-addon">@</span><input type="text" name="mail" class="form-control "  id="mail" /><span class="input-group-btn"><button class="btn btn-default" type="submit">Send</button></span></div><p class="help-block">Hey guy, you need some help?</p></div>
-                            </div>
-                        </div>
-                    </div>
-                    <p>You can also easily append dropdown menu to your input:</p>
-                    <div role="tabpanel">
-                        <!-- Nav tabs -->
-                        <ul class="nav nav-tabs" role="tablist">
-                            <li role="presentation" class="active"><a href="#preapp-2-php" aria-controls="preapp-2-php" role="tab" data-toggle="tab">PHP</a></li>
-                            <li role="presentation"><a href="#preapp-2-markup" aria-controls="preapp-2-markup" role="tab" data-toggle="tab">Markup</a></li>
-                            <li role="presentation"><a href="#preapp-2-output" aria-controls="preapp-2-output" role="tab" data-toggle="tab">Output</a></li>
-                        </ul>
-                        <!-- Tab panes -->
-                        <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane active" id="preapp-2-php">
-                                <pre><code class="language-php">&lt;?php
-    echo $this-&gt;Form-&gt;input('mail', [
-        'append' =&gt; [
-            $this-&gt;Form-&gt;button('Button'),
-            $this-&gt;Form-&gt;dropdownButton('Dropdown', [
-                $this-&gt;Html-&gt;link('A', '#'), 
-                $this-&gt;Html-&gt;link('B', '#'),
-                'divider', 
-                $this-&gt;Html-&gt;link('C', '#')
-            ])
-        ]
-    ]) ;
-?&gt;</code></pre>
-                            </div>
-                            <div role="tabpanel" class="tab-pane" id="preapp-2-markup">
-                                <pre><code class="language-markup">&lt;div class=&quot;form-group text&quot;&gt;
-    &lt;label class=&quot; control-label&quot;  for=&quot;mail&quot;&gt;Mail&lt;/label&gt;
-    &lt;div class=&quot;input-group&quot;&gt;
-        &lt;input type=&quot;text&quot; name=&quot;mail&quot; class=&quot;form-control &quot;  id=&quot;mail&quot; /&gt;
-        &lt;span class=&quot;input-group-btn&quot;&gt;
-            &lt;button class=&quot;btn btn-default&quot; type=&quot;submit&quot;&gt;Button&lt;/button&gt;
-            &lt;div class=&quot;btn-group&quot;&gt;
-                &lt;button data-toggle=&quot;dropdown&quot; class=&quot;dropdown-toggle btn btn-default&quot;&gt;Dropdown &lt;span class=&quot;caret&quot;&gt;&lt;/span&gt;&lt;/button&gt;
-                &lt;ul class=&quot;dropdown-menu&quot;&gt;
-                    &lt;li&gt;&lt;a href=&quot;#&quot;&gt;A&lt;/a&gt;&lt;/li&gt;
-                    &lt;li&gt;&lt;a href=&quot;#&quot;&gt;B&lt;/a&gt;&lt;/li&gt;
-                    &lt;li class=&quot;divider&quot;&gt;&lt;/li&gt;
-                    &lt;li&gt;&lt;a href=&quot;#&quot;&gt;C&lt;/a&gt;&lt;/li&gt;
-                &lt;/ul&gt;
-            &lt;/div&gt;
-        &lt;/span&gt;
-    &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-                            </div>
-                            <div role="tabpanel" class="tab-pane" id="preapp-2-output">
-                                <div class="form-group text"><label class=" control-label"  for="mail">Mail</label><div class="input-group"><input type="text" name="mail" class="form-control "  id="mail" /><span class="input-group-btn"><button class="btn btn-default" type="submit">Button</button><div class="btn-group"><button data-toggle="dropdown" class="dropdown-toggle btn btn-default">Dropdown <span class="caret"></span></button><ul class="dropdown-menu"><li><a href="#">A</a></li><li><a href="#">B</a></li><li class="divider"></li><li><a href="#">C</a></li></ul></div></span></div></div>
-                            </div>
-                        </div>
-                    </div>
-                    </section><!--
-                    <section id="helpers-paginator">
-                        <h1>Paginator Helper</h1>
-                        <p>Documentation coming soon...</p>
-                    </section>-->
-                    <section id="helpers-modal">
-                        <h1>Modal Helper</h1>
-                        <p>The Bootstrap 3 modal helper allow  you to easily create modal without having to write bunch of html code. There is 3 ways of using this helper, the first one being the most
-                        simple and common.</p>
-                        <h3 id="modal-standard-use">Example 1 - Standard Use</h3>
-                        <div role="tabpanel">
-                            <!-- Nav tabs -->
-                            <ul class="nav nav-tabs" role="tablist">
-                                <li role="presentation" class="active"><a href="#modal-1-php" aria-controls="modal-1-php" role="tab" data-toggle="tab">PHP</a></li>
-                                <li role="presentation"><a href="#modal-1-markup" aria-controls="modal-1-markup" role="tab" data-toggle="tab">Markup</a></li>
-                            </ul>
-                            <button type="button" class="btn btn-custom btn-modal" data-toggle="modal" data-target="#MyModal1">Show Modal</button>
-                            <div id="MyModal1" tabindex="-1" role="dialog" aria-hidden="true" aria-labbeledby="MyModal1Label" class="modal fade"><div class="modal-dialog"><div class="modal-content"><div class="modal-header "><h4 class="modal-title" id="MyModal1Label">Example 1 - Simple header & footer, custom body</h4></div><div class="modal-body "><p>Here I write the body of my modal !</p></div><div class="modal-footer "><button class="btn btn-primary btn-primary" type="submit">Submit</button><button data-dismiss="modal" class="btn btn-default" type="submit">Close</button></div></div></div></div>
-                            <!-- Tab panes -->
-                            <div class="tab-content">
-                                <div role="tabpanel" class="tab-pane active" id="modal-1-php">
-                                    <pre><code class="language-php">&lt;?php
-    // Start a modal with a title, default value for 'close' is true
-    echo $this->Modal->create("My Modal Form", ['id' => 'MyModal1', 'close' => false]) ; 
-?&gt;
-&lt;p&gt;Here I write the body of my modal !&lt;/p&gt;
-&lt;?php
-    // Close the modal, output a footer with a 'close' button
-    echo $this->Modal->end() ;
-    // It is possible to specify custom buttons:
-    echo $this->Modal->end([
-        $this->Form->button('Submit', ['bootstrap-type' => 'primary']),   
-        $this->Form->button('Close', ['data-dismiss' => 'modal']) 
-    ]);
-?&gt;</code></pre>
-                                </div>
-                                <div role="tabpanel" class="tab-pane" id="modal-1-markup">
-                                    <pre><code class="language-markup">&lt;div id=&quot;MyModal1&quot; tabindex=&quot;-1&quot; role=&quot;dialog&quot; aria-hidden=&quot;true&quot; aria-labbeledby=&quot;MyModal1Label&quot; class=&quot;modal fade&quot;&gt;
-    &lt;div class=&quot;modal-dialog&quot;&gt;
-        &lt;div class=&quot;modal-content&quot;&gt;
-            &lt;div class=&quot;modal-header &quot;&gt;
-                &lt;!-- With 'close' =&gt; true, or without specifying:
-                &lt;button type=&quot;button&quot; class=&quot;close&quot; data-dismiss=&quot;modal&quot; aria-hidden=&quot;true&quot;&gt;&times;&lt;/button&gt; --&gt;
-                &lt;h4 class=&quot;modal-title&quot; id=&quot;MyModal1Label&quot;&gt;Example 1 - Simple header & footer, custom body&lt;/h4&gt;
-            &lt;/div&gt;
-            &lt;div class=&quot;modal-body &quot;&gt;    
-                &lt;p&gt;Here I write the body of my modal !&lt;/p&gt;
-            &lt;/div&gt;
-            &lt;div class=&quot;modal-footer &quot;&gt;
-                &lt;button class=&quot;btn btn-primary btn-primary&quot; type=&quot;submit&quot;&gt;Submit&lt;/button&gt;
-                &lt;button data-dismiss=&quot;modal&quot; class=&quot;btn btn-default&quot; type=&quot;submit&quot;&gt;Close&lt;/button&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-                                </div>
-                            </div>
-                        </div>
+    </ul>
+</nav>
 
-                        <h3 id="modal-without-html">Example 2 - Without HTML</h3>
-                        <p>This one allow you to directly specify the modal body content when calling <code>Modal::body</code>. It is useful when the body you want to render is
-                        a PHP string.</p>
-                        <div role="tabpanel">
-                            <!-- Nav tabs -->
-                            <ul class="nav nav-tabs" role="tablist">
-                                <li role="presentation" class="active"><a href="#modal-2-php" aria-controls="modal-2-php" role="tab" data-toggle="tab">PHP</a></li>
-                                <li role="presentation"><a href="#modal-2-markup" aria-controls="modal-2-markup" role="tab" data-toggle="tab">Markup</a></li>
-                            </ul>
-                            <button type="button" class="btn btn-custom btn-modal" data-toggle="modal" data-target="#MyModal2">Show Modal</button>
-                            <div id="MyModal2" tabindex="-1" role="dialog" aria-hidden="true" aria-labbeledby="MyModal2Label" class="modal fade "><div class="modal-dialog"><div class="modal-content"><div class="modal-header "><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="MyModal2Label">Example 2 - No HTML</h4></div><div class="modal-body my-body-class"><p>My body... !</p></div><div class="modal-footer "><button class="btn btn-primary" type="submit">Submit</button><button data-dismiss="modal" class="btn btn-default" type="submit">Close</button></div></div></div></div>
-                            <!-- Tab panes -->
-                            <div class="tab-content">
-                                <div role="tabpanel" class="tab-pane active" id="modal-2-php">
-                                    <pre><code class="language-php">&lt;?php
-    $content = "&lt;p&gt;My body... !&lt;/p&gt;";
-    echo $this->Modal->create(['id' => 'MyModal2']) ;
-    echo $this->Modal->header('Example 2 - No HTML', ['close' => false]) ; 
-    echo $this->Modal->body($content, ['class' => 'my-body-class']) ;
-    echo $this->Modal->footer([
-        $this->Form->button('Submit', ['bootstrap-type' => 'primary']),   
-        $this->Form->button('Close', ['data-dismiss' => 'modal']) 
-    ]) ;
-    echo $this->Modal->end() ;
-?&gt;</code></pre>
-                                </div>
-                                <div role="tabpanel" class="tab-pane" id="modal-2-markup">
-                                    <pre><code class="language-markup">&lt;div id=&quot;MyModal2&quot; tabindex=&quot;-1&quot; role=&quot;dialog&quot; aria-hidden=&quot;true&quot; aria-labbeledby=&quot;MyModal2Label&quot; class=&quot;modal fade &quot;&gt;
-    &lt;div class=&quot;modal-dialog&quot;&gt;
-        &lt;div class=&quot;modal-content&quot;&gt;
-            &lt;div class=&quot;modal-header &quot;&gt;
-                &lt;button type=&quot;button&quot; class=&quot;close&quot; data-dismiss=&quot;modal&quot; aria-hidden=&quot;true&quot;&gt;&amp;times;&lt;/button&gt;
-                &lt;h4 class=&quot;modal-title&quot; id=&quot;MyModal2Label&quot;&gt;Example 2 - No HTML&lt;/h4&gt;
-            &lt;/div&gt;
-            &lt;div class=&quot;modal-body my-body-class&quot;&gt;
-                &lt;p&gt;My body... !&lt;/p&gt;
-            &lt;/div&gt;
-            &lt;div class=&quot;modal-footer &quot;&gt;
-                &lt;button class=&quot;btn btn-primary&quot; type=&quot;submit&quot;&gt;Submit&lt;/button&gt;
-                &lt;button data-dismiss=&quot;modal&quot; class=&quot;btn btn-default&quot; type=&quot;submit&quot;&gt;Close&lt;/button&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-                                </div>
-                            </div>
-                        </div>
+</div>
+    </div>
 
-                        <h3 id="modal-custom">Example 3 - Custom Modal</h3>
-                        <p>If you want a custom modal, you can start each sestion manually and add whatever you want:</p>
-                        <div role="tabpanel">
-                            <!-- Nav tabs -->
-                            <ul class="nav nav-tabs" role="tablist">
-                                <li role="presentation" class="active"><a href="#modal-3-php" aria-controls="modal-3-php" role="tab" data-toggle="tab">PHP</a></li>
-                                <li role="presentation"><a href="#modal-3-markup" aria-controls="modal-3-markup" role="tab" data-toggle="tab">Markup</a></li>
-                            </ul>
-                            <button type="button" class="btn btn-custom btn-modal" data-toggle="modal" data-target="#MyModal3">Show Modal</button>
-                            <div id="MyModal3" tabindex="-1" role="dialog" aria-hidden="true" aria-labbeledby="MyModal3Label" class="modal fade "><div class="modal-dialog"><div class="modal-content"><div class="modal-header my-header-class"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4>My Header!</h4></div><div class="modal-body "><p>My body!</p></div><div class="modal-footer "><p>My footer... Oops, no buttons!</p></div></div></div></div>
-                            <!-- Tab panes -->
-                            <div class="tab-content">
-                                <div role="tabpanel" class="tab-pane active" id="modal-3-php">
-                                    <pre><code class="language-php">&lt;?php 
-    echo $this-&gt;Modal-&gt;create(['id' =&gt; 'MyModal3']) ;
-    echo $this-&gt;Modal-&gt;header(['class' =&gt; 'my-header-class']) ; 
-?&gt;
-&lt;button type=&quot;button&quot; class=&quot;close&quot; data-dismiss=&quot;modal&quot; aria-hidden=&quot;true&quot;&gt;&amp;times;&lt;/button&gt;
-&lt;h4&gt;My Header!&lt;/h4&gt;
-&lt;?php
-    echo $this-&gt;Modal-&gt;body() ;
-?&gt;
-&lt;p&gt;My body!&lt;/p&gt;
-&lt;?php
-    echo $this-&gt;Modal-&gt;footer(['close' =&gt; false]) ;
-?&gt;
-&lt;p&gt;My footer... Oops, no buttons!&lt;/p&gt;
-&lt;?php
-    echo $this-&gt;Modal-&gt;end() ;
-?&gt;</code></pre>
-                                </div>
-                                <div role="tabpanel" class="tab-pane" id="modal-3-markup">
-                                    <pre><code class="language-markup">&lt;div id=&quot;MyModal3&quot; tabindex=&quot;-1&quot; role=&quot;dialog&quot; aria-hidden=&quot;true&quot; aria-labbeledby=&quot;MyModal3Label&quot; class=&quot;modal fade &quot;&gt;
-    &lt;div class=&quot;modal-dialog&quot;&gt;
-        &lt;div class=&quot;modal-content&quot;&gt;
-            &lt;div class=&quot;modal-header my-header-class&quot;&gt;
-                &lt;button type=&quot;button&quot; class=&quot;close&quot; data-dismiss=&quot;modal&quot; aria-hidden=&quot;true&quot;&gt;&amp;times;&lt;/button&gt;
-                &lt;h4&gt;My Header!&lt;/h4&gt;
-            &lt;/div&gt;
-            &lt;div class=&quot;modal-body &quot;&gt;
-                &lt;p&gt;My body!&lt;/p&gt;
-            &lt;/div&gt;
-            &lt;div class=&quot;modal-footer &quot;&gt;
-                &lt;p&gt;My footer... Oops, no buttons!&lt;/p&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-                                </div>
-                            </div>
-                        </div>
-                        <p>Notice that you can omit a section if you want:</p>
-                        <div role="tabpanel">
-                            <!-- Nav tabs -->
-                            <ul class="nav nav-tabs" role="tablist">
-                                <li role="presentation" class="active"><a href="#modal-4-php" aria-controls="modal-4-php" role="tab" data-toggle="tab">PHP</a></li>
-                                <li role="presentation"><a href="#modal-4-markup" aria-controls="modal-4-markup" role="tab" data-toggle="tab">Markup</a></li>
-                            </ul>
-                            <!-- Tab panes -->
-                            <div class="tab-content">
-                                <div role="tabpanel" class="tab-pane active" id="modal-4-php">
-                                    <pre><code class="language-php">&lt;?php
-    echo $this-&gt;Modal-&gt;create(['id' =&gt; 'MyModal4']) ;
-    echo $this-&gt;Modal-&gt;body() ; // No header
-    echo $this-&gt;Modal-&gt;footer() ; // Footer with close button (default)
-    echo $this-&gt;Modal-&gt;end() ;
-?&gt;</code></pre>
-                                </div>
-                                <div role="tabpanel" class="tab-pane" id="modal-4-markup">
-                                    <pre><code class="language-markup">&lt;div id=&quot;MyModal4&quot; tabindex=&quot;-1&quot; role=&quot;dialog&quot; aria-hidden=&quot;true&quot; class=&quot;modal fade &quot;&gt;
-    &lt;div class=&quot;modal-dialog&quot;&gt;
-        &lt;div class=&quot;modal-content&quot;&gt;
-            &lt;div class=&quot;modal-body &quot;&gt;
-            &lt;/div&gt;
-            &lt;div class=&quot;modal-footer &quot;&gt;
-                &lt;button type=&quot;button&quot; class=&quot;btn btn-default&quot; data-dismiss=&quot;modal&quot;&gt;Close&lt;/button&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-                                </div>
-                            </div>
-                        </div>
-                        <h3 id="modal-togglebutton">Creating a toggle button</h3>
-                        <p>You can use the <code>BootstrapFormHelper</code> to create a toggle button for your modal: </p>
-                        <pre><code class="language-php">echo $this->Form->button('Toggle Form', [
-    'data-toggle' => 'modal', 
-    'data-target' => '#MyModal'
-]) ;</code></pre>
-                    </section>
-                </div>     
-                <div class="col-md-3">
-                    <nav class="right-nav">
-                        <ul class="nav">
-                            <li>
-                                <a href="#getting-started">Getting Started</a>
-
-                            </li>
-                            <li>
-                                <a href="#helpers-html">HTML Helper</a>
-                                <ul class="nav">
-                                    <li><a href="#getcrumblist">getCrumbList</a></li>
-                                    <li><a href="#icons">Icons</a></li>
-                                    <li><a href="#icons-easy">Icons - Easy Icons</a></li>
-                                    <li><a href="#icons-fa">Icons - Font Awesome</a></li>
-                                    <li><a href="#labels">Labels</a></li>
-                                    <li><a href="#badges">Badges</a></li>
-                                    <li><a href="#alerts">Alerts</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#helpers-form">Form Helper</a>
-                                <ul class="nav">
-                                    <li><a href="#form-standard-use">Standard Use</a></li>
-                                    <li><a href="#horizontal-forms">Horizontal Forms</a></li>
-                                    <li><a href="#custom-file-input">Custom File Input</a></li>
-                                    <li><a href="#button-groups-etc">Button Group, Toolbar & Dropdown</a></li>
-                                    <li><a href="#form-new-options">New input options</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#helpers-modal">Modal Helper</a>
-                                <ul class="nav">
-                                    <li><a href="#modal-standard-use">Standard Use</a></li>
-                                    <li><a href="#modal-without-html">Without HTML</a></li>
-                                    <li><a href="#modal-custom">Custom Modal</a></li>
-                                    <li><a href="#modal-togglebutton">Creating a toggle button</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                        <a href="#top">Back to top</a>
-                    </nav>
-                </div>
+    <footer>
+        <div class="container">
+            <div class="col-md-12">
+                <p>&copy; 2017, Mikaël Capelle (@Holt59)
+                - Designed and built by <a href="https://github.com/Holt59" target="_blank">Holt59</a> &amp;
+                <a href="https://github.com/Holt59/cakephp3-bootstrap-helpers/graphs/contributors" target="_blank">contributors</a>.</p>
+                <p>Code licensed under <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, Version 2.0</a>.</p>
+                <p>Code &amp; Documentation hosted by <a href="https://github.com" target="_blank"><i class="fa fa-github"></i> Github</a>.</p>
+                <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> and <a href="http://www.apigen.org/">Apigen</a>.
             </div>
         </div>
+    </footer>
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+              integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+              crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+              integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <script src="./js/prism.min.js"></script>
+        <script src="./js/base.js"></script>
 
-        <footer>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <p>&copy; <span id="year"></span>, Mikaël Capelle (@Holt59) - Designed and built by <a href="https://github.com/Holt59" target="_blank">Holt59</a> &amp; <a href="https://github.com/Holt59/cakephp3-bootstrap-helpers/graphs/contributors" target="_blank">contributors</a>.</p>
-                        <p>Code licensed under <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, Version 2.0</a>.</p>
-                        <p>Code & Documentation hosted by <a href="https://github.com" target="_blank"><i class="fa fa-github"></i> Github</a>.</p>
-                    </div>
-                </div>     
-            </div>
-        </footer>
-  
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/prism.min.js"></script>
-
+        
         <script type="text/javascript">
-            $('#year').text(new Date().getFullYear());
-            var sideNavOffset = $('.right-nav').offset().top;
-            $('a[href^="#"]:not([role="tab"])').on('click', function (e) {
-                var section = $($(this).attr('href'));
-                if (section.length > 0) {
-                    e.preventDefault();
-                    if (!section.is('h3')) {
-                        $('.right-nav').addClass('scrolling');
-                    }
-                    $('html, body').animate({
-                        scrollTop: section.offset().top - 20
-                    }, {
-                        complete: function () {
-                            $('.right-nav').removeClass('scrolling');
-                        }
-                    }, 500);
-                }
-            });
+            var topNavOffset = $('.navbar').offset().top;
             $(window).on('scroll', function (e) {
-                if ($(window).scrollTop() + 20 > sideNavOffset) {
-                    $('.right-nav').addClass('right-nav-fixed');
+                if ($(window).scrollTop() > topNavOffset) {
+                    $('.navbar').addClass('navbar-fixed-top');
+                    $('.jumbotron').addClass('more-padding');
                 }
                 else {
-                    $('.right-nav').removeClass('right-nav-fixed');
+                    $('.navbar').removeClass('navbar-fixed-top');
+                    $('.jumbotron').removeClass('more-padding');
                 }
             });
         </script>
 
+        
     </body>
 </html>
-

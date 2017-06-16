@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        <link rel="canonical" href="https://holt59.github.io/cakephp3-bootstrap-helpers/form-helper/custom-file-inputs/">
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Custom file inputs - CakePHP 3 Bootstrap Helpers</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+            integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        <link href="../../css/prism.css" rel="stylesheet">
+        <link href="../../css/custom-prism.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">
+        <link href="../../css/jumbotron.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+         
+    </head>
+
+    <body data-spy="scroll" data-target=".right-nav" data-offset="70">
+
+    
+
+    
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="../..">CakePHP 3 Bootstrap Helpers</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse" id="main-navbar">
+            <!-- Main navigation -->
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="../..">Getting Started</a>
+                </li>
+                <li class="dropdown active">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">The helpers <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    <!-- helpers -->
+                    
+                    
+                    
+                    
+                        <li class="active">
+                            <a href="../basics/">Form Helper</a>
+                        </li>
+                    
+                    
+                    
+                        <li>
+                            <a href="../../html-helper/icons/">Html Helper</a>
+                        </li>
+                    
+                    
+                    
+                        <li>
+                            <a href="../../modal-helper/basics/">Modal Helper</a>
+                        </li>
+                    
+                    
+                    
+                        <li>
+                            <a href="../../navbar-helper/basics/">Navbar Helper</a>
+                        </li>
+                    
+                    
+                    
+                        <li>
+                            <a href="../../panel-helper/basics/">Panel Helper</a>
+                        </li>
+                    
+                    
+                    
+                    
+                    </ul>
+                </li>
+                <li><a href="https://holt59.github.io/cakephp3-bootstrap-helpers/api/">API</a></li>
+                <li>
+                    <a href="../../faq/">FAQ</a>
+                </li>
+            </ul>
+
+            <!-- Search, Navigation and Repo links -->
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li>
+                    <a href="https://github.com/Holt59/cakephp3-bootstrap-helpers">
+                        
+                            <i class="fa fa-github"></i>
+                        
+                        GitHub
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="navbar navbar-default hidden-md hidden-lg" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#sub-navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            
+            
+            
+            
+            <a class="navbar-brand" href="../basics/">
+                Form Helper</a>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse" id="sub-navbar">
+            <!-- Main navigation -->
+            <ul class="nav navbar-nav">
+                
+                
+                
+                
+                
+                
+                <li >
+                    <a href="../basics/">Basic usage</a>
+                
+                
+                
+                <li >
+                    <a href="../horizontal/">Horizontal forms</a>
+                
+                
+                
+                <li class="active">
+                    <a href="./">Custom file inputs</a>
+                
+                
+                
+                <li >
+                    <a href="../buttons-et-al/">Buttons, Groups & Toolbars</a>
+                
+                
+                
+                <li >
+                    <a href="../new-input-options/">New input options</a>
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+    <div class="container">
+            <div class="col-md-9" role="main">
+
+<h3 id="custom-file-inputs">Custom file inputs</h3>
+<p>Boostrap (until v3) does not customize the file inputs, so you can choose to customize them with the <code>Bootstrap.FormHelper</code>. To do
+so, enable the feature in the helper configuration:</p>
+<pre><code class="language-php">public $helpers = [
+    'Form' =&gt; [
+        'className' =&gt; 'Bootstrap.Form',
+        'useCustomFileInput' =&gt; true
+    ]
+];
+</code></pre>
+
+<p>Your file inputs will now look much better:</p>
+<div class="tab-panels"><ul class="nav nav-tabs" role="tablist"><li class="active" role="presentation"><a aria-controls="tab-form-file-input-1-php" data-toggle="tab" href="#tab-form-file-input-1-php" role="tab">PHP</a></li><li role="presentation"><a aria-controls="tab-form-file-input-1-markup" data-toggle="tab" href="#tab-form-file-input-1-markup" role="tab">Markup</a></li><li role="presentation"><a aria-controls="tab-form-file-input-1-output" data-toggle="tab" href="#tab-form-file-input-1-output" role="tab">Output</a></li></ul><div class="tab-content"><div class="tab-pane active" id="tab-form-file-input-1-php" role="tabpanel"><pre><code class="language-php">echo $this-&gt;Form-&gt;file('file');
+</code></pre>
+
+</div><div class="tab-pane" id="tab-form-file-input-1-markup" role="tabpanel"><pre><code class="language-markup">&lt;input type=&quot;file&quot; name=&quot;file&quot;  id=&quot;file&quot; style=&quot;display: none;&quot; onchange=&quot;document.getElementById('file-input').value = this.files[0].name;&quot;&gt;
+&lt;div class=&quot;input-group&quot;&gt;
+    &lt;div class=&quot;input-group-btn&quot;&gt;
+        &lt;button type=&quot;button&quot; onclick=&quot;document.getElementById('file').click();&quot; class=&quot;btn btn-default&quot;&gt;Choose File&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;input type=&quot;text&quot; name=&quot;file&quot; class=&quot;form-control &quot;  id=&quot;file-input&quot; readonly=&quot;readonly&quot; onclick=&quot;document.getElementById('file').click();&quot; /&gt;
+&lt;/div&gt;
+</code></pre>
+
+</div><div class="tab-pane" id="tab-form-file-input-1-output" role="tabpanel"><p><input type="file" name="file"  id="file" style="display: none;" onchange="document.getElementById('file-input').value = this.files[0].name;">
+<div class="input-group">
+    <div class="input-group-btn">
+        <button type="button" onclick="document.getElementById('file').click();" class="btn btn-default">Choose File</button>
+    </div>
+    <input type="text" name="file" class="form-control "  id="file-input" readonly="readonly" onclick="document.getElementById('file').click();" />
+</div></p>
+</div></div></div><h3 id="customizing-the-custom-file-input">Customizing the custom file input</h3>
+<p>Not satisfied with the output? You can customize the custom file input by using the <code>_button</code> and <code>_input</code> options:</p>
+<pre><code class="language-php">$this-&gt;Form-&gt;file('file', [
+    '_button' =&gt; ['class' =&gt; 'my-custom-button-class'],
+    '_input' =&gt; ['data-attr' =&gt; 'my-data-attr', 'class' =&gt; 'my-input-class']
+]);
+</code></pre>
+
+<p><strong>Note:</strong> Some attributes cannot be overriden:</p>
+<ul>
+<li>For <code>_button</code>, the <code>type</code> and <code>onclick</code> attributes.</li>
+<li>For <code>_input</code>, the <code>readonly</code>, <code>onclick</code> and <code>id</code> attributes.</li>
+</ul>
+<p>The classes specified in the <code>_button</code> and <code>_input</code> options will be added to the list of default classes for the custom input.</p></div>
+            <div class="col-md-3 hidden-sm hidden-xs">
+
+<nav class="right-nav right-nav-fixed">
+    <ul class="nav">
+
+    
+    
+    
+    
+    <li class="nav-header">Form Helper</li>
+    
+    
+    <li >
+        <a href="../basics/">Basic usage</a>
+        
+    </li>
+    
+    
+    
+    <li >
+        <a href="../horizontal/">Horizontal forms</a>
+        
+    </li>
+    
+    
+    
+    <li class="active">
+        <a href="./">Custom file inputs</a>
+        
+        <ul class="nav">
+        
+            <li class="main active"><a href="#custom-file-inputs">Custom file inputs</a></li>
+        
+            <li class="main "><a href="#customizing-the-custom-file-input">Customizing the custom file input</a></li>
+        
+        </ul>
+    
+    </li>
+    
+    
+    
+    <li >
+        <a href="../buttons-et-al/">Buttons, Groups & Toolbars</a>
+        
+    </li>
+    
+    
+    
+    <li >
+        <a href="../new-input-options/">New input options</a>
+        
+    </li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    </ul>
+</nav>
+
+</div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="col-md-12">
+                <p>&copy; 2017, Mikaël Capelle (@Holt59)
+                - Designed and built by <a href="https://github.com/Holt59" target="_blank">Holt59</a> &amp;
+                <a href="https://github.com/Holt59/cakephp3-bootstrap-helpers/graphs/contributors" target="_blank">contributors</a>.</p>
+                <p>Code licensed under <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, Version 2.0</a>.</p>
+                <p>Code &amp; Documentation hosted by <a href="https://github.com" target="_blank"><i class="fa fa-github"></i> Github</a>.</p>
+                <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> and <a href="http://www.apigen.org/">Apigen</a>.
+            </div>
+        </div>
+    </footer>
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+              integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+              crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+              integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <script src="../../js/prism.min.js"></script>
+        <script src="../../js/base.js"></script>
+
+        
+    </body>
+</html>

@@ -1,0 +1,537 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>Class Bootstrap\View\FlexibleStringTemplate | CakePHP 3 Bootstrap Helpers</title>
+
+	<link rel="stylesheet" href="resources/bootstrap.min.css?071b3c2a8dd3bf21f24cec7c6955fbf9beff6181">
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+		integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="resources/prism.css?e1a34f60039ca474453ea496a4887cf6f73c7e22">
+	<link rel="stylesheet" href="resources/custom-prism.css?a178cd22915f6b0ba261d3cc7edc719b234de9c1">
+	<link rel="stylesheet" href="resources/style.css?4f8c93c97a8296200ebbc4320e4d19208862e348">
+
+</head>
+
+<body>
+	<nav id="navigation" class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<!-- Expander button -->
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a href="https://holt59.github.io/cakephp3-bootstrap-helpers" class="navbar-brand">CakePHP 3 Bootstrap Helpers</a>
+			</div>
+			<div class="collapse navbar-collapse">
+
+				<ul class="nav navbar-nav">
+					<li>
+						<a href="https://holt59.github.io/cakephp3-bootstrap-helpers">Getting Started</a>
+					</li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">The helpers <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+<li> <a href="https://holt59.github.io/cakephp3-bootstrap-helpers/form-helper/basics/">Form Helper</a> </li>
+<li> <a href="https://holt59.github.io/cakephp3-bootstrap-helpers/html-helper/icons/">Html Helper</a> </li>
+<li> <a href="https://holt59.github.io/cakephp3-bootstrap-helpers/modal-helper/basics/">Modal Helper</a> </li>
+<li> <a href="https://holt59.github.io/cakephp3-bootstrap-helpers/navbar-helper/basics/">Navbar Helper</a> </li>
+<li> <a href="https://holt59.github.io/cakephp3-bootstrap-helpers/panel-helper/basics/">Panel Helper</a> </li>
+						</ul>
+					</li>
+					<li class="active"><a href="https://holt59.github.io/cakephp3-bootstrap-helpers/api/">API</a></li>
+					<li>
+						<a href="https://holt59.github.io/cakephp3-bootstrap-helpers/faq">FAQ</a>
+					</li>
+				</ul>
+
+				<!-- Search, Navigation and Repo links -->
+				<ul class="nav navbar-nav navbar-right">
+					<li>
+						<a href="https://github.com/Holt59/cakephp3-bootstrap-helpers">
+							<i class="fa fa-github"></i> GitHub
+						</a>
+					</li>
+				</ul>
+                <form id="search" class="navbar-form navbar-right" role="search">
+                    <input type="hidden" name="cx" value="">
+                    <input type="hidden" name="ie" value="UTF-8">
+                    <div class="form-group">
+                        <input type="text" name="q" class="search-query form-control" placeholder="Search">
+					</div>
+				</form>
+
+			</div>
+		</div>
+	</nav>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3 hidden-sm hidden-xs left-menu">
+
+				<div id="groups">
+						<h3 class="nav-title">Namespaces</h3>
+					<ul>
+							<li class="active">
+								<a href="namespace-Bootstrap.html">
+									Bootstrap<span></span>
+								</a>
+									<ul>
+							<li class="active">
+								<a href="namespace-Bootstrap.View.html">
+									View<span></span>
+								</a>
+									<ul>
+							<li>
+								<a href="namespace-Bootstrap.View.Helper.html">
+									Helper								</a>
+									</li>
+							<li>
+								<a href="namespace-Bootstrap.View.Widget.html">
+									Widget								</a>
+									</li>
+										</ul></li></ul></li>
+					</ul>
+				</div>
+
+
+				<div id="elements">
+					<h3 class="nav-title">Classes</h3>
+					<ul class="nav-list">
+						<li><a href="class-Bootstrap.View.EnhancedStringTemplate.html">EnhancedStringTemplate</a></li>
+						<li class="active"><a href="class-Bootstrap.View.FlexibleStringTemplate.html">FlexibleStringTemplate</a></li>
+					</ul>
+
+
+					<h3 class="nav-title">Traits</h3>
+					<ul class="nav-list">
+						<li><a href="class-Bootstrap.View.FlexibleStringTemplateTrait.html">FlexibleStringTemplateTrait</a></li>
+					</ul>
+
+
+
+				</div>
+			</div>
+
+			<div class="col-md-9">
+				<div id="rightInner">
+<div id="content" class="class">
+	<h1>Class FlexibleStringTemplate</h1>
+
+
+
+	<dl class="tree">
+		<dd style="padding-left:0px">
+			<a href="https://api.cakephp.org/3.4/class-Cake.View.StringTemplate.html" target="_blank">
+				<span>Cake\View\StringTemplate</span>
+			</a>
+			
+			
+		</dd>
+		<dd style="padding-left:30px">
+			<img src="resources/inherit.png" alt="Extended by">
+			<a href="https://api.cakephp.org/3.4/class-Bootstrap.View.EnhancedStringTemplate.html" target="_blank">
+				<span>Bootstrap\View\EnhancedStringTemplate</span>
+			</a>
+			
+			
+		</dd>
+		<dd style="padding-left:60px">
+			<img src="resources/inherit.png" alt="Extended by">
+				<b><span>Bootstrap\View\FlexibleStringTemplate</span></b>
+			
+			
+		</dd>
+	</dl>
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-Bootstrap.html">Bootstrap</a>\<a href="namespace-Bootstrap.View.html">View</a><br>
+		
+
+		<b>Location:</b> <a href="source-class-Bootstrap.View.FlexibleStringTemplate.html#19-85" title="Go to source code">View/FlexibleStringTemplate.php</a><br>
+	</div>
+
+
+
+
+	<div class="section">
+		<h2>Properties summary</h2>
+		<ul class="member-summary properties">
+		<li class="clearfix">
+			<div class="name">
+					<code><a href="class-Bootstrap.View.FlexibleStringTemplate.html#$_callback">$_callback</a></code>
+
+				<span class="attributes">
+					<span class="label label-warning">protected</span>
+
+				</span>
+			</div>
+
+			<div class="property-type">
+				<code>callable</code></div>
+
+			<div class="description">
+				General callback function.
+			</div>
+		</li>
+		<li class="clearfix">
+			<div class="name">
+					<code><a href="class-Bootstrap.View.FlexibleStringTemplate.html#$_callbacks">$_callbacks</a></code>
+
+				<span class="attributes">
+					<span class="label label-warning">protected</span>
+
+				</span>
+			</div>
+
+			<div class="property-type">
+				<code>array</code></div>
+
+			<div class="description">
+				Array of callback function for specific templates.
+			</div>
+		</li>
+		</ul>
+	</div>
+
+
+
+
+
+
+
+
+	<div class="section">
+		<h2>Method Summary</h2>
+		<ul class="member-summary">
+		<li class="clearfix">
+			<h3 class="method-name">
+					<a href="class-Bootstrap.View.FlexibleStringTemplate.html#___construct">__construct()</a>
+
+
+<span class="label label-success">public</span></span>
+
+			</h3>
+			<div class="description detailed">
+				Constructor.
+			</div>
+		</li>
+		<li class="clearfix">
+			<h3 class="method-name">
+					<a href="class-Bootstrap.View.FlexibleStringTemplate.html#__getTemplateName">_getTemplateName()</a>
+
+
+<span class="label label-warning">protected</span></span>
+
+			</h3>
+			<div class="description detailed">
+				Retrieve a template name after checking the various callbacks.
+			</div>
+		</li>
+		<li class="clearfix">
+			<h3 class="method-name">
+					<a href="class-Bootstrap.View.FlexibleStringTemplate.html#_format">format()</a>
+
+
+<span class="label label-success">public</span></span>
+
+			</h3>
+			<div class="description detailed">
+				Format a template string with $data
+			</div>
+		</li>
+		</ul>
+	</div>
+
+
+
+	<div class="section">
+		<h2>Method Detail</h2>
+		<div class="method-detail">
+				<a id="___construct"></a>
+		<a id="method-Bootstrap\View\FlexibleStringTemplate__construct"></a>
+		<h3 class="method-name">
+<a href="source-class-Bootstrap.View.FlexibleStringTemplate.html#35-47" title="Go to source code">__construct()</a>
+
+<span class="label label-success">public</span></span>
+
+			<a href="#___construct" class="permalink" title="Permalink to this method">¶</a>
+		</h3>
+		<pre class="language-php method-signature">
+<code>__construct($config = [], $callback = null, $callbacks = [])</code></pre>
+
+		<div class="description detailed">
+			<p>Constructor.</p>
+
+
+				<h6>Parameters</h6>
+				<div class="parameter-list list">
+				<dl>
+					<dt>
+						<code class="language-php optional">array $config = []</code>
+					</dt>
+					<dd>A set of templates to add.</dd>
+					<dt>
+						<code class="language-php optional">callable $callback = null</code>
+					</dt>
+					<dd><p>A general callback that will be called before
+retrieving any templates.</p></dd>
+					<dt>
+						<code class="language-php optional">array $callbacks = []</code>
+					</dt>
+					<dd>An array of callbacks.</dd>
+				</dl>
+				</div>
+
+
+
+
+
+		</div>
+		</div>
+		<div class="method-detail">
+				<a id="__getTemplateName"></a>
+		<a id="method-Bootstrap\View\FlexibleStringTemplate_getTemplateName"></a>
+		<h3 class="method-name">
+<a href="source-class-Bootstrap.View.FlexibleStringTemplate.html#62-82" title="Go to source code">_getTemplateName()</a>
+
+<span class="label label-warning">protected</span></span>
+
+			<a href="#__getTemplateName" class="permalink" title="Permalink to this method">¶</a>
+		</h3>
+		<pre class="language-php method-signature">
+<code>_getTemplateName($name, $data = [])</code></pre>
+
+		<div class="description detailed">
+			<p>Retrieve a template name after checking the various callbacks.</p>
+
+
+				<h6>Parameters</h6>
+				<div class="parameter-list list">
+				<dl>
+					<dt>
+						<code class="language-php ">string $name</code>
+					</dt>
+					<dd>The original name of the template.</dd>
+					<dt>
+						<code class="language-php optional">array $data = []</code>
+					</dt>
+					<dd>The data to update.</dd>
+				</dl>
+				</div>
+
+				<h6>Returns</h6>
+				<div class="list">
+					string<br>The new name of the template.<br>
+				</div>
+
+
+
+
+		</div>
+		</div>
+		<div class="method-detail">
+				<a id="_format"></a>
+		<a id="method-Bootstrap\View\FlexibleStringTemplateformat"></a>
+		<h3 class="method-name">
+<a href="source-class-Bootstrap.View.FlexibleStringTemplate.html#49-60" title="Go to source code">format()</a>
+
+<span class="label label-success">public</span></span>
+
+			<a href="#_format" class="permalink" title="Permalink to this method">¶</a>
+		</h3>
+		<pre class="language-php method-signature">
+<code>format($name, $data)</code></pre>
+
+		<div class="description detailed">
+			<p>Format a template string with $data</p>
+
+
+				<h6>Parameters</h6>
+				<div class="parameter-list list">
+				<dl>
+					<dt>
+						<code class="language-php ">string $name</code>
+					</dt>
+					<dd>The template name.</dd>
+					<dt>
+						<code class="language-php ">array $data</code>
+					</dt>
+					<dd>The data to insert.</dd>
+				</dl>
+				</div>
+
+				<h6>Returns</h6>
+				<div class="list">
+					string<br>
+				</div>
+
+
+
+				<h6>Overrides</h6>
+				<div class="list"><code><a href="class-Bootstrap.View.EnhancedStringTemplate.html#_format">Bootstrap\View\EnhancedStringTemplate::format()</a></code></div>
+
+		</div>
+		</div>
+	</div>
+
+		<div class="section">
+			<h2>Methods inherited from <a href="class-Bootstrap.View.EnhancedStringTemplate.html#methods">Bootstrap\View\EnhancedStringTemplate</a></h2>
+			<div class="method-detail">
+				<a id="__compileTemplates"></a>
+		<a id="method-Bootstrap\View\FlexibleStringTemplate_compileTemplates"></a>
+		<h3 class="method-name">
+<a href="source-class-Bootstrap.View.EnhancedStringTemplate.html#36-60" title="Go to source code">_compileTemplates()</a>
+
+<span class="label label-warning">protected</span></span>
+
+			<a href="#__compileTemplates" class="permalink" title="Permalink to this method">¶</a>
+		</h3>
+		<pre class="language-php method-signature">
+<code>_compileTemplates($templates = [])</code></pre>
+
+		<div class="description detailed">
+			<p>Compile templates into a more efficient printf() compatible format.</p>
+
+
+				<h6>Parameters</h6>
+				<div class="parameter-list list">
+				<dl>
+					<dt>
+						<code class="language-php optional">array $templates = []</code>
+					</dt>
+					<dd><p>The template names to compile. If empty all templates will
+be compiled.</p></dd>
+				</dl>
+				</div>
+
+
+
+
+
+		</div>
+			</div>
+		</div>
+
+
+
+
+
+
+	<div class="section">
+		<h2>Properties detail</h2>
+	<div class="property-detail">
+		<a id="$_callback"></a>
+
+		<h3 class="property-name">
+				<a href="source-class-Bootstrap.View.FlexibleStringTemplate.html#21-26" title="Go to source code"><var>$_callback</var></a>
+				<a href="#$_callback" class="permalink" title="Permalink to this property">¶</a>
+		</h3>
+
+		<div class="attributes">
+				<span class="label label-warning">protected</span>
+				callable
+		</div>
+
+		<div class="description detailed">
+			<p>General callback function.</p>
+
+
+			<div>
+				<pre class="language-php"><code>null</code></pre>
+			</div>
+		</div>
+	</div>
+	<div class="property-detail">
+		<a id="$_callbacks"></a>
+
+		<h3 class="property-name">
+				<a href="source-class-Bootstrap.View.FlexibleStringTemplate.html#28-33" title="Go to source code"><var>$_callbacks</var></a>
+				<a href="#$_callbacks" class="permalink" title="Permalink to this property">¶</a>
+		</h3>
+
+		<div class="attributes">
+				<span class="label label-warning">protected</span>
+				array
+		</div>
+
+		<div class="description detailed">
+			<p>Array of callback function for specific templates.</p>
+
+
+			<div>
+				<pre class="language-php"><code>null</code></pre>
+			</div>
+		</div>
+	</div>
+	</div>
+
+
+</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer>
+		<div class="container">
+			<div class="col-md-12">
+				<p>&copy; 2017, Mikaël Capelle (@Holt59)
+				- Designed and built by <a href="https://github.com/Holt59" target="_blank">Holt59</a> &amp;
+				<a href="https://github.com/Holt59/cakephp3-bootstrap-helpers/graphs/contributors" target="_blank">contributors</a>.</p>
+				<p>Code licensed under <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, Version 2.0</a>.</p>
+				<p>Code &amp; Documentation hosted by <a href="https://github.com" target="_blank"><i class="fa fa-github"></i> Github</a>.</p>
+				<p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> and <a href="http://www.apigen.org/">Apigen</a>.
+			</div>
+		</div>
+	</footer>
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"
+		integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+		crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+		integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="resources/combined.js"></script>
+<script src="elementlist.js"></script>
+<script type="text/javascript">
+	delete Prism.languages.php.markup;
+
+	Prism.hooks.add("after-highlight", function() {
+		$('.optional .token.operator').each(function () {
+			if ($(this).text() == '=') {
+				$(this).addClass('default-assign');
+			}
+		});
+	});
+	Prism.hooks.add("complete", function() {
+		var $counter = 0;
+		$('.line-numbers-rows > span').each(function () {
+			$(this).attr('id', ++$counter);
+		});
+		if (window.location.hash) {
+			var $hash = window.location.hash.split('-')[0];
+			var $navigationHeight = $('#navigation').outerHeight();
+			window.scrollTo(0, $($hash).offset().top - $navigationHeight);
+		}
+	});
+
+	Prism.highlightAll();
+</script>
+
+</body>
+</html>

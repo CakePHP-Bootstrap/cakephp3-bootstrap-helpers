@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        <link rel="canonical" href="https://holt59.github.io/cakephp3-bootstrap-helpers/faq/">
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>FAQ - CakePHP 3 Bootstrap Helpers</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+            integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        <link href="../css/prism.css" rel="stylesheet">
+        <link href="../css/custom-prism.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">
+        <link href="../css/jumbotron.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+         
+    </head>
+
+    <body data-spy="scroll" data-target=".right-nav" data-offset="70">
+
+    
+
+    
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="..">CakePHP 3 Bootstrap Helpers</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse" id="main-navbar">
+            <!-- Main navigation -->
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="..">Getting Started</a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">The helpers <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    <!-- helpers -->
+                    
+                    
+                    
+                    
+                        <li>
+                            <a href="../form-helper/basics/">Form Helper</a>
+                        </li>
+                    
+                    
+                    
+                        <li>
+                            <a href="../html-helper/icons/">Html Helper</a>
+                        </li>
+                    
+                    
+                    
+                        <li>
+                            <a href="../modal-helper/basics/">Modal Helper</a>
+                        </li>
+                    
+                    
+                    
+                        <li>
+                            <a href="../navbar-helper/basics/">Navbar Helper</a>
+                        </li>
+                    
+                    
+                    
+                        <li>
+                            <a href="../panel-helper/basics/">Panel Helper</a>
+                        </li>
+                    
+                    
+                    
+                    
+                    </ul>
+                </li>
+                <li><a href="https://holt59.github.io/cakephp3-bootstrap-helpers/api/">API</a></li>
+                <li class="active">
+                    <a href="./">FAQ</a>
+                </li>
+            </ul>
+
+            <!-- Search, Navigation and Repo links -->
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li>
+                    <a href="https://github.com/Holt59/cakephp3-bootstrap-helpers">
+                        
+                            <i class="fa fa-github"></i>
+                        
+                        GitHub
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="navbar navbar-default hidden-md hidden-lg" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#sub-navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse" id="sub-navbar">
+            <!-- Main navigation -->
+            <ul class="nav navbar-nav">
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+    <div class="container">
+            <div class="col-md-9" role="main">
+
+<h3 id="frequently-asked-questions">Frequently Asked Questions</h3>
+<hr />
+<h4 id="my-site-does-not-look-like-bootstrap-why">My site does not look like Bootstrap, why?</h4>
+<p>If you loaded the helpers correctly, check that you correctly include the stylesheets and
+scripts from Bootstrap, since the helpers do not include them automatically.</p>
+<hr />
+<h4 id="where-have-the-faicon-and-glicon-methods-gone">Where have the <code>faIcon</code> and <code>glIcon</code> methods gone?</h4>
+<p>The <code>faIcon</code> and <code>glIcon</code> have been dropped in 3.1.0, alongside with the <code>useFontAwesone</code> option. If you
+want to use a custom set of icons, you can customize the <code>icon</code> template:</p>
+<pre><code class="language-php">$this-&gt;Html-&gt;templates([
+    'icon' =&gt; '&lt;i class=&quot;fa fa-{{type}}&quot;&gt;&lt;/i&gt;'
+]);
+</code></pre>
+
+<hr />
+<h4 id="i-cannot-use-easy-icon-why">I cannot use easy icon, why?</h4>
+<p>The easy icon features relies on the <code>Bootstrap.Html</code> helper, so it only works if the <code>Html</code> helper
+associated to your view is <code>Bootstrap.Html</code>:</p>
+<pre><code class="language-php">public $helpers = [
+    'Html' =&gt; [
+        'className' =&gt; 'Bootstrap.Html'
+    ]
+];
+</code></pre></div>
+            <div class="col-md-3 hidden-sm hidden-xs">
+
+<nav class="right-nav right-nav-fixed">
+    <ul class="nav">
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    </ul>
+</nav>
+
+</div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="col-md-12">
+                <p>&copy; 2017, Mikaël Capelle (@Holt59)
+                - Designed and built by <a href="https://github.com/Holt59" target="_blank">Holt59</a> &amp;
+                <a href="https://github.com/Holt59/cakephp3-bootstrap-helpers/graphs/contributors" target="_blank">contributors</a>.</p>
+                <p>Code licensed under <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, Version 2.0</a>.</p>
+                <p>Code &amp; Documentation hosted by <a href="https://github.com" target="_blank"><i class="fa fa-github"></i> Github</a>.</p>
+                <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> and <a href="http://www.apigen.org/">Apigen</a>.
+            </div>
+        </div>
+    </footer>
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+              integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+              crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+              integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <script src="../js/prism.min.js"></script>
+        <script src="../js/base.js"></script>
+
+        
+    </body>
+</html>

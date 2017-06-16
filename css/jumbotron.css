@@ -1,0 +1,63 @@
+.jumbotron {
+    position: relative;
+    overflow: hidden;
+    background-color: #1096D0 ;
+    background-image: url(../img/header.png);
+    color: white;
+}
+
+.jumbotron .container {
+    padding-top: 26px;
+}
+
+.jumbotron .headline {
+    color: rgba(255, 255, 255, 0.8);
+    padding: 10px 0;
+}
+
+.jumbotron .headline a {
+    color: white;
+}
+
+.jumbotron .btn {
+    background: transparent;
+    border-color: rgba(255, 255, 255, 0.8);
+    color: white;
+    padding: 15px 30px;
+    font-size: 21px;
+}
+
+.jumbotron .btn:hover,
+.jumbotron .btn:active,
+.jumbotron .btn:focus {
+    background: white;
+    color: #1096D0;
+}
+
+/**
+ * Fork me on github banner.
+ **/
+
+#forkme {
+    display: block;
+    position: absolute;
+    top: 80px;
+    right: -70px;
+    color: #1096D0;
+    background: #f8f8f8;
+    height: 42px;
+    line-height: 42px;
+    font-size: 18px;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+    padding: 0 80px;
+    font-weight: bold;
+}
+
+#forkme:hover,
+#forkme:active,
+#forkme:focus {
+    text-decoration: none;
+}

@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        <link rel="canonical" href="https://holt59.github.io/cakephp3-bootstrap-helpers/modal-helper/custom/">
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Fully customized modals - CakePHP 3 Bootstrap Helpers</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+            integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        <link href="../../css/prism.css" rel="stylesheet">
+        <link href="../../css/custom-prism.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">
+        <link href="../../css/jumbotron.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+         
+    </head>
+
+    <body data-spy="scroll" data-target=".right-nav" data-offset="70">
+
+    
+
+    
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="../..">CakePHP 3 Bootstrap Helpers</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse" id="main-navbar">
+            <!-- Main navigation -->
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="../..">Getting Started</a>
+                </li>
+                <li class="dropdown active">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">The helpers <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    <!-- helpers -->
+                    
+                    
+                    
+                    
+                        <li>
+                            <a href="../../form-helper/basics/">Form Helper</a>
+                        </li>
+                    
+                    
+                    
+                        <li>
+                            <a href="../../html-helper/icons/">Html Helper</a>
+                        </li>
+                    
+                    
+                    
+                        <li class="active">
+                            <a href="../basics/">Modal Helper</a>
+                        </li>
+                    
+                    
+                    
+                        <li>
+                            <a href="../../navbar-helper/basics/">Navbar Helper</a>
+                        </li>
+                    
+                    
+                    
+                        <li>
+                            <a href="../../panel-helper/basics/">Panel Helper</a>
+                        </li>
+                    
+                    
+                    
+                    
+                    </ul>
+                </li>
+                <li><a href="https://holt59.github.io/cakephp3-bootstrap-helpers/api/">API</a></li>
+                <li>
+                    <a href="../../faq/">FAQ</a>
+                </li>
+            </ul>
+
+            <!-- Search, Navigation and Repo links -->
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li>
+                    <a href="https://github.com/Holt59/cakephp3-bootstrap-helpers">
+                        
+                            <i class="fa fa-github"></i>
+                        
+                        GitHub
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="navbar navbar-default hidden-md hidden-lg" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#sub-navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            
+            
+            
+            
+            
+            
+            
+            
+            <a class="navbar-brand" href="../basics/">
+                Modal Helper</a>
+            
+            
+            
+            
+            
+            
+            
+            
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse" id="sub-navbar">
+            <!-- Main navigation -->
+            <ul class="nav navbar-nav">
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                <li >
+                    <a href="../basics/">Basic usage</a>
+                
+                
+                
+                <li >
+                    <a href="../no-html/">Without HTML</a>
+                
+                
+                
+                <li class="active">
+                    <a href="./">Fully customized modals</a>
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+    <div class="container">
+            <div class="col-md-9" role="main">
+
+<h3 id="fully-customized-modals">Fully customized modals</h3>
+<p>You can also fully customize the various parts of the modal.</p>
+<div class="tab-panels"><ul class="nav nav-tabs" role="tablist"><li class="active" role="presentation"><a aria-controls="tab-modal-ex-3-php" data-toggle="tab" href="#tab-modal-ex-3-php" role="tab">PHP</a></li><li role="presentation"><a aria-controls="tab-modal-ex-3-markup" data-toggle="tab" href="#tab-modal-ex-3-markup" role="tab">Markup</a></li></ul><div class="btn-modal">
+    <button type="button" class="btn btn-custom" data-toggle="modal" data-target="#MyModal3">Show Modal</button>
+</div>
+
+<div id="MyModal3" tabindex="-1" role="dialog" aria-hidden="true" aria-labbeledby="MyModal3Label" class="modal fade "><div class="modal-dialog"><div class="modal-content"><div class="modal-header my-header-class"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button><h4>My Header!</h4></div><div class="modal-body "><p>My body!</p></div><div class="modal-footer "><p>My footer... Oops, no buttons!</p></div></div></div></div>
+
+<div class="tab-content"><div class="tab-pane active" id="tab-modal-ex-3-php" role="tabpanel"><pre><code class="language-php">&lt;?php
+    echo $this-&gt;Modal-&gt;create(['id' =&gt; 'MyModal4']) ;
+    echo $this-&gt;Modal-&gt;body() ; // No header
+    echo $this-&gt;Modal-&gt;footer() ; // Footer with close button (default)
+    echo $this-&gt;Modal-&gt;end() ;
+?&gt;
+</code></pre>
+
+</div><div class="tab-pane" id="tab-modal-ex-3-markup" role="tabpanel"><pre><code class="language-markup">&lt;div id=&quot;MyModal4&quot; tabindex=&quot;-1&quot; role=&quot;dialog&quot; aria-hidden=&quot;true&quot; class=&quot;modal fade &quot;&gt;
+    &lt;div class=&quot;modal-dialog&quot;&gt;
+        &lt;div class=&quot;modal-content&quot;&gt;
+            &lt;div class=&quot;modal-body &quot;&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;modal-footer &quot;&gt;
+                &lt;button type=&quot;button&quot; class=&quot;btn btn-default&quot; data-dismiss=&quot;modal&quot;&gt;Close&lt;/button&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+</div></div></div></div>
+            <div class="col-md-3 hidden-sm hidden-xs">
+
+<nav class="right-nav right-nav-fixed">
+    <ul class="nav">
+
+    
+    
+    
+    
+    
+    
+    
+    
+    <li class="nav-header">Modal Helper</li>
+    
+    
+    <li >
+        <a href="../basics/">Basic usage</a>
+        
+    </li>
+    
+    
+    
+    <li >
+        <a href="../no-html/">Without HTML</a>
+        
+    </li>
+    
+    
+    
+    <li class="active">
+        <a href="./">Fully customized modals</a>
+        
+        <ul class="nav">
+        
+            <li class="main active"><a href="#fully-customized-modals">Fully customized modals</a></li>
+        
+        </ul>
+    
+    </li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    </ul>
+</nav>
+
+</div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="col-md-12">
+                <p>&copy; 2017, Mikaël Capelle (@Holt59)
+                - Designed and built by <a href="https://github.com/Holt59" target="_blank">Holt59</a> &amp;
+                <a href="https://github.com/Holt59/cakephp3-bootstrap-helpers/graphs/contributors" target="_blank">contributors</a>.</p>
+                <p>Code licensed under <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, Version 2.0</a>.</p>
+                <p>Code &amp; Documentation hosted by <a href="https://github.com" target="_blank"><i class="fa fa-github"></i> Github</a>.</p>
+                <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> and <a href="http://www.apigen.org/">Apigen</a>.
+            </div>
+        </div>
+    </footer>
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+              integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+              crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+              integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <script src="../../js/prism.min.js"></script>
+        <script src="../../js/base.js"></script>
+
+        
+    </body>
+</html>

@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        <link rel="canonical" href="https://holt59.github.io/cakephp3-bootstrap-helpers/navbar-helper/auto-active-link/">
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Automatic "active" link - CakePHP 3 Bootstrap Helpers</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+            integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        <link href="../../css/prism.css" rel="stylesheet">
+        <link href="../../css/custom-prism.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">
+        <link href="../../css/jumbotron.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+         
+    </head>
+
+    <body data-spy="scroll" data-target=".right-nav" data-offset="70">
+
+    
+
+    
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="../..">CakePHP 3 Bootstrap Helpers</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse" id="main-navbar">
+            <!-- Main navigation -->
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="../..">Getting Started</a>
+                </li>
+                <li class="dropdown active">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">The helpers <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    <!-- helpers -->
+                    
+                    
+                    
+                    
+                        <li>
+                            <a href="../../form-helper/basics/">Form Helper</a>
+                        </li>
+                    
+                    
+                    
+                        <li>
+                            <a href="../../html-helper/icons/">Html Helper</a>
+                        </li>
+                    
+                    
+                    
+                        <li>
+                            <a href="../../modal-helper/basics/">Modal Helper</a>
+                        </li>
+                    
+                    
+                    
+                        <li class="active">
+                            <a href="../basics/">Navbar Helper</a>
+                        </li>
+                    
+                    
+                    
+                        <li>
+                            <a href="../../panel-helper/basics/">Panel Helper</a>
+                        </li>
+                    
+                    
+                    
+                    
+                    </ul>
+                </li>
+                <li><a href="https://holt59.github.io/cakephp3-bootstrap-helpers/api/">API</a></li>
+                <li>
+                    <a href="../../faq/">FAQ</a>
+                </li>
+            </ul>
+
+            <!-- Search, Navigation and Repo links -->
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li>
+                    <a href="https://github.com/Holt59/cakephp3-bootstrap-helpers">
+                        
+                            <i class="fa fa-github"></i>
+                        
+                        GitHub
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="navbar navbar-default hidden-md hidden-lg" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#sub-navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <a class="navbar-brand" href="../basics/">
+                Navbar Helper</a>
+            
+            
+            
+            
+            
+            
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse" id="sub-navbar">
+            <!-- Main navigation -->
+            <ul class="nav navbar-nav">
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                <li >
+                    <a href="../basics/">Basic usage</a>
+                
+                
+                
+                <li class="active">
+                    <a href="./">Automatic "active" link</a>
+                
+                
+                
+                
+                
+                
+                
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+    <div class="container">
+            <div class="col-md-9" role="main">
+
+<h3 id="description-of-the-feature">Description of the feature</h3>
+<p>The <code>autoActiveLink</code> configuration option allows the navbar helper to deduce the active link automatically and add an <code>active</code> class to the
+surrounding <code>&lt;li&gt;</code> element.</p>
+<h3 id="enabling-the-feature">Enabling the feature</h3>
+<p>The feature is enabled by default, you can enable or disable it by doing:</p>
+<pre><code class="language-php">$this-&gt;Navbar-&gt;setConfig('autoActiveLink', false);
+$this-&gt;Navbar-&gt;setConfig('autoActiveLink', true);
+</code></pre>
+
+<p>When the feature is disable, you can always specify the <code>active</code> option to the <code>NavbarHelper::link()</code> method:</p>
+<pre><code class="language-php">echo $this-&gt;Navbar-&gt;link('Link', $url, ['active' =&gt; true]);
+</code></pre>
+
+<p>The <code>active</code> option will always override the automatic value, even when <code>autoActiveLink</code> is <code>true</code>:</p>
+<pre><code class="language-php">$this-&gt;Navbar-&gt;setConfig('autoActiveLink', true);
+echo $this-&gt;Navbar-&gt;link('Link', $url);
+// '&lt;li class=&quot;active&quot;&gt;...&lt;/li&gt;
+echo $this-&gt;Navbar-&gt;link('Link', $url, ['active' =&gt; false]);
+// '&lt;li&gt;...&lt;/li&gt;
+</code></pre>
+
+<h3 id="explanation-of-the-deduction">Explanation of the deduction</h3>
+<p>The <code>autoActiveLink</code> feature rely on the <a href=""><code>UrlComparerTrait::compareUrls()</code></a> method and do not compare URL strictly, it rather
+check if the first URL is the root path of the second.</p>
+<p>Below is a list of combinations to better understand the feature:</p>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Link URL</th>
+            <th>Normalized</th>
+            <th>Current URL</th>
+            <th>Normalized</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td rowspan="2"><pre class="language-php">
+    <code>['controller' => 'Pages',
+     'action' => 'display', 'faq']</code></pre></td>
+            <td rowspan="2"><code>/pages/display/faq</code></td>
+            <td><code>/pages/faq</code></td>
+            <td><code>/pages/display/faq</code></td>
+            <td><i class="fa fa-check"></i></td>
+        </tr>
+        <tr>
+            <td><code>/pages/credits</code></td>
+            <td><code>/pages/display/credits</code></td>
+            <td><i class="fa fa-remove"></i></td>
+        </tr>
+        <tr>
+            <td rowspan="2"><pre class="language-php">
+    <code>['controller' => 'Users',
+     'action' => 'edit']</code></pre></td>
+            <td rowspan="2"><code>/users/edit</code></td>
+            <td><code>/users/edit/1</code></td>
+            <td><code>/users/edit/1</code></td>
+            <td><i class="fa fa-check"></i></td>
+        </tr>
+        <tr>
+            <td><code>/users/edit</code></td>
+            <td><code>/users/edit</code></td>
+            <td><i class="fa fa-check"></i></td>
+        </tr>
+        <tr>
+        <td rowspan="2"><pre class="language-php">
+    <code>['controller' => 'Users',
+     'action' => 'index']</code></pre></td>
+            <td rowspan="2"><code>/users/index</code></td>
+            <td><code>/users</code></td>
+            <td><code>/users/index</code></td>
+            <td><i class="fa fa-check"></i></td>
+        </tr>
+        <tr>
+            <td><code>/users/edit</code></td>
+            <td><code>/users/edit</code></td>
+            <td><i class="fa fa-remove"></i></td>
+        </tr>
+        </tbody>
+</table>
+
+<p>The query parameters (<code>?</code>) and the anchor (<code>#</code>) are never used for comparison.</p>
+<h3 id="customizing-the-comparison">Customizing the comparison</h3>
+<p>When calling the <code>link()</code> method, you can pass an array as the <code>active</code> options to customize the way the comparison is made. This
+array should contains which part of the URL you want to include in the left part of the comparison. Below is an example that removes
+the passed parameters and the action:</p>
+<pre><code class="language-php">echo $this-&gt;Navbar-&gt;link($name, $url, [
+    'active' =&gt; [
+        'action' =&gt; false,
+        'pass' =&gt; false
+    ];
+]);
+</code></pre>
+
+<p>Now:</p>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Link URL</th>
+            <th>Normalized</th>
+            <th>Current URL</th>
+            <th>Normalized</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+        <td rowspan="2"><pre class="language-php">
+    <code>['controller' => 'Users',
+     'action' => 'index']</code></pre></td>
+            <td rowspan="2"><code>/users/index</code></td>
+            <td><code>/users</code></td>
+            <td><code>/users/index</code></td>
+            <td><i class="fa fa-check"></i></td>
+        </tr>
+        <tr>
+            <td><code>/users/edit</code></td>
+            <td><code>/users/edit</code></td>
+            <td><i class="fa fa-check"></i></td>
+        </tr>
+        </tbody>
+</table>
+
+<p>Notice that the <code>/users</code> URL now matches the <code>/users/edit</code> URL. The possible keys in the array are defined by the <code>UrlComparerTrait::_parts</code>
+property:</p>
+<pre><code class="language-php">public $_parts = ['plugin', 'prefix', 'controller', 'action', 'pass'];;
+</code></pre></div>
+            <div class="col-md-3 hidden-sm hidden-xs">
+
+<nav class="right-nav right-nav-fixed">
+    <ul class="nav">
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <li class="nav-header">Navbar Helper</li>
+    
+    
+    <li >
+        <a href="../basics/">Basic usage</a>
+        
+    </li>
+    
+    
+    
+    <li class="active">
+        <a href="./">Automatic "active" link</a>
+        
+        <ul class="nav">
+        
+            <li class="main active"><a href="#description-of-the-feature">Description of the feature</a></li>
+        
+            <li class="main "><a href="#enabling-the-feature">Enabling the feature</a></li>
+        
+            <li class="main "><a href="#explanation-of-the-deduction">Explanation of the deduction</a></li>
+        
+            <li class="main "><a href="#customizing-the-comparison">Customizing the comparison</a></li>
+        
+        </ul>
+    
+    </li>
+    
+    
+    
+    
+    
+    
+    
+    
+
+    </ul>
+</nav>
+
+</div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="col-md-12">
+                <p>&copy; 2017, Mikaël Capelle (@Holt59)
+                - Designed and built by <a href="https://github.com/Holt59" target="_blank">Holt59</a> &amp;
+                <a href="https://github.com/Holt59/cakephp3-bootstrap-helpers/graphs/contributors" target="_blank">contributors</a>.</p>
+                <p>Code licensed under <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, Version 2.0</a>.</p>
+                <p>Code &amp; Documentation hosted by <a href="https://github.com" target="_blank"><i class="fa fa-github"></i> Github</a>.</p>
+                <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> and <a href="http://www.apigen.org/">Apigen</a>.
+            </div>
+        </div>
+    </footer>
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+              integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+              crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+              integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <script src="../../js/prism.min.js"></script>
+        <script src="../../js/base.js"></script>
+
+        
+    </body>
+</html>

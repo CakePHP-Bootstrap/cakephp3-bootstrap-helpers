@@ -1,0 +1,2076 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>Class Bootstrap\View\Helper\FormHelper | CakePHP 3 Bootstrap Helpers</title>
+
+	<link rel="stylesheet" href="resources/bootstrap.min.css?071b3c2a8dd3bf21f24cec7c6955fbf9beff6181">
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+		integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="resources/prism.css?e1a34f60039ca474453ea496a4887cf6f73c7e22">
+	<link rel="stylesheet" href="resources/custom-prism.css?a178cd22915f6b0ba261d3cc7edc719b234de9c1">
+	<link rel="stylesheet" href="resources/style.css?4f8c93c97a8296200ebbc4320e4d19208862e348">
+
+</head>
+
+<body>
+	<nav id="navigation" class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<!-- Expander button -->
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a href="https://holt59.github.io/cakephp3-bootstrap-helpers" class="navbar-brand">CakePHP 3 Bootstrap Helpers</a>
+			</div>
+			<div class="collapse navbar-collapse">
+
+				<ul class="nav navbar-nav">
+					<li>
+						<a href="https://holt59.github.io/cakephp3-bootstrap-helpers">Getting Started</a>
+					</li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">The helpers <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+<li> <a href="https://holt59.github.io/cakephp3-bootstrap-helpers/form-helper/basics/">Form Helper</a> </li>
+<li> <a href="https://holt59.github.io/cakephp3-bootstrap-helpers/html-helper/icons/">Html Helper</a> </li>
+<li> <a href="https://holt59.github.io/cakephp3-bootstrap-helpers/modal-helper/basics/">Modal Helper</a> </li>
+<li> <a href="https://holt59.github.io/cakephp3-bootstrap-helpers/navbar-helper/basics/">Navbar Helper</a> </li>
+<li> <a href="https://holt59.github.io/cakephp3-bootstrap-helpers/panel-helper/basics/">Panel Helper</a> </li>
+						</ul>
+					</li>
+					<li class="active"><a href="https://holt59.github.io/cakephp3-bootstrap-helpers/api/">API</a></li>
+					<li>
+						<a href="https://holt59.github.io/cakephp3-bootstrap-helpers/faq">FAQ</a>
+					</li>
+				</ul>
+
+				<!-- Search, Navigation and Repo links -->
+				<ul class="nav navbar-nav navbar-right">
+					<li>
+						<a href="https://github.com/Holt59/cakephp3-bootstrap-helpers">
+							<i class="fa fa-github"></i> GitHub
+						</a>
+					</li>
+				</ul>
+                <form id="search" class="navbar-form navbar-right" role="search">
+                    <input type="hidden" name="cx" value="">
+                    <input type="hidden" name="ie" value="UTF-8">
+                    <div class="form-group">
+                        <input type="text" name="q" class="search-query form-control" placeholder="Search">
+					</div>
+				</form>
+
+			</div>
+		</div>
+	</nav>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3 hidden-sm hidden-xs left-menu">
+
+				<div id="groups">
+						<h3 class="nav-title">Namespaces</h3>
+					<ul>
+							<li class="active">
+								<a href="namespace-Bootstrap.html">
+									Bootstrap<span></span>
+								</a>
+									<ul>
+							<li class="active">
+								<a href="namespace-Bootstrap.View.html">
+									View<span></span>
+								</a>
+									<ul>
+							<li class="active">
+								<a href="namespace-Bootstrap.View.Helper.html">
+									Helper								</a>
+									</li>
+							<li>
+								<a href="namespace-Bootstrap.View.Widget.html">
+									Widget								</a>
+									</li>
+										</ul></li></ul></li>
+					</ul>
+				</div>
+
+
+				<div id="elements">
+					<h3 class="nav-title">Classes</h3>
+					<ul class="nav-list">
+						<li><a href="class-Bootstrap.View.Helper.BreadcrumbsHelper.html">BreadcrumbsHelper</a></li>
+						<li><a href="class-Bootstrap.View.Helper.FlashHelper.html">FlashHelper</a></li>
+						<li class="active"><a href="class-Bootstrap.View.Helper.FormHelper.html">FormHelper</a></li>
+						<li><a href="class-Bootstrap.View.Helper.HtmlHelper.html">HtmlHelper</a></li>
+						<li><a href="class-Bootstrap.View.Helper.ModalHelper.html">ModalHelper</a></li>
+						<li><a href="class-Bootstrap.View.Helper.NavbarHelper.html">NavbarHelper</a></li>
+						<li><a href="class-Bootstrap.View.Helper.PaginatorHelper.html">PaginatorHelper</a></li>
+						<li><a href="class-Bootstrap.View.Helper.PanelHelper.html">PanelHelper</a></li>
+					</ul>
+
+
+					<h3 class="nav-title">Traits</h3>
+					<ul class="nav-list">
+						<li><a href="class-Bootstrap.View.Helper.ClassTrait.html">ClassTrait</a></li>
+						<li><a href="class-Bootstrap.View.Helper.EasyIconTrait.html">EasyIconTrait</a></li>
+						<li><a href="class-Bootstrap.View.Helper.UrlComparerTrait.html">UrlComparerTrait</a></li>
+					</ul>
+
+
+
+				</div>
+			</div>
+
+			<div class="col-md-9">
+				<div id="rightInner">
+<div id="content" class="class">
+	<h1>Class FormHelper</h1>
+
+
+	<div class="description">
+	<p>Form helper library.</p>
+
+<p>Automatic generation of HTML FORMs from given data.</p>
+	</div>
+
+	<dl class="tree">
+		<dd style="padding-left:0px">
+			<a href="https://api.cakephp.org/3.4/class-Cake.View.Helper.FormHelper.html" target="_blank">
+				<span>Cake\View\Helper\FormHelper</span>
+			</a>
+			
+			
+		</dd>
+		<dd style="padding-left:30px">
+			<img src="resources/inherit.png" alt="Extended by">
+				<b><span>Bootstrap\View\Helper\FormHelper</span></b>
+			
+			 uses 
+					<a href="class-Bootstrap.View.Helper.ClassTrait.html"><span>Bootstrap\View\Helper\ClassTrait</span></a>
+				, 
+			
+					<a href="class-Bootstrap.View.Helper.EasyIconTrait.html"><span>Bootstrap\View\Helper\EasyIconTrait</span></a>
+				, 
+			
+					<a href="class-Bootstrap.View.FlexibleStringTemplateTrait.html"><span>Bootstrap\View\FlexibleStringTemplateTrait</span></a>
+				
+			
+		</dd>
+	</dl>
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-Bootstrap.html">Bootstrap</a>\<a href="namespace-Bootstrap.View.html">View</a>\<a href="namespace-Bootstrap.View.Helper.html">Helper</a><br>
+		
+
+				<b>Link:</b>
+				<a href="http://book.cakephp.org/3.0/en/views/helpers/form.html">http://book.cakephp.org/3.0/en/views/helpers/form.html</a><br>
+		<b>Location:</b> <a href="source-class-Bootstrap.View.Helper.FormHelper.html#19-725" title="Go to source code">View/Helper/FormHelper.php</a><br>
+	</div>
+
+
+
+
+	<div class="section">
+		<h2>Properties summary</h2>
+		<ul class="member-summary properties">
+		<li class="clearfix">
+			<div class="name">
+					<code><a href="class-Bootstrap.View.Helper.FormHelper.html#$_defaultConfig">$_defaultConfig</a></code>
+
+				<span class="attributes">
+					<span class="label label-warning">protected</span>
+
+				</span>
+			</div>
+
+			<div class="property-type">
+				<code>array</code></div>
+
+			<div class="description">
+				Default configuration for the helper.
+			</div>
+		</li>
+		<li class="clearfix">
+			<div class="name">
+					<code><a href="class-Bootstrap.View.Helper.FormHelper.html#$_defaultWidgets">$_defaultWidgets</a></code>
+
+				<span class="attributes">
+					<span class="label label-warning">protected</span>
+
+				</span>
+			</div>
+
+			<div class="property-type">
+				<code>array</code></div>
+
+			<div class="description">
+				Default widgets.
+			</div>
+		</li>
+		<li class="clearfix">
+			<div class="name">
+					<code><a href="class-Bootstrap.View.Helper.FormHelper.html#$helpers">$helpers</a></code>
+
+				<span class="attributes">
+					<span class="label label-success">public</span>
+
+				</span>
+			</div>
+
+			<div class="property-type">
+				<code>array</code></div>
+
+			<div class="description">
+				Other helpers used by FormHelper.
+			</div>
+		</li>
+		<li class="clearfix">
+			<div class="name">
+					<code><a href="class-Bootstrap.View.Helper.FormHelper.html#$horizontal">$horizontal</a></code>
+
+				<span class="attributes">
+					<span class="label label-success">public</span>
+
+				</span>
+			</div>
+
+			<div class="property-type">
+				<code>boolean</code></div>
+
+			<div class="description">
+				Indicates if horizontal mode is enabled.
+			</div>
+		</li>
+		<li class="clearfix">
+			<div class="name">
+					<code><a href="class-Bootstrap.View.Helper.FormHelper.html#$inline">$inline</a></code>
+
+				<span class="attributes">
+					<span class="label label-success">public</span>
+
+				</span>
+			</div>
+
+			<div class="property-type">
+				<code>boolean</code></div>
+
+			<div class="description">
+				Indicates if inline mode is enabled.
+			</div>
+		</li>
+		</ul>
+	</div>
+
+	<div class="section">
+		<h2>Magic properties summary</h2>
+		<ul class="member-summary properties">
+		<li class="clearfix">
+			<div class="name">
+					<code><a href="class-Bootstrap.View.Helper.FormHelper.html#m$Html">$Html</a></code>
+
+				<span class="attributes">
+					<span class="label label-success">public</span>
+
+				</span>
+			</div>
+
+			<div class="property-type">
+				<code><code><a href="class-Bootstrap.View.Helper.HtmlHelper.html">Bootstrap\View\Helper\HtmlHelper</a></code></code></div>
+
+			<div class="description">
+				
+			</div>
+		</li>
+		<li class="clearfix">
+			<div class="name">
+					<code><a href="class-Bootstrap.View.Helper.FormHelper.html#m$Url">$Url</a></code>
+
+				<span class="attributes">
+					<span class="label label-success">public</span>
+
+				</span>
+			</div>
+
+			<div class="property-type">
+					<code><code><a href="https://api.cakephp.org/3.4/class-Cake.View.Helper.UrlHelper.html" target="_blank">\Cake\View\Helper\UrlHelper</a></code></code>
+
+			<div class="description">
+				
+			</div>
+		</li>
+		</ul>
+	</div>
+
+
+	<div class="section">
+		<h2>Inherited Properties</h2>
+		<ul class="member-summary used">
+			<li>
+					<code><a href="class-Bootstrap.View.Helper.EasyIconTrait.html#$easyIcon"><!--
+					-->easyIcon<!--
+					--></a></code>
+			</li>
+		</ul>
+	</div>
+
+
+
+
+
+	<div class="section">
+		<h2>Method Summary</h2>
+		<ul class="member-summary">
+		<li class="clearfix">
+			<h3 class="method-name">
+					<a href="class-Bootstrap.View.Helper.FormHelper.html#___construct">__construct()</a>
+
+
+<span class="label label-success">public</span></span>
+
+			</h3>
+			<div class="description detailed">
+				
+			</div>
+		</li>
+		<li class="clearfix">
+			<h3 class="method-name">
+					<a href="class-Bootstrap.View.Helper.FormHelper.html#__getColumnClass">_getColumnClass()</a>
+
+
+<span class="label label-warning">protected</span></span>
+
+			</h3>
+			<div class="description detailed">
+				<p>Retrieve classes for the size of the specified column (label, input or error),
+optionally adding the offset prefix to the classes.</p>
+			</div>
+		</li>
+		<li class="clearfix">
+			<h3 class="method-name">
+					<a href="class-Bootstrap.View.Helper.FormHelper.html#__getInput">_getInput()</a>
+
+
+<span class="label label-warning">protected</span></span>
+
+			</h3>
+			<div class="description detailed">
+				
+			</div>
+		</li>
+		<li class="clearfix">
+			<h3 class="method-name">
+					<a href="class-Bootstrap.View.Helper.FormHelper.html#__matchButton">_matchButton()</a>
+
+
+<span class="label label-warning">protected</span></span>
+
+			</h3>
+			<div class="description detailed">
+				Check if the given HTML string corresponds to a button or a submit input.
+			</div>
+		</li>
+		<li class="clearfix">
+			<h3 class="method-name">
+					<a href="class-Bootstrap.View.Helper.FormHelper.html#__wrap">_wrap()</a>
+
+
+<span class="label label-warning">protected</span></span>
+
+			</h3>
+			<div class="description detailed">
+				Concatenates and wraps <code>$input</code>, <code>$prepend</code> and <code>$append</code> inside an input group.
+			</div>
+		</li>
+		<li class="clearfix">
+			<h3 class="method-name">
+					<a href="class-Bootstrap.View.Helper.FormHelper.html#__wrapInputGroup">_wrapInputGroup()</a>
+
+
+<span class="label label-warning">protected</span></span>
+
+			</h3>
+			<div class="description detailed">
+				<p>Wraps the given string corresponding to add-ons or buttons inside a HTML wrapper
+element.</p>
+			</div>
+		</li>
+		<li class="clearfix">
+			<h3 class="method-name">
+					<a href="class-Bootstrap.View.Helper.FormHelper.html#_append">append()</a>
+
+
+<span class="label label-success">public</span></span>
+
+			</h3>
+			<div class="description detailed">
+				Append the given content to the given input or close an input group.
+			</div>
+		</li>
+		<li class="clearfix">
+			<h3 class="method-name">
+					<a href="class-Bootstrap.View.Helper.FormHelper.html#_button">button()</a>
+
+
+<span class="label label-success">public</span></span>
+
+			</h3>
+			<div class="description detailed">
+				Creates a <code>&lt;button&gt;</code> tag.
+			</div>
+		</li>
+		<li class="clearfix">
+			<h3 class="method-name">
+					<a href="class-Bootstrap.View.Helper.FormHelper.html#_buttonGroup">buttonGroup()</a>
+
+
+<span class="label label-success">public</span></span>
+
+			</h3>
+			<div class="description detailed">
+				Creates a button group using the given buttons.
+			</div>
+		</li>
+		<li class="clearfix">
+			<h3 class="method-name">
+					<a href="class-Bootstrap.View.Helper.FormHelper.html#_buttonToolbar">buttonToolbar()</a>
+
+
+<span class="label label-success">public</span></span>
+
+			</h3>
+			<div class="description detailed">
+				Creates a button toolbar using the given button groups.
+			</div>
+		</li>
+		<li class="clearfix">
+			<h3 class="method-name">
+					<a href="class-Bootstrap.View.Helper.FormHelper.html#_control">control()</a>
+
+
+<span class="label label-success">public</span></span>
+
+			</h3>
+			<div class="description detailed">
+				Generates a form input element complete with label and wrapper div.
+			</div>
+		</li>
+		<li class="clearfix">
+			<h3 class="method-name">
+					<a href="class-Bootstrap.View.Helper.FormHelper.html#_create">create()</a>
+
+
+<span class="label label-success">public</span></span>
+
+			</h3>
+			<div class="description detailed">
+				Returns an HTML form element.
+			</div>
+		</li>
+		<li class="clearfix">
+			<h3 class="method-name">
+					<a href="class-Bootstrap.View.Helper.FormHelper.html#_dropdownButton">dropdownButton()</a>
+
+
+<span class="label label-success">public</span></span>
+
+			</h3>
+			<div class="description detailed">
+				Creates a dropdown button.
+			</div>
+		</li>
+		<li class="clearfix">
+			<h3 class="method-name">
+					<a href="class-Bootstrap.View.Helper.FormHelper.html#_file">file()</a>
+
+
+<span class="label label-success">public</span></span>
+
+			</h3>
+			<div class="description detailed">
+				Creates file input widget.
+			</div>
+		</li>
+		<li class="clearfix">
+			<h3 class="method-name">
+					<a href="class-Bootstrap.View.Helper.FormHelper.html#_getColumnSizes">getColumnSizes()</a>
+
+
+<span class="label label-success">public</span></span>
+
+			</h3>
+			<div class="description detailed">
+				<p>Get the column sizes configuration associated with the
+form helper.</p>
+			</div>
+		</li>
+		<li class="clearfix">
+			<h3 class="method-name">
+					<a href="class-Bootstrap.View.Helper.FormHelper.html#_inlineRadio">inlineRadio()</a>
+
+
+<span class="label label-success">public</span></span>
+
+			</h3>
+			<div class="description detailed">
+				Creates a set of inline radio widgets.
+			</div>
+		</li>
+		<li class="clearfix">
+			<h3 class="method-name">
+					<a href="class-Bootstrap.View.Helper.FormHelper.html#_prepend">prepend()</a>
+
+
+<span class="label label-success">public</span></span>
+
+			</h3>
+			<div class="description detailed">
+				Prepend the given content to the given input or create an opening input group.
+			</div>
+		</li>
+		<li class="clearfix">
+			<h3 class="method-name">
+					<a href="class-Bootstrap.View.Helper.FormHelper.html#_setColumnSizes">setColumnSizes()</a>
+
+
+<span class="label label-success">public</span></span>
+
+			</h3>
+			<div class="description detailed">
+				<p>Set the column sizes configuration associated with the
+form helper.</p>
+			</div>
+		</li>
+		<li class="clearfix">
+			<h3 class="method-name">
+					<a href="class-Bootstrap.View.Helper.FormHelper.html#_submit">submit()</a>
+
+
+<span class="label label-success">public</span></span>
+
+			</h3>
+			<div class="description detailed">
+				<p>Creates a submit button element. This method will generate <code>&lt;input /&gt;</code> elements that
+can be used to submit, and reset forms by using $options. image submits can be
+created by supplying an image path for $caption.</p>
+			</div>
+		</li>
+		<li class="clearfix">
+			<h3 class="method-name">
+					<a href="class-Bootstrap.View.Helper.FormHelper.html#_wrap">wrap()</a>
+
+
+<span class="label label-success">public</span></span>
+
+			</h3>
+			<div class="description detailed">
+				Wrap the given <code>$input</code> between <code>$prepend</code> and <code>$append</code>.
+			</div>
+		</li>
+		</ul>
+	</div>
+
+
+
+	<div class="section">
+		<h2>Method Detail</h2>
+		<div class="method-detail">
+				<a id="___construct"></a>
+		<a id="method-Bootstrap\View\Helper\FormHelper__construct"></a>
+		<h3 class="method-name">
+<a href="source-class-Bootstrap.View.Helper.FormHelper.html#172-195" title="Go to source code">__construct()</a>
+
+<span class="label label-success">public</span></span>
+
+			<a href="#___construct" class="permalink" title="Permalink to this method">¶</a>
+		</h3>
+		<pre class="language-php method-signature">
+<code>__construct($View, $config = [])</code></pre>
+
+		<div class="description detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div>
+		<div class="method-detail">
+				<a id="__getColumnClass"></a>
+		<a id="method-Bootstrap\View\Helper\FormHelper_getColumnClass"></a>
+		<h3 class="method-name">
+<a href="source-class-Bootstrap.View.Helper.FormHelper.html#280-313" title="Go to source code">_getColumnClass()</a>
+
+<span class="label label-warning">protected</span></span>
+
+			<a href="#__getColumnClass" class="permalink" title="Permalink to this method">¶</a>
+		</h3>
+		<pre class="language-php method-signature">
+<code>_getColumnClass($what, $offset = false)</code></pre>
+
+		<div class="description detailed">
+			<p>Retrieve classes for the size of the specified column (label, input or error),
+optionally adding the offset prefix to the classes.</p>
+
+
+				<h6>Parameters</h6>
+				<div class="parameter-list list">
+				<dl>
+					<dt>
+						<code class="language-php ">string $what</code>
+					</dt>
+					<dd>The type of the column (<code>'label'</code>, <code>'input'</code>, <code>'error'</code>).</dd>
+					<dt>
+						<code class="language-php optional">bool $offset = false</code>
+					</dt>
+					<dd>Set to <code>true</code> to add the offset prefix.</dd>
+				</dl>
+				</div>
+
+				<h6>Returns</h6>
+				<div class="list">
+					string<br>The classes for the size or offset of the specified column.<br>
+				</div>
+
+
+
+
+		</div>
+		</div>
+		<div class="method-detail">
+				<a id="__getInput"></a>
+		<a id="method-Bootstrap\View\Helper\FormHelper_getInput"></a>
+		<h3 class="method-name">
+<a href="source-class-Bootstrap.View.Helper.FormHelper.html#500-512" title="Go to source code">_getInput()</a>
+
+<span class="label label-warning">protected</span></span>
+
+			<a href="#__getInput" class="permalink" title="Permalink to this method">¶</a>
+		</h3>
+		<pre class="language-php method-signature">
+<code>_getInput($fieldName, $options)</code></pre>
+
+		<div class="description detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div>
+		<div class="method-detail">
+				<a id="__matchButton"></a>
+		<a id="method-Bootstrap\View\Helper\FormHelper_matchButton"></a>
+		<h3 class="method-name">
+<a href="source-class-Bootstrap.View.Helper.FormHelper.html#197-207" title="Go to source code">_matchButton()</a>
+
+<span class="label label-warning">protected</span></span>
+
+			<a href="#__matchButton" class="permalink" title="Permalink to this method">¶</a>
+		</h3>
+		<pre class="language-php method-signature">
+<code>_matchButton($html)</code></pre>
+
+		<div class="description detailed">
+			<p>Check if the given HTML string corresponds to a button or a submit input.</p>
+
+
+				<h6>Parameters</h6>
+				<div class="parameter-list list">
+				<dl>
+					<dt>
+						<code class="language-php ">string $html</code>
+					</dt>
+					<dd>The HTML code to check</dd>
+				</dl>
+				</div>
+
+				<h6>Returns</h6>
+				<div class="list">
+					boolean<br><p><code>true</code> if the HTML code contains a button or a submit input,
+false otherwize.</p><br>
+				</div>
+
+
+
+
+		</div>
+		</div>
+		<div class="method-detail">
+				<a id="__wrap"></a>
+		<a id="method-Bootstrap\View\Helper\FormHelper_wrap"></a>
+		<h3 class="method-name">
+<a href="source-class-Bootstrap.View.Helper.FormHelper.html#347-367" title="Go to source code">_wrap()</a>
+
+<span class="label label-warning">protected</span></span>
+
+			<a href="#__wrap" class="permalink" title="Permalink to this method">¶</a>
+		</h3>
+		<pre class="language-php method-signature">
+<code>_wrap($input, $prepend, $append)</code></pre>
+
+		<div class="description detailed">
+			<p>Concatenates and wraps <code>$input</code>, <code>$prepend</code> and <code>$append</code> inside an input group.</p>
+
+
+				<h6>Parameters</h6>
+				<div class="parameter-list list">
+				<dl>
+					<dt>
+						<code class="language-php ">string $input</code>
+					</dt>
+					<dd>The input content.</dd>
+					<dt>
+						<code class="language-php ">string $prepend</code>
+					</dt>
+					<dd>The content to prepend to <code>$input</code>.</dd>
+					<dt>
+						<code class="language-php ">string $append</code>
+					</dt>
+					<dd>The content to append to <code>$input</code>.</dd>
+				</dl>
+				</div>
+
+				<h6>Returns</h6>
+				<div class="list">
+					string<br><p>A string containing the three elements concatenated an wrapped inside
+an input group <code>&lt;div&gt;</code>.</p><br>
+				</div>
+
+
+
+
+		</div>
+		</div>
+		<div class="method-detail">
+				<a id="__wrapInputGroup"></a>
+		<a id="method-Bootstrap\View\Helper\FormHelper_wrapInputGroup"></a>
+		<h3 class="method-name">
+<a href="source-class-Bootstrap.View.Helper.FormHelper.html#315-345" title="Go to source code">_wrapInputGroup()</a>
+
+<span class="label label-warning">protected</span></span>
+
+			<a href="#__wrapInputGroup" class="permalink" title="Permalink to this method">¶</a>
+		</h3>
+		<pre class="language-php method-signature">
+<code>_wrapInputGroup($addonOrButtons)</code></pre>
+
+		<div class="description detailed">
+			<p>Wraps the given string corresponding to add-ons or buttons inside a HTML wrapper
+element.</p>
+
+<p>If <code>$addonOrButtons</code> is an array, it should contains buttons and will be wrapped
+accordingly. If <code>$addonOrButtons</code> is a string, the wrapper will be chosen depending
+on the content (see <code>_matchButton()</code>).</p>
+
+
+				<h6>Parameters</h6>
+				<div class="parameter-list list">
+				<dl>
+					<dt>
+						<code class="language-php ">string|array $addonOrButtons</code>
+					</dt>
+					<dd><p>Content to be wrapped or array of buttons to be
+wrapped.</p></dd>
+				</dl>
+				</div>
+
+				<h6>Returns</h6>
+				<div class="list">
+					string<br>The elements wrapped in a suitable HTML element.<br>
+				</div>
+
+
+
+
+		</div>
+		</div>
+		<div class="method-detail">
+				<a id="_append"></a>
+		<a id="method-Bootstrap\View\Helper\FormHelperappend"></a>
+		<h3 class="method-name">
+<a href="source-class-Bootstrap.View.Helper.FormHelper.html#387-403" title="Go to source code">append()</a>
+
+<span class="label label-success">public</span></span>
+
+			<a href="#_append" class="permalink" title="Permalink to this method">¶</a>
+		</h3>
+		<pre class="language-php method-signature">
+<code>append($input, $append)</code></pre>
+
+		<div class="description detailed">
+			<p>Append the given content to the given input or close an input group.</p>
+
+
+				<h6>Parameters</h6>
+				<div class="parameter-list list">
+				<dl>
+					<dt>
+						<code class="language-php ">string|null $input</code>
+					</dt>
+					<dd><p>Input to which <code>$append</code> will be append, or
+null to create a closing element for an input group.</p></dd>
+					<dt>
+						<code class="language-php ">string|array $append</code>
+					</dt>
+					<dd>The content to append.,</dd>
+				</dl>
+				</div>
+
+				<h6>Returns</h6>
+				<div class="list">
+					string<br><p>The input with the content of <code>$append</code> appended or a
+closing <code>&lt;/div&gt;</code> for an input group.</p><br>
+				</div>
+
+
+
+
+		</div>
+		</div>
+		<div class="method-detail">
+				<a id="_button"></a>
+		<a id="method-Bootstrap\View\Helper\FormHelperbutton"></a>
+		<h3 class="method-name">
+<a href="source-class-Bootstrap.View.Helper.FormHelper.html#577-599" title="Go to source code">button()</a>
+
+<span class="label label-success">public</span></span>
+
+			<a href="#_button" class="permalink" title="Permalink to this method">¶</a>
+		</h3>
+		<pre class="language-php method-signature">
+<code>button($title, $options = [])</code></pre>
+
+		<div class="description detailed">
+			<p>Creates a <code>&lt;button&gt;</code> tag.</p>
+
+<p>The type attribute defaults to <code>type="submit"</code>
+You can change it to a different value by using <code>$options['type']</code>.</p>
+
+<h3>Options</h3>
+
+<ul>
+<li><code>bootstrap-type</code> Twitter bootstrap button type (primary, danger, info, etc.)</li>
+<li><code>bootstrap-size</code> Twitter bootstrap button size (mini, small, large)</li>
+<li><code>escape</code> HTML entity encode the $title of the button. Defaults to <code>false</code>.</li>
+</ul>
+
+
+				<h6>Parameters</h6>
+				<div class="parameter-list list">
+				<dl>
+					<dt>
+						<code class="language-php ">string $title</code>
+					</dt>
+					<dd>The button's caption. Not automatically HTML encoded</dd>
+					<dt>
+						<code class="language-php optional">array $options = []</code>
+					</dt>
+					<dd>Array of options and HTML attributes.</dd>
+				</dl>
+				</div>
+
+				<h6>Returns</h6>
+				<div class="list">
+					string<br>A HTML button tag.<br>
+				</div>
+
+
+				<h6>Link</h6>
+				<div class="list">
+						<a href="http://book.cakephp.org/3.0/en/views/helpers/form.html#creating-button-elements">http://book.cakephp.org/3.0/en/views/helpers/form.html#creating-button-elements</a><br>
+				</div>
+
+
+		</div>
+		</div>
+		<div class="method-detail">
+				<a id="_buttonGroup"></a>
+		<a id="method-Bootstrap\View\Helper\FormHelperbuttonGroup"></a>
+		<h3 class="method-name">
+<a href="source-class-Bootstrap.View.Helper.FormHelper.html#601-627" title="Go to source code">buttonGroup()</a>
+
+<span class="label label-success">public</span></span>
+
+			<a href="#_buttonGroup" class="permalink" title="Permalink to this method">¶</a>
+		</h3>
+		<pre class="language-php method-signature">
+<code>buttonGroup($buttons, $options = [])</code></pre>
+
+		<div class="description detailed">
+			<p>Creates a button group using the given buttons.</p>
+
+<h3>Options</h3>
+
+<ul>
+<li><code>vertical</code> Specifies if the group should be vertical. Default to <code>false</code>.
+Other options are passed to the <code>Html::tag</code> method.</li>
+</ul>
+
+
+				<h6>Parameters</h6>
+				<div class="parameter-list list">
+				<dl>
+					<dt>
+						<code class="language-php ">array $buttons</code>
+					</dt>
+					<dd>Array of buttons for the group.</dd>
+					<dt>
+						<code class="language-php optional">array $options = []</code>
+					</dt>
+					<dd>Array of options. See above.</dd>
+				</dl>
+				</div>
+
+				<h6>Returns</h6>
+				<div class="list">
+					string<br>A HTML string containing the button group.<br>
+				</div>
+
+
+
+
+		</div>
+		</div>
+		<div class="method-detail">
+				<a id="_buttonToolbar"></a>
+		<a id="method-Bootstrap\View\Helper\FormHelperbuttonToolbar"></a>
+		<h3 class="method-name">
+<a href="source-class-Bootstrap.View.Helper.FormHelper.html#629-646" title="Go to source code">buttonToolbar()</a>
+
+<span class="label label-success">public</span></span>
+
+			<a href="#_buttonToolbar" class="permalink" title="Permalink to this method">¶</a>
+		</h3>
+		<pre class="language-php method-signature">
+<code>buttonToolbar($buttonGroups, $options = array())</code></pre>
+
+		<div class="description detailed">
+			<p>Creates a button toolbar using the given button groups.</p>
+
+
+				<h6>Parameters</h6>
+				<div class="parameter-list list">
+				<dl>
+					<dt>
+						<code class="language-php ">array $buttonGroups</code>
+					</dt>
+					<dd>Array of groups for the toolbar</dd>
+					<dt>
+						<code class="language-php optional">array $options = array()</code>
+					</dt>
+					<dd>Array of options for the <code>Html::div</code> method.</dd>
+				</dl>
+				</div>
+
+				<h6>Returns</h6>
+				<div class="list">
+					string<br>A HTML string containing the button toolbar.<br>
+				</div>
+
+
+
+
+		</div>
+		</div>
+		<div class="method-detail">
+				<a id="_control"></a>
+		<a id="method-Bootstrap\View\Helper\FormHelpercontrol"></a>
+		<h3 class="method-name">
+<a href="source-class-Bootstrap.View.Helper.FormHelper.html#419-498" title="Go to source code">control()</a>
+
+<span class="label label-success">public</span></span>
+
+			<a href="#_control" class="permalink" title="Permalink to this method">¶</a>
+		</h3>
+		<pre class="language-php method-signature">
+<code>control($fieldName, $options = array())</code></pre>
+
+		<div class="description detailed">
+			<p>Generates a form input element complete with label and wrapper div.</p>
+
+<h3>Options</h3>
+
+<p>See each field type method for more information. Any options that are part of
+<code>$attributes</code> or <code>$options</code> for the different <strong>type</strong> methods can be included
+in <code>$options</code> for input().
+Additionally, any unknown keys that are not in the list below, or part of the
+selected type's options will be treated as a regular HTML attribute for the
+generated input.</p>
+
+<ul>
+<li><code>append</code> Content to append to the input, may be a string or an array of buttons.</li>
+<li><code>empty</code> String or boolean to enable empty select box options.</li>
+<li><code>error</code> Control the error message that is produced. Set to <code>false</code> to disable
+any kind of error reporting (field error and error messages).</li>
+<li><code>help</code> Help message to add below the input.</li>
+<li><code>label</code> Either a string label, or an array of options for the label.
+See FormHelper::label().</li>
+<li><code>labelOptions</code> - Either <code>false</code> to disable label around nestedWidgets e.g. radio, multicheckbox or an array of attributes for the label tag. <code>selected</code> will be added to any classes e.g. <code>class =&gt; 'myclass'</code> where widget is checked.</li>
+<li><code>nestedInput</code> Used with checkbox and radio inputs. Set to false to render
+inputs outside of label elements. Can be set to true on any input to force the
+input inside the label. If you enable this option for radio buttons you will also
+need to modify the default <code>radioWrapper</code> template.</li>
+<li><code>inline</code> Only used with radio inputs, set to <code>true</code> to have inlined radio buttons.</li>
+<li><code>options</code> For widgets that take options e.g. radio, select.</li>
+<li><code>templates</code> The templates you want to use for this input. Any templates will be
+merged on top of the already loaded templates. This option can either be a filename
+in /config that contains the templates you want to load, or an array of templates
+to use.</li>
+<li><code>prepend</code> Content to prepend to the input, may be a string or an array of buttons.</li>
+<li><code>templateVars</code> Array of template variables.</li>
+<li><code>type</code> Force the type of widget you want. e.g. <code>type =&gt; 'select'</code></li>
+</ul>
+
+
+				<h6>Parameters</h6>
+				<div class="parameter-list list">
+				<dl>
+					<dt>
+						<code class="language-php ">string $fieldName</code>
+					</dt>
+					<dd>This should be "modelname.fieldname"</dd>
+					<dt>
+						<code class="language-php optional">array $options = array()</code>
+					</dt>
+					<dd>Each type of input takes different options.</dd>
+				</dl>
+				</div>
+
+				<h6>Returns</h6>
+				<div class="list">
+					string<br>Completed form widget.<br>
+				</div>
+
+
+
+
+		</div>
+		</div>
+		<div class="method-detail">
+				<a id="_create"></a>
+		<a id="method-Bootstrap\View\Helper\FormHelpercreate"></a>
+		<h3 class="method-name">
+<a href="source-class-Bootstrap.View.Helper.FormHelper.html#209-258" title="Go to source code">create()</a>
+
+<span class="label label-success">public</span></span>
+
+			<a href="#_create" class="permalink" title="Permalink to this method">¶</a>
+		</h3>
+		<pre class="language-php method-signature">
+<code>create($model = null, $options = array())</code></pre>
+
+		<div class="description detailed">
+			<p>Returns an HTML form element.</p>
+
+<h3>Options</h3>
+
+<ul>
+<li><code>context</code> Additional options for the context class. For example the
+EntityContext accepts a 'table' option that allows you to set the specific Table
+class the form should be based on.</li>
+<li><code>encoding</code> Set the accept-charset encoding for the form. Defaults to
+<code>Configure::read('App.encoding')</code>.</li>
+<li><code>enctype</code> Set the form encoding explicitly. By default <code>type =&gt; file</code> will set
+<code>enctype</code> to <code>multipart/form-data</code>.</li>
+<li><code>horizontal</code> Boolean specifying if the form should be horizontal.</li>
+<li><code>idPrefix</code> Prefix for generated ID attributes.</li>
+<li><code>inline</code> Boolean specifying if the form should be inlined.</li>
+<li><code>method</code> Set the form's method attribute explicitly.</li>
+<li><code>templates</code> The templates you want to use for this form. Any templates will be
+merged on top of the already loaded templates. This option can either be a filename
+in /config that contains the templates you want to load, or an array of templates
+to use.</li>
+<li><code>templateVars</code> Provide template variables for the formStart template.</li>
+<li><code>type</code> Form method defaults to autodetecting based on the form context. If the form context's isCreate() method returns false, a PUT request will be done.</li>
+<li><code>url</code> The URL the form submits to. Can be a string or a URL array. If you use 'url' you should leave 'action' undefined.</li>
+</ul>
+
+
+				<h6>Parameters</h6>
+				<div class="parameter-list list">
+				<dl>
+					<dt>
+						<code class="language-php optional">mixed $model = null</code>
+					</dt>
+					<dd><p>The context for which the form is being defined. Can
+  be an ORM entity, ORM resultset, or an array of meta data. You can use false or null
+  to make a model-less form.</p></dd>
+					<dt>
+						<code class="language-php optional">array $options = array()</code>
+					</dt>
+					<dd>An array of html attributes and options.</dd>
+				</dl>
+				</div>
+
+				<h6>Returns</h6>
+				<div class="list">
+					string<br>An formatted opening FORM tag.<br>
+				</div>
+
+
+
+
+		</div>
+		</div>
+		<div class="method-detail">
+				<a id="_dropdownButton"></a>
+		<a id="method-Bootstrap\View\Helper\FormHelperdropdownButton"></a>
+		<h3 class="method-name">
+<a href="source-class-Bootstrap.View.Helper.FormHelper.html#648-696" title="Go to source code">dropdownButton()</a>
+
+<span class="label label-success">public</span></span>
+
+			<a href="#_dropdownButton" class="permalink" title="Permalink to this method">¶</a>
+		</h3>
+		<pre class="language-php method-signature">
+<code>dropdownButton($title, $menu = [], $options = [])</code></pre>
+
+		<div class="description detailed">
+			<p>Creates a dropdown button.</p>
+
+<p>This function is a shortcut for:</p>
+
+<pre><span class="php-var">$this</span>-&gt;Form-&gt;<span class="php-var">$buttonGroup</span>([ <span class="php-var">$this</span>-&gt;Form-&gt;button(<span class="php-var">$title</span>, <span class="php-var">$options</span>), <span class="php-var">$this</span>-&gt;Html-&gt;dropdown(<span class="php-var">$menu</span>, []) ]);</pre>
+
+
+				<h6>Parameters</h6>
+				<div class="parameter-list list">
+				<dl>
+					<dt>
+						<code class="language-php ">string $title</code>
+					</dt>
+					<dd>The text for the button.</dd>
+					<dt>
+						<code class="language-php optional">array $menu = []</code>
+					</dt>
+					<dd><p>HTML elements corresponding to menu options (which will be wrapped
+into <code>&lt;li&gt;</code> tag). To add separator, pass 'divider'. See <code>BootstrapHtml::dropdown()</code>.</p></dd>
+					<dt>
+						<code class="language-php optional">array $options = []</code>
+					</dt>
+					<dd>Array of options for the button. See <code>button()</code>.</dd>
+				</dl>
+				</div>
+
+				<h6>Returns</h6>
+				<div class="list">
+					string<br>A HTML string containing the button dropdown.<br>
+				</div>
+
+
+
+
+		</div>
+		</div>
+		<div class="method-detail">
+				<a id="_file"></a>
+		<a id="method-Bootstrap\View\Helper\FormHelperfile"></a>
+		<h3 class="method-name">
+<a href="source-class-Bootstrap.View.Helper.FormHelper.html#554-575" title="Go to source code">file()</a>
+
+<span class="label label-success">public</span></span>
+
+			<a href="#_file" class="permalink" title="Permalink to this method">¶</a>
+		</h3>
+		<pre class="language-php method-signature">
+<code>file($fieldName, $options = [])</code></pre>
+
+		<div class="description detailed">
+			<p>Creates file input widget.</p>
+
+<p><strong>Note:</strong> If the configuration value of <code>useCustomFileInput</code> is <code>false</code>, this methods
+is equivalent to <code>FormHelper::file</code>.</p>
+
+
+				<h6>Parameters</h6>
+				<div class="parameter-list list">
+				<dl>
+					<dt>
+						<code class="language-php ">string $fieldName</code>
+					</dt>
+					<dd>Name of a field, in the form "modelname.fieldname"</dd>
+					<dt>
+						<code class="language-php optional">array $options = []</code>
+					</dt>
+					<dd>Array of HTML attributes.</dd>
+				</dl>
+				</div>
+
+				<h6>Returns</h6>
+				<div class="list">
+					string<br>A generated file input.<br>
+				</div>
+
+
+
+
+		</div>
+		</div>
+		<div class="method-detail">
+				<a id="_getColumnSizes"></a>
+		<a id="method-Bootstrap\View\Helper\FormHelpergetColumnSizes"></a>
+		<h3 class="method-name">
+<a href="source-class-Bootstrap.View.Helper.FormHelper.html#260-268" title="Go to source code">getColumnSizes()</a>
+
+<span class="label label-success">public</span></span>
+
+			<a href="#_getColumnSizes" class="permalink" title="Permalink to this method">¶</a>
+		</h3>
+		<pre class="language-php method-signature">
+<code>getColumnSizes()</code></pre>
+
+		<div class="description detailed">
+			<p>Get the column sizes configuration associated with the
+form helper.</p>
+
+
+
+				<h6>Returns</h6>
+				<div class="list">
+					array<br>
+				</div>
+
+
+
+
+		</div>
+		</div>
+		<div class="method-detail">
+				<a id="_inlineRadio"></a>
+		<a id="method-Bootstrap\View\Helper\FormHelperinlineRadio"></a>
+		<h3 class="method-name">
+<a href="source-class-Bootstrap.View.Helper.FormHelper.html#515-552" title="Go to source code">inlineRadio()</a>
+
+<span class="label label-success">public</span></span>
+
+			<a href="#_inlineRadio" class="permalink" title="Permalink to this method">¶</a>
+		</h3>
+		<pre class="language-php method-signature">
+<code>inlineRadio($fieldName, $options = [], $attributes = [])</code></pre>
+
+		<div class="description detailed">
+			<p>Creates a set of inline radio widgets.</p>
+
+<h3>Attributes:</h3>
+
+<ul>
+<li><code>value</code> - Indicates the value when this radio button is checked.</li>
+<li><code>label</code> - Either <code>false</code> to disable label around the widget or an array of attributes for the label tag. <code>selected</code> will be added to any classes e.g. <code>'class' =&gt; 'myclass'</code> where widget is checked</li>
+<li><code>hiddenField</code> - boolean to indicate if you want the results of radio() to include a hidden input with a value of ''. This is useful for creating radio sets that are non-continuous.</li>
+<li><code>disabled</code> - Set to <code>true</code> or <code>disabled</code> to disable all the radio buttons.</li>
+<li><code>empty</code> - Set to <code>true</code> to create an input with the value '' as the first option. When <code>true</code> the radio label will be 'empty'. Set this option to a string to control the label value.</li>
+</ul>
+
+
+				<h6>Parameters</h6>
+				<div class="parameter-list list">
+				<dl>
+					<dt>
+						<code class="language-php ">string $fieldName</code>
+					</dt>
+					<dd>Name of a field, like this "modelname.fieldname"</dd>
+					<dt>
+						<code class="language-php optional">array|\Traversable $options = []</code>
+					</dt>
+					<dd>Radio button options array.</dd>
+					<dt>
+						<code class="language-php optional">array $attributes = []</code>
+					</dt>
+					<dd>Array of attributes.</dd>
+				</dl>
+				</div>
+
+				<h6>Returns</h6>
+				<div class="list">
+					string<br>Completed radio widget set.<br>
+				</div>
+
+
+
+
+		</div>
+		</div>
+		<div class="method-detail">
+				<a id="_prepend"></a>
+		<a id="method-Bootstrap\View\Helper\FormHelperprepend"></a>
+		<h3 class="method-name">
+<a href="source-class-Bootstrap.View.Helper.FormHelper.html#369-385" title="Go to source code">prepend()</a>
+
+<span class="label label-success">public</span></span>
+
+			<a href="#_prepend" class="permalink" title="Permalink to this method">¶</a>
+		</h3>
+		<pre class="language-php method-signature">
+<code>prepend($input, $prepend)</code></pre>
+
+		<div class="description detailed">
+			<p>Prepend the given content to the given input or create an opening input group.</p>
+
+
+				<h6>Parameters</h6>
+				<div class="parameter-list list">
+				<dl>
+					<dt>
+						<code class="language-php ">string|null $input</code>
+					</dt>
+					<dd><p>Input to which <code>$prepend</code> will be prepend, or
+null to create an opening input group.</p></dd>
+					<dt>
+						<code class="language-php ">string|array $prepend</code>
+					</dt>
+					<dd>The content to prepend.,</dd>
+				</dl>
+				</div>
+
+				<h6>Returns</h6>
+				<div class="list">
+					string<br><p>The input with the content of <code>$prepend</code> prepended or an
+opening <code>&lt;div&gt;</code> for an input group.</p><br>
+				</div>
+
+
+
+
+		</div>
+		</div>
+		<div class="method-detail">
+				<a id="_setColumnSizes"></a>
+		<a id="method-Bootstrap\View\Helper\FormHelpersetColumnSizes"></a>
+		<h3 class="method-name">
+<a href="source-class-Bootstrap.View.Helper.FormHelper.html#270-278" title="Go to source code">setColumnSizes()</a>
+
+<span class="label label-success">public</span></span>
+
+			<a href="#_setColumnSizes" class="permalink" title="Permalink to this method">¶</a>
+		</h3>
+		<pre class="language-php method-signature">
+<code>setColumnSizes($columns)</code></pre>
+
+		<div class="description detailed">
+			<p>Set the column sizes configuration associated with the
+form helper.</p>
+
+
+
+				<h6>Returns</h6>
+				<div class="list">
+					array<br>
+				</div>
+
+
+
+
+		</div>
+		</div>
+		<div class="method-detail">
+				<a id="_submit"></a>
+		<a id="method-Bootstrap\View\Helper\FormHelpersubmit"></a>
+		<h3 class="method-name">
+<a href="source-class-Bootstrap.View.Helper.FormHelper.html#698-723" title="Go to source code">submit()</a>
+
+<span class="label label-success">public</span></span>
+
+			<a href="#_submit" class="permalink" title="Permalink to this method">¶</a>
+		</h3>
+		<pre class="language-php method-signature">
+<code>submit($caption = null, $options = array())</code></pre>
+
+		<div class="description detailed">
+			<p>Creates a submit button element. This method will generate <code>&lt;input /&gt;</code> elements that
+can be used to submit, and reset forms by using $options. image submits can be
+created by supplying an image path for $caption.</p>
+
+<h3>Options</h3>
+
+<ul>
+<li><code>bootstrap-size</code> Twitter bootstrap button size (mini, small, large)</li>
+<li><code>bootstrap-type</code> Twitter bootstrap button type (primary, danger, info, etc.)</li>
+<li><code>templateVars</code> Additional template variables for the input element and its container.</li>
+<li><code>type</code> Set to 'reset' for reset inputs. Defaults to 'submit'</li>
+<li>Other attributes will be assigned to the input element.</li>
+</ul>
+
+
+				<h6>Parameters</h6>
+				<div class="parameter-list list">
+				<dl>
+					<dt>
+						<code class="language-php optional">string|null $caption = null</code>
+					</dt>
+					<dd><p>The label appearing on the button OR if string
+contains :// or the  extension .jpg, .jpe, .jpeg, .gif, .png use an image if
+the extension exists, AND the first character is /, image is relative to webroot,
+ OR if the first character is not /, image is relative to webroot/img.</p></dd>
+					<dt>
+						<code class="language-php optional">array $options = array()</code>
+					</dt>
+					<dd>Array of options. See above.</dd>
+				</dl>
+				</div>
+
+				<h6>Returns</h6>
+				<div class="list">
+					string<br>A HTML submit button<br>
+				</div>
+
+
+				<h6>Link</h6>
+				<div class="list">
+						<a href="http://book.cakephp.org/3.0/en/views/helpers/form.html#creating-buttons-and-submit-elements">http://book.cakephp.org/3.0/en/views/helpers/form.html#creating-buttons-and-submit-elements</a><br>
+				</div>
+
+
+		</div>
+		</div>
+		<div class="method-detail">
+				<a id="_wrap"></a>
+		<a id="method-Bootstrap\View\Helper\FormHelperwrap"></a>
+		<h3 class="method-name">
+<a href="source-class-Bootstrap.View.Helper.FormHelper.html#405-417" title="Go to source code">wrap()</a>
+
+<span class="label label-success">public</span></span>
+
+			<a href="#_wrap" class="permalink" title="Permalink to this method">¶</a>
+		</h3>
+		<pre class="language-php method-signature">
+<code>wrap($input, $prepend, $append)</code></pre>
+
+		<div class="description detailed">
+			<p>Wrap the given <code>$input</code> between <code>$prepend</code> and <code>$append</code>.</p>
+
+
+				<h6>Parameters</h6>
+				<div class="parameter-list list">
+				<dl>
+					<dt>
+						<code class="language-php ">string $input</code>
+					</dt>
+					<dd>The input to be wrapped (see <code>prepend()</code> and <code>append()</code>).</dd>
+					<dt>
+						<code class="language-php ">string|array $prepend</code>
+					</dt>
+					<dd>The content to prepend (see <code>prepend()</code>).</dd>
+					<dt>
+						<code class="language-php ">string|array $append</code>
+					</dt>
+					<dd>The content to append (see <code>append()</code>).</dd>
+				</dl>
+				</div>
+
+				<h6>Returns</h6>
+				<div class="list">
+					string<br><p>A string containing the given <code>$input</code> wrapped between <code>$prepend</code> and
+<code>$append</code> according to the behavior of <code>prepend()</code> and <code>append()</code>.</p><br>
+				</div>
+
+
+
+
+		</div>
+		</div>
+	</div>
+
+
+	<div class="section">
+		<h2>Methods used from <a href="class-Bootstrap.View.Helper.ClassTrait.html#methods">Bootstrap\View\Helper\ClassTrait</a></h2>
+		<div class="method-detail">
+				<a id="__addButtonClasses"></a>
+		<a id="method-Bootstrap\View\Helper\FormHelper_addButtonClasses"></a>
+		<h3 class="method-name">
+<a href="source-class-Bootstrap.View.Helper.FormHelper.html#52-84" title="Go to source code">_addButtonClasses()</a>
+
+<span class="label label-warning">protected</span></span>
+
+			<a href="#__addButtonClasses" class="permalink" title="Permalink to this method">¶</a>
+		</h3>
+		<pre class="language-php method-signature">
+<code>_addButtonClasses($options)</code></pre>
+
+		<div class="description detailed">
+			<p>Add classes to options according to the default values of bootstrap-type
+and bootstrap-size for button (see configuration).</p>
+
+
+				<h6>Parameters</h6>
+				<div class="parameter-list list">
+				<dl>
+					<dt>
+						<code class="language-php ">array $options</code>
+					</dt>
+					<dd><p>The initial options with bootstrap-type and/or
+bootstrat-size values.</p></dd>
+				</dl>
+				</div>
+
+				<h6>Returns</h6>
+				<div class="list">
+					array<br><p>The new options with class values (btn, and btn-* according to
+initial options).</p><br>
+				</div>
+
+
+
+
+		</div>
+		</div>
+		<div class="method-detail">
+				<a id="__isAssociativeArray"></a>
+		<a id="method-Bootstrap\View\Helper\FormHelper_isAssociativeArray"></a>
+		<h3 class="method-name">
+<a href="source-class-Bootstrap.View.Helper.FormHelper.html#86-95" title="Go to source code">_isAssociativeArray()</a>
+
+<span class="label label-warning">protected</span></span>
+
+			<a href="#__isAssociativeArray" class="permalink" title="Permalink to this method">¶</a>
+		</h3>
+		<pre class="language-php method-signature">
+<code>_isAssociativeArray($array)</code></pre>
+
+		<div class="description detailed">
+			<p>Check weither the specified array is associative or not.</p>
+
+
+				<h6>Parameters</h6>
+				<div class="parameter-list list">
+				<dl>
+					<dt>
+						<code class="language-php ">array $array</code>
+					</dt>
+					<dd>The array to check.</dd>
+				</dl>
+				</div>
+
+				<h6>Returns</h6>
+				<div class="list">
+					boolean<br><code>true</code> if the array is associative, <code>false</code> otherwize.<br>
+				</div>
+
+
+
+
+		</div>
+		</div>
+		<div class="method-detail">
+				<a id="_addClass"></a>
+		<a id="method-Bootstrap\View\Helper\FormHelperaddClass"></a>
+		<h3 class="method-name">
+<a href="source-class-Bootstrap.View.Helper.FormHelper.html#24-50" title="Go to source code">addClass()</a>
+
+<span class="label label-success">public</span></span>
+
+			<a href="#_addClass" class="permalink" title="Permalink to this method">¶</a>
+		</h3>
+		<pre class="language-php method-signature">
+<code>addClass($options = [], $class = null, $key = 'class')</code></pre>
+
+		<div class="description detailed">
+			<p>Adds the given class to the element options.</p>
+
+
+				<h6>Parameters</h6>
+				<div class="parameter-list list">
+				<dl>
+					<dt>
+						<code class="language-php optional">array $options = []</code>
+					</dt>
+					<dd>Array of options/attributes to add a class to.</dd>
+					<dt>
+						<code class="language-php optional">string|array $class = null</code>
+					</dt>
+					<dd>The class names to be added.</dd>
+					<dt>
+						<code class="language-php optional">string $key = 'class'</code>
+					</dt>
+					<dd>The key to use for class (default to <code>'class'</code>).</dd>
+				</dl>
+				</div>
+
+				<h6>Returns</h6>
+				<div class="list">
+					array<br>Array of options with <code>$key</code> set or updated.<br>
+				</div>
+
+
+
+
+		</div>
+		</div>
+	</div>
+	<div class="section">
+		<h2>Methods used from <a href="class-Bootstrap.View.Helper.EasyIconTrait.html#methods">Bootstrap\View\Helper\EasyIconTrait</a></h2>
+		<div class="method-detail">
+				<a id="__easyIcon"></a>
+		<a id="method-Bootstrap\View\Helper\FormHelper_easyIcon"></a>
+		<h3 class="method-name">
+<a href="source-class-Bootstrap.View.Helper.FormHelper.html#63-93" title="Go to source code">_easyIcon()</a>
+
+<span class="label label-warning">protected</span></span>
+
+			<a href="#__easyIcon" class="permalink" title="Permalink to this method">¶</a>
+		</h3>
+		<pre class="language-php method-signature">
+<code>_easyIcon($callback, $indexTitle, $indexOptions, $args = null)</code></pre>
+
+		<div class="description detailed">
+			<p>This method calls the given callback with the given list of parameters after
+applying an easy-icon filter on them.</p>
+
+<p>Note: For compatibility issue, this function can still be called with a callback,
+a string (title) and an array of options.</p>
+
+
+				<h6>Parameters</h6>
+				<div class="parameter-list list">
+				<dl>
+					<dt>
+						<code class="language-php ">callable $callback</code>
+					</dt>
+					<dd>The callback.</dd>
+					<dt>
+						<code class="language-php ">int $indexTitle</code>
+					</dt>
+					<dd><p>Index of the title to which the easy-icon processing
+will be applied.</p></dd>
+					<dt>
+						<code class="language-php ">int $indexOptions</code>
+					</dt>
+					<dd>Index of the options in the $args array.</dd>
+					<dt>
+						<code class="language-php optional">array $args = null</code>
+					</dt>
+					<dd>Arguments for the callback.</dd>
+				</dl>
+				</div>
+
+				<h6>Returns</h6>
+				<div class="list">
+					mixed<br>Whatever might be returned by $callback.<br>
+				</div>
+
+
+
+
+		</div>
+		</div>
+		<div class="method-detail">
+				<a id="__makeIcon"></a>
+		<a id="method-Bootstrap\View\Helper\FormHelper_makeIcon"></a>
+		<h3 class="method-name">
+<a href="source-class-Bootstrap.View.Helper.FormHelper.html#30-61" title="Go to source code">_makeIcon()</a>
+
+<span class="label label-warning">protected</span></span>
+
+			<a href="#__makeIcon" class="permalink" title="Permalink to this method">¶</a>
+		</h3>
+		<pre class="language-php method-signature">
+<code>_makeIcon($text, $converted = false, $options = [])</code></pre>
+
+		<div class="description detailed">
+			<p>Try to convert the specified string to a bootstrap icon. The string is converted if
+it matches a format <code>i:icon-name</code> (leading and trailing spaces or ignored) and if
+easy-icon is activated.</p>
+
+<p><strong>Note:</strong> This function will currently fail if the Html helper associated with the
+view is not BootstrapHtmlHelper.</p>
+
+
+				<h6>Parameters</h6>
+				<div class="parameter-list list">
+				<dl>
+					<dt>
+						<code class="language-php ">string $text</code>
+					</dt>
+					<dd>The string to convert.</dd>
+					<dt>
+						<code class="language-php optional">bool $converted = false</code>
+					</dt>
+					<dd><p>If specified, will contains <code>true</code> if the text was converted,
+<code>false</code> otherwize.</p></dd>
+					<dt>
+						<code class="language-php optional"> $options = []</code>
+					</dt>
+					<dd></dd>
+				</dl>
+				</div>
+
+				<h6>Returns</h6>
+				<div class="list">
+					string<br>The text after conversion.<br>
+				</div>
+
+
+
+
+		</div>
+		</div>
+	</div>
+	<div class="section">
+		<h2>Methods used from <a href="class-Bootstrap.View.FlexibleStringTemplateTrait.html#methods">Bootstrap\View\FlexibleStringTemplateTrait</a></h2>
+		<div class="method-detail">
+				<a id="_templater"></a>
+		<a id="method-Bootstrap\View\Helper\FormHelpertemplater"></a>
+		<h3 class="method-name">
+<a href="source-class-Bootstrap.View.Helper.FormHelper.html#27-50" title="Go to source code">templater()</a>
+
+<span class="label label-success">public</span></span>
+
+			<a href="#_templater" class="permalink" title="Permalink to this method">¶</a>
+		</h3>
+		<pre class="language-php method-signature">
+<code>templater()</code></pre>
+
+		<div class="description detailed">
+			<p>Returns the templater instance.</p>
+
+
+
+				<h6>Returns</h6>
+				<div class="list">
+					Cake\View\StringTemplate<br>
+				</div>
+
+
+
+
+		</div>
+		</div>
+	</div>
+
+
+
+
+
+	<div class="section">
+		<h2>Properties detail</h2>
+	<div class="property-detail">
+		<a id="$_defaultConfig"></a>
+
+		<h3 class="property-name">
+				<a href="source-class-Bootstrap.View.Helper.FormHelper.html#44-133" title="Go to source code"><var>$_defaultConfig</var></a>
+				<a href="#$_defaultConfig" class="permalink" title="Permalink to this property">¶</a>
+		</h3>
+
+		<div class="attributes">
+				<span class="label label-warning">protected</span>
+				array
+		</div>
+
+		<div class="description detailed">
+			<p>Default configuration for the helper.</p>
+
+<ul>
+<li><code>idPrefix</code> See CakePHP <code>FormHelper</code>.</li>
+<li><code>errorClass</code> See CakePHP <code>FormHelper</code>. Overriden by <code>'has-error'</code>.</li>
+<li><code>typeMap</code> See CakePHP <code>FormHelper</code>.</li>
+<li><code>templates</code> Templates for the various form elements.</li>
+<li><code>templateClass</code> Class used to format the various template. Do not override!</li>
+<li><code>buttons</code> Default options for buttons.</li>
+<li><code>columns</code> Default column sizes for horizontal forms.</li>
+<li><code>useCustomFileInput</code> Set to <code>true</code> to use the custom file input. Default is <code>false</code>.</li>
+</ul>
+
+
+			<div>
+				<pre class="language-php"><code>[
+    'idPrefix' =&gt; null,
+    'errorClass' =&gt; 'has-error',
+    'typeMap' =&gt; [
+        'string' =&gt; 'text', 'datetime' =&gt; 'datetime', 'boolean' =&gt; 'checkbox',
+        'timestamp' =&gt; 'datetime', 'text' =&gt; 'textarea', 'time' =&gt; 'time',
+        'date' =&gt; 'date', 'float' =&gt; 'number', 'integer' =&gt; 'number',
+        'decimal' =&gt; 'number', 'binary' =&gt; 'file', 'uuid' =&gt; 'string'
+    ],
+
+    'templates' =&gt; [
+        'button' =&gt; '&lt;button{{attrs}}&gt;{{text}}&lt;/button&gt;',
+        'checkbox' =&gt; '&lt;input type="checkbox" name="{{name}}" value="{{value}}"{{attrs}}&gt;',
+        'checkboxFormGroup' =&gt; '{{label}}',
+        'checkboxWrapper' =&gt; '&lt;div class="checkbox"&gt;{{label}}&lt;/div&gt;',
+        'checkboxContainer' =&gt; '&lt;div class="checkbox {{required}}"&gt;{{content}}&lt;/div&gt;',
+        'checkboxContainerHorizontal' =&gt; '&lt;div class="form-group"&gt;&lt;div class="{{inputColumnOffsetClass}} {{inputColumnClass}}"&gt;&lt;div class="checkbox {{required}}"&gt;{{content}}&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;',
+        'dateWidget' =&gt; '&lt;div class="row"&gt;{{year}}{{month}}{{day}}{{hour}}{{minute}}{{second}}{{meridian}}&lt;/div&gt;',
+        'error' =&gt; '&lt;span class="help-block error-message"&gt;{{content}}&lt;/span&gt;',
+        'errorHorizontal' =&gt; '&lt;span class="help-block error-message {{errorColumnClass}}"&gt;{{content}}&lt;/span&gt;',
+        'errorList' =&gt; '&lt;ul&gt;{{content}}&lt;/ul&gt;',
+        'errorItem' =&gt; '&lt;li&gt;{{text}}&lt;/li&gt;',
+        'file' =&gt; '&lt;input type="file" name="{{name}}" {{attrs}}&gt;',
+        'fieldset' =&gt; '&lt;fieldset{{attrs}}&gt;{{content}}&lt;/fieldset&gt;',
+        'formStart' =&gt; '&lt;form{{attrs}}&gt;',
+        'formEnd' =&gt; '&lt;/form&gt;',
+        'formGroup' =&gt; '{{label}}{{prepend}}{{input}}{{append}}',
+        'formGroupHorizontal' =&gt; '{{label}}&lt;div class="{{inputColumnClass}}"&gt;{{prepend}}{{input}}{{append}}&lt;/div&gt;',
+        'hiddenBlock' =&gt; '&lt;div style="display:none;"&gt;{{content}}&lt;/div&gt;',
+        'input' =&gt; '&lt;input type="{{type}}" name="{{name}}" class="form-control{{attrs.class}}" {{attrs}} /&gt;',
+        'inputSubmit' =&gt; '&lt;input type="{{type}}"{{attrs}}&gt;',
+        'inputContainer' =&gt; '&lt;div class="form-group {{type}}{{required}}"&gt;{{content}}&lt;/div&gt;',
+        'inputContainerError' =&gt; '&lt;div class="form-group has-error {{type}}{{required}}"&gt;{{content}}{{error}}&lt;/div&gt;',
+        'label' =&gt; '&lt;label class="control-label{{attrs.class}}"{{attrs}}&gt;{{text}}&lt;/label&gt;',
+        'labelHorizontal' =&gt; '&lt;label class="control-label {{labelColumnClass}}{{attrs.class}}"{{attrs}}&gt;{{text}}&lt;/label&gt;',
+        'labelInline' =&gt; '&lt;label class="sr-only{{attrs.class}}"{{attrs}}&gt;{{text}}&lt;/label&gt;',
+        'nestingLabel' =&gt; '{{hidden}}&lt;label{{attrs}}&gt;{{input}}{{text}}&lt;/label&gt;',
+        'legend' =&gt; '&lt;legend&gt;{{text}}&lt;/legend&gt;',
+        'option' =&gt; '&lt;option value="{{value}}"{{attrs}}&gt;{{text}}&lt;/option&gt;',
+        'optgroup' =&gt; '&lt;optgroup label="{{label}}"{{attrs}}&gt;{{content}}&lt;/optgroup&gt;',
+        'select' =&gt; '&lt;select name="{{name}}" class="form-control{{attrs.class}}" {{attrs}}&gt;{{content}}&lt;/select&gt;',
+        'selectColumn' =&gt; '&lt;div class="col-md-{{columnSize}}"&gt;&lt;select name="{{name}}" class="form-control{{attrs.class}}" {{attrs}}&gt;{{content}}&lt;/select&gt;&lt;/div&gt;',
+        'selectMultiple' =&gt; '&lt;select name="{{name}}[]" multiple="multiple" class="form-control{{attrs.class}}" {{attrs}}&gt;{{content}}&lt;/select&gt;',
+        'radio' =&gt; '&lt;input type="radio" name="{{name}}" value="{{value}}"{{attrs}}&gt;',
+        'radioWrapper' =&gt; '&lt;div class="radio"&gt;{{label}}&lt;/div&gt;',
+        'radioContainer' =&gt; '&lt;div class="form-group"&gt;{{content}}&lt;/div&gt;',
+        'inlineRadio' =&gt; '&lt;input type="radio" name="{{name}}" value="{{value}}"{{attrs}}&gt;',
+        'inlineRadioWrapper' =&gt; '{{label}}',
+        'inlineRadioContainer' =&gt; '&lt;div class="form-group"&gt;{{content}}&lt;/div&gt;',
+        'inlineRadioNestingLabel' =&gt; '{{hidden}}&lt;label{{attrs}} class="radio-inline"&gt;{{input}}{{text}}&lt;/label&gt;',
+        'textarea' =&gt; '&lt;textarea name="{{name}}" class="form-control{{attrs.class}}" {{attrs}}&gt;{{value}}&lt;/textarea&gt;',
+        'submitContainer' =&gt; '&lt;div class="form-group"&gt;{{submitContainerHorizontalStart}}{{content}}{{submitContainerHorizontalEnd}}&lt;/div&gt;',
+        'submitContainerHorizontal' =&gt; '&lt;div class="form-group"&gt;&lt;div class="{{inputColumnOffsetClass}} {{inputColumnClass}}"&gt;{{content}}&lt;/div&gt;&lt;/div&gt;',
+
+        'inputGroup' =&gt; '{{inputGroupStart}}{{input}}{{inputGroupEnd}}',
+        'inputGroupStart' =&gt; '&lt;div class="input-group"&gt;{{prepend}}',
+        'inputGroupEnd' =&gt; '{{append}}&lt;/div&gt;',
+        'inputGroupAddons' =&gt; '&lt;span class="input-group-addon"&gt;{{content}}&lt;/span&gt;',
+        'inputGroupButtons' =&gt; '&lt;span class="input-group-btn"&gt;{{content}}&lt;/span&gt;',
+        'helpBlock' =&gt; '&lt;p class="help-block"&gt;{{content}}&lt;/p&gt;',
+        'buttonGroup' =&gt; '&lt;div class="btn-group{{attrs.class}}"{{attrs}}&gt;{{content}}&lt;/div&gt;',
+        'buttonToolbar' =&gt; '&lt;div class="btn-toolbar{{attrs.class}}"{{attrs}}&gt;{{content}}&lt;/div&gt;',
+        'fancyFileInput' =&gt; '{{fileInput}}&lt;div class="input-group"&gt;&lt;div class="input-group-btn"&gt;{{button}}&lt;/div&gt;{{input}}&lt;/div&gt;'
+    ],
+    'buttons' =&gt; [
+        'type' =&gt; 'default'
+    ],
+    'columns' =&gt; [
+        'md' =&gt; [
+            'label' =&gt; 2,
+            'input' =&gt; 10,
+            'error' =&gt; 0
+        ]
+    ],
+    'useCustomFileInput' =&gt; false
+]</code></pre>
+			</div>
+		</div>
+	</div>
+	<div class="property-detail">
+		<a id="$_defaultWidgets"></a>
+
+		<h3 class="property-name">
+				<a href="source-class-Bootstrap.View.Helper.FormHelper.html#135-156" title="Go to source code"><var>$_defaultWidgets</var></a>
+				<a href="#$_defaultWidgets" class="permalink" title="Permalink to this property">¶</a>
+		</h3>
+
+		<div class="attributes">
+				<span class="label label-warning">protected</span>
+				array
+		</div>
+
+		<div class="description detailed">
+			<p>Default widgets.</p>
+
+
+			<div>
+				<pre class="language-php"><code>[
+    '_default' =&gt; ['Cake\View\Widget\BasicWidget'],
+    'button' =&gt; ['Cake\View\Widget\ButtonWidget'],
+    'checkbox' =&gt; ['Cake\View\Widget\CheckboxWidget'],
+    'file' =&gt; ['Cake\View\Widget\FileWidget'],
+    'fancyFile' =&gt; ['Bootstrap\View\Widget\FancyFileWidget', 'file', 'button', 'basic'],
+    'label' =&gt; ['Cake\View\Widget\LabelWidget'],
+    'nestingLabel' =&gt; ['Cake\View\Widget\NestingLabelWidget'],
+    'multicheckbox' =&gt; ['Cake\View\Widget\MultiCheckboxWidget', 'nestingLabel'],
+    'radio' =&gt; ['Cake\View\Widget\RadioWidget', 'nestingLabel'],
+    'inlineRadioNestingLabel' =&gt; ['Bootstrap\View\Widget\InlineRadioNestingLabelWidget'],
+    'inlineRadio' =&gt; ['Bootstrap\View\Widget\InlineRadioWidget', 'inlineRadioNestingLabel'],
+    'select' =&gt; ['Cake\View\Widget\SelectBoxWidget'],
+    'selectColumn' =&gt; ['Bootstrap\View\Widget\ColumnSelectBoxWidget'],
+    'textarea' =&gt; ['Cake\View\Widget\TextareaWidget'],
+    'datetime' =&gt; ['Bootstrap\View\Widget\DateTimeWidget', 'selectColumn']
+]</code></pre>
+			</div>
+		</div>
+	</div>
+	<div class="property-detail">
+		<a id="$helpers"></a>
+
+		<h3 class="property-name">
+				<a href="source-class-Bootstrap.View.Helper.FormHelper.html#35-42" title="Go to source code"><var>$helpers</var></a>
+				<a href="#$helpers" class="permalink" title="Permalink to this property">¶</a>
+		</h3>
+
+		<div class="attributes">
+				<span class="label label-success">public</span>
+				array
+		</div>
+
+		<div class="description detailed">
+			<p>Other helpers used by FormHelper.</p>
+
+
+			<div>
+				<pre class="language-php"><code>[
+    'Url', 'Html'
+]</code></pre>
+			</div>
+		</div>
+	</div>
+	<div class="property-detail">
+		<a id="$horizontal"></a>
+
+		<h3 class="property-name">
+				<a href="source-class-Bootstrap.View.Helper.FormHelper.html#158-163" title="Go to source code"><var>$horizontal</var></a>
+				<a href="#$horizontal" class="permalink" title="Permalink to this property">¶</a>
+		</h3>
+
+		<div class="attributes">
+				<span class="label label-success">public</span>
+				boolean
+		</div>
+
+		<div class="description detailed">
+			<p>Indicates if horizontal mode is enabled.</p>
+
+
+			<div>
+				<pre class="language-php"><code>false</code></pre>
+			</div>
+		</div>
+	</div>
+	<div class="property-detail">
+		<a id="$inline"></a>
+
+		<h3 class="property-name">
+				<a href="source-class-Bootstrap.View.Helper.FormHelper.html#165-170" title="Go to source code"><var>$inline</var></a>
+				<a href="#$inline" class="permalink" title="Permalink to this property">¶</a>
+		</h3>
+
+		<div class="attributes">
+				<span class="label label-success">public</span>
+				boolean
+		</div>
+
+		<div class="description detailed">
+			<p>Indicates if inline mode is enabled.</p>
+
+
+			<div>
+				<pre class="language-php"><code>false</code></pre>
+			</div>
+		</div>
+	</div>
+	</div>
+
+	<div class="section">
+		<h2>Magic properties detail</h2>
+	<div class="property-detail">
+		<a id="m$Html"></a>
+
+		<h3 class="property-name">
+				<a href="source-class-Bootstrap.View.Helper.FormHelper.html#24" title="Go to source code"><var>$Html</var></a>
+				<a href="#m$Html" class="permalink" title="Permalink to this property">¶</a>
+		</h3>
+
+		<div class="attributes">
+				<span class="label label-success">public</span>
+				<code><a href="class-Bootstrap.View.Helper.HtmlHelper.html">Bootstrap\View\Helper\HtmlHelper</a></code>
+		</div>
+
+		<div class="description detailed">
+			
+
+
+		</div>
+	</div>
+	<div class="property-detail">
+		<a id="m$Url"></a>
+
+		<h3 class="property-name">
+				<a href="source-class-Bootstrap.View.Helper.FormHelper.html#25" title="Go to source code"><var>$Url</var></a>
+				<a href="#m$Url" class="permalink" title="Permalink to this property">¶</a>
+		</h3>
+
+		<div class="attributes">
+				<span class="label label-success">public</span>
+				<code><a href="https://api.cakephp.org/3.4/class-Cake.View.Helper.UrlHelper.html" target="_blank">\Cake\View\Helper\UrlHelper</a></code>
+		</div>
+
+		<div class="description detailed">
+			
+
+
+		</div>
+	</div>
+	</div>
+
+</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer>
+		<div class="container">
+			<div class="col-md-12">
+				<p>&copy; 2017, Mikaël Capelle (@Holt59)
+				- Designed and built by <a href="https://github.com/Holt59" target="_blank">Holt59</a> &amp;
+				<a href="https://github.com/Holt59/cakephp3-bootstrap-helpers/graphs/contributors" target="_blank">contributors</a>.</p>
+				<p>Code licensed under <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, Version 2.0</a>.</p>
+				<p>Code &amp; Documentation hosted by <a href="https://github.com" target="_blank"><i class="fa fa-github"></i> Github</a>.</p>
+				<p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> and <a href="http://www.apigen.org/">Apigen</a>.
+			</div>
+		</div>
+	</footer>
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"
+		integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+		crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+		integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="resources/combined.js"></script>
+<script src="elementlist.js"></script>
+<script type="text/javascript">
+	delete Prism.languages.php.markup;
+
+	Prism.hooks.add("after-highlight", function() {
+		$('.optional .token.operator').each(function () {
+			if ($(this).text() == '=') {
+				$(this).addClass('default-assign');
+			}
+		});
+	});
+	Prism.hooks.add("complete", function() {
+		var $counter = 0;
+		$('.line-numbers-rows > span').each(function () {
+			$(this).attr('id', ++$counter);
+		});
+		if (window.location.hash) {
+			var $hash = window.location.hash.split('-')[0];
+			var $navigationHeight = $('#navigation').outerHeight();
+			window.scrollTo(0, $($hash).offset().top - $navigationHeight);
+		}
+	});
+
+	Prism.highlightAll();
+</script>
+
+</body>
+</html>

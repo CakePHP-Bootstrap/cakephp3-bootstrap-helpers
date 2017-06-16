@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        <link rel="canonical" href="https://holt59.github.io/cakephp3-bootstrap-helpers/panel-helper/groups/">
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Panel groups - CakePHP 3 Bootstrap Helpers</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+            integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        <link href="../../css/prism.css" rel="stylesheet">
+        <link href="../../css/custom-prism.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">
+        <link href="../../css/jumbotron.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+         
+    </head>
+
+    <body data-spy="scroll" data-target=".right-nav" data-offset="70">
+
+    
+
+    
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="../..">CakePHP 3 Bootstrap Helpers</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse" id="main-navbar">
+            <!-- Main navigation -->
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="../..">Getting Started</a>
+                </li>
+                <li class="dropdown active">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">The helpers <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    <!-- helpers -->
+                    
+                    
+                    
+                    
+                        <li>
+                            <a href="../../form-helper/basics/">Form Helper</a>
+                        </li>
+                    
+                    
+                    
+                        <li>
+                            <a href="../../html-helper/icons/">Html Helper</a>
+                        </li>
+                    
+                    
+                    
+                        <li>
+                            <a href="../../modal-helper/basics/">Modal Helper</a>
+                        </li>
+                    
+                    
+                    
+                        <li>
+                            <a href="../../navbar-helper/basics/">Navbar Helper</a>
+                        </li>
+                    
+                    
+                    
+                        <li class="active">
+                            <a href="../basics/">Panel Helper</a>
+                        </li>
+                    
+                    
+                    
+                    
+                    </ul>
+                </li>
+                <li><a href="https://holt59.github.io/cakephp3-bootstrap-helpers/api/">API</a></li>
+                <li>
+                    <a href="../../faq/">FAQ</a>
+                </li>
+            </ul>
+
+            <!-- Search, Navigation and Repo links -->
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li>
+                    <a href="https://github.com/Holt59/cakephp3-bootstrap-helpers">
+                        
+                            <i class="fa fa-github"></i>
+                        
+                        GitHub
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="navbar navbar-default hidden-md hidden-lg" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#sub-navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <a class="navbar-brand" href="../basics/">
+                Panel Helper</a>
+            
+            
+            
+            
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse" id="sub-navbar">
+            <!-- Main navigation -->
+            <ul class="nav navbar-nav">
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                <li >
+                    <a href="../basics/">Basic usage</a>
+                
+                
+                
+                <li class="active">
+                    <a href="./">Panel groups</a>
+                
+                
+                
+                
+                
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+    <div class="container">
+            <div class="col-md-9" role="main">
+
+<h3 id="panel-groups">Panel Groups</h3>
+<p>You can create (collapsible) panel groups easily using the <code>Bootstrap.PanelHelper</code>:</p>
+<div class="tab-panels"><ul class="nav nav-tabs" role="tablist"><li class="active" role="presentation"><a aria-controls="tab-panel-grousp-1-php" data-toggle="tab" href="#tab-panel-grousp-1-php" role="tab">php</a></li><li role="presentation"><a aria-controls="tab-panel-grousp-1-markup" data-toggle="tab" href="#tab-panel-grousp-1-markup" role="tab">Markup</a></li><li role="presentation"><a aria-controls="tab-panel-grousp-1-output" data-toggle="tab" href="#tab-panel-grousp-1-output" role="tab">Output</a></li></ul><div class="tab-content"><div class="tab-pane active" id="tab-panel-grousp-1-php" role="tabpanel"><pre><code class="language-php">echo $this-&gt;Panel-&gt;startGroup();
+echo $this-&gt;Panel-&gt;create('My Panel 1');
+echo '&lt;p&gt;Here I can write my panel content... &lt;/p&gt;';
+echo $this-&gt;Panel-&gt;create('My Panel 2'); // You don't need to close the previous panel!
+echo '&lt;p&gt;Here I can write my panel content... &lt;/p&gt;';
+echo $this-&gt;Panel-&gt;create('My Panel 3');
+echo '&lt;p&gt;Here I can write my panel content... &lt;/p&gt;';
+echo $this-&gt;Panel-&gt;endGroup();
+</code></pre>
+
+</div><div class="tab-pane" id="tab-panel-grousp-1-markup" role="tabpanel"><pre><code class="language-markup">&lt;div role=&quot;tablist&quot; aria-multiselectable=&quot;1&quot; id=&quot;panelGroup-1&quot; class=&quot;panel-group&quot;&gt;
+    &lt;div class=&quot;panel panel-default&quot;&gt;
+        &lt;div class=&quot;panel-heading&quot; role=&quot;tab&quot; id=&quot;heading-0&quot;&gt;
+            &lt;h4 class=&quot;panel-title&quot;&gt;&lt;a href=&quot;#collapse-0&quot; data-toggle=&quot;collapse&quot; data-parent=&quot;#panelGroup-1&quot; aria-expanded=&quot;true&quot; aria-controls=&quot;#collapse-0&quot;&gt;My Panel 1&lt;/a&gt;&lt;/h4&gt;
+        &lt;/div&gt;
+        &lt;div role=&quot;tabpanel&quot; aria-labelledby=&quot;heading-0&quot; id=&quot;collapse-0&quot; class=&quot;panel-collapse collapse in&quot;&gt;
+            &lt;div class=&quot;panel-body&quot;&gt;
+                &lt;p&gt;Here I can write my panel content... &lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;panel panel-default&quot;&gt;
+        &lt;div class=&quot;panel-heading&quot; role=&quot;tab&quot; id=&quot;heading-1&quot;&gt;
+            &lt;h4 class=&quot;panel-title&quot;&gt;&lt;a href=&quot;#collapse-1&quot; data-toggle=&quot;collapse&quot; data-parent=&quot;#panelGroup-1&quot; aria-expanded=&quot;false&quot; aria-controls=&quot;#collapse-1&quot;&gt;My Panel 2&lt;/a&gt;&lt;/h4&gt;
+        &lt;/div&gt;
+        &lt;div role=&quot;tabpanel&quot; aria-labelledby=&quot;heading-1&quot; id=&quot;collapse-1&quot; class=&quot;panel-collapse collapse&quot;&gt;
+            &lt;div class=&quot;panel-body&quot;&gt;
+                &lt;p&gt;Here I can write my panel content... &lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;panel panel-default&quot;&gt;
+        &lt;div class=&quot;panel-heading&quot; role=&quot;tab&quot; id=&quot;heading-2&quot;&gt;
+            &lt;h4 class=&quot;panel-title&quot;&gt;&lt;a href=&quot;#collapse-2&quot; data-toggle=&quot;collapse&quot; data-parent=&quot;#panelGroup-1&quot; aria-expanded=&quot;false&quot; aria-controls=&quot;#collapse-2&quot;&gt;My Panel 3&lt;/a&gt;&lt;/h4&gt;
+        &lt;/div&gt;
+        &lt;div role=&quot;tabpanel&quot; aria-labelledby=&quot;heading-2&quot; id=&quot;collapse-2&quot; class=&quot;panel-collapse collapse&quot;&gt;
+            &lt;div class=&quot;panel-body&quot;&gt;
+                &lt;p&gt;Here I can write my panel content... &lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+</div><div class="tab-pane" id="tab-panel-grousp-1-output" role="tabpanel"><div role="tablist" aria-multiselectable="1" id="panelGroup-1" class="panel-group">
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="heading-0">
+            <h4 class="panel-title"><a href="#collapse-0" data-toggle="collapse" data-parent="#panelGroup-1" aria-expanded="true" aria-controls="#collapse-0">My Panel 1</a></h4>
+        </div>
+        <div role="tabpanel" aria-labelledby="heading-0" id="collapse-0" class="panel-collapse collapse in">
+            <div class="panel-body">
+                <p>Here I can write my panel content... </p>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="heading-1">
+            <h4 class="panel-title"><a href="#collapse-1" data-toggle="collapse" data-parent="#panelGroup-1" aria-expanded="false" aria-controls="#collapse-1">My Panel 2</a></h4>
+        </div>
+        <div role="tabpanel" aria-labelledby="heading-1" id="collapse-1" class="panel-collapse collapse">
+            <div class="panel-body">
+                <p>Here I can write my panel content... </p>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="heading-2">
+            <h4 class="panel-title"><a href="#collapse-2" data-toggle="collapse" data-parent="#panelGroup-1" aria-expanded="false" aria-controls="#collapse-2">My Panel 3</a></h4>
+        </div>
+        <div role="tabpanel" aria-labelledby="heading-2" id="collapse-2" class="panel-collapse collapse">
+            <div class="panel-body">
+                <p>Here I can write my panel content... </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div></div></div><p>The <code>id</code> of the panel group is automatically generated by default, you can customize it by passing the <code>id</code> option to the <code>startGroup()</code> method:</p>
+<pre><code class="language-php">echo $this-&gt;Panel-&gt;startGroup(['id' =&gt; 'my-custom-id']);
+</code></pre>
+
+<p>If you do not want the first panel to be open, you can set the <code>'open' =&gt; false</code> option and then use <code>'open' =&gt; true</code> when creating a panel:</p>
+<div class="tab-panels"><ul class="nav nav-tabs" role="tablist"><li class="active" role="presentation"><a aria-controls="tab-panel-groups-2-php" data-toggle="tab" href="#tab-panel-groups-2-php" role="tab">PHP</a></li><li role="presentation"><a aria-controls="tab-panel-groups-2-markup" data-toggle="tab" href="#tab-panel-groups-2-markup" role="tab">Markup</a></li><li role="presentation"><a aria-controls="tab-panel-groups-2-output" data-toggle="tab" href="#tab-panel-groups-2-output" role="tab">Output</a></li></ul><div class="tab-content"><div class="tab-pane active" id="tab-panel-groups-2-php" role="tabpanel"><pre><code class="language-php">echo $this-&gt;Panel-&gt;startGroup(['open' =&gt; false]);
+echo $this-&gt;Panel-&gt;create('My Panel 1');
+echo '&lt;p&gt;Here I can write my panel content... &lt;/p&gt;';
+echo $this-&gt;Panel-&gt;create('My Panel 2', ['open' =&gt; true]);
+echo '&lt;p&gt;Here I can write my panel content... &lt;/p&gt;';
+echo $this-&gt;Panel-&gt;create('My Panel 3');
+echo '&lt;p&gt;Here I can write my panel content... &lt;/p&gt;';
+echo $this-&gt;Panel-&gt;endGroup();
+</code></pre>
+
+</div><div class="tab-pane" id="tab-panel-groups-2-markup" role="tabpanel"><pre><code class="language-markup">&lt;div role=&quot;tablist&quot; aria-multiselectable=&quot;1&quot; id=&quot;panelGroup-3&quot; class=&quot;panel-group&quot;&gt;
+    &lt;div class=&quot;panel panel-default&quot;&gt;
+        &lt;div class=&quot;panel-heading&quot; role=&quot;tab&quot; id=&quot;heading-3&quot;&gt;
+            &lt;h4 class=&quot;panel-title&quot;&gt;&lt;a href=&quot;#collapse-3&quot; data-toggle=&quot;collapse&quot; data-parent=&quot;#panelGroup-3&quot; aria-expanded=&quot;false&quot; aria-controls=&quot;#collapse-3&quot;&gt;My Panel 1&lt;/a&gt;&lt;/h4&gt;
+        &lt;/div&gt;
+        &lt;div role=&quot;tabpanel&quot; aria-labelledby=&quot;heading-3&quot; id=&quot;collapse-3&quot; class=&quot;panel-collapse collapse&quot;&gt;
+            &lt;div class=&quot;panel-body&quot;&gt;
+                &lt;p&gt;Here I can write my panel content... &lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;panel panel-default&quot;&gt;
+        &lt;div class=&quot;panel-heading&quot; role=&quot;tab&quot; id=&quot;heading-4&quot;&gt;
+            &lt;h4 class=&quot;panel-title&quot;&gt;&lt;a href=&quot;#collapse-4&quot; data-toggle=&quot;collapse&quot; data-parent=&quot;#panelGroup-3&quot; aria-expanded=&quot;true&quot; aria-controls=&quot;#collapse-4&quot;&gt;My Panel 2&lt;/a&gt;&lt;/h4&gt;
+        &lt;/div&gt;
+        &lt;div role=&quot;tabpanel&quot; aria-labelledby=&quot;heading-4&quot; id=&quot;collapse-4&quot; class=&quot;panel-collapse collapse in&quot;&gt;
+            &lt;div class=&quot;panel-body&quot;&gt;
+                &lt;p&gt;Here I can write my panel content... &lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;panel panel-default&quot;&gt;
+        &lt;div class=&quot;panel-heading&quot; role=&quot;tab&quot; id=&quot;heading-5&quot;&gt;
+            &lt;h4 class=&quot;panel-title&quot;&gt;&lt;a href=&quot;#collapse-5&quot; data-toggle=&quot;collapse&quot; data-parent=&quot;#panelGroup-3&quot; aria-expanded=&quot;false&quot; aria-controls=&quot;#collapse-5&quot;&gt;My Panel 3&lt;/a&gt;&lt;/h4&gt;
+        &lt;/div&gt;
+        &lt;div role=&quot;tabpanel&quot; aria-labelledby=&quot;heading-5&quot; id=&quot;collapse-5&quot; class=&quot;panel-collapse collapse&quot;&gt;
+            &lt;div class=&quot;panel-body&quot;&gt;
+                &lt;p&gt;Here I can write my panel content... &lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+</div><div class="tab-pane" id="tab-panel-groups-2-output" role="tabpanel"><div role="tablist" aria-multiselectable="1" id="panelGroup-3" class="panel-group">
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="heading-3">
+            <h4 class="panel-title"><a href="#collapse-3" data-toggle="collapse" data-parent="#panelGroup-3" aria-expanded="false" aria-controls="#collapse-3">My Panel 1</a></h4>
+        </div>
+        <div role="tabpanel" aria-labelledby="heading-3" id="collapse-3" class="panel-collapse collapse">
+            <div class="panel-body">
+                <p>Here I can write my panel content... </p>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="heading-4">
+            <h4 class="panel-title"><a href="#collapse-4" data-toggle="collapse" data-parent="#panelGroup-3" aria-expanded="true" aria-controls="#collapse-4">My Panel 2</a></h4>
+        </div>
+        <div role="tabpanel" aria-labelledby="heading-4" id="collapse-4" class="panel-collapse collapse in">
+            <div class="panel-body">
+                <p>Here I can write my panel content... </p>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="heading-5">
+            <h4 class="panel-title"><a href="#collapse-5" data-toggle="collapse" data-parent="#panelGroup-3" aria-expanded="false" aria-controls="#collapse-5">My Panel 3</a></h4>
+        </div>
+        <div role="tabpanel" aria-labelledby="heading-5" id="collapse-5" class="panel-collapse collapse">
+            <div class="panel-body">
+                <p>Here I can write my panel content... </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div></div></div><h3 id="non-collapsible-groups">Non collapsible groups</h3>
+<p>The panel are collapsible by default, but you can have non collapsible panels if you want:</p>
+<div class="tab-panels"><ul class="nav nav-tabs" role="tablist"><li class="active" role="presentation"><a aria-controls="tab-panel-groups-3-php" data-toggle="tab" href="#tab-panel-groups-3-php" role="tab">PHP</a></li><li role="presentation"><a aria-controls="tab-panel-groups-3-markup" data-toggle="tab" href="#tab-panel-groups-3-markup" role="tab">Markup</a></li><li role="presentation"><a aria-controls="tab-panel-groups-3-output" data-toggle="tab" href="#tab-panel-groups-3-output" role="tab">Output</a></li></ul><div class="tab-content"><div class="tab-pane active" id="tab-panel-groups-3-php" role="tabpanel"><pre><code class="language-php">echo $this-&gt;Panel-&gt;startGroup(['collapsible' =&gt; false]);
+echo $this-&gt;Panel-&gt;create('My Panel 1');
+echo '&lt;p&gt;Here I can write my panel content... &lt;/p&gt;';
+echo $this-&gt;Panel-&gt;create('My Panel 2');
+echo '&lt;p&gt;Here I can write my panel content... &lt;/p&gt;';
+echo $this-&gt;Panel-&gt;create('My Panel 3');
+echo '&lt;p&gt;Here I can write my panel content... &lt;/p&gt;';
+echo $this-&gt;Panel-&gt;endGroup();
+</code></pre>
+
+</div><div class="tab-pane" id="tab-panel-groups-3-markup" role="tabpanel"><pre><code class="language-markup">&lt;div role=&quot;tablist&quot; aria-multiselectable=&quot;1&quot; id=&quot;panelGroup-2&quot; class=&quot;panel-group&quot;&gt;
+    &lt;div class=&quot;panel panel-default&quot;&gt;
+        &lt;div class=&quot;panel-heading&quot;&gt;
+            &lt;h4 class=&quot;panel-title&quot;&gt;My Panel 1&lt;/h4&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;panel-body&quot;&gt;
+            &lt;p&gt;Here I can write my panel content... &lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;panel panel-default&quot;&gt;
+        &lt;div class=&quot;panel-heading&quot;&gt;
+            &lt;h4 class=&quot;panel-title&quot;&gt;My Panel 2&lt;/h4&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;panel-body&quot;&gt;
+            &lt;p&gt;Here I can write my panel content... &lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;panel panel-default&quot;&gt;
+        &lt;div class=&quot;panel-heading&quot;&gt;
+            &lt;h4 class=&quot;panel-title&quot;&gt;My Panel 3&lt;/h4&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;panel-body&quot;&gt;
+            &lt;p&gt;Here I can write my panel content... &lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+</div><div class="tab-pane" id="tab-panel-groups-3-output" role="tabpanel"><div role="tablist" aria-multiselectable="1" id="panelGroup-2" class="panel-group">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">My Panel 1</h4>
+        </div>
+        <div class="panel-body">
+            <p>Here I can write my panel content... </p>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">My Panel 2</h4>
+        </div>
+        <div class="panel-body">
+            <p>Here I can write my panel content... </p>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">My Panel 3</h4>
+        </div>
+        <div class="panel-body">
+            <p>Here I can write my panel content... </p>
+        </div>
+    </div>
+</div>
+
+</div></div></div></div>
+            <div class="col-md-3 hidden-sm hidden-xs">
+
+<nav class="right-nav right-nav-fixed">
+    <ul class="nav">
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <li class="nav-header">Panel Helper</li>
+    
+    
+    <li >
+        <a href="../basics/">Basic usage</a>
+        
+    </li>
+    
+    
+    
+    <li class="active">
+        <a href="./">Panel groups</a>
+        
+        <ul class="nav">
+        
+            <li class="main active"><a href="#panel-groups">Panel Groups</a></li>
+        
+            <li class="main "><a href="#non-collapsible-groups">Non collapsible groups</a></li>
+        
+        </ul>
+    
+    </li>
+    
+    
+    
+    
+    
+    
+
+    </ul>
+</nav>
+
+</div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="col-md-12">
+                <p>&copy; 2017, Mikaël Capelle (@Holt59)
+                - Designed and built by <a href="https://github.com/Holt59" target="_blank">Holt59</a> &amp;
+                <a href="https://github.com/Holt59/cakephp3-bootstrap-helpers/graphs/contributors" target="_blank">contributors</a>.</p>
+                <p>Code licensed under <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, Version 2.0</a>.</p>
+                <p>Code &amp; Documentation hosted by <a href="https://github.com" target="_blank"><i class="fa fa-github"></i> Github</a>.</p>
+                <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> and <a href="http://www.apigen.org/">Apigen</a>.
+            </div>
+        </div>
+    </footer>
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+              integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+              crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+              integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <script src="../../js/prism.min.js"></script>
+        <script src="../../js/base.js"></script>
+
+        
+    </body>
+</html>

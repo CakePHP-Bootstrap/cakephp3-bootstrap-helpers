@@ -1,0 +1,1641 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>Class Bootstrap\View\Helper\NavbarHelper | CakePHP 3 Bootstrap Helpers</title>
+
+	<link rel="stylesheet" href="resources/bootstrap.min.css?071b3c2a8dd3bf21f24cec7c6955fbf9beff6181">
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+		integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="resources/prism.css?e1a34f60039ca474453ea496a4887cf6f73c7e22">
+	<link rel="stylesheet" href="resources/custom-prism.css?a178cd22915f6b0ba261d3cc7edc719b234de9c1">
+	<link rel="stylesheet" href="resources/style.css?4f8c93c97a8296200ebbc4320e4d19208862e348">
+
+</head>
+
+<body>
+	<nav id="navigation" class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<!-- Expander button -->
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a href="https://holt59.github.io/cakephp3-bootstrap-helpers" class="navbar-brand">CakePHP 3 Bootstrap Helpers</a>
+			</div>
+			<div class="collapse navbar-collapse">
+
+				<ul class="nav navbar-nav">
+					<li>
+						<a href="https://holt59.github.io/cakephp3-bootstrap-helpers">Getting Started</a>
+					</li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">The helpers <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+<li> <a href="https://holt59.github.io/cakephp3-bootstrap-helpers/form-helper/basics/">Form Helper</a> </li>
+<li> <a href="https://holt59.github.io/cakephp3-bootstrap-helpers/html-helper/icons/">Html Helper</a> </li>
+<li> <a href="https://holt59.github.io/cakephp3-bootstrap-helpers/modal-helper/basics/">Modal Helper</a> </li>
+<li> <a href="https://holt59.github.io/cakephp3-bootstrap-helpers/navbar-helper/basics/">Navbar Helper</a> </li>
+<li> <a href="https://holt59.github.io/cakephp3-bootstrap-helpers/panel-helper/basics/">Panel Helper</a> </li>
+						</ul>
+					</li>
+					<li class="active"><a href="https://holt59.github.io/cakephp3-bootstrap-helpers/api/">API</a></li>
+					<li>
+						<a href="https://holt59.github.io/cakephp3-bootstrap-helpers/faq">FAQ</a>
+					</li>
+				</ul>
+
+				<!-- Search, Navigation and Repo links -->
+				<ul class="nav navbar-nav navbar-right">
+					<li>
+						<a href="https://github.com/Holt59/cakephp3-bootstrap-helpers">
+							<i class="fa fa-github"></i> GitHub
+						</a>
+					</li>
+				</ul>
+                <form id="search" class="navbar-form navbar-right" role="search">
+                    <input type="hidden" name="cx" value="">
+                    <input type="hidden" name="ie" value="UTF-8">
+                    <div class="form-group">
+                        <input type="text" name="q" class="search-query form-control" placeholder="Search">
+					</div>
+				</form>
+
+			</div>
+		</div>
+	</nav>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3 hidden-sm hidden-xs left-menu">
+
+				<div id="groups">
+						<h3 class="nav-title">Namespaces</h3>
+					<ul>
+							<li class="active">
+								<a href="namespace-Bootstrap.html">
+									Bootstrap<span></span>
+								</a>
+									<ul>
+							<li class="active">
+								<a href="namespace-Bootstrap.View.html">
+									View<span></span>
+								</a>
+									<ul>
+							<li class="active">
+								<a href="namespace-Bootstrap.View.Helper.html">
+									Helper								</a>
+									</li>
+							<li>
+								<a href="namespace-Bootstrap.View.Widget.html">
+									Widget								</a>
+									</li>
+										</ul></li></ul></li>
+					</ul>
+				</div>
+
+
+				<div id="elements">
+					<h3 class="nav-title">Classes</h3>
+					<ul class="nav-list">
+						<li><a href="class-Bootstrap.View.Helper.BreadcrumbsHelper.html">BreadcrumbsHelper</a></li>
+						<li><a href="class-Bootstrap.View.Helper.FlashHelper.html">FlashHelper</a></li>
+						<li><a href="class-Bootstrap.View.Helper.FormHelper.html">FormHelper</a></li>
+						<li><a href="class-Bootstrap.View.Helper.HtmlHelper.html">HtmlHelper</a></li>
+						<li><a href="class-Bootstrap.View.Helper.ModalHelper.html">ModalHelper</a></li>
+						<li class="active"><a href="class-Bootstrap.View.Helper.NavbarHelper.html">NavbarHelper</a></li>
+						<li><a href="class-Bootstrap.View.Helper.PaginatorHelper.html">PaginatorHelper</a></li>
+						<li><a href="class-Bootstrap.View.Helper.PanelHelper.html">PanelHelper</a></li>
+					</ul>
+
+
+					<h3 class="nav-title">Traits</h3>
+					<ul class="nav-list">
+						<li><a href="class-Bootstrap.View.Helper.ClassTrait.html">ClassTrait</a></li>
+						<li><a href="class-Bootstrap.View.Helper.EasyIconTrait.html">EasyIconTrait</a></li>
+						<li><a href="class-Bootstrap.View.Helper.UrlComparerTrait.html">UrlComparerTrait</a></li>
+					</ul>
+
+
+
+				</div>
+			</div>
+
+			<div class="col-md-9">
+				<div id="rightInner">
+<div id="content" class="class">
+	<h1>Class NavbarHelper</h1>
+
+
+	<div class="description">
+	<p>Navbar helper library.</p>
+
+<p>Automatic generation of Bootstrap HTML navbars.</p>
+	</div>
+
+	<dl class="tree">
+		<dd style="padding-left:0px">
+			<a href="https://api.cakephp.org/3.4/class-Cake.View.Helper.html" target="_blank">
+				<span>Cake\View\Helper</span>
+			</a>
+			
+			
+		</dd>
+		<dd style="padding-left:30px">
+			<img src="resources/inherit.png" alt="Extended by">
+				<b><span>Bootstrap\View\Helper\NavbarHelper</span></b>
+			
+			 uses 
+					<a href="class-Bootstrap.View.Helper.ClassTrait.html"><span>Bootstrap\View\Helper\ClassTrait</span></a>
+				, 
+			
+					<a href="class-Bootstrap.View.Helper.EasyIconTrait.html"><span>Bootstrap\View\Helper\EasyIconTrait</span></a>
+				, 
+			
+					Cake\View\StringTemplateTrait
+, 
+			
+					<a href="class-Bootstrap.View.Helper.UrlComparerTrait.html"><span>Bootstrap\View\Helper\UrlComparerTrait</span></a>
+				
+			
+		</dd>
+	</dl>
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-Bootstrap.html">Bootstrap</a>\<a href="namespace-Bootstrap.View.html">View</a>\<a href="namespace-Bootstrap.View.Helper.html">Helper</a><br>
+		
+
+		<b>Location:</b> <a href="source-class-Bootstrap.View.Helper.NavbarHelper.html#20-459" title="Go to source code">View/Helper/NavbarHelper.php</a><br>
+	</div>
+
+
+
+
+	<div class="section">
+		<h2>Properties summary</h2>
+		<ul class="member-summary properties">
+		<li class="clearfix">
+			<div class="name">
+					<code><a href="class-Bootstrap.View.Helper.NavbarHelper.html#$_defaultConfig">$_defaultConfig</a></code>
+
+				<span class="attributes">
+					<span class="label label-success">public</span>
+
+				</span>
+			</div>
+
+			<div class="property-type">
+				<code>array</code></div>
+
+			<div class="description">
+				Default configuration for the helper.
+			</div>
+		</li>
+		<li class="clearfix">
+			<div class="name">
+					<code><a href="class-Bootstrap.View.Helper.NavbarHelper.html#$_level">$_level</a></code>
+
+				<span class="attributes">
+					<span class="label label-warning">protected</span>
+
+				</span>
+			</div>
+
+			<div class="property-type">
+				<code>integer</code></div>
+
+			<div class="description">
+				Menu level (0 = out of menu, 1 = main horizontal menu, 2 = dropdown menu).
+			</div>
+		</li>
+		<li class="clearfix">
+			<div class="name">
+					<code><a href="class-Bootstrap.View.Helper.NavbarHelper.html#$_responsive">$_responsive</a></code>
+
+				<span class="attributes">
+					<span class="label label-warning">protected</span>
+
+				</span>
+			</div>
+
+			<div class="property-type">
+				<code>boolean</code></div>
+
+			<div class="description">
+				Indicates if the navbar is responsive or not.
+			</div>
+		</li>
+		<li class="clearfix">
+			<div class="name">
+					<code><a href="class-Bootstrap.View.Helper.NavbarHelper.html#$helpers">$helpers</a></code>
+
+				<span class="attributes">
+					<span class="label label-success">public</span>
+
+				</span>
+			</div>
+
+			<div class="property-type">
+				<code>array</code></div>
+
+			<div class="description">
+				Other helpers used by NavbarHelper.
+			</div>
+		</li>
+		</ul>
+	</div>
+
+	<div class="section">
+		<h2>Magic properties summary</h2>
+		<ul class="member-summary properties">
+		<li class="clearfix">
+			<div class="name">
+					<code><a href="class-Bootstrap.View.Helper.NavbarHelper.html#m$Form">$Form</a></code>
+
+				<span class="attributes">
+					<span class="label label-success">public</span>
+
+				</span>
+			</div>
+
+			<div class="property-type">
+				<code><code><a href="class-Bootstrap.View.Helper.FormHelper.html">Bootstrap\View\Helper\FormHelper</a></code></code></div>
+
+			<div class="description">
+				
+			</div>
+		</li>
+		<li class="clearfix">
+			<div class="name">
+					<code><a href="class-Bootstrap.View.Helper.NavbarHelper.html#m$Html">$Html</a></code>
+
+				<span class="attributes">
+					<span class="label label-success">public</span>
+
+				</span>
+			</div>
+
+			<div class="property-type">
+				<code><code><a href="class-Bootstrap.View.Helper.HtmlHelper.html">Bootstrap\View\Helper\HtmlHelper</a></code></code></div>
+
+			<div class="description">
+				
+			</div>
+		</li>
+		<li class="clearfix">
+			<div class="name">
+					<code><a href="class-Bootstrap.View.Helper.NavbarHelper.html#m$Url">$Url</a></code>
+
+				<span class="attributes">
+					<span class="label label-success">public</span>
+
+				</span>
+			</div>
+
+			<div class="property-type">
+					<code><code><a href="https://api.cakephp.org/3.4/class-Cake.View.Helper.UrlHelper.html" target="_blank">\Cake\View\Helper\UrlHelper</a></code></code>
+
+			<div class="description">
+				
+			</div>
+		</li>
+		</ul>
+	</div>
+
+
+	<div class="section">
+		<h2>Inherited Properties</h2>
+		<ul class="member-summary used">
+			<li>
+					<code><a href="class-Bootstrap.View.Helper.EasyIconTrait.html#$easyIcon"><!--
+					-->easyIcon<!--
+					--></a></code>
+					<code><a href="class-Bootstrap.View.Helper.UrlComparerTrait.html#$_parts"><!--
+					-->_parts<!--
+					--></a></code>
+			</li>
+		</ul>
+	</div>
+
+
+
+
+
+	<div class="section">
+		<h2>Method Summary</h2>
+		<ul class="member-summary">
+		<li class="clearfix">
+			<h3 class="method-name">
+					<a href="class-Bootstrap.View.Helper.NavbarHelper.html#_beginMenu">beginMenu()</a>
+
+
+<span class="label label-success">public</span></span>
+
+			</h3>
+			<div class="description detailed">
+				Start a new menu.
+			</div>
+		</li>
+		<li class="clearfix">
+			<h3 class="method-name">
+					<a href="class-Bootstrap.View.Helper.NavbarHelper.html#_button">button()</a>
+
+
+<span class="label label-success">public</span></span>
+
+			</h3>
+			<div class="description detailed">
+				Add a button to the navbar.
+			</div>
+		</li>
+		<li class="clearfix">
+			<h3 class="method-name">
+					<a href="class-Bootstrap.View.Helper.NavbarHelper.html#_create">create()</a>
+
+
+<span class="label label-success">public</span></span>
+
+			</h3>
+			<div class="description detailed">
+				Create a new navbar.
+			</div>
+		</li>
+		<li class="clearfix">
+			<h3 class="method-name">
+					<a href="class-Bootstrap.View.Helper.NavbarHelper.html#_divider">divider()</a>
+
+
+<span class="label label-success">public</span></span>
+
+			</h3>
+			<div class="description detailed">
+				Add a divider to an inner menu of the navbar.
+			</div>
+		</li>
+		<li class="clearfix">
+			<h3 class="method-name">
+					<a href="class-Bootstrap.View.Helper.NavbarHelper.html#_end">end()</a>
+
+
+<span class="label label-success">public</span></span>
+
+			</h3>
+			<div class="description detailed">
+				Close a navbar.
+			</div>
+		</li>
+		<li class="clearfix">
+			<h3 class="method-name">
+					<a href="class-Bootstrap.View.Helper.NavbarHelper.html#_endMenu">endMenu()</a>
+
+
+<span class="label label-success">public</span></span>
+
+			</h3>
+			<div class="description detailed">
+				End a menu.
+			</div>
+		</li>
+		<li class="clearfix">
+			<h3 class="method-name">
+					<a href="class-Bootstrap.View.Helper.NavbarHelper.html#_header">header()</a>
+
+
+<span class="label label-success">public</span></span>
+
+			</h3>
+			<div class="description detailed">
+				Add a header to an inner menu of the navbar.
+			</div>
+		</li>
+		<li class="clearfix">
+			<h3 class="method-name">
+					<a href="class-Bootstrap.View.Helper.NavbarHelper.html#_link">link()</a>
+
+
+<span class="label label-success">public</span></span>
+
+			</h3>
+			<div class="description detailed">
+				Add a link to the navbar or to a menu.
+			</div>
+		</li>
+		<li class="clearfix">
+			<h3 class="method-name">
+					<a href="class-Bootstrap.View.Helper.NavbarHelper.html#_text">text()</a>
+
+
+<span class="label label-success">public</span></span>
+
+			</h3>
+			<div class="description detailed">
+				Add a text to the navbar.
+			</div>
+		</li>
+		</ul>
+	</div>
+
+
+
+	<div class="section">
+		<h2>Method Detail</h2>
+		<div class="method-detail">
+				<a id="_beginMenu"></a>
+		<a id="method-Bootstrap\View\Helper\NavbarHelperbeginMenu"></a>
+		<h3 class="method-name">
+<a href="source-class-Bootstrap.View.Helper.NavbarHelper.html#357-424" title="Go to source code">beginMenu()</a>
+
+<span class="label label-success">public</span></span>
+
+			<a href="#_beginMenu" class="permalink" title="Permalink to this method">¶</a>
+		</h3>
+		<pre class="language-php method-signature">
+<code>beginMenu($name = null, $url = null, $options = [], $linkOptions = [], $listOptions = [])</code></pre>
+
+		<div class="description detailed">
+			<p>Start a new menu.</p>
+
+<p>Two types of menus exist:
+- Horizontal hover menu in the navbar (level 0).
+- Vertical dropdown menu (level 1).
+The menu level is determined automatically: A dropdown menu needs to be part of
+a hover menu. In the hover menu case, pass the options array as the first argument.</p>
+
+<p>You can populate the menu with <code>link()</code>, <code>divider()</code>, and sub menus.
+Use <code>'class' =&gt; 'navbar-right'</code> option for flush right.</p>
+
+<p><strong>Note:</strong> The <code>$linkOptions</code> and <code>$listOptions</code> parameters are not used for menu
+at level 0 (horizontal menu).</p>
+
+<h3>Options</h3>
+
+<ul>
+<li><code>templateVars</code> Provide template variables for the menu template.</li>
+<li>Other attributes will be assigned to the menu element.</li>
+</ul>
+
+<h3>Link Options</h3>
+
+<ul>
+<li><code>caret</code> HTML caret element. Default is <code>'&lt;span class="caret"&gt;&lt;/span&gt;'</code>.</li>
+<li>Other attributes will be assigned to the link element.</li>
+</ul>
+
+<h3>List Options</h3>
+
+<ul>
+<li>Other attributes will be assigned to the list element.</li>
+</ul>
+
+
+				<h6>Parameters</h6>
+				<div class="parameter-list list">
+				<dl>
+					<dt>
+						<code class="language-php optional">string $name = null</code>
+					</dt>
+					<dd>Name of the menu.</dd>
+					<dt>
+						<code class="language-php optional">string|array $url = null</code>
+					</dt>
+					<dd>URL for the menu.</dd>
+					<dt>
+						<code class="language-php optional">array $options = []</code>
+					</dt>
+					<dd>Array of options for the wrapping element.</dd>
+					<dt>
+						<code class="language-php optional">array $linkOptions = []</code>
+					</dt>
+					<dd>Array of options for the link. See above.</dd>
+					<dt>
+						<code class="language-php optional">array $listOptions = []</code>
+					</dt>
+					<dd>Array of options for the openning <code>ul</code> elements.</dd>
+				</dl>
+				</div>
+
+				<h6>Returns</h6>
+				<div class="list">
+					string<br>HTML elements to start a menu.<br>
+				</div>
+
+
+
+
+		</div>
+		</div>
+		<div class="method-detail">
+				<a id="_button"></a>
+		<a id="method-Bootstrap\View\Helper\NavbarHelperbutton"></a>
+		<h3 class="method-name">
+<a href="source-class-Bootstrap.View.Helper.NavbarHelper.html#265-279" title="Go to source code">button()</a>
+
+<span class="label label-success">public</span></span>
+
+			<a href="#_button" class="permalink" title="Permalink to this method">¶</a>
+		</h3>
+		<pre class="language-php method-signature">
+<code>button($name, $options = [])</code></pre>
+
+		<div class="description detailed">
+			<p>Add a button to the navbar.</p>
+
+
+				<h6>Parameters</h6>
+				<div class="parameter-list list">
+				<dl>
+					<dt>
+						<code class="language-php ">string $name</code>
+					</dt>
+					<dd>Text of the button.</dd>
+					<dt>
+						<code class="language-php optional">array $options = []</code>
+					</dt>
+					<dd>Options sent to the <code>Form::button</code> method.</dd>
+				</dl>
+				</div>
+
+				<h6>Returns</h6>
+				<div class="list">
+					string<br>A HTML navbar button.<br>
+				</div>
+
+
+
+
+		</div>
+		</div>
+		<div class="method-detail">
+				<a id="_create"></a>
+		<a id="method-Bootstrap\View\Helper\NavbarHelpercreate"></a>
+		<h3 class="method-name">
+<a href="source-class-Bootstrap.View.Helper.NavbarHelper.html#112-211" title="Go to source code">create()</a>
+
+<span class="label label-success">public</span></span>
+
+			<a href="#_create" class="permalink" title="Permalink to this method">¶</a>
+		</h3>
+		<pre class="language-php method-signature">
+<code>create($brand, $options = [])</code></pre>
+
+		<div class="description detailed">
+			<p>Create a new navbar.</p>
+
+<h3>Options:</h3>
+
+<ul>
+<li><code>fixed</code> <a href="http://getbootstrap.com/components/#navbar-fixed-top">Fixed navbar</a>. Possible values are <code>'top'</code>, <code>'bottom'</code>, <code>false</code>. Default is <code>false</code>.</li>
+<li><code>fluid</code> Fluid navabar. Default is <code>false</code>.</li>
+<li><code>inverse</code> <a href="http://getbootstrap.com/components/#navbar-inverted">Inverted navbar</a>. Default is <code>false</code>.</li>
+<li><code>responsive</code> Responsive navbar. Default is <code>true</code>.</li>
+<li><code>static</code> <a href="http://getbootstrap.com/components/#navbar-static-top">Static navbar</a>. Default is <code>false</code>.</li>
+<li><code>templateVars</code> Provide template variables for the template.</li>
+<li>Other attributes will be assigned to the navbar element.</li>
+</ul>
+
+
+				<h6>Parameters</h6>
+				<div class="parameter-list list">
+				<dl>
+					<dt>
+						<code class="language-php ">string $brand</code>
+					</dt>
+					<dd>Brand name.</dd>
+					<dt>
+						<code class="language-php optional">array $options = []</code>
+					</dt>
+					<dd>Array of options. See above.</dd>
+				</dl>
+				</div>
+
+				<h6>Returns</h6>
+				<div class="list">
+					string<br>containing the HTML starting element of the navbar.<br>
+				</div>
+
+
+
+
+		</div>
+		</div>
+		<div class="method-detail">
+				<a id="_divider"></a>
+		<a id="method-Bootstrap\View\Helper\NavbarHelperdivider"></a>
+		<h3 class="method-name">
+<a href="source-class-Bootstrap.View.Helper.NavbarHelper.html#281-299" title="Go to source code">divider()</a>
+
+<span class="label label-success">public</span></span>
+
+			<a href="#_divider" class="permalink" title="Permalink to this method">¶</a>
+		</h3>
+		<pre class="language-php method-signature">
+<code>divider($options = [])</code></pre>
+
+		<div class="description detailed">
+			<p>Add a divider to an inner menu of the navbar.</p>
+
+<h3>Options</h3>
+
+<ul>
+<li><code>templateVars</code> Provide template variables for the divider template.</li>
+<li>Other attributes will be assigned to the divider element.</li>
+</ul>
+
+
+				<h6>Parameters</h6>
+				<div class="parameter-list list">
+				<dl>
+					<dt>
+						<code class="language-php optional">array $options = []</code>
+					</dt>
+					<dd>Array of options. See above.</dd>
+				</dl>
+				</div>
+
+				<h6>Returns</h6>
+				<div class="list">
+					A<br>HTML dropdown divider tag.<br>
+				</div>
+
+
+
+
+		</div>
+		</div>
+		<div class="method-detail">
+				<a id="_end"></a>
+		<a id="method-Bootstrap\View\Helper\NavbarHelperend"></a>
+		<h3 class="method-name">
+<a href="source-class-Bootstrap.View.Helper.NavbarHelper.html#442-457" title="Go to source code">end()</a>
+
+<span class="label label-success">public</span></span>
+
+			<a href="#_end" class="permalink" title="Permalink to this method">¶</a>
+		</h3>
+		<pre class="language-php method-signature">
+<code>end()</code></pre>
+
+		<div class="description detailed">
+			<p>Close a navbar.</p>
+
+
+
+				<h6>Returns</h6>
+				<div class="list">
+					string<br>HTML elements to close the navbar.<br>
+				</div>
+
+
+
+
+		</div>
+		</div>
+		<div class="method-detail">
+				<a id="_endMenu"></a>
+		<a id="method-Bootstrap\View\Helper\NavbarHelperendMenu"></a>
+		<h3 class="method-name">
+<a href="source-class-Bootstrap.View.Helper.NavbarHelper.html#426-440" title="Go to source code">endMenu()</a>
+
+<span class="label label-success">public</span></span>
+
+			<a href="#_endMenu" class="permalink" title="Permalink to this method">¶</a>
+		</h3>
+		<pre class="language-php method-signature">
+<code>endMenu()</code></pre>
+
+		<div class="description detailed">
+			<p>End a menu.</p>
+
+
+
+				<h6>Returns</h6>
+				<div class="list">
+					string<br>HTML elements to close a menu.<br>
+				</div>
+
+
+
+
+		</div>
+		</div>
+		<div class="method-detail">
+				<a id="_header"></a>
+		<a id="method-Bootstrap\View\Helper\NavbarHelperheader"></a>
+		<h3 class="method-name">
+<a href="source-class-Bootstrap.View.Helper.NavbarHelper.html#301-321" title="Go to source code">header()</a>
+
+<span class="label label-success">public</span></span>
+
+			<a href="#_header" class="permalink" title="Permalink to this method">¶</a>
+		</h3>
+		<pre class="language-php method-signature">
+<code>header($name, $options = [])</code></pre>
+
+		<div class="description detailed">
+			<p>Add a header to an inner menu of the navbar.</p>
+
+<h3>Options</h3>
+
+<ul>
+<li><code>templateVars</code> Provide template variables for the header template.</li>
+<li>Other attributes will be assigned to the header element.</li>
+<li></li>
+</ul>
+
+
+				<h6>Parameters</h6>
+				<div class="parameter-list list">
+				<dl>
+					<dt>
+						<code class="language-php ">string $name</code>
+					</dt>
+					<dd>Title of the header.</dd>
+					<dt>
+						<code class="language-php optional">array $options = []</code>
+					</dt>
+					<dd>Array of options for the wrapper tag.</dd>
+				</dl>
+				</div>
+
+				<h6>Returns</h6>
+				<div class="list">
+					A<br>HTML header tag.<br>
+				</div>
+
+
+
+
+		</div>
+		</div>
+		<div class="method-detail">
+				<a id="_link"></a>
+		<a id="method-Bootstrap\View\Helper\NavbarHelperlink"></a>
+		<h3 class="method-name">
+<a href="source-class-Bootstrap.View.Helper.NavbarHelper.html#213-263" title="Go to source code">link()</a>
+
+<span class="label label-success">public</span></span>
+
+			<a href="#_link" class="permalink" title="Permalink to this method">¶</a>
+		</h3>
+		<pre class="language-php method-signature">
+<code>link($name, $url = '', $options = [], $linkOptions = [])</code></pre>
+
+		<div class="description detailed">
+			<p>Add a link to the navbar or to a menu.</p>
+
+<p>Encapsulate links with <code>beginMenu()</code>, <code>endMenu()</code> to create
+a horizontal hover menu in the navbar or a dropdown menu.</p>
+
+<h3>Options</h3>
+
+<ul>
+<li><code>active</code> Indicates if the link is the current one. Default is automatically
+deduced if <code>autoActiveLink</code> is on, otherwize default is <code>false</code>.</li>
+<li><code>templateVars</code> Provide template variables for the templates.</li>
+<li>Other attributes will be assigned to the navbar link element.</li>
+</ul>
+
+
+				<h6>Parameters</h6>
+				<div class="parameter-list list">
+				<dl>
+					<dt>
+						<code class="language-php ">string $name</code>
+					</dt>
+					<dd>The link text.</dd>
+					<dt>
+						<code class="language-php optional">string|array $url = ''</code>
+					</dt>
+					<dd>The link URL (CakePHP way).</dd>
+					<dt>
+						<code class="language-php optional">array $options = []</code>
+					</dt>
+					<dd>Array of attributes for the wrapper tag.</dd>
+					<dt>
+						<code class="language-php optional">array $linkOptions = []</code>
+					</dt>
+					<dd>Array of attributes for the link.</dd>
+				</dl>
+				</div>
+
+				<h6>Returns</h6>
+				<div class="list">
+					string<br>A HTML tag wrapping the link.<br>
+				</div>
+
+
+
+
+		</div>
+		</div>
+		<div class="method-detail">
+				<a id="_text"></a>
+		<a id="method-Bootstrap\View\Helper\NavbarHelpertext"></a>
+		<h3 class="method-name">
+<a href="source-class-Bootstrap.View.Helper.NavbarHelper.html#323-355" title="Go to source code">text()</a>
+
+<span class="label label-success">public</span></span>
+
+			<a href="#_text" class="permalink" title="Permalink to this method">¶</a>
+		</h3>
+		<pre class="language-php method-signature">
+<code>text($text, $options = [])</code></pre>
+
+		<div class="description detailed">
+			<p>Add a text to the navbar.</p>
+
+<h3>Options</h3>
+
+<ul>
+<li><code>templateVars</code> Provide template variables for the text template.</li>
+<li>Other attributes will be assigned to the text element.</li>
+</ul>
+
+
+				<h6>Parameters</h6>
+				<div class="parameter-list list">
+				<dl>
+					<dt>
+						<code class="language-php ">string $text</code>
+					</dt>
+					<dd>The text message.</dd>
+					<dt>
+						<code class="language-php optional">array $options = []</code>
+					</dt>
+					<dd>Array attributes for the wrapper element.</dd>
+				</dl>
+				</div>
+
+				<h6>Returns</h6>
+				<div class="list">
+					string<br>A HTML element wrapping the text for the navbar.<br>
+				</div>
+
+
+
+
+		</div>
+		</div>
+	</div>
+
+
+	<div class="section">
+		<h2>Methods used from <a href="class-Bootstrap.View.Helper.ClassTrait.html#methods">Bootstrap\View\Helper\ClassTrait</a></h2>
+		<div class="method-detail">
+				<a id="__addButtonClasses"></a>
+		<a id="method-Bootstrap\View\Helper\NavbarHelper_addButtonClasses"></a>
+		<h3 class="method-name">
+<a href="source-class-Bootstrap.View.Helper.NavbarHelper.html#52-84" title="Go to source code">_addButtonClasses()</a>
+
+<span class="label label-warning">protected</span></span>
+
+			<a href="#__addButtonClasses" class="permalink" title="Permalink to this method">¶</a>
+		</h3>
+		<pre class="language-php method-signature">
+<code>_addButtonClasses($options)</code></pre>
+
+		<div class="description detailed">
+			<p>Add classes to options according to the default values of bootstrap-type
+and bootstrap-size for button (see configuration).</p>
+
+
+				<h6>Parameters</h6>
+				<div class="parameter-list list">
+				<dl>
+					<dt>
+						<code class="language-php ">array $options</code>
+					</dt>
+					<dd><p>The initial options with bootstrap-type and/or
+bootstrat-size values.</p></dd>
+				</dl>
+				</div>
+
+				<h6>Returns</h6>
+				<div class="list">
+					array<br><p>The new options with class values (btn, and btn-* according to
+initial options).</p><br>
+				</div>
+
+
+
+
+		</div>
+		</div>
+		<div class="method-detail">
+				<a id="__isAssociativeArray"></a>
+		<a id="method-Bootstrap\View\Helper\NavbarHelper_isAssociativeArray"></a>
+		<h3 class="method-name">
+<a href="source-class-Bootstrap.View.Helper.NavbarHelper.html#86-95" title="Go to source code">_isAssociativeArray()</a>
+
+<span class="label label-warning">protected</span></span>
+
+			<a href="#__isAssociativeArray" class="permalink" title="Permalink to this method">¶</a>
+		</h3>
+		<pre class="language-php method-signature">
+<code>_isAssociativeArray($array)</code></pre>
+
+		<div class="description detailed">
+			<p>Check weither the specified array is associative or not.</p>
+
+
+				<h6>Parameters</h6>
+				<div class="parameter-list list">
+				<dl>
+					<dt>
+						<code class="language-php ">array $array</code>
+					</dt>
+					<dd>The array to check.</dd>
+				</dl>
+				</div>
+
+				<h6>Returns</h6>
+				<div class="list">
+					boolean<br><code>true</code> if the array is associative, <code>false</code> otherwize.<br>
+				</div>
+
+
+
+
+		</div>
+		</div>
+		<div class="method-detail">
+				<a id="_addClass"></a>
+		<a id="method-Bootstrap\View\Helper\NavbarHelperaddClass"></a>
+		<h3 class="method-name">
+<a href="source-class-Bootstrap.View.Helper.NavbarHelper.html#24-50" title="Go to source code">addClass()</a>
+
+<span class="label label-success">public</span></span>
+
+			<a href="#_addClass" class="permalink" title="Permalink to this method">¶</a>
+		</h3>
+		<pre class="language-php method-signature">
+<code>addClass($options = [], $class = null, $key = 'class')</code></pre>
+
+		<div class="description detailed">
+			<p>Adds the given class to the element options.</p>
+
+
+				<h6>Parameters</h6>
+				<div class="parameter-list list">
+				<dl>
+					<dt>
+						<code class="language-php optional">array $options = []</code>
+					</dt>
+					<dd>Array of options/attributes to add a class to.</dd>
+					<dt>
+						<code class="language-php optional">string|array $class = null</code>
+					</dt>
+					<dd>The class names to be added.</dd>
+					<dt>
+						<code class="language-php optional">string $key = 'class'</code>
+					</dt>
+					<dd>The key to use for class (default to <code>'class'</code>).</dd>
+				</dl>
+				</div>
+
+				<h6>Returns</h6>
+				<div class="list">
+					array<br>Array of options with <code>$key</code> set or updated.<br>
+				</div>
+
+
+
+
+		</div>
+		</div>
+	</div>
+	<div class="section">
+		<h2>Methods used from <a href="class-Bootstrap.View.Helper.EasyIconTrait.html#methods">Bootstrap\View\Helper\EasyIconTrait</a></h2>
+		<div class="method-detail">
+				<a id="__easyIcon"></a>
+		<a id="method-Bootstrap\View\Helper\NavbarHelper_easyIcon"></a>
+		<h3 class="method-name">
+<a href="source-class-Bootstrap.View.Helper.NavbarHelper.html#63-93" title="Go to source code">_easyIcon()</a>
+
+<span class="label label-warning">protected</span></span>
+
+			<a href="#__easyIcon" class="permalink" title="Permalink to this method">¶</a>
+		</h3>
+		<pre class="language-php method-signature">
+<code>_easyIcon($callback, $indexTitle, $indexOptions, $args = null)</code></pre>
+
+		<div class="description detailed">
+			<p>This method calls the given callback with the given list of parameters after
+applying an easy-icon filter on them.</p>
+
+<p>Note: For compatibility issue, this function can still be called with a callback,
+a string (title) and an array of options.</p>
+
+
+				<h6>Parameters</h6>
+				<div class="parameter-list list">
+				<dl>
+					<dt>
+						<code class="language-php ">callable $callback</code>
+					</dt>
+					<dd>The callback.</dd>
+					<dt>
+						<code class="language-php ">int $indexTitle</code>
+					</dt>
+					<dd><p>Index of the title to which the easy-icon processing
+will be applied.</p></dd>
+					<dt>
+						<code class="language-php ">int $indexOptions</code>
+					</dt>
+					<dd>Index of the options in the $args array.</dd>
+					<dt>
+						<code class="language-php optional">array $args = null</code>
+					</dt>
+					<dd>Arguments for the callback.</dd>
+				</dl>
+				</div>
+
+				<h6>Returns</h6>
+				<div class="list">
+					mixed<br>Whatever might be returned by $callback.<br>
+				</div>
+
+
+
+
+		</div>
+		</div>
+		<div class="method-detail">
+				<a id="__makeIcon"></a>
+		<a id="method-Bootstrap\View\Helper\NavbarHelper_makeIcon"></a>
+		<h3 class="method-name">
+<a href="source-class-Bootstrap.View.Helper.NavbarHelper.html#30-61" title="Go to source code">_makeIcon()</a>
+
+<span class="label label-warning">protected</span></span>
+
+			<a href="#__makeIcon" class="permalink" title="Permalink to this method">¶</a>
+		</h3>
+		<pre class="language-php method-signature">
+<code>_makeIcon($text, $converted = false, $options = [])</code></pre>
+
+		<div class="description detailed">
+			<p>Try to convert the specified string to a bootstrap icon. The string is converted if
+it matches a format <code>i:icon-name</code> (leading and trailing spaces or ignored) and if
+easy-icon is activated.</p>
+
+<p><strong>Note:</strong> This function will currently fail if the Html helper associated with the
+view is not BootstrapHtmlHelper.</p>
+
+
+				<h6>Parameters</h6>
+				<div class="parameter-list list">
+				<dl>
+					<dt>
+						<code class="language-php ">string $text</code>
+					</dt>
+					<dd>The string to convert.</dd>
+					<dt>
+						<code class="language-php optional">bool $converted = false</code>
+					</dt>
+					<dd><p>If specified, will contains <code>true</code> if the text was converted,
+<code>false</code> otherwize.</p></dd>
+					<dt>
+						<code class="language-php optional"> $options = []</code>
+					</dt>
+					<dd></dd>
+				</dl>
+				</div>
+
+				<h6>Returns</h6>
+				<div class="list">
+					string<br>The text after conversion.<br>
+				</div>
+
+
+
+
+		</div>
+		</div>
+	</div>
+	<div class="section">
+		<h2>Methods used from <a href="class-Bootstrap.View.Helper.UrlComparerTrait.html#methods">Bootstrap\View\Helper\UrlComparerTrait</a></h2>
+		<div class="method-detail">
+				<a id="__hostname"></a>
+		<a id="method-Bootstrap\View\Helper\NavbarHelper_hostname"></a>
+		<h3 class="method-name">
+<a href="source-class-Bootstrap.View.Helper.NavbarHelper.html#41-52" title="Go to source code">_hostname()</a>
+
+<span class="label label-warning">protected</span></span>
+
+			<a href="#__hostname" class="permalink" title="Permalink to this method">¶</a>
+		</h3>
+		<pre class="language-php method-signature">
+<code>_hostname()</code></pre>
+
+		<div class="description detailed">
+			<p>Retrieve the hostname (if any).</p>
+
+
+
+				<h6>Returns</h6>
+				<div class="list">
+					string|null<br>The hostname, or <code>null</code>.<br>
+				</div>
+
+
+
+
+		</div>
+		</div>
+		<div class="method-detail">
+				<a id="__matchHost"></a>
+		<a id="method-Bootstrap\View\Helper\NavbarHelper_matchHost"></a>
+		<h3 class="method-name">
+<a href="source-class-Bootstrap.View.Helper.NavbarHelper.html#54-64" title="Go to source code">_matchHost()</a>
+
+<span class="label label-warning">protected</span></span>
+
+			<a href="#__matchHost" class="permalink" title="Permalink to this method">¶</a>
+		</h3>
+		<pre class="language-php method-signature">
+<code>_matchHost($url)</code></pre>
+
+		<div class="description detailed">
+			<p>Checks if the given URL components match the current host.</p>
+
+
+				<h6>Parameters</h6>
+				<div class="parameter-list list">
+				<dl>
+					<dt>
+						<code class="language-php ">string $url</code>
+					</dt>
+					<dd>URL to check.</dd>
+				</dl>
+				</div>
+
+				<h6>Returns</h6>
+				<div class="list">
+					boolean<br><code>true</code> if the URL matches, <code>false</code> otherwise.<br>
+				</div>
+
+
+
+
+		</div>
+		</div>
+		<div class="method-detail">
+				<a id="__matchRelative"></a>
+		<a id="method-Bootstrap\View\Helper\NavbarHelper_matchRelative"></a>
+		<h3 class="method-name">
+<a href="source-class-Bootstrap.View.Helper.NavbarHelper.html#66-85" title="Go to source code">_matchRelative()</a>
+
+<span class="label label-warning">protected</span></span>
+
+			<a href="#__matchRelative" class="permalink" title="Permalink to this method">¶</a>
+		</h3>
+		<pre class="language-php method-signature">
+<code>_matchRelative($url)</code></pre>
+
+		<div class="description detailed">
+			<p>Checks if the given URL components match the current relative URL. This
+methods only works with full URL, and do not check the host.</p>
+
+
+				<h6>Parameters</h6>
+				<div class="parameter-list list">
+				<dl>
+					<dt>
+						<code class="language-php ">string $url</code>
+					</dt>
+					<dd>URL to check.</dd>
+				</dl>
+				</div>
+
+				<h6>Returns</h6>
+				<div class="list">
+					boolean<br><code>true</code> if the URL matches, <code>false</code> otherwise.<br>
+				</div>
+
+
+
+
+		</div>
+		</div>
+		<div class="method-detail">
+				<a id="__normalize"></a>
+		<a id="method-Bootstrap\View\Helper\NavbarHelper_normalize"></a>
+		<h3 class="method-name">
+<a href="source-class-Bootstrap.View.Helper.NavbarHelper.html#104-137" title="Go to source code">_normalize()</a>
+
+<span class="label label-warning">protected</span></span>
+
+			<a href="#__normalize" class="permalink" title="Permalink to this method">¶</a>
+		</h3>
+		<pre class="language-php method-signature">
+<code>_normalize($url, $parts = [])</code></pre>
+
+		<div class="description detailed">
+			<p>Normalize an URL.</p>
+
+
+				<h6>Parameters</h6>
+				<div class="parameter-list list">
+				<dl>
+					<dt>
+						<code class="language-php ">string $url</code>
+					</dt>
+					<dd>URL to normalize.</dd>
+					<dt>
+						<code class="language-php optional">array $parts = []</code>
+					</dt>
+					<dd>$pass Include pass parameters.</dd>
+				</dl>
+				</div>
+
+				<h6>Returns</h6>
+				<div class="list">
+					string<br>Normalized URL.<br>
+				</div>
+
+
+
+
+		</div>
+		</div>
+		<div class="method-detail">
+				<a id="__relative"></a>
+		<a id="method-Bootstrap\View\Helper\NavbarHelper_relative"></a>
+		<h3 class="method-name">
+<a href="source-class-Bootstrap.View.Helper.NavbarHelper.html#32-39" title="Go to source code">_relative()</a>
+
+<span class="label label-warning">protected</span></span>
+
+			<a href="#__relative" class="permalink" title="Permalink to this method">¶</a>
+		</h3>
+		<pre class="language-php method-signature">
+<code>_relative()</code></pre>
+
+		<div class="description detailed">
+			<p>Retrieve the relative path of the root URL from hostname.</p>
+
+
+
+				<h6>Returns</h6>
+				<div class="list">
+					string<br>The relative path.<br>
+				</div>
+
+
+
+
+		</div>
+		</div>
+		<div class="method-detail">
+				<a id="__removeRelative"></a>
+		<a id="method-Bootstrap\View\Helper\NavbarHelper_removeRelative"></a>
+		<h3 class="method-name">
+<a href="source-class-Bootstrap.View.Helper.NavbarHelper.html#87-102" title="Go to source code">_removeRelative()</a>
+
+<span class="label label-warning">protected</span></span>
+
+			<a href="#__removeRelative" class="permalink" title="Permalink to this method">¶</a>
+		</h3>
+		<pre class="language-php method-signature">
+<code>_removeRelative($url)</code></pre>
+
+		<div class="description detailed">
+			<p>Remove relative part an URL (if any).</p>
+
+
+				<h6>Parameters</h6>
+				<div class="parameter-list list">
+				<dl>
+					<dt>
+						<code class="language-php ">string $url</code>
+					</dt>
+					<dd>URL from which the relative part should be removed.</dd>
+				</dl>
+				</div>
+
+
+
+
+
+		</div>
+		</div>
+		<div class="method-detail">
+				<a id="_compareUrls"></a>
+		<a id="method-Bootstrap\View\Helper\NavbarHelpercompareUrls"></a>
+		<h3 class="method-name">
+<a href="source-class-Bootstrap.View.Helper.NavbarHelper.html#139-155" title="Go to source code">compareUrls()</a>
+
+<span class="label label-success">public</span></span>
+
+			<a href="#_compareUrls" class="permalink" title="Permalink to this method">¶</a>
+		</h3>
+		<pre class="language-php method-signature">
+<code>compareUrls($lhs, $rhs = null, $parts = [])</code></pre>
+
+		<div class="description detailed">
+			<p>Check if first URL is a parent of the right URL, without regards to query
+parameters or hash.</p>
+
+
+				<h6>Parameters</h6>
+				<div class="parameter-list list">
+				<dl>
+					<dt>
+						<code class="language-php ">string|array $lhs</code>
+					</dt>
+					<dd>First URL to compare.</dd>
+					<dt>
+						<code class="language-php optional">string|array $rhs = null</code>
+					</dt>
+					<dd>Second URL to compare. Default is current URL (<code>Router::url()</code>).</dd>
+					<dt>
+						<code class="language-php optional"> $parts = []</code>
+					</dt>
+					<dd></dd>
+				</dl>
+				</div>
+
+				<h6>Returns</h6>
+				<div class="list">
+					boolean<br><code>true</code> if both URL match, <code>false</code> otherwise.<br>
+				</div>
+
+
+
+
+		</div>
+		</div>
+	</div>
+
+
+
+
+
+	<div class="section">
+		<h2>Properties detail</h2>
+	<div class="property-detail">
+		<a id="$_defaultConfig"></a>
+
+		<h3 class="property-name">
+				<a href="source-class-Bootstrap.View.Helper.NavbarHelper.html#45-96" title="Go to source code"><var>$_defaultConfig</var></a>
+				<a href="#$_defaultConfig" class="permalink" title="Permalink to this property">¶</a>
+		</h3>
+
+		<div class="attributes">
+				<span class="label label-success">public</span>
+				array
+		</div>
+
+		<div class="description detailed">
+			<p>Default configuration for the helper.</p>
+
+<ul>
+<li><code>autoActiveLink</code> Set to <code>true</code> to automatically add <code>active</code> class
+when given URL for a link matches the current URL. Default is <code>true</code>.</li>
+<li><code>autoButtonLink</code> Set to  true<code>to automatically create buttons instead
+of links when outside a menu. Default is</code>true`.</li>
+</ul>
+
+
+			<div>
+				<pre class="language-php"><code>[
+    'templates' =&gt; [
+        'navbarStart' =&gt; '&lt;nav class="navbar navbar-{{type}}{{attrs.class}}"{{attrs}}&gt;{{containerStart}}{{header}}{{responsiveStart}}',
+        'navbarEnd' =&gt; '{{responsiveEnd}}{{containerEnd}}&lt;/nav&gt;',
+        'containerStart' =&gt; '&lt;div class="{{containerClass}}{{attrs.class}}"{{attrs}}&gt;',
+        'containerEnd' =&gt; '&lt;/div&gt;',
+        'responsiveStart' =&gt; '&lt;div class="collapse navbar-collapse{{attrs.class}}" id="{{id}}"{{attrs}}&gt;',
+        'responsiveEnd' =&gt; '&lt;/div&gt;',
+        'header' =&gt; '&lt;div class="navbar-header{{attrs.class}}"{{attrs}}&gt;{{toggleButton}}{{brand}}&lt;/div&gt;',
+        'toggleButton' =&gt;
+'&lt;button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#{{id}}" aria-expanded="false"&gt;
+&lt;span class="sr-only"&gt;{{content}}&lt;/span&gt;
+&lt;span class="icon-bar"&gt;&lt;/span&gt;
+&lt;span class="icon-bar"&gt;&lt;/span&gt;
+&lt;span class="icon-bar"&gt;&lt;/span&gt;
+&lt;/button&gt;',
+        'brand' =&gt; '&lt;a class="navbar-brand{{attrs.class}}" href="{{url}}"{{attrs}}&gt;{{content}}&lt;/a&gt;',
+        'brandImage' =&gt; '&lt;img alt="{{brandname}}" src="{{src}}"{{attrs}} /&gt;',
+        'dropdownMenuStart' =&gt; '&lt;ul class="dropdown-menu{{attrs.class}}"{{attrs}}&gt;',
+        'dropdownMenuEnd' =&gt; '&lt;/ul&gt;',
+        'dropdownLink' =&gt;
+'&lt;a href="{{url}}" class="dropdown-toggle{{attrs.class}}" data-toggle="dropdown" role="button"
+aria-haspopup="true" aria-expanded="false"&gt;{{content}}{{caret}}&lt;/a&gt;',
+        'innerMenuStart' =&gt; '&lt;li class="dropdown{{attrs.class}}"{{attrs}}&gt;{{dropdownLink}}{{dropdownMenuStart}}',
+        'innerMenuEnd' =&gt; '{{dropdownMenuEnd}}&lt;/li&gt;',
+        'innerMenuItem' =&gt; '&lt;li{{attrs}}&gt;{{link}}&lt;/li&gt;',
+        'innerMenuItemLink' =&gt; '&lt;a href="{{url}}"{{attrs}}&gt;{{content}}&lt;/a&gt;',
+        'innerMenuItemActive' =&gt; '&lt;li class="active{{attrs.class}}"{{attrs}}&gt;{{link}}&lt;/li&gt;',
+        'innerMenuItemLinkActive' =&gt; '&lt;a href="{{url}}"{{attrs}}&gt;{{content}}&lt;/a&gt;',
+        'innerMenuItemDivider' =&gt; '&lt;li role="separator" class="divider{{attrs.class}}"{{attrs}}&gt;&lt;/li&gt;',
+        'innerMenuItemHeader' =&gt; '&lt;li class="dropdown-header{{attrs.class}}"{{attrs}}&gt;{{content}}&lt;/li&gt;',
+        'outerMenuStart' =&gt; '&lt;ul class="nav navbar-nav{{attrs.class}}"{{attrs}}&gt;',
+        'outerMenuEnd' =&gt; '&lt;/ul&gt;',
+        'outerMenuItem' =&gt; '&lt;li{{attrs}}&gt;{{link}}&lt;/li&gt;',
+        'outerMenuItemLink' =&gt; '&lt;a href="{{url}}"{{attrs}}&gt;{{content}}&lt;/a&gt;',
+        'outerMenuItemActive' =&gt; '&lt;li class="active{{attrs.class}}"{{attrs}}&gt;{{link}}&lt;/li&gt;',
+        'outerMenuItemLinkActive' =&gt; '&lt;a href="{{url}}"{{attrs}}&gt;{{content}}&lt;/a&gt;',
+        'navbarText' =&gt; '&lt;p class="navbar-text{{attrs.class}}"{{attrs}}&gt;{{content}}&lt;/p&gt;',
+    ],
+    'templateClass' =&gt; 'Bootstrap\View\EnhancedStringTemplate',
+    'autoActiveLink' =&gt; true
+]</code></pre>
+			</div>
+		</div>
+	</div>
+	<div class="property-detail">
+		<a id="$_level"></a>
+
+		<h3 class="property-name">
+				<a href="source-class-Bootstrap.View.Helper.NavbarHelper.html#105-110" title="Go to source code"><var>$_level</var></a>
+				<a href="#$_level" class="permalink" title="Permalink to this property">¶</a>
+		</h3>
+
+		<div class="attributes">
+				<span class="label label-warning">protected</span>
+				integer
+		</div>
+
+		<div class="description detailed">
+			<p>Menu level (0 = out of menu, 1 = main horizontal menu, 2 = dropdown menu).</p>
+
+
+		</div>
+	</div>
+	<div class="property-detail">
+		<a id="$_responsive"></a>
+
+		<h3 class="property-name">
+				<a href="source-class-Bootstrap.View.Helper.NavbarHelper.html#98-103" title="Go to source code"><var>$_responsive</var></a>
+				<a href="#$_responsive" class="permalink" title="Permalink to this property">¶</a>
+		</h3>
+
+		<div class="attributes">
+				<span class="label label-warning">protected</span>
+				boolean
+		</div>
+
+		<div class="description detailed">
+			<p>Indicates if the navbar is responsive or not.</p>
+
+
+			<div>
+				<pre class="language-php"><code>false</code></pre>
+			</div>
+		</div>
+	</div>
+	<div class="property-detail">
+		<a id="$helpers"></a>
+
+		<h3 class="property-name">
+				<a href="source-class-Bootstrap.View.Helper.NavbarHelper.html#36-43" title="Go to source code"><var>$helpers</var></a>
+				<a href="#$helpers" class="permalink" title="Permalink to this property">¶</a>
+		</h3>
+
+		<div class="attributes">
+				<span class="label label-success">public</span>
+				array
+		</div>
+
+		<div class="description detailed">
+			<p>Other helpers used by NavbarHelper.</p>
+
+
+			<div>
+				<pre class="language-php"><code>[
+    'Form', 'Html', 'Url'
+]</code></pre>
+			</div>
+		</div>
+	</div>
+	</div>
+
+	<div class="section">
+		<h2>Magic properties detail</h2>
+	<div class="property-detail">
+		<a id="m$Form"></a>
+
+		<h3 class="property-name">
+				<a href="source-class-Bootstrap.View.Helper.NavbarHelper.html#25" title="Go to source code"><var>$Form</var></a>
+				<a href="#m$Form" class="permalink" title="Permalink to this property">¶</a>
+		</h3>
+
+		<div class="attributes">
+				<span class="label label-success">public</span>
+				<code><a href="class-Bootstrap.View.Helper.FormHelper.html">Bootstrap\View\Helper\FormHelper</a></code>
+		</div>
+
+		<div class="description detailed">
+			
+
+
+		</div>
+	</div>
+	<div class="property-detail">
+		<a id="m$Html"></a>
+
+		<h3 class="property-name">
+				<a href="source-class-Bootstrap.View.Helper.NavbarHelper.html#26" title="Go to source code"><var>$Html</var></a>
+				<a href="#m$Html" class="permalink" title="Permalink to this property">¶</a>
+		</h3>
+
+		<div class="attributes">
+				<span class="label label-success">public</span>
+				<code><a href="class-Bootstrap.View.Helper.HtmlHelper.html">Bootstrap\View\Helper\HtmlHelper</a></code>
+		</div>
+
+		<div class="description detailed">
+			
+
+
+		</div>
+	</div>
+	<div class="property-detail">
+		<a id="m$Url"></a>
+
+		<h3 class="property-name">
+				<a href="source-class-Bootstrap.View.Helper.NavbarHelper.html#27" title="Go to source code"><var>$Url</var></a>
+				<a href="#m$Url" class="permalink" title="Permalink to this property">¶</a>
+		</h3>
+
+		<div class="attributes">
+				<span class="label label-success">public</span>
+				<code><a href="https://api.cakephp.org/3.4/class-Cake.View.Helper.UrlHelper.html" target="_blank">\Cake\View\Helper\UrlHelper</a></code>
+		</div>
+
+		<div class="description detailed">
+			
+
+
+		</div>
+	</div>
+	</div>
+
+</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer>
+		<div class="container">
+			<div class="col-md-12">
+				<p>&copy; 2017, Mikaël Capelle (@Holt59)
+				- Designed and built by <a href="https://github.com/Holt59" target="_blank">Holt59</a> &amp;
+				<a href="https://github.com/Holt59/cakephp3-bootstrap-helpers/graphs/contributors" target="_blank">contributors</a>.</p>
+				<p>Code licensed under <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, Version 2.0</a>.</p>
+				<p>Code &amp; Documentation hosted by <a href="https://github.com" target="_blank"><i class="fa fa-github"></i> Github</a>.</p>
+				<p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> and <a href="http://www.apigen.org/">Apigen</a>.
+			</div>
+		</div>
+	</footer>
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"
+		integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+		crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+		integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="resources/combined.js"></script>
+<script src="elementlist.js"></script>
+<script type="text/javascript">
+	delete Prism.languages.php.markup;
+
+	Prism.hooks.add("after-highlight", function() {
+		$('.optional .token.operator').each(function () {
+			if ($(this).text() == '=') {
+				$(this).addClass('default-assign');
+			}
+		});
+	});
+	Prism.hooks.add("complete", function() {
+		var $counter = 0;
+		$('.line-numbers-rows > span').each(function () {
+			$(this).attr('id', ++$counter);
+		});
+		if (window.location.hash) {
+			var $hash = window.location.hash.split('-')[0];
+			var $navigationHeight = $('#navigation').outerHeight();
+			window.scrollTo(0, $($hash).offset().top - $navigationHeight);
+		}
+	});
+
+	Prism.highlightAll();
+</script>
+
+</body>
+</html>
