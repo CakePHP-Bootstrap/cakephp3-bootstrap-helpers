@@ -94,7 +94,7 @@ class StackState {
      * @param mixed $value New value for the attribute.
      */
     public function setValue($name, $value) {
-        end($this->_states)[1][$name] = $value;
+        $this->_states[count($this->_states) - 1][1][$name] = $value;
     }
 
     /**
@@ -109,11 +109,16 @@ class StackState {
     }
 
     /**
-     * Check if the current state is of the given type.
+     * Check if the current state is of the given type. If there is no
+     * current state, this function returns false.
      *
-     * @return bool true if the current state is of the given type.
+     * @return bool true if the current state is of the given type,
+    *      false if the types do not match or if there is no current state.
      */
     public function is($type) {
+        if (empty($this->_states)) {
+            return false;
+        }
         return $this->type() == $type;
     }
 };

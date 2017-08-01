@@ -158,7 +158,7 @@ class PanelHelper extends Helper {
     public function endGroup() {
         $out = '';
         while ($this->_states->is('panel')) { // panels were not closed
-            $out = $this->end();
+            $out .= $this->end();
         }
         $out .= $this->formatTemplate('panelGroupEnd', []);
         $this->_states->pop();
@@ -217,6 +217,13 @@ class PanelHelper extends Helper {
             $title   = null;
         }
 
+        $out = '';
+
+        // close previous panel if in group
+        if ($this->_states->is('panel') && $this->_states->getValue('inGroup')) {
+            $out .= $this->end();
+        }
+
         $options += [
             'body'     => true,
             'type'        => 'default',
@@ -239,12 +246,6 @@ class PanelHelper extends Helper {
             $open = $open
                 || $this->_states->getValue('groupPanelOpen')
                     == $this->_states->getValue('groupPanelCount');
-        }
-
-        $out = '';
-
-        if ($this->_states->is('panel') && $this->_states->getValue('inGroup')) {
-            $out .= $this->end();
         }
 
         $out .= $this->formatTemplate('panelStart', [
@@ -320,10 +321,10 @@ class PanelHelper extends Helper {
         }
         $out = $this->formatTemplate($current.'End', []);
         if ($this->_states->getValue('collapsible')) {
-            $ctplt = $this->_current.'CollapsibleEnd';
+            $ctplt = $current.'CollapsibleEnd';
             if ($this->templates($ctplt)) {
                 $out = $this->formatTemplate($ctplt, [
-                    $this->_current.'End' => $out
+                    $current.'End' => $out
                 ]);
             }
         }
@@ -431,7 +432,7 @@ class PanelHelper extends Helper {
             'attrs' => $this->templater()->formatAttributes($options),
             'templateVars' => $options['templateVars']
         ]);
-        if ($this->_collapsible) {
+        if ($this->_states->getValue('collapsible')) {
             $out = $this->formatTemplate('bodyCollapsibleStart', [
                 'bodyStart' => $out,
                 'headId' => $this->_states->getValue('headId'),

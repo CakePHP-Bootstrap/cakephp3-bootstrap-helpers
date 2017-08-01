@@ -3,6 +3,7 @@
 namespace Bootstrap\Test\TestCase\View\Helper;
 
 use Bootstrap\View\Helper\PanelHelper;
+use Cake\Core\Configure;
 use Cake\TestSuite\TestCase;
 use Cake\View\View;
 
@@ -27,6 +28,7 @@ class PanelHelperTest extends TestCase {
             'className' => 'Bootstrap.Html'
         ]);
         $this->panel = new PanelHelper($view);
+        Configure::write('debug', true);
     }
 
     protected function reset() {
@@ -89,6 +91,7 @@ class PanelHelperTest extends TestCase {
         $extraclass = 'my-extra-class';
 
         // Simple test
+        $this->panel->create();
         $result = $this->panel->header($content);
         $this->assertHtml([
             ['div' => [
@@ -104,6 +107,7 @@ class PanelHelperTest extends TestCase {
         $this->reset();
 
         // Test with HTML content (should be escaped)
+        $this->panel->create();
         $result = $this->panel->header($htmlContent);
         $this->assertHtml([
             ['div' => [
@@ -119,6 +123,7 @@ class PanelHelperTest extends TestCase {
         $this->reset();
 
         // Test with HTML content (should NOT be escaped)
+        $this->panel->create();
         $result = $this->panel->header($htmlContent, ['escape' => false]);
         $this->assertHtml([
             ['div' => [
@@ -135,6 +140,7 @@ class PanelHelperTest extends TestCase {
 
         // Test with icon
         $iconContent = 'i:home Home';
+        $this->panel->create();
         $result = $this->panel->header($iconContent);
         $this->assertHtml([
             ['div' => [
@@ -161,7 +167,7 @@ class PanelHelperTest extends TestCase {
             ['div' => [
                 'class' => 'panel-heading',
                 'role'  => 'tab',
-                'id'    => 'heading-0'
+                'id'    => 'heading-4'
             ]],
             ['h4' => [
                 'class' => 'panel-title'
@@ -169,9 +175,9 @@ class PanelHelperTest extends TestCase {
             ['a' => [
                 'role'          => 'button',
                 'data-toggle'   => 'collapse',
-                'href'          => '#collapse-0',
+                'href'          => '#collapse-4',
                 'aria-expanded' => 'true',
-                'aria-controls' => 'collapse-0'
+                'aria-controls' => 'collapse-4'
             ]],
             htmlspecialchars($htmlContent),
             '/a',
@@ -186,7 +192,7 @@ class PanelHelperTest extends TestCase {
         $this->assertHtml([
             ['div' => [
                 'role'  => 'tab',
-                'id'    => 'heading-1',
+                'id'    => 'heading-5',
                 'class' => 'panel-heading'
             ]],
             ['h4' => [
@@ -195,9 +201,9 @@ class PanelHelperTest extends TestCase {
             ['a' => [
                 'role'          => 'button',
                 'data-toggle'   => 'collapse',
-                'href'          => '#collapse-1',
+                'href'          => '#collapse-5',
                 'aria-expanded' => 'true',
-                'aria-controls' => 'collapse-1'
+                'aria-controls' => 'collapse-5'
             ]],
             ['b' => true], $content, '/b',
             '/a',
@@ -213,7 +219,7 @@ class PanelHelperTest extends TestCase {
         $this->assertHtml([
             ['div' => [
                 'role'  => 'tab',
-                'id'    => 'heading-2',
+                'id'    => 'heading-6',
                 'class' => 'panel-heading'
             ]],
             ['h4' => [
@@ -222,9 +228,9 @@ class PanelHelperTest extends TestCase {
             ['a' => [
                 'role'          => 'button',
                 'data-toggle'   => 'collapse',
-                'href'          => '#collapse-2',
+                'href'          => '#collapse-6',
                 'aria-expanded' => 'true',
-                'aria-controls' => 'collapse-2'
+                'aria-controls' => 'collapse-6'
             ]],
             ['i' => [
                 'class' => 'glyphicon glyphicon-home',
@@ -328,7 +334,7 @@ class PanelHelperTest extends TestCase {
             '/div'
         ]);
 
-        $this->assertHtml($expected, $result, true);
+        $this->assertHtml($expected, $result, false);
     }
 
 }
