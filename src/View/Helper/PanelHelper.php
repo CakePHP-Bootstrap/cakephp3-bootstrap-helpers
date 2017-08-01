@@ -14,6 +14,8 @@
  */
 namespace Bootstrap\View\Helper;
 
+use Bootstrap\Utility\StackState;
+
 use Cake\View\Helper;
 use Cake\View\StringTemplateTrait;
 
@@ -55,12 +57,12 @@ class PanelHelper extends Helper {
             'headerStart' => '<div class="panel-heading{{attrs.class}}"{{attrs}}>',
             'headerCollapsibleStart' => '<div class="panel-heading{{attrs.class}}" role="tab"{{attrs}}>',
             'headerTitle' => '<h4 class="panel-title{{attrs.class}}"{{attrs}}>{{content}}</h4>',
-            'headerCollapsibleLink' => 
+            'headerCollapsibleLink' =>
 '<a role="button" data-toggle="collapse" href="#{{target}}" aria-expanded="{{expanded}}" aria-controls="{{target}}"{{attrs}}>{{content}}</a>',
             'headerEnd' => '</div>',
             'bodyStart' => '<div class="panel-body{{attrs.class}}"{{attrs}}>',
             'bodyEnd' => '</div>',
-            'bodyCollapsibleStart' => 
+            'bodyCollapsibleStart' =>
                 '<div class="panel-collapse collapse{{attrs.class}}" role="tabpanel" aria-labelledby="{{headId}}"{{attrs}}>{{bodyStart}}',
             'bodyCollapsibleEnd' => '{{bodyEnd}}</div>',
             'footerStart' => '<div class="panel-footer{{attrs.class}}"{{attrs}}>',
@@ -71,11 +73,11 @@ class PanelHelper extends Helper {
     ];
 
     /**
-     * Current part of the panel (`null`, `'header'`, `'body'`, `'footer'`).
+     * States of the panel helper (contains states of type 'group' and 'panel').
      *
-     * @var string
+     * @var StackState
      */
-    protected $_current = NULL;
+    protected $_states;
 
     /**
      * Panel counter (for collapsible groups).
@@ -85,76 +87,31 @@ class PanelHelper extends Helper {
     protected $_panelCount = 0;
 
     /**
-     * Body HTML id (for collapsible panel).
-     *
-     * @var string
-     */
-    protected $_bodyId = null;
-
-    /**
-     * Header HTML id (for collapsible panel).
-     *
-     * @var string
-     */
-    protected $_headId = null;
-
-    /**
      * Panel groups counter (for panel groups).
      *
      * @var int
      */
     protected $_groupCount = 0;
 
-    /**
-     * Panel group HTML id.
-     *
-     * @var mixed
-     */
-    protected $_groupId = false;
-
-    /**
-     * Panel counter inside a group (count the number of panels in a group).
-     *
-     * @var int
-     */
-    protected $_groupPanelCount = 0;
-
-    /**
-     * Panel to open inside a group.
-     *
-     * @var mixed
-     */
-    protected $_groupPanelOpen = false;
-
-
-    /**
-     * Indicate if in group mode or not.
-     *
-     * @var bool
-     */
-    protected $_groupInGroup = false;
-
-    /**
-     * Indicate if the last panel was closed (in a group).
-     *
-     * @var bool
-     */
-    protected $_lastPanelClosed    = true;
-
-    /**
-     * Determine if previous panel should be automatically closed when calling `create()`.
-     *
-     * @var bool
-     */
-    protected $_autoCloseOnCreate  = false;
-
-    /**
-     * Indicate if panel should be collapsible or not.
-     *
-     * @var bool
-     */
-    protected $_collapsible = false;
-
+    public function __construct(\Cake\View\View $View, array $config = []) {
+        $this->_states = new StackState([
+            'group' => [
+                'groupPanelOpen' => false,
+                'groupPanelCount' => -1,
+                'groupId' => false,
+                'groupCollapsible' => true
+            ],
+            'panel' => [
+                'part' => null,
+                'bodyId' => null,
+                'headId' => null,
+                'collapsible' => false,
+                'open' => false,
+                'inGroup' => false
+            ]
+        ]);
+        parent::__construct($View, $config);
+    }
     /**
      * Open a panel group.
      *
@@ -181,14 +138,12 @@ class PanelHelper extends Helper {
             'open'                 => 0,
             'templateVars' => []
         ];
-        $this->setConfig('saved.collapsible', $this->getConfig('collapsible'));
-        $this->setConfig('collapsible', $options['collapsible']);
-        $this->_autoCloseOnCreate  = true;
-        $this->_lastPanelClosed    = true;
-        $this->_groupPanelCount    = -1;
-        $this->_groupPanelOpen     = $options['open'];
-        $this->_groupId            = $options['id'];
-        $this->_groupInGroup       = true;
+        $this->_states->push('group', [
+            'groupPanelOpen' => $options['open'],
+            'groupPanelCount' => -1,
+            'groupId' => $options['id'],
+            'groupCollapsible' => $options['collapsible']
+        ]);
         return $this->formatTemplate('panelGroupStart', [
             'attrs' => $this->templater()->formatAttributes($options, ['open', 'collapsible']),
             'templateVars' => $options['templateVars']
@@ -201,16 +156,12 @@ class PanelHelper extends Helper {
      * @return string An HTML string containing closing tags.
      */
     public function endGroup() {
-        $this->setConfig('collapsible', $this->getConfig('saved.collapsible'));
-        $this->_autoCloseOnCreate  = false;
-        $this->_groupId            = false;
-        $this->_groupPanelOpen     = false;
-        $this->_groupInGroup       = false;
         $out = '';
-        if (!$this->_lastPanelClosed) {
+        while ($this->_states->is('panel')) { // panels were not closed
             $out = $this->end();
         }
         $out .= $this->formatTemplate('panelGroupEnd', []);
+        $this->_states->pop();
         return $out;
     }
 
@@ -269,33 +220,32 @@ class PanelHelper extends Helper {
         $options += [
             'body'     => true,
             'type'        => 'default',
-            'collapsible' => $this->getConfig('collapsible'),
-            'open'        => !$this->_groupInGroup,
+            'collapsible' => $this->_states->is('group') ?
+                $this->_states->getValue('groupCollapsible') : $this->getConfig('collapsible'),
+            'open'        => !$this->_states->is('group'),
             'panel-count' => $this->_panelCount,
             'title' => [],
             'templateVars' => []
         ];
 
-        $this->_collapsible = $options['collapsible'];
+        $this->_panelCount = intval($options['panel-count']) + 1;
 
-        if ($this->_collapsible) {
-            $this->_headId = 'heading-'.$options['panel-count'];
-            $this->_bodyId = 'collapse-'.$options['panel-count'];
-            $this->_panelCount = intval($options['panel-count']) + 1;
-            if ($options['open']) {
-                $this->_groupPanelOpen = $this->_bodyId;
-            }
+        // check open
+        $open = $options['open'];
+        if ($this->_states->is('group')) {
+            // increment count inside
+            $this->_states->setValue('groupPanelCount',
+                $this->_states->getValue('groupPanelCount') + 1);
+            $open = $open
+                || $this->_states->getValue('groupPanelOpen')
+                    == $this->_states->getValue('groupPanelCount');
         }
 
         $out = '';
 
-        if ($this->_autoCloseOnCreate && !$this->_lastPanelClosed) {
+        if ($this->_states->is('panel') && $this->_states->getValue('inGroup')) {
             $out .= $this->end();
         }
-        $this->_lastPanelClosed = false;
-
-        /* Increment panel counter for the current group. */
-        $this->_groupPanelCount++;
 
         $out .= $this->formatTemplate('panelStart', [
             'type' => $options['type'],
@@ -303,6 +253,18 @@ class PanelHelper extends Helper {
                 $options, ['body', 'type', 'collapsible', 'open', 'panel-count', 'title']),
             'templateVars' => $options['templateVars']
         ]);
+
+        $this->_states->push('panel', [
+            'part' => null,
+            'bodyId' => 'collapse-'.$options['panel-count'],
+            'headId' => 'heading-'.$options['panel-count'],
+            'collapsible' => $options['collapsible'],
+            'open' => $open,
+            'inGroup' => $this->_states->is('group'),
+            'groupId' => $this->_states->is('group') ?
+                $this->_states->getValue('groupId') : 0
+        ]);
+
         if (is_string($title) && $title) {
             $out .= $this->_createHeader($title, [
                 'title' => $options['title']
@@ -339,6 +301,7 @@ class PanelHelper extends Helper {
             $res .= $this->footer($content, $options);
         }
         $res .= $this->formatTemplate('panelEnd', []);
+        $this->_states->pop();
         return $res;
     }
 
@@ -348,11 +311,15 @@ class PanelHelper extends Helper {
      * @return string An HTML string containing closing elements.
      */
     protected function _cleanCurrent() {
-        if (!$this->_current) {
+        if (!$this->_states->is('panel')) {
             return '';
         }
-        $out = $this->formatTemplate($this->_current.'End', []);
-        if ($this->_collapsible) {
+        $current = $this->_states->getValue('part');
+        if ($current === null) {
+            return '';
+        }
+        $out = $this->formatTemplate($current.'End', []);
+        if ($this->_states->getValue('collapsible')) {
             $ctplt = $this->_current.'CollapsibleEnd';
             if ($this->templates($ctplt)) {
                 $out = $this->formatTemplate($ctplt, [
@@ -360,7 +327,7 @@ class PanelHelper extends Helper {
                 ]);
             }
         }
-        $this->_current = null;
+        $this->_states->setValue('part', null);
         return $out;
     }
 
@@ -370,9 +337,7 @@ class PanelHelper extends Helper {
      * @return bool `true` if the current panel should be open, `false` otherwize.
      */
     protected function _isOpen() {
-        return (is_int($this->_groupPanelOpen)
-                && $this->_groupPanelOpen === $this->_groupPanelCount)
-            || $this->_groupPanelOpen === $this->_bodyId;
+        return $this->_states->getValue('open');
     }
 
     /**
@@ -403,18 +368,18 @@ class PanelHelper extends Helper {
             'attrs' => $this->templater()->formatAttributes($options, ['title']),
             'templateVars' => $options['templateVars']
         ]);
-        if ($this->_collapsible) {
+        if ($this->_states->getValue('collapsible')) {
             $out = $this->formatTemplate('headerCollapsibleStart', [
-                'attrs' => $this->templater()->formatAttributes(['id' => $this->_headId]),
+                'attrs' => $this->templater()->formatAttributes(['id' => $this->_states->getValue('headId')]),
                 'templateVars' => $options['templateVars']
             ]);
             if ($title) {
                 $title = $this->formatTemplate('headerCollapsibleLink', [
                     'expanded' => json_encode($this->_isOpen()),
-                    'target' => $this->_bodyId,
+                    'target' => $this->_states->getValue('bodyId'),
                     'content' => $options['escape'] ? h($title) : $title,
-                    'attrs' => $this->templater()->formatAttributes($this->_groupId ? [
-                        'data-parent' => '#'.$this->_groupId
+                    'attrs' => $this->templater()->formatAttributes($this->_states->getValue('inGroup') ? [
+                        'data-parent' => '#'.$this->_states->getValue('groupId')
                     ] : []),
                     'templateVars' => $options['templateVars']
                 ]);
@@ -422,7 +387,7 @@ class PanelHelper extends Helper {
             $options['escape'] = false;
         }
         $out = $this->_cleanCurrent().$out;
-        $this->_current = 'header';
+        $this->_states->setValue('part', 'header');
         if ($titleOptions === false) {
             $title = null;
         }
@@ -469,16 +434,16 @@ class PanelHelper extends Helper {
         if ($this->_collapsible) {
             $out = $this->formatTemplate('bodyCollapsibleStart', [
                 'bodyStart' => $out,
-                'headId' => $this->_headId,
+                'headId' => $this->_states->getValue('headId'),
                 'attrs' => $this->templater()->formatAttributes([
-                    'id' => $this->_bodyId,
+                    'id' => $this->_states->getValue('bodyId'),
                     'class' => $this->_isOpen() ? 'in' : ''
                 ]),
                 'templateVars' => $options['templateVars']
             ]);
         }
         $out = $this->_cleanCurrent().$out;
-        $this->_current = 'body';
+        $this->_states->setValue('part', 'body');
         if ($text) {
             $out .= $text;
             $out .= $this->_cleanCurrent();
@@ -505,7 +470,7 @@ class PanelHelper extends Helper {
             'templateVars' => []
         ];
         $out = $this->_cleanCurrent();
-        $this->_current = 'body';
+        $this->_states->setCurrent('part', 'footer');
         $out .= $this->formatTemplate('footerStart', [
             'attrs' => $this->templater()->formatAttributes($options),
             'templateVars' => $options['templateVars']
