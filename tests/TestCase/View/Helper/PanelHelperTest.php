@@ -337,4 +337,90 @@ class PanelHelperTest extends TestCase {
         $this->assertHtml($expected, $result, false);
     }
 
+    public function testPanelGroupInsidePanel() {
+
+        $panelHeading = 'This is a panel heading';
+        $panelContent = 'A bit of HTML code inside!';
+
+        $result = '';
+        $result .= $this->panel->create($panelHeading);
+        $result .= $this->panel->startGroup();
+        $result .= $this->panel->create($panelHeading);
+        $result .= $panelContent;
+        $result .= $this->panel->create($panelHeading);
+        $result .= $panelContent;
+        $result .= $this->panel->endGroup();
+        $result .= $this->panel->end();
+
+        $expected = [
+            ['div' => [
+                'class' => 'panel panel-default'
+            ]],
+            ['div' => [
+                'class' => 'panel-heading'
+            ]],
+            ['h4' => [
+                'class' => 'panel-title'
+            ]],
+            $panelHeading,
+            '/h4',
+            '/div',
+            ['div' => [
+                'class' => 'panel-body'
+            ]],
+            ['div' => [
+                'class'                => 'panel-group',
+                'role'                 => 'tablist',
+                'aria-multiselectable' => 'true',
+                'id'                   => 'panelGroup-1'
+            ]]
+        ];
+
+        for ($i = 1; $i < 3; ++$i) {
+            $expected = array_merge($expected, [
+                ['div' => [
+                    'class' => 'panel panel-default'
+                ]],
+                ['div' => [
+                    'class' => 'panel-heading',
+                    'role'  => 'tab',
+                    'id'    => 'heading-'.$i
+                ]],
+                ['h4' => [
+                    'class' => 'panel-title'
+                ]],
+                ['a' => [
+                    'role'          => 'button',
+                    'data-toggle'   => 'collapse',
+                    'href'          => '#collapse-'.$i,
+                    'aria-expanded' => ($i > 1) ? 'false' : 'true',
+                    'aria-controls' => 'collapse-'.$i,
+                    'data-parent'   => '#panelGroup-1'
+                ]],
+                $panelHeading,
+                '/a',
+                '/h4',
+                '/div',
+                ['div' => [
+                    'class'           => 'panel-collapse collapse'.($i > 1 ? '' : ' in'),
+                    'role'            => 'tabpanel',
+                    'aria-labelledby' => 'heading-'.$i,
+                    'id'              => 'collapse-'.$i
+                ]],
+                ['div' => [
+                    'class' => 'panel-body'
+                ]],
+                $panelContent,
+                '/div',
+                '/div',
+                '/div'
+            ]);
+        }
+
+        $expected = array_merge($expected, ['/div', '/div']);
+
+        $this->assertHtml($expected, $result, false);
+
+    }
+
 }
