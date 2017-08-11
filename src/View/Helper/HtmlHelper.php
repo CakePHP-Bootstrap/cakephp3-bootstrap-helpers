@@ -73,24 +73,23 @@ class HtmlHelper extends \Cake\View\Helper\HtmlHelper {
             'javascriptend' => '</script>',
 
             // New templates for Bootstrap
-            'icon' => '<i aria-hidden="true" class="glyphicon glyphicon-{{type}}{{attrs.class}}"{{attrs}}></i>',
-            'label' => '<span class="label label-{{type}}{{attrs.class}}"{{attrs}}>{{content}}</span>',
-            'badge' => '<span class="badge{{attrs.class}}"{{attrs}}>{{content}}</span>',
+            'icon' => '<i aria-hidden="true" class="fa fa-{{type}}{{attrs.class}}"{{attrs}}></i>',
+            'badge' => '<span class="badge badge-{{type}}{{attrs.class}}"{{attrs}}>{{content}}</span>',
             'alert' => '<div class="alert alert-{{type}}{{attrs.class}}" role="alert"{{attrs}}>{{close}}{{content}}</div>',
             'alertCloseButton' =>
                 '<button type="button" class="close{{attrs.class}}" data-dismiss="alert" aria-label="{{label}}"{{attrs}}>{{content}}</button>',
             'alertCloseContent' => '<span aria-hidden="true">&times;</span>',
             'tooltip' => '<{{tag}} data-toggle="{{toggle}}" data-placement="{{placement}}" title="{{tooltip}}"{{attrs}}>{{content}}</{{tag}}>',
             'progressBar' =>
-'<div class="progress-bar progress-bar-{{type}}{{attrs.class}}" role="progressbar"
+'<div class="progress-bar bg-{{type}}{{attrs.class}}" role="progressbar"
 aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style="width: {{width}}%;"{{attrs}}>{{inner}}</div>',
             'progressBarInner' => '<span class="sr-only">{{width}}%</span>',
             'progressBarContainer' => '<div class="progress{{attrs.class}}"{{attrs}}>{{content}}</div>',
 
-            'dropdownMenu' => '<ul class="dropdown-menu{{attrs.class}}"{{attrs}}>{{content}}</ul>',
-            'dropdownMenuItem' => '<li{{attrs}}>{{content}}</li>',
-            'dropdownMenuHeader' => '<li role="presentation" class="dropdown-header{{attrs.class}}"{{attrs}}>{{content}}</li>',
-            'dropdownMenuDivider' => '<li role="separator" class="divider{{attrs.class}}"{{attrs}}></li>'
+            'dropdownMenu' => '<div class="dropdown-menu{{attrs.class}}"{{attrs}}>{{content}}</div>',
+            'dropdownMenuItem' => '<a href="{{url}}" class="dropdown-item{{attrs.class}}"{{attrs}}>{{content}}</a>',
+            'dropdownMenuHeader' => '<h6 class="dropdown-header{{attrs.class}}"{{attrs}}>{{content}}</h6>',
+            'dropdownMenuDivider' => '<div class="dropdown-divider{{attrs.class}}"{{attrs}}></div>'
         ],
         'templateClass' => 'Bootstrap\View\EnhancedStringTemplate',
         'tooltip' => [
@@ -98,7 +97,7 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
             'placement' => 'right',
             'toggle'    => 'tooltip'
         ],
-        'label' => [
+        'badge' => [
             'type' => 'default'
         ],
         'alert' => [
@@ -142,44 +141,10 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
     }
 
     /**
-     * Create a Twitter Bootstrap span label.
-     *
-     * The second parameter may either be `$type` or `$options` (in which case
-     * the third parameter is not used, and the label type can be specified in the
-     * `$options` array).
-     *
-     * ### Options
-     *
-     * - `tag` The HTML tag to use.
-     * - `type` The type of the label.
-     * - `templateVars` Provide template variables for the `label` template.
-     * - Other attributes will be assigned to the wrapper element.
-     *
-     * @param string $text The label text
-     * @param string|array $type The label type (default, primary, success, warning,
-     * info, danger) or the array of options (see `$options`).
-     * @param array $options Array of options. See above. Default values are retrieved
-     * from the configuration.
-     *
-     * @return string The HTML label element.
+     * @deprecated 4.0.0 Use the badge() instead.
      */
     public function label($text, $type = null, $options = []) {
-        if (is_string($type)) {
-            $options['type'] = $type;
-        }
-        else if (is_array($type)) {
-            $options = $type;
-        }
-        $options += $this->getConfig('label') + [
-            'templateVars' => []
-        ];
-        $type = $options['type'];
-        return $this->formatTemplate('label', [
-            'type' => $options['type'],
-            'content' => $text,
-            'attrs' => $this->templater()->formatAttributes($options, ['type']),
-            'templateVars' => $options['templateVars']
-        ]);
+        return $this->badge($text, $type, $options);
     }
 
     /**
@@ -191,28 +156,30 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
      * - Other attributes will be assigned to the wrapper element.
      *
      * @param string $text The badge text.
+     * @param string|array $type The badge type (default, primary, secondary, success, warning,
+     * info, danger) or the array of options (see `$options`).
+     * @param array $options Array of options. See above. Default values are retrieved
+     * from the configuration.
      *
      * @param array $options Array of attributes for the span element.
      */
-    public function badge($text, $options = []) {
-        $options += [
+     public function badge($text, $type = null, $options = []) {
+        if (is_string($type)) {
+            $options['type'] = $type;
+        }
+        else if (is_array($type)) {
+            $options = $type;
+        }
+        $options += $this->getConfig('badge') + [
             'templateVars' => []
         ];
+        $type = $options['type'];
         return $this->formatTemplate('badge', [
+            'type' => $options['type'],
             'content' => $text,
-            'attrs' => $this->templater()->formatAttributes($options),
+            'attrs' => $this->templater()->formatAttributes($options, ['type']),
             'templateVars' => $options['templateVars']
         ]);
-    }
-
-
-    /**
-     * @deprecated 3.3.6 (CakePHP) Use the BreadcrumbsHelper instead.
-     */
-    public function getCrumbList(array $options = [], $startText = false) {
-        $options['separator'] = '';
-        $options = $this->addClass($options, 'breadcrumb');
-        return parent::getCrumbList($options, $startText);
     }
 
     /**
@@ -340,7 +307,7 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
                 $width = $this->addClass($width, 'progress-bar-striped');
             }
             if ($width['active']) {
-                $width = $this->addClass($width, 'active');
+                $width = $this->addClass($width, 'progress-bar-striped progress-bar-animated');
             }
             $inner = $this->formatTemplate('progressBarInner', [
                 'width' => $width['width']
@@ -433,6 +400,7 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
             }
             $normalized[] = $value;
         }
+        // create content
         $content = '';
         foreach ($normalized as $item) {
             foreach ($item as $key => $value) {
@@ -453,11 +421,17 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
                     ]);
                 }
                 if ($key == 'item') {
+                    $title = $value['title'];
                     if (isset($value['url'])) {
-                        $value['title'] = $this->link($value['title'], $value['url']);
+                        $url = $this->Url->build($value['url']);
+                    }
+                    else {
+                        $url = '#';
+                        $value = $this->addClass($value, 'disabled');
                     }
                     $content .= $this->formatTemplate('dropdownMenuItem', [
-                        'content' => $value['title'],
+                        'content' => $title,
+                        'url' => $url,
                         'attrs' => $this->templater()->formatAttributes($value, ['title', 'url']),
                         'templateVars' => $value['templateVars']
                     ]);
@@ -474,40 +448,6 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
             'attrs' => $this->templater()->formatAttributes($options, ['align']),
             'templateVars' => $options['templateVars']
         ]);
-    }
-
-    /**
-     * Create a formatted collection of elements while
-     * maintaining proper bootstrappy markup. Useful when
-     * displaying, for example, a list of products that would require
-     * more than the maximum number of columns per row.
-     *
-     * @deprecated 3.1.0
-     *
-     * @param int|string $breakIndex       Divisible index that will trigger a new row
-     * @param array      $data             Collection of data used to render each column
-     * @param callable   $determineContent A callback that will be called with the
-     * data required to render an individual column
-     *
-     * @return string
-     */
-    public function splicedRows($breakIndex, array $data, callable $determineContent) {
-        $rowsHtml = '<div class="row">';
-
-        $count = 1;
-        foreach ($data as $index => $colData) {
-            $rowsHtml .= $determineContent($colData);
-
-            if ($count % $breakIndex === 0) {
-                $rowsHtml .= '<div class="clearfix hidden-xs hidden-sm"></div>';
-            }
-
-            $count++;
-        }
-
-        $rowsHtml .= '</div>';
-        return $rowsHtml;
-
     }
 
 }
