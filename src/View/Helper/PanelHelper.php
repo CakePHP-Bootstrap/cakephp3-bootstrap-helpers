@@ -14,7 +14,7 @@
  */
 namespace Bootstrap\View\Helper;
 
-use Bootstrap\Utility\StackState;
+use Bootstrap\Utility\StackedStates;
 
 use Cake\View\Helper;
 use Cake\View\StringTemplateTrait;
@@ -75,7 +75,7 @@ class PanelHelper extends Helper {
     /**
      * States of the panel helper (contains states of type 'group' and 'panel').
      *
-     * @var StackState
+     * @var StackedStates
      */
     protected $_states;
 
@@ -94,7 +94,7 @@ class PanelHelper extends Helper {
     protected $_groupCount = 0;
 
     public function __construct(\Cake\View\View $View, array $config = []) {
-        $this->_states = new StackState([
+        $this->_states = new StackedStates([
             'group' => [
                 'groupPanelOpen' => false,
                 'groupPanelCount' => -1,

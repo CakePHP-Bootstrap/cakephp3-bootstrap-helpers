@@ -18,7 +18,7 @@ namespace Bootstrap\Utility;
 /**
  * A class that providing stacking states.
  */
-class StackState {
+class StackedStates {
 
     /**
      * Default values for a new state.
@@ -45,9 +45,18 @@ class StackState {
     }
 
     /**
+     * Check if the stack is empty.
+     *
+     * @return bool true if the stack is empty (i.e. contains no states).
+     */
+    public function isEmpty() {
+        return empty($this->_states);
+    }
+
+    /**
      * Pop the current state.
      *
-     * @return mixed The current state.
+     * @return mixed An array [type, state] containing the removed state.
      */
     public function pop() {
         return array_pop($this->_states);
@@ -61,7 +70,7 @@ class StackState {
      * @param mixed $sate New state.
      *
      */
-    public function push($type, $state = null) {
+    public function push($type, $state = []) {
         if (isset($this->_defaults[$type])) {
             $state = array_merge($this->_defaults[$type], $state);
         }
