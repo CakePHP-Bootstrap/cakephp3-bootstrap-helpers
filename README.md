@@ -38,8 +38,6 @@ $this->loadHelper('Html', [
 
 The full plugin documentation is available at https://holt59.github.io/cakephp3-bootstrap-helpers/.
 
-*Migrating to the latest version (>= 3.1.0)? Check the migration guide below!*
-
 #### Table of version and requirements
 
 | Version | Bootstrap version | CakePHP version | Information |
@@ -53,27 +51,6 @@ The full plugin documentation is available at https://holt59.github.io/cakephp3-
 #### Contributing
 
 Do not hesitate to [**post a github issue**](https://github.com/Holt59/cakephp3-bootstrap-helpers/issues/new) or [**submit a pull request**](https://github.com/Holt59/cakephp3-bootstrap-helpers/pulls) if you find a bug or want a new feature.
-
-
-Current version: 3.1.2
-==================================
-
-The current version of the helpers is `3.1.2`, this means that new features will not be ported to older versions (i.e. `<= 3.1.1`).
-If you are migrating from a version `< 3.1.0`, feel free to open issues if you encounter problems since version `3.1.0` brought a lot
-of changes.
-
-#### Changes
-
-- Most methods are now based on templates, meaning that:
-    - Options like `tag`, `aria-*`, `data-*`, ..., have been dropped from various methods.
-    - The `templateVars` options is now usable with most methods.
-    - There might be escaping issue since the old `div()` and `tag()` methods did not escape content be default, while
-the template based methods do. Feel free to open an [issue](https://github.com/Holt59/cakephp3-bootstrap-helpers/issues/new) if
-you encounter problems with escaping.
-
-Some minor changes that do not impact the user interface:
-- The `BootstrapTrait` class has been split in two classes: `ClassTrait` and `EasyIconTrait`.
-- The test cases have been updated and strenghten to avoid bad modification in the code.
 
 Who is using it?
 ================
