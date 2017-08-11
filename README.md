@@ -13,7 +13,7 @@ Work in progress
 
 I am currently working on rewritting the helpers for Bootstrap 4, current work status:
 
-- FlashHelper - 0%
+- FlashHelper - 100%
 - FormHelper - 0%
 - HtmlHelper - 100%
 - ModalHelper - 0%
