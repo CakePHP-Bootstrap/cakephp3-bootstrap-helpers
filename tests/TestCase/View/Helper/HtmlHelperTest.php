@@ -83,51 +83,51 @@ class HtmlHelperTest extends TestCase {
 
     }
 
-    public function testLabel() {
+    public function testBadge() {
         $content = 'My Label';
         // Standard test
         $this->assertHtml([
             ['span' => [
-                'class' => 'label label-default'
+                'class' => 'badge badge-default'
             ]],
             'My Label',
             '/span'
-        ], $this->html->label($content));
+        ], $this->html->badge($content));
         // Type
         $this->assertHtml([
             ['span' => [
-                'class' => 'label label-primary'
+                'class' => 'badge badge-primary'
             ]],
             'My Label',
             '/span'
-        ], $this->html->label($content, 'primary'));
+        ], $this->html->badge($content, 'primary'));
         // Type + Options
         $options = [
-            'class' => 'my-label-class',
-            'id'    => 'my-label-id'
+            'class' => 'my-badge-class',
+            'id'    => 'my-badge-id'
         ];
         $this->assertHtml([
             ['span' => [
-                'class' => 'label label-primary '.$options['class'],
+                'class' => 'badge badge-primary '.$options['class'],
                 'id'    => $options['id']
             ]],
             'My Label',
             '/span'
-        ], $this->html->label($content, 'primary', $options));
+        ], $this->html->badge($content, 'primary', $options));
         // Only options
         $options = [
-            'class' => 'my-label-class',
-            'id'    => 'my-label-id',
+            'class' => 'my-badge-class',
+            'id'    => 'my-badge-id',
             'type'  => 'primary'
         ];
         $this->assertHtml([
             ['span' => [
-                'class' => 'label label-primary '.$options['class'],
+                'class' => 'badge badge-primary '.$options['class'],
                 'id'    => $options['id']
             ]],
             'My Label',
             '/span'
-        ], $this->html->label($content, $options));
+        ], $this->html->badge($content, $options));
     }
 
     public function testAlert() {
@@ -223,7 +223,7 @@ class HtmlHelperTest extends TestCase {
         $expected = [
             ['div' => ['class' => 'progress']],
             ['div' => [
-                'class' => 'progress-bar progress-bar-primary',
+                'class' => 'progress-bar bg-primary',
                 'role' => 'progressbar',
                 'aria-valuenow' => 20,
                 'aria-valuemin' => 0,
@@ -245,7 +245,7 @@ class HtmlHelperTest extends TestCase {
         $expected = [
             ['div' => ['class' => 'progress']],
             ['div' => [
-                'class' => 'progress-bar progress-bar-primary my-class progress-bar-striped',
+                'class' => 'progress-bar bg-primary my-class progress-bar-striped',
                 'role' => 'progressbar',
                 'aria-valuenow' => 20,
                 'aria-valuemin' => 0,
@@ -255,7 +255,7 @@ class HtmlHelperTest extends TestCase {
             ['span' => ['class' => 'sr-only']], '20%', '/span',
             '/div',
             ['div' => [
-                'class' => 'progress-bar progress-bar-primary progress-bar-striped',
+                'class' => 'progress-bar bg-primary progress-bar-striped',
                 'role' => 'progressbar',
                 'aria-valuenow' => 15,
                 'aria-valuemin' => 0,
@@ -266,7 +266,7 @@ class HtmlHelperTest extends TestCase {
             ['span' => ['class' => 'sr-only']], '15%', '/span',
             '/div',
             ['div' => [
-                'class' => 'progress-bar progress-bar-primary progress-bar-striped active',
+                'class' => 'progress-bar bg-primary progress-bar-striped progress-bar-animated',
                 'role' => 'progressbar',
                 'aria-valuenow' => 10,
                 'aria-valuemin' => 0,
@@ -306,18 +306,19 @@ class HtmlHelperTest extends TestCase {
             ]]
         ]);
         $expected = [
-            ['ul' => ['class' => 'dropdown-menu dropdown-menu-left']],
-            ['li' => ['role' => 'presentation', 'class' => 'dropdown-header']], 'Header 1', '/li',
-            ['li' => ['role' => 'separator', 'class' => 'divider']], '/li',
-            ['li' => ['role' => 'presentation', 'class' => 'dropdown-header']], 'Header 2', '/li',
-            ['li' => ['role' => 'separator', 'class' => 'divider']], '/li',
-            ['li' => []], ['a' => ['href' => '#']], 'Link 1', '/a', '/li',
-            ['li' => ['role' => 'separator', 'class' => 'divider']], '/li',
-            ['li' => ['role' => 'presentation', 'class' => 'dropdown-header']], 'Header 3', '/li',
-            ['li' => []], 'Item 1', '/li',
-            ['li' => []], ['a' => ['href' => '#']], 'Item 2', '/a', '/li',
-            ['li' => []], 'Item 3', '/li',
-            ['li' => ['class' => 'my-class-4']], ['a' => ['href' => '#']], 'Item 4', '/a', '/li',
+            ['div' => ['class' => 'dropdown-menu dropdown-menu-left']],
+            ['h6' => ['class' => 'dropdown-header']], 'Header 1', '/h6',
+            ['div' => ['class' => 'dropdown-divider']], '/div',
+            ['h6' => ['class' => 'dropdown-header']], 'Header 2', '/h6',
+            ['div' => ['class' => 'dropdown-divider']], '/div',
+            ['a' => ['href' => '#', 'class' => 'dropdown-item']], 'Link 1', '/a',
+            ['div' => ['class' => 'dropdown-divider']], '/div',
+            ['h6' => ['class' => 'dropdown-header']], 'Header 3', '/h6',
+            ['a' => ['href' => '#', 'class' => 'dropdown-item disabled']], 'Item 1', '/a',
+            ['a' => ['href' => '#', 'class' => 'dropdown-item']], 'Item 2', '/a',
+            ['a' => ['href' => '#', 'class' => 'dropdown-item disabled']], 'Item 3', '/a',
+            ['a' => ['href' => '#', 'class' => 'dropdown-item my-class-4']], 'Item 4', '/a',
+            '/div'
         ];
         $this->assertHtml($expected, $result);
     }
