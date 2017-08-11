@@ -8,17 +8,30 @@ CakePHP 3.x Helpers for Bootstrap
 CakePHP 3.x Helpers to generate HTML with @Twitter Boostrap style: `Breadcrumbs`, `Flash`, `Form`, `Html`, `Modal`, `Navbar`,
 `Panel` and `Paginator` helpers available!
 
+Work in progress
+================
+
+I am currently working on rewritting the helpers for Bootstrap 4, current work status:
+
+- FlashHelper - 0%
+- FormHelper - 0%
+- HtmlHelper - 100%
+- ModalHelper - 0%
+- NavbarHelper - 0%
+- PaginatorHelper - 0%
+- PanelHelper - 0%
+
 How to... ?
 ===========
 
 #### Installation
 
-If you want the latest **Bootstrap 3** version of the plugin:
+If you want the latest **Bootstrap 4** version of the plugin:
 
 - Add the plugin to your `composer.json` (see below if you want to use another branch / version):
 
 ```
-composer require holt59/cakephp3-bootstrap-helpers:dev-master
+composer require holt59/cakephp3-bootstrap-helpers:v4-updated
 ```
 
 - Load the plugin in your `config/bootstrap.php`:
