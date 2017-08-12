@@ -243,6 +243,24 @@ class PanelHelperTest extends TestCase {
         $this->reset();
     }
 
+    public function testFooter() {
+        $content = 'Footer';
+        $extraclass = 'my-extra-class';
+
+        // Simple test
+        $this->panel->create();
+        $result = $this->panel->footer($content, ['class' => $extraclass]);
+        $this->assertHtml([
+            ['div' => [
+                'class' => 'panel-footer '.$extraclass
+            ]],
+            $content,
+            '/div'
+        ], $result);
+        $this->reset();
+
+    }
+
     public function testGroup() {
 
         $panelHeading = 'This is a panel heading';
