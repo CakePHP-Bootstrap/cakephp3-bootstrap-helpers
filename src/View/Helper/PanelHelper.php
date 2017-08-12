@@ -471,7 +471,7 @@ class PanelHelper extends Helper {
             'templateVars' => []
         ];
         $out = $this->_cleanCurrent();
-        $this->_states->setCurrent('part', 'footer');
+        $this->_states->setValue('part', 'footer');
         $out .= $this->formatTemplate('footerStart', [
             'attrs' => $this->templater()->formatAttributes($options),
             'templateVars' => $options['templateVars']
