@@ -62,7 +62,8 @@ class NavbarHelper extends Helper {
             'responsiveEnd' => '</div>',
             'header' => '<div class="navbar-header{{attrs.class}}"{{attrs}}>{{toggleButton}}{{brand}}</div>',
             'toggleButton' =>
-'<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#{{id}}" aria-expanded="false">
+'<button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#{{id}}" aria-controls="{{id}}"
+aria-label="Toggle navigation" aria-expanded="false">
     <span class="sr-only">{{content}}</span>
     <span class="icon-bar"></span>
     <span class="icon-bar"></span>
@@ -70,12 +71,12 @@ class NavbarHelper extends Helper {
 </button>',
             'brand' => '<a class="navbar-brand{{attrs.class}}" href="{{url}}"{{attrs}}>{{content}}</a>',
             'brandImage' => '<img alt="{{brandname}}" src="{{src}}"{{attrs}} />',
-            'dropdownMenuStart' => '<ul class="dropdown-menu{{attrs.class}}"{{attrs}}>',
-            'dropdownMenuEnd' => '</ul>',
+            'dropdownMenuStart' => '<div class="dropdown-menu{{attrs.class}}"{{attrs}}>',
+            'dropdownMenuEnd' => '<div>',
             'dropdownLink' =>
-'<a href="{{url}}" class="dropdown-toggle{{attrs.class}}" data-toggle="dropdown" role="button"
+'<a href="{{url}}" class="nav-link dropdown-toggle{{attrs.class}}" data-toggle="dropdown" role="button"
 aria-haspopup="true" aria-expanded="false">{{content}}{{caret}}</a>',
-            'innerMenuStart' => '<li class="dropdown{{attrs.class}}"{{attrs}}>{{dropdownLink}}{{dropdownMenuStart}}',
+            'innerMenuStart' => '<li class="nav-item dropdown{{attrs.class}}"{{attrs}}>{{dropdownLink}}{{dropdownMenuStart}}',
             'innerMenuEnd' => '{{dropdownMenuEnd}}</li>',
             'innerMenuItem' => '<li{{attrs}}>{{link}}</li>',
             'innerMenuItemLink' => '<a href="{{url}}"{{attrs}}>{{content}}</a>',
@@ -83,13 +84,13 @@ aria-haspopup="true" aria-expanded="false">{{content}}{{caret}}</a>',
             'innerMenuItemLinkActive' => '<a href="{{url}}"{{attrs}}>{{content}}</a>',
             'innerMenuItemDivider' => '<li role="separator" class="divider{{attrs.class}}"{{attrs}}></li>',
             'innerMenuItemHeader' => '<li class="dropdown-header{{attrs.class}}"{{attrs}}>{{content}}</li>',
-            'outerMenuStart' => '<ul class="nav navbar-nav{{attrs.class}}"{{attrs}}>',
+            'outerMenuStart' => '<ul class="navbar-nav mr-auto{{attrs.class}}"{{attrs}}>',
             'outerMenuEnd' => '</ul>',
-            'outerMenuItem' => '<li{{attrs}}>{{link}}</li>',
-            'outerMenuItemLink' => '<a href="{{url}}"{{attrs}}>{{content}}</a>',
-            'outerMenuItemActive' => '<li class="active{{attrs.class}}"{{attrs}}>{{link}}</li>',
-            'outerMenuItemLinkActive' => '<a href="{{url}}"{{attrs}}>{{content}}</a>',
-            'navbarText' => '<p class="navbar-text{{attrs.class}}"{{attrs}}>{{content}}</p>',
+            'outerMenuItem' => '<li class="nav-item{{attrs.class}}"{{attrs}}>{{link}}</li>',
+            'outerMenuItemLink' => '<a href="{{url}}" class="nav-link{{attrs.class}}"{{attrs}}>{{content}}</a>',
+            'outerMenuItemActive' => '<li class="nav-item active{{attrs.class}}"{{attrs}}>{{link}}</li>',
+            'outerMenuItemLinkActive' => '<a href="{{url}}" class="nav-link{{attrs.class}}"{{attrs}}>{{content}}</a>',
+            'navbarText' => '<span class="navbar-text{{attrs.class}}"{{attrs}}>{{content}}</span>',
         ],
         'templateClass' => 'Bootstrap\View\EnhancedStringTemplate',
         'autoActiveLink' => true
