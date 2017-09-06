@@ -106,10 +106,10 @@ class FormHelperTest extends TestCase {
         $result = $this->form->control('test', ['type' => 'text']);
         $expected = [
             ['div' => [
-                'class' => 'form-group text'
+                'class' => 'form-group row text'
             ]],
             ['label' => [
-                'class' => 'control-label col-md-2 col-sm-12',
+                'class' => 'col-form-label col-md-2 col-sm-12',
                 'for' => 'test'
             ]],
             'Test',
@@ -151,10 +151,10 @@ class FormHelperTest extends TestCase {
         $result = $this->form->control('Article.title', ['type' => 'text']);
         $expected = [
             ['div' => [
-                'class' => 'form-group has-error text'
+                'class' => 'form-group row has-error text'
             ]],
             ['label' => [
-                'class' => 'control-label col-md-2 col-sm-4',
+                'class' => 'col-form-label col-md-2 col-sm-4',
                 'for' => 'article-title'
             ]],
             'Title',
@@ -169,11 +169,11 @@ class FormHelperTest extends TestCase {
                 'id'    => 'article-title'
             ]],
             '/div',
-            ['span' => [
-                'class' => 'help-block error-message col-md-offset-0 col-md-4 col-sm-offset-4 col-sm-8'
+            ['small' => [
+                'class' => 'help-block error-message text-muted col-md-offset-0 col-md-4 col-sm-offset-4 col-sm-8'
             ]],
             'error message',
-            '/span',
+            '/small',
             '/div'
         ];
         $this->assertHtml($expected, $result);
@@ -230,7 +230,6 @@ class FormHelperTest extends TestCase {
                 'class' => 'form-group text'
             ]],
             ['label' => [
-                'class' => 'control-label',
                 'for'   => $fieldName
             ]],
             \Cake\Utility\Inflector::humanize($fieldName),
@@ -249,7 +248,7 @@ class FormHelperTest extends TestCase {
                 'class' => 'form-group text'
             ]],
             ['label' => [
-                'class' => 'control-label col-md-2',
+                'class' => 'col-form-label col-md-2',
                 'for' => $fieldName
             ]],
             \Cake\Utility\Inflector::humanize($fieldName),
@@ -277,7 +276,6 @@ class FormHelperTest extends TestCase {
                 'class' => 'form-group text'
             ]],
             ['label' => [
-                'class' => 'control-label',
                 'for'   => $fieldName
             ]],
             \Cake\Utility\Inflector::humanize($fieldName),
