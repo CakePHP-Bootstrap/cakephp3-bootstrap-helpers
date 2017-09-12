@@ -53,6 +53,27 @@ class PaginatorHelperTest extends TestCase {
         Router::connect('/:plugin/:controller/:action/*');
     }
 
+    public function testNumbers() {
+        $this->assertHtml([
+            ['ul' => [
+                'class' => 'pagination'
+            ]],
+            ['li' => [
+                'class' => 'active'
+            ]],
+            ['a' => [
+                'href' => '/index'
+            ]], '1', '/a', '/li',
+            ['li' => []], ['a' => ['href' => '/index?page=2']], 2, '/a', '/li',
+            ['li' => []], ['a' => ['href' => '/index?page=3']], 3, '/a', '/li',
+            ['li' => []], ['a' => ['href' => '/index?page=4']], 4, '/a', '/li',
+            ['li' => []], ['a' => ['href' => '/index?page=5']], 5, '/a', '/li',
+            ['li' => []], ['a' => ['href' => '/index?page=6']], 6, '/a', '/li',
+            ['li' => []], ['a' => ['href' => '/index?page=7']], 7, '/a', '/li',
+            '/ul'
+        ], $this->paginator->numbers());
+    }
+
     public function testPrev() {
         $this->assertHtml([
             ['li' => [
