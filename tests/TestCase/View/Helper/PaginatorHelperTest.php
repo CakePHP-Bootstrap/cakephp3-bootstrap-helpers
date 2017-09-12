@@ -59,17 +59,18 @@ class PaginatorHelperTest extends TestCase {
                 'class' => 'pagination'
             ]],
             ['li' => [
-                'class' => 'active'
+                'class' => 'page-item active'
             ]],
             ['a' => [
-                'href' => '/index'
+                'href' => '/index',
+                'class' => 'page-link'
             ]], '1', '/a', '/li',
-            ['li' => []], ['a' => ['href' => '/index?page=2']], 2, '/a', '/li',
-            ['li' => []], ['a' => ['href' => '/index?page=3']], 3, '/a', '/li',
-            ['li' => []], ['a' => ['href' => '/index?page=4']], 4, '/a', '/li',
-            ['li' => []], ['a' => ['href' => '/index?page=5']], 5, '/a', '/li',
-            ['li' => []], ['a' => ['href' => '/index?page=6']], 6, '/a', '/li',
-            ['li' => []], ['a' => ['href' => '/index?page=7']], 7, '/a', '/li',
+            ['li' => ['class' => 'page-item']], ['a' => ['href' => '/index?page=2', 'class' => 'page-link']], 2, '/a', '/li',
+            ['li' => ['class' => 'page-item']], ['a' => ['href' => '/index?page=3', 'class' => 'page-link']], 3, '/a', '/li',
+            ['li' => ['class' => 'page-item']], ['a' => ['href' => '/index?page=4', 'class' => 'page-link']], 4, '/a', '/li',
+            ['li' => ['class' => 'page-item']], ['a' => ['href' => '/index?page=5', 'class' => 'page-link']], 5, '/a', '/li',
+            ['li' => ['class' => 'page-item']], ['a' => ['href' => '/index?page=6', 'class' => 'page-link']], 6, '/a', '/li',
+            ['li' => ['class' => 'page-item']], ['a' => ['href' => '/index?page=7', 'class' => 'page-link']], 7, '/a', '/li',
             '/ul'
         ], $this->paginator->numbers());
     }
@@ -77,18 +78,22 @@ class PaginatorHelperTest extends TestCase {
     public function testPrev() {
         $this->assertHtml([
             ['li' => [
-                'class' => 'disabled'
+                'class' => 'page-item disabled'
             ]],
-            ['a' => true], '&lt;', '/a',
+            ['a' => [
+                'class' => 'page-link'
+            ]], '&lt;', '/a',
             '/li'
         ], $this->paginator->prev('<'));
         $this->assertHtml([
             ['li' => [
-                'class' => 'disabled'
+                'class' => 'page-item disabled'
             ]],
-            ['a' => true],
+            ['a' => [
+                'class' => 'page-link'
+            ]],
             ['i' => [
-                'class' => 'glyphicon glyphicon-chevron-left',
+                'class' => 'fa fa-chevron-left',
                 'aria-hidden' => 'true'
             ]],
             '/i', '/a', '/li'
@@ -97,19 +102,25 @@ class PaginatorHelperTest extends TestCase {
 
     public function testNext() {
         $this->assertHtml([
-            ['li' => true],
+            ['li' => [
+                'class' => 'page-item'
+            ]],
             ['a' => [
-                'href' => '/index?page=2'
+                'href' => '/index?page=2',
+                'class' => 'page-link'
             ]], '&gt;', '/a',
             '/li'
         ], $this->paginator->next('>'));
         $this->assertHtml([
-            ['li' => true],
+            ['li' => [
+                'class' => 'page-item'
+            ]],
             ['a' => [
-                'href' => '/index?page=2'
+                'href' => '/index?page=2',
+                'class' => 'page-link'
             ]],
             ['i' => [
-                'class' => 'glyphicon glyphicon-chevron-right',
+                'class' => 'fa fa-chevron-right',
                 'aria-hidden' => 'true'
             ]],
             '/i', '/a', '/li'
