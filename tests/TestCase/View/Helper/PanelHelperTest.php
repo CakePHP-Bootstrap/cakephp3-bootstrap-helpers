@@ -150,7 +150,7 @@ class PanelHelperTest extends TestCase {
                 'class' => 'panel-title'
             ]],
             ['i' => [
-                'class' => 'glyphicon glyphicon-home',
+                'class' => 'fa fa-home',
                 'aria-hidden' => 'true'
             ]], '/i', ' Home',
             '/h4',
@@ -233,7 +233,7 @@ class PanelHelperTest extends TestCase {
                 'aria-controls' => 'collapse-6'
             ]],
             ['i' => [
-                'class' => 'glyphicon glyphicon-home',
+                'class' => 'fa fa-home',
                 'aria-hidden' => 'true'
             ]], '/i', ' Home',
             '/a',
