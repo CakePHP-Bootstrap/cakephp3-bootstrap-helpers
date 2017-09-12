@@ -36,7 +36,7 @@ class HtmlHelperTest extends TestCase {
         $expected = [
             ['i' => [
                 'aria-hidden' => 'true',
-                'class' => 'glyphicon glyphicon-home my-class',
+                'class' => 'fa fa-home my-class',
                 'id' => 'my-id'
             ]],
             '/i'
