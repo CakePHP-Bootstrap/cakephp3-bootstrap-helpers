@@ -170,7 +170,7 @@ class FormHelperTest extends TestCase {
             ]],
             '/div',
             ['small' => [
-                'class' => 'help-block error-message text-muted col-md-offset-0 col-md-4 col-sm-offset-4 col-sm-8'
+                'class' => 'error-message text-muted col-md-offset-0 col-md-4 col-sm-offset-4 col-sm-8'
             ]],
             'error message',
             '/small',
@@ -307,7 +307,7 @@ class FormHelperTest extends TestCase {
         // Default
         $expected = [
             ['div' => [
-                'class' => 'form-group'
+                'class' => 'form-group radio'
             ]],
             ['label' => []],
             \Cake\Utility\Inflector::humanize($fieldName),
@@ -322,13 +322,15 @@ class FormHelperTest extends TestCase {
         foreach($options['options'] as $key => $value) {
             $expected = array_merge($expected, [
                 ['div' => [
-                    'class' => 'radio'
+                    'class' => 'form-check'
                 ]],
                 ['label' => [
-                    'for'   => $fieldName.'-'.$key
+                    'for'   => $fieldName.'-'.$key,
+                    'class' => 'form-check-label'
                 ]],
                 ['input' => [
                     'type'  => 'radio',
+                    'class' => 'form-check-input',
                     'name'  => $fieldName,
                     'value' => $key,
                     'id'    => $fieldName.'-'.$key
@@ -340,13 +342,14 @@ class FormHelperTest extends TestCase {
         }
         $expected = array_merge($expected, ['/div']);
         $this->_testInput($expected, $fieldName, $options);
+
         // Inline
         $options += [
             'inline' => true
         ];
         $expected = [
             ['div' => [
-                'class' => 'form-group'
+                'class' => 'form-group inlineRadio'
             ]],
             ['label' => [
                 'for' => $fieldName
@@ -362,22 +365,28 @@ class FormHelperTest extends TestCase {
         ];
         foreach($options['options'] as $key => $value) {
             $expected = array_merge($expected, [
+                ['div' => [
+                    'class' => 'form-check form-check-inline'
+                ]],
                 ['label' => [
-                    'class' => 'radio-inline',
-                    'for'   => $fieldName.'-'.$key
+                    'for'   => $fieldName.'-'.$key,
+                    'class' => 'form-check-label'
                 ]],
                 ['input' => [
                     'type'  => 'radio',
+                    'class' => 'form-check-input',
                     'name'  => $fieldName,
                     'value' => $key,
                     'id'    => $fieldName.'-'.$key
                 ]],
                 $value,
-                '/label'
+                '/label',
+                '/div'
             ]);
         }
         $expected = array_merge($expected, ['/div']);
         $this->_testInput($expected, $fieldName, $options);
+
         // Horizontal
         $options += [
             '_formOptions' => ['horizontal' => true]
@@ -385,7 +394,7 @@ class FormHelperTest extends TestCase {
         $options['inline'] = false;
         $expected = [
             ['div' => [
-                'class' => 'form-group'
+                'class' => 'form-group row radio'
             ]],
             ['label' => [
                 'class' => 'col-form-label col-md-2'
@@ -405,13 +414,15 @@ class FormHelperTest extends TestCase {
         foreach($options['options'] as $key => $value) {
             $expected = array_merge($expected, [
                 ['div' => [
-                    'class' => 'radio'
+                    'class' => 'form-check'
                 ]],
                 ['label' => [
-                    'for'   => $fieldName.'-'.$key
+                    'for'   => $fieldName.'-'.$key,
+                    'class' => 'form-check-label'
                 ]],
                 ['input' => [
                     'type'  => 'radio',
+                    'class' => 'form-check-input',
                     'name'  => $fieldName,
                     'value' => $key,
                     'id'    => $fieldName.'-'.$key
@@ -423,11 +434,12 @@ class FormHelperTest extends TestCase {
         }
         $expected = array_merge($expected, ['/div', '/div']);
         $this->_testInput($expected, $fieldName, $options);
+
         // Horizontal + Inline
         $options['inline'] = true;
         $expected = [
             ['div' => [
-                'class' => 'form-group'
+                'class' => 'form-group row inlineRadio'
             ]],
             ['label' => [
                 'class' => 'col-form-label col-md-2',
@@ -447,18 +459,23 @@ class FormHelperTest extends TestCase {
         ];
         foreach($options['options'] as $key => $value) {
             $expected = array_merge($expected, [
+                ['div' => [
+                    'class' => 'form-check form-check-inline'
+                ]],
                 ['label' => [
-                    'class' => 'radio-inline',
-                    'for'   => $fieldName.'-'.$key
+                    'for'   => $fieldName.'-'.$key,
+                    'class' => 'form-check-label'
                 ]],
                 ['input' => [
                     'type'  => 'radio',
+                    'class' => 'form-check-input',
                     'name'  => $fieldName,
                     'value' => $key,
                     'id'    => $fieldName.'-'.$key
                 ]],
                 $value,
-                '/label'
+                '/label',
+                '/div'
             ]);
         }
         $expected = array_merge($expected, ['/div', '/div']);
@@ -981,9 +998,7 @@ class FormHelperTest extends TestCase {
             ['div' => [
                 'class' => 'form-group date'
             ]],
-            ['label' => [
-                'class' => 'control-label'
-            ]],
+            ['label' => []],
             'Date',
             '/label',
             ['div' => ['class' => 'row']],
@@ -1035,7 +1050,7 @@ class FormHelperTest extends TestCase {
         $this->form->horizontal = true;
         $result = $this->form->submit('Submit');
         $expected = [
-            ['div' => ['class' => 'form-group']],
+            ['div' => ['class' => 'form-group row']],
             ['div' => ['class' => 'col-md-offset-2 col-md-10']],
             ['input' => [
                 'type' => 'submit',
