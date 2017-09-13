@@ -174,13 +174,6 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
     public $inline = false;
 
     /**
-     * Instance of \Bootstrap\Utility\Matching.
-     *
-     * @var \Bootstrap\Utility\Matching
-     */
-    public $matching = null;
-
-    /**
      * {@inheritDoc}
      */
     public function __construct(\Cake\View\View $View, array $config = []) {
@@ -203,7 +196,6 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
             };
         }
         parent::__construct($View, $config);
-        $this->matching = new Matching();
     }
 
     /**
@@ -330,7 +322,7 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
             $template = 'inputGroupButtons';
             if (is_string($addonOrButtons)) {
                 $addonOrButtons = $this->_makeIcon($addonOrButtons);
-                if (!$this->matching->findTagOrAttribute(
+                if (!Matching::findTagOrAttribute(
                         'button', ['type' => 'submit'], $addonOrButtons)) {
                     $template = 'inputGroupAddons';
                 }
@@ -338,7 +330,7 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
             else {
                 $addonOrButtons = implode('', $addonOrButtons);
             }
-            if ($this->matching->findTagOrAttribute(
+            if (Matching::findTagOrAttribute(
                     null, ['data-toggle' => 'dropdown'], $addonOrButtons)) {
                 $template = 'inputGroupDropdowns';
             }
