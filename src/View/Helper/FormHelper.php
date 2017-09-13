@@ -207,17 +207,6 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
     }
 
     /**
-     * Check if the given HTML string corresponds to a dropdown.
-     *
-     * @param string $html The HTML code to check
-     *
-     * @return bool `true` if the HTML code contains a dropdown, false otherwize.
-     */
-     protected function _matchDropdown($html) {
-        return strpos($html, 'data-toggle="dropdown"') !== FALSE;
-    }
-
-    /**
      * Returns an HTML form element.
      *
      * ### Options
@@ -349,7 +338,8 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
             else {
                 $addonOrButtons = implode('', $addonOrButtons);
             }
-            if ($this->_matchDropdown($addonOrButtons)) {
+            if ($this->matching->findTagOrAttribute(
+                    null, ['data-toggle', 'dropdown'], $addonOrButtons)) {
                 $template = 'inputGroupDropdowns';
             }
             $addonOrButtons = $this->formatTemplate($template, [
