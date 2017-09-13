@@ -331,7 +331,7 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
             if (is_string($addonOrButtons)) {
                 $addonOrButtons = $this->_makeIcon($addonOrButtons);
                 if (!$this->matching->findTagOrAttribute(
-                        'button', ['type', 'submit'], $addonOrButtons)) {
+                        'button', ['type' => 'submit'], $addonOrButtons)) {
                     $template = 'inputGroupAddons';
                 }
             }
@@ -339,7 +339,7 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
                 $addonOrButtons = implode('', $addonOrButtons);
             }
             if ($this->matching->findTagOrAttribute(
-                    null, ['data-toggle', 'dropdown'], $addonOrButtons)) {
+                    null, ['data-toggle' => 'dropdown'], $addonOrButtons)) {
                 $template = 'inputGroupDropdowns';
             }
             $addonOrButtons = $this->formatTemplate($template, [

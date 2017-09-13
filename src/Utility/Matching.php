@@ -84,13 +84,13 @@ class Matching {
      * type name or attribute.
      *
      * @param string $tag Tag name to search for, or null if not relevant.
-     * @param string $attr Array [name, value] for the attribute to search for, or null
+     * @param string $attrs Array [name => value] for the attributes to search for, or null
      * if not relevant. `value` can be null if only the name should be looked.
      * @param string $subject String to search.
      *
      * @return bool True if the given tag or given attribute is found.
      **/
-    public function findTagOrAttribute($tag, $attr, $subject) {
+    public function findTagOrAttribute($tag, $attrs, $subject) {
         $xml = new \XMLReader();
         $xml->xml($subject, 'UTF-8', LIBXML_NOERROR | LIBXML_ERR_NONE);
         // failed to parse => false
@@ -98,19 +98,21 @@ class Matching {
             return false;
         }
 
-        if (!is_null($attr) && !is_array($attr)) {
-            $attr = [$attr, null];
+        if (!is_null($attrs) && !is_array($attrs)) {
+            $attrs = [$attrs => null];
         }
 
         while ($xml->read()) {
             if (!is_null($tag) && $xml->name == $tag) {
                 return true; // tag found
             }
-            if (!is_null($attr)) {
-                $value = $xml->getAttribute($attr[0]);
-                if (!is_null($value)
-                    && (is_null($attr[1]) || $value == $attr[1])) {
-                    return true;
+            if (!is_null($attrs)) {
+                foreach ($attrs as $attr => $attrValue) {
+                    $value = $xml->getAttribute($attr);
+                    if (!is_null($value)
+                        && (is_null($attrValue) || $value == $attrValue)) {
+                        return true;
+                    }
                 }
             }
         }
