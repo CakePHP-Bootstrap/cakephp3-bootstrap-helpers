@@ -168,12 +168,12 @@ class FormHelperTest extends TestCase {
                 'name'  => 'Article[title]',
                 'id'    => 'article-title'
             ]],
-            '/div',
             ['small' => [
-                'class' => 'error-message text-muted col-md-offset-0 col-md-4 col-sm-offset-4 col-sm-8'
+                'class' => 'error-message form-text text-muted'
             ]],
             'error message',
             '/small',
+            '/div',
             '/div'
         ];
         $this->assertHtml($expected, $result);
@@ -513,8 +513,46 @@ class FormHelperTest extends TestCase {
             '/label',
             '/div'
         ];
-        $this->_testInput($expected, $fieldName, $options, false);
+        $this->_testInput($expected, $fieldName, $options);
 
+        // Horizontal
+        $expected = [
+            ['div' => [
+                'class' => 'form-group row'
+            ]],
+            ['div' => ['class' => 'col-md-2']], '/div',
+            ['div' => [
+                'class' => 'col-md-10'
+            ]],
+            ['div' => [
+                'class' => 'form-check checkbox'
+            ]],
+            ['input' => [
+                'type' => 'hidden',
+                'name' => $fieldName,
+                'value' => "0",
+                'class' => 'form-control'
+            ]],
+            ['label' => [
+                'for'   => $fieldName,
+                'class' => 'form-check-label'
+            ]],
+            ['input' => [
+                'type'  => 'checkbox',
+                'class' => 'form-check-input',
+                'name'  => $fieldName,
+                'value' => "1",
+                'id'    => $fieldName
+            ]],
+            \Cake\Utility\Inflector::humanize($fieldName),
+            '/label',
+            '/div',
+            '/div',
+            '/div'
+        ];
+        $this->_testInput($expected, $fieldName, $options + [
+            '_formOptions' => ['horizontal' => true]
+        ], true);
     }
 
     public function testInputGroup() {
@@ -1082,7 +1120,8 @@ class FormHelperTest extends TestCase {
         $result = $this->form->submit('Submit');
         $expected = [
             ['div' => ['class' => 'form-group row']],
-            ['div' => ['class' => 'col-md-offset-2 col-md-10']],
+            ['div' => ['class' => 'col-md-2']], '/div',
+            ['div' => ['class' => 'col-md-10']],
             ['input' => [
                 'type' => 'submit',
                 'class' => 'btn btn-primary',

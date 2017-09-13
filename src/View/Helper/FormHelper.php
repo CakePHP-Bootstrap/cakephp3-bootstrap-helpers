@@ -71,10 +71,10 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
             'checkbox' => '<input type="checkbox" class="form-check-input{{attrs.class}}" name="{{name}}" value="{{value}}"{{attrs}}>',
             'checkboxFormGroup' => '{{label}}',
             'checkboxContainer' => '<div class="form-check checkbox{{required}}">{{content}}</div>',
-            'checkboxContainerHorizontal' => '<div class="form-group"><div class="{{inputColumnOffsetClass}} {{inputColumnClass}}"><div class="checkbox {{required}}">{{content}}</div></div></div>',
+            'checkboxContainerHorizontal' => '<div class="form-group row"><div class="{{labelColumnClass}}"></div><div class="{{inputColumnClass}}"><div class="form-check checkbox{{required}}">{{content}}</div></div></div>',
             'dateWidget' => '<div class="row">{{year}}{{month}}{{day}}{{hour}}{{minute}}{{second}}{{meridian}}</div>',
             'error' => '<small class="error-message form-text text-muted">{{content}}</small>',
-            'errorHorizontal' => '<small class="error-message text-muted {{errorColumnClass}}">{{content}}</small>',
+            'errorInline' => '<small class="error-message text-muted">{{content}}</small>',
             'errorList' => '<ul>{{content}}</ul>',
             'errorItem' => '<li>{{text}}</li>',
             'file' => '<input type="file" name="{{name}}" {{attrs}}>',
@@ -82,18 +82,18 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
             'formStart' => '<form{{attrs}}>',
             'formEnd' => '</form>',
             'formGroup' => '{{label}}{{prepend}}{{input}}{{append}}',
-            'formGroupHorizontal' => '{{label}}<div class="{{inputColumnClass}}">{{prepend}}{{input}}{{append}}</div>',
+            'formGroupHorizontal' => '{{label}}<div class="{{inputColumnClass}}">{{prepend}}{{input}}{{append}}{{error}}</div>',
             'hiddenBlock' => '<div style="display:none;">{{content}}</div>',
             'input' => '<input type="{{type}}" name="{{name}}" class="form-control{{attrs.class}}" {{attrs}} />',
             'inputSubmit' => '<input type="{{type}}"{{attrs}}>',
             'inputContainer' => '<div class="form-group {{type}}{{required}}">{{content}}</div>',
             'inputContainerHorizontal' => '<div class="form-group row {{type}}{{required}}">{{content}}</div>',
             'inputContainerError' => '<div class="form-group has-error {{type}}{{required}}">{{content}}{{error}}</div>',
-            'inputContainerErrorHorizontal' => '<div class="form-group row has-error {{type}}{{required}}">{{content}}{{error}}</div>',
+            'inputContainerErrorHorizontal' => '<div class="form-group row has-error {{type}}{{required}}">{{content}}</div>',
             'label' => '<label{{attrs}}>{{text}}</label>',
             'labelHorizontal' => '<label class="col-form-label {{labelColumnClass}}{{attrs.class}}"{{attrs}}>{{text}}</label>',
             'labelInline' => '<label class="sr-only{{attrs.class}}"{{attrs}}>{{text}}</label>',
-            'nestingLabel' => '{{hidden}}<label class="form-check-label{{attrs.class}}"{{attrs}}>{{input}}{{text}}</label>',
+            'nestingLabel' => '{{hidden}}<label class="form-check-label{{attrs.class}}"{{attrs}}>{{input}} {{text}}</label>',
             'legend' => '<legend>{{text}}</legend>',
             'option' => '<option value="{{value}}"{{attrs}}>{{text}}</option>',
             'optgroup' => '<optgroup label="{{label}}"{{attrs}}>{{content}}</optgroup>',
@@ -106,7 +106,7 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
             'inlineRadioWrapper' => '<div class="form-check form-check-inline">{{label}}</div>',
             'textarea' => '<textarea name="{{name}}" class="form-control{{attrs.class}}" {{attrs}}>{{value}}</textarea>',
             'submitContainer' => '<div class="form-group">{{submitContainerHorizontalStart}}{{content}}{{submitContainerHorizontalEnd}}</div>',
-            'submitContainerHorizontal' => '<div class="form-group row"><div class="{{inputColumnOffsetClass}} {{inputColumnClass}}">{{content}}</div></div>',
+            'submitContainerHorizontal' => '<div class="form-group row"><div class="{{labelColumnClass}}"></div><div class="{{inputColumnClass}}">{{content}}</div></div>',
 
             'inputGroup' => '{{inputGroupStart}}{{input}}{{inputGroupEnd}}',
             'inputGroupStart' => '<div class="input-group">{{prepend}}',
@@ -114,7 +114,7 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
             'inputGroupAddons' => '<span class="input-group-addon">{{content}}</span>',
             'inputGroupButtons' => '<span class="input-group-btn">{{content}}</span>',
             'inputGroupDropdowns' => '<div class="input-group-btn">{{content}}</div>',
-            'helpBlock' => '<small class="help-block">{{content}}</small>',
+            'helpBlock' => '<small class="help-block form-text text-muted">{{content}}</small>',
             'buttonGroup' => '<div class="btn-group{{attrs.class}}"{{attrs}}>{{content}}</div>',
             'buttonToolbar' => '<div class="btn-toolbar{{attrs.class}}"{{attrs}}>{{content}}</div>',
             'fancyFileInput' => '{{fileInput}}<div class="input-group"><div class="input-group-btn">{{button}}</div>{{input}}</div>'
@@ -125,8 +125,7 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
         'columns' => [
             'md' => [
                 'label' => 2,
-                'input' => 10,
-                'error' => 0
+                'input' => 10
             ]
         ],
         'useCustomFileInput' => false
@@ -181,9 +180,7 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
                 else if ($that->inline) $data['templateName'] .= 'Inline';
                 $data += [
                     'inputColumnClass' => $this->_getColumnClass('input'),
-                    'labelColumnClass' => $this->_getColumnClass('label'),
-                    'errorColumnClass' => $this->_getColumnClass('error'),
-                    'inputColumnOffsetClass' => $this->_getColumnClass('label', true),
+                    'labelColumnClass' => $this->_getColumnClass('label')
                 ];
                 if (!$that->templates($data['templateName'])) {
                     $data['templateName'] = $name;
@@ -274,7 +271,7 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
      *
      * @return string The classes for the size or offset of the specified column.
      */
-    protected function _getColumnClass($what, $offset = false) {
+    protected function _getColumnClass($what) {
         $columns = $this->getConfig('columns');
         $classes = [];
         foreach ($columns as $cl => $arr) {
@@ -282,20 +279,7 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
                 continue;
             }
             $value = $arr[$what];
-            if ($what === 'error') {
-                if ($value == 0) {
-                    $offset = $arr['label'];
-                    $value = 12 - $arr['label'];
-                }
-                else {
-                    $offset = 0;
-                }
-                $classes[] = 'col-'.$cl.'-offset-'.$offset;
-                $classes[] = 'col-'.$cl.'-'.$value;
-            }
-            else {
-                $classes[] = 'col-'.$cl.'-'.($offset ? 'offset-' : '').$value;
-            }
+            $classes[] = 'col-'.$cl.'-'.$value;
         }
         return implode(' ', $classes);
     }
