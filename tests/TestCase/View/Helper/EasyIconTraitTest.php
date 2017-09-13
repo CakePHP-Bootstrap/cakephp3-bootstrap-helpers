@@ -157,7 +157,7 @@ class EasyIconTraitTest extends TestCase {
         $result = $this->form->button('i:plus');
         $this->assertHtml([
             ['button' => [
-                'class' => 'btn btn-default',
+                'class' => 'btn btn-primary',
                 'type'  => 'submit'
             ]], ['i' => [
                 'class' => 'fa fa-plus',
