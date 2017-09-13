@@ -14,6 +14,7 @@
  */
 namespace Bootstrap\View\Helper;
 
+use Bootstrap\Utility\Matching;
 use Bootstrap\View\FlexibleStringTemplateTrait;
 
 /**
@@ -170,6 +171,13 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
     public $inline = false;
 
     /**
+     * Instance of \Bootstrap\Utility\Matching.
+     *
+     * @var \Bootstrap\Utility\Matching
+     */
+    public $matching = null;
+
+    /**
      * {@inheritDoc}
      */
     public function __construct(\Cake\View\View $View, array $config = []) {
@@ -192,18 +200,7 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
             };
         }
         parent::__construct($View, $config);
-    }
-
-    /**
-     * Check if the given HTML string corresponds to a button or a submit input.
-     *
-     * @param string $html The HTML code to check
-     *
-     * @return bool `true` if the HTML code contains a button or a submit input,
-     * false otherwize.
-     */
-    protected function _matchButton($html) {
-        return strpos($html, '<button') !== FALSE || strpos($html, 'type="submit"') !== FALSE;
+        $this->matching = new Matching();
     }
 
     /**
@@ -330,7 +327,8 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
             $template = 'inputGroupButtons';
             if (is_string($addonOrButtons)) {
                 $addonOrButtons = $this->_makeIcon($addonOrButtons);
-                if (!$this->_matchButton($addonOrButtons)) {
+                if (!$this->matching->findTagOrAttribute(
+                        'button', ['type', 'submit'], $addonOrButtons)) {
                     $template = 'inputGroupAddons';
                 }
             }
