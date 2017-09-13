@@ -483,6 +483,37 @@ class FormHelperTest extends TestCase {
     }
 
     public function testInputCheckbox() {
+        $fieldName = 'color';
+        $options   = [
+            'type' => 'checkbox'
+        ];
+        // Default
+        $expected = [
+            ['div' => [
+                'class' => 'form-check checkbox'
+            ]],
+            ['input' => [
+                'type' => 'hidden',
+                'name' => $fieldName,
+                'value' => "0",
+                'class' => 'form-control'
+            ]],
+            ['label' => [
+                'for'   => $fieldName,
+                'class' => 'form-check-label'
+            ]],
+            ['input' => [
+                'type'  => 'checkbox',
+                'class' => 'form-check-input',
+                'name'  => $fieldName,
+                'value' => "1",
+                'id'    => $fieldName
+            ]],
+            \Cake\Utility\Inflector::humanize($fieldName),
+            '/label',
+            '/div'
+        ];
+        $this->_testInput($expected, $fieldName, $options, false);
 
     }
 

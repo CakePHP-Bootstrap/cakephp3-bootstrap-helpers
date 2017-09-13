@@ -68,10 +68,9 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
 
         'templates' => [
             'button' => '<button{{attrs}}>{{text}}</button>',
-            'checkbox' => '<input type="checkbox" name="{{name}}" value="{{value}}"{{attrs}}>',
+            'checkbox' => '<input type="checkbox" class="form-check-input{{attrs.class}}" name="{{name}}" value="{{value}}"{{attrs}}>',
             'checkboxFormGroup' => '{{label}}',
-            'checkboxWrapper' => '<div class="checkbox">{{label}}</div>',
-            'checkboxContainer' => '<div class="checkbox {{required}}">{{content}}</div>',
+            'checkboxContainer' => '<div class="form-check checkbox{{required}}">{{content}}</div>',
             'checkboxContainerHorizontal' => '<div class="form-group"><div class="{{inputColumnOffsetClass}} {{inputColumnClass}}"><div class="checkbox {{required}}">{{content}}</div></div></div>',
             'dateWidget' => '<div class="row">{{year}}{{month}}{{day}}{{hour}}{{minute}}{{second}}{{meridian}}</div>',
             'error' => '<small class="error-message form-text text-muted">{{content}}</small>',
