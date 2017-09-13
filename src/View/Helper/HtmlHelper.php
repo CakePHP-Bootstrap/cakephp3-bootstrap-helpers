@@ -89,7 +89,7 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
             'dropdownMenu' => '<div class="dropdown-menu{{attrs.class}}"{{attrs}}>{{content}}</div>',
             'dropdownMenuItem' => '<a href="{{url}}" class="dropdown-item{{attrs.class}}"{{attrs}}>{{content}}</a>',
             'dropdownMenuHeader' => '<h6 class="dropdown-header{{attrs.class}}"{{attrs}}>{{content}}</h6>',
-            'dropdownMenuDivider' => '<div class="dropdown-divider{{attrs.class}}"{{attrs}}></div>'
+            'dropdownMenuDivider' => '<div role="separator" class="dropdown-divider{{attrs.class}}"{{attrs}}></div>'
         ],
         'templateClass' => 'Bootstrap\View\EnhancedStringTemplate',
         'tooltip' => [
@@ -425,6 +425,8 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
                     if (isset($value['url'])) {
                         $url = $this->Url->build($value['url']);
                     }
+                    // else if ($this->_matchTag('a', $title)) {
+                    // }
                     else {
                         $url = '#';
                         $value = $this->addClass($value, 'disabled');

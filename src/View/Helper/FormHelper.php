@@ -88,9 +88,11 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
             'input' => '<input type="{{type}}" name="{{name}}" class="form-control{{attrs.class}}" {{attrs}} />',
             'inputSubmit' => '<input type="{{type}}"{{attrs}}>',
             'inputContainer' => '<div class="form-group {{type}}{{required}}">{{content}}</div>',
+            'inputContainerHorizontal' => '<div class="form-group row {{type}}{{required}}">{{content}}</div>',
             'inputContainerError' => '<div class="form-group has-error {{type}}{{required}}">{{content}}{{error}}</div>',
-            'label' => '<label class="control-label{{attrs.class}}"{{attrs}}>{{text}}</label>',
-            'labelHorizontal' => '<label class="control-label {{labelColumnClass}}{{attrs.class}}"{{attrs}}>{{text}}</label>',
+            'inputContainerErrorHorizontal' => '<div class="form-group row has-error {{type}}{{required}}">{{content}}{{error}}</div>',
+            'label' => '<label{{attrs}}>{{text}}</label>',
+            'labelHorizontal' => '<label class="col-form-label {{labelColumnClass}}{{attrs.class}}"{{attrs}}>{{text}}</label>',
             'labelInline' => '<label class="sr-only{{attrs.class}}"{{attrs}}>{{text}}</label>',
             'nestingLabel' => '{{hidden}}<label{{attrs}}>{{input}}{{text}}</label>',
             'legend' => '<legend>{{text}}</legend>',
@@ -108,20 +110,21 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
             'inlineRadioNestingLabel' => '{{hidden}}<label{{attrs}} class="radio-inline">{{input}}{{text}}</label>',
             'textarea' => '<textarea name="{{name}}" class="form-control{{attrs.class}}" {{attrs}}>{{value}}</textarea>',
             'submitContainer' => '<div class="form-group">{{submitContainerHorizontalStart}}{{content}}{{submitContainerHorizontalEnd}}</div>',
-            'submitContainerHorizontal' => '<div class="form-group"><div class="{{inputColumnOffsetClass}} {{inputColumnClass}}">{{content}}</div></div>',
+            'submitContainerHorizontal' => '<div class="form-group row"><div class="{{inputColumnOffsetClass}} {{inputColumnClass}}">{{content}}</div></div>',
 
             'inputGroup' => '{{inputGroupStart}}{{input}}{{inputGroupEnd}}',
             'inputGroupStart' => '<div class="input-group">{{prepend}}',
             'inputGroupEnd' => '{{append}}</div>',
             'inputGroupAddons' => '<span class="input-group-addon">{{content}}</span>',
             'inputGroupButtons' => '<span class="input-group-btn">{{content}}</span>',
+            'inputGroupDropdowns' => '<div class="input-group-btn">{{content}}</div>',
             'helpBlock' => '<p class="help-block">{{content}}</p>',
             'buttonGroup' => '<div class="btn-group{{attrs.class}}"{{attrs}}>{{content}}</div>',
             'buttonToolbar' => '<div class="btn-toolbar{{attrs.class}}"{{attrs}}>{{content}}</div>',
             'fancyFileInput' => '{{fileInput}}<div class="input-group"><div class="input-group-btn">{{button}}</div>{{input}}</div>'
         ],
         'buttons' => [
-            'type' => 'default'
+            'type' => 'primary'
         ],
         'columns' => [
             'md' => [
@@ -201,6 +204,17 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
         }
         parent::__construct($View, $config);
         $this->matching = new Matching();
+    }
+
+    /**
+     * Check if the given HTML string corresponds to a dropdown.
+     *
+     * @param string $html The HTML code to check
+     *
+     * @return bool `true` if the HTML code contains a dropdown, false otherwize.
+     */
+     protected function _matchDropdown($html) {
+        return strpos($html, 'data-toggle="dropdown"') !== FALSE;
     }
 
     /**
@@ -334,6 +348,9 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
             }
             else {
                 $addonOrButtons = implode('', $addonOrButtons);
+            }
+            if ($this->_matchDropdown($addonOrButtons)) {
+                $template = 'inputGroupDropdowns';
             }
             $addonOrButtons = $this->formatTemplate($template, [
                 'content' => $addonOrButtons
@@ -675,7 +692,9 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
         $options += [
             'type' => false,
             'dropup' => false,
-            'data-toggle' => 'dropdown'
+            'data-toggle' => 'dropdown',
+            'aria-haspopup' => 'true',
+            'aria-expanded' => 'false'
         ];
         $dropup = $options['dropup'];
         unset($options['dropup']);
@@ -687,7 +706,7 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
 
         $options = $this->addClass($options, 'dropdown-toggle');
         return $this->buttonGroup([
-            $this->button($title.' <span class="caret"></span>', $options),
+            $this->button($title, $options),
             $this->Html->dropdown($menu, $ulOptions)
         ], $bGroupOptions);
 
