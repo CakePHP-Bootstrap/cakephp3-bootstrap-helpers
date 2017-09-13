@@ -70,6 +70,7 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
             'button' => '<button{{attrs}}>{{text}}</button>',
             'checkbox' => '<input type="checkbox" class="form-check-input{{attrs.class}}" name="{{name}}" value="{{value}}"{{attrs}}>',
             'checkboxFormGroup' => '{{label}}',
+            'checkboxWrapper' => '<div class="form-check">{{label}}</div>',
             'checkboxContainer' => '<div class="form-check checkbox{{required}}">{{content}}</div>',
             'checkboxContainerHorizontal' => '<div class="form-group row"><div class="{{labelColumnClass}}"></div><div class="{{inputColumnClass}}"><div class="form-check checkbox{{required}}">{{content}}</div></div></div>',
             'dateWidget' => '<div class="row">{{year}}{{month}}{{day}}{{hour}}{{minute}}{{second}}{{meridian}}</div>',
