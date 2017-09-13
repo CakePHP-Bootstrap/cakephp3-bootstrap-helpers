@@ -328,7 +328,7 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
             if (is_string($addonOrButtons)) {
                 $addonOrButtons = $this->_makeIcon($addonOrButtons);
                 if (!$this->matching->findTagOrAttribute(
-                        'button', ['type', 'submit'], $addonOrButtons)) {
+                        'button', ['type' => 'submit'], $addonOrButtons)) {
                     $template = 'inputGroupAddons';
                 }
             }
