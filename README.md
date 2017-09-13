@@ -21,6 +21,16 @@ I am currently working on rewritting the helpers for Bootstrap 4, current work s
 - PaginatorHelper - 100% (Alpha)
 - PanelHelper - 0%
 
+#### Breaking changes from previous versions
+
+- `FormHelper`:
+  - it is not possible to place error message in a separate column in horizontal form, the error message
+  will always be put below the input.
+
+*Note: It may happen that the generated HTML is not exactly the one required by Bootstrap, but the final
+rendering should be the same. One example is the way `radio` controls are wrapped in horizontal
+form.*
+
 How to... ?
 ===========
 
