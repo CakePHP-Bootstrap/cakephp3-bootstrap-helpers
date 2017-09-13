@@ -14,6 +14,8 @@
  */
 namespace Bootstrap\View\Helper;
 
+use Bootstrap\Utility\Matching;
+
 /**
  * Html Helper class for easy use of HTML widgets.
  *
@@ -425,8 +427,12 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
                     if (isset($value['url'])) {
                         $url = $this->Url->build($value['url']);
                     }
-                    // else if ($this->_matchTag('a', $title)) {
-                    // }
+                    else if (Matching::matchTag('a', $value['title'], $title, $attrs)) {
+                        $value += $attrs;
+                        $url = $value['href'];
+                        unset($value['href']);
+                        $url = '#';
+                    }
                     else {
                         $url = '#';
                         $value = $this->addClass($value, 'disabled');
