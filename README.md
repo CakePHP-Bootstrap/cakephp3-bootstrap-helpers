@@ -27,9 +27,12 @@ I am currently working on rewritting the helpers for Bootstrap 4, current work s
   - it is not possible to place error message in a separate column in horizontal form, the error message
   will always be put below the input.
 
-*Note: It may happen that the generated HTML is not exactly the one required by Bootstrap, but the final
-rendering should be the same. One example is the way `radio` controls are wrapped in horizontal
-form.*
+**Note:** It may happen that the generated HTML is not exactly the one required by Bootstrap, but the final
+rendering should be the same. Some examples are:
+
+- the way `radio` controls are wrapped inside horizontal forms;
+- the way `checkbox` and `submit` button are offseted in horizontal form (an empty `<div>` element is added
+before the input `<div>`).
 
 How to... ?
 ===========
