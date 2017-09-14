@@ -53,22 +53,32 @@ trait ClassTrait {
      * Add classes to options according to the default values of bootstrap-type
      * and bootstrap-size for button (see configuration).
      *
-     * @param array $options The initial options with bootstrap-type and/or
-     * bootstrat-size values.
+     * @param array $options The initial options with btype and/or
+     * size, block values.
      *
      * @return array The new options with class values (btn, and btn-* according to
      * initial options).
      */
     protected function _addButtonClasses($options) {
         $options += [
-            'bootstrap-type' => $this->getConfig('buttons.type'),
-            'bootstrap-size' => false,
-            'bootstrap-block' => false
+            'btype' => $this->getConfig('buttons.type'),
+            'size' => false,
+            'block' => false
         ];
-        $type = $options['bootstrap-type'];
-        $size = $options['bootstrap-size'];
-        $block = $options['bootstrap-block'];
-        unset($options['bootstrap-type'], $options['bootstrap-size'],
+        if (isset($options['bootstrap-type'])) {
+            $options['btype'] = $options['bootstrap-type'];
+        }
+        if (isset($options['bootstrap-size'])) {
+            $options['size'] = $options['bootstrap-size'];
+        }
+        if (isset($options['bootstrap-block'])) {
+            $options['block'] = $options['bootstrap-block'];
+        }
+        $type = $options['btype'];
+        $size = $options['size'];
+        $block = $options['block'];
+        unset($options['btype'], $options['size'], $options['block'],
+            $options['bootstrap-size'], $options['bootstrap-size'],
             $options['bootstrap-block']);
         $options = $this->addClass($options, 'btn');
         if (!preg_match('#btn-[a-z]+#', $options['class'])) {
