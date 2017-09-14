@@ -349,7 +349,7 @@ class FormHelperTest extends TestCase {
         ];
         $expected = [
             ['div' => [
-                'class' => 'form-group inlineRadio'
+                'class' => 'form-group inlineradio'
             ]],
             ['label' => [
                 'for' => $fieldName
@@ -393,8 +393,11 @@ class FormHelperTest extends TestCase {
         ];
         $options['inline'] = false;
         $expected = [
+            ['fieldset' => [
+                'class' => 'form-group radio'
+            ]],
             ['div' => [
-                'class' => 'form-group row radio'
+                'class' => 'row'
             ]],
             ['label' => [
                 'class' => 'col-form-label col-md-2'
@@ -432,14 +435,17 @@ class FormHelperTest extends TestCase {
                 '/div'
             ]);
         }
-        $expected = array_merge($expected, ['/div', '/div']);
+        $expected = array_merge($expected, ['/div', '/div', '/fieldset']);
         $this->_testInput($expected, $fieldName, $options);
 
         // Horizontal + Inline
         $options['inline'] = true;
         $expected = [
+            ['fieldset' => [
+                'class' => 'form-group inlineradio'
+            ]],
             ['div' => [
-                'class' => 'form-group row inlineRadio'
+                'class' => 'row'
             ]],
             ['label' => [
                 'class' => 'col-form-label col-md-2',
@@ -478,7 +484,7 @@ class FormHelperTest extends TestCase {
                 '/div'
             ]);
         }
-        $expected = array_merge($expected, ['/div', '/div']);
+        $expected = array_merge($expected, ['/div', '/div', '/fieldset']);
         $this->_testInput($expected, $fieldName, $options);
     }
 
