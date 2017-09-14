@@ -195,6 +195,17 @@ class FormHelperTest extends TestCase {
                 'type' => 'submit'
             ]], 'Test', '/button'
         ], $button);
+        // button with btype and size
+        $button = $this->form->button('Test', [
+            'btype' => 'success',
+            'size' => 'sm'
+        ]);
+        $this->assertHtml([
+            ['button' => [
+                'class' => 'btn btn-success btn-sm',
+                'type' => 'submit'
+            ]], 'Test', '/button'
+        ], $button);
         // button with class
         $button = $this->form->button('Test', [
             'class' => 'btn btn-primary'
@@ -205,6 +216,25 @@ class FormHelperTest extends TestCase {
                 'type' => 'submit'
             ]], 'Test', '/button'
         ], $button);
+    }
+
+    public function testCustomFunctions() {
+        $this->assertEquals(
+            $this->form->cbutton('b', ['class' => 'cl']),
+            $this->form->button('b', ['class' => 'cl'])
+        );
+        $this->assertEquals(
+            $this->form->cbutton('b', 'danger', ['class' => 'cl']),
+            $this->form->button('b', ['class' => 'cl', 'btype' => 'danger'])
+        );
+        $this->assertEquals(
+            $this->form->csubmit('b', ['class' => 'cl']),
+            $this->form->submit('b', ['class' => 'cl'])
+        );
+        $this->assertEquals(
+            $this->form->csubmit('b', 'danger', ['class' => 'cl']),
+            $this->form->submit('b', ['class' => 'cl', 'btype' => 'danger'])
+        );
     }
 
     protected function _testInput($expected, $fieldName, $options = [], $debug = false) {
