@@ -54,36 +54,32 @@ class NavbarHelper extends Helper {
      */
     public $_defaultConfig = [
         'templates' => [
-            'navbarStart' => '<nav class="navbar navbar-{{type}}{{attrs.class}}"{{attrs}}>{{containerStart}}{{header}}{{responsiveStart}}',
+            'navbarStart' => '<nav class="navbar{{attrs.class}}"{{attrs}}>{{containerStart}}{{header}}{{responsiveStart}}',
             'navbarEnd' => '{{responsiveEnd}}{{containerEnd}}</nav>',
-            'containerStart' => '<div class="{{containerClass}}{{attrs.class}}"{{attrs}}>',
+            'containerStart' => '<div class="container{{attrs.class}}"{{attrs}}>',
             'containerEnd' => '</div>',
             'responsiveStart' => '<div class="collapse navbar-collapse{{attrs.class}}" id="{{id}}"{{attrs}}>',
             'responsiveEnd' => '</div>',
-            'header' => '<div class="navbar-header{{attrs.class}}"{{attrs}}>{{toggleButton}}{{brand}}</div>',
+            'header' => '{{brand}}{{toggleButton}}',
             'toggleButton' =>
-'<button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#{{id}}" aria-controls="{{id}}"
-aria-label="Toggle navigation" aria-expanded="false">
-    <span class="sr-only">{{content}}</span>
-    <span class="icon-bar"></span>
-    <span class="icon-bar"></span>
-    <span class="icon-bar"></span>
+'<button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#{{id}}" aria-controls="{{id}}" aria-label="{{label}}" aria-expanded="false">
+    <span class="navbar-toggler-icon"></span>
 </button>',
             'brand' => '<a class="navbar-brand{{attrs.class}}" href="{{url}}"{{attrs}}>{{content}}</a>',
             'brandImage' => '<img alt="{{brandname}}" src="{{src}}"{{attrs}} />',
             'dropdownMenuStart' => '<div class="dropdown-menu{{attrs.class}}"{{attrs}}>',
-            'dropdownMenuEnd' => '<div>',
+            'dropdownMenuEnd' => '</div>',
             'dropdownLink' =>
 '<a href="{{url}}" class="nav-link dropdown-toggle{{attrs.class}}" data-toggle="dropdown" role="button"
 aria-haspopup="true" aria-expanded="false">{{content}}{{caret}}</a>',
             'innerMenuStart' => '<li class="nav-item dropdown{{attrs.class}}"{{attrs}}>{{dropdownLink}}{{dropdownMenuStart}}',
             'innerMenuEnd' => '{{dropdownMenuEnd}}</li>',
-            'innerMenuItem' => '<li{{attrs}}>{{link}}</li>',
-            'innerMenuItemLink' => '<a href="{{url}}"{{attrs}}>{{content}}</a>',
-            'innerMenuItemActive' => '<li class="active{{attrs.class}}"{{attrs}}>{{link}}</li>',
-            'innerMenuItemLinkActive' => '<a href="{{url}}"{{attrs}}>{{content}}</a>',
-            'innerMenuItemDivider' => '<li role="separator" class="divider{{attrs.class}}"{{attrs}}></li>',
-            'innerMenuItemHeader' => '<li class="dropdown-header{{attrs.class}}"{{attrs}}>{{content}}</li>',
+            'innerMenuItem' => '{{link}}',
+            'innerMenuItemLink' => '<a href="{{url}}" class="dropdown-item{{attrs.class}}"{{attrs}}>{{content}}</a>',
+            'innerMenuItemActive' => '{{link}}',
+            'innerMenuItemLinkActive' => '<a href="{{url}}" class="dropdown-item active{{attrs.class}}"{{attrs}}>{{content}}</a>',
+            'innerMenuItemDivider' => '<div role="separator" class="dropdown-divider{{attrs.class}}"{{attrs}}></div>',
+            'innerMenuItemHeader' => '<h6 class="dropdown-header{{attrs.class}}"{{attrs}}>{{content}}</h6>',
             'outerMenuStart' => '<ul class="navbar-nav mr-auto{{attrs.class}}"{{attrs}}>',
             'outerMenuEnd' => '</ul>',
             'outerMenuItem' => '<li class="nav-item{{attrs.class}}"{{attrs}}>{{link}}</li>',
@@ -132,27 +128,41 @@ aria-haspopup="true" aria-expanded="false">{{content}}{{caret}}</a>',
         $options += [
             'id' => 'navbar',
             'fixed' => false,
-            'responsive' => true,
-            'static' => false,
-            'inverse' => false,
-            'fluid' => false,
+            'collapse' => 'lg',
+            'sticky' => false,
+            'scheme' => 'light',
+            'container' => false,
             'templateVars' => []
         ];
 
-        $this->_responsive = $options['responsive'];
-        $fixed = $options['fixed'];
-        $static = $options['static'];
-        $inverse = $options['inverse'];
-        $fluid = $options['fluid'];
+        $this->_responsive = $options['collapse'] !== false;
+        $this->_container = $options['container'];
 
         /** Generate options for outer div. **/
-        $type = $inverse ? 'inverse' : 'default';
-
-        if ($fixed !== false) {
-            $options = $this->addClass($options, 'navbar-fixed-'.$fixed);
+        if ($options['scheme'] !== false) {
+            $scheme = $options['scheme'];
+            $bg = null;
+            if (is_array($scheme)) {
+                list($scheme, $bg) = $scheme;
+            }
+            if ($bg === null) {
+                $bg = $scheme;
+            }
+            $options = $this->addClass($options, 'navbar-'.$scheme);
+            if ($bg !== false) {
+                $options = $this->addClass($options, 'bg-'.$bg);
+            }
         }
-        if ($static !== false) {
-            $options = $this->addClass($options, 'navbar-static-top');
+
+        if ($options['fixed'] !== false) {
+            $fixed = $options['fixed'];
+            if ($fixed === true) {
+                $fixed = 'top';
+            }
+            $options = $this->addClass($options, 'fixed-'.$fixed);
+        }
+        if ($options['sticky'] !== false) {
+            $options = $this->addClass($options, 'sticky-top');
         }
 
         if ($brand) {
@@ -173,16 +183,24 @@ aria-haspopup="true" aria-expanded="false">{{content}}{{caret}}</a>',
         $toggleButton = '';
         if ($this->_responsive) {
             $toggleButton = $this->formatTemplate('toggleButton', [
-                'content' => __('Toggle navigation'),
+                'label' => __('Toggle navigation'),
                 'id' => $options['id']
             ]);
+            if ($options['collapse'] !== true) {
+                $options = $this->addClass($options, 'navbar-expand-'.$options['collapse']);
+            }
+        }
+        else {
+            $options = $this->addClass($options, 'navbar-expand');
         }
 
-        $containerStart = $this->formatTemplate('containerStart', [
-            'containerClass' => $fluid ? 'container-fluid' : 'container',
-            'attrs' => $this->templater()->formatAttributes([]),
-            'templateVars' => $options['templateVars']
-        ]);
+        $containerStart = '';
+        if ($this->_container) {
+            $containerStart = $this->formatTemplate('containerStart', [
+                'attrs' => $this->templater()->formatAttributes([]),
+                'templateVars' => $options['templateVars']
+            ]);
+        }
 
         $responsiveStart = '';
         if ($this->_responsive) {
@@ -203,10 +221,9 @@ aria-haspopup="true" aria-expanded="false">{{content}}{{caret}}</a>',
 
         return $this->formatTemplate('navbarStart', [
             'header' => $header,
-            'type' => $type,
             'responsiveStart' => $responsiveStart,
             'containerStart' => $containerStart,
-            'attrs' => $this->templater()->formatAttributes($options, ['id', 'fixed', 'responsive', 'static', 'fluid', 'inverse']),
+            'attrs' => $this->templater()->formatAttributes($options, ['id', 'fixed', 'collapse', 'sticky', 'scheme', 'container']),
             'templateVars' => $options['templateVars']
         ]);
     }
@@ -446,7 +463,10 @@ aria-haspopup="true" aria-expanded="false">{{content}}{{caret}}</a>',
      * @return string HTML elements to close the navbar.
      */
     public function end() {
-        $containerEnd = $this->formatTemplate('containerEnd', []);
+        $containerEnd = '';
+        if ($this->_container) {
+            $containerEnd = $this->formatTemplate('containerEnd', []);
+        }
         $responsiveEnd = '';
         if ($this->_responsive) {
             $responsiveEnd = $this->formatTemplate('responsiveEnd', []);
