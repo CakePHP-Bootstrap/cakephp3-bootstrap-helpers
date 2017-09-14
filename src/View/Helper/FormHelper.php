@@ -110,7 +110,7 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
             'inlineradioContainer' => '<div class="form-group {{type}}{{required}}">{{content}}</div>',
             'inlineradioContainerHorizontal' => '<fieldset class="form-group {{type}}{{required}}"><div class="row">{{content}}</div></fieldset>',
             'textarea' => '<textarea name="{{name}}" class="form-control{{attrs.class}}" {{attrs}}>{{value}}</textarea>',
-            'submitContainer' => '<div class="form-group">{{submitContainerHorizontalStart}}{{content}}{{submitContainerHorizontalEnd}}</div>',
+            'submitContainer' => '<div class="form-group">{{content}}</div>',
             'submitContainerHorizontal' => '<div class="form-group row"><div class="{{labelColumnClass}}"></div><div class="{{inputColumnClass}}">{{content}}</div></div>',
 
             'inputGroup' => '{{inputGroupStart}}{{input}}{{inputGroupEnd}}',
