@@ -39,7 +39,7 @@ class NavbarHelper extends Helper {
      * @var array
      */
     public $helpers = [
-        'Form', 'Html', 'Url'
+        'Html', 'Url'
     ];
 
     /**
@@ -71,7 +71,7 @@ class NavbarHelper extends Helper {
             'dropdownMenuEnd' => '</div>',
             'dropdownLink' =>
 '<a href="{{url}}" class="nav-link dropdown-toggle{{attrs.class}}" data-toggle="dropdown" role="button"
-aria-haspopup="true" aria-expanded="false">{{content}}{{caret}}</a>',
+aria-haspopup="true" aria-expanded="false">{{content}}</a>',
             'innerMenuStart' => '<li class="nav-item dropdown{{attrs.class}}"{{attrs}}>{{dropdownLink}}{{dropdownMenuStart}}',
             'innerMenuEnd' => '{{dropdownMenuEnd}}</li>',
             'innerMenuItem' => '{{link}}',
@@ -267,10 +267,16 @@ aria-haspopup="true" aria-expanded="false">{{content}}{{caret}}</a>',
         $level = $this->_level > 1 ? 'inner' : 'outer';
         $template = $level.'MenuItem'.$active;
         $linkTemplate = $level.'MenuItemLink'.$active;
+
+        // inner menu, no wrapper elements, options go directly for link
+        if ($level === 'inner') {
+            $linkOptions = $options;
+        }
+
         $link = $this->formatTemplate($linkTemplate, [
             'content' => $name,
             'url' => $url,
-            'attrs' => $this->templater()->formatAttributes($linkOptions),
+            'attrs' => $this->templater()->formatAttributes($linkOptions, ['active']),
             'templateVars' => $linkOptions['templateVars']
         ]);
         return $this->formatTemplate($template, [
@@ -278,22 +284,6 @@ aria-haspopup="true" aria-expanded="false">{{content}}{{caret}}</a>',
             'attrs' => $this->templater()->formatAttributes($options, ['active']),
             'templateVars' => $options['templateVars']
         ]);
-    }
-
-    /**
-     * Add a button to the navbar.
-     *
-     * @param string $name Text of the button.
-     * @param array $options Options sent to the `Form::button` method.
-     *
-     * @return string A HTML navbar button.
-     */
-    public function button($name, array $options = []) {
-        $options += [
-            'type' => 'button'
-        ];
-        $options = $this->addClass($options, 'navbar-btn');
-        return $this->Form->button($name, $options);
     }
 
     /**
@@ -355,16 +345,6 @@ aria-haspopup="true" aria-expanded="false">{{content}}{{caret}}</a>',
         $options += [
             'templateVars' => []
         ];
-        $text = preg_replace_callback('/<a([^>]*)?>([^<]*)?<\/a>/i', function($matches) {
-            $attrs = preg_replace_callback ('/class="(.*)?"/', function ($m) {
-                $cl = $this->addClass (['class' => $m[1]], 'navbar-link');
-                return 'class="'.$cl['class'].'"';
-            }, $matches[1], -1, $count);
-            if ($count == 0) {
-                $attrs .= ' class="navbar-link"';
-            }
-            return '<a'.$attrs.'>'.$matches[2].'</a>';
-        }, $text);
         return $this->formatTemplate('navbarText', [
             'content' => $text,
             'attrs' => $this->templater()->formatAttributes($options),
@@ -394,7 +374,6 @@ aria-haspopup="true" aria-expanded="false">{{content}}{{caret}}</a>',
      *
      * ### Link Options
      *
-     * - `caret` HTML caret element. Default is `'<span class="caret"></span>'`.
      * - Other attributes will be assigned to the link element.
      *
      * ### List Options
@@ -420,15 +399,11 @@ aria-haspopup="true" aria-expanded="false">{{content}}{{caret}}</a>',
             'templateVars' => []
         ];
         if ($this->_level == 1) {
-            $linkOptions += [
-                'caret' => '<span class="caret"></span>'
-            ];
             $template = 'innerMenuStart';
             $templateOptions['dropdownLink'] = $this->formatTemplate('dropdownLink', [
                 'content' => $name,
-                'caret' => $linkOptions['caret'],
                 'url' => $url ? $this->Url->build($url) : '#',
-                'attrs' => $this->templater()->formatAttributes($linkOptions, ['caret'])
+                'attrs' => $this->templater()->formatAttributes($linkOptions)
             ]);
             $templateOptions['dropdownMenuStart'] = $this->formatTemplate('dropdownMenuStart', [
                 'attrs' => $this->templater()->formatAttributes($listOptions)
