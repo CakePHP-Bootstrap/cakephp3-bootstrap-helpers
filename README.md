@@ -41,10 +41,10 @@ How to... ?
 
 If you want the latest **Bootstrap 4** version of the plugin:
 
-- Add the plugin to your `composer.json` (see below if you want to use another branch / version):
+- Add the plugin to your `composer.json`:
 
 ```
-composer require holt59/cakephp3-bootstrap-helpers:v4-updated
+composer require holt59/cakephp3-bootstrap-helpers:dev-4.0.1-alpha
 ```
 
 - Load the plugin in your `config/bootstrap.php`:
@@ -71,8 +71,7 @@ The full plugin documentation is available at https://holt59.github.io/cakephp3-
 | master / 3.1.2 | 3 | >= 3.4.0 | Current active branch. |
 | > 3.0.5, <= 3.1.1 | 3 | >= 3.2.3, < 3.4.0 | Not actively maintained (open issue(s) if necessary). |
 | <= 3.0.5 | 3 | >= 3.0.0 | Deprecated. |
-| 4.0.0-alpha | 4 | N/A | Deprecated. |
-| 4.0.1-alpha | 4 | >= 3.4.0 | Coming soon... |
+| 4.0.1-alpha | 4 | >= 3.4.0 | Alpha, not all helpers are available. |
 
 #### Contributing
 
