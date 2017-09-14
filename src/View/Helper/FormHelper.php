@@ -577,13 +577,12 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
      *
      * ### Options
      *
-     * - `bootstrap-type` Twitter bootstrap button type (primary, danger, info, etc.)
-     * - `bootstrap-size` Twitter bootstrap button size (mini, small, large)
+     * - `block` Twitter bootstrap button block (true or false, default false).
+     * - `btype` Twitter bootstrap button type (primary, danger, info, etc.).
+     * - `size` Twitter bootstrap button size (mini, small, large).
      * - `escape` HTML entity encode the $title of the button. Defaults to `false`.
      *
-     * @param string $title The button's caption. Not automatically HTML encoded
-     * @param array $options Array of options and HTML attributes.
-     *
+     * @param string $title The button's caption. Not automatically HTML encoded.
      * @return string A HTML button tag.
      *
      * @link http://book.cakephp.org/3.0/en/views/helpers/form.html#creating-button-elements
@@ -591,6 +590,30 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
     public function button($title, array $options = []) {
         return $this->_easyIcon('parent::button', $title,
                                 $this->_addButtonClasses($options));
+    }
+
+    /**
+     * Alternative to the `button` method allowing the type of the button to be set as an
+     * argument.
+     *
+     * @param string $title The button's caption. Not automatically HTML encoded.
+     * @param string|array $type If array, behaves like options, otherwize will be used as
+     * the `btype` option.
+     * @param array $options Array of options and HTML attributes.
+     *
+     * @return string A HTML button tag.
+     */
+    public function cbutton($title, $type = [], array $options = []) {
+        if (is_array($type)) {
+            $options = $type;
+            $type = null;
+        }
+        if ($type !== null) {
+            $options += [
+                'btype' => $type
+            ];
+        }
+        return $this->button($title, $options);
     }
 
     /**
@@ -699,8 +722,9 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
      *
      * ### Options
      *
-     * - `bootstrap-size` Twitter bootstrap button size (mini, small, large)
-     * - `bootstrap-type` Twitter bootstrap button type (primary, danger, info, etc.)
+     * - `block` Twitter bootstrap button block (true or false, default false).
+     * - `btype` Twitter bootstrap button type (primary, danger, info, etc.).
+     * - `size` Twitter bootstrap button size (mini, small, large).
      * - `templateVars` Additional template variables for the input element and its container.
      * - `type` Set to 'reset' for reset inputs. Defaults to 'submit'
      * - Other attributes will be assigned to the input element.
@@ -715,10 +739,32 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
      * @return string A HTML submit button
      * @link http://book.cakephp.org/3.0/en/views/helpers/form.html#creating-buttons-and-submit-elements
      */
-    public function submit($caption = null, array $options = array()) {
+    public function submit($caption = null, array $options = []) {
         return parent::submit($caption, $this->_addButtonClasses($options));
     }
 
+    /**
+     * See FormHelper::submit.
+     *
+     * @param string $captio See `FormHelper::submit` documentation.
+     * @param string|array $type If array, behaves like options, otherwize will be used as
+     * the `btype` option.
+     * @param array $options Array of options and HTML attributes, see `FormHelper::submit`.
+     *
+     * @return string A HTML submit button.
+     */
+    public function csubmit($caption = null, $type = [], array $options = []) {
+        if (is_array($type)) {
+            $options = $type;
+            $type = null;
+        }
+        if ($type !== null) {
+            $options += [
+                'btype' => $type
+            ];
+        }
+        return $this->submit($caption, $options);
+    }
 }
 
 ?>
