@@ -350,7 +350,7 @@ class FormHelperTest extends TestCase {
         ];
         $expected = [
             ['div' => [
-                'class' => 'form-group'
+                'class' => 'form-group inlineradio'
             ]],
             ['label' => [
                 'class' => 'control-label',
@@ -382,7 +382,7 @@ class FormHelperTest extends TestCase {
             ]);
         }
         $expected = array_merge($expected, ['/div']);
-        $this->_testInput($expected, $fieldName, $options);
+        $this->_testInput($expected, $fieldName, $options, true);
         // Horizontal
         $options += [
             '_formOptions' => ['horizontal' => true]
@@ -432,7 +432,7 @@ class FormHelperTest extends TestCase {
         $options['inline'] = true;
         $expected = [
             ['div' => [
-                'class' => 'form-group'
+                'class' => 'form-group inlineradio'
             ]],
             ['label' => [
                 'class' => 'control-label col-md-2',
