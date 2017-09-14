@@ -73,7 +73,8 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
             'checkboxWrapper' => '<div class="form-check">{{label}}</div>',
             'checkboxContainer' => '<div class="form-check checkbox{{required}}">{{content}}</div>',
             'checkboxContainerHorizontal' => '<div class="form-group row"><div class="{{labelColumnClass}}"></div><div class="{{inputColumnClass}}"><div class="form-check checkbox{{required}}">{{content}}</div></div></div>',
-            'dateWidget' => '<div class="row">{{year}}{{month}}{{day}}{{hour}}{{minute}}{{second}}{{meridian}}</div>',
+            'multicheckboxContainer' => '<fieldset class="form-group {{type}}{{required}}">{{content}}</fieldset>',
+            'multicheckboxContainerHorizontal' => '<fieldset class="form-group {{type}}{{required}}"><div class="row">{{content}}</div></fieldset>','dateWidget' => '<div class="row">{{year}}{{month}}{{day}}{{hour}}{{minute}}{{second}}{{meridian}}</div>',
             'error' => '<small class="error-message form-text text-muted">{{content}}</small>',
             'errorInline' => '<small class="error-message text-muted">{{content}}</small>',
             'errorList' => '<ul>{{content}}</ul>',
@@ -96,6 +97,8 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
             'labelInline' => '<label class="sr-only{{attrs.class}}"{{attrs}}>{{text}}</label>',
             'nestingLabel' => '{{hidden}}<label class="form-check-label{{attrs.class}}"{{attrs}}>{{input}} {{text}}</label>',
             'legend' => '<legend>{{text}}</legend>',
+            'labelLegend' => '<label{{attrs}}>{{text}}</label>',
+            'labelLegendHorizontal' => '<legend class="col-form-legend {{labelColumnClass}}{{attrs.class}}"{{attrs}}>{{text}}</legend>',
             'option' => '<option value="{{value}}"{{attrs}}>{{text}}</option>',
             'optgroup' => '<optgroup label="{{label}}"{{attrs}}>{{content}}</optgroup>',
             'select' => '<select name="{{name}}" class="form-control{{attrs.class}}" {{attrs}}>{{content}}</select>',
@@ -103,11 +106,11 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
             'selectMultiple' => '<select name="{{name}}[]" multiple="multiple" class="form-control{{attrs.class}}" {{attrs}}>{{content}}</select>',
             'radio' => '<input type="radio" class="form-check-input{{attrs.class}}" name="{{name}}" value="{{value}}"{{attrs}}>',
             'radioWrapper' => '<div class="form-check">{{label}}</div>',
-            'radioContainer' => '<div class="form-group {{type}}{{required}}">{{content}}</div>',
+            'radioContainer' => '<fieldset class="form-group {{type}}{{required}}">{{content}}</fieldset>',
             'radioContainerHorizontal' => '<fieldset class="form-group {{type}}{{required}}"><div class="row">{{content}}</div></fieldset>',
             'inlineRadio' => '<input type="radio" class="form-check-input{{attrs.class}}" name="{{name}}" value="{{value}}"{{attrs}}>',
             'inlineRadioWrapper' => '<div class="form-check form-check-inline">{{label}}</div>',
-            'inlineradioContainer' => '<div class="form-group {{type}}{{required}}">{{content}}</div>',
+            'inlineradioContainer' => '<fieldset class="form-group {{type}}{{required}}">{{content}}</fieldset>',
             'inlineradioContainerHorizontal' => '<fieldset class="form-group {{type}}{{required}}"><div class="row">{{content}}</div></fieldset>',
             'textarea' => '<textarea name="{{name}}" class="form-control{{attrs.class}}" {{attrs}}>{{value}}</textarea>',
             'submitContainer' => '<div class="form-group">{{content}}</div>',
@@ -147,7 +150,7 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
         'checkbox' => ['Cake\View\Widget\CheckboxWidget'],
         'file' => ['Cake\View\Widget\FileWidget'],
         'fancyFile' => ['Bootstrap\View\Widget\FancyFileWidget', 'file', 'button', 'basic'],
-        'label' => ['Cake\View\Widget\LabelWidget'],
+        'label' => ['Bootstrap\View\Widget\LabelLegendWidget'],
         'nestingLabel' => ['Cake\View\Widget\NestingLabelWidget'],
         'multicheckbox' => ['Cake\View\Widget\MultiCheckboxWidget', 'nestingLabel'],
         'radio' => ['Cake\View\Widget\RadioWidget', 'nestingLabel'],
@@ -493,6 +496,16 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
         return parent::_getInput($fieldName, $options);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+     protected function _inputLabel($fieldName, $label, $options) {
+        $groupTypes = ['radio', 'inlineradio', 'multicheckbox', 'date', 'time', 'datetime'];
+        if (in_array($options['type'], $groupTypes, true)) {
+            $options['id'] = false;
+        }
+        return parent::_inputLabel($fieldName, $label, $options);
+     }
 
     /**
      * Creates a set of inline radio widgets.

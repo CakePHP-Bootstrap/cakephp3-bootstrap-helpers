@@ -306,7 +306,7 @@ class FormHelperTest extends TestCase {
         ];
         // Default
         $expected = [
-            ['div' => [
+            ['fieldset' => [
                 'class' => 'form-group radio'
             ]],
             ['label' => []],
@@ -340,7 +340,7 @@ class FormHelperTest extends TestCase {
                 '/div'
             ]);
         }
-        $expected = array_merge($expected, ['/div']);
+        $expected = array_merge($expected, ['/fieldset']);
         $this->_testInput($expected, $fieldName, $options);
 
         // Inline
@@ -348,12 +348,10 @@ class FormHelperTest extends TestCase {
             'inline' => true
         ];
         $expected = [
-            ['div' => [
+            ['fieldset' => [
                 'class' => 'form-group inlineradio'
             ]],
-            ['label' => [
-                'for' => $fieldName
-            ]],
+            ['label' => [ ]],
             \Cake\Utility\Inflector::humanize($fieldName),
             '/label',
             ['input' => [
@@ -384,7 +382,7 @@ class FormHelperTest extends TestCase {
                 '/div'
             ]);
         }
-        $expected = array_merge($expected, ['/div']);
+        $expected = array_merge($expected, ['/fieldset']);
         $this->_testInput($expected, $fieldName, $options);
 
         // Horizontal
@@ -399,11 +397,11 @@ class FormHelperTest extends TestCase {
             ['div' => [
                 'class' => 'row'
             ]],
-            ['label' => [
-                'class' => 'col-form-label col-md-2'
+            ['legend' => [
+                'class' => 'col-form-legend col-md-2'
             ]],
             \Cake\Utility\Inflector::humanize($fieldName),
-            '/label',
+            '/legend',
             ['div' => [
                 'class' => 'col-md-10'
             ]],
@@ -447,12 +445,11 @@ class FormHelperTest extends TestCase {
             ['div' => [
                 'class' => 'row'
             ]],
-            ['label' => [
-                'class' => 'col-form-label col-md-2',
-                'for' => $fieldName
+            ['legend' => [
+                'class' => 'col-form-legend col-md-2'
             ]],
             \Cake\Utility\Inflector::humanize($fieldName),
-            '/label',
+            '/legend',
             ['div' => [
                 'class' => 'col-md-10'
             ]],
