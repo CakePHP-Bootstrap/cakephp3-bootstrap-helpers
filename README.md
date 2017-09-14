@@ -14,11 +14,11 @@ Work in progress
 I am currently working on rewritting the helpers for Bootstrap 4, current work status:
 
 - FlashHelper - 100%
-- FormHelper - 100% (Alpha)
+- FormHelper - 100%, **alpha!**
 - HtmlHelper - 100%
 - ModalHelper - 0%
-- NavbarHelper - 0%
-- PaginatorHelper - 100% (Alpha)
+- NavbarHelper - 100%, **alpha!**
+- PaginatorHelper - 100%, **alpha!**
 - PanelHelper - 0%
 
 #### Breaking changes from previous versions
