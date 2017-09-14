@@ -38,7 +38,8 @@ class ModalHelperTest extends TestCase {
             ['div' => [
                 'tabindex' => '-1',
                 'role' => 'dialog',
-                'class' => 'modal fade'
+                'class' => 'modal fade',
+                'aria-hidden' => 'true'
             ]],
             ['div' => [
                 'class' => 'modal-dialog',
@@ -50,6 +51,11 @@ class ModalHelperTest extends TestCase {
             ['div' => [
                 'class' => 'modal-header'
             ]],
+            ['h5' => [
+                'class' => 'modal-title'
+            ]],
+            $title,
+            '/h5',
             ['button' => [
                 'type' => 'button',
                 'class' => 'close',
@@ -58,11 +64,6 @@ class ModalHelperTest extends TestCase {
             ]],
             ['span' => ['aria-hidden' => 'true']], '&times;', '/span',
             '/button',
-            ['h4' => [
-                'class' => 'modal-title'
-            ]],
-            $title,
-            '/h4',
             '/div',
             ['div' => [
                 'class' => 'modal-body'
@@ -76,6 +77,7 @@ class ModalHelperTest extends TestCase {
                 'id' => $id,
                 'tabindex' => '-1',
                 'role' => 'dialog',
+                'aria-hidden' => 'true',
                 'aria-labelledby' => $id.'Label',
                 'class' => 'modal fade'
             ]],
@@ -89,6 +91,12 @@ class ModalHelperTest extends TestCase {
             ['div' => [
                 'class' => 'modal-header'
             ]],
+            ['h5' => [
+                'class' => 'modal-title',
+                'id' => $id.'Label'
+            ]],
+            $title,
+            '/h5',
             ['button' => [
                 'type' => 'button',
                 'class' => 'close',
@@ -97,12 +105,6 @@ class ModalHelperTest extends TestCase {
             ]],
             ['span' => ['aria-hidden' => 'true']], '&times;', '/span',
             '/button',
-            ['h4' => [
-                'class' => 'modal-title',
-                'id' => $id.'Label'
-            ]],
-            $title,
-            '/h4',
             '/div',
             ['div' => [
                 'class' => 'modal-body'
@@ -117,6 +119,7 @@ class ModalHelperTest extends TestCase {
                 'id' => $id,
                 'tabindex' => '-1',
                 'role' => 'dialog',
+                'aria-hidden' => 'true',
                 'aria-labelledby' => $id.'Label',
                 'class' => 'modal fade'
             ]],
@@ -130,6 +133,12 @@ class ModalHelperTest extends TestCase {
             ['div' => [
                 'class' => 'modal-header'
             ]],
+            ['h5' => [
+                'class' => 'modal-title',
+                'id' => $id.'Label'
+            ]],
+            $title,
+            '/h5',
             ['button' => [
                 'type' => 'button',
                 'class' => 'close',
@@ -138,12 +147,6 @@ class ModalHelperTest extends TestCase {
             ]],
             ['span' => ['aria-hidden' => 'true']], '&times;', '/span',
             '/button',
-            ['h4' => [
-                'class' => 'modal-title',
-                'id' => $id.'Label'
-            ]],
-            $title,
-            '/h4',
             '/div'
         ];
         $this->assertHtml($expected, $result);
@@ -154,6 +157,7 @@ class ModalHelperTest extends TestCase {
                 'id' => $id,
                 'tabindex' => '-1',
                 'role' => 'dialog',
+                'aria-hidden' => 'true',
                 'aria-labelledby' => $id.'Label',
                 'class' => 'modal fade'
             ]],
@@ -167,12 +171,12 @@ class ModalHelperTest extends TestCase {
             ['div' => [
                 'class' => 'modal-header'
             ]],
-            ['h4' => [
+            ['h5' => [
                 'class' => 'modal-title',
                 'id' => $id.'Label'
             ]],
             $title,
-            '/h4',
+            '/h5',
             '/div',
             ['div' => [
                 'class' => 'modal-body'
@@ -185,6 +189,7 @@ class ModalHelperTest extends TestCase {
             ['div' => [
                 'tabindex' => '-1',
                 'role' => 'dialog',
+                'aria-hidden' => 'true',
                 'class' => 'modal fade'
             ]],
             ['div' => [
@@ -202,6 +207,7 @@ class ModalHelperTest extends TestCase {
             ['div' => [
                 'tabindex' => '-1',
                 'role' => 'dialog',
+                'aria-hidden' => 'true',
                 'class' => 'modal fade'
             ]],
             ['div' => [
@@ -214,6 +220,11 @@ class ModalHelperTest extends TestCase {
             ['div' => [
                 'class' => 'modal-header'
             ]],
+            ['h5' => [
+                'class' => 'modal-title'
+            ]],
+            $title,
+            '/h5',
             ['button' => [
                 'type' => 'button',
                 'class' => 'close',
@@ -222,22 +233,19 @@ class ModalHelperTest extends TestCase {
             ]],
             ['span' => ['aria-hidden' => 'true']], '&times;', '/span',
             '/button',
-            ['h4' => [
-                'class' => 'modal-title'
-            ]],
-            $title,
-            '/h4',
             '/div',
             ['div' => [
                 'class' => 'modal-body'
             ]]
         ];
+        $this->assertHtml($expected, $result);
         // Test standard create with custom size
         $result = $this->modal->create($title, ['size' => 'modal-big']);
         $expected = [
             ['div' => [
                 'tabindex' => '-1',
                 'role' => 'dialog',
+                'aria-hidden' => 'true',
                 'class' => 'modal fade'
             ]],
             ['div' => [
@@ -250,6 +258,11 @@ class ModalHelperTest extends TestCase {
             ['div' => [
                 'class' => 'modal-header'
             ]],
+            ['h5' => [
+                'class' => 'modal-title'
+            ]],
+            $title,
+            '/h5',
             ['button' => [
                 'type' => 'button',
                 'class' => 'close',
@@ -258,16 +271,12 @@ class ModalHelperTest extends TestCase {
             ]],
             ['span' => ['aria-hidden' => 'true']], '&times;', '/span',
             '/button',
-            ['h4' => [
-                'class' => 'modal-title'
-            ]],
-            $title,
-            '/h4',
             '/div',
             ['div' => [
                 'class' => 'modal-body'
             ]]
         ];
+        $this->assertHtml($expected, $result);
     }
 
     public function testHeader() {
@@ -279,6 +288,11 @@ class ModalHelperTest extends TestCase {
             ['div' => [
                 'class' => 'modal-header'
             ]],
+            ['h5' => [
+                'class' => 'modal-title'
+            ]],
+            $content,
+            '/h5',
             ['button' => [
                 'type' => 'button',
                 'class' => 'close',
@@ -287,11 +301,6 @@ class ModalHelperTest extends TestCase {
             ]],
             ['span' => ['aria-hidden' => 'true']], '&times;', '/span',
             '/button',
-            ['h4' => [
-                'class' => 'modal-title'
-            ]],
-            $content,
-            '/h4',
             '/div'
         ];
         $this->assertHtml($expected, $result);
@@ -301,11 +310,11 @@ class ModalHelperTest extends TestCase {
             ['div' => [
                 'class' => 'modal-header'
             ]],
-            ['h4' => [
+            ['h5' => [
                 'class' => 'modal-title'
             ]],
             $content,
-            '/h4',
+            '/h5',
             '/div'
         ];
         $this->assertHtml($expected, $result);
@@ -315,11 +324,11 @@ class ModalHelperTest extends TestCase {
             ['div' => [
                 'class' => 'modal-header '.$extraclass
             ]],
-            ['h4' => [
+            ['h5' => [
                 'class' => 'modal-title'
             ]],
             $content,
-            '/h4',
+            '/h5',
             '/div'
         ];
         $this->assertHtml($expected, $result);

@@ -46,7 +46,7 @@ class ModalHelper extends Helper {
      */
     public $_defaultConfig = [
         'templates' => [
-            'modalStart' => '<div class="modal fade{{attrs.class}}" tabindex="-1" role="dialog"{{attrs}}>{{dialogStart}}{{contentStart}}',
+            'modalStart' => '<div class="modal fade{{attrs.class}}" tabindex="-1" role="dialog"{{attrs}} aria-hidden="true">{{dialogStart}}{{contentStart}}',
             'modalEnd' => '{{contentEnd}}{{dialogEnd}}</div>',
             'modalDialogStart' => '<div class="modal-dialog{{attrs.class}}" role="document"{{attrs}}>',
             'modalDialogEnd' => '</div>',
@@ -57,7 +57,7 @@ class ModalHelper extends Helper {
             'modalHeaderCloseButton' =>
                 '<button type="button" class="close{{attrs.class}}" data-dismiss="modal" aria-label="{{label}}"{{attrs}}>{{content}}</button>',
             'modalHeaderCloseContent' => '<span aria-hidden="true">&times;</span>',
-            'modalTitle' => '<h4 class="modal-title{{attrs.class}}"{{attrs}}>{{content}}</h4>',
+            'modalTitle' => '<h5 class="modal-title{{attrs.class}}"{{attrs}}>{{content}}</h5>',
             'bodyStart' => '<div class="modal-body{{attrs.class}}"{{attrs}}>',
             'bodyEnd' => '</div>',
             'footerStart' => '<div class="modal-footer{{attrs.class}}"{{attrs}}>',
@@ -214,7 +214,7 @@ class ModalHelper extends Helper {
      * @return string An HTML string containing closing elements.
      */
     protected function _cleanCurrent() {
-        if($this->_current) {
+        if ($this->_current) {
             $current = $this->_current;
             $this->_current = null;
             return $this->formatTemplate($current.'End', []);
@@ -272,19 +272,18 @@ class ModalHelper extends Helper {
         ];
         $out = null;
         if($title) {
-            $out = '';
+            $out = $this->formatTemplate('modalTitle', [
+                'content' => $title,
+                'attrs' => $this->templater()->formatAttributes([
+                    'id' => $this->_currentId ? $this->_currentId.'Label' : false
+                ])
+            ]);
             if($options['close']) {
                 $out .= $this->formatTemplate('modalHeaderCloseButton', [
                     'content' => $this->formatTemplate('modalHeaderCloseContent', []),
                     'label' => __('Close')
                 ]);
             }
-            $out .= $this->formatTemplate('modalTitle', [
-                'content' => $title,
-                'attrs' => $this->templater()->formatAttributes([
-                    'id' => $this->_currentId ? $this->_currentId.'Label' : false
-                ])
-            ]);
         }
         return $this->_part('header', $out, $options);
     }
