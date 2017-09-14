@@ -78,7 +78,7 @@ trait ClassTrait {
         $size = $options['size'];
         $block = $options['block'];
         unset($options['btype'], $options['size'], $options['block'],
-            $options['bootstrap-size'], $options['bootstrap-size'],
+            $options['bootstrap-type'], $options['bootstrap-size'],
             $options['bootstrap-block']);
         $options = $this->addClass($options, 'btn');
         if (!preg_match('#btn-[a-z]+#', $options['class'])) {
