@@ -476,7 +476,7 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
         }
 
         if ($options['type'] === 'radio' && $inline) {
-            $options['type'] = 'inlineRadio';
+            $options['type'] = 'inlineradio';
         }
 
         $options['templateVars'] += [
