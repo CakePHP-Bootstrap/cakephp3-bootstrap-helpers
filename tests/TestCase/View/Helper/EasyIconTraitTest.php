@@ -62,7 +62,7 @@ class EasyIconTraitTest extends TestCase {
         parent::setUp();
         $view = new View();
         $view->loadHelper('Html', [
-            'className' => 'Bootstrap.BootstrapHtml'
+            'className' => 'Bootstrap.Html'
         ]);
         $this->html = $view->Html;
         $this->trait = new PublicEasyIconTrait($view);

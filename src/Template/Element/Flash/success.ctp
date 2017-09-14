@@ -13,7 +13,7 @@
  * @license https://opensource.org/licenses/mit-license.php MIT License
  */
 
-$helper = new \Bootstrap\View\Helper\BootstrapHtmlHelper ($this) ;
+$helper = new \Bootstrap\View\Helper\HtmlHelper ($this) ;
 if (!isset($params['escape']) || $params['escape'] !== false) {
     $message = h($message);
 }
