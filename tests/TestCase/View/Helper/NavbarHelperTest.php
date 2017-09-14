@@ -165,28 +165,25 @@ class NavbarHelperTest extends TestCase {
         // Test standard end (responsive)
         $this->navbar->create(null);
         $result = $this->navbar->end();
+        $expected = ['/div', '/nav'];
+        $this->assertHtml($expected, $result);
+
+        // Test non-responsive end
+        $this->navbar->create(null, ['collapse' => false]);
+        $result = $this->navbar->end();
+        $expected = ['/nav'];
+        $this->assertHtml($expected, $result);
+
+        // Test container end (responsive)
+        $this->navbar->create(null, ['container' => true]);
+        $result = $this->navbar->end();
         $expected = ['/div', '/div', '/nav'];
         $this->assertHtml($expected, $result);
 
         // Test non-responsive end
-        $this->navbar->create(null, ['responsive' => false]);
+        $this->navbar->create(null, ['container' => true, 'collapse' => false]);
         $result = $this->navbar->end();
         $expected = ['/div', '/nav'];
-        $this->assertHtml($expected, $result);
-    }
-
-    public function testButton() {
-        $result = $this->navbar->button('Click Me!');
-        $expected = [
-            ['button' => ['class' => 'navbar-btn btn btn-default', 'type' => 'button']],
-            'Click Me!', '/button'];
-        $this->assertHtml($expected, $result);
-
-        $result = $this->navbar->button('Click Me!', ['class' => 'my-class', 'href' => '/']);
-        $expected = [
-            ['button' => ['class' => 'my-class navbar-btn btn btn-default',
-                          'href' => '/', 'type' => 'button']],
-            'Click Me!', '/button'];
         $this->assertHtml($expected, $result);
     }
 
@@ -194,36 +191,36 @@ class NavbarHelperTest extends TestCase {
         // Normal test
         $result = $this->navbar->text('Some text');
         $expected = [
-            ['p' => ['class' => 'navbar-text']],
+            ['span' => ['class' => 'navbar-text']],
             'Some text',
-            '/p'
+            '/span'
         ];
         $this->assertHtml($expected, $result);
 
         // Custom options
         $result = $this->navbar->text('Some text', ['class' => 'my-class']);
         $expected = [
-            ['p' => ['class' => 'navbar-text my-class']],
+            ['span' => ['class' => 'navbar-text my-class']],
             'Some text',
-            '/p'
+            '/span'
         ];
         $this->assertHtml($expected, $result);
 
         // Link automatic wrapping
         $result = $this->navbar->text('Some text with a <a href="/">link</a>.');
         $expected = [
-            ['p' => ['class' => 'navbar-text']],
-            'Some text with a <a href="/" class="navbar-link">link</a>.',
-            '/p'
+            ['span' => ['class' => 'navbar-text']],
+            'Some text with a <a href="/">link</a>.',
+            '/span'
         ];
         $this->assertHtml($expected, $result);
 
         $result = $this->navbar->text(
             'Some text with a <a href="/" class="my-class">link</a>.');
         $expected = [
-            ['p' => ['class' => 'navbar-text']],
-            'Some text with a <a href="/" class="my-class navbar-link">link</a>.',
-            '/p'
+            ['span' => ['class' => 'navbar-text']],
+            'Some text with a <a href="/" class="my-class">link</a>.',
+            '/span'
         ];
         $this->assertHtml($expected, $result);
     }
@@ -239,38 +236,38 @@ class NavbarHelperTest extends TestCase {
         $result .= $this->navbar->beginMenu('Dropdown');
         $result .= $this->navbar->header('Header 1');
         $result .= $this->navbar->link('Action');
-        $result .= $this->navbar->link('Another action');
-        $result .= $this->navbar->link('Something else here');
+        $result .= $this->navbar->link('Another action', '', ['class' => 'my-class-1']);
+        $result .= $this->navbar->link('Something else here', '', ['class' => 'my-class-2']);
         $result .= $this->navbar->divider();
         $result .= $this->navbar->header('Header 2');
         $result .= $this->navbar->link('Another action');
         $result .= $this->navbar->endMenu();
         $result .= $this->navbar->endMenu();
         $expected = [
-            ['ul' => ['class' => 'nav navbar-nav my-menu']],
-            ['li' => ['class' => 'active']],
-            ['a' => ['href' => '/']], 'Link', '/a', '/li',
-            ['li' => []],
-            ['a' => ['href' => '/pages/test']], 'Blog', '/a', '/li',
-            ['li' => ['class' => 'dropdown']],
-            ['a' => ['href' => '#', 'class' => 'dropdown-toggle', 'data-toggle' => 'dropdown',
+            ['ul' => ['class' => 'navbar-nav mr-auto my-menu']],
+            ['li' => ['class' => 'nav-item active']],
+            ['a' => ['href' => '/', 'class' => 'nav-link']], 'Link', '/a', '/li',
+            ['li' => ['class' => 'nav-item']],
+            ['a' => ['href' => '/pages/test', 'class' => 'nav-link']], 'Blog', '/a', '/li',
+            ['li' => ['class' => 'nav-item dropdown']],
+            ['a' => ['href' => '#', 'class' => 'nav-link dropdown-toggle', 'data-toggle' => 'dropdown',
                      'role' => 'button', 'aria-haspopup' => 'true',
                      'aria-expanded' => 'false']],
             'Dropdown',
-            ['span' => ['class' => 'caret']], '/span', '/a',
-            ['ul' => ['class' => 'dropdown-menu']],
-            ['li' => ['class' => 'dropdown-header']], 'Header 1', '/li',
-            ['li' => []], ['a' => ['href' => '/']], 'Action', '/a', '/li',
-            ['li' => []], ['a' => ['href' => '/']], 'Another action', '/a', '/li',
-            ['li' => []], ['a' => ['href' => '/']], 'Something else here', '/a', '/li',
-            ['li' => ['role' => 'separator', 'class' => 'divider']], '/li',
-            ['li' => ['class' => 'dropdown-header']], 'Header 2', '/li',
-            ['li' => []], ['a' => ['href' => '/']], 'Another action', '/a', '/li',
-            '/ul',
+            '/a',
+            ['div' => ['class' => 'dropdown-menu']],
+            ['h6' => ['class' => 'dropdown-header']], 'Header 1', '/h6',
+            ['a' => ['href' => '/', 'class' => 'dropdown-item']], 'Action', '/a',
+            ['a' => ['href' => '/', 'class' => 'dropdown-item my-class-1']], 'Another action', '/a',
+            ['a' => ['href' => '/', 'class' => 'dropdown-item my-class-2']], 'Something else here', '/a',
+            ['div' => ['role' => 'separator', 'class' => 'dropdown-divider']], '/div',
+            ['h6' => ['class' => 'dropdown-header']], 'Header 2', '/h6',
+            ['a' => ['href' => '/', 'class' => 'dropdown-item']], 'Another action', '/a',
+            '/div',
             '/li',
             '/ul'
         ];
-        $this->assertHtml($expected, $result, true);
+        $this->assertHtml($expected, $result);
 
         // TODO: Add more tests...
     }
@@ -283,8 +280,8 @@ class NavbarHelperTest extends TestCase {
         $this->navbar->config('autoActiveLink', true);
         $result = $this->navbar->link('Link', '/');
         $expected = [
-            ['li' => ['class' => 'active']],
-            ['a' => ['href' => '/']], 'Link', '/a',
+            ['li' => ['class' => 'nav-item active']],
+            ['a' => ['href' => '/', 'class' => 'nav-link']], 'Link', '/a',
             '/li'
         ];
         $this->assertHtml($expected, $result);
@@ -293,8 +290,8 @@ class NavbarHelperTest extends TestCase {
         $this->navbar->config('autoActiveLink', true);
         $result = $this->navbar->link('Link', '/pages');
         $expected = [
-            ['li' => []],
-            ['a' => ['href' => '/pages']], 'Link', '/a',
+            ['li' => ['class' => 'nav-item']],
+            ['a' => ['href' => '/pages', 'class' => 'nav-link']], 'Link', '/a',
             '/li'
         ];
         $this->assertHtml($expected, $result);
@@ -303,8 +300,8 @@ class NavbarHelperTest extends TestCase {
         $this->navbar->config('autoActiveLink', false);
         $result = $this->navbar->link('Link', '/');
         $expected = [
-            ['li' => []],
-            ['a' => ['href' => '/']], 'Link', '/a',
+            ['li' => ['class' => 'nav-item']],
+            ['a' => ['href' => '/', 'class' => 'nav-link']], 'Link', '/a',
             '/li'
         ];
         $this->assertHtml($expected, $result);
@@ -313,8 +310,8 @@ class NavbarHelperTest extends TestCase {
         $this->navbar->config('autoActiveLink', false);
         $result = $this->navbar->link('Link', '/pages');
         $expected = [
-            ['li' => []],
-            ['a' => ['href' => '/pages']], 'Link', '/a',
+            ['li' => ['class' => 'nav-item']],
+            ['a' => ['href' => '/pages', 'class' => 'nav-link']], 'Link', '/a',
             '/li'
         ];
         $this->assertHtml($expected, $result);
@@ -342,16 +339,16 @@ class NavbarHelperTest extends TestCase {
             'active' => ['action' => false, 'pass' => false]
         ]);
         $expected = [
-            ['li' => ['class' => 'active']],
-            ['a' => ['href' => '/cakephp/pages']], 'Link', '/a',
+            ['li' => ['class' => 'nav-item active']],
+            ['a' => ['href' => '/cakephp/pages', 'class' => 'nav-link']], 'Link', '/a',
             '/li'
         ];
         $this->assertHtml($expected, $result);
 
         $result = $this->navbar->link('Link', '/pages');
         $expected = [
-            ['li' => []],
-            ['a' => ['href' => '/cakephp/pages']], 'Link', '/a',
+            ['li' => ['class' => 'nav-item']],
+            ['a' => ['href' => '/cakephp/pages', 'class' => 'nav-link']], 'Link', '/a',
             '/li'
         ];
         $this->assertHtml($expected, $result);
@@ -380,24 +377,24 @@ class NavbarHelperTest extends TestCase {
             'active' => ['action' => false, 'pass' => false]
         ]);
         $expected = [
-            ['li' => ['class' => 'active']],
-            ['a' => ['href' => '/cakephp/pages']], 'Link', '/a',
+            ['li' => ['class' => 'nav-item active']],
+            ['a' => ['href' => '/cakephp/pages', 'class' => 'nav-link']], 'Link', '/a',
             '/li'
         ];
         $this->assertHtml($expected, $result);
 
         $result = $this->navbar->link('Link', '/pages/credits');
         $expected = [
-            ['li' => []],
-            ['a' => ['href' => '/cakephp/pages/credits']], 'Link', '/a',
+            ['li' => ['class' => 'nav-item']],
+            ['a' => ['href' => '/cakephp/pages/credits', 'class' => 'nav-link']], 'Link', '/a',
             '/li'
         ];
         $this->assertHtml($expected, $result);
 
         $result = $this->navbar->link('Link', '/pages/faq');
         $expected = [
-            ['li' => ['class' => 'active']],
-            ['a' => ['href' => '/cakephp/pages/faq']], 'Link', '/a',
+            ['li' => ['class' => 'nav-item active']],
+            ['a' => ['href' => '/cakephp/pages/faq', 'class' => 'nav-link']], 'Link', '/a',
             '/li'
         ];
         $this->assertHtml($expected, $result);
