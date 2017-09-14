@@ -58,7 +58,7 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
      */
     protected $_defaultConfig = [
         'idPrefix' => null,
-        'errorClass' => 'has-error',
+        'errorClass' => 'is-invalid',
         'typeMap' => [
             'string' => 'text', 'datetime' => 'datetime', 'boolean' => 'checkbox',
             'timestamp' => 'datetime', 'text' => 'textarea', 'time' => 'time',
@@ -75,8 +75,8 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
             'checkboxContainerHorizontal' => '<div class="form-group row"><div class="{{labelColumnClass}}"></div><div class="{{inputColumnClass}}"><div class="form-check checkbox{{required}}">{{content}}</div></div></div>',
             'multicheckboxContainer' => '<fieldset class="form-group {{type}}{{required}}">{{content}}</fieldset>',
             'multicheckboxContainerHorizontal' => '<fieldset class="form-group {{type}}{{required}}"><div class="row">{{content}}</div></fieldset>','dateWidget' => '<div class="row">{{year}}{{month}}{{day}}{{hour}}{{minute}}{{second}}{{meridian}}</div>',
-            'error' => '<small class="error-message form-text text-muted">{{content}}</small>',
-            'errorInline' => '<small class="error-message text-muted">{{content}}</small>',
+            'error' => '<div class="error-message invalid-feedback">{{content}}</div>',
+            'errorInline' => '<div class="error-message invalid-feedback">{{content}}</div>',
             'errorList' => '<ul>{{content}}</ul>',
             'errorItem' => '<li>{{text}}</li>',
             'file' => '<input type="file" name="{{name}}" {{attrs}}>',

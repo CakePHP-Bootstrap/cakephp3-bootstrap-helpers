@@ -92,14 +92,12 @@ class FormHelperTest extends TestCase {
     public function testColumnSizes() {
         $this->form->setConfig('columns', [
             'md' => [
-                'label' => 2,
-                'input' => 6,
-                'error' => 4
+                'label' => 4,
+                'input' => 8
             ],
             'sm' => [
                 'label' => 12,
-                'input' => 12,
-                'error' => 12
+                'input' => 12
             ]
         ], false);
         $this->form->create(null, ['horizontal' => true]);
@@ -109,13 +107,13 @@ class FormHelperTest extends TestCase {
                 'class' => 'form-group row text'
             ]],
             ['label' => [
-                'class' => 'col-form-label col-md-2 col-sm-12',
+                'class' => 'col-form-label col-md-4 col-sm-12',
                 'for' => 'test'
             ]],
             'Test',
             '/label',
             ['div' => [
-                'class' => 'col-md-6 col-sm-12'
+                'class' => 'col-md-8 col-sm-12'
             ]],
             ['input' => [
                 'type'  => 'text',
@@ -137,14 +135,12 @@ class FormHelperTest extends TestCase {
 
         $this->form->setConfig('columns', [
             'md' => [
-                'label' => 2,
-                'input' => 6,
-                'error' => 4
+                'label' => 4,
+                'input' => 8
             ],
             'sm' => [
                 'label' => 4,
-                'input' => 8,
-                'error' => 0
+                'input' => 8
             ]
         ], false);
         $this->form->create($this->article, ['horizontal' => true]);
@@ -154,29 +150,29 @@ class FormHelperTest extends TestCase {
                 'class' => 'form-group row has-error text'
             ]],
             ['label' => [
-                'class' => 'col-form-label col-md-2 col-sm-4',
+                'class' => 'col-form-label col-md-4 col-sm-4',
                 'for' => 'article-title'
             ]],
             'Title',
             '/label',
             ['div' => [
-                'class' => 'col-md-6 col-sm-8'
+                'class' => 'col-md-8 col-sm-8'
             ]],
             ['input' => [
                 'type'  => 'text',
-                'class' => 'form-control has-error',
+                'class' => 'form-control is-invalid',
                 'name'  => 'Article[title]',
                 'id'    => 'article-title'
             ]],
-            ['small' => [
-                'class' => 'error-message form-text text-muted'
+            ['div' => [
+                'class' => 'error-message invalid-feedback'
             ]],
             'error message',
-            '/small',
+            '/div',
             '/div',
             '/div'
         ];
-        $this->assertHtml($expected, $result);
+        $this->assertHtml($expected, $result, true);
     }
 
     public function testButton() {
