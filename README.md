@@ -27,12 +27,17 @@ I am currently working on rewritting the helpers for Bootstrap 4, current work s
   - it is not possible to place error message in a separate column in horizontal form, the error message
   will always be put below the input.
 
-**Note:** It may happen that the generated HTML is not exactly the one required by Bootstrap, but the final
-rendering should be the same. Some examples are:
-
-- the way `radio` controls are wrapped inside horizontal forms;
-- the way `checkbox` and `submit` button are offseted in horizontal form (an empty `<div>` element is added
-before the input `<div>`).
+- `NavbarHelper`:
+  - the following options of the `create()` methods have been removed or have had their meaning changed:
+    - `static` is now `sticky`
+    - `responsive` has been dropped and replace by a `collapse` option with the following meaning: `true`
+    for always collapsed, `false` for never collapsed, or a string representing indicating when the content
+    should collapse (`'lg'` is the default).
+    - `fluid` has been dropped.
+    - `container` is a new option (`bool`, default is `false`) to indicate if the content of the navbar
+    should be wrapped inside a `<div class="container"></div>`.
+  - when adding a `link()` to an inner menu, the `$linkOptions` parameters is not usable anymore and the
+  `$options` parameters should be used directly (their are no wrapping `<li>` anymore for inner menu).
 
 How to... ?
 ===========
