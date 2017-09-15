@@ -20,20 +20,20 @@ use Cake\View\Helper;
 use Cake\View\StringTemplateTrait;
 
 /**
- * Panel helper library.
+ * Card helper library.
  *
- * Automatic generation of Bootstrap HTML panels.
+ * Automatic generation of Bootstrap HTML cards.
  *
  * @property \Bootstrap\View\Helper\HtmlHelper $Html
  */
-class PanelHelper extends Helper {
+class CardHelper extends Helper {
 
     use ClassTrait;
     use EasyIconTrait;
     use StringTemplateTrait;
 
     /**
-     * Other helpers used by PanelHelper.
+     * Other helpers used by CardHelper.
      *
      * @var array
      */
@@ -44,28 +44,28 @@ class PanelHelper extends Helper {
     /**
      * Default configuration for the helper.
      *
-     * - `collapsible` Default behavior for collapsible panel.
+     * - `collapsible` Default behavior for collapsible card.
      *
      * @var array
      */
     protected $_defaultConfig = [
         'templates' => [
-            'panelGroupStart' => '<div class="panel-group{{attrs.class}}" role="tablist" aria-multiselectable="true"{{attrs}}>',
-            'panelGroupEnd' => '</div>',
-            'panelStart' => '<div class="panel panel-{{type}}{{attrs.class}}"{{attrs}}>',
-            'panelEnd' => '</div>',
-            'headerStart' => '<div class="panel-heading{{attrs.class}}"{{attrs}}>',
-            'headerCollapsibleStart' => '<div class="panel-heading{{attrs.class}}" role="tab"{{attrs}}>',
-            'headerTitle' => '<h4 class="panel-title{{attrs.class}}"{{attrs}}>{{content}}</h4>',
+            'cardGroupStart' => '<div class="card-group{{attrs.class}}" role="tablist" aria-multiselectable="true"{{attrs}}>',
+            'cardGroupEnd' => '</div>',
+            'cardStart' => '<div class="card card-{{type}}{{attrs.class}}"{{attrs}}>',
+            'cardEnd' => '</div>',
+            'headerStart' => '<div class="card-heading{{attrs.class}}"{{attrs}}>',
+            'headerCollapsibleStart' => '<div class="card-heading{{attrs.class}}" role="tab"{{attrs}}>',
+            'headerTitle' => '<h4 class="card-title{{attrs.class}}"{{attrs}}>{{content}}</h4>',
             'headerCollapsibleLink' =>
 '<a role="button" data-toggle="collapse" href="#{{target}}" aria-expanded="{{expanded}}" aria-controls="{{target}}"{{attrs}}>{{content}}</a>',
             'headerEnd' => '</div>',
-            'bodyStart' => '<div class="panel-body{{attrs.class}}"{{attrs}}>',
+            'bodyStart' => '<div class="card-body{{attrs.class}}"{{attrs}}>',
             'bodyEnd' => '</div>',
             'bodyCollapsibleStart' =>
-                '<div class="panel-collapse collapse{{attrs.class}}" role="tabpanel" aria-labelledby="{{headId}}"{{attrs}}>{{bodyStart}}',
+                '<div class="card-collapse collapse{{attrs.class}}" role="tabcard" aria-labelledby="{{headId}}"{{attrs}}>{{bodyStart}}',
             'bodyCollapsibleEnd' => '{{bodyEnd}}</div>',
-            'footerStart' => '<div class="panel-footer{{attrs.class}}"{{attrs}}>',
+            'footerStart' => '<div class="card-footer{{attrs.class}}"{{attrs}}>',
             'footerEnd' => '</div>'
         ],
         'templateClass' => 'Bootstrap\View\EnhancedStringTemplate',
@@ -73,21 +73,21 @@ class PanelHelper extends Helper {
     ];
 
     /**
-     * States of the panel helper (contains states of type 'group' and 'panel').
+     * States of the card helper (contains states of type 'group' and 'card').
      *
      * @var StackedStates
      */
     protected $_states;
 
     /**
-     * Panel counter (for collapsible groups).
+     * Card counter (for collapsible groups).
      *
      * @var int
      */
-    protected $_panelCount = 0;
+    protected $_cardCount = 0;
 
     /**
-     * Panel groups counter (for panel groups).
+     * Card groups counter (for card groups).
      *
      * @var int
      */
@@ -96,12 +96,12 @@ class PanelHelper extends Helper {
     public function __construct(\Cake\View\View $View, array $config = []) {
         $this->_states = new StackedStates([
             'group' => [
-                'groupPanelOpen' => false,
-                'groupPanelCount' => -1,
+                'groupCardOpen' => false,
+                'groupCardCount' => -1,
                 'groupId' => false,
                 'groupCollapsible' => true
             ],
-            'panel' => [
+            'card' => [
                 'part' => null,
                 'bodyId' => null,
                 'headId' => null,
@@ -113,102 +113,102 @@ class PanelHelper extends Helper {
         parent::__construct($View, $config);
     }
     /**
-     * Open a panel group.
+     * Open a card group.
      *
      * ### Options
      *
-     * - `collapsible` Set to `false` if panels should not be collapsible. Default is `true`.
+     * - `collapsible` Set to `false` if cards should not be collapsible. Default is `true`.
      * - `id` Identifier for the group. Default is automatically generated.
-     * - `open` If `collapsible` is `true`, indicate the panel that should be open by default.
-     * Set to `false` to have no panels open. You can also indicate if a panel should be open
+     * - `open` If `collapsible` is `true`, indicate the card that should be open by default.
+     * Set to `false` to have no cards open. You can also indicate if a card should be open
      * in the `create()` method. Default is `0`.
      *
      * - Other attributes will be passed to the `Html::div()` method.
      *
      * @param array $options Array of options. See above.
      *
-     * @return string A formated opening HTML tag for panel groups.
+     * @return string A formated opening HTML tag for card groups.
      *
      * @link http://getbootstrap.com/javascript/#collapse-example-accordion
      */
     public function startGroup($options = []) {
         $options += [
-            'id'                   => 'panelGroup-'.(++$this->_groupCount),
-            'collapsible'          => true,
-            'open'                 => 0,
+            'id' => 'cardGroup-'.(++$this->_groupCount),
+            'collapsible' => true,
+            'open' => 0,
             'templateVars' => []
         ];
         $this->_states->push('group', [
-            'groupPanelOpen' => $options['open'],
-            'groupPanelCount' => -1,
+            'groupCardOpen' => $options['open'],
+            'groupCardCount' => -1,
             'groupId' => $options['id'],
             'groupCollapsible' => $options['collapsible']
         ]);
-        return $this->formatTemplate('panelGroupStart', [
+        return $this->formatTemplate('cardGroupStart', [
             'attrs' => $this->templater()->formatAttributes($options, ['open', 'collapsible']),
             'templateVars' => $options['templateVars']
         ]);
     }
 
     /**
-     * Closes a panel group, closes the last panel if it has not already been closed.
+     * Closes a card group, closes the last card if it has not already been closed.
      *
      * @return string An HTML string containing closing tags.
      */
     public function endGroup() {
         $out = '';
-        while ($this->_states->is('panel')) { // panels were not closed
+        while ($this->_states->is('card')) { // cards were not closed
             $out .= $this->end();
         }
-        $out .= $this->formatTemplate('panelGroupEnd', []);
+        $out .= $this->formatTemplate('cardGroupEnd', []);
         $this->_states->pop();
         return $out;
     }
 
     /**
-     * Open a panel.
+     * Open a card.
      *
-     * If `$title` is a string, the panel header is created using `$title` as its
+     * If `$title` is a string, the card header is created using `$title` as its
      * content and default options (except for the `title` options that can be specified
      * inside `$options`).
      *
      * ```php
-     * echo $this->Panel->create('My Panel Title', ['title' => ['tag' => 'h2']]);
+     * echo $this->Card->create('My Card Title', ['title' => ['tag' => 'h2']]);
      * ```
      *
-     * If the panel header is created, the panel body is automatically opened after
+     * If the card header is created, the card body is automatically opened after
      * it, except if the `no-body` options is specified (see below).
      *
      * If `$title` is an array, it is used as `$options`.
      *
      * ```php
-     * echo $this->Panel->create(['class' => 'my-panel-class']);
+     * echo $this->Card->create(['class' => 'my-card-class']);
      * ```
      *
-     * If the `create()` method is used inside a panel group, the previous panel is
+     * If the `create()` method is used inside a card group, the previous card is
      * automatically closed.
      *
      * ### Options
      *
-     * - `collapsible` Set to `true` if the panel should be collapsible. Default is fetch
+     * - `collapsible` Set to `true` if the card should be collapsible. Default is fetch
      * from configuration/
      * - `body` If `$title` is a string, set to `false` to not open the body after the
-     * panel header. Default is `true`.
-     * - `open` Indicate if the panel should be open. If the panel is not inside a group, the
-     * default is `true`, otherwize the default is `false` and the panel is open if its
+     * card header. Default is `true`.
+     * - `open` Indicate if the card should be open. If the card is not inside a group, the
+     * default is `true`, otherwize the default is `false` and the card is open if its
      * count matches the specified value in `startGroup()` (set to `true` inside a group to
-     * force the panel to be open).
-     * - `panel-count` Panel counter, can be used to override the default counter when inside
-     * a group. This value is used to generate the panel, header and body ID attribute.
+     * force the card to be open).
+     * - `card-count` Card counter, can be used to override the default counter when inside
+     * a group. This value is used to generate the card, header and body ID attribute.
      * - `title` Array of options for the title. Default is [].
-     * - `type` Type of the panel (`'default'`, `'primary'`, ...). Default is `'default'`.
+     * - `type` Type of the card (`'default'`, `'primary'`, ...). Default is `'default'`.
      * - Other options will be passed to the `Html::div` method for creating the
-     * panel `<div>`.
+     * card `<div>`.
      *
-     * @param array|string $title   The panel title or an array of options.
+     * @param array|string $title   The card title or an array of options.
      * @param array        $options Array of options. See above.
      *
-     * @return string An HTML string containing opening elements for a panel.
+     * @return string An HTML string containing opening elements for a card.
      */
     public function create($title = null, $options = []) {
 
@@ -219,8 +219,8 @@ class PanelHelper extends Helper {
 
         $out = '';
 
-        // close previous panel if in group
-        if ($this->_states->is('panel') && $this->_states->getValue('inGroup')) {
+        // close previous card if in group
+        if ($this->_states->is('card') && $this->_states->getValue('inGroup')) {
             $out .= $this->end();
         }
 
@@ -230,35 +230,35 @@ class PanelHelper extends Helper {
             'collapsible' => $this->_states->is('group') ?
                 $this->_states->getValue('groupCollapsible') : $this->getConfig('collapsible'),
             'open'        => !$this->_states->is('group'),
-            'panel-count' => $this->_panelCount,
+            'card-count' => $this->_cardCount,
             'title' => [],
             'templateVars' => []
         ];
 
-        $this->_panelCount = intval($options['panel-count']) + 1;
+        $this->_cardCount = intval($options['card-count']) + 1;
 
         // check open
         $open = $options['open'];
         if ($this->_states->is('group')) {
             // increment count inside
-            $this->_states->setValue('groupPanelCount',
-                $this->_states->getValue('groupPanelCount') + 1);
+            $this->_states->setValue('groupCardCount',
+                $this->_states->getValue('groupCardCount') + 1);
             $open = $open
-                || $this->_states->getValue('groupPanelOpen')
-                    == $this->_states->getValue('groupPanelCount');
+                || $this->_states->getValue('groupCardOpen')
+                    == $this->_states->getValue('groupCardCount');
         }
 
-        $out .= $this->formatTemplate('panelStart', [
+        $out .= $this->formatTemplate('cardStart', [
             'type' => $options['type'],
             'attrs' => $this->templater()->formatAttributes(
-                $options, ['body', 'type', 'collapsible', 'open', 'panel-count', 'title']),
+                $options, ['body', 'type', 'collapsible', 'open', 'card-count', 'title']),
             'templateVars' => $options['templateVars']
         ]);
 
-        $this->_states->push('panel', [
+        $this->_states->push('card', [
             'part' => null,
-            'bodyId' => 'collapse-'.$options['panel-count'],
-            'headId' => 'heading-'.$options['panel-count'],
+            'bodyId' => 'collapse-'.$options['card-count'],
+            'headId' => 'heading-'.$options['card-count'],
             'collapsible' => $options['collapsible'],
             'open' => $open,
             'inGroup' => $this->_states->is('group'),
@@ -279,14 +279,14 @@ class PanelHelper extends Helper {
     }
 
     /**
-     * Closes a panel, cleans part that have not been closed correctly and optionaly adds a
-     * footer to the panel.
+     * Closes a card, cleans part that have not been closed correctly and optionaly adds a
+     * footer to the card.
      *
-     * If `$content` is not null, the `footer()` methods will be used to create the panel
+     * If `$content` is not null, the `footer()` methods will be used to create the card
      * footer using `$content` and `$options`.
      *
      * ```php
-     * echo $this->Panel->end('Footer Content', ['my-class' => 'my-footer-class']);
+     * echo $this->Card->end('Footer Content', ['my-class' => 'my-footer-class']);
      * ```
      *
      * @param string|null $content   Footer content, or `null`.
@@ -295,24 +295,24 @@ class PanelHelper extends Helper {
      * @return string An HTML string containing closing tags.
      */
     public function end($content = null, $options = []) {
-        $this->_lastPanelClosed = true;
+        $this->_lastCardClosed = true;
         $res = '';
         $res .= $this->_cleanCurrent();
         if ($content !== null) {
             $res .= $this->footer($content, $options);
         }
-        $res .= $this->formatTemplate('panelEnd', []);
+        $res .= $this->formatTemplate('cardEnd', []);
         $this->_states->pop();
         return $res;
     }
 
     /**
-     * Cleans the current panel part and return necessary HTML closing elements.
+     * Cleans the current card part and return necessary HTML closing elements.
      *
      * @return string An HTML string containing closing elements.
      */
     protected function _cleanCurrent() {
-        if (!$this->_states->is('panel')) {
+        if (!$this->_states->is('card')) {
             return '';
         }
         $current = $this->_states->getValue('part');
@@ -333,16 +333,16 @@ class PanelHelper extends Helper {
     }
 
     /**
-     * Check if the current panel should be open or not.
+     * Check if the current card should be open or not.
      *
-     * @return bool `true` if the current panel should be open, `false` otherwize.
+     * @return bool `true` if the current card should be open, `false` otherwize.
      */
     protected function _isOpen() {
         return $this->_states->getValue('open');
     }
 
     /**
-     * Create or open a panel header.
+     * Create or open a card header.
      *
      * ### Options
      *
@@ -350,10 +350,10 @@ class PanelHelper extends Helper {
      * - `templateVars` Provide template variables for the header template.
      * - Other attributes will be assigned to the header element.
      *
-     * @param string $text The panel header content, or null to only open the header.
+     * @param string $text The card header content, or null to only open the header.
      * @param array $options Array of options. See above.
      *
-     * @return string A formated opening tag for the panel header or the complete panel
+     * @return string A formated opening tag for the card header or the complete card
      * header.
      */
     protected function _createHeader($title, $options = [], $titleOptions = []) {
@@ -410,17 +410,17 @@ class PanelHelper extends Helper {
     }
 
     /**
-     * Create or open a panel body.
+     * Create or open a card body.
      *
      * ### Options
      *
      * - `templateVars` Provide template variables for the body template.
      * - Other attributes will be assigned to the body element.
      *
-     * @param string|null $text The panel body content, or null to only open the body.
+     * @param string|null $text The card body content, or null to only open the body.
      * @param array $options Array of options for the body `<div>`.
      *
-     * @return string A formated opening tag for the panel body or the complete panel
+     * @return string A formated opening tag for the card body or the complete card
      * body.
      */
     protected function _createBody($text = null, $options = []) {
@@ -453,17 +453,17 @@ class PanelHelper extends Helper {
     }
 
     /**
-     * Create or open a panel footer.
+     * Create or open a card footer.
      *
      * ### Options
      *
      * - `templateVars` Provide template variables for the footer template.
      * - Other attributes will be assigned to the footer element.
      *
-     * @param string $text The panel footer content, or null to only open the footer.
+     * @param string $text The card footer content, or null to only open the footer.
      * @param array $options Array of options for the footer `<div>`.
      *
-     * @return string A formated opening tag for the panel footer or the complete panel
+     * @return string A formated opening tag for the card footer or the complete card
      * footer.
      */
     protected function _createFooter($text = null, $options = []) {
@@ -484,35 +484,35 @@ class PanelHelper extends Helper {
     }
 
     /**
-     * Create or open a panel header.
+     * Create or open a card header.
      *
-     * If `$text` is a string, create a panel header using the specified content
+     * If `$text` is a string, create a card header using the specified content
      * and `$options`.
      *
      * ```php
-     * echo $this->Panel->header('Header Content', ['class' => 'my-class']);
+     * echo $this->Card->header('Header Content', ['class' => 'my-class']);
      * ```
      *
-     * If `$text` is `null`, create a formated opening tag for a panel header using the
+     * If `$text` is `null`, create a formated opening tag for a card header using the
      * specified `$options`.
      *
      * ```php
-     * echo $this->Panel->header(null, ['class' => 'my-class']);
+     * echo $this->Card->header(null, ['class' => 'my-class']);
      * ```
      *
      * If `$text` is an array, used it as `$options` and create a formated opening tag for
-     * a panel header.
+     * a card header.
      *
      * ```php
-     * echo $this->Panel->header(['class' => 'my-class']);
+     * echo $this->Card->header(['class' => 'my-class']);
      * ```
      *
      * You can use the `title` option to wrap the content:
      *
      * ```php
-     * echo $this->Panel->header('My Title', ['title' => false]);
-     * echo $this->Panel->header('My Title', ['title' => true]);
-     * echo $this->Panel->header('My <Title>', ['title' => ['tag' => 'h2', 'class' => 'my-class', 'escape' => true]]);
+     * echo $this->Card->header('My Title', ['title' => false]);
+     * echo $this->Card->header('My Title', ['title' => true]);
+     * echo $this->Card->header('My <Title>', ['title' => ['tag' => 'h2', 'class' => 'my-class', 'escape' => true]]);
      * ```
      *
      * ### Options
@@ -527,7 +527,7 @@ class PanelHelper extends Helper {
      * @param string|array $text The header content, or `null`, or an array of options.
      * @param array        $options Array of options. See above.
      *
-     * @return string A formated opening tag for the panel header or the complete panel
+     * @return string A formated opening tag for the card header or the complete card
      * header.
      */
     public function header($info = null, $options = []) {
@@ -542,27 +542,27 @@ class PanelHelper extends Helper {
     }
 
     /**
-     * Create or open a panel body.
+     * Create or open a card body.
      *
-     * If `$content` is a string, create a panel body using the specified content and
+     * If `$content` is a string, create a card body using the specified content and
      * `$options`.
      *
      * ```php
-     * echo $this->Panel->body('Panel Content', ['class' => 'my-class']);
+     * echo $this->Card->body('Card Content', ['class' => 'my-class']);
      * ```
      *
-     * If `$content` is `null`, create a formated opening tag for a panel body using the
+     * If `$content` is `null`, create a formated opening tag for a card body using the
      * specified `$options`.
      *
      * ```php
-     * echo $this->Panel->body(null, ['class' => 'my-class']);
+     * echo $this->Card->body(null, ['class' => 'my-class']);
      * ```
      *
      * If `$content` is an array, used it as `$options` and create a formated opening tag for
-     * a panel body.
+     * a card body.
      *
      * ```php
-     * echo $this->Panel->body(['class' => 'my-class']);
+     * echo $this->Card->body(['class' => 'my-class']);
      * ```
      *
      * ### Options
@@ -572,7 +572,7 @@ class PanelHelper extends Helper {
      *
      * @param array|string $info The body content, or `null`, or an array of options.
      * `$options`.
-     * @param array $options Array of options for the panel body `<div>`.
+     * @param array $options Array of options for the card body `<div>`.
      *
      * @return string
      */
@@ -585,27 +585,27 @@ class PanelHelper extends Helper {
     }
 
     /**
-     * Create or open a panel footer.
+     * Create or open a card footer.
      *
-     * If `$text` is a string, create a panel footer using the specified content
+     * If `$text` is a string, create a card footer using the specified content
      * and `$options`.
      *
      * ```php
-     * echo $this->Panel->footer('Footer Content', ['class' => 'my-class']);
+     * echo $this->Card->footer('Footer Content', ['class' => 'my-class']);
      * ```
      *
-     * If `$text` is `null`, create a formated opening tag for a panel footer using the
+     * If `$text` is `null`, create a formated opening tag for a card footer using the
      * specified `$options`.
      *
      * ```php
-     * echo $this->Panel->footer(null, ['class' => 'my-class']);
+     * echo $this->Card->footer(null, ['class' => 'my-class']);
      * ```
      *
      * If `$text` is an array, used it as `$options` and create a formated opening tag for
-     * a panel footer.
+     * a card footer.
      *
      * ```php
-     * echo $this->Panel->footer(['class' => 'my-class']);
+     * echo $this->Card->footer(['class' => 'my-class']);
      * ```
      *
      * ### Options
@@ -614,9 +614,9 @@ class PanelHelper extends Helper {
      * - Other attributes will be assigned to the footer element.
      *
      * @param string|array $text The footer content, or `null`, or an array of options.
-     * @param array        $options Array of options for the panel footer `<div>`.
+     * @param array        $options Array of options for the card footer `<div>`.
      *
-     * @return string A formated opening tag for the panel footer or the complete panel
+     * @return string A formated opening tag for the card footer or the complete card
      * footer.
      */
     public function footer($text = null, $options = []) {

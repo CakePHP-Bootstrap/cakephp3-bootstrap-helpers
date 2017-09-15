@@ -2,19 +2,19 @@
 
 namespace Bootstrap\Test\TestCase\View\Helper;
 
-use Bootstrap\View\Helper\PanelHelper;
+use Bootstrap\View\Helper\CardHelper;
 use Cake\Core\Configure;
 use Cake\TestSuite\TestCase;
 use Cake\View\View;
 
-class PanelHelperTest extends TestCase {
+class CardHelperTest extends TestCase {
 
     /**
-     * Instance of PanelHelper.
+     * Instance of CardHelper.
      *
-     * @var PanelHelper
+     * @var CardHelper
      */
-    public $panel;
+    public $card;
 
     /**
      * Setup
@@ -27,48 +27,48 @@ class PanelHelperTest extends TestCase {
         $view->loadHelper('Html', [
             'className' => 'Bootstrap.Html'
         ]);
-        $this->panel = new PanelHelper($view);
+        $this->card = new CardHelper($view);
         Configure::write('debug', true);
     }
 
     protected function reset() {
-        $this->panel->end();
+        $this->card->end();
     }
 
     public function testCreate() {
         $title = "My Modal";
         $id = "myModalId";
         // Test standard create with title
-        $result = $this->panel->create($title);
+        $result = $this->card->create($title);
         $this->assertHtml([
             ['div' => [
-                'class' => 'panel panel-default'
+                'class' => 'card card-default'
             ]],
             ['div' => [
-                'class' => 'panel-heading'
+                'class' => 'card-heading'
             ]],
             ['h4' => [
-                'class' => 'panel-title'
+                'class' => 'card-title'
             ]],
             $title,
             '/h4',
             '/div',
             ['div' => [
-                'class' => 'panel-body'
+                'class' => 'card-body'
             ]]
         ], $result);
         $this->reset();
         // Test standard create with title
-        $result = $this->panel->create($title, ['body' => false]);
+        $result = $this->card->create($title, ['body' => false]);
         $this->assertHtml([
             ['div' => [
-                'class' => 'panel panel-default'
+                'class' => 'card card-default'
             ]],
             ['div' => [
-                'class' => 'panel-heading'
+                'class' => 'card-heading'
             ]],
             ['h4' => [
-                'class' => 'panel-title'
+                'class' => 'card-title'
             ]],
             $title,
             '/h4',
@@ -76,10 +76,10 @@ class PanelHelperTest extends TestCase {
         ], $result);
         $this->reset();
         // Test standard create without title
-        $result = $this->panel->create();
+        $result = $this->card->create();
         $this->assertHtml([
             ['div' => [
-                'class' => 'panel panel-default'
+                'class' => 'card card-default'
             ]]
         ], $result);
         $this->reset();
@@ -91,14 +91,14 @@ class PanelHelperTest extends TestCase {
         $extraclass = 'my-extra-class';
 
         // Simple test
-        $this->panel->create();
-        $result = $this->panel->header($content);
+        $this->card->create();
+        $result = $this->card->header($content);
         $this->assertHtml([
             ['div' => [
-                'class' => 'panel-heading'
+                'class' => 'card-heading'
             ]],
             ['h4' => [
-                'class' => 'panel-title'
+                'class' => 'card-title'
             ]],
             $content,
             '/h4',
@@ -107,14 +107,14 @@ class PanelHelperTest extends TestCase {
         $this->reset();
 
         // Test with HTML content (should be escaped)
-        $this->panel->create();
-        $result = $this->panel->header($htmlContent);
+        $this->card->create();
+        $result = $this->card->header($htmlContent);
         $this->assertHtml([
             ['div' => [
-                'class' => 'panel-heading'
+                'class' => 'card-heading'
             ]],
             ['h4' => [
-                'class' => 'panel-title'
+                'class' => 'card-title'
             ]],
             htmlspecialchars($htmlContent),
             '/h4',
@@ -123,14 +123,14 @@ class PanelHelperTest extends TestCase {
         $this->reset();
 
         // Test with HTML content (should NOT be escaped)
-        $this->panel->create();
-        $result = $this->panel->header($htmlContent, ['escape' => false]);
+        $this->card->create();
+        $result = $this->card->header($htmlContent, ['escape' => false]);
         $this->assertHtml([
             ['div' => [
-                'class' => 'panel-heading'
+                'class' => 'card-heading'
             ]],
             ['h4' => [
-                'class' => 'panel-title'
+                'class' => 'card-title'
             ]],
             ['b' => true], $content, '/b',
             '/h4',
@@ -140,14 +140,14 @@ class PanelHelperTest extends TestCase {
 
         // Test with icon
         $iconContent = 'i:home Home';
-        $this->panel->create();
-        $result = $this->panel->header($iconContent);
+        $this->card->create();
+        $result = $this->card->header($iconContent);
         $this->assertHtml([
             ['div' => [
-                'class' => 'panel-heading'
+                'class' => 'card-heading'
             ]],
             ['h4' => [
-                'class' => 'panel-title'
+                'class' => 'card-title'
             ]],
             ['i' => [
                 'class' => 'fa fa-home',
@@ -161,16 +161,16 @@ class PanelHelperTest extends TestCase {
         // Test with collapsible (should NOT be escaped)
 
         // Test with HTML content (should be escaped)
-        $tmp = $this->panel->create(null, ['collapsible' => true]);
-        $result = $this->panel->header($htmlContent);
+        $tmp = $this->card->create(null, ['collapsible' => true]);
+        $result = $this->card->header($htmlContent);
         $this->assertHtml([
             ['div' => [
-                'class' => 'panel-heading',
+                'class' => 'card-heading',
                 'role'  => 'tab',
                 'id'    => 'heading-4'
             ]],
             ['h4' => [
-                'class' => 'panel-title'
+                'class' => 'card-title'
             ]],
             ['a' => [
                 'role'          => 'button',
@@ -187,16 +187,16 @@ class PanelHelperTest extends TestCase {
         $this->reset();
 
         // Test with HTML content (should NOT be escaped)
-        $this->panel->create(null, ['collapsible' => true]);
-        $result = $this->panel->header($htmlContent, ['escape' => false]);
+        $this->card->create(null, ['collapsible' => true]);
+        $result = $this->card->header($htmlContent, ['escape' => false]);
         $this->assertHtml([
             ['div' => [
                 'role'  => 'tab',
                 'id'    => 'heading-5',
-                'class' => 'panel-heading'
+                'class' => 'card-heading'
             ]],
             ['h4' => [
-                'class' => 'panel-title'
+                'class' => 'card-title'
             ]],
             ['a' => [
                 'role'          => 'button',
@@ -214,16 +214,16 @@ class PanelHelperTest extends TestCase {
 
         // Test with icon
         $iconContent = 'i:home Home';
-        $this->panel->create(null, ['collapsible' => true]);
-        $result = $this->panel->header($iconContent);
+        $this->card->create(null, ['collapsible' => true]);
+        $result = $this->card->header($iconContent);
         $this->assertHtml([
             ['div' => [
                 'role'  => 'tab',
                 'id'    => 'heading-6',
-                'class' => 'panel-heading'
+                'class' => 'card-heading'
             ]],
             ['h4' => [
-                'class' => 'panel-title'
+                'class' => 'card-title'
             ]],
             ['a' => [
                 'role'          => 'button',
@@ -248,11 +248,11 @@ class PanelHelperTest extends TestCase {
         $extraclass = 'my-extra-class';
 
         // Simple test
-        $this->panel->create();
-        $result = $this->panel->footer($content, ['class' => $extraclass]);
+        $this->card->create();
+        $result = $this->card->footer($content, ['class' => $extraclass]);
         $this->assertHtml([
             ['div' => [
-                'class' => 'panel-footer '.$extraclass
+                'class' => 'card-footer '.$extraclass
             ]],
             $content,
             '/div'
@@ -263,43 +263,43 @@ class PanelHelperTest extends TestCase {
 
     public function testGroup() {
 
-        $panelHeading = 'This is a panel heading';
-        $panelContent = 'A bit of HTML code inside!';
+        $cardHeading = 'This is a card heading';
+        $cardContent = 'A bit of HTML code inside!';
 
         $result = '';
-        $result .= $this->panel->startGroup();
-        $result .= $this->panel->create($panelHeading);
-        $result .= $panelContent;
-        $result .= $this->panel->create($panelHeading);
-        $result .= $panelContent;
-        $result .= $this->panel->create($panelHeading);
-        $result .= $panelContent;
-        $result .= $this->panel->endGroup();
-        $result .= $this->panel->create($panelHeading);
-        $result .= $panelContent;
-        $result .= $this->panel->end();
+        $result .= $this->card->startGroup();
+        $result .= $this->card->create($cardHeading);
+        $result .= $cardContent;
+        $result .= $this->card->create($cardHeading);
+        $result .= $cardContent;
+        $result .= $this->card->create($cardHeading);
+        $result .= $cardContent;
+        $result .= $this->card->endGroup();
+        $result .= $this->card->create($cardHeading);
+        $result .= $cardContent;
+        $result .= $this->card->end();
 
         $expected = [
             ['div' => [
-                'class'                => 'panel-group',
+                'class'                => 'card-group',
                 'role'                 => 'tablist',
                 'aria-multiselectable' => 'true',
-                'id'                   => 'panelGroup-1'
+                'id'                   => 'cardGroup-1'
             ]]
         ];
 
         for ($i = 0; $i < 3; ++$i) {
             $expected = array_merge($expected, [
                 ['div' => [
-                    'class' => 'panel panel-default'
+                    'class' => 'card card-default'
                 ]],
                 ['div' => [
-                    'class' => 'panel-heading',
+                    'class' => 'card-heading',
                     'role'  => 'tab',
                     'id'    => 'heading-'.$i
                 ]],
                 ['h4' => [
-                    'class' => 'panel-title'
+                    'class' => 'card-title'
                 ]],
                 ['a' => [
                     'role'          => 'button',
@@ -307,22 +307,22 @@ class PanelHelperTest extends TestCase {
                     'href'          => '#collapse-'.$i,
                     'aria-expanded' => $i ? 'false' : 'true',
                     'aria-controls' => 'collapse-'.$i,
-                    'data-parent'   => '#panelGroup-1'
+                    'data-parent'   => '#cardGroup-1'
                 ]],
-                $panelHeading,
+                $cardHeading,
                 '/a',
                 '/h4',
                 '/div',
                 ['div' => [
-                    'class'           => 'panel-collapse collapse'.($i ? '' : ' in'),
-                    'role'            => 'tabpanel',
+                    'class'           => 'card-collapse collapse'.($i ? '' : ' in'),
+                    'role'            => 'tabcard',
                     'aria-labelledby' => 'heading-'.$i,
                     'id'              => 'collapse-'.$i
                 ]],
                 ['div' => [
-                    'class' => 'panel-body'
+                    'class' => 'card-body'
                 ]],
-                $panelContent,
+                $cardContent,
                 '/div',
                 '/div',
                 '/div'
@@ -333,21 +333,21 @@ class PanelHelperTest extends TestCase {
 
         $expected = array_merge($expected, [
             ['div' => [
-                'class' => 'panel panel-default'
+                'class' => 'card card-default'
             ]],
             ['div' => [
-                'class' => 'panel-heading'
+                'class' => 'card-heading'
             ]],
             ['h4' => [
-                'class' => 'panel-title'
+                'class' => 'card-title'
             ]],
-            $panelHeading,
+            $cardHeading,
             '/h4',
             '/div',
             ['div' => [
-                'class' => 'panel-body'
+                'class' => 'card-body'
             ]],
-            $panelContent,
+            $cardContent,
             '/div',
             '/div'
         ]);
@@ -355,57 +355,57 @@ class PanelHelperTest extends TestCase {
         $this->assertHtml($expected, $result, false);
     }
 
-    public function testPanelGroupInsidePanel() {
+    public function testCardGroupInsideCard() {
 
-        $panelHeading = 'This is a panel heading';
-        $panelContent = 'A bit of HTML code inside!';
+        $cardHeading = 'This is a card heading';
+        $cardContent = 'A bit of HTML code inside!';
 
         $result = '';
-        $result .= $this->panel->create($panelHeading);
-        $result .= $this->panel->startGroup();
-        $result .= $this->panel->create($panelHeading);
-        $result .= $panelContent;
-        $result .= $this->panel->create($panelHeading);
-        $result .= $panelContent;
-        $result .= $this->panel->endGroup();
-        $result .= $this->panel->end();
+        $result .= $this->card->create($cardHeading);
+        $result .= $this->card->startGroup();
+        $result .= $this->card->create($cardHeading);
+        $result .= $cardContent;
+        $result .= $this->card->create($cardHeading);
+        $result .= $cardContent;
+        $result .= $this->card->endGroup();
+        $result .= $this->card->end();
 
         $expected = [
             ['div' => [
-                'class' => 'panel panel-default'
+                'class' => 'card card-default'
             ]],
             ['div' => [
-                'class' => 'panel-heading'
+                'class' => 'card-heading'
             ]],
             ['h4' => [
-                'class' => 'panel-title'
+                'class' => 'card-title'
             ]],
-            $panelHeading,
+            $cardHeading,
             '/h4',
             '/div',
             ['div' => [
-                'class' => 'panel-body'
+                'class' => 'card-body'
             ]],
             ['div' => [
-                'class'                => 'panel-group',
+                'class'                => 'card-group',
                 'role'                 => 'tablist',
                 'aria-multiselectable' => 'true',
-                'id'                   => 'panelGroup-1'
+                'id'                   => 'cardGroup-1'
             ]]
         ];
 
         for ($i = 1; $i < 3; ++$i) {
             $expected = array_merge($expected, [
                 ['div' => [
-                    'class' => 'panel panel-default'
+                    'class' => 'card card-default'
                 ]],
                 ['div' => [
-                    'class' => 'panel-heading',
+                    'class' => 'card-heading',
                     'role'  => 'tab',
                     'id'    => 'heading-'.$i
                 ]],
                 ['h4' => [
-                    'class' => 'panel-title'
+                    'class' => 'card-title'
                 ]],
                 ['a' => [
                     'role'          => 'button',
@@ -413,22 +413,22 @@ class PanelHelperTest extends TestCase {
                     'href'          => '#collapse-'.$i,
                     'aria-expanded' => ($i > 1) ? 'false' : 'true',
                     'aria-controls' => 'collapse-'.$i,
-                    'data-parent'   => '#panelGroup-1'
+                    'data-parent'   => '#cardGroup-1'
                 ]],
-                $panelHeading,
+                $cardHeading,
                 '/a',
                 '/h4',
                 '/div',
                 ['div' => [
-                    'class'           => 'panel-collapse collapse'.($i > 1 ? '' : ' in'),
-                    'role'            => 'tabpanel',
+                    'class'           => 'card-collapse collapse'.($i > 1 ? '' : ' in'),
+                    'role'            => 'tabcard',
                     'aria-labelledby' => 'heading-'.$i,
                     'id'              => 'collapse-'.$i
                 ]],
                 ['div' => [
-                    'class' => 'panel-body'
+                    'class' => 'card-body'
                 ]],
-                $panelContent,
+                $cardContent,
                 '/div',
                 '/div',
                 '/div'
