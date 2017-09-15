@@ -36,6 +36,9 @@ I am currently working on rewritting the helpers for Bootstrap 4, current work s
     - `fluid` has been dropped.
     - `container` is a new option (`bool`, default is `false`) to indicate if the content of the navbar
     should be wrapped inside a `<div class="container"></div>`.
+    - `inverse` has been dropped.
+  - a new `theme` option has been added to the `create()` method to control, possible values are `'light'`,
+  `'dark'`, `false` (no theme), or an array `[$theme, $bg]`.
   - when adding a `link()` to an inner menu, the `$linkOptions` parameters is not usable anymore and the
   `$options` parameters should be used directly (their are no wrapping `<li>` anymore for inner menu).
 
