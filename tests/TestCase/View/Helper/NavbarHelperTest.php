@@ -124,8 +124,8 @@ class NavbarHelperTest extends TestCase {
         ];
         $this->assertHtml($expected, $result);
 
-        // Test scheme
-        $result = $this->navbar->create(null, ['scheme' => 'dark', 'collapse' => false]);
+        // Test theme
+        $result = $this->navbar->create(null, ['theme' => 'dark', 'collapse' => false]);
         $expected = [
             ['nav' => [
                 'class' => 'navbar navbar-dark bg-dark navbar-expand'

@@ -110,11 +110,13 @@ aria-haspopup="true" aria-expanded="false">{{content}}</a>',
      * Create a new navbar.
      *
      * ### Options:
-     * - `fixed` [Fixed navbar](http://getbootstrap.com/components/#navbar-fixed-top). Possible values are `'top'`, `'bottom'`, `false`. Default is `false`.
-     * - `fluid` Fluid navabar. Default is `false`.
-     * - `inverse` [Inverted navbar](http://getbootstrap.com/components/#navbar-inverted). Default is `false`.
-     * - `responsive` Responsive navbar. Default is `true`.
-     * - `static` [Static navbar](http://getbootstrap.com/components/#navbar-static-top). Default is `false`.
+     * - `container` Wrap the inner content inside a container. Default is `false`.
+     * - `fixed` [Fixed navbar](https://getbootstrap.com/docs/4.0/components/navbar/#placement). Possible values are `'top'`, `'bottom'`, `false`. Default is `false`.
+     * - `theme` [Navbar theme](https://getbootstrap.com/docs/4.0/components/navbar/#color-schemes). Either a `'light'`, `'dark'` or an array with]
+     * 2 values corresponding to the theme and the background (e.g. `['dark', 'primary']`). Can also be set to `false` to disable automatic theming. Default is `'light'`.
+     * - `collapse` Specify when the navbar should collapse. Possible values are `false` (never), `true` (always) or a string (`'lg'`, `'xl'`, ...).
+     * Default is `'lg'`.
+     * - `sticky` [Sticky navbar](https://getbootstrap.com/docs/4.0/components/navbar/#placement). Default is `false`.
      * - `templateVars` Provide template variables for the template.
      * - Other attributes will be assigned to the navbar element.
      *
@@ -130,7 +132,7 @@ aria-haspopup="true" aria-expanded="false">{{content}}</a>',
             'fixed' => false,
             'collapse' => 'lg',
             'sticky' => false,
-            'scheme' => 'light',
+            'theme' => 'light',
             'container' => false,
             'templateVars' => []
         ];
@@ -139,8 +141,8 @@ aria-haspopup="true" aria-expanded="false">{{content}}</a>',
         $this->_container = $options['container'];
 
         /** Generate options for outer div. **/
-        if ($options['scheme'] !== false) {
-            $scheme = $options['scheme'];
+        if ($options['theme'] !== false) {
+            $scheme = $options['theme'];
             $bg = null;
             if (is_array($scheme)) {
                 list($scheme, $bg) = $scheme;
@@ -223,7 +225,7 @@ aria-haspopup="true" aria-expanded="false">{{content}}</a>',
             'header' => $header,
             'responsiveStart' => $responsiveStart,
             'containerStart' => $containerStart,
-            'attrs' => $this->templater()->formatAttributes($options, ['id', 'fixed', 'collapse', 'sticky', 'scheme', 'container']),
+            'attrs' => $this->templater()->formatAttributes($options, ['id', 'fixed', 'collapse', 'sticky', 'theme', 'container']),
             'templateVars' => $options['templateVars']
         ]);
     }
@@ -243,8 +245,10 @@ aria-haspopup="true" aria-expanded="false">{{content}}</a>',
      *
      * @param string $name The link text.
      * @param string|array $url The link URL (CakePHP way).
-     * @param array $options Array of attributes for the wrapper tag.
-     * @param array $linkOptions Array of attributes for the link.
+     * @param array $options Array of attributes for the wrapper tag (outer menu) or
+     * the link (inner menu).
+     * @param array $linkOptions Array of attributes for the link in outer menu. Not used
+     * if in inner menu.
      *
      * @return string A HTML tag wrapping the link.
      */
