@@ -123,8 +123,8 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
             'inputGroupButtons' => '<span class="input-group-btn">{{content}}</span>',
             'inputGroupDropdowns' => '<div class="input-group-btn">{{content}}</div>',
             'helpBlock' => '<small class="help-block form-text text-muted">{{content}}</small>',
-            'buttonGroup' => '<div class="btn-group{{attrs.class}}"{{attrs}}>{{content}}</div>',
-            'buttonToolbar' => '<div class="btn-toolbar{{attrs.class}}"{{attrs}}>{{content}}</div>',
+            'buttonGroup' => '<div class="btn-group{{attrs.class}}" role="group"{{attrs}}>{{content}}</div>',
+            'buttonToolbar' => '<div class="btn-toolbar{{attrs.class}}" role="toolbar"{{attrs}}>{{content}}</div>',
             'fancyFileInput' => '{{fileInput}}<div class="input-group"><div class="input-group-btn">{{button}}</div>{{input}}</div>'
         ],
         'buttons' => [

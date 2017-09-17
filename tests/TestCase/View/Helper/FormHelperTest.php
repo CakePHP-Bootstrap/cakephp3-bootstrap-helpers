@@ -787,7 +787,8 @@ class FormHelperTest extends TestCase {
                 'class' => 'input-group-btn'
             ]],
             ['div' => [
-                'class' => 'btn-group'
+                'class' => 'btn-group',
+                'role' => 'group'
             ]],
             ['button' => [
                 'data-toggle' => 'dropdown',
@@ -837,7 +838,8 @@ class FormHelperTest extends TestCase {
                 'class' => 'input-group-btn'
             ]],
             ['div' => [
-                'class' => 'btn-group dropup'
+                'class' => 'btn-group dropup',
+                'role' => 'group'
             ]],
             ['button' => [
                 'data-toggle' => 'dropdown',
