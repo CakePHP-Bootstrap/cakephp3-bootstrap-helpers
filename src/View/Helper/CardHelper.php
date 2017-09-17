@@ -50,7 +50,7 @@ class CardHelper extends Helper {
      */
     protected $_defaultConfig = [
         'templates' => [
-            'cardGroupStart' => '<div role="tablist" data-children=".card"{{attrs}}>',
+            'cardGroupStart' => '<div role="tablist"{{attrs}}>',
             'cardGroupEnd' => '</div>',
             'cardStart' => '<div class="card card-{{type}}{{attrs.class}}"{{attrs}}>',
             'cardEnd' => '</div>',
@@ -270,6 +270,7 @@ class CardHelper extends Helper {
             $out .= $this->_createHeader($title, [
                 'title' => $options['title']
             ]);
+            $out .= $this->_cleanCurrent();
             if ($options['body']) {
                 $out .= $this->_createBody();
             }
@@ -387,6 +388,9 @@ class CardHelper extends Helper {
         $out = $this->_cleanCurrent().$out;
         $this->_states->setValue('part', 'header');
         if ($title) {
+            if ($options['escape']) {
+                $title = h($title);
+            }
             $out .= $title;
         }
         return $out;

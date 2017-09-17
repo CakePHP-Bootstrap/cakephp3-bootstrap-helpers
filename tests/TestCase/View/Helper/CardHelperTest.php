@@ -45,13 +45,9 @@ class CardHelperTest extends TestCase {
                 'class' => 'card card-default'
             ]],
             ['div' => [
-                'class' => 'card-heading'
-            ]],
-            ['h4' => [
-                'class' => 'card-title'
+                'class' => 'card-header'
             ]],
             $title,
-            '/h4',
             '/div',
             ['div' => [
                 'class' => 'card-body'
@@ -65,14 +61,9 @@ class CardHelperTest extends TestCase {
                 'class' => 'card card-default'
             ]],
             ['div' => [
-                'class' => 'card-heading'
+                'class' => 'card-header'
             ]],
-            ['h4' => [
-                'class' => 'card-title'
-            ]],
-            $title,
-            '/h4',
-            '/div'
+            $title
         ], $result);
         $this->reset();
         // Test standard create without title
@@ -95,14 +86,9 @@ class CardHelperTest extends TestCase {
         $result = $this->card->header($content);
         $this->assertHtml([
             ['div' => [
-                'class' => 'card-heading'
+                'class' => 'card-header'
             ]],
-            ['h4' => [
-                'class' => 'card-title'
-            ]],
-            $content,
-            '/h4',
-            '/div'
+            $content
         ], $result);
         $this->reset();
 
@@ -111,14 +97,9 @@ class CardHelperTest extends TestCase {
         $result = $this->card->header($htmlContent);
         $this->assertHtml([
             ['div' => [
-                'class' => 'card-heading'
+                'class' => 'card-header'
             ]],
-            ['h4' => [
-                'class' => 'card-title'
-            ]],
-            htmlspecialchars($htmlContent),
-            '/h4',
-            '/div'
+            htmlspecialchars($htmlContent)
         ], $result);
         $this->reset();
 
@@ -127,14 +108,9 @@ class CardHelperTest extends TestCase {
         $result = $this->card->header($htmlContent, ['escape' => false]);
         $this->assertHtml([
             ['div' => [
-                'class' => 'card-heading'
+                'class' => 'card-header'
             ]],
-            ['h4' => [
-                'class' => 'card-title'
-            ]],
-            ['b' => true], $content, '/b',
-            '/h4',
-            '/div'
+            ['b' => true], $content, '/b'
         ], $result);
         $this->reset();
 
@@ -144,17 +120,12 @@ class CardHelperTest extends TestCase {
         $result = $this->card->header($iconContent);
         $this->assertHtml([
             ['div' => [
-                'class' => 'card-heading'
-            ]],
-            ['h4' => [
-                'class' => 'card-title'
+                'class' => 'card-header'
             ]],
             ['i' => [
                 'class' => 'fa fa-home',
                 'aria-hidden' => 'true'
-            ]], '/i', ' Home',
-            '/h4',
-            '/div'
+            ]], '/i', ' Home'
         ], $result);
         $this->reset();
 
@@ -163,14 +134,15 @@ class CardHelperTest extends TestCase {
         // Test with HTML content (should be escaped)
         $tmp = $this->card->create(null, ['collapsible' => true]);
         $result = $this->card->header($htmlContent);
+        debug($result);
         $this->assertHtml([
             ['div' => [
-                'class' => 'card-heading',
+                'class' => 'card-header',
                 'role'  => 'tab',
                 'id'    => 'heading-4'
             ]],
-            ['h4' => [
-                'class' => 'card-title'
+            ['h5' => [
+                'class' => 'mb-0'
             ]],
             ['a' => [
                 'role'          => 'button',
@@ -181,8 +153,7 @@ class CardHelperTest extends TestCase {
             ]],
             htmlspecialchars($htmlContent),
             '/a',
-            '/h4',
-            '/div'
+            '/h5'
         ], $result);
         $this->reset();
 
@@ -193,10 +164,10 @@ class CardHelperTest extends TestCase {
             ['div' => [
                 'role'  => 'tab',
                 'id'    => 'heading-5',
-                'class' => 'card-heading'
+                'class' => 'card-header'
             ]],
-            ['h4' => [
-                'class' => 'card-title'
+            ['h5' => [
+                'class' => 'mb-0'
             ]],
             ['a' => [
                 'role'          => 'button',
@@ -207,8 +178,7 @@ class CardHelperTest extends TestCase {
             ]],
             ['b' => true], $content, '/b',
             '/a',
-            '/h4',
-            '/div'
+            '/h5'
         ], $result);
         $this->reset();
 
@@ -220,10 +190,10 @@ class CardHelperTest extends TestCase {
             ['div' => [
                 'role'  => 'tab',
                 'id'    => 'heading-6',
-                'class' => 'card-heading'
+                'class' => 'card-header'
             ]],
-            ['h4' => [
-                'class' => 'card-title'
+            ['h5' => [
+                'class' => 'mb-0'
             ]],
             ['a' => [
                 'role'          => 'button',
@@ -237,8 +207,7 @@ class CardHelperTest extends TestCase {
                 'aria-hidden' => 'true'
             ]], '/i', ' Home',
             '/a',
-            '/h4',
-            '/div'
+            '/h5'
         ], $result, true);
         $this->reset();
     }
@@ -281,10 +250,8 @@ class CardHelperTest extends TestCase {
 
         $expected = [
             ['div' => [
-                'class'                => 'card-group',
-                'role'                 => 'tablist',
-                'aria-multiselectable' => 'true',
-                'id'                   => 'cardGroup-1'
+                'role' => 'tablist',
+                'id' => 'cardGroup-1'
             ]]
         ];
 
@@ -294,12 +261,12 @@ class CardHelperTest extends TestCase {
                     'class' => 'card card-default'
                 ]],
                 ['div' => [
-                    'class' => 'card-heading',
+                    'class' => 'card-header',
                     'role'  => 'tab',
                     'id'    => 'heading-'.$i
                 ]],
-                ['h4' => [
-                    'class' => 'card-title'
+                ['h5' => [
+                    'class' => 'mb-0'
                 ]],
                 ['a' => [
                     'role'          => 'button',
@@ -311,11 +278,11 @@ class CardHelperTest extends TestCase {
                 ]],
                 $cardHeading,
                 '/a',
-                '/h4',
+                '/h5',
                 '/div',
                 ['div' => [
-                    'class'           => 'card-collapse collapse'.($i ? '' : ' in'),
-                    'role'            => 'tabcard',
+                    'class'           => 'collapse'.($i ? '' : ' in'),
+                    'role'            => 'tabpanel',
                     'aria-labelledby' => 'heading-'.$i,
                     'id'              => 'collapse-'.$i
                 ]],
@@ -336,13 +303,9 @@ class CardHelperTest extends TestCase {
                 'class' => 'card card-default'
             ]],
             ['div' => [
-                'class' => 'card-heading'
-            ]],
-            ['h4' => [
-                'class' => 'card-title'
+                'class' => 'card-header'
             ]],
             $cardHeading,
-            '/h4',
             '/div',
             ['div' => [
                 'class' => 'card-body'
@@ -375,21 +338,15 @@ class CardHelperTest extends TestCase {
                 'class' => 'card card-default'
             ]],
             ['div' => [
-                'class' => 'card-heading'
-            ]],
-            ['h4' => [
-                'class' => 'card-title'
+                'class' => 'card-header'
             ]],
             $cardHeading,
-            '/h4',
             '/div',
             ['div' => [
                 'class' => 'card-body'
             ]],
             ['div' => [
-                'class'                => 'card-group',
                 'role'                 => 'tablist',
-                'aria-multiselectable' => 'true',
                 'id'                   => 'cardGroup-1'
             ]]
         ];
@@ -400,12 +357,12 @@ class CardHelperTest extends TestCase {
                     'class' => 'card card-default'
                 ]],
                 ['div' => [
-                    'class' => 'card-heading',
+                    'class' => 'card-header',
                     'role'  => 'tab',
                     'id'    => 'heading-'.$i
                 ]],
-                ['h4' => [
-                    'class' => 'card-title'
+                ['h5' => [
+                    'class' => 'mb-0'
                 ]],
                 ['a' => [
                     'role'          => 'button',
@@ -417,11 +374,11 @@ class CardHelperTest extends TestCase {
                 ]],
                 $cardHeading,
                 '/a',
-                '/h4',
+                '/h5',
                 '/div',
                 ['div' => [
-                    'class'           => 'card-collapse collapse'.($i > 1 ? '' : ' in'),
-                    'role'            => 'tabcard',
+                    'class'           => 'collapse'.($i > 1 ? '' : ' in'),
+                    'role'            => 'tabpanel',
                     'aria-labelledby' => 'heading-'.$i,
                     'id'              => 'collapse-'.$i
                 ]],
