@@ -19,7 +19,7 @@ I am currently working on rewritting the helpers for Bootstrap 4, current work s
 - ModalHelper - **alpha**, minor changes, should work properly.
 - NavbarHelper - **alpha,**, no huge changes, should work properly.
 - PaginatorHelper - **alpha**, minor changes, should work properly.
-- PanelHelper - 0%
+- CardHelper (previously PanelHelper) - **alpha**, important changes.
 
 #### Breaking changes from previous versions
 
@@ -76,10 +76,10 @@ The full plugin documentation is available at https://holt59.github.io/cakephp3-
 
 | Version | Bootstrap version | CakePHP version | Information |
 |---------|-------------------|-----------------|-------------|
-| master / 3.1.2 | 3 | >= 3.4.0 | Current active branch. |
-| > 3.0.5, <= 3.1.1 | 3 | >= 3.2.3, < 3.4.0 | Not actively maintained (open issue(s) if necessary). |
+| [master](https://github.com/Holt59/cakephp3-bootstrap-helpers/tree/master) / [3.1.2](https://github.com/Holt59/cakephp3-bootstrap-helpers/tree/v3.1.2) | 3 | >= 3.4.0 | Current active branch. |
+| > 3.0.5, <= [3.1.1](https://github.com/Holt59/cakephp3-bootstrap-helpers/tree/v3.1.1) | 3 | >= 3.2.3, < 3.4.0 | Not actively maintained (open issue(s) if necessary). |
 | <= 3.0.5 | 3 | >= 3.0.0 | Deprecated. |
-| 4.0.1-alpha | 4 | >= 3.4.0 | Alpha, not all helpers are available. |
+| [4.0.1-alpha](https://github.com/Holt59/cakephp3-bootstrap-helpers/tree/4.0.1-alpha) | 4 | >= 3.4.0 | Alpha, not all helpers are available. |
 
 #### Contributing
 
