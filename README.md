@@ -13,13 +13,14 @@ Work in progress
 
 I am currently working on rewritting the helpers for Bootstrap 4, current work status:
 
-- FlashHelper - 100%
-- FormHelper - **alpha**, important changes, expect errors or strange outputs.
-- HtmlHelper - 100%
-- ModalHelper - **alpha**, minor changes, should work properly.
-- NavbarHelper - **alpha,**, no huge changes, should work properly.
-- PaginatorHelper - **alpha**, minor changes, should work properly.
-- CardHelper (previously PanelHelper) - **alpha**, important changes.
+- `BreadcrumbsHelper` - **alpha**, minor changes, should work properly.
+- `FlashHelper` - No changes.
+- `FormHelper` - **alpha**, important changes, expect errors or strange outputs.
+- `HtmlHelper` - **alpha**, minor changes, should work properly.
+- `ModalHelper` - **alpha**, minor changes, should work properly.
+- `NavbarHelper` - **alpha,**, no huge changes, should work properly.
+- `PaginatorHelper` - **alpha**, minor changes, should work properly.
+- `CardHelper` (previously `PanelHelper`) - **alpha**, important changes, work in progress.
 
 #### Breaking changes from previous versions
 
