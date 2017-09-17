@@ -134,7 +134,6 @@ class CardHelperTest extends TestCase {
         // Test with HTML content (should be escaped)
         $tmp = $this->card->create(null, ['collapsible' => true]);
         $result = $this->card->header($htmlContent);
-        debug($result);
         $this->assertHtml([
             ['div' => [
                 'class' => 'card-header',
