@@ -69,7 +69,7 @@ class PaginatorHelper extends \Cake\View\Helper\PaginatorHelper {
             'last' => '<li><a href="{{url}}">{{text}}</a></li>',
             'number' => '<li><a href="{{url}}">{{text}}</a></li>',
             'current' => '<li class="active"><a href="{{url}}">{{text}}</a></li>',
-            'ellipsis' => '<li class="ellipsis disabled"><a>...</a></li>',
+            'ellipsis' => '<li class="ellipsis disabled"><a>&hellip;</a></li>',
             'sort' => '<a href="{{url}}">{{text}}</a>',
             'sortAsc' => '<a class="asc" href="{{url}}">{{text}}</a>',
             'sortDesc' => '<a class="desc" href="{{url}}">{{text}}</a>',
@@ -78,6 +78,39 @@ class PaginatorHelper extends \Cake\View\Helper\PaginatorHelper {
         ],
         'templateClass' => 'Bootstrap\View\EnhancedStringTemplate',
     ];
+
+    /**
+     * Calculates the start and end for the pagination numbers.
+     *
+     * @param array $params Params from the numbers() method.
+     * @param array $options Options from the numbers() method.
+     * @return array An array with the start and end numbers.
+     */
+    protected function _getNumbersStartAndEnd($params, $options) {
+        $half = (int)($options['modulus'] / 2);
+        $end = max(1 + $options['modulus'], $params['page'] + $half);
+        $start = min($params['pageCount'] - $options['modulus'], $params['page'] - $half - $options['modulus'] % 2);
+
+        // See the numbers method.
+        $first = isset($options['first_']) ? $options['first_'] : $options['first'];
+        $last = isset($options['last_']) ? $options['last_'] : $options['last'];
+
+         if ($first) {
+             $first = is_int($first) ? $first : 1;
+             if ($start <= $first + 2) {
+                 $start = 1;
+             }
+         }
+         if ($last) {
+             $last = is_int($last) ? $last : 1;
+             if ($end >= $params['pageCount'] - $last - 1) {
+                 $end = $params['pageCount'];
+             }
+         }
+         $end = min($params['pageCount'], $end);
+         $start = max(1, $start);
+         return [$start, $end];
+     }
 
     /**
      * Returns a set of numbers for the paged result set using a modulus to decide how
@@ -189,27 +222,22 @@ class PaginatorHelper extends \Cake\View\Helper\PaginatorHelper {
 
         list($start, $end) = $this->_getNumbersStartAndEnd($params, $options);
 
-        if ($options['last']) {
-            $ellipsis = isset($options['ellipsis']) ?
-                      $options['ellipsis'] : is_int($options['last']);
-            $ellipsis = $ellipsis ? $templater->format('ellipsis', []) : '';
-            $last = $this->_lastNumber($ellipsis, $params, $end, $options);
-        }
+        $ellipsis = $templater->format('ellipsis', []);
+        $first = $this->_firstNumber($ellipsis, $params, $start, $options);
+        $last = $this->_lastNumber($ellipsis, $params, $end, $options);
 
-        if ($options['first']) {
-            $ellipsis = isset($options['ellipsis']) ?
-                      $options['ellipsis'] : is_int($options['first']);
-            $ellipsis = $ellipsis ? $templater->format('ellipsis', []) : '';
-            $first = $this->_firstNumber($ellipsis, $params, $start, $options);
-        }
+        $before = (is_int($options['first']) && $options['first'] > 1) ? $prev.$first : $first.$prev;
+        $after  = (is_int($options['last']) && $options['last'] > 1) ? $last.$next : $next.$last;
 
-        unset($options['ellipsis']);
-
-        $before = is_int($options['first']) ? $prev.$first : $first.$prev;
-        $after  = is_int($options['last']) ? $last.$next : $next.$last;
         $options['before'] = $options['before'].$before;;
         $options['after']  = $after.$options['after'];
-        $options['first']  = $options['last'] = false;
+
+        // New options used to allow the _getNumbersStartAndEnd method to work correctly without having
+        // the actual last and first number outputed by the _modulusNumbers.
+        $options['first_'] = $options['first'];
+        $options['last_'] = $options['last'];
+        $options['first'] = null;
+        $options['last'] = null;
 
         if ($options['modulus'] !== false && $params['pageCount'] > $options['modulus']) {
             $out = $this->_modulusNumbers($templater, $params, $options);
@@ -220,7 +248,6 @@ class PaginatorHelper extends \Cake\View\Helper\PaginatorHelper {
         if (isset($options['templates'])) {
             $templater->pop();
         }
-
 
         return $out;
     }
