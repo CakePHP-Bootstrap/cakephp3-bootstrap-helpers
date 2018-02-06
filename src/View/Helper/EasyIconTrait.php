@@ -43,15 +43,26 @@ trait EasyIconTrait {
      */
     protected function _makeIcon($text, &$converted = false, $options = []) {
         $converted = false;
+
+        // If easyIcon mode is disable.
         if (!$this->easyIcon) {
             return $text;
         }
+
+        // If text is not a string!
+        if (!is_string($text)) {
+            return $text;
+        }
+
+        // Use $this->icon if available, otherwize fall back to $this->Html->icon.
         if (method_exists($this, 'icon')) {
             $ficon = [$this, 'icon'];
         }
         else {
             $ficon = [$this->Html, 'icon'];
         }
+
+        // Replace occurences.
         $text = preg_replace_callback(
             '#(^|\s+)i:([a-zA-Z0-9\\-_]+)(\s+|$)#', function ($matches) use ($ficon, $options) {
                 return $matches[1].call_user_func($ficon, $matches[2], $options).$matches[3];
