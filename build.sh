@@ -97,7 +97,7 @@ if [ $push -eq 1 ]; then
     rm -rf gh-pages
     git clone --branch gh-pages https://github.com/holt59/cakephp3-bootstrap-helpers.git gh-pages
     cd gh-pages
-    rm ./* -rf
+    rm -rf ./*
     mv ../site/* ./
     git add --all
     git commit -m "$commit"
