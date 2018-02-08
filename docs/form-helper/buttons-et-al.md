@@ -21,7 +21,7 @@ echo $this->Form->buttonGroup([$this->Form->button('1'), $this->Form->button('2'
 </div>
 ```
 
--- Output
+-- TAB: Output
 
 <div class="btn-group">
     <button class="btn btn-default" type="submit">1</button>
@@ -61,7 +61,7 @@ echo $this->Form->buttonToolbar([
 </div>
 ```
 
--- Output
+-- TAB: Output
 
 <div class="btn-toolbar">
     <div class="btn-group">
@@ -107,7 +107,7 @@ echo $this->Form->dropdownButton('My Dropdown', [
 </div>
 ```
 
--- Output
+-- TAB: Output
 
 <div class="btn-group">
     <button data-toggle="dropdown" class="dropdown-toggle btn btn-default">My Dropdown <span class="caret"></span></button>
