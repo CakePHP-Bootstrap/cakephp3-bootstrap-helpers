@@ -6,13 +6,13 @@
 
 	<title>Class Bootstrap\View\Helper\PanelHelper | CakePHP 3 Bootstrap Helpers</title>
 
-	<link rel="stylesheet" href="resources/bootstrap.min.css?071b3c2a8dd3bf21f24cec7c6955fbf9beff6181">
+	<link rel="stylesheet" href="resources/bootstrap.min.css?f3e7fec0be1260a5489a2d9311f6ac812ec0b79a">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
 		integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">
-	<link rel="stylesheet" href="resources/prism.css?e1a34f60039ca474453ea496a4887cf6f73c7e22">
+	<link rel="stylesheet" href="resources/prism.css?d282f45ec4478ce0f395830d44047fac7ea7a842">
 	<link rel="stylesheet" href="resources/custom-prism.css?a178cd22915f6b0ba261d3cc7edc719b234de9c1">
-	<link rel="stylesheet" href="resources/style.css?4f8c93c97a8296200ebbc4320e4d19208862e348">
+	<link rel="stylesheet" href="resources/style.css?ce538030ed7ee67e6085857bb8fac62be623aa17">
 
 </head>
 
@@ -38,11 +38,12 @@
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">The helpers <b class="caret"></b></a>
 						<ul class="dropdown-menu">
-<li> <a href="https://holt59.github.io/cakephp3-bootstrap-helpers/form-helper/basics/">Form Helper</a> </li>
+<!-- helpers --> <li> <a href="https://holt59.github.io/cakephp3-bootstrap-helpers/form-helper/basics/">Form Helper</a> </li>
 <li> <a href="https://holt59.github.io/cakephp3-bootstrap-helpers/html-helper/icons/">Html Helper</a> </li>
 <li> <a href="https://holt59.github.io/cakephp3-bootstrap-helpers/modal-helper/basics/">Modal Helper</a> </li>
 <li> <a href="https://holt59.github.io/cakephp3-bootstrap-helpers/navbar-helper/basics/">Navbar Helper</a> </li>
 <li> <a href="https://holt59.github.io/cakephp3-bootstrap-helpers/panel-helper/basics/">Panel Helper</a> </li>
+</ul>
 						</ul>
 					</li>
 					<li class="active"><a href="https://holt59.github.io/cakephp3-bootstrap-helpers/api/">API</a></li>
@@ -83,6 +84,10 @@
 									Bootstrap<span></span>
 								</a>
 									<ul>
+							<li>
+								<a href="namespace-Bootstrap.Utility.html">
+									Utility								</a>
+									</li>
 							<li class="active">
 								<a href="namespace-Bootstrap.View.html">
 									View<span></span>
@@ -177,7 +182,7 @@
 		<b>Namespace:</b> <a href="namespace-Bootstrap.html">Bootstrap</a>\<a href="namespace-Bootstrap.View.html">View</a>\<a href="namespace-Bootstrap.View.Helper.html">Helper</a><br>
 		
 
-		<b>Location:</b> <a href="source-class-Bootstrap.View.Helper.PanelHelper.html#20-664" title="Go to source code">View/Helper/PanelHelper.php</a><br>
+		<b>Location:</b> <a href="source-class-Bootstrap.View.Helper.PanelHelper.html#22-630" title="Go to source code">View/Helper/PanelHelper.php</a><br>
 	</div>
 
 
@@ -186,74 +191,6 @@
 	<div class="section">
 		<h2>Properties summary</h2>
 		<ul class="member-summary properties">
-		<li class="clearfix">
-			<div class="name">
-					<code><a href="class-Bootstrap.View.Helper.PanelHelper.html#$_autoCloseOnCreate">$_autoCloseOnCreate</a></code>
-
-				<span class="attributes">
-					<span class="label label-warning">protected</span>
-
-				</span>
-			</div>
-
-			<div class="property-type">
-				<code>boolean</code></div>
-
-			<div class="description">
-				Determine if previous panel should be automatically closed when calling <code>create()</code>.
-			</div>
-		</li>
-		<li class="clearfix">
-			<div class="name">
-					<code><a href="class-Bootstrap.View.Helper.PanelHelper.html#$_bodyId">$_bodyId</a></code>
-
-				<span class="attributes">
-					<span class="label label-warning">protected</span>
-
-				</span>
-			</div>
-
-			<div class="property-type">
-				<code>string</code></div>
-
-			<div class="description">
-				Body HTML id (for collapsible panel).
-			</div>
-		</li>
-		<li class="clearfix">
-			<div class="name">
-					<code><a href="class-Bootstrap.View.Helper.PanelHelper.html#$_collapsible">$_collapsible</a></code>
-
-				<span class="attributes">
-					<span class="label label-warning">protected</span>
-
-				</span>
-			</div>
-
-			<div class="property-type">
-				<code>boolean</code></div>
-
-			<div class="description">
-				Indicate if panel should be collapsible or not.
-			</div>
-		</li>
-		<li class="clearfix">
-			<div class="name">
-					<code><a href="class-Bootstrap.View.Helper.PanelHelper.html#$_current">$_current</a></code>
-
-				<span class="attributes">
-					<span class="label label-warning">protected</span>
-
-				</span>
-			</div>
-
-			<div class="property-type">
-				<code>string</code></div>
-
-			<div class="description">
-				Current part of the panel (<code>null</code>, <code>'header'</code>, <code>'body'</code>, <code>'footer'</code>).
-			</div>
-		</li>
 		<li class="clearfix">
 			<div class="name">
 					<code><a href="class-Bootstrap.View.Helper.PanelHelper.html#$_defaultConfig">$_defaultConfig</a></code>
@@ -290,108 +227,6 @@
 		</li>
 		<li class="clearfix">
 			<div class="name">
-					<code><a href="class-Bootstrap.View.Helper.PanelHelper.html#$_groupId">$_groupId</a></code>
-
-				<span class="attributes">
-					<span class="label label-warning">protected</span>
-
-				</span>
-			</div>
-
-			<div class="property-type">
-				<code>mixed</code></div>
-
-			<div class="description">
-				Panel group HTML id.
-			</div>
-		</li>
-		<li class="clearfix">
-			<div class="name">
-					<code><a href="class-Bootstrap.View.Helper.PanelHelper.html#$_groupInGroup">$_groupInGroup</a></code>
-
-				<span class="attributes">
-					<span class="label label-warning">protected</span>
-
-				</span>
-			</div>
-
-			<div class="property-type">
-				<code>boolean</code></div>
-
-			<div class="description">
-				Indicate if in group mode or not.
-			</div>
-		</li>
-		<li class="clearfix">
-			<div class="name">
-					<code><a href="class-Bootstrap.View.Helper.PanelHelper.html#$_groupPanelCount">$_groupPanelCount</a></code>
-
-				<span class="attributes">
-					<span class="label label-warning">protected</span>
-
-				</span>
-			</div>
-
-			<div class="property-type">
-				<code>integer</code></div>
-
-			<div class="description">
-				Panel counter inside a group (count the number of panels in a group).
-			</div>
-		</li>
-		<li class="clearfix">
-			<div class="name">
-					<code><a href="class-Bootstrap.View.Helper.PanelHelper.html#$_groupPanelOpen">$_groupPanelOpen</a></code>
-
-				<span class="attributes">
-					<span class="label label-warning">protected</span>
-
-				</span>
-			</div>
-
-			<div class="property-type">
-				<code>mixed</code></div>
-
-			<div class="description">
-				Panel to open inside a group.
-			</div>
-		</li>
-		<li class="clearfix">
-			<div class="name">
-					<code><a href="class-Bootstrap.View.Helper.PanelHelper.html#$_headId">$_headId</a></code>
-
-				<span class="attributes">
-					<span class="label label-warning">protected</span>
-
-				</span>
-			</div>
-
-			<div class="property-type">
-				<code>string</code></div>
-
-			<div class="description">
-				Header HTML id (for collapsible panel).
-			</div>
-		</li>
-		<li class="clearfix">
-			<div class="name">
-					<code><a href="class-Bootstrap.View.Helper.PanelHelper.html#$_lastPanelClosed">$_lastPanelClosed</a></code>
-
-				<span class="attributes">
-					<span class="label label-warning">protected</span>
-
-				</span>
-			</div>
-
-			<div class="property-type">
-				<code>boolean</code></div>
-
-			<div class="description">
-				Indicate if the last panel was closed (in a group).
-			</div>
-		</li>
-		<li class="clearfix">
-			<div class="name">
 					<code><a href="class-Bootstrap.View.Helper.PanelHelper.html#$_panelCount">$_panelCount</a></code>
 
 				<span class="attributes">
@@ -405,6 +240,23 @@
 
 			<div class="description">
 				Panel counter (for collapsible groups).
+			</div>
+		</li>
+		<li class="clearfix">
+			<div class="name">
+					<code><a href="class-Bootstrap.View.Helper.PanelHelper.html#$_states">$_states</a></code>
+
+				<span class="attributes">
+					<span class="label label-warning">protected</span>
+
+				</span>
+			</div>
+
+			<div class="property-type">
+				<code><code><a href="class-Bootstrap.Utility.StackedStates.html">Bootstrap\Utility\StackedStates</a></code></code></div>
+
+			<div class="description">
+				States of the panel helper (contains states of type 'group' and 'panel').
 			</div>
 		</li>
 		<li class="clearfix">
@@ -469,6 +321,18 @@
 	<div class="section">
 		<h2>Method Summary</h2>
 		<ul class="member-summary">
+		<li class="clearfix">
+			<h3 class="method-name">
+					<a href="class-Bootstrap.View.Helper.PanelHelper.html#___construct">__construct()</a>
+
+
+<span class="label label-success">public</span></span>
+
+			</h3>
+			<div class="description detailed">
+				
+			</div>
+		</li>
 		<li class="clearfix">
 			<h3 class="method-name">
 					<a href="class-Bootstrap.View.Helper.PanelHelper.html#__cleanCurrent">_cleanCurrent()</a>
@@ -622,10 +486,34 @@ footer to the panel.</p>
 	<div class="section">
 		<h2>Method Detail</h2>
 		<div class="method-detail">
+				<a id="___construct"></a>
+		<a id="method-Bootstrap\View\Helper\PanelHelper__construct"></a>
+		<h3 class="method-name">
+<a href="source-class-Bootstrap.View.Helper.PanelHelper.html#96-114" title="Go to source code">__construct()</a>
+
+<span class="label label-success">public</span></span>
+
+			<a href="#___construct" class="permalink" title="Permalink to this method">¶</a>
+		</h3>
+		<pre class="language-php method-signature">
+<code>__construct($View, $config = [])</code></pre>
+
+		<div class="description detailed">
+			
+
+
+
+
+
+
+
+		</div>
+		</div>
+		<div class="method-detail">
 				<a id="__cleanCurrent"></a>
 		<a id="method-Bootstrap\View\Helper\PanelHelper_cleanCurrent"></a>
 		<h3 class="method-name">
-<a href="source-class-Bootstrap.View.Helper.PanelHelper.html#345-365" title="Go to source code">_cleanCurrent()</a>
+<a href="source-class-Bootstrap.View.Helper.PanelHelper.html#309-333" title="Go to source code">_cleanCurrent()</a>
 
 <span class="label label-warning">protected</span></span>
 
@@ -653,7 +541,7 @@ footer to the panel.</p>
 				<a id="__createBody"></a>
 		<a id="method-Bootstrap\View\Helper\PanelHelper_createBody"></a>
 		<h3 class="method-name">
-<a href="source-class-Bootstrap.View.Helper.PanelHelper.html#446-487" title="Go to source code">_createBody()</a>
+<a href="source-class-Bootstrap.View.Helper.PanelHelper.html#412-453" title="Go to source code">_createBody()</a>
 
 <span class="label label-warning">protected</span></span>
 
@@ -702,7 +590,7 @@ body.</p><br>
 				<a id="__createFooter"></a>
 		<a id="method-Bootstrap\View\Helper\PanelHelper_createFooter"></a>
 		<h3 class="method-name">
-<a href="source-class-Bootstrap.View.Helper.PanelHelper.html#489-518" title="Go to source code">_createFooter()</a>
+<a href="source-class-Bootstrap.View.Helper.PanelHelper.html#455-484" title="Go to source code">_createFooter()</a>
 
 <span class="label label-warning">protected</span></span>
 
@@ -751,7 +639,7 @@ footer.</p><br>
 				<a id="__createHeader"></a>
 		<a id="method-Bootstrap\View\Helper\PanelHelper_createHeader"></a>
 		<h3 class="method-name">
-<a href="source-class-Bootstrap.View.Helper.PanelHelper.html#378-444" title="Go to source code">_createHeader()</a>
+<a href="source-class-Bootstrap.View.Helper.PanelHelper.html#344-410" title="Go to source code">_createHeader()</a>
 
 <span class="label label-warning">protected</span></span>
 
@@ -805,7 +693,7 @@ header.</p><br>
 				<a id="__isOpen"></a>
 		<a id="method-Bootstrap\View\Helper\PanelHelper_isOpen"></a>
 		<h3 class="method-name">
-<a href="source-class-Bootstrap.View.Helper.PanelHelper.html#367-376" title="Go to source code">_isOpen()</a>
+<a href="source-class-Bootstrap.View.Helper.PanelHelper.html#335-342" title="Go to source code">_isOpen()</a>
 
 <span class="label label-warning">protected</span></span>
 
@@ -833,7 +721,7 @@ header.</p><br>
 				<a id="_body"></a>
 		<a id="method-Bootstrap\View\Helper\PanelHelperbody"></a>
 		<h3 class="method-name">
-<a href="source-class-Bootstrap.View.Helper.PanelHelper.html#578-619" title="Go to source code">body()</a>
+<a href="source-class-Bootstrap.View.Helper.PanelHelper.html#544-585" title="Go to source code">body()</a>
 
 <span class="label label-success">public</span></span>
 
@@ -897,7 +785,7 @@ a panel body.</p>
 				<a id="_create"></a>
 		<a id="method-Bootstrap\View\Helper\PanelHelpercreate"></a>
 		<h3 class="method-name">
-<a href="source-class-Bootstrap.View.Helper.PanelHelper.html#217-316" title="Go to source code">create()</a>
+<a href="source-class-Bootstrap.View.Helper.PanelHelper.html#168-279" title="Go to source code">create()</a>
 
 <span class="label label-success">public</span></span>
 
@@ -973,7 +861,7 @@ panel <code>&lt;div&gt;</code>.</li>
 				<a id="_end"></a>
 		<a id="method-Bootstrap\View\Helper\PanelHelperend"></a>
 		<h3 class="method-name">
-<a href="source-class-Bootstrap.View.Helper.PanelHelper.html#318-343" title="Go to source code">end()</a>
+<a href="source-class-Bootstrap.View.Helper.PanelHelper.html#281-307" title="Go to source code">end()</a>
 
 <span class="label label-success">public</span></span>
 
@@ -1020,7 +908,7 @@ footer using <code>$content</code> and <code>$options</code>.</p>
 				<a id="_endGroup"></a>
 		<a id="method-Bootstrap\View\Helper\PanelHelperendGroup"></a>
 		<h3 class="method-name">
-<a href="source-class-Bootstrap.View.Helper.PanelHelper.html#198-215" title="Go to source code">endGroup()</a>
+<a href="source-class-Bootstrap.View.Helper.PanelHelper.html#153-166" title="Go to source code">endGroup()</a>
 
 <span class="label label-success">public</span></span>
 
@@ -1048,7 +936,7 @@ footer using <code>$content</code> and <code>$options</code>.</p>
 				<a id="_footer"></a>
 		<a id="method-Bootstrap\View\Helper\PanelHelperfooter"></a>
 		<h3 class="method-name">
-<a href="source-class-Bootstrap.View.Helper.PanelHelper.html#621-662" title="Go to source code">footer()</a>
+<a href="source-class-Bootstrap.View.Helper.PanelHelper.html#587-628" title="Go to source code">footer()</a>
 
 <span class="label label-success">public</span></span>
 
@@ -1112,7 +1000,7 @@ footer.</p><br>
 				<a id="_header"></a>
 		<a id="method-Bootstrap\View\Helper\PanelHelperheader"></a>
 		<h3 class="method-name">
-<a href="source-class-Bootstrap.View.Helper.PanelHelper.html#520-576" title="Go to source code">header()</a>
+<a href="source-class-Bootstrap.View.Helper.PanelHelper.html#486-542" title="Go to source code">header()</a>
 
 <span class="label label-success">public</span></span>
 
@@ -1183,7 +1071,7 @@ header.</p><br>
 				<a id="_startGroup"></a>
 		<a id="method-Bootstrap\View\Helper\PanelHelperstartGroup"></a>
 		<h3 class="method-name">
-<a href="source-class-Bootstrap.View.Helper.PanelHelper.html#158-196" title="Go to source code">startGroup()</a>
+<a href="source-class-Bootstrap.View.Helper.PanelHelper.html#115-151" title="Go to source code">startGroup()</a>
 
 <span class="label label-success">public</span></span>
 
@@ -1365,7 +1253,7 @@ initial options).</p><br>
 				<a id="__easyIcon"></a>
 		<a id="method-Bootstrap\View\Helper\PanelHelper_easyIcon"></a>
 		<h3 class="method-name">
-<a href="source-class-Bootstrap.View.Helper.PanelHelper.html#63-93" title="Go to source code">_easyIcon()</a>
+<a href="source-class-Bootstrap.View.Helper.PanelHelper.html#74-104" title="Go to source code">_easyIcon()</a>
 
 <span class="label label-warning">protected</span></span>
 
@@ -1419,7 +1307,7 @@ will be applied.</p></dd>
 				<a id="__makeIcon"></a>
 		<a id="method-Bootstrap\View\Helper\PanelHelper_makeIcon"></a>
 		<h3 class="method-name">
-<a href="source-class-Bootstrap.View.Helper.PanelHelper.html#30-61" title="Go to source code">_makeIcon()</a>
+<a href="source-class-Bootstrap.View.Helper.PanelHelper.html#30-72" title="Go to source code">_makeIcon()</a>
 
 <span class="label label-warning">protected</span></span>
 
@@ -1475,98 +1363,10 @@ view is not BootstrapHtmlHelper.</p>
 	<div class="section">
 		<h2>Properties detail</h2>
 	<div class="property-detail">
-		<a id="$_autoCloseOnCreate"></a>
-
-		<h3 class="property-name">
-				<a href="source-class-Bootstrap.View.Helper.PanelHelper.html#144-149" title="Go to source code"><var>$_autoCloseOnCreate</var></a>
-				<a href="#$_autoCloseOnCreate" class="permalink" title="Permalink to this property">¶</a>
-		</h3>
-
-		<div class="attributes">
-				<span class="label label-warning">protected</span>
-				boolean
-		</div>
-
-		<div class="description detailed">
-			<p>Determine if previous panel should be automatically closed when calling <code>create()</code>.</p>
-
-
-			<div>
-				<pre class="language-php"><code>false</code></pre>
-			</div>
-		</div>
-	</div>
-	<div class="property-detail">
-		<a id="$_bodyId"></a>
-
-		<h3 class="property-name">
-				<a href="source-class-Bootstrap.View.Helper.PanelHelper.html#87-92" title="Go to source code"><var>$_bodyId</var></a>
-				<a href="#$_bodyId" class="permalink" title="Permalink to this property">¶</a>
-		</h3>
-
-		<div class="attributes">
-				<span class="label label-warning">protected</span>
-				string
-		</div>
-
-		<div class="description detailed">
-			<p>Body HTML id (for collapsible panel).</p>
-
-
-			<div>
-				<pre class="language-php"><code>null</code></pre>
-			</div>
-		</div>
-	</div>
-	<div class="property-detail">
-		<a id="$_collapsible"></a>
-
-		<h3 class="property-name">
-				<a href="source-class-Bootstrap.View.Helper.PanelHelper.html#151-156" title="Go to source code"><var>$_collapsible</var></a>
-				<a href="#$_collapsible" class="permalink" title="Permalink to this property">¶</a>
-		</h3>
-
-		<div class="attributes">
-				<span class="label label-warning">protected</span>
-				boolean
-		</div>
-
-		<div class="description detailed">
-			<p>Indicate if panel should be collapsible or not.</p>
-
-
-			<div>
-				<pre class="language-php"><code>false</code></pre>
-			</div>
-		</div>
-	</div>
-	<div class="property-detail">
-		<a id="$_current"></a>
-
-		<h3 class="property-name">
-				<a href="source-class-Bootstrap.View.Helper.PanelHelper.html#73-78" title="Go to source code"><var>$_current</var></a>
-				<a href="#$_current" class="permalink" title="Permalink to this property">¶</a>
-		</h3>
-
-		<div class="attributes">
-				<span class="label label-warning">protected</span>
-				string
-		</div>
-
-		<div class="description detailed">
-			<p>Current part of the panel (<code>null</code>, <code>'header'</code>, <code>'body'</code>, <code>'footer'</code>).</p>
-
-
-			<div>
-				<pre class="language-php"><code>NULL</code></pre>
-			</div>
-		</div>
-	</div>
-	<div class="property-detail">
 		<a id="$_defaultConfig"></a>
 
 		<h3 class="property-name">
-				<a href="source-class-Bootstrap.View.Helper.PanelHelper.html#42-71" title="Go to source code"><var>$_defaultConfig</var></a>
+				<a href="source-class-Bootstrap.View.Helper.PanelHelper.html#44-73" title="Go to source code"><var>$_defaultConfig</var></a>
 				<a href="#$_defaultConfig" class="permalink" title="Permalink to this property">¶</a>
 		</h3>
 
@@ -1593,12 +1393,12 @@ view is not BootstrapHtmlHelper.</p>
         'headerStart' =&gt; '&lt;div class="panel-heading{{attrs.class}}"{{attrs}}&gt;',
         'headerCollapsibleStart' =&gt; '&lt;div class="panel-heading{{attrs.class}}" role="tab"{{attrs}}&gt;',
         'headerTitle' =&gt; '&lt;h4 class="panel-title{{attrs.class}}"{{attrs}}&gt;{{content}}&lt;/h4&gt;',
-        'headerCollapsibleLink' =&gt; 
+        'headerCollapsibleLink' =&gt;
 '&lt;a role="button" data-toggle="collapse" href="#{{target}}" aria-expanded="{{expanded}}" aria-controls="{{target}}"{{attrs}}&gt;{{content}}&lt;/a&gt;',
         'headerEnd' =&gt; '&lt;/div&gt;',
         'bodyStart' =&gt; '&lt;div class="panel-body{{attrs.class}}"{{attrs}}&gt;',
         'bodyEnd' =&gt; '&lt;/div&gt;',
-        'bodyCollapsibleStart' =&gt; 
+        'bodyCollapsibleStart' =&gt;
             '&lt;div class="panel-collapse collapse{{attrs.class}}" role="tabpanel" aria-labelledby="{{headId}}"{{attrs}}&gt;{{bodyStart}}',
         'bodyCollapsibleEnd' =&gt; '{{bodyEnd}}&lt;/div&gt;',
         'footerStart' =&gt; '&lt;div class="panel-footer{{attrs.class}}"{{attrs}}&gt;',
@@ -1614,7 +1414,7 @@ view is not BootstrapHtmlHelper.</p>
 		<a id="$_groupCount"></a>
 
 		<h3 class="property-name">
-				<a href="source-class-Bootstrap.View.Helper.PanelHelper.html#101-106" title="Go to source code"><var>$_groupCount</var></a>
+				<a href="source-class-Bootstrap.View.Helper.PanelHelper.html#89-94" title="Go to source code"><var>$_groupCount</var></a>
 				<a href="#$_groupCount" class="permalink" title="Permalink to this property">¶</a>
 		</h3>
 
@@ -1630,139 +1430,10 @@ view is not BootstrapHtmlHelper.</p>
 		</div>
 	</div>
 	<div class="property-detail">
-		<a id="$_groupId"></a>
-
-		<h3 class="property-name">
-				<a href="source-class-Bootstrap.View.Helper.PanelHelper.html#108-113" title="Go to source code"><var>$_groupId</var></a>
-				<a href="#$_groupId" class="permalink" title="Permalink to this property">¶</a>
-		</h3>
-
-		<div class="attributes">
-				<span class="label label-warning">protected</span>
-				mixed
-		</div>
-
-		<div class="description detailed">
-			<p>Panel group HTML id.</p>
-
-
-			<div>
-				<pre class="language-php"><code>false</code></pre>
-			</div>
-		</div>
-	</div>
-	<div class="property-detail">
-		<a id="$_groupInGroup"></a>
-
-		<h3 class="property-name">
-				<a href="source-class-Bootstrap.View.Helper.PanelHelper.html#130-135" title="Go to source code"><var>$_groupInGroup</var></a>
-				<a href="#$_groupInGroup" class="permalink" title="Permalink to this property">¶</a>
-		</h3>
-
-		<div class="attributes">
-				<span class="label label-warning">protected</span>
-				boolean
-		</div>
-
-		<div class="description detailed">
-			<p>Indicate if in group mode or not.</p>
-
-
-			<div>
-				<pre class="language-php"><code>false</code></pre>
-			</div>
-		</div>
-	</div>
-	<div class="property-detail">
-		<a id="$_groupPanelCount"></a>
-
-		<h3 class="property-name">
-				<a href="source-class-Bootstrap.View.Helper.PanelHelper.html#115-120" title="Go to source code"><var>$_groupPanelCount</var></a>
-				<a href="#$_groupPanelCount" class="permalink" title="Permalink to this property">¶</a>
-		</h3>
-
-		<div class="attributes">
-				<span class="label label-warning">protected</span>
-				integer
-		</div>
-
-		<div class="description detailed">
-			<p>Panel counter inside a group (count the number of panels in a group).</p>
-
-
-		</div>
-	</div>
-	<div class="property-detail">
-		<a id="$_groupPanelOpen"></a>
-
-		<h3 class="property-name">
-				<a href="source-class-Bootstrap.View.Helper.PanelHelper.html#122-127" title="Go to source code"><var>$_groupPanelOpen</var></a>
-				<a href="#$_groupPanelOpen" class="permalink" title="Permalink to this property">¶</a>
-		</h3>
-
-		<div class="attributes">
-				<span class="label label-warning">protected</span>
-				mixed
-		</div>
-
-		<div class="description detailed">
-			<p>Panel to open inside a group.</p>
-
-
-			<div>
-				<pre class="language-php"><code>false</code></pre>
-			</div>
-		</div>
-	</div>
-	<div class="property-detail">
-		<a id="$_headId"></a>
-
-		<h3 class="property-name">
-				<a href="source-class-Bootstrap.View.Helper.PanelHelper.html#94-99" title="Go to source code"><var>$_headId</var></a>
-				<a href="#$_headId" class="permalink" title="Permalink to this property">¶</a>
-		</h3>
-
-		<div class="attributes">
-				<span class="label label-warning">protected</span>
-				string
-		</div>
-
-		<div class="description detailed">
-			<p>Header HTML id (for collapsible panel).</p>
-
-
-			<div>
-				<pre class="language-php"><code>null</code></pre>
-			</div>
-		</div>
-	</div>
-	<div class="property-detail">
-		<a id="$_lastPanelClosed"></a>
-
-		<h3 class="property-name">
-				<a href="source-class-Bootstrap.View.Helper.PanelHelper.html#137-142" title="Go to source code"><var>$_lastPanelClosed</var></a>
-				<a href="#$_lastPanelClosed" class="permalink" title="Permalink to this property">¶</a>
-		</h3>
-
-		<div class="attributes">
-				<span class="label label-warning">protected</span>
-				boolean
-		</div>
-
-		<div class="description detailed">
-			<p>Indicate if the last panel was closed (in a group).</p>
-
-
-			<div>
-				<pre class="language-php"><code>true</code></pre>
-			</div>
-		</div>
-	</div>
-	<div class="property-detail">
 		<a id="$_panelCount"></a>
 
 		<h3 class="property-name">
-				<a href="source-class-Bootstrap.View.Helper.PanelHelper.html#80-85" title="Go to source code"><var>$_panelCount</var></a>
+				<a href="source-class-Bootstrap.View.Helper.PanelHelper.html#82-87" title="Go to source code"><var>$_panelCount</var></a>
 				<a href="#$_panelCount" class="permalink" title="Permalink to this property">¶</a>
 		</h3>
 
@@ -1778,10 +1449,29 @@ view is not BootstrapHtmlHelper.</p>
 		</div>
 	</div>
 	<div class="property-detail">
+		<a id="$_states"></a>
+
+		<h3 class="property-name">
+				<a href="source-class-Bootstrap.View.Helper.PanelHelper.html#75-80" title="Go to source code"><var>$_states</var></a>
+				<a href="#$_states" class="permalink" title="Permalink to this property">¶</a>
+		</h3>
+
+		<div class="attributes">
+				<span class="label label-warning">protected</span>
+				<code><a href="class-Bootstrap.Utility.StackedStates.html">Bootstrap\Utility\StackedStates</a></code>
+		</div>
+
+		<div class="description detailed">
+			<p>States of the panel helper (contains states of type 'group' and 'panel').</p>
+
+
+		</div>
+	</div>
+	<div class="property-detail">
 		<a id="$helpers"></a>
 
 		<h3 class="property-name">
-				<a href="source-class-Bootstrap.View.Helper.PanelHelper.html#33-40" title="Go to source code"><var>$helpers</var></a>
+				<a href="source-class-Bootstrap.View.Helper.PanelHelper.html#35-42" title="Go to source code"><var>$helpers</var></a>
 				<a href="#$helpers" class="permalink" title="Permalink to this property">¶</a>
 		</h3>
 
@@ -1809,7 +1499,7 @@ view is not BootstrapHtmlHelper.</p>
 		<a id="m$Html"></a>
 
 		<h3 class="property-name">
-				<a href="source-class-Bootstrap.View.Helper.PanelHelper.html#25" title="Go to source code"><var>$Html</var></a>
+				<a href="source-class-Bootstrap.View.Helper.PanelHelper.html#27" title="Go to source code"><var>$Html</var></a>
 				<a href="#m$Html" class="permalink" title="Permalink to this property">¶</a>
 		</h3>
 
@@ -1835,7 +1525,7 @@ view is not BootstrapHtmlHelper.</p>
 	<footer>
 		<div class="container">
 			<div class="col-md-12">
-				<p>&copy; 2017, Mikaël Capelle (@Holt59)
+				<p>&copy; 2018, Mikaël Capelle (@Holt59)
 				- Designed and built by <a href="https://github.com/Holt59" target="_blank">Holt59</a> &amp;
 				<a href="https://github.com/Holt59/cakephp3-bootstrap-helpers/graphs/contributors" target="_blank">contributors</a>.</p>
 				<p>Code licensed under <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, Version 2.0</a>.</p>

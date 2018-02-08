@@ -6,13 +6,13 @@
 
 	<title>Class Bootstrap\View\Helper\PaginatorHelper | CakePHP 3 Bootstrap Helpers</title>
 
-	<link rel="stylesheet" href="resources/bootstrap.min.css?071b3c2a8dd3bf21f24cec7c6955fbf9beff6181">
+	<link rel="stylesheet" href="resources/bootstrap.min.css?f3e7fec0be1260a5489a2d9311f6ac812ec0b79a">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
 		integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">
-	<link rel="stylesheet" href="resources/prism.css?e1a34f60039ca474453ea496a4887cf6f73c7e22">
+	<link rel="stylesheet" href="resources/prism.css?d282f45ec4478ce0f395830d44047fac7ea7a842">
 	<link rel="stylesheet" href="resources/custom-prism.css?a178cd22915f6b0ba261d3cc7edc719b234de9c1">
-	<link rel="stylesheet" href="resources/style.css?4f8c93c97a8296200ebbc4320e4d19208862e348">
+	<link rel="stylesheet" href="resources/style.css?ce538030ed7ee67e6085857bb8fac62be623aa17">
 
 </head>
 
@@ -38,11 +38,12 @@
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">The helpers <b class="caret"></b></a>
 						<ul class="dropdown-menu">
-<li> <a href="https://holt59.github.io/cakephp3-bootstrap-helpers/form-helper/basics/">Form Helper</a> </li>
+<!-- helpers --> <li> <a href="https://holt59.github.io/cakephp3-bootstrap-helpers/form-helper/basics/">Form Helper</a> </li>
 <li> <a href="https://holt59.github.io/cakephp3-bootstrap-helpers/html-helper/icons/">Html Helper</a> </li>
 <li> <a href="https://holt59.github.io/cakephp3-bootstrap-helpers/modal-helper/basics/">Modal Helper</a> </li>
 <li> <a href="https://holt59.github.io/cakephp3-bootstrap-helpers/navbar-helper/basics/">Navbar Helper</a> </li>
 <li> <a href="https://holt59.github.io/cakephp3-bootstrap-helpers/panel-helper/basics/">Panel Helper</a> </li>
+</ul>
 						</ul>
 					</li>
 					<li class="active"><a href="https://holt59.github.io/cakephp3-bootstrap-helpers/api/">API</a></li>
@@ -83,6 +84,10 @@
 									Bootstrap<span></span>
 								</a>
 									<ul>
+							<li>
+								<a href="namespace-Bootstrap.Utility.html">
+									Utility								</a>
+									</li>
 							<li class="active">
 								<a href="namespace-Bootstrap.View.html">
 									View<span></span>
@@ -176,7 +181,7 @@
 
 				<b>Link:</b>
 				<a href="http://book.cakephp.org/3.0/en/views/helpers/paginator.html">http://book.cakephp.org/3.0/en/views/helpers/paginator.html</a><br>
-		<b>Location:</b> <a href="source-class-Bootstrap.View.Helper.PaginatorHelper.html#17-350" title="Go to source code">View/Helper/PaginatorHelper.php</a><br>
+		<b>Location:</b> <a href="source-class-Bootstrap.View.Helper.PaginatorHelper.html#17-377" title="Go to source code">View/Helper/PaginatorHelper.php</a><br>
 	</div>
 
 
@@ -300,6 +305,18 @@
 		<ul class="member-summary">
 		<li class="clearfix">
 			<h3 class="method-name">
+					<a href="class-Bootstrap.View.Helper.PaginatorHelper.html#__getNumbersStartAndEnd">_getNumbersStartAndEnd()</a>
+
+
+<span class="label label-warning">protected</span></span>
+
+			</h3>
+			<div class="description detailed">
+				Calculates the start and end for the pagination numbers.
+			</div>
+		</li>
+		<li class="clearfix">
+			<h3 class="method-name">
 					<a href="class-Bootstrap.View.Helper.PaginatorHelper.html#_first">first()</a>
 
 
@@ -367,10 +384,51 @@ many numbers to show on each side of the current page (default: 8).</p>
 	<div class="section">
 		<h2>Method Detail</h2>
 		<div class="method-detail">
+				<a id="__getNumbersStartAndEnd"></a>
+		<a id="method-Bootstrap\View\Helper\PaginatorHelper_getNumbersStartAndEnd"></a>
+		<h3 class="method-name">
+<a href="source-class-Bootstrap.View.Helper.PaginatorHelper.html#82-113" title="Go to source code">_getNumbersStartAndEnd()</a>
+
+<span class="label label-warning">protected</span></span>
+
+			<a href="#__getNumbersStartAndEnd" class="permalink" title="Permalink to this method">¶</a>
+		</h3>
+		<pre class="language-php method-signature">
+<code>_getNumbersStartAndEnd($params, $options)</code></pre>
+
+		<div class="description detailed">
+			<p>Calculates the start and end for the pagination numbers.</p>
+
+
+				<h6>Parameters</h6>
+				<div class="parameter-list list">
+				<dl>
+					<dt>
+						<code class="language-php ">array $params</code>
+					</dt>
+					<dd>Params from the numbers() method.</dd>
+					<dt>
+						<code class="language-php ">array $options</code>
+					</dt>
+					<dd>Options from the numbers() method.</dd>
+				</dl>
+				</div>
+
+				<h6>Returns</h6>
+				<div class="list">
+					array<br>An array with the start and end numbers.<br>
+				</div>
+
+
+
+
+		</div>
+		</div>
+		<div class="method-detail">
 				<a id="_first"></a>
 		<a id="method-Bootstrap\View\Helper\PaginatorHelperfirst"></a>
 		<h3 class="method-name">
-<a href="source-class-Bootstrap.View.Helper.PaginatorHelper.html#280-313" title="Go to source code">first()</a>
+<a href="source-class-Bootstrap.View.Helper.PaginatorHelper.html#307-340" title="Go to source code">first()</a>
 
 <span class="label label-success">public</span></span>
 
@@ -436,7 +494,7 @@ of page links you want at the beginning of the range.</p></dd>
 				<a id="_last"></a>
 		<a id="method-Bootstrap\View\Helper\PaginatorHelperlast"></a>
 		<h3 class="method-name">
-<a href="source-class-Bootstrap.View.Helper.PaginatorHelper.html#315-348" title="Go to source code">last()</a>
+<a href="source-class-Bootstrap.View.Helper.PaginatorHelper.html#342-375" title="Go to source code">last()</a>
 
 <span class="label label-success">public</span></span>
 
@@ -502,7 +560,7 @@ page numbers.</p></dd>
 				<a id="_next"></a>
 		<a id="method-Bootstrap\View\Helper\PaginatorHelpernext"></a>
 		<h3 class="method-name">
-<a href="source-class-Bootstrap.View.Helper.PaginatorHelper.html#254-278" title="Go to source code">next()</a>
+<a href="source-class-Bootstrap.View.Helper.PaginatorHelper.html#281-305" title="Go to source code">next()</a>
 
 <span class="label label-success">public</span></span>
 
@@ -557,7 +615,7 @@ page numbers.</p></dd>
 				<a id="_numbers"></a>
 		<a id="method-Bootstrap\View\Helper\PaginatorHelpernumbers"></a>
 		<h3 class="method-name">
-<a href="source-class-Bootstrap.View.Helper.PaginatorHelper.html#82-226" title="Go to source code">numbers()</a>
+<a href="source-class-Bootstrap.View.Helper.PaginatorHelper.html#115-253" title="Go to source code">numbers()</a>
 
 <span class="label label-success">public</span></span>
 
@@ -632,7 +690,7 @@ inserted after the first and last link sets.</p>
 				<a id="_prev"></a>
 		<a id="method-Bootstrap\View\Helper\PaginatorHelperprev"></a>
 		<h3 class="method-name">
-<a href="source-class-Bootstrap.View.Helper.PaginatorHelper.html#228-252" title="Go to source code">prev()</a>
+<a href="source-class-Bootstrap.View.Helper.PaginatorHelper.html#255-279" title="Go to source code">prev()</a>
 
 <span class="label label-success">public</span></span>
 
@@ -817,7 +875,7 @@ initial options).</p><br>
 				<a id="__easyIcon"></a>
 		<a id="method-Bootstrap\View\Helper\PaginatorHelper_easyIcon"></a>
 		<h3 class="method-name">
-<a href="source-class-Bootstrap.View.Helper.PaginatorHelper.html#63-93" title="Go to source code">_easyIcon()</a>
+<a href="source-class-Bootstrap.View.Helper.PaginatorHelper.html#74-104" title="Go to source code">_easyIcon()</a>
 
 <span class="label label-warning">protected</span></span>
 
@@ -871,7 +929,7 @@ will be applied.</p></dd>
 				<a id="__makeIcon"></a>
 		<a id="method-Bootstrap\View\Helper\PaginatorHelper_makeIcon"></a>
 		<h3 class="method-name">
-<a href="source-class-Bootstrap.View.Helper.PaginatorHelper.html#30-61" title="Go to source code">_makeIcon()</a>
+<a href="source-class-Bootstrap.View.Helper.PaginatorHelper.html#30-72" title="Go to source code">_makeIcon()</a>
 
 <span class="label label-warning">protected</span></span>
 
@@ -972,7 +1030,7 @@ view is not BootstrapHtmlHelper.</p>
         'last' =&gt; '&lt;li&gt;&lt;a href="{{url}}"&gt;{{text}}&lt;/a&gt;&lt;/li&gt;',
         'number' =&gt; '&lt;li&gt;&lt;a href="{{url}}"&gt;{{text}}&lt;/a&gt;&lt;/li&gt;',
         'current' =&gt; '&lt;li class="active"&gt;&lt;a href="{{url}}"&gt;{{text}}&lt;/a&gt;&lt;/li&gt;',
-        'ellipsis' =&gt; '&lt;li class="ellipsis disabled"&gt;&lt;a&gt;...&lt;/a&gt;&lt;/li&gt;',
+        'ellipsis' =&gt; '&lt;li class="ellipsis disabled"&gt;&lt;a&gt;&amp;hellip;&lt;/a&gt;&lt;/li&gt;',
         'sort' =&gt; '&lt;a href="{{url}}"&gt;{{text}}&lt;/a&gt;',
         'sortAsc' =&gt; '&lt;a class="asc" href="{{url}}"&gt;{{text}}&lt;/a&gt;',
         'sortDesc' =&gt; '&lt;a class="desc" href="{{url}}"&gt;{{text}}&lt;/a&gt;',
@@ -1080,7 +1138,7 @@ view is not BootstrapHtmlHelper.</p>
 	<footer>
 		<div class="container">
 			<div class="col-md-12">
-				<p>&copy; 2017, Mikaël Capelle (@Holt59)
+				<p>&copy; 2018, Mikaël Capelle (@Holt59)
 				- Designed and built by <a href="https://github.com/Holt59" target="_blank">Holt59</a> &amp;
 				<a href="https://github.com/Holt59/cakephp3-bootstrap-helpers/graphs/contributors" target="_blank">contributors</a>.</p>
 				<p>Code licensed under <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License, Version 2.0</a>.</p>

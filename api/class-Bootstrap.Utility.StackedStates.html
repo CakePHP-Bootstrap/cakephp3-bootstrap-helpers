@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 
-	<title>Trait Bootstrap\View\Helper\UrlComparerTrait | CakePHP 3 Bootstrap Helpers</title>
+	<title>Class Bootstrap\Utility\StackedStates | CakePHP 3 Bootstrap Helpers</title>
 
 	<link rel="stylesheet" href="resources/bootstrap.min.css?f3e7fec0be1260a5489a2d9311f6ac812ec0b79a">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
@@ -84,16 +84,16 @@
 									Bootstrap<span></span>
 								</a>
 									<ul>
-							<li>
+							<li class="active">
 								<a href="namespace-Bootstrap.Utility.html">
 									Utility								</a>
 									</li>
-							<li class="active">
+							<li>
 								<a href="namespace-Bootstrap.View.html">
 									View<span></span>
 								</a>
 									<ul>
-							<li class="active">
+							<li>
 								<a href="namespace-Bootstrap.View.Helper.html">
 									Helper								</a>
 									</li>
@@ -109,23 +109,11 @@
 				<div id="elements">
 					<h3 class="nav-title">Classes</h3>
 					<ul class="nav-list">
-						<li><a href="class-Bootstrap.View.Helper.BreadcrumbsHelper.html">BreadcrumbsHelper</a></li>
-						<li><a href="class-Bootstrap.View.Helper.FlashHelper.html">FlashHelper</a></li>
-						<li><a href="class-Bootstrap.View.Helper.FormHelper.html">FormHelper</a></li>
-						<li><a href="class-Bootstrap.View.Helper.HtmlHelper.html">HtmlHelper</a></li>
-						<li><a href="class-Bootstrap.View.Helper.ModalHelper.html">ModalHelper</a></li>
-						<li><a href="class-Bootstrap.View.Helper.NavbarHelper.html">NavbarHelper</a></li>
-						<li><a href="class-Bootstrap.View.Helper.PaginatorHelper.html">PaginatorHelper</a></li>
-						<li><a href="class-Bootstrap.View.Helper.PanelHelper.html">PanelHelper</a></li>
+						<li><a href="class-Bootstrap.Utility.Matching.html">Matching</a></li>
+						<li class="active"><a href="class-Bootstrap.Utility.StackedStates.html">StackedStates</a></li>
 					</ul>
 
 
-					<h3 class="nav-title">Traits</h3>
-					<ul class="nav-list">
-						<li><a href="class-Bootstrap.View.Helper.ClassTrait.html">ClassTrait</a></li>
-						<li><a href="class-Bootstrap.View.Helper.EasyIconTrait.html">EasyIconTrait</a></li>
-						<li class="active"><a href="class-Bootstrap.View.Helper.UrlComparerTrait.html">UrlComparerTrait</a></li>
-					</ul>
 
 
 
@@ -135,11 +123,11 @@
 			<div class="col-md-9">
 				<div id="rightInner">
 <div id="content" class="class">
-	<h1>Trait UrlComparerTrait</h1>
+	<h1>Class StackedStates</h1>
 
 
 	<div class="description">
-	<p>A trait that provides a method to compare url.</p>
+	<p>A class that providing stacking states.</p>
 	</div>
 
 
@@ -148,25 +136,15 @@
 
 
 
-	<div class="section description">
-		<h4>Direct Users</h4>
-		<ul>
-			<li>
-				<a href="class-Bootstrap.View.Helper.NavbarHelper.html">
-					Bootstrap\View\Helper\NavbarHelper
-				</a>
-			</li>
-		</ul>
-	</div>
 
 
 	<div class="info">
 		
 		
-		<b>Namespace:</b> <a href="namespace-Bootstrap.html">Bootstrap</a>\<a href="namespace-Bootstrap.View.html">View</a>\<a href="namespace-Bootstrap.View.Helper.html">Helper</a><br>
+		<b>Namespace:</b> <a href="namespace-Bootstrap.html">Bootstrap</a>\<a href="namespace-Bootstrap.Utility.html">Utility</a><br>
 		
 
-		<b>Location:</b> <a href="source-class-Bootstrap.View.Helper.UrlComparerTrait.html#20-156" title="Go to source code">View/Helper/UrlComparerTrait.php</a><br>
+		<b>Location:</b> <a href="source-class-Bootstrap.Utility.StackedStates.html#18-133" title="Go to source code">Utility/StackedStates.php</a><br>
 	</div>
 
 
@@ -177,7 +155,24 @@
 		<ul class="member-summary properties">
 		<li class="clearfix">
 			<div class="name">
-					<code><a href="class-Bootstrap.View.Helper.UrlComparerTrait.html#$_parts">$_parts</a></code>
+					<code><a href="class-Bootstrap.Utility.StackedStates.html#$_defaults">$_defaults</a></code>
+
+				<span class="attributes">
+					<span class="label label-warning">protected</span>
+
+				</span>
+			</div>
+
+			<div class="property-type">
+				<code>mixed</code></div>
+
+			<div class="description">
+				Default values for a new state.
+			</div>
+		</li>
+		<li class="clearfix">
+			<div class="name">
+					<code><a href="class-Bootstrap.Utility.StackedStates.html#$_states">$_states</a></code>
 
 				<span class="attributes">
 					<span class="label label-warning">protected</span>
@@ -189,7 +184,7 @@
 				<code>array</code></div>
 
 			<div class="description">
-				Parts of the URL used for normalization.
+				Stack of states.
 			</div>
 		</li>
 		</ul>
@@ -207,88 +202,112 @@
 		<ul class="member-summary">
 		<li class="clearfix">
 			<h3 class="method-name">
-					<a href="class-Bootstrap.View.Helper.UrlComparerTrait.html#__hostname">_hostname()</a>
-
-
-<span class="label label-warning">protected</span></span>
-
-			</h3>
-			<div class="description detailed">
-				Retrieve the hostname (if any).
-			</div>
-		</li>
-		<li class="clearfix">
-			<h3 class="method-name">
-					<a href="class-Bootstrap.View.Helper.UrlComparerTrait.html#__matchHost">_matchHost()</a>
-
-
-<span class="label label-warning">protected</span></span>
-
-			</h3>
-			<div class="description detailed">
-				Checks if the given URL components match the current host.
-			</div>
-		</li>
-		<li class="clearfix">
-			<h3 class="method-name">
-					<a href="class-Bootstrap.View.Helper.UrlComparerTrait.html#__matchRelative">_matchRelative()</a>
-
-
-<span class="label label-warning">protected</span></span>
-
-			</h3>
-			<div class="description detailed">
-				<p>Checks if the given URL components match the current relative URL. This
-methods only works with full URL, and do not check the host.</p>
-			</div>
-		</li>
-		<li class="clearfix">
-			<h3 class="method-name">
-					<a href="class-Bootstrap.View.Helper.UrlComparerTrait.html#__normalize">_normalize()</a>
-
-
-<span class="label label-warning">protected</span></span>
-
-			</h3>
-			<div class="description detailed">
-				Normalize an URL.
-			</div>
-		</li>
-		<li class="clearfix">
-			<h3 class="method-name">
-					<a href="class-Bootstrap.View.Helper.UrlComparerTrait.html#__relative">_relative()</a>
-
-
-<span class="label label-warning">protected</span></span>
-
-			</h3>
-			<div class="description detailed">
-				Retrieve the relative path of the root URL from hostname.
-			</div>
-		</li>
-		<li class="clearfix">
-			<h3 class="method-name">
-					<a href="class-Bootstrap.View.Helper.UrlComparerTrait.html#__removeRelative">_removeRelative()</a>
-
-
-<span class="label label-warning">protected</span></span>
-
-			</h3>
-			<div class="description detailed">
-				Remove relative part an URL (if any).
-			</div>
-		</li>
-		<li class="clearfix">
-			<h3 class="method-name">
-					<a href="class-Bootstrap.View.Helper.UrlComparerTrait.html#_compareUrls">compareUrls()</a>
+					<a href="class-Bootstrap.Utility.StackedStates.html#___construct">__construct()</a>
 
 
 <span class="label label-success">public</span></span>
 
 			</h3>
 			<div class="description detailed">
-				<p>Check if first URL is a parent of the right URL, without regards to query
-parameters or hash.</p>
+				Construct a new StackState with the given default values.
+			</div>
+		</li>
+		<li class="clearfix">
+			<h3 class="method-name">
+					<a href="class-Bootstrap.Utility.StackedStates.html#_current">current()</a>
+
+
+<span class="label label-success">public</span></span>
+
+			</h3>
+			<div class="description detailed">
+				Return the current state.
+			</div>
+		</li>
+		<li class="clearfix">
+			<h3 class="method-name">
+					<a href="class-Bootstrap.Utility.StackedStates.html#_getValue">getValue()</a>
+
+
+<span class="label label-success">public</span></span>
+
+			</h3>
+			<div class="description detailed">
+				Get a value from the current state.
+			</div>
+		</li>
+		<li class="clearfix">
+			<h3 class="method-name">
+					<a href="class-Bootstrap.Utility.StackedStates.html#_is">is()</a>
+
+
+<span class="label label-success">public</span></span>
+
+			</h3>
+			<div class="description detailed">
+				<p>Check if the current state is of the given type. If there is no
+current state, this function returns false.</p>
+			</div>
+		</li>
+		<li class="clearfix">
+			<h3 class="method-name">
+					<a href="class-Bootstrap.Utility.StackedStates.html#_isEmpty">isEmpty()</a>
+
+
+<span class="label label-success">public</span></span>
+
+			</h3>
+			<div class="description detailed">
+				Check if the stack is empty.
+			</div>
+		</li>
+		<li class="clearfix">
+			<h3 class="method-name">
+					<a href="class-Bootstrap.Utility.StackedStates.html#_pop">pop()</a>
+
+
+<span class="label label-success">public</span></span>
+
+			</h3>
+			<div class="description detailed">
+				Pop the current state.
+			</div>
+		</li>
+		<li class="clearfix">
+			<h3 class="method-name">
+					<a href="class-Bootstrap.Utility.StackedStates.html#_push">push()</a>
+
+
+<span class="label label-success">public</span></span>
+
+			</h3>
+			<div class="description detailed">
+				<p>Push a new state, merging given values with the default
+ones.</p>
+			</div>
+		</li>
+		<li class="clearfix">
+			<h3 class="method-name">
+					<a href="class-Bootstrap.Utility.StackedStates.html#_setValue">setValue()</a>
+
+
+<span class="label label-success">public</span></span>
+
+			</h3>
+			<div class="description detailed">
+				Set a value of the current state.
+			</div>
+		</li>
+		<li class="clearfix">
+			<h3 class="method-name">
+					<a href="class-Bootstrap.Utility.StackedStates.html#_type">type()</a>
+
+
+<span class="label label-success">public</span></span>
+
+			</h3>
+			<div class="description detailed">
+				Retrieve the type of the current sate.
 			</div>
 		</li>
 		</ul>
@@ -299,249 +318,285 @@ parameters or hash.</p>
 	<div class="section">
 		<h2>Method Detail</h2>
 		<div class="method-detail">
-				<a id="__hostname"></a>
-		<a id="method-Bootstrap\View\Helper\UrlComparerTrait_hostname"></a>
+				<a id="___construct"></a>
+		<a id="method-Bootstrap\Utility\StackedStates__construct"></a>
 		<h3 class="method-name">
-<a href="source-class-Bootstrap.View.Helper.UrlComparerTrait.html#41-52" title="Go to source code">_hostname()</a>
-
-<span class="label label-warning">protected</span></span>
-
-			<a href="#__hostname" class="permalink" title="Permalink to this method">¶</a>
-		</h3>
-		<pre class="language-php method-signature">
-<code>_hostname()</code></pre>
-
-		<div class="description detailed">
-			<p>Retrieve the hostname (if any).</p>
-
-
-
-				<h6>Returns</h6>
-				<div class="list">
-					string|null<br>The hostname, or <code>null</code>.<br>
-				</div>
-
-
-
-
-		</div>
-		</div>
-		<div class="method-detail">
-				<a id="__matchHost"></a>
-		<a id="method-Bootstrap\View\Helper\UrlComparerTrait_matchHost"></a>
-		<h3 class="method-name">
-<a href="source-class-Bootstrap.View.Helper.UrlComparerTrait.html#54-64" title="Go to source code">_matchHost()</a>
-
-<span class="label label-warning">protected</span></span>
-
-			<a href="#__matchHost" class="permalink" title="Permalink to this method">¶</a>
-		</h3>
-		<pre class="language-php method-signature">
-<code>_matchHost($url)</code></pre>
-
-		<div class="description detailed">
-			<p>Checks if the given URL components match the current host.</p>
-
-
-				<h6>Parameters</h6>
-				<div class="parameter-list list">
-				<dl>
-					<dt>
-						<code class="language-php ">string $url</code>
-					</dt>
-					<dd>URL to check.</dd>
-				</dl>
-				</div>
-
-				<h6>Returns</h6>
-				<div class="list">
-					boolean<br><code>true</code> if the URL matches, <code>false</code> otherwise.<br>
-				</div>
-
-
-
-
-		</div>
-		</div>
-		<div class="method-detail">
-				<a id="__matchRelative"></a>
-		<a id="method-Bootstrap\View\Helper\UrlComparerTrait_matchRelative"></a>
-		<h3 class="method-name">
-<a href="source-class-Bootstrap.View.Helper.UrlComparerTrait.html#66-85" title="Go to source code">_matchRelative()</a>
-
-<span class="label label-warning">protected</span></span>
-
-			<a href="#__matchRelative" class="permalink" title="Permalink to this method">¶</a>
-		</h3>
-		<pre class="language-php method-signature">
-<code>_matchRelative($url)</code></pre>
-
-		<div class="description detailed">
-			<p>Checks if the given URL components match the current relative URL. This
-methods only works with full URL, and do not check the host.</p>
-
-
-				<h6>Parameters</h6>
-				<div class="parameter-list list">
-				<dl>
-					<dt>
-						<code class="language-php ">string $url</code>
-					</dt>
-					<dd>URL to check.</dd>
-				</dl>
-				</div>
-
-				<h6>Returns</h6>
-				<div class="list">
-					boolean<br><code>true</code> if the URL matches, <code>false</code> otherwise.<br>
-				</div>
-
-
-
-
-		</div>
-		</div>
-		<div class="method-detail">
-				<a id="__normalize"></a>
-		<a id="method-Bootstrap\View\Helper\UrlComparerTrait_normalize"></a>
-		<h3 class="method-name">
-<a href="source-class-Bootstrap.View.Helper.UrlComparerTrait.html#104-137" title="Go to source code">_normalize()</a>
-
-<span class="label label-warning">protected</span></span>
-
-			<a href="#__normalize" class="permalink" title="Permalink to this method">¶</a>
-		</h3>
-		<pre class="language-php method-signature">
-<code>_normalize($url, $parts = [])</code></pre>
-
-		<div class="description detailed">
-			<p>Normalize an URL.</p>
-
-
-				<h6>Parameters</h6>
-				<div class="parameter-list list">
-				<dl>
-					<dt>
-						<code class="language-php ">string $url</code>
-					</dt>
-					<dd>URL to normalize.</dd>
-					<dt>
-						<code class="language-php optional">array $parts = []</code>
-					</dt>
-					<dd>$pass Include pass parameters.</dd>
-				</dl>
-				</div>
-
-				<h6>Returns</h6>
-				<div class="list">
-					string<br>Normalized URL.<br>
-				</div>
-
-
-
-
-		</div>
-		</div>
-		<div class="method-detail">
-				<a id="__relative"></a>
-		<a id="method-Bootstrap\View\Helper\UrlComparerTrait_relative"></a>
-		<h3 class="method-name">
-<a href="source-class-Bootstrap.View.Helper.UrlComparerTrait.html#32-39" title="Go to source code">_relative()</a>
-
-<span class="label label-warning">protected</span></span>
-
-			<a href="#__relative" class="permalink" title="Permalink to this method">¶</a>
-		</h3>
-		<pre class="language-php method-signature">
-<code>_relative()</code></pre>
-
-		<div class="description detailed">
-			<p>Retrieve the relative path of the root URL from hostname.</p>
-
-
-
-				<h6>Returns</h6>
-				<div class="list">
-					string<br>The relative path.<br>
-				</div>
-
-
-
-
-		</div>
-		</div>
-		<div class="method-detail">
-				<a id="__removeRelative"></a>
-		<a id="method-Bootstrap\View\Helper\UrlComparerTrait_removeRelative"></a>
-		<h3 class="method-name">
-<a href="source-class-Bootstrap.View.Helper.UrlComparerTrait.html#87-102" title="Go to source code">_removeRelative()</a>
-
-<span class="label label-warning">protected</span></span>
-
-			<a href="#__removeRelative" class="permalink" title="Permalink to this method">¶</a>
-		</h3>
-		<pre class="language-php method-signature">
-<code>_removeRelative($url)</code></pre>
-
-		<div class="description detailed">
-			<p>Remove relative part an URL (if any).</p>
-
-
-				<h6>Parameters</h6>
-				<div class="parameter-list list">
-				<dl>
-					<dt>
-						<code class="language-php ">string $url</code>
-					</dt>
-					<dd>URL from which the relative part should be removed.</dd>
-				</dl>
-				</div>
-
-
-
-
-
-		</div>
-		</div>
-		<div class="method-detail">
-				<a id="_compareUrls"></a>
-		<a id="method-Bootstrap\View\Helper\UrlComparerTraitcompareUrls"></a>
-		<h3 class="method-name">
-<a href="source-class-Bootstrap.View.Helper.UrlComparerTrait.html#139-155" title="Go to source code">compareUrls()</a>
+<a href="source-class-Bootstrap.Utility.StackedStates.html#37-45" title="Go to source code">__construct()</a>
 
 <span class="label label-success">public</span></span>
 
-			<a href="#_compareUrls" class="permalink" title="Permalink to this method">¶</a>
+			<a href="#___construct" class="permalink" title="Permalink to this method">¶</a>
 		</h3>
 		<pre class="language-php method-signature">
-<code>compareUrls($lhs, $rhs = null, $parts = [])</code></pre>
+<code>__construct($defaults = [])</code></pre>
 
 		<div class="description detailed">
-			<p>Check if first URL is a parent of the right URL, without regards to query
-parameters or hash.</p>
+			<p>Construct a new StackState with the given default values.</p>
 
 
 				<h6>Parameters</h6>
 				<div class="parameter-list list">
 				<dl>
 					<dt>
-						<code class="language-php ">string|array $lhs</code>
+						<code class="language-php optional">mixed $defaults = []</code>
 					</dt>
-					<dd>First URL to compare.</dd>
+					<dd>Default values for the states.</dd>
+				</dl>
+				</div>
+
+
+
+
+
+		</div>
+		</div>
+		<div class="method-detail">
+				<a id="_current"></a>
+		<a id="method-Bootstrap\Utility\StackedStatescurrent"></a>
+		<h3 class="method-name">
+<a href="source-class-Bootstrap.Utility.StackedStates.html#90-97" title="Go to source code">current()</a>
+
+<span class="label label-success">public</span></span>
+
+			<a href="#_current" class="permalink" title="Permalink to this method">¶</a>
+		</h3>
+		<pre class="language-php method-signature">
+<code>current()</code></pre>
+
+		<div class="description detailed">
+			<p>Return the current state.</p>
+
+
+
+				<h6>Returns</h6>
+				<div class="list">
+					mixed<br>Current values of the state.<br>
+				</div>
+
+
+
+
+		</div>
+		</div>
+		<div class="method-detail">
+				<a id="_getValue"></a>
+		<a id="method-Bootstrap\Utility\StackedStatesgetValue"></a>
+		<h3 class="method-name">
+<a href="source-class-Bootstrap.Utility.StackedStates.html#109-118" title="Go to source code">getValue()</a>
+
+<span class="label label-success">public</span></span>
+
+			<a href="#_getValue" class="permalink" title="Permalink to this method">¶</a>
+		</h3>
+		<pre class="language-php method-signature">
+<code>getValue($name)</code></pre>
+
+		<div class="description detailed">
+			<p>Get a value from the current state.</p>
+
+
+				<h6>Parameters</h6>
+				<div class="parameter-list list">
+				<dl>
 					<dt>
-						<code class="language-php optional">string|array $rhs = null</code>
+						<code class="language-php ">mixed $name</code>
 					</dt>
-					<dd>Second URL to compare. Default is current URL (<code>Router::url()</code>).</dd>
-					<dt>
-						<code class="language-php optional"> $parts = []</code>
-					</dt>
-					<dd></dd>
+					<dd>Name of the attribute to retrieve.</dd>
 				</dl>
 				</div>
 
 				<h6>Returns</h6>
 				<div class="list">
-					boolean<br><code>true</code> if both URL match, <code>false</code> otherwise.<br>
+					mixed<br>Value retrieved from the current state.<br>
+				</div>
+
+
+
+
+		</div>
+		</div>
+		<div class="method-detail">
+				<a id="_is"></a>
+		<a id="method-Bootstrap\Utility\StackedStatesis"></a>
+		<h3 class="method-name">
+<a href="source-class-Bootstrap.Utility.StackedStates.html#120-132" title="Go to source code">is()</a>
+
+<span class="label label-success">public</span></span>
+
+			<a href="#_is" class="permalink" title="Permalink to this method">¶</a>
+		</h3>
+		<pre class="language-php method-signature">
+<code>is($type)</code></pre>
+
+		<div class="description detailed">
+			<p>Check if the current state is of the given type. If there is no
+current state, this function returns false.</p>
+
+
+
+				<h6>Returns</h6>
+				<div class="list">
+					boolean<br><p>true if the current state is of the given type,
+     false if the types do not match or if there is no current state.</p><br>
+				</div>
+
+
+
+
+		</div>
+		</div>
+		<div class="method-detail">
+				<a id="_isEmpty"></a>
+		<a id="method-Bootstrap\Utility\StackedStatesisEmpty"></a>
+		<h3 class="method-name">
+<a href="source-class-Bootstrap.Utility.StackedStates.html#47-54" title="Go to source code">isEmpty()</a>
+
+<span class="label label-success">public</span></span>
+
+			<a href="#_isEmpty" class="permalink" title="Permalink to this method">¶</a>
+		</h3>
+		<pre class="language-php method-signature">
+<code>isEmpty()</code></pre>
+
+		<div class="description detailed">
+			<p>Check if the stack is empty.</p>
+
+
+
+				<h6>Returns</h6>
+				<div class="list">
+					boolean<br>true if the stack is empty (i.e. contains no states).<br>
+				</div>
+
+
+
+
+		</div>
+		</div>
+		<div class="method-detail">
+				<a id="_pop"></a>
+		<a id="method-Bootstrap\Utility\StackedStatespop"></a>
+		<h3 class="method-name">
+<a href="source-class-Bootstrap.Utility.StackedStates.html#56-63" title="Go to source code">pop()</a>
+
+<span class="label label-success">public</span></span>
+
+			<a href="#_pop" class="permalink" title="Permalink to this method">¶</a>
+		</h3>
+		<pre class="language-php method-signature">
+<code>pop()</code></pre>
+
+		<div class="description detailed">
+			<p>Pop the current state.</p>
+
+
+
+				<h6>Returns</h6>
+				<div class="list">
+					mixed<br>An array [type, state] containing the removed state.<br>
+				</div>
+
+
+
+
+		</div>
+		</div>
+		<div class="method-detail">
+				<a id="_push"></a>
+		<a id="method-Bootstrap\Utility\StackedStatespush"></a>
+		<h3 class="method-name">
+<a href="source-class-Bootstrap.Utility.StackedStates.html#65-78" title="Go to source code">push()</a>
+
+<span class="label label-success">public</span></span>
+
+			<a href="#_push" class="permalink" title="Permalink to this method">¶</a>
+		</h3>
+		<pre class="language-php method-signature">
+<code>push($type, $state = [])</code></pre>
+
+		<div class="description detailed">
+			<p>Push a new state, merging given values with the default
+ones.</p>
+
+
+				<h6>Parameters</h6>
+				<div class="parameter-list list">
+				<dl>
+					<dt>
+						<code class="language-php ">string $type</code>
+					</dt>
+					<dd>Type of the new state.</dd>
+					<dt>
+						<code class="language-php optional">mixed $state = []</code>
+					</dt>
+					<dd>$sate New state.</dd>
+				</dl>
+				</div>
+
+
+
+
+
+		</div>
+		</div>
+		<div class="method-detail">
+				<a id="_setValue"></a>
+		<a id="method-Bootstrap\Utility\StackedStatessetValue"></a>
+		<h3 class="method-name">
+<a href="source-class-Bootstrap.Utility.StackedStates.html#99-107" title="Go to source code">setValue()</a>
+
+<span class="label label-success">public</span></span>
+
+			<a href="#_setValue" class="permalink" title="Permalink to this method">¶</a>
+		</h3>
+		<pre class="language-php method-signature">
+<code>setValue($name, $value)</code></pre>
+
+		<div class="description detailed">
+			<p>Set a value of the current state.</p>
+
+
+				<h6>Parameters</h6>
+				<div class="parameter-list list">
+				<dl>
+					<dt>
+						<code class="language-php ">mixed $name</code>
+					</dt>
+					<dd>Name of the attribute to set.</dd>
+					<dt>
+						<code class="language-php ">mixed $value</code>
+					</dt>
+					<dd>New value for the attribute.</dd>
+				</dl>
+				</div>
+
+
+
+
+
+		</div>
+		</div>
+		<div class="method-detail">
+				<a id="_type"></a>
+		<a id="method-Bootstrap\Utility\StackedStatestype"></a>
+		<h3 class="method-name">
+<a href="source-class-Bootstrap.Utility.StackedStates.html#80-87" title="Go to source code">type()</a>
+
+<span class="label label-success">public</span></span>
+
+			<a href="#_type" class="permalink" title="Permalink to this method">¶</a>
+		</h3>
+		<pre class="language-php method-signature">
+<code>type()</code></pre>
+
+		<div class="description detailed">
+			<p>Retrieve the type of the current sate.</p>
+
+
+
+				<h6>Returns</h6>
+				<div class="list">
+					string<br>Type of the current state.<br>
 				</div>
 
 
@@ -560,11 +615,33 @@ parameters or hash.</p>
 	<div class="section">
 		<h2>Properties detail</h2>
 	<div class="property-detail">
-		<a id="$_parts"></a>
+		<a id="$_defaults"></a>
 
 		<h3 class="property-name">
-				<a href="source-class-Bootstrap.View.Helper.UrlComparerTrait.html#25-30" title="Go to source code"><var>$_parts</var></a>
-				<a href="#$_parts" class="permalink" title="Permalink to this property">¶</a>
+				<a href="source-class-Bootstrap.Utility.StackedStates.html#23-28" title="Go to source code"><var>$_defaults</var></a>
+				<a href="#$_defaults" class="permalink" title="Permalink to this property">¶</a>
+		</h3>
+
+		<div class="attributes">
+				<span class="label label-warning">protected</span>
+				mixed
+		</div>
+
+		<div class="description detailed">
+			<p>Default values for a new state.</p>
+
+
+			<div>
+				<pre class="language-php"><code>[]</code></pre>
+			</div>
+		</div>
+	</div>
+	<div class="property-detail">
+		<a id="$_states"></a>
+
+		<h3 class="property-name">
+				<a href="source-class-Bootstrap.Utility.StackedStates.html#30-35" title="Go to source code"><var>$_states</var></a>
+				<a href="#$_states" class="permalink" title="Permalink to this property">¶</a>
 		</h3>
 
 		<div class="attributes">
@@ -573,11 +650,11 @@ parameters or hash.</p>
 		</div>
 
 		<div class="description detailed">
-			<p>Parts of the URL used for normalization.</p>
+			<p>Stack of states.</p>
 
 
 			<div>
-				<pre class="language-php"><code>['plugin', 'prefix', 'controller', 'action', 'pass']</code></pre>
+				<pre class="language-php"><code>[]</code></pre>
 			</div>
 		</div>
 	</div>

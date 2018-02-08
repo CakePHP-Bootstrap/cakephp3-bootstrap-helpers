@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 
-	<title>Trait Bootstrap\View\Helper\EasyIconTrait | CakePHP 3 Bootstrap Helpers</title>
+	<title>Class Bootstrap\Utility\Matching | CakePHP 3 Bootstrap Helpers</title>
 
 	<link rel="stylesheet" href="resources/bootstrap.min.css?f3e7fec0be1260a5489a2d9311f6ac812ec0b79a">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
@@ -84,16 +84,16 @@
 									Bootstrap<span></span>
 								</a>
 									<ul>
-							<li>
+							<li class="active">
 								<a href="namespace-Bootstrap.Utility.html">
 									Utility								</a>
 									</li>
-							<li class="active">
+							<li>
 								<a href="namespace-Bootstrap.View.html">
 									View<span></span>
 								</a>
 									<ul>
-							<li class="active">
+							<li>
 								<a href="namespace-Bootstrap.View.Helper.html">
 									Helper								</a>
 									</li>
@@ -109,23 +109,11 @@
 				<div id="elements">
 					<h3 class="nav-title">Classes</h3>
 					<ul class="nav-list">
-						<li><a href="class-Bootstrap.View.Helper.BreadcrumbsHelper.html">BreadcrumbsHelper</a></li>
-						<li><a href="class-Bootstrap.View.Helper.FlashHelper.html">FlashHelper</a></li>
-						<li><a href="class-Bootstrap.View.Helper.FormHelper.html">FormHelper</a></li>
-						<li><a href="class-Bootstrap.View.Helper.HtmlHelper.html">HtmlHelper</a></li>
-						<li><a href="class-Bootstrap.View.Helper.ModalHelper.html">ModalHelper</a></li>
-						<li><a href="class-Bootstrap.View.Helper.NavbarHelper.html">NavbarHelper</a></li>
-						<li><a href="class-Bootstrap.View.Helper.PaginatorHelper.html">PaginatorHelper</a></li>
-						<li><a href="class-Bootstrap.View.Helper.PanelHelper.html">PanelHelper</a></li>
+						<li class="active"><a href="class-Bootstrap.Utility.Matching.html">Matching</a></li>
+						<li><a href="class-Bootstrap.Utility.StackedStates.html">StackedStates</a></li>
 					</ul>
 
 
-					<h3 class="nav-title">Traits</h3>
-					<ul class="nav-list">
-						<li><a href="class-Bootstrap.View.Helper.ClassTrait.html">ClassTrait</a></li>
-						<li class="active"><a href="class-Bootstrap.View.Helper.EasyIconTrait.html">EasyIconTrait</a></li>
-						<li><a href="class-Bootstrap.View.Helper.UrlComparerTrait.html">UrlComparerTrait</a></li>
-					</ul>
 
 
 
@@ -135,11 +123,11 @@
 			<div class="col-md-9">
 				<div id="rightInner">
 <div id="content" class="class">
-	<h1>Trait EasyIconTrait</h1>
+	<h1>Class Matching</h1>
 
 
 	<div class="description">
-	<p>A trait that provides easy icon processing.</p>
+	<p>A trait that provides useful methods to match HTML tag.</p>
 	</div>
 
 
@@ -148,77 +136,20 @@
 
 
 
-	<div class="section description">
-		<h4>Direct Users</h4>
-		<ul>
-			<li>
-				<a href="class-Bootstrap.View.Helper.FormHelper.html">
-					Bootstrap\View\Helper\FormHelper
-				</a>
-			</li>
-			<li>
-				<a href="class-Bootstrap.View.Helper.HtmlHelper.html">
-					Bootstrap\View\Helper\HtmlHelper
-				</a>
-			</li>
-			<li>
-				<a href="class-Bootstrap.View.Helper.ModalHelper.html">
-					Bootstrap\View\Helper\ModalHelper
-				</a>
-			</li>
-			<li>
-				<a href="class-Bootstrap.View.Helper.NavbarHelper.html">
-					Bootstrap\View\Helper\NavbarHelper
-				</a>
-			</li>
-			<li>
-				<a href="class-Bootstrap.View.Helper.PaginatorHelper.html">
-					Bootstrap\View\Helper\PaginatorHelper
-				</a>
-			</li>
-			<li>
-				<a href="class-Bootstrap.View.Helper.PanelHelper.html">
-					Bootstrap\View\Helper\PanelHelper
-				</a>
-			</li>
-		</ul>
-	</div>
 
 
 	<div class="info">
 		
 		
-		<b>Namespace:</b> <a href="namespace-Bootstrap.html">Bootstrap</a>\<a href="namespace-Bootstrap.View.html">View</a>\<a href="namespace-Bootstrap.View.Helper.html">Helper</a><br>
+		<b>Namespace:</b> <a href="namespace-Bootstrap.html">Bootstrap</a>\<a href="namespace-Bootstrap.Utility.html">Utility</a><br>
 		
 
-		<b>Location:</b> <a href="source-class-Bootstrap.View.Helper.EasyIconTrait.html#18-106" title="Go to source code">View/Helper/EasyIconTrait.php</a><br>
+		<b>Location:</b> <a href="source-class-Bootstrap.Utility.Matching.html#18-122" title="Go to source code">Utility/Matching.php</a><br>
 	</div>
 
 
 
 
-	<div class="section">
-		<h2>Properties summary</h2>
-		<ul class="member-summary properties">
-		<li class="clearfix">
-			<div class="name">
-					<code><a href="class-Bootstrap.View.Helper.EasyIconTrait.html#$easyIcon">$easyIcon</a></code>
-
-				<span class="attributes">
-					<span class="label label-success">public</span>
-
-				</span>
-			</div>
-
-			<div class="property-type">
-				<code>boolean</code></div>
-
-			<div class="description">
-				Set to false to disable easy icon processing.
-			</div>
-		</li>
-		</ul>
-	</div>
 
 
 
@@ -232,29 +163,45 @@
 		<ul class="member-summary">
 		<li class="clearfix">
 			<h3 class="method-name">
-					<a href="class-Bootstrap.View.Helper.EasyIconTrait.html#__easyIcon">_easyIcon()</a>
+					<a href="class-Bootstrap.Utility.Matching.html#_findTagOrAttribute">findTagOrAttribute()</a>
 
 
-<span class="label label-warning">protected</span></span>
+<span class="label label-success">public</span></span>
 
+		<span class="label label-default">static</span>
 			</h3>
 			<div class="description detailed">
-				<p>This method calls the given callback with the given list of parameters after
-applying an easy-icon filter on them.</p>
+				<p>Check if the given input string contains an element with the given
+type name or attribute.</p>
 			</div>
 		</li>
 		<li class="clearfix">
 			<h3 class="method-name">
-					<a href="class-Bootstrap.View.Helper.EasyIconTrait.html#__makeIcon">_makeIcon()</a>
+					<a href="class-Bootstrap.Utility.Matching.html#_matchAttribute">matchAttribute()</a>
 
 
-<span class="label label-warning">protected</span></span>
+<span class="label label-success">public</span></span>
 
+		<span class="label label-default">static</span>
 			</h3>
 			<div class="description detailed">
-				<p>Try to convert the specified string to a bootstrap icon. The string is converted if
-it matches a format <code>i:icon-name</code> (leading and trailing spaces or ignored) and if
-easy-icon is activated.</p>
+				<p>Check if the first tag found in the given input string contains an attribute
+with the given name and value.</p>
+			</div>
+		</li>
+		<li class="clearfix">
+			<h3 class="method-name">
+					<a href="class-Bootstrap.Utility.Matching.html#_matchTag">matchTag()</a>
+
+
+<span class="label label-success">public</span></span>
+
+		<span class="label label-default">static</span>
+			</h3>
+			<div class="description detailed">
+				<p>Check if the given input string match the given tag, and returns
+an array of attributes if attrs is not null. This function does not
+work for "singleton" tags.</p>
 			</div>
 		</li>
 		</ul>
@@ -265,52 +212,46 @@ easy-icon is activated.</p>
 	<div class="section">
 		<h2>Method Detail</h2>
 		<div class="method-detail">
-				<a id="__easyIcon"></a>
-		<a id="method-Bootstrap\View\Helper\EasyIconTrait_easyIcon"></a>
+				<a id="_findTagOrAttribute"></a>
+		<a id="method-Bootstrap\Utility\MatchingfindTagOrAttribute"></a>
 		<h3 class="method-name">
-<a href="source-class-Bootstrap.View.Helper.EasyIconTrait.html#74-104" title="Go to source code">_easyIcon()</a>
+<a href="source-class-Bootstrap.Utility.Matching.html#82-121" title="Go to source code">findTagOrAttribute()</a>
 
-<span class="label label-warning">protected</span></span>
+<span class="label label-success">public</span></span>
 
-			<a href="#__easyIcon" class="permalink" title="Permalink to this method">¶</a>
+		<span class="label label-default">static</span>
+			<a href="#_findTagOrAttribute" class="permalink" title="Permalink to this method">¶</a>
 		</h3>
 		<pre class="language-php method-signature">
-<code>_easyIcon($callback, $indexTitle, $indexOptions, $args = null)</code></pre>
+<code>findTagOrAttribute($tag, $attrs, $subject)</code></pre>
 
 		<div class="description detailed">
-			<p>This method calls the given callback with the given list of parameters after
-applying an easy-icon filter on them.</p>
-
-<p>Note: For compatibility issue, this function can still be called with a callback,
-a string (title) and an array of options.</p>
+			<p>Check if the given input string contains an element with the given
+type name or attribute.</p>
 
 
 				<h6>Parameters</h6>
 				<div class="parameter-list list">
 				<dl>
 					<dt>
-						<code class="language-php ">callable $callback</code>
+						<code class="language-php ">string $tag</code>
 					</dt>
-					<dd>The callback.</dd>
+					<dd>Tag name to search for, or null if not relevant.</dd>
 					<dt>
-						<code class="language-php ">int $indexTitle</code>
+						<code class="language-php ">string $attrs</code>
 					</dt>
-					<dd><p>Index of the title to which the easy-icon processing
-will be applied.</p></dd>
+					<dd><p>Array [name => value] for the attributes to search for, or null
+if not relevant. <code>value</code> can be null if only the name should be looked.</p></dd>
 					<dt>
-						<code class="language-php ">int $indexOptions</code>
+						<code class="language-php ">string $subject</code>
 					</dt>
-					<dd>Index of the options in the $args array.</dd>
-					<dt>
-						<code class="language-php optional">array $args = null</code>
-					</dt>
-					<dd>Arguments for the callback.</dd>
+					<dd>String to search.</dd>
 				</dl>
 				</div>
 
 				<h6>Returns</h6>
 				<div class="list">
-					mixed<br>Whatever might be returned by $callback.<br>
+					boolean<br>True if the given tag or given attribute is found.<br>
 				</div>
 
 
@@ -319,49 +260,98 @@ will be applied.</p></dd>
 		</div>
 		</div>
 		<div class="method-detail">
-				<a id="__makeIcon"></a>
-		<a id="method-Bootstrap\View\Helper\EasyIconTrait_makeIcon"></a>
+				<a id="_matchAttribute"></a>
+		<a id="method-Bootstrap\Utility\MatchingmatchAttribute"></a>
 		<h3 class="method-name">
-<a href="source-class-Bootstrap.View.Helper.EasyIconTrait.html#30-72" title="Go to source code">_makeIcon()</a>
+<a href="source-class-Bootstrap.Utility.Matching.html#59-80" title="Go to source code">matchAttribute()</a>
 
-<span class="label label-warning">protected</span></span>
+<span class="label label-success">public</span></span>
 
-			<a href="#__makeIcon" class="permalink" title="Permalink to this method">¶</a>
+		<span class="label label-default">static</span>
+			<a href="#_matchAttribute" class="permalink" title="Permalink to this method">¶</a>
 		</h3>
 		<pre class="language-php method-signature">
-<code>_makeIcon($text, $converted = false, $options = [])</code></pre>
+<code>matchAttribute($attr, $value, $subject)</code></pre>
 
 		<div class="description detailed">
-			<p>Try to convert the specified string to a bootstrap icon. The string is converted if
-it matches a format <code>i:icon-name</code> (leading and trailing spaces or ignored) and if
-easy-icon is activated.</p>
-
-<p><strong>Note:</strong> This function will currently fail if the Html helper associated with the
-view is not BootstrapHtmlHelper.</p>
+			<p>Check if the first tag found in the given input string contains an attribute
+with the given name and value.</p>
 
 
 				<h6>Parameters</h6>
 				<div class="parameter-list list">
 				<dl>
 					<dt>
-						<code class="language-php ">string $text</code>
+						<code class="language-php ">string $attr</code>
 					</dt>
-					<dd>The string to convert.</dd>
+					<dd>Name of the attribute.</dd>
 					<dt>
-						<code class="language-php optional">bool $converted = false</code>
+						<code class="language-php ">string $value</code>
 					</dt>
-					<dd><p>If specified, will contains <code>true</code> if the text was converted,
-<code>false</code> otherwize.</p></dd>
+					<dd>Value of the attribute.</dd>
 					<dt>
-						<code class="language-php optional"> $options = []</code>
+						<code class="language-php ">string $subject</code>
 					</dt>
-					<dd></dd>
+					<dd>String to search.</dd>
 				</dl>
 				</div>
 
 				<h6>Returns</h6>
 				<div class="list">
-					string<br>The text after conversion.<br>
+					boolean<br><p>True if an attribute with the given name/value was found, false
+otherwize.</p><br>
+				</div>
+
+
+
+
+		</div>
+		</div>
+		<div class="method-detail">
+				<a id="_matchTag"></a>
+		<a id="method-Bootstrap\Utility\MatchingmatchTag"></a>
+		<h3 class="method-name">
+<a href="source-class-Bootstrap.Utility.Matching.html#23-57" title="Go to source code">matchTag()</a>
+
+<span class="label label-success">public</span></span>
+
+		<span class="label label-default">static</span>
+			<a href="#_matchTag" class="permalink" title="Permalink to this method">¶</a>
+		</h3>
+		<pre class="language-php method-signature">
+<code>matchTag($tag, $subject, $content = null, $attrs = null)</code></pre>
+
+		<div class="description detailed">
+			<p>Check if the given input string match the given tag, and returns
+an array of attributes if attrs is not null. This function does not
+work for "singleton" tags.</p>
+
+
+				<h6>Parameters</h6>
+				<div class="parameter-list list">
+				<dl>
+					<dt>
+						<code class="language-php ">string $tag</code>
+					</dt>
+					<dd>Tag to match (e.g. 'a', 'div', 'span').</dd>
+					<dt>
+						<code class="language-php ">string $subject</code>
+					</dt>
+					<dd>String within which to match the tag.</dd>
+					<dt>
+						<code class="language-php optional">string $content = null</code>
+					</dt>
+					<dd>Content within the tag, if one was found.</dd>
+					<dt>
+						<code class="language-php optional">array $attrs = null</code>
+					</dt>
+					<dd>Attributes of the tag, if one was found.</dd>
+				</dl>
+				</div>
+
+				<h6>Returns</h6>
+				<div class="list">
+					boolean<br>True if the given tag was found, false otherwize.<br>
 				</div>
 
 
@@ -377,31 +367,6 @@ view is not BootstrapHtmlHelper.</p>
 
 
 
-	<div class="section">
-		<h2>Properties detail</h2>
-	<div class="property-detail">
-		<a id="$easyIcon"></a>
-
-		<h3 class="property-name">
-				<a href="source-class-Bootstrap.View.Helper.EasyIconTrait.html#23-28" title="Go to source code"><var>$easyIcon</var></a>
-				<a href="#$easyIcon" class="permalink" title="Permalink to this property">¶</a>
-		</h3>
-
-		<div class="attributes">
-				<span class="label label-success">public</span>
-				boolean
-		</div>
-
-		<div class="description detailed">
-			<p>Set to false to disable easy icon processing.</p>
-
-
-			<div>
-				<pre class="language-php"><code>true</code></pre>
-			</div>
-		</div>
-	</div>
-	</div>
 
 
 </div>
