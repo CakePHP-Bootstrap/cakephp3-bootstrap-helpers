@@ -93,18 +93,8 @@ echo $this->Form->end() ;
 
 ### Specifying the width of the columns
 
-You can change the widths of the columns at any time using the `setConfig` method:
-
-```php
-echo $this->Form->setConfig('columns', [ // Total is 12, default is 2 / 10 / 0
-    'label' => 2,
-    'input' => 10,
-    'error' => 0 // 0 for 'error' means that it will be put under the input
-]);
-echo $this->Form->create(null, ['horizontal' => true]);
-```
-
-You can also specify different widths for different display sizes:
+You can change the widths of the columns at any time and specify different widths for different
+display sizes using `setConfig`:
 
 -- TABS: form-horizontals-sizes-1
 
