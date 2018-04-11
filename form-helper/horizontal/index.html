@@ -280,16 +280,8 @@ echo $this-&gt;Form-&gt;end() ;
 </form>
 
 </div></div></div><h3 id="specifying-the-width-of-the-columns">Specifying the width of the columns</h3>
-<p>You can change the widths of the columns at any time using the <code>setConfig</code> method:</p>
-<pre><code class="language-php">echo $this-&gt;Form-&gt;setConfig('columns', [ // Total is 12, default is 2 / 10 / 0
-    'label' =&gt; 2,
-    'input' =&gt; 10,
-    'error' =&gt; 0 // 0 for 'error' means that it will be put under the input
-]);
-echo $this-&gt;Form-&gt;create(null, ['horizontal' =&gt; true]);
-</code></pre>
-
-<p>You can also specify different widths for different display sizes:</p>
+<p>You can change the widths of the columns at any time and specify different widths for different
+display sizes using <code>setConfig</code>:</p>
 <div class="tab-panels"><ul class="nav nav-tabs" role="tablist"><li class="active" role="presentation"><a aria-controls="tab-form-horizontals-sizes-1-php" data-toggle="tab" href="#tab-form-horizontals-sizes-1-php" role="tab">PHP</a></li><li role="presentation"><a aria-controls="tab-form-horizontals-sizes-1-markup" data-toggle="tab" href="#tab-form-horizontals-sizes-1-markup" role="tab">Markup</a></li><li role="presentation"><a aria-controls="tab-form-horizontals-sizes-1-output" data-toggle="tab" href="#tab-form-horizontals-sizes-1-output" role="tab">Output</a></li></ul><div class="tab-content"><div class="tab-pane active" id="tab-form-horizontals-sizes-1-php" role="tabpanel"><pre><code class="language-php">$this-&gt;Form-&gt;setConfig('columns', [
     'sm' =&gt; [
         'label' =&gt; 4,
