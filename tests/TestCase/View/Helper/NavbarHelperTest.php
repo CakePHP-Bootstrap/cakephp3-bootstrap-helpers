@@ -4,7 +4,7 @@ namespace Bootstrap\Test\TestCase\View\Helper;
 
 use Bootstrap\View\Helper\NavbarHelper;
 use Cake\Core\Configure;
-use Cake\Network\Request;
+use Cake\Http\ServerRequest;
 use Cake\Routing\RouteBuilder;
 use Cake\Routing\Router;
 use Cake\Routing\Route\DashedRoute;
@@ -269,7 +269,7 @@ class NavbarHelperTest extends TestCase {
 
     public function testMenu() {
         // TODO: Add test for this...
-        $this->navbar->config('autoActiveLink', false);
+        $this->navbar->setConfig('autoActiveLink', false);
         // Basic test:
         $this->navbar->create(null);
         $result = $this->navbar->beginMenu(['class' => 'my-menu']);
@@ -319,7 +319,7 @@ class NavbarHelperTest extends TestCase {
         $this->navbar->beginMenu('');
 
         // Active and correct link:
-        $this->navbar->config('autoActiveLink', true);
+        $this->navbar->setConfig('autoActiveLink', true);
         $result = $this->navbar->link('Link', '/');
         $expected = [
             ['li' => ['class' => 'active']],
@@ -329,7 +329,7 @@ class NavbarHelperTest extends TestCase {
         $this->assertHtml($expected, $result);
 
         // Active and incorrect link but more complex:
-        $this->navbar->config('autoActiveLink', true);
+        $this->navbar->setConfig('autoActiveLink', true);
         $result = $this->navbar->link('Link', '/pages');
         $expected = [
             ['li' => []],
@@ -339,7 +339,7 @@ class NavbarHelperTest extends TestCase {
         $this->assertHtml($expected, $result);
 
         // Unactive and correct link:
-        $this->navbar->config('autoActiveLink', false);
+        $this->navbar->setConfig('autoActiveLink', false);
         $result = $this->navbar->link('Link', '/');
         $expected = [
             ['li' => []],
@@ -349,7 +349,7 @@ class NavbarHelperTest extends TestCase {
         $this->assertHtml($expected, $result);
 
         // Unactive and incorrect link:
-        $this->navbar->config('autoActiveLink', false);
+        $this->navbar->setConfig('autoActiveLink', false);
         $result = $this->navbar->link('Link', '/pages');
         $expected = [
             ['li' => []],
@@ -363,20 +363,20 @@ class NavbarHelperTest extends TestCase {
         Router::scope('/', function (RouteBuilder $routes) {
             $routes->fallbacks(DashedRoute::class);
         });
-        Router::fullBaseUrl('');
+        Router::fullBaseUrl('/cakephp/pages/view/1');
         Configure::write('App.fullBaseUrl', 'http://localhost');
-        $request = new Request();
-        $request->addParams([
-            'action' => 'view',
-            'plugin' => null,
-            'controller' => 'pages',
-            'pass' => ['1']
-        ]);
-        $request->base = '/cakephp';
-        $request->here = '/cakephp/pages/view/1';
+        $request = new ServerRequest();
+        $request = $request
+            ->withAttribute('params', [
+                'action' => 'view',
+                'plugin' => null,
+                'controller' => 'pages',
+                'pass' => ['1']
+            ])
+            ->withAttribute('base', '/cakephp');
         Router::setRequestInfo($request);
 
-        $this->navbar->config('autoActiveLink', true);
+        $this->navbar->setConfig('autoActiveLink', true);
         $result = $this->navbar->link('Link', '/pages', [
             'active' => ['action' => false, 'pass' => false]
         ]);
@@ -403,18 +403,18 @@ class NavbarHelperTest extends TestCase {
         });
         Router::fullBaseUrl('');
         Configure::write('App.fullBaseUrl', 'http://localhost');
-        $request = new Request();
-        $request->addParams([
-            'action' => 'display',
-            'plugin' => null,
-            'controller' => 'pages',
-            'pass' => ['faq']
-        ]);
-        $request->base = '/cakephp';
-        $request->here = '/cakephp/pages/faq';
+        $request = new ServerRequest('/cakephp/pages/faq');
+        $request = $request
+            ->withAttribute('params', [
+                'action' => 'display',
+                'plugin' => null,
+                'controller' => 'pages',
+                'pass' => ['faq']
+            ])
+            ->withAttribute('base', '/cakephp');
         Router::setRequestInfo($request);
 
-        $this->navbar->config('autoActiveLink', true);
+        $this->navbar->setConfig('autoActiveLink', true);
         $result = $this->navbar->link('Link', '/pages', [
             'active' => ['action' => false, 'pass' => false]
         ]);
