@@ -164,7 +164,7 @@ class EasyIconTraitTest extends TestCase {
                 'aria-hidden' => 'true'
             ]], '/i', '/button'
         ], $result);
-        $result = $this->form->input('fieldname', [
+        $result = $this->form->control('fieldname', [
             'prepend' => 'i:home',
             'append'  => 'i:plus',
             'label'   => false

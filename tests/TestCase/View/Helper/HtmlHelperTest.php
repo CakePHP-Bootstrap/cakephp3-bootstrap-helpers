@@ -44,8 +44,8 @@ class HtmlHelperTest extends TestCase {
         $this->assertHtml($expected, $result);
 
         // Custom templates
-        $oldTemplates = $this->html->templates();
-        $this->html->templates([
+        $oldTemplates = $this->html->getTemplates();
+        $this->html->setTemplates([
             'icon' => '<span class="fa fa-{{type}}{{attrs.class}}" data-type="{{type}}"{{attrs}}>{{inner}}</span>'
         ]);
         $result = $this->html->icon('home', [
@@ -79,7 +79,7 @@ class HtmlHelperTest extends TestCase {
             '/span'
         ];
         $this->assertHtml($expected, $result);
-        $this->html->templates($oldTemplates);
+        $this->html->setTemplates($oldTemplates);
 
     }
 
