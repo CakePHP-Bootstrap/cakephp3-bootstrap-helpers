@@ -322,7 +322,7 @@ class PanelHelper extends Helper {
         $out = $this->formatTemplate($current.'End', []);
         if ($this->_states->getValue('collapsible')) {
             $ctplt = $current.'CollapsibleEnd';
-            if ($this->templates($ctplt)) {
+            if ($this->getTemplates($ctplt)) {
                 $out = $this->formatTemplate($ctplt, [
                     $current.'End' => $out
                 ]);
