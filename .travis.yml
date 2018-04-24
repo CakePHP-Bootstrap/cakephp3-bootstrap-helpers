@@ -35,7 +35,7 @@ cache:
     - vendor
     - $HOME/.composer/cache
 
-before_script:
+before_install:
   - composer require "cakephp/cakephp:${CAKEPHP_VERSION}" --no-update
 
 install: composer update --prefer-dist --no-interaction
