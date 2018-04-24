@@ -9,8 +9,7 @@ php:
 dist: trusty
 
 env:
-  - CAKEPHP_VERSION=3.6.*
-  - DEFAULT=1
+  - CAKEPHP_VERSION=3.6.* DEFAULT=1
 
 matrix:
   include:
@@ -39,7 +38,7 @@ cache:
 before_script:
   - composer require "cakephp/cakephp:${CAKEPHP_VERSION}" --no-update
 
-install: composer update --prefer-dist --no-interaction --dev
+install: composer update --prefer-dist --no-interaction
 
 script:
   - if [[ $DEFAULT = 1 && $TRAVIS_PHP_VERSION = 7.0 ]]; then export CODECOVERAGE=1; vendor/bin/phpunit --coverage-clover=clover.xml; fi
