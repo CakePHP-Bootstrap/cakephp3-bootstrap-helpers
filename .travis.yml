@@ -10,8 +10,7 @@ dist: trusty
 
 env:
   - CAKEPHP_VERSION=3.6.*
-  global:
-    - DEFAULT=1
+  - DEFAULT=1
 
 matrix:
   include:
