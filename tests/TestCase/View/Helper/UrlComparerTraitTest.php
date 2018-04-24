@@ -63,7 +63,7 @@ class UrlComparerTraitTest extends TestCase {
         }
         Router::fullBaseUrl('');
         Configure::write('App.fullBaseUrl', 'http://localhost');
-        $request = new ServerRequest('/cakephp/pages/view/1');
+        $request = new ServerRequest('/pages/view/1');
         $request = $request
             ->withAttribute('params', [
                 'action' => 'view',
@@ -132,7 +132,7 @@ class UrlComparerTraitTest extends TestCase {
         }
         Router::fullBaseUrl('');
         Configure::write('App.fullBaseUrl', 'http://localhost');
-        $request = new ServerRequest('/cakephp/pages/view/1');
+        $request = new ServerRequest('/pages/view/1');
         $request = $request
             ->withAttribute('params', [
                 'action' => 'view',
@@ -188,7 +188,7 @@ class UrlComparerTraitTest extends TestCase {
     public function _testCompare($matchTrue, $matchFalse, $parts = []) {
         foreach ($matchTrue as $urls) {
             list($lhs, $rhs) = $urls;
-            $this->assertTrue($this->trait->compareUrls($lhs, $rhs, $parts), sprintf('%s != %s', Router::url($lhs), Router::url($rhs)));
+            $this->assertTrue($this->trait->compareUrls($lhs, $rhs, $parts), sprintf('%s [] != %s', Router::url($lhs), Router::url($rhs)));
         }
         foreach ($matchFalse as $urls) {
             list($lhs, $rhs) = $urls;
@@ -224,7 +224,7 @@ class UrlComparerTraitTest extends TestCase {
     public function testFullBase() {
         Router::fullBaseUrl('');
         Configure::write('App.fullBaseUrl', 'http://localhost');
-        $request = new ServerRequest('/cakephp/pages/view/1');
+        $request = new ServerRequest('/pages/view/1');
         $request = $request
             ->withAttribute('params', [
                 'action' => 'view',
@@ -269,7 +269,7 @@ class UrlComparerTraitTest extends TestCase {
         ];
         $this->_testCompare($urlsMatchTrue, $urlsMatchFalse);
 
-        $request = new ServerRequest('/cakephp/pages/faq');
+        $request = new ServerRequest('/pages/faq');
         $request = $request
             ->withAttribute('params', [
                 'action' => 'display',

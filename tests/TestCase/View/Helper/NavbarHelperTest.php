@@ -403,7 +403,7 @@ class NavbarHelperTest extends TestCase {
         });
         Router::fullBaseUrl('');
         Configure::write('App.fullBaseUrl', 'http://localhost');
-        $request = new ServerRequest('/cakephp/pages/faq');
+        $request = new ServerRequest('/pages/faq');
         $request = $request
             ->withAttribute('params', [
                 'action' => 'display',
