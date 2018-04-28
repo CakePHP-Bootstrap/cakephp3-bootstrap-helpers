@@ -33,7 +33,7 @@ class FlashHelper extends \Cake\View\Helper\FlashHelper {
      * {@inheritDoc}
      */
     public function render($key = 'flash', array $options = []) {
-        if (!$this->request->session()->check("Flash.$key")) {
+        if (!$this->request->getSession()->check("Flash.$key")) {
             return;
         }
 
