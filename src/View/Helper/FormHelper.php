@@ -190,7 +190,7 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
                     'inputColumnClass' => $this->_getColumnClass('input'),
                     'labelColumnClass' => $this->_getColumnClass('label')
                 ];
-                if (!$that->templates($data['templateName'])) {
+                if (!$that->getTemplates($data['templateName'])) {
                     $data['templateName'] = $name;
                 }
                 return $data;

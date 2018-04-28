@@ -4,7 +4,7 @@ namespace Bootstrap\Test\TestCase\View\Helper;
 
 use Bootstrap\View\Helper\UrlComparerTrait;
 use Cake\Core\Configure;
-use Cake\Network\Request;
+use Cake\Http\ServerRequest;
 use Cake\Routing\RouteBuilder;
 use Cake\Routing\Router;
 use Cake\Routing\Route\DashedRoute;
@@ -63,15 +63,15 @@ class UrlComparerTraitTest extends TestCase {
         }
         Router::fullBaseUrl('');
         Configure::write('App.fullBaseUrl', 'http://localhost');
-        $request = new Request();
-        $request->addParams([
-            'action' => 'view',
-            'plugin' => null,
-            'controller' => 'pages',
-            'pass' => ['1']
-        ]);
-        $request->base = '/cakephp';
-        $request->here = '/cakephp/pages/view/1';
+        $request = new ServerRequest('/pages/view/1');
+        $request = $request
+            ->withAttribute('params', [
+                'action' => 'view',
+                'plugin' => null,
+                'controller' => 'pages',
+                'pass' => ['1']
+            ])
+            ->withAttribute('base', '/cakephp');
         Router::setRequestInfo($request);
         $tests = [
             ['/pages', '/pages/display'],
@@ -132,15 +132,15 @@ class UrlComparerTraitTest extends TestCase {
         }
         Router::fullBaseUrl('');
         Configure::write('App.fullBaseUrl', 'http://localhost');
-        $request = new Request();
-        $request->addParams([
-            'action' => 'view',
-            'plugin' => null,
-            'controller' => 'pages',
-            'pass' => ['1']
-        ]);
-        $request->base = '/cakephp';
-        $request->here = '/cakephp/pages/view/1';
+        $request = new ServerRequest('/pages/view/1');
+        $request = $request
+            ->withAttribute('params', [
+                'action' => 'view',
+                'plugin' => null,
+                'controller' => 'pages',
+                'pass' => ['1']
+            ])
+            ->withAttribute('base', '/cakephp');
         Router::setRequestInfo($request);
         $tests = [
             ['/pages', '/pages/display'],
@@ -188,7 +188,7 @@ class UrlComparerTraitTest extends TestCase {
     public function _testCompare($matchTrue, $matchFalse, $parts = []) {
         foreach ($matchTrue as $urls) {
             list($lhs, $rhs) = $urls;
-            $this->assertTrue($this->trait->compareUrls($lhs, $rhs, $parts), sprintf('%s != %s', Router::url($lhs), Router::url($rhs)));
+            $this->assertTrue($this->trait->compareUrls($lhs, $rhs, $parts), sprintf('%s [] != %s', Router::url($lhs), Router::url($rhs)));
         }
         foreach ($matchFalse as $urls) {
             list($lhs, $rhs) = $urls;
@@ -224,15 +224,15 @@ class UrlComparerTraitTest extends TestCase {
     public function testFullBase() {
         Router::fullBaseUrl('');
         Configure::write('App.fullBaseUrl', 'http://localhost');
-        $request = new Request();
-        $request->addParams([
-            'action' => 'view',
-            'plugin' => null,
-            'controller' => 'pages',
-            'pass' => ['1']
-        ]);
-        $request->base = '/cakephp';
-        $request->here = '/cakephp/pages/view/1';
+        $request = new ServerRequest('/pages/view/1');
+        $request = $request
+            ->withAttribute('params', [
+                'action' => 'view',
+                'plugin' => null,
+                'controller' => 'pages',
+                'pass' => ['1']
+            ])
+            ->withAttribute('base', '/cakephp');
         Router::setRequestInfo($request);
         $urlsMatchTrue = [
             // Test root
@@ -269,15 +269,15 @@ class UrlComparerTraitTest extends TestCase {
         ];
         $this->_testCompare($urlsMatchTrue, $urlsMatchFalse);
 
-        $request = new Request();
-        $request->addParams([
-            'action' => 'display',
-            'plugin' => null,
-            'controller' => 'pages',
-            'pass' => ['faq']
-        ]);
-        $request->base = '/cakephp';
-        $request->here = '/cakephp/pages/faq';
+        $request = new ServerRequest('/pages/faq');
+        $request = $request
+            ->withAttribute('params', [
+                'action' => 'display',
+                'plugin' => null,
+                'controller' => 'pages',
+                'pass' => ['faq']
+            ])
+            ->withAttribute('base', '/cakephp');
         Router::setRequestInfo($request);
         $this->_testCompare([
             ['/pages/faq', []],

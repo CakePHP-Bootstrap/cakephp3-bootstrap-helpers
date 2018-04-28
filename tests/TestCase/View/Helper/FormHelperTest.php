@@ -244,7 +244,7 @@ class FormHelperTest extends TestCase {
             unset($options['_formOptions']);
         }
         $this->form->create(null, $formOptions);
-        $result = $this->form->input($fieldName, $options);
+        $result = $this->form->control($fieldName, $options);
         $assert = $this->assertHtml($expected, $result, $debug);
     }
 
@@ -876,7 +876,7 @@ class FormHelperTest extends TestCase {
         $fieldName = 'field';
         // Add a template with the help placeholder.
         $help = 'Some help text.';
-        $this->form->templates([
+        $this->form->setTemplates([
             'inputContainer' => '<div class="form-group {{type}}{{required}}">{{content}}<span>{{help}}</span></div>'
         ]);
         // Standard form
@@ -1092,7 +1092,7 @@ class FormHelperTest extends TestCase {
         $this->assertHtml($expected, $result);
 
         // Test with input()
-        $result = $this->form->input('Contact.date', ['type' => 'date']);
+        $result = $this->form->control('Contact.date', ['type' => 'date']);
         $now = strtotime('now');
         $expected = [
             ['div' => [
@@ -1264,14 +1264,17 @@ class FormHelperTest extends TestCase {
         $result = $this->form->file('Contact.picture');
         $this->assertHtml($expected, $result);
 
-        $this->form->request->data['Contact']['picture'] = [
+        $this->form->request = $this->form->request->withData('Contact.picture', [
             'name' => '', 'type' => '', 'tmp_name' => '',
             'error' => 4, 'size' => 0
-        ];
+        ]);
         $result = $this->form->file('Contact.picture');
         $this->assertHtml($expected, $result);
 
-        $this->form->request->data['Contact']['picture'] = 'no data should be set in value';
+        $this->form->request = $this->form->request->withData(
+            'Contact.picture',
+            'no data should be set in value'
+        );
         $result = $this->form->file('Contact.picture');
         $this->assertHtml($expected, $result);
     }
