@@ -14,19 +14,19 @@ env:
 matrix:
   include:
     - php: 5.6
-      env: CAKEPHP_VERSION=3.4.*
+      env: CAKEPHP_VERSION=3.5.0
     - php: 5.6
       env: CAKEPHP_VERSION=3.5.*
     - php: 7.0
-      env: CAKEPHP_VERSION=3.4.*
+      env: CAKEPHP_VERSION=3.5.0
     - php: 7.0
       env: CAKEPHP_VERSION=3.5.*
     - php: 7.1
-      env: CAKEPHP_VERSION=3.4.*
+      env: CAKEPHP_VERSION=3.5.0
     - php: 7.1
       env: CAKEPHP_VERSION=3.5.*
     - php: 7.2
-      env: CAKEPHP_VERSION=3.4.*
+      env: CAKEPHP_VERSION=3.5.0
     - php: 7.2
       env: CAKEPHP_VERSION=3.5.*
 
