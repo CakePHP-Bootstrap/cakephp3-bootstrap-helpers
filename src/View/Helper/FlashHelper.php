@@ -37,7 +37,7 @@ class FlashHelper extends \Cake\View\Helper\FlashHelper {
             return;
         }
 
-        $flash = $this->request->session()->read("Flash.$key");
+        $flash = $this->request->getSession()->read("Flash.$key");
         if (!is_array($flash)) {
             throw new \UnexpectedValueException(sprintf(
                 'Value for flash setting key "%s" must be an array.',
@@ -49,7 +49,7 @@ class FlashHelper extends \Cake\View\Helper\FlashHelper {
                 $message['element'] = 'Bootstrap.'.$message['element'];
             }
         }
-        $this->request->session()->write("Flash.$key", $flash);
+        $this->request->getSession()->write("Flash.$key", $flash);
 
         return parent::render($key, $options);
     }
