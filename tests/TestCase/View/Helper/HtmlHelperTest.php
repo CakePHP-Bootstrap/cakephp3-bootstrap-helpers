@@ -43,6 +43,23 @@ class HtmlHelperTest extends TestCase {
         ];
         $this->assertHtml($expected, $result);
 
+        // With custom tag and fa font
+        $result = $this->html->faIcon('home', [
+            'id' => 'my-id',
+            'tag' => 'span',
+            'font' => 'fa',
+            'class' => 'my-class'
+        ]);
+        $expected = [
+            ['span' => [
+                'aria-hidden' => 'true',
+                'class' => 'fa fa-home my-class',
+                'id' => 'my-id'
+            ]],
+            '/span'
+        ];
+        $this->assertHtml($expected, $result);
+
         // Custom templates
         $oldTemplates = $this->html->getTemplates();
         $this->html->setTemplates([
@@ -80,6 +97,40 @@ class HtmlHelperTest extends TestCase {
         ];
         $this->assertHtml($expected, $result);
         $this->html->setTemplates($oldTemplates);
+
+    }
+
+    public function textFaIcon() {
+
+        // Default icon
+        $result = $this->html->faIcon('home', [
+            'id' => 'my-id',
+            'class' => 'my-class'
+        ]);
+        $expected = [
+            ['i' => [
+                'aria-hidden' => 'true',
+                'class' => 'fa fa-home my-class',
+                'id' => 'my-id'
+            ]],
+            '/i'
+        ];
+        $this->assertHtml($expected, $result);
+        // With custom tag
+        $result = $this->html->faIcon('home', [
+            'id' => 'my-id',
+            'tag' => 'span',
+            'class' => 'my-class'
+        ]);
+        $expected = [
+            ['span' => [
+                'aria-hidden' => 'true',
+                'class' => 'fa fa-home my-class',
+                'id' => 'my-id'
+            ]],
+            '/span'
+        ];
+        $this->assertHtml($expected, $result);
 
     }
 
