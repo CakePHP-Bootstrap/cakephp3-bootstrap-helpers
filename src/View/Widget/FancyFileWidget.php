@@ -132,7 +132,7 @@ class FancyFileWidget implements WidgetInterface {
                 ];
             }
 						
-						unset($data['val']);
+            unset($data['val']);
         }
 
         $fakeInput = $this->_input->render($fakeInputCustomOptions + [
