@@ -123,14 +123,16 @@ class FancyFileWidget implements WidgetInterface {
         if (!empty($data['val']) && is_array($data['val'])) {
             if (isset($data['val']['name']) || count($data['val']) == 1) {
                 $fakeInputCustomOptions += [
-                    'value' => (isset($data['val']['name'])) ? $data['val']['name'] : $data['val'][0]['name']
+                    'val' => (isset($data['val']['name'])) ? $data['val']['name'] : $data['val'][0]['name']
                 ];
             }
             else {
                 $fakeInputCustomOptions += [
-                    'value' => count($data['val']) . ' ' . $countLabel
+                    'val' => count($data['val']) . ' ' . $countLabel
                 ];
             }
+						
+						unset($data['val']);
         }
 
         $fakeInput = $this->_input->render($fakeInputCustomOptions + [
