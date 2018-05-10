@@ -431,7 +431,6 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
                         $value += $attrs;
                         $url = $value['href'];
                         unset($value['href']);
-                        $url = '#';
                     }
                     else {
                         $url = '#';

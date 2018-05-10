@@ -288,7 +288,7 @@ class HtmlHelperTest extends TestCase {
             ['divider'],
             ['item' => [
                 'title' => 'Link 1',
-                'url' => '#'
+                'url' => '/link1'
             ]],
             ['divider' => true],
             ['header' => [
@@ -301,7 +301,7 @@ class HtmlHelperTest extends TestCase {
             ]],
             ['item' => [
                 'title' => 'Item 4',
-                'url' => '#',
+                'url' => '/link4',
                 'class' => 'my-class-4'
             ]]
         ]);
@@ -311,13 +311,13 @@ class HtmlHelperTest extends TestCase {
             ['div' => ['role' => 'separator', 'class' => 'dropdown-divider']], '/div',
             ['h6' => ['class' => 'dropdown-header']], 'Header 2', '/h6',
             ['div' => ['role' => 'separator', 'class' => 'dropdown-divider']], '/div',
-            ['a' => ['href' => '#', 'class' => 'dropdown-item']], 'Link 1', '/a',
+            ['a' => ['href' => '/link1', 'class' => 'dropdown-item']], 'Link 1', '/a',
             ['div' => ['role' => 'separator', 'class' => 'dropdown-divider']], '/div',
             ['h6' => ['class' => 'dropdown-header']], 'Header 3', '/h6',
             ['a' => ['href' => '#', 'class' => 'dropdown-item disabled']], 'Item 1', '/a',
             ['a' => ['href' => '#', 'class' => 'dropdown-item']], 'Item 2', '/a',
             ['a' => ['href' => '#', 'class' => 'dropdown-item disabled']], 'Item 3', '/a',
-            ['a' => ['href' => '#', 'class' => 'dropdown-item my-class-4']], 'Item 4', '/a',
+            ['a' => ['href' => '/link4', 'class' => 'dropdown-item my-class-4']], 'Item 4', '/a',
             '/div'
         ];
         $this->assertHtml($expected, $result);
@@ -325,20 +325,20 @@ class HtmlHelperTest extends TestCase {
         // test with HTML links
         $result = $this->html->dropdown([
             ['header' => 'Header 1'],
-            $this->html->link('Link 1', '#'),
-            $this->html->link('Link 2', '#'),
-            $this->html->link('Link 3', '#'),
+            $this->html->link('Link 1', '/link1'),
+            $this->html->link('Link 2', '/link2'),
+            $this->html->link('Link 3', ['controller' => 'pages', 'action' => 'home']),
             'divider',
-            $this->html->link('Link 4', '#'),
+            $this->html->link('Link 4', '/link4'),
         ]);
         $expected = [
             ['div' => ['class' => 'dropdown-menu dropdown-menu-left']],
             ['h6' => ['class' => 'dropdown-header']], 'Header 1', '/h6',
-            ['a' => ['href' => '#', 'class' => 'dropdown-item']], 'Link 1', '/a',
-            ['a' => ['href' => '#', 'class' => 'dropdown-item']], 'Link 2', '/a',
-            ['a' => ['href' => '#', 'class' => 'dropdown-item']], 'Link 3', '/a',
+            ['a' => ['href' => '/link1', 'class' => 'dropdown-item']], 'Link 1', '/a',
+            ['a' => ['href' => '/link2', 'class' => 'dropdown-item']], 'Link 2', '/a',
+            ['a' => ['href' => '/pages/home', 'class' => 'dropdown-item']], 'Link 3', '/a',
             ['div' => ['role' => 'separator', 'class' => 'dropdown-divider']], '/div',
-            ['a' => ['href' => '#', 'class' => 'dropdown-item']], 'Link 4', '/a',
+            ['a' => ['href' => '/link4', 'class' => 'dropdown-item']], 'Link 4', '/a',
             '/div'
         ];
         $this->assertHtml($expected, $result);
