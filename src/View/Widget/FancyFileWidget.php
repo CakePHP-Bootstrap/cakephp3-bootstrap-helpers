@@ -97,9 +97,18 @@ class FancyFileWidget implements WidgetInterface {
             '_button' => [],
             'id' => $data['name'],
             'count-label' => __('files selected'),
-            'button-label' => (isset($data['multiple']) && $data['multiple']) ? __('Choose Files') : __('Choose File'),
             'templateVars' => []
         ];
+
+        if(isset($data['_button']['button-label'])){
+            $data += [
+                'button-label' => $data['_button']['button-label']
+            ];
+        }else{
+            $data += [
+                'button-label' => (isset($data['multiple']) && $data['multiple']) ? __('Choose Files') : __('Choose File')
+            ];
+        }
 
         $fakeInputCustomOptions = $data['_input'];
         $fakeButtonCustomOptions = $data['_button'];
