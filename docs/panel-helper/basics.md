@@ -5,7 +5,7 @@ The `Bootstrap.PanelHelper` works in a similar way to the standard modal helper,
 ```php
 public $helpers = [
     'Panel' => [
-        'className' => 'Bootstrap.PanelHelper'
+        'className' => 'Bootstrap.Panel'
     ]
 ];
 ```
