@@ -320,6 +320,47 @@ class FormHelperTest extends TestCase {
 
     }
 
+    public function testButtonGroup() {
+        // Basic test:
+        $expected = [
+            ['div' => [
+                'class' => 'btn-group', 'role' => 'group'
+            ]],
+            ['button' => ['class' => 'btn btn-primary', 'type' => 'submit']], '1', '/button',
+            ['button' => ['class' => 'btn btn-primary', 'type' => 'submit']], '2', '/button',
+            '/div'
+        ];
+        $this->assertHtml($expected, $this->form->buttonGroup([
+            $this->form->button('1'), $this->form->button('2')
+        ]));
+
+        // Custom attributes:
+        $expected = [
+            ['div' => [
+                'class' => 'btn-group myclass', 'role' => 'group', 'data-test' => 'mydata'
+            ]],
+            ['button' => ['class' => 'btn btn-primary', 'type' => 'submit']], '1', '/button',
+            ['button' => ['class' => 'btn btn-primary', 'type' => 'submit']], '2', '/button',
+            '/div'
+        ];
+        $this->assertHtml($expected, $this->form->buttonGroup([
+            $this->form->button('1'), $this->form->button('2')
+        ], ['class' => 'myclass', 'data-test' => 'mydata']));
+
+        // Vertical + custom attributes:
+        $expected = [
+            ['div' => [
+                'class' => 'btn-group-vertical myclass', 'role' => 'group', 'data-test' => 'mydata'
+            ]],
+            ['button' => ['class' => 'btn btn-primary', 'type' => 'submit']], '1', '/button',
+            ['button' => ['class' => 'btn btn-primary', 'type' => 'submit']], '2', '/button',
+            '/div'
+        ];
+        $this->assertHtml($expected, $this->form->buttonGroup([
+            $this->form->button('1'), $this->form->button('2')
+        ], ['class' => 'myclass', 'data-test' => 'mydata', 'vertical' => true]));
+    }
+
     public function testInputRadio() {
         $fieldName = 'color';
         $options   = [

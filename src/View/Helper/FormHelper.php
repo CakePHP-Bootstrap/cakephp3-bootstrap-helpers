@@ -124,6 +124,7 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
             'inputGroupDropdowns' => '<div class="input-group-btn">{{content}}</div>',
             'helpBlock' => '<small class="help-block form-text text-muted">{{content}}</small>',
             'buttonGroup' => '<div class="btn-group{{attrs.class}}" role="group"{{attrs}}>{{content}}</div>',
+            'buttonGroupVertical' => '<div class="btn-group-vertical{{attrs.class}}" role="group"{{attrs}}>{{content}}</div>',
             'buttonToolbar' => '<div class="btn-toolbar{{attrs.class}}" role="toolbar"{{attrs}}>{{content}}</div>',
             'fancyFileInput' => '{{fileInput}}<div class="input-group"><div class="input-group-btn">{{button}}</div>{{input}}</div>'
         ],
@@ -634,10 +635,11 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
             'vertical' => false,
             'templateVars' => []
         ];
+        $template = 'buttonGroup';
         if ($options['vertical']) {
-            $options = $this->addClass($options, 'btn-group-vertical');
+            $template = 'buttonGroupVertical';
         }
-        return $this->formatTemplate('buttonGroup', [
+        return $this->formatTemplate($template, [
             'content' => implode('', $buttons),
             'attrs' => $this->templater()->formatAttributes($options, ['vertical']),
             'templateVars' => $options['templateVars']
