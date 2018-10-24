@@ -424,7 +424,7 @@ class FormHelperTest extends TestCase {
                 'class' => 'row'
             ]],
             ['legend' => [
-                'class' => 'col-form-legend col-md-2'
+                'class' => 'col-form-label pt-0 col-md-2'
             ]],
             \Cake\Utility\Inflector::humanize($fieldName),
             '/legend',
@@ -472,7 +472,7 @@ class FormHelperTest extends TestCase {
                 'class' => 'row'
             ]],
             ['legend' => [
-                'class' => 'col-form-legend col-md-2'
+                'class' => 'col-form-label pt-0 col-md-2'
             ]],
             \Cake\Utility\Inflector::humanize($fieldName),
             '/legend',

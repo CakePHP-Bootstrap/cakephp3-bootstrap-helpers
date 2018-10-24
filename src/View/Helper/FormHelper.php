@@ -98,7 +98,7 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
             'nestingLabel' => '{{hidden}}<label class="form-check-label{{attrs.class}}"{{attrs}}>{{input}} {{text}}</label>',
             'legend' => '<legend>{{text}}</legend>',
             'labelLegend' => '<label{{attrs}}>{{text}}</label>',
-            'labelLegendHorizontal' => '<legend class="col-form-legend {{labelColumnClass}}{{attrs.class}}"{{attrs}}>{{text}}</legend>',
+            'labelLegendHorizontal' => '<legend class="col-form-label pt-0 {{labelColumnClass}}{{attrs.class}}"{{attrs}}>{{text}}</legend>',
             'option' => '<option value="{{value}}"{{attrs}}>{{text}}</option>',
             'optgroup' => '<optgroup label="{{label}}"{{attrs}}>{{content}}</optgroup>',
             'select' => '<select name="{{name}}" class="form-control{{attrs.class}}" {{attrs}}>{{content}}</select>',
