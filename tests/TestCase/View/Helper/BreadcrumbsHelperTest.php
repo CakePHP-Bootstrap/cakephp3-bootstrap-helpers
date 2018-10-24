@@ -58,7 +58,7 @@ class BreadcrumbsHelperTest extends TestCase {
             'Some text',
             '/a',
             '/li',
-            ['li' => ['class' => 'breadcrumb-item active final']],
+            ['li' => ['class' => 'breadcrumb-item active final', 'aria-current' => 'page']],
             'Final crumb',
             '/li',
             '/ol'

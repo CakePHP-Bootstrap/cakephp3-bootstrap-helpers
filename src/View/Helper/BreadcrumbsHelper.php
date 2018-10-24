@@ -31,7 +31,7 @@ class BreadcrumbsHelper extends \Cake\View\Helper\BreadcrumbsHelper{
         'templates' => [
             'wrapper' => '<ol class="breadcrumb{{attrs.class}}"{{attrs}}>{{content}}</ol>',
             'item' => '<li class="breadcrumb-item{{attrs.class}}"{{attrs}}><a href="{{url}}"{{innerAttrs}}>{{title}}</a></li>',
-            'itemWithoutLink' => '<li class="breadcrumb-item active{{attrs.class}}"{{attrs}}>{{title}}</li>',
+            'itemWithoutLink' => '<li class="breadcrumb-item active{{attrs.class}}" aria-current="page"{{attrs}}>{{title}}</li>',
             'separator' => ''
         ],
         'templateClass' => 'Bootstrap\View\EnhancedStringTemplate'
