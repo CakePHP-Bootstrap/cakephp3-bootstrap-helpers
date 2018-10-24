@@ -37,3 +37,7 @@ You can also fully customize the various parts of the modal.
 
 -- TABS
 
+### Modal options
+
+You can check the [API documentation](https://holt59.github.io/cakephp3-bootstrap-helpers/api/class-Bootstrap.View.Helper.ModalHelper.html)
+for a complete list of available options.

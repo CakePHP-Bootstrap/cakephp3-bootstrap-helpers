@@ -55,9 +55,9 @@ if [ $? -ne 0 ]; then
 fi
 
 site_url=$(python3 -c "import yaml; print(yaml.load(open('mkdocs.yml'))['site_url'])")
-sed -i .bak 's@$site_url\s*=.*@$site_url = "'"$site_url"'"}@g' build/templates/bootstrap/@layout.latte
+sed -i.bak 's@$site_url\s*=.*@$site_url = "'"$site_url"'"}@g' build/templates/bootstrap/@layout.latte
 repo_url=$(python3 -c "import yaml; print(yaml.load(open('mkdocs.yml'))['repo_url'])")
-sed -i .bak 's@$repo_url\s*=.*@$repo_url = "'"$repo_url"'"}@g' build/templates/bootstrap/@layout.latte
+sed -i.bak 's@$repo_url\s*=.*@$repo_url = "'"$repo_url"'"}@g' build/templates/bootstrap/@layout.latte
 menu=$(pcregrep -Mo '(?s)(?<=<!-- helpers -->)(.*?)(?=</ul>)' build/site/index.html)
 echo $menu | sed -E $'s@</li>[[:space:]]+@</li>\\\n@g' | sed -E 's@href="(.*)"@href="'"$site_url"'/\1"@g' > build/templates/bootstrap/helpers-menu.latte
 
