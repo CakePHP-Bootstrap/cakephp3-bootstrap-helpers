@@ -73,6 +73,7 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
             'checkboxWrapper' => '<div class="checkbox">{{label}}</div>',
             'checkboxContainer' => '<div class="checkbox {{required}}">{{content}}</div>',
             'checkboxContainerHorizontal' => '<div class="form-group"><div class="{{inputColumnOffsetClass}} {{inputColumnClass}}"><div class="checkbox {{required}}">{{content}}</div></div></div>',
+            'confirmJs' => '{{confirm}}',
             'dateWidget' => '<div class="row">{{year}}{{month}}{{day}}{{hour}}{{minute}}{{second}}{{meridian}}</div>',
             'error' => '<span class="help-block error-message">{{content}}</span>',
             'errorHorizontal' => '<span class="help-block error-message {{errorColumnClass}}">{{content}}</span>',
