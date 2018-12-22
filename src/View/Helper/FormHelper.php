@@ -118,7 +118,8 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
             'helpBlock' => '<p class="help-block">{{content}}</p>',
             'buttonGroup' => '<div class="btn-group{{attrs.class}}"{{attrs}}>{{content}}</div>',
             'buttonToolbar' => '<div class="btn-toolbar{{attrs.class}}"{{attrs}}>{{content}}</div>',
-            'fancyFileInput' => '{{fileInput}}<div class="input-group"><div class="input-group-btn">{{button}}</div>{{input}}</div>'
+	    'fancyFileInput' => '{{fileInput}}<div class="input-group"><div class="input-group-btn">{{button}}</div>{{input}}</div>',
+	    'confirmJs' => '{{confirm}}'
         ],
         'buttons' => [
             'type' => 'default'
