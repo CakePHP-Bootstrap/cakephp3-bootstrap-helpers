@@ -126,7 +126,8 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
             'buttonGroup' => '<div class="btn-group{{attrs.class}}" role="group"{{attrs}}>{{content}}</div>',
             'buttonGroupVertical' => '<div class="btn-group-vertical{{attrs.class}}" role="group"{{attrs}}>{{content}}</div>',
             'buttonToolbar' => '<div class="btn-toolbar{{attrs.class}}" role="toolbar"{{attrs}}>{{content}}</div>',
-            'fancyFileInput' => '{{fileInput}}<div class="input-group"><div class="input-group-btn">{{button}}</div>{{input}}</div>'
+            'fancyFileInput' => '{{fileInput}}<div class="input-group"><div class="input-group-btn">{{button}}</div>{{input}}</div>',
+            'confirmJs' => '{{confirm}}'
         ],
         'buttons' => [
             'type' => 'primary'
@@ -450,7 +451,8 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
             'prepend'      => false,
             'append'       => false,
             'help'         => false,
-            'inline'       => false
+            'inline'       => false,
+            'required'     => false
         ];
 
         $options = $this->_parseOptions($fieldName, $options);
