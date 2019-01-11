@@ -448,6 +448,7 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
 
         $options += [
             'templateVars' => [],
+            'required'     => false,
             'prepend'      => false,
             'append'       => false,
             'help'         => false,
