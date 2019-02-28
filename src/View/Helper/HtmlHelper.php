@@ -90,7 +90,8 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
             'dropdownMenu' => '<ul class="dropdown-menu{{attrs.class}}"{{attrs}}>{{content}}</ul>',
             'dropdownMenuItem' => '<li{{attrs}}>{{content}}</li>',
             'dropdownMenuHeader' => '<li role="presentation" class="dropdown-header{{attrs.class}}"{{attrs}}>{{content}}</li>',
-            'dropdownMenuDivider' => '<li role="separator" class="divider{{attrs.class}}"{{attrs}}></li>'
+            'dropdownMenuDivider' => '<li role="separator" class="divider{{attrs.class}}"{{attrs}}></li>',
+            'confirmJs' => '{{confirm}}'
         ],
         'templateClass' => 'Bootstrap\View\EnhancedStringTemplate',
         'tooltip' => [
