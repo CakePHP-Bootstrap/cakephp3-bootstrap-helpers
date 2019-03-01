@@ -123,7 +123,6 @@ class EasyIconTraitTest extends TestCase {
                 'result' => 'i:plus'
             ]
         ]);
-
     }
 
     public function testHtmlHelperMethods() {
@@ -176,28 +175,36 @@ class EasyIconTraitTest extends TestCase {
             ['div' => [
                 'class' => 'input-group'
             ]],
+            ['div' => [
+                'class' => 'input-group-prepend'
+            ]],
             ['span' => [
-                'class' => 'input-group-addon'
+                'class' => 'input-group-text'
             ]],
             ['i' => [
                 'class' => 'fa fa-home',
                 'aria-hidden' => 'true'
             ]], '/i',
             '/span',
+            '/div',
             ['input' => [
                 'type' => 'text',
                 'class' => 'form-control',
                 'name' => 'fieldname',
                 'id' => 'fieldname'
             ]],
+            ['div' => [
+                'class' => 'input-group-append'
+            ]],
             ['span' => [
-                'class' => 'input-group-addon'
+                'class' => 'input-group-text'
             ]],
             ['i' => [
                 'class' => 'fa fa-plus',
                 'aria-hidden' => 'true'
             ]], '/i',
             '/span',
+            '/div',
             '/div',
             '/div'
         ], $result);
