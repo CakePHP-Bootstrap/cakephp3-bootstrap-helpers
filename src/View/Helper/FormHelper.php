@@ -121,8 +121,6 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
             'inputGroupEnd' => '{{append}}</div>',
             'inputGroupAddons' => '<div class="input-group-{{type}}">{{content}}</div>',
             'inputGroupText' => '<span class="input-group-text">{{content}}</span>',
-            'inputGroupButtons' => '<span class="input-group-btn">{{content}}</span>',
-            'inputGroupDropdowns' => '<div class="input-group-btn">{{content}}</div>',
             'helpBlock' => '<small class="help-block form-text text-muted">{{content}}</small>',
             'buttonGroup' => '<div class="btn-group{{attrs.class}}" role="group"{{attrs}}>{{content}}</div>',
             'buttonGroupVertical' => '<div class="btn-group-vertical{{attrs.class}}" role="group"{{attrs}}>{{content}}</div>',
@@ -322,10 +320,7 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
             else {
                 $addonOrButtons = implode('', $addonOrButtons);
             }
-            if (Matching::findTagOrAttribute(
-                    null, ['data-toggle' => 'dropdown'], $addonOrButtons)) {
-                $template = 'inputGroupDropdowns';
-            }
+
             $addonOrButtons = $this->formatTemplate('inputGroupAddons', [
                 'type' => strtolower($type),
                 'content' => $addonOrButtons
@@ -717,11 +712,8 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
         }
 
         $options = $this->addClass($options, 'dropdown-toggle');
-        return $this->buttonGroup([
-            $this->button($title, $options),
-            $this->Html->dropdown($menu, $ulOptions)
-        ], $bGroupOptions);
 
+        return $this->button($title, $options) . $this->Html->dropdown($menu, $ulOptions);
     }
 
     /**
