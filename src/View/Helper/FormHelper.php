@@ -119,7 +119,8 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
             'inputGroup' => '{{inputGroupStart}}{{input}}{{inputGroupEnd}}',
             'inputGroupStart' => '<div class="input-group">{{prepend}}',
             'inputGroupEnd' => '{{append}}</div>',
-            'inputGroupAddons' => '<span class="input-group-addon">{{content}}</span>',
+            'inputGroupAddons' => '<div class="input-group-{{type}}">{{content}}</div>',
+            'inputGroupText' => '<span class="input-group-text">{{content}}</span>',
             'inputGroupButtons' => '<span class="input-group-btn">{{content}}</span>',
             'inputGroupDropdowns' => '<div class="input-group-btn">{{content}}</div>',
             'helpBlock' => '<small class="help-block form-text text-muted">{{content}}</small>',
@@ -307,14 +308,15 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
      *
      * @return string The elements wrapped in a suitable HTML element.
      */
-    protected function _wrapInputGroup($addonOrButtons) {
+    protected function _wrapInputGroup($addonOrButtons, $type) {
         if ($addonOrButtons) {
-            $template = 'inputGroupButtons';
             if (is_string($addonOrButtons)) {
                 $addonOrButtons = $this->_makeIcon($addonOrButtons);
                 if (!Matching::findTagOrAttribute(
                         'button', ['type' => 'submit'], $addonOrButtons)) {
-                    $template = 'inputGroupAddons';
+                    $addonOrButtons = $this->formatTemplate('inputGroupText', [
+                        'content' => $addonOrButtons
+                    ]);
                 }
             }
             else {
@@ -324,10 +326,12 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
                     null, ['data-toggle' => 'dropdown'], $addonOrButtons)) {
                 $template = 'inputGroupDropdowns';
             }
-            $addonOrButtons = $this->formatTemplate($template, [
+            $addonOrButtons = $this->formatTemplate('inputGroupAddons', [
+                'type' => strtolower($type),
                 'content' => $addonOrButtons
             ]);
         }
+
         return $addonOrButtons;
     }
 
@@ -364,7 +368,7 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
      * opening `<div>` for an input group.
      */
     public function prepend($input, $prepend) {
-        $prepend = $this->_wrapInputGroup($prepend);
+        $prepend = $this->_wrapInputGroup($prepend, 'prepend');
         if ($input === null) {
             return $this->formatTemplate('inputGroupStart', ['prepend' => $prepend]);
         }
@@ -382,7 +386,7 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
      * closing `</div>` for an input group.
      */
     public function append($input, $append) {
-        $append = $this->_wrapInputGroup($append);
+        $append = $this->_wrapInputGroup($append, 'append');
         if ($input === null) {
             return $this->formatTemplate('inputGroupEnd', ['append' => $append]);
         }
