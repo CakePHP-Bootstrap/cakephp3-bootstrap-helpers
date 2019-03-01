@@ -308,17 +308,18 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
      */
     protected function _wrapInputGroup($addonOrButtons, $type) {
         if ($addonOrButtons) {
-            if (is_string($addonOrButtons)) {
-                $addonOrButtons = $this->_makeIcon($addonOrButtons);
-                if (!Matching::findTagOrAttribute(
-                        'button', ['type' => 'submit'], $addonOrButtons)) {
-                    $addonOrButtons = $this->formatTemplate('inputGroupText', [
-                        'content' => $addonOrButtons
-                    ]);
-                }
-            }
-            else {
+            if (is_array($addonOrButtons)) {
                 $addonOrButtons = implode('', $addonOrButtons);
+            } else {
+                $addonOrButtons = $this->_makeIcon($addonOrButtons);
+            }
+
+            $isButton = strpos($addonOrButtons, '<button') === 0;
+            $isDropdown = strpos($addonOrButtons, 'data-toggle="dropdown"');
+            if (!$isButton && !$isDropdown) {
+                $addonOrButtons = $this->formatTemplate('inputGroupText', [
+                    'content' => $addonOrButtons
+                ]);
             }
 
             $addonOrButtons = $this->formatTemplate('inputGroupAddons', [
@@ -713,7 +714,10 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
 
         $options = $this->addClass($options, 'dropdown-toggle');
 
-        return $this->button($title, $options) . $this->Html->dropdown($menu, $ulOptions);
+        return $this->buttonGroup([
+            $this->button($title, $options),
+            $this->Html->dropdown($menu, $ulOptions)
+        ], $bGroupOptions);
     }
 
     /**
