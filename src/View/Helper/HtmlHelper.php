@@ -140,7 +140,7 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
      * {@inheritDoc}
      */
     public function link($title, $url = null, array $options = []) {
-	    if($this->easyIcon && Hash::get($options, 'easyIcon', true)) {
+	    if(Hash::get($options, 'easyIcon', $this->easyIcon)) {
 		    if ($url !== null && Hash::get($options, 'escape', true)) {
 			    $title = h($title);
 		    }
