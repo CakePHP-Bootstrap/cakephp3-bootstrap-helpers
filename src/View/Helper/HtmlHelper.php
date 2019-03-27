@@ -13,6 +13,7 @@
  * @license https://opensource.org/licenses/mit-license.php MIT License
  */
 namespace Bootstrap\View\Helper;
+use Cake\Utility\Hash;
 
 /**
  * Html Helper class for easy use of HTML widgets.
@@ -139,7 +140,14 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
      * {@inheritDoc}
      */
     public function link($title, $url = null, array $options = []) {
-        return $this->_easyIcon('parent::link', 0, 2, [$title, $url, $options]);
+	    if($this->easyIcon && Hash::get($options, 'easyIcon', true)) {
+		    if ($url !== null && Hash::get($options, 'escape', true)) {
+			    $title = h($title);
+		    }
+		    return $this->_easyIcon('parent::link', 0, 2, [$title, $url, $options]);
+	    } else {
+		    return parent::link($title, $url, $options);
+	    }
     }
 
     /**
