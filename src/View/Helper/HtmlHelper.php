@@ -143,6 +143,7 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
 	    if(Hash::get($options, 'easyIcon', $this->easyIcon)) {
 		    if ($url !== null && Hash::get($options, 'escape', true)) {
 			    $title = h($title);
+			    $options['escape'] = false;
 		    }
 		    return $this->_easyIcon('parent::link', 0, 2, [$title, $url, $options]);
 	    } else {
