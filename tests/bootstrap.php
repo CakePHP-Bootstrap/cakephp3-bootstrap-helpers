@@ -64,5 +64,3 @@ Cache::setConfig([
 Configure::write('debug', true);
 
 ini_set('intl.default_locale', 'en_US');
-
-Plugin::load('Search', ['path' => ROOT]);
