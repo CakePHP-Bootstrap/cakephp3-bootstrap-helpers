@@ -140,6 +140,31 @@ class EasyIconTraitTest extends TestCase {
             ]], '/i', 'Dashboard', '/a'
         ], $result);
 
+        // BootstrapHtmlHelper
+        $result = $this->html->link('i:dashboard Dashboard', '/dashboard', [
+            'easyIcon' => false
+        ]);
+        $this->assertHtml([
+            ['a' => [
+                'href' => '/dashboard'
+            ]],
+            'i:dashboard Dashboard', '/a'
+        ], $result);
+
+        // BootstrapHtmlHelper
+        $result = $this->html->link('i:dashboard <script>Dashboard</script>', '/dashboard', [
+            'easyIcon' => true
+        ]);
+        $this->assertHtml([
+            ['a' => [
+                'href' => '/dashboard'
+            ]],
+            ['i' => [
+                'class' => 'glyphicon glyphicon-dashboard',
+                'aria-hidden' => 'true'
+            ]], '/i', '&lt;script&gt;Dashboard&lt;/script&gt;', '/a'
+        ], $result);
+
     }
 
     public function testPaginatorHelperMethods() {

@@ -275,7 +275,8 @@ class PaginatorHelper extends \Cake\View\Helper\PaginatorHelper {
      * @link http://book.cakephp.org/3.0/en/views/helpers/paginator.html#creating-jump-links
      */
     public function prev($title = '<< Previous', array $options = []) {
-        return $this->_easyIcon('parent::prev', $title, $options);
+        list($options, $easyIcon) = $this->_easyIconOption($options);
+        return $this->_injectIcon(parent::prev($title, $options), $easyIcon);
     }
 
     /**
@@ -301,7 +302,8 @@ class PaginatorHelper extends \Cake\View\Helper\PaginatorHelper {
      * @link http://book.cakephp.org/3.0/en/views/helpers/paginator.html#creating-jump-links
      */
     public function next($title = 'Next >>', array $options = []) {
-        return $this->_easyIcon('parent::next', $title, $options);
+        list($options, $easyIcon) = $this->_easyIconOption($options);
+        return $this->_injectIcon(parent::next($title, $options), $easyIcon);
     }
 
     /**
@@ -336,7 +338,8 @@ class PaginatorHelper extends \Cake\View\Helper\PaginatorHelper {
      * @link http://book.cakephp.org/3.0/en/views/helpers/paginator.html#creating-jump-links
      */
     public function first($first = '<< first', array $options = []) {
-        return $this->_easyIcon('parent::first', $first, $options);
+        list($options, $easyIcon) = $this->_easyIconOption($options);
+        return $this->_injectIcon(parent::first($first, $options), $easyIcon);
     }
 
     /**
@@ -371,7 +374,8 @@ class PaginatorHelper extends \Cake\View\Helper\PaginatorHelper {
      * @link http://book.cakephp.org/3.0/en/views/helpers/paginator.html#creating-jump-links
      */
     public function last($last = 'last >>', array $options = []) {
-        return $this->_easyIcon('parent::last', $last, $options);
+        list($options, $easyIcon) = $this->_easyIconOption($options);
+        return $this->_injectIcon(parent::last($last, $options), $easyIcon);
     }
 
 }

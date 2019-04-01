@@ -357,11 +357,14 @@ class PanelHelper extends Helper {
      * header.
      */
     protected function _createHeader($title, $options = [], $titleOptions = []) {
-        $title = $this->_makeIcon($title, $converted);
         $options += [
-            'escape' => !$converted,
+            'escape' => true,
             'templateVars' => []
         ];
+
+        // Extract easy icon option:
+        list($options, $easyIcon) = $this->_easyIconOption($options);
+
         if (empty($titleOptions)) {
             $titleOptions = $options['title'];
         }
@@ -406,7 +409,9 @@ class PanelHelper extends Helper {
             ]);
             $out .= $this->_cleanCurrent();
         }
-        return $out;
+
+        // Inject easy-icon:
+        return $this->_injectIcon($out, $easyIcon);
     }
 
     /**
