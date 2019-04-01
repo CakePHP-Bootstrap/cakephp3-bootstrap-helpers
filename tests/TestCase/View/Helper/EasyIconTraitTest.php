@@ -17,8 +17,8 @@ class PublicEasyIconTrait {
         $this->Html = new HtmlHelper($view);
     }
 
-    public function publicEasyIcon($callback, $title, $options) {
-        return $this->_easyIcon($callback, $title, $options);
+    public function publicMakeIcon($title, &$converted) {
+        return $this->_makeIcon($title, $converted);
     }
 
 };
@@ -71,59 +71,33 @@ class EasyIconTraitTest extends TestCase {
     }
 
     public function testEasyIcon() {
+        $converted = false;
 
-        $that = $this;
-        $callback = function($text, $options) use($that) {
-            $that->assertEquals(isset($options['escape']) ? $options['escape'] : true,
-                                $options['expected']['escape']);
-            $that->assertHtml($options['expected']['result'], $text);
-        };
+        $this->assertHtml(
+            [['i' => [
+                'class' => 'glyphicon glyphicon-plus',
+                'aria-hidden' => 'true'
+            ]], '/i'], $this->trait->publicMakeIcon('i:plus', $converted));
+        $this->assertTrue($converted);
 
-        $this->trait->publicEasyIcon($callback, 'i:plus', [
-            'expected' => [
-                'escape' => false,
-                'result' => [['i' => [
-                    'class' => 'glyphicon glyphicon-plus',
-                    'aria-hidden' => 'true'
-                ]], '/i']
-            ]
-        ]);
+        $this->assertHtml(['Click Me!'], $this->trait->publicMakeIcon('Click Me!', $converted));
+        $this->assertFalse($converted);
 
-        $this->trait->publicEasyIcon($callback, 'Click Me!', [
-            'expected' => [
-                'escape' => true,
-                'result' => 'Click Me!'
-            ]
-        ]);
+        $this->assertHtml([['i' => [
+                'class' => 'glyphicon glyphicon-plus',
+                'aria-hidden' => 'true'
+            ]], '/i', ' Add'], $this->trait->publicMakeIcon('i:plus Add', $converted));
+        $this->assertTrue($converted);
 
-        $this->trait->publicEasyIcon($callback, 'i:plus Add', [
-            'expected' => [
-                'escape' => false,
-                'result' => [['i' => [
-                    'class' => 'glyphicon glyphicon-plus',
-                    'aria-hidden' => 'true'
-                ]], '/i', ' Add']
-            ]
-        ]);
-
-        $this->trait->publicEasyIcon($callback, 'Add i:plus', [
-            'expected' => [
-                'escape' => false,
-                'result' => ['Add ', ['i' => [
-                    'class' => 'glyphicon glyphicon-plus',
-                    'aria-hidden' => 'true'
-                ]], '/i']
-            ]
-        ]);
+        $this->assertHtml(['Add ', ['i' => [
+            'class' => 'glyphicon glyphicon-plus',
+            'aria-hidden' => 'true'
+        ]], '/i'], $this->trait->publicMakeIcon('Add i:plus', $converted));
+        $this->assertTrue($converted);
 
         $this->trait->easyIcon = false;
-        $this->trait->publicEasyIcon($callback, 'i:plus', [
-            'expected' => [
-                'escape' => true,
-                'result' => 'i:plus'
-            ]
-        ]);
-
+        $this->assertHtml(['Add i:plus'], $this->trait->publicMakeIcon('Add i:plus', $converted));
+        $this->assertFalse($converted);
     }
 
     public function testHtmlHelperMethods() {

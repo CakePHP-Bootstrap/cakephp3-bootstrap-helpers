@@ -36,7 +36,7 @@ trait EasyIconTrait {
      * 
      * @return array An array containing the options and the easy-icon option.
      */
-    public function _easyIconOption(array $options) {
+    protected function _easyIconOption(array $options) {
         $options += [
             'easyIcon' => $this->easyIcon
         ];
@@ -97,45 +97,11 @@ trait EasyIconTrait {
      * @param bool $easyIcon Boolean indicating if the easy-icon process should be
      * applied.
      */
-    public function _injectIcon($title, $easyIcon) {
+    protected function _injectIcon($title, $easyIcon) {
         if (!$easyIcon) {
             return $title;
         }
         return $this->_makeIcon($title);
-    }
-
-    /**
-     * This method calls the given callback with the given list of parameters after
-     * applying an easy-icon filter on them.
-     *
-     * Note: For compatibility issue, this function can still be called with a callback,
-     * a string (title) and an array of options.
-     *
-     * @param callable $callback The callback.
-     * @param int $indexTitle Index of the title to which the easy-icon processing
-     * will be applied.
-     * @param int $indexOptions Index of the options in the $args array.
-     * @param array $args Arguments for the callback.
-     *
-     * @return mixed Whatever might be returned by $callback.
-     * 
-     * @deprecated
-     */
-    protected function _easyIcon(callable $callback, $indexTitle, $indexOptions, $args = null) {
-        if ($args === null) {
-            $args = [$indexTitle, $indexOptions];
-            $indexTitle = 0;
-            $indexOptions = 1;
-        }
-        $title = &$args[$indexTitle];
-        $options = &$args[$indexOptions];
-        $title = $this->_makeIcon($title, $converted);
-        if ($converted) {
-            $options += [
-                'escape' => false
-            ];
-        }
-        return call_user_func_array($callback, $args);
     }
 
 }
