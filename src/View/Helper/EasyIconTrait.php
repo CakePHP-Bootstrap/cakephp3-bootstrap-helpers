@@ -97,7 +97,7 @@ trait EasyIconTrait {
      * @param bool $easyIcon Boolean indicating if the easy-icon process should be
      * applied.
      */
-    public function _injectIcon(string $title, bool $easyIcon) {
+    public function _injectIcon($title, $easyIcon) {
         if (!$easyIcon) {
             return $title;
         }
