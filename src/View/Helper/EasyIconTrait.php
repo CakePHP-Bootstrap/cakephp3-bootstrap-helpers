@@ -28,6 +28,24 @@ trait EasyIconTrait {
     public $easyIcon = true;
 
     /**
+     * Remove the `easyIcon` option from the given array and return it together with
+     * the array.
+     * 
+     * @param array $options Array of options from which the easy-icon option should
+     * be extracted.
+     * 
+     * @return array An array containing the options and the easy-icon option.
+     */
+    protected function _easyIconOption(array $options) {
+        $options += [
+            'easyIcon' => $this->easyIcon
+        ];
+        $easyIcon = $options['easyIcon'];
+        unset($options['easyIcon']);
+        return [$options, $easyIcon];
+    }
+
+    /**
      * Try to convert the specified string to a bootstrap icon. The string is converted if
      * it matches a format `i:icon-name` (leading and trailing spaces or ignored) and if
      * easy-icon is activated.
@@ -41,7 +59,7 @@ trait EasyIconTrait {
      *
      * @return string The text after conversion.
      */
-    protected function _makeIcon($text, &$converted = false, $options = []) {
+    protected function _makeIcon($text, &$converted = false) {
         $converted = false;
 
         // If easyIcon mode is disable.
@@ -64,43 +82,26 @@ trait EasyIconTrait {
 
         // Replace occurences.
         $text = preg_replace_callback(
-            '#(^|\s+)i:([a-zA-Z0-9\\-_]+)(\s+|$)#', function ($matches) use ($ficon, $options) {
-                return $matches[1].call_user_func($ficon, $matches[2], $options).$matches[3];
+            '#(^|[>\s]\s*)i:([a-zA-Z0-9\\-_]+)(\s*[\s<]|$)#', function ($matches) use ($ficon) {
+                return $matches[1].call_user_func($ficon, $matches[2]).$matches[3];
             }, $text, -1, $count);
         $converted = (bool)$count;
         return $text;
     }
 
     /**
-     * This method calls the given callback with the given list of parameters after
-     * applying an easy-icon filter on them.
-     *
-     * Note: For compatibility issue, this function can still be called with a callback,
-     * a string (title) and an array of options.
-     *
-     * @param callable $callback The callback.
-     * @param int $indexTitle Index of the title to which the easy-icon processing
-     * will be applied.
-     * @param int $indexOptions Index of the options in the $args array.
-     * @param array $args Arguments for the callback.
-     *
-     * @return mixed Whatever might be returned by $callback.
+     * Inject icon into the given string.
+     * 
+     * @param string $input Input string where icon should be injected following the
+     * easy-icon process.
+     * @param bool $easyIcon Boolean indicating if the easy-icon process should be
+     * applied.
      */
-    protected function _easyIcon(callable $callback, $indexTitle, $indexOptions, $args = null) {
-        if ($args === null) {
-            $args = [$indexTitle, $indexOptions];
-            $indexTitle = 0;
-            $indexOptions = 1;
+    protected function _injectIcon($title, $easyIcon) {
+        if (!$easyIcon) {
+            return $title;
         }
-        $title = &$args[$indexTitle];
-        $options = &$args[$indexOptions];
-        $title = $this->_makeIcon($title, $converted);
-        if ($converted) {
-            $options += [
-                'escape' => false
-            ];
-        }
-        return call_user_func_array($callback, $args);
+        return $this->_makeIcon($title);
     }
 
 }

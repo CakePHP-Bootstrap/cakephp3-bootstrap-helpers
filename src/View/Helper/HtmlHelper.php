@@ -139,7 +139,8 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
      * {@inheritDoc}
      */
     public function link($title, $url = null, array $options = []) {
-        return $this->_easyIcon('parent::link', 0, 2, [$title, $url, $options]);
+        list($options, $easyIcon) = $this->_easyIconOption($options);
+        return $this->_injectIcon(parent::link($title, $url, $options), $easyIcon);
     }
 
     /**
