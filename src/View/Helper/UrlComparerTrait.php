@@ -120,7 +120,8 @@ trait UrlComparerTrait {
         if (!$this->_matchRelative($url)) {
             return null;
         }
-        $url = Router::parseRequest(new ServerRequest($this->_removeRelative($url)));
+        $request = new ServerRequest($this->_removeRelative($url));
+        $url = Router::parseRequest($request->withMethod('GET'));
         $arr = [];
         foreach ($this->_parts as $part) {
             if (!isset($url[$part]) || (isset($parts[$part]) && !$parts[$part])) {
