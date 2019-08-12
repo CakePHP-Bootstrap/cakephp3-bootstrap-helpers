@@ -2,7 +2,7 @@ CakePHP 3.x Helpers for Bootstrap
 =================================
 
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
-[![Travis](https://img.shields.io/travis/Holt59/cakephp3-bootstrap-helpers/4.0.1-alpha.svg?style=flat-square)](https://travis-ci.org/Holt59/cakephp3-bootstrap-helpers)
+[![Travis](https://img.shields.io/travis/Holt59/cakephp3-bootstrap-helpers/4.0.1-alpha.svg?style=flat-square)](https://travis-ci.com/Holt59/cakephp3-bootstrap-helpers)
 [![Packagist](https://img.shields.io/packagist/dt/holt59/cakephp3-bootstrap-helpers.svg?style=flat-square)](https://packagist.org/packages/holt59/cakephp3-bootstrap-helpers)
 
 CakePHP 3.x Helpers to generate HTML with @Twitter Boostrap style: `Breadcrumbs`, `Flash`, `Form`, `Html`, `Modal`, `Navbar`,
