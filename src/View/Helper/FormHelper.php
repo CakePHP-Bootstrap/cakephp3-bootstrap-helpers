@@ -454,7 +454,6 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
             'options' => null,
             'templates' => [],
             'templateVars' => [],
-
             'labelOptions' => true
         ];
 
