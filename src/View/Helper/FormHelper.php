@@ -450,11 +450,20 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
     public function control($fieldName, array $options = array()) {
 
         $options += [
+            'type' => null,
+            'label' => null,
+            'error' => null,
+            'required' => null,
+            'options' => null,
+            'templates' => [],
             'templateVars' => [],
-            'required'     => false,
-            'prepend'      => false,
-            'append'       => false,
-            'help'         => false,
+            'labelOptions' => true
+        ];
+
+        $options += [
+            'prepend'      => null,
+            'append'       => null,
+            'help'         => null,
             'inline'       => false
         ];
 
