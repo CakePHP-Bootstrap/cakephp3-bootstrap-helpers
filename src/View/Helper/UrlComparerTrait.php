@@ -21,7 +21,8 @@ use Cake\Routing\Router;
 /**
  * A trait that provides a method to compare url.
  */
-trait UrlComparerTrait {
+trait UrlComparerTrait
+{
 
     /**
      * Parts of the URL used for normalization.
@@ -35,7 +36,7 @@ trait UrlComparerTrait {
      *
      * @return string The relative path.
      */
-    protected function _relative() {
+    protected function _relative(): string {
         return trim(Router::url('/'), '/');
     }
 
@@ -44,7 +45,7 @@ trait UrlComparerTrait {
      *
      * @return string|null The hostname, or `null`.
      */
-    protected function _hostname() {
+    protected function _hostname(): string {
         $components = parse_url(Router::url('/', true));
         if (isset($components['host'])) {
             return $components['host'];
@@ -59,7 +60,7 @@ trait UrlComparerTrait {
      *
      * @return bool `true` if the URL matches, `false` otherwise.
      */
-    protected function _matchHost($url) {
+    protected function _matchHost($url): bool {
         $components = parse_url($url);
         return !(isset($components['host']) && $components['host'] != $this->_hostname());
     }
@@ -72,7 +73,7 @@ trait UrlComparerTrait {
      *
      * @return bool `true` if the URL matches, `false` otherwise.
      */
-    protected function _matchRelative($url) {
+    protected function _matchRelative($url): bool {
         $relative = $this->_relative();
         if (!$relative) {
             return true;
@@ -92,14 +93,14 @@ trait UrlComparerTrait {
      *
      * @param string The new URL.
      */
-    protected function _removeRelative($url) {
+    protected function _removeRelative($url): string {
         $components = parse_url($url);
         $relative = $this->_relative();
         $path = trim($components['path'], '/');
         if ($relative && strpos($path, $relative) === 0) {
             $path = trim(substr($path, strlen($relative)), '/');
         }
-        return '/'.$path;
+        return '/' . $path;
     }
 
     /**
@@ -110,7 +111,7 @@ trait UrlComparerTrait {
      *
      * @return string Normalized URL.
      */
-    protected function _normalize($url, array $parts = []) {
+    protected function _normalize($url, array $parts = []): string {
         if (!is_string($url)) {
             $url = Router::url($url);
         }
@@ -134,7 +135,7 @@ trait UrlComparerTrait {
             }
             $arr[] = $url[$part];
         }
-        return $this->_removeRelative(Router::normalize('/'.implode('/', $arr)));
+        return $this->_removeRelative(Router::normalize('/' . implode('/', $arr)));
     }
 
     /**
@@ -146,7 +147,7 @@ trait UrlComparerTrait {
      *
      * @return bool `true` if both URL match, `false` otherwise.
      */
-    public function compareUrls($lhs, $rhs = null, $parts = []) {
+    public function compareUrls($lhs, $rhs = null, $parts = []): bool {
         if ($rhs == null) {
             $rhs = Router::url();
         }

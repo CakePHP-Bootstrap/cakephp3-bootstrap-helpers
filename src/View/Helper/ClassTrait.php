@@ -30,7 +30,7 @@ trait ClassTrait {
      *
      * @return array Array of options with `$key` set or updated.
      */
-    public function addClass(array $options = [], $class = null, $key = 'class') {
+    public function addClass(array $options = [], $class = null, $key = 'class'):array {
         if (!is_array($class)) {
             $class = explode(' ', trim($class));
         }
@@ -59,7 +59,7 @@ trait ClassTrait {
      * @return array The new options with class values (btn, and btn-* according to
      * initial options).
      */
-    protected function _addButtonClasses($options) {
+    protected function _addButtonClasses($options): array {
         $options += [
             'btype' => $this->getConfig('buttons.type'),
             'size' => false,
@@ -100,7 +100,7 @@ trait ClassTrait {
      *
      * @return bool `true` if the array is associative, `false` otherwize.
      */
-    protected function _isAssociativeArray($array) {
+    protected function _isAssociativeArray($array): bool {
         return array_keys($array) !== range(0, count($array) - 1);
     }
 

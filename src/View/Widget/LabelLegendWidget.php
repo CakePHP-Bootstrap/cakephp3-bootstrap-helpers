@@ -42,7 +42,7 @@ class LabelLegendWidget extends LabelWidget {
     /**
      * {@inheritDoc}
      */
-    public function render(array $data, \Cake\View\Form\ContextInterface $context) {
+    public function render(array $data, \Cake\View\Form\ContextInterface $context):string {
         if (isset($data['for']) && $data['for'] === false) {
             $this->_labelTemplate = $this->_templateForLegend;
         }

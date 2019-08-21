@@ -90,7 +90,7 @@ class FancyFileWidget implements WidgetInterface {
      * @param \Cake\View\Form\ContextInterface $context The current form context.
      * @return string HTML elements.
      */
-    public function render(array $data, \Cake\View\Form\ContextInterface $context) {
+    public function render(array $data, \Cake\View\Form\ContextInterface $context):string {
 
         $data += [
             '_input'  => [],
@@ -159,7 +159,7 @@ class FancyFileWidget implements WidgetInterface {
     /**
      * {@inheritDoc}
      */
-    public function secureFields(array $data) {
+    public function secureFields(array $data):string {
         // the extra input for display
         $fields = [$this->_fakeFieldName($data['name'])];
         // the file array
@@ -174,7 +174,7 @@ class FancyFileWidget implements WidgetInterface {
      * @param string $fieldName original field name
      * @return string fake field name
      */
-    protected static function _fakeFieldName($fieldName) {
+    protected static function _fakeFieldName($fieldName):string {
         return preg_replace('/(\]?)$/', '-text$1', $fieldName, 1);
     }
 };

@@ -117,7 +117,7 @@ class ModalHelper extends Helper {
      *
      * @return string An HTML string containing opening elements for a modal.
      */
-    public function create($title = null, $options = []) {
+    public function create($title = null, $options = []): string {
 
         if(is_array($title)) {
             $options = $title;
@@ -196,7 +196,7 @@ class ModalHelper extends Helper {
      *
      * @return string An HTML string containing closing tags for the modal.
      */
-    public function end($buttons = NULL, $options = []) {
+    public function end($buttons = NULL, $options = []): string {
         $res = $this->_cleanCurrent();
         if($buttons !== null) {
             $res .= $this->footer($buttons, $options);
@@ -213,7 +213,7 @@ class ModalHelper extends Helper {
      *
      * @return string An HTML string containing closing elements.
      */
-    protected function _cleanCurrent() {
+    protected function _cleanCurrent(): string {
         if ($this->_current) {
             $current = $this->_current;
             $this->_current = null;
@@ -232,7 +232,7 @@ class ModalHelper extends Helper {
      *
      * @return string
      */
-    protected function _part($part, $content = null, $options = []) {
+    protected function _part($part, $content = null, $options = []): string {
         $options += [
             'templateVars' => []
         ];
@@ -266,7 +266,7 @@ class ModalHelper extends Helper {
      *
      * @see `BootstrapModalHelper::header`
      */
-    protected function _createHeader($title = null, $options = []) {
+    protected function _createHeader($title = null, $options = []): string {
         $options += [
             'close' => true
         ];
@@ -302,7 +302,7 @@ class ModalHelper extends Helper {
      *
      * @see `BootstrapModalHelper::body`
      */
-    protected function _createBody($text = null, $options = []) {
+    protected function _createBody($text = null, $options = []): string {
         return $this->_part('body', $text, $options);
     }
 
@@ -325,7 +325,7 @@ class ModalHelper extends Helper {
      * @return string A formated opening tag for the modal footer or the complete modal
      * footer.
      */
-    protected function _createFooter($content = null, $options = []) {
+    protected function _createFooter($content = null, $options = []): string {
         $options += [
             'close' => true
         ];
@@ -373,7 +373,7 @@ class ModalHelper extends Helper {
      * @return string A formated opening tag for the modal header or the complete modal
      * header.
      */
-    public function header($info = null, $options = []) {
+    public function header($info = null, $options = []): string {
         if(is_array($info)) {
             $options = $info;
             $info = null;
@@ -417,7 +417,7 @@ class ModalHelper extends Helper {
      * @return string A formated opening tag for the modal body or the complete modal
      * body.
      */
-    public function body($info = null, $options = []) {
+    public function body($info = null, $options = []): string {
         if(is_array($info)) {
             $options = $info;
             $info = null;
@@ -467,7 +467,7 @@ class ModalHelper extends Helper {
      * @return string A formated opening tag for the modal footer or the complete modal
      * footer.
      */
-    public function footer($buttons = null, $options = []) {
+    public function footer($buttons = null, $options = []): string {
         if(is_array($buttons)) {
             if(!empty($buttons) && $this->_isAssociativeArray($buttons)) {
                 $options = $buttons;

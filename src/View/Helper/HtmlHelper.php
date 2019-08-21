@@ -138,7 +138,7 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
     /**
      * {@inheritDoc}
      */
-    public function link($title, $url = null, array $options = []) {
+    public function link($title, $url = null, array $options = []):string {
         list($options, $easyIcon) = $this->_easyIconOption($options);
         return $this->_injectIcon(parent::link($title, $url, $options), $easyIcon);
     }
@@ -146,7 +146,7 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
     /**
      * @deprecated 4.0.0 Use the badge() instead.
      */
-    public function label($text, $type = null, $options = []) {
+    public function label($text, $type = null, $options = []):string {
         return $this->badge($text, $type, $options);
     }
 
@@ -166,7 +166,7 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
      *
      * @param array $options Array of attributes for the span element.
      */
-     public function badge($text, $type = null, $options = []) {
+     public function badge($text, $type = null, $options = []):string {
         if (is_string($type)) {
             $options['type'] = $type;
         }
@@ -205,7 +205,7 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
      *
      * @return string A HTML bootstrap alert element.
      */
-    public function alert($text, $type = null, $options = []) {
+    public function alert($text, $type = null, $options = []): string {
         if (is_string($type)) {
             $options['type'] = $type;
         }
@@ -255,7 +255,7 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
      *
      * @return string The text wrapped in the specified HTML tag with a tooltip.
      */
-    public function tooltip($text, $tooltip, $options = []) {
+    public function tooltip($text, $tooltip, $options = []): string {
         $options += $this->getConfig('tooltip') + [
             'tooltip' => $tooltip,
             'templateVars' => []
@@ -290,7 +290,7 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
      *
      * @return string The HTML bootstrap progress bar.
      */
-    public function progress($widths, array $options = []) {
+    public function progress($widths, array $options = []): string {
         $options += $this->getConfig('progress') + [
             'striped' => false,
             'active'  => false,
@@ -362,7 +362,7 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
      *
      * @return string
      */
-    public function dropdown(array $menu = [], array $options = []) {
+    public function dropdown(array $menu = [], array $options = []): string {
         $normalized = [];
         foreach ($menu as $key => $value) {
             if (!is_numeric($key)) {

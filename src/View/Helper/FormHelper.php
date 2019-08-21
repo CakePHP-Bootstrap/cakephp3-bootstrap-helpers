@@ -233,7 +233,7 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
      *
      * @return string An formatted opening FORM tag.
      */
-    public function create($model = null, Array $options = array()) {
+    public function create($model = null, Array $options = array()):string {
         $options += [
             'horizontal' => false,
             'inline' => false
@@ -444,7 +444,7 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
      *
      * @return string Completed form widget.
      */
-    public function control($fieldName, array $options = array()) {
+    public function control($fieldName, array $options = array()):string {
 
         $options += [
             'type' => null,
@@ -511,7 +511,7 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
     /**
      * {@inheritDoc}
      */
-     protected function _inputLabel($fieldName, $label, $options) {
+     protected function _inputLabel($fieldName, $label, $options):string {
         $groupTypes = ['radio', 'inlineradio', 'multicheckbox', 'date', 'time', 'datetime'];
         if (in_array($options['type'], $groupTypes, true)) {
             $options['id'] = false;
@@ -569,7 +569,7 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
      *
      * @return string A generated file input.
      */
-    public function file($fieldName, array $options = []) {
+    public function file($fieldName, array $options = []):string {
         $options += ['secure' => true];
         $options = $this->_initInputField($fieldName, $options);
         unset($options['type']);
@@ -599,7 +599,7 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
      *
      * @link http://book.cakephp.org/3.0/en/views/helpers/form.html#creating-button-elements
      */
-    public function button($title, array $options = []) {
+    public function button($title, array $options = []):string {
         list($options, $easyIcon) = $this->_easyIconOption($options);
         return $this->_injectIcon(parent::button($title, $this->_addButtonClasses($options)), $easyIcon);
     }
@@ -615,7 +615,7 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
      *
      * @return string A HTML button tag.
      */
-    public function cbutton($title, $type = [], array $options = []) {
+    public function cbutton($title, $type = [], array $options = []):string {
         if (is_array($type)) {
             $options = $type;
             $type = null;
@@ -665,7 +665,7 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
      *
      * @return string A HTML string containing the button toolbar.
      */
-    public function buttonToolbar(array $buttonGroups, array $options = array()) {
+    public function buttonToolbar(array $buttonGroups, array $options = array()):string {
         $options += [
             'templateVars' => []
         ];
@@ -695,7 +695,7 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
      *
      * @return string A HTML string containing the button dropdown.
      */
-    public function dropdownButton($title, array $menu = [], array $options = []) {
+    public function dropdownButton($title, array $menu = [], array $options = []):string {
         // List of options to send to the dropdown() method
         $optsForHtml = ['align'];
         $ulOptions = [];
@@ -752,7 +752,7 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
      * @return string A HTML submit button
      * @link http://book.cakephp.org/3.0/en/views/helpers/form.html#creating-buttons-and-submit-elements
      */
-    public function submit($caption = null, array $options = []) {
+    public function submit($caption = null, array $options = []):string {
         return parent::submit($caption, $this->_addButtonClasses($options));
     }
 
@@ -766,7 +766,7 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
      *
      * @return string A HTML submit button.
      */
-    public function csubmit($caption = null, $type = [], array $options = []) {
+    public function csubmit($caption = null, $type = [], array $options = []):string {
         if (is_array($type)) {
             $options = $type;
             $type = null;

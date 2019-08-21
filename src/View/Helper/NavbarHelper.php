@@ -125,7 +125,7 @@ aria-haspopup="true" aria-expanded="false">{{content}}</a>',
      *
      * @return string containing the HTML starting element of the navbar.
      */
-    public function create($brand, $options = []) {
+    public function create($brand, $options = []):string {
 
         $options += [
             'id' => 'navbar',
@@ -252,7 +252,7 @@ aria-haspopup="true" aria-expanded="false">{{content}}</a>',
      *
      * @return string A HTML tag wrapping the link.
      */
-    public function link($name, $url = '', array $options = [], array $linkOptions = []) {
+    public function link($name, $url = '', array $options = [], array $linkOptions = []):string {
         $url = $this->Url->build($url);
         $options += [
             'active' => [],
@@ -302,7 +302,7 @@ aria-haspopup="true" aria-expanded="false">{{content}}</a>',
      *
      * @return A HTML dropdown divider tag.
      */
-    public function divider(array $options = []) {
+    public function divider(array $options = []):string {
         $options += ['templateVars' => []];
         return $this->formatTemplate('innerMenuItemDivider', [
             'attrs' => $this->templater()->formatAttributes($options),
@@ -323,7 +323,7 @@ aria-haspopup="true" aria-expanded="false">{{content}}</a>',
      *
      * @return A HTML header tag.
      */
-    public function header($name, array $options = []) {
+    public function header($name, array $options = []):string {
         $options += ['templateVars' => []];
         return $this->formatTemplate('innerMenuItemHeader', [
             'content' => $name,
@@ -345,7 +345,7 @@ aria-haspopup="true" aria-expanded="false">{{content}}</a>',
      *
      * @return string A HTML element wrapping the text for the navbar.
      */
-    public function text($text, $options = []) {
+    public function text($text, $options = []):string {
         $options += [
             'templateVars' => []
         ];
@@ -393,7 +393,7 @@ aria-haspopup="true" aria-expanded="false">{{content}}</a>',
      * @return string HTML elements to start a menu.
      */
     public function beginMenu($name = null, $url = null, $options = [],
-                              $linkOptions = [], $listOptions = []) {
+                              $linkOptions = [], $listOptions = []):string {
         $template = 'outerMenuStart';
         $templateOptions = [];
         if (is_array($name)) {
@@ -425,7 +425,7 @@ aria-haspopup="true" aria-expanded="false">{{content}}</a>',
      *
      * @return string HTML elements to close a menu.
      */
-    public function endMenu() {
+    public function endMenu():string {
         $template = 'outerMenuEnd';
         $options = [];
         if ($this->_level == 2) {
@@ -441,7 +441,7 @@ aria-haspopup="true" aria-expanded="false">{{content}}</a>',
      *
      * @return string HTML elements to close the navbar.
      */
-    public function end() {
+    public function end():string {
         $containerEnd = '';
         if ($this->_container) {
             $containerEnd = $this->formatTemplate('containerEnd', []);
