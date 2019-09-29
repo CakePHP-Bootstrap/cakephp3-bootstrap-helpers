@@ -449,6 +449,10 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
      */
     public function control($fieldName, array $options = array()) {
 
+        if (!empty($options['type']) and $options['type'] == 'reset') {
+          return $this->submit($fieldName, $options);
+        }
+
         $options += [
             'type' => null,
             'label' => null,
