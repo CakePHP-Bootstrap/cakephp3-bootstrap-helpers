@@ -44,9 +44,9 @@ The full plugin documentation is available at https://holt59.github.io/cakephp3-
 
 | Version | Bootstrap version | CakePHP version | Information |
 |---------|-------------------|-----------------|-------------|
-| [master](https://github.com/Holt59/cakephp3-bootstrap-helpers/tree/master) | 3 | >= 3.5.0 | Current active branch. |
-| [3.1.2](https://github.com/Holt59/cakephp3-bootstrap-helpers/tree/v3.1.2) | 3 | >= 3.4.0, < 3.5.0 | Not actively maintained (open issue(s) if necessary). |
-| <= [3.1.1](https://github.com/Holt59/cakephp3-bootstrap-helpers/tree/v3.1.1) | 3 | < 3.4.0 | Deprecated. |
+| [master](https://github.com/Holt59/cakephp3-bootstrap-helpers/tree/master) | 3 | >= 3.7.0 | Current active Bootstrap 3 branch. |
+| [3.1.4](https://github.com/Holt59/cakephp3-bootstrap-helpers/tree/v3.1.4) | 3 | >= 3.7.0 | Open issue(s) if necessary. |
+| <= [3.1.2](https://github.com/Holt59/cakephp3-bootstrap-helpers/tree/v3.1.1) | 3 | < 3.4.0 | Deprecated. |
 | [4.0.1-alpha](https://github.com/Holt59/cakephp3-bootstrap-helpers/tree/4.0.1-alpha) | 4 | >= 3.4.0 | Alpha, not all helpers are available. |
 
 #### Contributing
