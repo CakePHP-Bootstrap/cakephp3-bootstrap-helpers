@@ -1158,17 +1158,17 @@ class FormHelperTest extends TestCase {
         $result = $this->form->file('Contact.picture');
         $this->assertHtml($expected, $result);
 
-        $this->form->getView()->setRequest($this->form->getView()->getRequest()->withData('Contact.picture', [
+        $this->form->request = $this->form->request->withData('Contact.picture', [
             'name' => '', 'type' => '', 'tmp_name' => '',
             'error' => 4, 'size' => 0
-        ]));
+        ]);
         $result = $this->form->file('Contact.picture');
         $this->assertHtml($expected, $result);
 
-        $this->form->getView()->setRequest($this->form->getView()->getRequest()->withData(
+        $this->form->request = $this->form->request->withData(
             'Contact.picture',
             'no data should be set in value'
-        ));
+        );
         $result = $this->form->file('Contact.picture');
         $this->assertHtml($expected, $result);
     }
