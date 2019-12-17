@@ -3,6 +3,7 @@
 namespace Bootstrap\Test\TestCase\View\Helper;
 
 use Bootstrap\View\Helper\BreadcrumbsHelper;
+use Cake\Routing\Router;
 use Cake\TestSuite\TestCase;
 use Cake\View\View;
 
@@ -24,6 +25,13 @@ class BreadcrumbsHelperTest extends TestCase {
         parent::setUp();
         $view = new View();
         $this->breadcrumbs = new BreadcrumbsHelper($view);
+
+        Router::reload();
+        Router::scope('/', function ($routes) {
+            $routes->connect('/', ['controller' => 'pages', 'action' => 'display', 'home']);
+            $routes->connect('/some_alias', ['controller' => 'tests_apps', 'action' => 'some_method']);
+            $routes->fallbacks();
+        });
     }
 
 
