@@ -10,7 +10,6 @@ dist: trusty
 env:
   - CAKEPHP_VERSION=3.7.*
   - CAKEPHP_VERSION=3.8.*
-  - CAKEPHP_VERSION=4.0.*
 
 cache:
   directories:
