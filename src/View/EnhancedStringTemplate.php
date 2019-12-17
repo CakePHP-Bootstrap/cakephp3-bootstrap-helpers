@@ -41,7 +41,7 @@ class EnhancedStringTemplate extends StringTemplate {
      *
      * @return string
     */
-    public function format($name, array $data) {
+    public function format($name, array $data): string {
         if (!isset($this->_compiled[$name])) {
             throw new RuntimeException("Cannot find template named '$name'.");
         }

@@ -29,7 +29,7 @@ trait FlexibleStringTemplateTrait {
      *
      * @return \Cake\View\StringTemplate
      */
-    public function templater() {
+    public function templater(): FlexibleStringTemplate {
         if ($this->_templater === null) {
             $class = $this->getConfig('templateClass') ?: 'Bootstrap\View\FlexibleStringTemplate';
             $callback = $this->getConfig('templateCallback') ?: null;
