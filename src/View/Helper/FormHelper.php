@@ -533,7 +533,7 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
      *
      * @return string Completed radio widget set.
      */
-    public function inlineRadio($fieldName, $options = [], array $attributes = []): string {
+    public function inlineRadio($fieldName, $options = [], array $attributes = []) {
         $attributes['options'] = $options;
         $attributes['idPrefix'] = $this->_idPrefix;
         $attributes = $this->_initInputField($fieldName, $attributes);
@@ -611,7 +611,7 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
      *
      * @return string A HTML string containing the button group.
      */
-    public function buttonGroup($buttons, array $options = []): string {
+    public function buttonGroup($buttons, array $options = []) {
         $options += [
             'vertical' => false,
             'templateVars' => []
@@ -634,7 +634,7 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
      *
      * @return string A HTML string containing the button toolbar.
      */
-    public function buttonToolbar(array $buttonGroups, array $options = array()): string {
+    public function buttonToolbar(array $buttonGroups, array $options = array()) {
         $options += [
             'templateVars' => []
         ];
@@ -664,7 +664,7 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
      *
      * @return string A HTML string containing the button dropdown.
      */
-    public function dropdownButton($title, array $menu = [], array $options = []): string {
+    public function dropdownButton($title, array $menu = [], array $options = []) {
         // List of options to send to the dropdown() method
         $optsForHtml = ['align'];
         $ulOptions = [];

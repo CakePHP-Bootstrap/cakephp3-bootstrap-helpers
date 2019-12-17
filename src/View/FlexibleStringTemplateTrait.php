@@ -13,6 +13,7 @@
  * @license https://opensource.org/licenses/mit-license.php MIT License
  */
 namespace Bootstrap\View;
+use Cake\View\StringTemplate;
 
 /**
  * Adds string template functionality to any class by providing methods to
@@ -29,7 +30,7 @@ trait FlexibleStringTemplateTrait {
      *
      * @return \Cake\View\StringTemplate
      */
-    public function templater(): FlexibleStringTemplate {
+    public function templater(): StringTemplate {
         if ($this->_templater === null) {
             $class = $this->getConfig('templateClass') ?: 'Bootstrap\View\FlexibleStringTemplate';
             $callback = $this->getConfig('templateCallback') ?: null;
