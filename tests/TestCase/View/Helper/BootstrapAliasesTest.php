@@ -11,7 +11,7 @@ class BootstrapAliasesTest extends TestCase {
      *
      * @return void
      */
-    public function setUp() {
+    public function setUp(): void {
 
     }
 
@@ -26,6 +26,6 @@ class BootstrapAliasesTest extends TestCase {
             $this->assertTrue(class_exists($alias), "Alias class $alias does not exists.");
             $this->assertTrue(is_subclass_of(new $alias($view), $class), "Class $alias is not an alias of $class.");
         }
-    }    
+    }
 
 };

@@ -33,7 +33,7 @@ class InlineRadioWidget extends RadioWidget {
      * @param \Cake\View\Form\ContextInterface $context The form context
      * @return string
      */
-    protected function _renderInput($val, $text, $data, $context) {
+    protected function _renderInput($val, $text, $data, $context): string {
         $escape = $data['escape'];
         if (is_int($val) && isset($text['text'], $text['value'])) {
             $radio = $text;
