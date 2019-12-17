@@ -35,6 +35,13 @@ class NavbarHelperTest extends TestCase {
             'className' => 'Bootstrap.Form'
         ]);
         $this->navbar = new NavbarHelper($view);
+
+        Router::reload();
+        Router::scope('/', function ($routes) {
+            $routes->connect('/', ['controller' => 'pages', 'action' => 'display', 'home']);
+            $routes->connect('/some_alias', ['controller' => 'tests_apps', 'action' => 'some_method']);
+            $routes->fallbacks();
+        });
     }
 
     public function testCreate() {
@@ -374,7 +381,11 @@ class NavbarHelperTest extends TestCase {
                 'pass' => ['1']
             ])
             ->withAttribute('base', '/cakephp');
-        Router::setRequestInfo($request);
+        if (method_exists('Router', 'setRequest')) {
+          Router::setRequest($request);
+        } else {
+          Router::setRequestInfo($request);
+        }
 
         $this->navbar->setConfig('autoActiveLink', true);
         $result = $this->navbar->link('Link', '/pages', [
@@ -403,7 +414,7 @@ class NavbarHelperTest extends TestCase {
         });
         Router::fullBaseUrl('');
         Configure::write('App.fullBaseUrl', 'http://localhost');
-        $request = new ServerRequest('/pages/faq');
+        $request = new ServerRequest(['url' => '/pages/faq']);
         $request = $request
             ->withAttribute('params', [
                 'action' => 'display',
@@ -412,7 +423,11 @@ class NavbarHelperTest extends TestCase {
                 'pass' => ['faq']
             ])
             ->withAttribute('base', '/cakephp');
-        Router::setRequestInfo($request);
+        if (method_exists('Router', 'setRequest')) {
+          Router::setRequest($request);
+        } else {
+          Router::setRequestInfo($request);
+        }
 
         $this->navbar->setConfig('autoActiveLink', true);
         $result = $this->navbar->link('Link', '/pages', [

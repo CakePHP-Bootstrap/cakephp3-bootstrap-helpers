@@ -58,8 +58,11 @@ class PaginatorHelperTest extends TestCase {
         $this->Paginator = new PaginatorHelper($this->View);
         Configure::write('Routing.prefixes', []);
         Router::reload();
-        Router::connect('/:controller/:action/*');
-        Router::connect('/:plugin/:controller/:action/*');
+        Router::scope('/', function ($routes) {
+            $routes->connect('/:controller/:action/*');
+            $routes->connect('/:plugin/:controller/:action/*');
+            $routes->fallbacks();
+        });
     }
 
     public function testNumbers()
