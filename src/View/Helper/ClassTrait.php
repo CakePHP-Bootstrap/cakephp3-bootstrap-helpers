@@ -25,12 +25,12 @@ trait ClassTrait {
      * Adds the given class to the element options.
      *
      * @param array        $options Array of options/attributes to add a class to.
-     * @param string|array $class   The class names to be added.
+     * @param string       $class   The class name to be added.
      * @param string       $key     The key to use for class (default to `'class'`).
      *
      * @return array Array of options with `$key` set or updated.
      */
-    public function addClass(array $options = [], $class = null, $key = 'class') {
+    public function addClass(array $options = [], string $class, string $key = 'class'): array {
         if (!is_array($class)) {
             $class = explode(' ', trim($class));
         }

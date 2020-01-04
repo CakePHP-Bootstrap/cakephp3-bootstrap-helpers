@@ -138,7 +138,7 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
     /**
      * {@inheritDoc}
      */
-    public function link($title, $url = null, array $options = []) {
+    public function link($title, $url = null, array $options = []): string {
         list($options, $easyIcon) = $this->_easyIconOption($options);
         return $this->_injectIcon(parent::link($title, $url, $options), $easyIcon);
     }
@@ -205,16 +205,6 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
             'attrs' => $this->templater()->formatAttributes($options),
             'templateVars' => $options['templateVars']
         ]);
-    }
-
-
-    /**
-     * @deprecated 3.3.6 (CakePHP) Use the BreadcrumbsHelper instead.
-     */
-    public function getCrumbList(array $options = [], $startText = false) {
-        $options['separator'] = '';
-        $options = $this->addClass($options, 'breadcrumb');
-        return parent::getCrumbList($options, $startText);
     }
 
     /**

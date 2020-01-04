@@ -27,8 +27,8 @@ use Bootstrap\View\FlexibleStringTemplateTrait;
  *
  * @link http://book.cakephp.org/3.0/en/views/helpers/form.html
  */
-class FormHelper extends \Cake\View\Helper\FormHelper {
-
+class FormHelper extends \Cake\View\Helper\FormHelper
+{
     use ClassTrait;
     use EasyIconTrait;
     use FlexibleStringTemplateTrait;
@@ -228,7 +228,7 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
      *
      * @return string An formatted opening FORM tag.
      */
-    public function create($model = null, Array $options = array()) {
+    public function create($model = null, Array $options = array()): string {
         $options += [
             'horizontal' => false,
             'inline' => false
@@ -371,7 +371,7 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
         if ($input === null) {
             return $this->formatTemplate('inputGroupStart', ['prepend' => $prepend]);
         }
-        return $this->_wrap($input, $prepend, null);
+        return $this->_wrap($input, $prepend, '');
     }
 
     /**
@@ -389,7 +389,7 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
         if ($input === null) {
             return $this->formatTemplate('inputGroupEnd', ['append' => $append]);
         }
-        return $this->_wrap($input, null, $append);
+        return $this->_wrap($input, '', $append);
     }
 
     /**
@@ -447,7 +447,7 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
      *
      * @return string Completed form widget.
      */
-    public function control($fieldName, array $options = array()) {
+    public function control(string $fieldName, array $options = array()): string {
 
         $options += [
             'type' => null,
@@ -500,7 +500,7 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
     /**
      * {@inheritDoc}
      */
-    protected function _getInput($fieldName, $options) {
+    protected function _getInput(string $fieldName, array $options) {
         $label = $options['labelOptions'];
         switch (strtolower($options['type'])) {
             case 'inlineradio':
@@ -562,7 +562,7 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
      *
      * @return string A generated file input.
      */
-    public function file($fieldName, array $options = []) {
+    public function file(string $fieldName, array $options = []): string {
         $options += ['secure' => true];
         $options = $this->_initInputField($fieldName, $options);
         unset($options['type']);
@@ -593,7 +593,7 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
      *
      * @link http://book.cakephp.org/3.0/en/views/helpers/form.html#creating-button-elements
      */
-    public function button($title, array $options = []) {
+    public function button(string $title, array $options = []): string {
         list($options, $easyIcon) = $this->_easyIconOption($options);
         return $this->_injectIcon(parent::button($title, $this->_addButtonClasses($options)), $easyIcon);
     }
@@ -718,7 +718,7 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
      * @return string A HTML submit button
      * @link http://book.cakephp.org/3.0/en/views/helpers/form.html#creating-buttons-and-submit-elements
      */
-    public function submit($caption = null, array $options = array()) {
+    public function submit(?string $caption = null, array $options = array()): string {
         return parent::submit($caption, $this->_addButtonClasses($options));
     }
 

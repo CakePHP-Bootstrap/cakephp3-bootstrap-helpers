@@ -50,7 +50,7 @@ class ColumnSelectBoxWidget extends SelectBoxWidget {
      * @return string A generated select box.
      * @throws \RuntimeException when the name attribute is empty.
      */
-    public function render(array $data, \Cake\View\Form\ContextInterface $context)
+    public function render(array $data, \Cake\View\Form\ContextInterface $context): string
     {
         $data += [
             'name' => '',
