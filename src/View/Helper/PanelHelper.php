@@ -350,7 +350,7 @@ class PanelHelper extends Helper {
      * - `templateVars` Provide template variables for the header template.
      * - Other attributes will be assigned to the header element.
      *
-     * @param string $text The panel header content, or null to only open the header.
+     * @param string $title The panel header content, or null to only open the header.
      * @param array $options Array of options. See above.
      *
      * @return string A formated opening tag for the panel header or the complete panel
@@ -529,7 +529,7 @@ class PanelHelper extends Helper {
      * - `templateVars` Provide template variables for the header template.
      * - Other attributes will be assigned to the header element.
      *
-     * @param string|array $text The header content, or `null`, or an array of options.
+     * @param string|array $info The header content, or `null`, or an array of options.
      * @param array        $options Array of options. See above.
      *
      * @return string A formated opening tag for the panel header or the complete panel
@@ -575,7 +575,7 @@ class PanelHelper extends Helper {
      * - `templateVars` Provide template variables for the body template.
      * - Other attributes will be assigned to the body element.
      *
-     * @param array|string $info The body content, or `null`, or an array of options.
+     * @param array|string $content The body content, or `null`, or an array of options.
      * `$options`.
      * @param array $options Array of options for the panel body `<div>`.
      *

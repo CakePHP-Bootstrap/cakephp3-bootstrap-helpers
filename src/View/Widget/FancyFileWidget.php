@@ -35,21 +35,21 @@ class FancyFileWidget implements WidgetInterface {
     /**
      * FileWidget instance.
      *
-     * @var Cake\View\Widget\FileWidget
+     * @var \Cake\View\Widget\FileWidget
      */
     protected $_file;
 
     /**
      * ButtonWidget instance.
      *
-     * @var Cake\View\Widget\ButtonWidget
+     * @var \Cake\View\Widget\ButtonWidget
      */
     protected $_button;
 
     /**
      * Text widget instance.
      *
-     * @var Cake\View\Widget\BasicWidget
+     * @var \Cake\View\Widget\BasicWidget
      */
     protected $_input;
 

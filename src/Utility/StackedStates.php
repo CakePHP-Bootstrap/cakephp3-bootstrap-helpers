@@ -67,7 +67,7 @@ class StackedStates {
      * ones.
      *
      * @param string $type Type of the new state.
-     * @param mixed $sate New state.
+     * @param mixed $state New state.
      *
      */
     public function push($type, $state = []) {

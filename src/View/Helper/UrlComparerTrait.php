@@ -90,7 +90,7 @@ trait UrlComparerTrait {
      *
      * @param string $url URL from which the relative part should be removed.
      *
-     * @param string The new URL.
+     * @return string The new URL.
      */
     protected function _removeRelative($url) {
         $components = parse_url($url);
@@ -106,9 +106,9 @@ trait UrlComparerTrait {
      * Normalize an URL.
      *
      * @param string $url URL to normalize.
-     * @param array $pass Include pass parameters.
+     * @param array $parts Include pass parameters.
      *
-     * @return string Normalized URL.
+     * @return string|null Normalized URL.
      */
     protected function _normalize($url, array $parts = []) {
         if (!is_string($url)) {

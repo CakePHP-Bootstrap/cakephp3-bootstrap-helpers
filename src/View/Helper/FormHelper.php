@@ -260,7 +260,7 @@ class FormHelper extends \Cake\View\Helper\FormHelper
      * Set the column sizes configuration associated with the
      * form helper.
      *
-     * @return array
+     * @return $this
      */
     public function setColumnSizes($columns) {
         return $this->setConfig('columns', $columns, false);

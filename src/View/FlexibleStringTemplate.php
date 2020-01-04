@@ -38,7 +38,7 @@ class FlexibleStringTemplate extends EnhancedStringTemplate {
      * @param array $config A set of templates to add.
      * @param callable $callback A general callback that will be called before
      * retrieving any templates.
-     * @param arra $callbacks An array of callbacks.
+     * @param array $callbacks An array of callbacks.
      */
     public function __construct(array $config = [], callable $callback = null, array $callbacks = []) {
         parent::__construct($config);

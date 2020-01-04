@@ -70,7 +70,7 @@ class ModalHelper extends Helper {
     /**
      * Current part of the modal(`null`, `'header'`, `'body'`, `'footer'`).
      *
-     * @var string
+     * @var string|null
      */
     protected $_current = null;
 
@@ -258,7 +258,7 @@ class ModalHelper extends Helper {
      * - `templateVars` Provide template variables for the `headerStart` template.
      * - Other attributes will be assigned to the modal header element.
      *
-     * @param string $text The modal header content, or null to only open the header.
+     * @param string $title The modal header content, or null to only open the header.
      * @param array $options Array of options. See above.
      *
      * @return string A formated opening tag for the modal header or the complete modal
@@ -368,7 +368,7 @@ class ModalHelper extends Helper {
      * - `templateVars` Provide template variables for the `headerStart` template.
      * - Other attributes will be assigned to the modal header element.
      *
-     * @param string|array $text The modal header content, or an array of options.
+     * @param string|array $info The modal header content, or an array of options.
      * @param array $options Array of options. See above.
      *
      * @return string A formated opening tag for the modal header or the complete modal

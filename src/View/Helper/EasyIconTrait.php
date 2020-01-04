@@ -92,7 +92,7 @@ trait EasyIconTrait {
     /**
      * Inject icon into the given string.
      * 
-     * @param string $input Input string where icon should be injected following the
+     * @param string $title Input string where icon should be injected following the
      * easy-icon process.
      * @param bool $easyIcon Boolean indicating if the easy-icon process should be
      * applied.
