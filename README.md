@@ -2,25 +2,43 @@ CakePHP 3.x Helpers for Bootstrap
 =================================
 
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
-[![Travis](https://img.shields.io/travis/Holt59/cakephp3-bootstrap-helpers/4.0.1-alpha.svg?style=flat-square)](https://travis-ci.com/Holt59/cakephp3-bootstrap-helpers)
+[![Travis](https://img.shields.io/travis/Holt59/cakephp3-bootstrap-helpers/4.0.3.svg?style=flat-square)](https://travis-ci.com/Holt59/cakephp3-bootstrap-helpers)
 [![Packagist](https://img.shields.io/packagist/dt/holt59/cakephp3-bootstrap-helpers.svg?style=flat-square)](https://packagist.org/packages/holt59/cakephp3-bootstrap-helpers)
 
 CakePHP 3.x Helpers to generate HTML with @Twitter Boostrap style: `Breadcrumbs`, `Flash`, `Form`, `Html`, `Modal`, `Navbar`,
-`Panel` and `Paginator` helpers available!
+`Card` and `Paginator` helpers available!
 
-Work in progress
-================
+How to... ?
+===========
 
-I am currently working on rewritting the helpers for Bootstrap 4, current work status:
+#### Installation
 
-- `BreadcrumbsHelper` - **alpha**, minor changes, should work properly.
-- `FlashHelper` - No changes.
-- `FormHelper` - **alpha**, important changes, expect errors or strange outputs.
-- `HtmlHelper` - **alpha**, minor changes, should work properly.
-- `ModalHelper` - **alpha**, minor changes, should work properly.
-- `NavbarHelper` - **alpha,**, no huge changes, should work properly.
-- `PaginatorHelper` - **alpha**, minor changes, should work properly.
-- `CardHelper` (previously `PanelHelper`) - **alpha**, important changes, work in progress.
+If you want the **Bootstrap 4** version of the plugin:
+
+- Add the plugin to your `composer.json`:
+
+```bash
+# Stable version:
+composer require holt59/cakephp3-bootstrap-helpers:4.0.2
+
+# Development version (latest fixes):
+composer require holt59/cakephp3-bootstrap-helpers:dev-4.0.1-alpha
+```
+
+- Load the plugin in your `config/bootstrap.php`:
+
+```php
+Plugin::load('Bootstrap');
+```
+
+- [Load the helpers](https://book.cakephp.org/3.0/en/views/helpers.html#configuring-helpers) you want in your `View/AppView.php`:
+
+```php
+$this->loadHelper('Html', [
+    'className' => 'Bootstrap.Html',
+    // Other configuration options...
+]);
+```
 
 #### Breaking changes from previous versions
 
@@ -43,44 +61,16 @@ I am currently working on rewritting the helpers for Bootstrap 4, current work s
   - when adding a `link()` to an inner menu, the `$linkOptions` parameters is not usable anymore and the
   `$options` parameters should be used directly (their are no wrapping `<li>` anymore for inner menu).
 
-How to... ?
-===========
-
-#### Installation
-
-If you want the latest **Bootstrap 4** version of the plugin:
-
-- Add the plugin to your `composer.json`:
-
-```
-composer require holt59/cakephp3-bootstrap-helpers:dev-4.0.1-alpha
-```
-
-- Load the plugin in your `config/bootstrap.php`:
-
-```php
-Plugin::load('Bootstrap');
-```
-
-- [Load the helpers](https://book.cakephp.org/3.0/en/views/helpers.html#configuring-helpers) you want in your `View/AppView.php`:
-
-```php
-$this->loadHelper('Html', [
-    'className' => 'Bootstrap.Html',
-    // Other configuration options...
-]);
-```
-
 The full plugin documentation is available at https://holt59.github.io/cakephp3-bootstrap-helpers/.
 
 #### Table of version and requirements
 
 | Version | Bootstrap version | CakePHP version | Information |
 |---------|-------------------|-----------------|-------------|
-| [master](https://github.com/Holt59/cakephp3-bootstrap-helpers/tree/master) | 3 | >= 3.5.0 | Current active branch. |
-| [3.1.2](https://github.com/Holt59/cakephp3-bootstrap-helpers/tree/v3.1.2) | 3 | >= 3.4.0, < 3.5.0 | Not actively maintained (open issue(s) if necessary). |
-| <= [3.1.1](https://github.com/Holt59/cakephp3-bootstrap-helpers/tree/v3.1.1) | 3 | < 3.4.0 | Deprecated. |
-| [4.0.1-alpha](https://github.com/Holt59/cakephp3-bootstrap-helpers/tree/4.0.1-alpha) | 4 | >= 3.4.0 | Alpha, most helpers available. |
+| [master](https://github.com/Holt59/cakephp3-bootstrap-helpers/tree/master) | 3 | >= 3.7.0 | Current active V3 branch. |
+| [4.0.2](https://github.com/Holt59/cakephp3-bootstrap-helpers/tree/4.0.1-alpha) | 4 | >= 3.7.0 | Current active V4 branch. |
+| [3.1.4](https://github.com/Holt59/cakephp3-bootstrap-helpers/tree/v3.1.2) | 3 | >= 3.7.0 | Open issue(s) if necessary. |
+| <= [3.1.2](https://github.com/Holt59/cakephp3-bootstrap-helpers/tree/v3.1.1) | 3 | < 3.4.0 | Deprecated. |
 
 #### Contributing
 
