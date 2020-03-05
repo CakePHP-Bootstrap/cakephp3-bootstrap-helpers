@@ -20,7 +20,8 @@ class ModalHelperTest extends TestCase {
      *
      * @return void
      */
-    public function setUp() {
+    public function setUp(): void
+    {
         parent::setUp();
         $view = new View();
         $view->loadHelper('Html', [

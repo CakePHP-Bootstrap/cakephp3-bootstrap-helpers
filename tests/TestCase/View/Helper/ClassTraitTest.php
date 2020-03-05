@@ -29,7 +29,8 @@ class BootstrapTraitTest extends TestCase {
      *
      * @return void
      */
-    public function setUp() {
+    public function setUp(): void
+    {
         parent::setUp();
         $view = new View();
         $this->trait = new PublicClassTrait($view);

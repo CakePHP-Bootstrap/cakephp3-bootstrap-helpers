@@ -20,7 +20,8 @@ class HtmlHelperTest extends TestCase {
      *
      * @return void
      */
-    public function setUp() {
+    public function setUp(): void
+    {
         parent::setUp();
         $view = new View();
         $this->html = new HtmlHelper($view);

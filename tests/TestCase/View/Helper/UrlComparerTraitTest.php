@@ -34,7 +34,8 @@ class UrlComparerTraitTest extends TestCase {
      *
      * @return void
      */
-    public function setUp() {
+    public function setUp(): void
+    {
         parent::setUp();
         Configure::write('debug', true);
         Router::scope('/', function (RouteBuilder $routes) {

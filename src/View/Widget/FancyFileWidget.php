@@ -69,7 +69,6 @@ class FancyFileWidget implements WidgetInterface {
         $this->_input = $input;
     }
 
-
     /**
      * Render a custom file upload form widget.
      *
@@ -90,8 +89,8 @@ class FancyFileWidget implements WidgetInterface {
      * @param \Cake\View\Form\ContextInterface $context The current form context.
      * @return string HTML elements.
      */
-    public function render(array $data, \Cake\View\Form\ContextInterface $context) {
-
+    public function render(array $data, \Cake\View\Form\ContextInterface $context): string
+    {
         $data += [
             '_input'  => [],
             '_button' => [],
@@ -159,7 +158,8 @@ class FancyFileWidget implements WidgetInterface {
     /**
      * {@inheritDoc}
      */
-    public function secureFields(array $data) {
+    public function secureFields(array $data): array
+    {
         // the extra input for display
         $fields = [$this->_fakeFieldName($data['name'])];
         // the file array
