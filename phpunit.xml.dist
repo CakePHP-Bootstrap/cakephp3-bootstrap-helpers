@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit
-    bootstrap="./tests/bootstrap.php"
+    bootstrap="tests/bootstrap.php"
     colors="true"
     stopOnFailure="false"
     >
+    <php>
+        <ini name="memory_limit" value="-1"/>
+    </php>
 
     <testsuites>
         <testsuite name="CakePHP 3 Bootstrap Helpers Test Cases">
-            <directory>./tests/</directory>
+            <directory>tests/TestCase</directory>
         </testsuite>
     </testsuites>
 
+    <!-- configure code coverage -->
     <filter>
         <whitelist>
-            <directory suffix=".php">./src/</directory>
+            <directory suffix=".php">src/</directory>
         </whitelist>
     </filter>
 </phpunit>

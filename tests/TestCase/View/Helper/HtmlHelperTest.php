@@ -282,6 +282,8 @@ class HtmlHelperTest extends TestCase {
     }
 
     public function testDropdown() {
+        $this->loadRoutes();
+
         $result = $this->html->dropdown([
             ['header' => 'Header 1'],
             'divider',

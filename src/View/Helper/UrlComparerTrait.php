@@ -17,7 +17,6 @@ namespace Bootstrap\View\Helper;
 use Cake\Http\ServerRequest;
 use Cake\Routing\Router;
 
-
 /**
  * A trait that provides a method to compare url.
  */
@@ -120,7 +119,7 @@ trait UrlComparerTrait {
         if (!$this->_matchRelative($url)) {
             return null;
         }
-        $url = Router::parseRequest(new ServerRequest($this->_removeRelative($url)));
+        $url = Router::parseRequest(new ServerRequest(['url' => $this->_removeRelative($url)]));
         $arr = [];
         foreach ($this->_parts as $part) {
             if (!isset($url[$part]) || (isset($parts[$part]) && !$parts[$part])) {

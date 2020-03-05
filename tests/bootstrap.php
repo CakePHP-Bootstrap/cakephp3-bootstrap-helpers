@@ -1,66 +1,76 @@
 <?php
-// @codingStandardsIgnoreFile
 use Cake\Cache\Cache;
 use Cake\Core\Configure;
 use Cake\Core\Plugin;
 use Cake\Datasource\ConnectionManager;
-use Cake\I18n\I18n;
+use Cake\Routing\DispatcherFactory;
 
 require_once 'vendor/autoload.php';
 
 // Path constants to a few helpful things.
-if (!defined('DS')) {
-    define('DS', DIRECTORY_SEPARATOR);
-}
-
-define('ROOT', dirname(__DIR__) . DS);
-define('CAKE_CORE_INCLUDE_PATH', ROOT . 'vendor' . DS . 'cakephp' . DS . 'cakephp');
-define('CORE_PATH', ROOT . 'vendor' . DS . 'cakephp' . DS . 'cakephp' . DS);
+define('ROOT', dirname(__DIR__));
+define('CAKE_CORE_INCLUDE_PATH', ROOT . DS . 'vendor' . DS . 'cakephp' . DS . 'cakephp');
+define('CORE_PATH', ROOT . DS . 'vendor' . DS . 'cakephp' . DS . 'cakephp' . DS);
 define('CAKE', CORE_PATH . 'src' . DS);
-define('TESTS', ROOT . 'tests');
-define('APP', ROOT . 'tests' . DS . 'test_app' . DS);
-define('APP_DIR', 'app');
+define('TESTS', ROOT . DS . 'tests');
+define('APP', ROOT . DS . 'tests' . DS . 'test_app' . DS);
+define('APP_DIR', 'test_app');
 define('WEBROOT_DIR', 'webroot');
-define('WWW_ROOT', dirname(APP) . DS . 'webroot' . DS);
+define('WWW_ROOT', APP . 'webroot' . DS);
 define('TMP', sys_get_temp_dir() . DS);
 define('CONFIG', APP . 'config' . DS);
 define('CACHE', TMP);
 define('LOGS', TMP);
 
-//@codingStandardsIgnoreStart
-@mkdir(LOGS);
-@mkdir(SESSIONS);
-@mkdir(CACHE);
-@mkdir(CACHE . 'views');
-@mkdir(CACHE . 'models');
+$loader = new \Cake\Core\ClassLoader();
+$loader->register();
+
+$loader->addNamespace('TestApp', APP);
 
 require_once CORE_PATH . 'config/bootstrap.php';
+
 date_default_timezone_set('UTC');
 mb_internal_encoding('UTF-8');
+ini_set('intl.default_locale', 'en_US');
 
+Configure::write('debug', true);
 Configure::write('App', [
-    'namespace' => 'App',
+    'namespace' => 'Bootstrap\TestApp',
     'encoding' => 'UTF-8',
     'base' => false,
     'baseUrl' => false,
-    'dir' => APP_DIR,
+    'dir' => 'src',
     'webroot' => 'webroot',
-    'wwwRoot' => WWW_ROOT
+    'www_root' => APP . 'webroot',
+    'fullBaseUrl' => 'http://localhost',
+    'imageBaseUrl' => 'img/',
+    'jsBaseUrl' => 'js/',
+    'cssBaseUrl' => 'css/',
+    'paths' => [
+        'plugins' => [APP . 'Plugin' . DS],
+        'templates' => [APP . 'Template' . DS],
+    ],
+]);
+Configure::write('Session', [
+    'defaults' => 'php',
 ]);
 
 Cache::setConfig([
     '_cake_core_' => [
         'engine' => 'File',
         'prefix' => 'cake_core_',
-        'serialize' => true
+        'serialize' => true,
     ],
     '_cake_model_' => [
         'engine' => 'File',
         'prefix' => 'cake_model_',
-        'serialize' => true
-    ]
+        'serialize' => true,
+    ],
+    'default' => [
+        'engine' => 'File',
+        'prefix' => 'default_',
+        'serialize' => true,
+    ],
 ]);
 
-Configure::write('debug', true);
-
-ini_set('intl.default_locale', 'en_US');
+Plugin::getCollection()->add(new \Bootstrap\Plugin());

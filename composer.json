@@ -19,7 +19,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Bootstrap\\Test\\": "tests"
+            "Bootstrap\\Test\\": "tests/",
+            "Bootstrap\\TestApp\\": "tests/test_app/"
         }
     },
     "extra": {

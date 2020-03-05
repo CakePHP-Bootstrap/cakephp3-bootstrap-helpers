@@ -25,6 +25,7 @@ class BreadcrumbsHelperTest extends TestCase {
         parent::setUp();
         $view = new View();
         $this->breadcrumbs = new BreadcrumbsHelper($view);
+        $this->loadRoutes();
     }
 
 
@@ -39,8 +40,12 @@ class BreadcrumbsHelperTest extends TestCase {
         $this->breadcrumbs
              ->add('Home', '/', ['class' => 'first', 'innerAttrs' => ['data-foo' => 'bar']])
              ->add('Some text', ['controller' => 'tests_apps', 'action' => 'some_method'])
-             ->add('Final crumb', null, ['class' => 'final',
-                                         'innerAttrs' => ['class' => 'final-link']]);
+             ->add('Final crumb', null, [
+                'class' => 'final',
+                'innerAttrs' => [
+                    'class' => 'final-link',
+                ],
+            ]);
         $result = $this->breadcrumbs->render(
             ['data-stuff' => 'foo and bar']
         );

@@ -123,7 +123,7 @@ class EasyIconTraitTest extends TestCase {
         // BootstrapPaginatorHelper::prev($title, array $options = []);
         // BootstrapPaginatorHelper::next($title, array $options = []);
         // BootstrapPaginatorHelper::numbers(array $options = []); // For `prev` and `next` options.
-
+        $this->markTestIncomplete();
     }
 
     public function testFormHelperMethod() {

@@ -963,195 +963,36 @@ class FormHelperTest extends TestCase {
     public function testDateTime() {
         extract($this->dateRegex);
 
-        $result = $this->form->dateTime('Contact.date', ['default' => true]);
         $now = strtotime('now');
+        $result = $this->form->dateTime('Contact.date', ['default' => true]);
         $expected = [
-            ['div' => ['class' => 'row']],
-            ['div' => ['class' => 'col-md-2']],
-            ['select' => ['name' => 'Contact[date][year]', 'class' => 'form-control']],
-            ['option' => ['value' => '']],
-            '/option',
-            $yearsRegex,
-            ['option' => ['value' => date('Y', $now), 'selected' => 'selected']],
-            date('Y', $now),
-            '/option',
-            '*/select',
-            '/div',
-            ['div' => ['class' => 'col-md-2']],
-            ['select' => ['name' => 'Contact[date][month]', 'class' => 'form-control']],
-            ['option' => ['value' => '']],
-            '/option',
-            $monthsRegex,
-            ['option' => ['value' => date('m', $now), 'selected' => 'selected']],
-            date('F', $now),
-            '/option',
-            '*/select',
-            '/div',
-            ['div' => ['class' => 'col-md-2']],
-            ['select' => ['name' => 'Contact[date][day]', 'class' => 'form-control']],
-            ['option' => ['value' => '']],
-            '/option',
-            $daysRegex,
-            ['option' => ['value' => date('d', $now), 'selected' => 'selected']],
-            date('j', $now),
-            '/option',
-            '*/select',
-            '/div',
-            ['div' => ['class' => 'col-md-2']],
-            ['select' => ['name' => 'Contact[date][hour]', 'class' => 'form-control']],
-            ['option' => ['value' => '']],
-            '/option',
-            $hoursRegex,
-            ['option' => ['value' => date('H', $now), 'selected' => 'selected']],
-            date('G', $now),
-            '/option',
-            '*/select',
-            '/div',
-            ['div' => ['class' => 'col-md-2']],
-            ['select' => ['name' => 'Contact[date][minute]', 'class' => 'form-control']],
-            ['option' => ['value' => '']],
-            '/option',
-            $minutesRegex,
-            ['option' => ['value' => date('i', $now), 'selected' => 'selected']],
-            date('i', $now),
-            '/option',
-            '*/select',
-            '/div',
-            '/div'
+            ['input' => [
+                'type' => 'datetime-local',
+                'name' => 'Contact[date]',
+                'class' => 'form-control',
+                'step' => 1,
+                'value' => date('Y-m-d\TH:i:s', $now),
+            ]],
         ];
         $this->assertHtml($expected, $result);
 
         // Empty=>false implies Default=>true, as selecting the "first" dropdown value is useless
+        $now = strtotime('now');
         $result = $this->form->dateTime('Contact.date', ['empty' => false]);
-        $now = strtotime('now');
         $expected = [
-            ['div' => ['class' => 'row']],
-            ['div' => ['class' => 'col-md-2']],
-            ['select' => ['name' => 'Contact[date][year]', 'class' => 'form-control']],
-            $yearsRegex,
-            ['option' => ['value' => date('Y', $now), 'selected' => 'selected']],
-            date('Y', $now),
-            '/option',
-            '*/select',
-            '/div',
-            ['div' => ['class' => 'col-md-2']],
-            ['select' => ['name' => 'Contact[date][month]', 'class' => 'form-control']],
-            $monthsRegex,
-            ['option' => ['value' => date('m', $now), 'selected' => 'selected']],
-            date('F', $now),
-            '/option',
-            '*/select',
-            '/div',
-            ['div' => ['class' => 'col-md-2']],
-            ['select' => ['name' => 'Contact[date][day]', 'class' => 'form-control']],
-            $daysRegex,
-            ['option' => ['value' => date('d', $now), 'selected' => 'selected']],
-            date('j', $now),
-            '/option',
-            '*/select',
-            '/div',
-            ['div' => ['class' => 'col-md-2']],
-            ['select' => ['name' => 'Contact[date][hour]', 'class' => 'form-control']],
-            $hoursRegex,
-            ['option' => ['value' => date('H', $now), 'selected' => 'selected']],
-            date('G', $now),
-            '/option',
-            '*/select',
-            '/div',
-            ['div' => ['class' => 'col-md-2']],
-            ['select' => ['name' => 'Contact[date][minute]', 'class' => 'form-control']],
-            $minutesRegex,
-            ['option' => ['value' => date('i', $now), 'selected' => 'selected']],
-            date('i', $now),
-            '/option',
-            '*/select',
-            '/div',
-            '/div'
-        ];
-        $this->assertHtml($expected, $result);
-
-        // year => false implies 4 column, thus column size => 3
-        $result = $this->form->dateTime('Contact.date', ['default' => true, 'year' => false]);
-        $now = strtotime('now');
-        $expected = [
-            ['div' => ['class' => 'row']],
-            ['div' => ['class' => 'col-md-3']],
-            ['select' => ['name' => 'Contact[date][month]', 'class' => 'form-control']],
-            ['option' => ['value' => '']],
-            '/option',
-            $monthsRegex,
-            ['option' => ['value' => date('m', $now), 'selected' => 'selected']],
-            date('F', $now),
-            '/option',
-            '*/select',
-            '/div',
-            ['div' => ['class' => 'col-md-3']],
-            ['select' => ['name' => 'Contact[date][day]', 'class' => 'form-control']],
-            ['option' => ['value' => '']],
-            '/option',
-            $daysRegex,
-            ['option' => ['value' => date('d', $now), 'selected' => 'selected']],
-            date('j', $now),
-            '/option',
-            '*/select',
-            '/div',
-            ['div' => ['class' => 'col-md-3']],
-            ['select' => ['name' => 'Contact[date][hour]', 'class' => 'form-control']],
-            ['option' => ['value' => '']],
-            '/option',
-            $hoursRegex,
-            ['option' => ['value' => date('H', $now), 'selected' => 'selected']],
-            date('G', $now),
-            '/option',
-            '*/select',
-            '/div',
-            ['div' => ['class' => 'col-md-3']],
-            ['select' => ['name' => 'Contact[date][minute]', 'class' => 'form-control']],
-            ['option' => ['value' => '']],
-            '/option',
-            $minutesRegex,
-            ['option' => ['value' => date('i', $now), 'selected' => 'selected']],
-            date('i', $now),
-            '/option',
-            '*/select',
-            '/div',
-            '/div'
-        ];
-        $this->assertHtml($expected, $result);
-
-        // year => false, month => false, day => false implies 2 column, thus column size => 6
-        $result = $this->form->dateTime('Contact.date', ['default' => true, 'year' => false,
-                                                         'month' => false, 'day' => false]);
-        $now = strtotime('now');
-        $expected = [
-            ['div' => ['class' => 'row']],
-            ['div' => ['class' => 'col-md-6']],
-            ['select' => ['name' => 'Contact[date][hour]', 'class' => 'form-control']],
-            ['option' => ['value' => '']],
-            '/option',
-            $hoursRegex,
-            ['option' => ['value' => date('H', $now), 'selected' => 'selected']],
-            date('G', $now),
-            '/option',
-            '*/select',
-            '/div',
-            ['div' => ['class' => 'col-md-6']],
-            ['select' => ['name' => 'Contact[date][minute]', 'class' => 'form-control']],
-            ['option' => ['value' => '']],
-            '/option',
-            $minutesRegex,
-            ['option' => ['value' => date('i', $now), 'selected' => 'selected']],
-            date('i', $now),
-            '/option',
-            '*/select',
-            '/div',
-            '/div'
+            ['input' => [
+                'type' => 'datetime-local',
+                'name' => 'Contact[date]',
+                'class' => 'form-control',
+                'step' => 1,
+                'value' => '',
+            ]],
         ];
         $this->assertHtml($expected, $result);
 
         // Test with input()
-        $result = $this->form->control('Contact.date', ['type' => 'date']);
         $now = strtotime('now');
+        $result = $this->form->control('Contact.date', ['type' => 'date']);
         $expected = [
             ['div' => [
                 'class' => 'form-group date'
@@ -1159,32 +1000,13 @@ class FormHelperTest extends TestCase {
             ['label' => []],
             'Date',
             '/label',
-            ['div' => ['class' => 'row']],
-            ['div' => ['class' => 'col-md-4']],
-            ['select' => ['name' => 'Contact[date][year]', 'class' => 'form-control']],
-            $yearsRegex,
-            ['option' => ['value' => date('Y', $now), 'selected' => 'selected']],
-            date('Y', $now),
-            '/option',
-            '*/select',
-            '/div',
-            ['div' => ['class' => 'col-md-4']],
-            ['select' => ['name' => 'Contact[date][month]', 'class' => 'form-control']],
-            $monthsRegex,
-            ['option' => ['value' => date('m', $now), 'selected' => 'selected']],
-            date('F', $now),
-            '/option',
-            '*/select',
-            '/div',
-            ['div' => ['class' => 'col-md-4']],
-            ['select' => ['name' => 'Contact[date][day]', 'class' => 'form-control']],
-            $daysRegex,
-            ['option' => ['value' => date('d', $now), 'selected' => 'selected']],
-            date('j', $now),
-            '/option',
-            '*/select',
-            '/div',
-            '/div',
+            ['input' => [
+                'type' => 'date',
+                'name' => 'Contact[date]',
+                'class' => 'form-control',
+                'id' => 'contact-date',
+                'value' => '',
+            ]],
             '/div'
         ];
         $this->assertHtml($expected, $result);
