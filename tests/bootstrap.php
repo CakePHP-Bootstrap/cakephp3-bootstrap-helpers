@@ -4,6 +4,7 @@ use Cake\Core\Configure;
 use Cake\Core\Plugin;
 use Cake\Datasource\ConnectionManager;
 use Cake\Routing\DispatcherFactory;
+use Cake\Utility\Security;
 
 require_once 'vendor/autoload.php';
 
@@ -72,5 +73,7 @@ Cache::setConfig([
         'serialize' => true,
     ],
 ]);
+
+Security::setSalt('testing');
 
 Plugin::getCollection()->add(new \Bootstrap\Plugin());

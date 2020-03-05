@@ -4,10 +4,16 @@ namespace Bootstrap\Test\TestCase\View\Helper;
 
 use Bootstrap\View\Helper\FormHelper;
 use Cake\Core\Configure;
+use Cake\Http\ServerRequest;
 use Cake\TestSuite\TestCase;
 use Cake\View\View;
 
 class FormHelperTest extends TestCase {
+
+    /**
+     * @var \Cake\View\View
+     */
+    protected $View;
 
     /**
      * Instance of FormHelper.
@@ -24,11 +30,21 @@ class FormHelperTest extends TestCase {
     public function setUp(): void
     {
         parent::setUp();
-        $view = new View();
-        $view->loadHelper('Html', [
+
+        $request = new ServerRequest([
+            'url' => '/',
+            'params' => [
+                'plugin' => null,
+                'controller' => '',
+                'action' => 'index',
+            ],
+        ]);
+
+        $this->View = new View($request);
+        $this->View->loadHelper('Html', [
             'className' => 'Bootstrap.Html'
         ]);
-        $this->form = new FormHelper($view);
+        $this->form = new FormHelper($this->View);
         $this->dateRegex = [
             'daysRegex' => 'preg:/(?:<option value="0?([\d]+)">\\1<\/option>[\r\n]*)*/',
             'monthsRegex' => 'preg:/(?:<option value="[\d]+">[\w]+<\/option>[\r\n]*)*/',
@@ -315,10 +331,6 @@ class FormHelperTest extends TestCase {
             ]],
             '/div'
         ], $fieldName, ['type' => 'text']);
-    }
-
-    public function testInputSelect() {
-
     }
 
     public function testButtonGroup() {
@@ -964,28 +976,12 @@ class FormHelperTest extends TestCase {
         extract($this->dateRegex);
 
         $now = strtotime('now');
-        $result = $this->form->dateTime('Contact.date', ['default' => true]);
+        $result = $this->form->dateTime('Contact.date');
         $expected = [
             ['input' => [
                 'type' => 'datetime-local',
                 'name' => 'Contact[date]',
                 'class' => 'form-control',
-                'step' => 1,
-                'value' => date('Y-m-d\TH:i:s', $now),
-            ]],
-        ];
-        $this->assertHtml($expected, $result);
-
-        // Empty=>false implies Default=>true, as selecting the "first" dropdown value is useless
-        $now = strtotime('now');
-        $result = $this->form->dateTime('Contact.date', ['empty' => false]);
-        $expected = [
-            ['input' => [
-                'type' => 'datetime-local',
-                'name' => 'Contact[date]',
-                'class' => 'form-control',
-                'step' => 1,
-                'value' => '',
             ]],
         ];
         $this->assertHtml($expected, $result);
@@ -1005,7 +1001,6 @@ class FormHelperTest extends TestCase {
                 'name' => 'Contact[date]',
                 'class' => 'form-control',
                 'id' => 'contact-date',
-                'value' => '',
             ]],
             '/div'
         ];
@@ -1060,7 +1055,7 @@ class FormHelperTest extends TestCase {
             ['button' => [
                 'class' => 'btn btn-primary',
                 'type' => 'button',
-                'onclick' => "document.getElementById('Contact[picture]').click();"
+                'onclick' => "document.getElementById('Contact[picture]').click();",
             ]],
             __('Choose File'),
             '/button',
@@ -1160,21 +1155,18 @@ class FormHelperTest extends TestCase {
     }
 
     public function testFormSecuredFileControl() {
+        $this->View->setRequest($this->View->getRequest()->withAttribute('formTokenData', [
+            'unlockedFields' => [],
+        ]));
+
         $this->form->setConfig('useCustomFileInput', true);
         // Test with filename, see issues #56, #123
-        $this->assertEquals([], $this->form->fields);
+        $this->form->create();
         $this->form->file('picture');
         $this->form->file('Contact.picture');
-        $expected = [
-            'picture-text',
-            'picture.name', 'picture.type',
-            'picture.tmp_name', 'picture.error',
-            'picture.size',
-            'Contact.picture-text',
-            'Contact.picture.name', 'Contact.picture.type',
-            'Contact.picture.tmp_name', 'Contact.picture.error',
-            'Contact.picture.size'
-        ];
-        $this->assertEquals($expected, $this->form->fields);
+
+        $tokenData = $this->form->getFormProtector()->buildTokenData();
+
+        $this->assertSame('949a50880781bda6c5c21f4ef7e82548c682b7e8%3A', $tokenData['fields']);
     }
 }

@@ -160,7 +160,6 @@ class FormHelper extends \Cake\View\Helper\FormHelper {
         'select' => ['Cake\View\Widget\SelectBoxWidget'],
         'selectColumn' => ['Bootstrap\View\Widget\ColumnSelectBoxWidget'],
         'textarea' => ['Cake\View\Widget\TextareaWidget'],
-        'datetime' => ['Bootstrap\View\Widget\DateTimeWidget', 'selectColumn']
     ];
 
     /**

@@ -143,7 +143,8 @@ class FancyFileWidget implements WidgetInterface {
         $fakeButton = $this->_button->render($fakeButtonCustomOptions + [
             'type' => 'button',
             'text' => $buttonLabel,
-            'onclick' => "document.getElementById('".$data['id']."').click();"
+            'onclick' => "document.getElementById('".$data['id']."').click();",
+            'escape' => false,
         ], $context);
 
         return $this->_templates->format('fancyFileInput', [
