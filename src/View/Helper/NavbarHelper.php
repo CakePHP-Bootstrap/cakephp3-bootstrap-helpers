@@ -50,7 +50,7 @@ class NavbarHelper extends Helper
      *
      * @var array
      */
-    public $_defaultConfig = [
+    protected $_defaultConfig = [
         'templates' => [
             'navbarStart' => '<nav class="navbar{{attrs.class}}"{{attrs}}>{{containerStart}}{{header}}{{responsiveStart}}',
             'navbarEnd' => '{{responsiveEnd}}{{containerEnd}}</nav>',
@@ -118,14 +118,12 @@ aria-haspopup="true" aria-expanded="false">{{content}}</a>',
      * - `templateVars` Provide template variables for the template.
      * - Other attributes will be assigned to the navbar element.
      *
-     * @param string $brand Brand name.
+     * @param string|null $brand Brand name.
      * @param array $options Array of options. See above.
-     *
      * @return string containing the HTML starting element of the navbar.
      */
-    public function create($brand, $options = [])
+    public function create(?string $brand = null, array $options = []): string
     {
-
         $options += [
             'id' => 'navbar',
             'fixed' => false,
@@ -247,10 +245,9 @@ aria-haspopup="true" aria-expanded="false">{{content}}</a>',
      * the link (inner menu).
      * @param array $linkOptions Array of attributes for the link in outer menu. Not used
      * if in inner menu.
-     *
      * @return string A HTML tag wrapping the link.
      */
-    public function link($name, $url = '', array $options = [], array $linkOptions = [])
+    public function link(string $name, $url = '', array $options = [], array $linkOptions = []): string
     {
         $url = $this->Url->build($url);
         $options += [
@@ -299,10 +296,9 @@ aria-haspopup="true" aria-expanded="false">{{content}}</a>',
      * - Other attributes will be assigned to the divider element.
      *
      * @param array $options Array of options. See above.
-     *
-     * @return \Bootstrap\View\Helper\A HTML dropdown divider tag.
+     * @return string A HTML dropdown divider tag.
      */
-    public function divider(array $options = [])
+    public function divider(array $options = []): string
     {
         $options += ['templateVars' => []];
 
@@ -322,10 +318,9 @@ aria-haspopup="true" aria-expanded="false">{{content}}</a>',
      * *
      * @param string $name Title of the header.
      * @param array $options Array of options for the wrapper tag.
-     *
-     * @return \Bootstrap\View\Helper\A HTML header tag.
+     * @return string A HTML header tag.
      */
-    public function header($name, array $options = [])
+    public function header(string $name, array $options = []): string
     {
         $options += ['templateVars' => []];
 
@@ -346,10 +341,9 @@ aria-haspopup="true" aria-expanded="false">{{content}}</a>',
      *
      * @param string $text The text message.
      * @param array $options Array attributes for the wrapper element.
-     *
      * @return string A HTML element wrapping the text for the navbar.
      */
-    public function text($text, $options = [])
+    public function text(string $text, array $options = []): string
     {
         $options += [
             'templateVars' => [],
@@ -390,21 +384,20 @@ aria-haspopup="true" aria-expanded="false">{{content}}</a>',
      *
      * - Other attributes will be assigned to the list element.
      *
-     * @param string $name Name of the menu.
+     * @param string|array|null $name Name of the menu.
      * @param string|array $url URL for the menu.
      * @param array $options Array of options for the wrapping element.
      * @param array $linkOptions Array of options for the link. See above.
      * @param array $listOptions Array of options for the openning `ul` elements.
-     *
      * @return string HTML elements to start a menu.
      */
     public function beginMenu(
         $name = null,
         $url = null,
-        $options = [],
-        $linkOptions = [],
-        $listOptions = []
-    ) {
+        array $options = [],
+        array $linkOptions = [],
+        array $listOptions = []
+    ): string {
         $template = 'outerMenuStart';
         $templateOptions = [];
         if (is_array($name)) {
@@ -437,7 +430,7 @@ aria-haspopup="true" aria-expanded="false">{{content}}</a>',
      *
      * @return string HTML elements to close a menu.
      */
-    public function endMenu()
+    public function endMenu(): string
     {
         $template = 'outerMenuEnd';
         $options = [];
@@ -455,7 +448,7 @@ aria-haspopup="true" aria-expanded="false">{{content}}</a>',
      *
      * @return string HTML elements to close the navbar.
      */
-    public function end()
+    public function end(): string
     {
         $containerEnd = '';
         if ($this->_container) {
