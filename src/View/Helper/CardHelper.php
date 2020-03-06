@@ -213,7 +213,7 @@ class CardHelper extends Helper
      * @param array        $options Array of options. See above.
      * @return string An HTML string containing opening elements for a card.
      */
-    public function create($title = null, $options = [])
+    public function create($title = null, array $options = []): string
     {
         if (is_array($title)) {
             $options = $title;

@@ -37,7 +37,7 @@ class StackedStates
      * @param mixed $defaults Default values for the states.
      *
      */
-    public function __construct($defaults = []): void
+    public function __construct($defaults = [])
     {
         $this->_defaults = $defaults;
     }

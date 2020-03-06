@@ -30,10 +30,9 @@ trait EasyIconTrait
      *
      * @param array $options Array of options from which the easy-icon option should
      * be extracted.
-     *
      * @return array An array containing the options and the easy-icon option.
      */
-    protected function _easyIconOption(array $options)
+    protected function _easyIconOption(array $options): array
     {
         $options += [
             'easyIcon' => $this->easyIcon,
@@ -55,10 +54,9 @@ trait EasyIconTrait
      * @param string $text The string to convert.
      * @param bool $converted If specified, will contains `true` if the text was converted,
      * `false` otherwize.
-     *
      * @return string The text after conversion.
      */
-    protected function _makeIcon($text, &$converted = false)
+    protected function _makeIcon(string $text, &$converted = false): string
     {
         $converted = false;
 
@@ -97,12 +95,13 @@ trait EasyIconTrait
     /**
      * Inject icon into the given string.
      *
-     * @param string $title Input string where icon should be injected following the
-     * easy-icon process.
-     * @param bool $easyIcon Boolean indicating if the easy-icon process should be
-     * applied.
+     * @param   string $title Input string where icon should be injected
+     *                        following the easy-icon process.
+     * @param   bool $easyIcon Boolean indicating if the easy-icon process
+     *                         should be applied.
+     * @return  string
      */
-    protected function _injectIcon($title, $easyIcon)
+    protected function _injectIcon(string $title, bool $easyIcon): string
     {
         if (!$easyIcon) {
             return $title;
