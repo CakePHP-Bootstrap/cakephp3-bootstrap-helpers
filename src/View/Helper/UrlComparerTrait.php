@@ -32,7 +32,7 @@ trait UrlComparerTrait
      *
      * @return string The relative path.
      */
-    protected function _relative()
+    protected function _relative(): string
     {
         return trim(Router::url('/'), '/');
     }
@@ -42,7 +42,7 @@ trait UrlComparerTrait
      *
      * @return string|null The hostname, or `null`.
      */
-    protected function _hostname()
+    protected function _hostname(): ?string
     {
         $components = parse_url(Router::url('/', true));
         if (isset($components['host'])) {
@@ -56,10 +56,9 @@ trait UrlComparerTrait
      * Checks if the given URL components match the current host.
      *
      * @param string $url URL to check.
-     *
      * @return bool `true` if the URL matches, `false` otherwise.
      */
-    protected function _matchHost($url)
+    protected function _matchHost(string $url): bool
     {
         $components = parse_url($url);
 
@@ -71,10 +70,9 @@ trait UrlComparerTrait
      * methods only works with full URL, and do not check the host.
      *
      * @param string $url URL to check.
-     *
      * @return bool `true` if the URL matches, `false` otherwise.
      */
-    protected function _matchRelative($url)
+    protected function _matchRelative(string $url): bool
     {
         $relative = $this->_relative();
         if (!$relative) {
@@ -92,11 +90,10 @@ trait UrlComparerTrait
     /**
      * Remove relative part an URL (if any).
      *
-     * @param string $url URL from which the relative part should be removed.
-     *
-     * @param string The new URL.
+     * @param   string $url URL from which the relative part should be removed.
+     * @return  string The new URL.
      */
-    protected function _removeRelative($url)
+    protected function _removeRelative(string $url): string
     {
         $components = parse_url($url);
         $relative = $this->_relative();
@@ -111,12 +108,11 @@ trait UrlComparerTrait
     /**
      * Normalize an URL.
      *
-     * @param string $url URL to normalize.
+     * @param string|array $url URL to normalize.
      * @param array $parts Include pass parameters.
-     *
-     * @return string Normalized URL.
+     * @return string|null Normalized URL.
      */
-    protected function _normalize($url, array $parts = [])
+    protected function _normalize($url, array $parts = []): ?string
     {
         if (!is_string($url)) {
             $url = Router::url($url);
@@ -151,10 +147,10 @@ trait UrlComparerTrait
      *
      * @param string|array $lhs First URL to compare.
      * @param string|array $rhs Second URL to compare. Default is current URL (`Router::url()`).
-     *
+     * @param array $parts Include pass parameters
      * @return bool `true` if both URL match, `false` otherwise.
      */
-    public function compareUrls($lhs, $rhs = null, $parts = [])
+    public function compareUrls($lhs, $rhs = null, array $parts = []): bool
     {
         if ($rhs == null) {
             $rhs = Router::url();
