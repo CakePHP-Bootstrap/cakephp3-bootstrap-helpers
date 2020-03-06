@@ -53,14 +53,12 @@ class CardHelper extends Helper
             'cardEnd' => '</div>',
             'headerStart' => '<div class="card-header{{attrs.class}}"{{attrs}}>',
             'headerCollapsibleStart' => '<div class="card-header{{attrs.class}}" role="tab"{{attrs}}>',
-            'headerCollapsibleLink' =>
-    '<h5 class="mb-0"><a role="button" data-toggle="collapse" href="#{{target}}" aria-expanded="{{expanded}}" aria-controls="{{target}}"{{attrs}}>{{content}}</a></h5>',
+            'headerCollapsibleLink' => '<h5 class="mb-0"><a role="button" data-toggle="collapse" href="#{{target}}" aria-expanded="{{expanded}}" aria-controls="{{target}}"{{attrs}}>{{content}}</a></h5>',
             'headerEnd' => '</div>',
             'title' => '<h4 class="card-title{{attrs.class}}"{{attrs}}>{{content}}</h4>',
             'bodyStart' => '<div class="card-body{{attrs.class}}"{{attrs}}>',
             'bodyEnd' => '</div>',
-            'bodyCollapsibleStart' =>
-                '<div class="collapse{{attrs.class}}" role="tabpanel" aria-labelledby="{{headId}}"{{attrs}}>{{bodyStart}}',
+            'bodyCollapsibleStart' => '<div class="collapse{{attrs.class}}" role="tabpanel" aria-labelledby="{{headId}}"{{attrs}}>{{bodyStart}}',
             'bodyCollapsibleEnd' => '{{bodyEnd}}</div>',
             'footerStart' => '<div class="card-footer{{attrs.class}}"{{attrs}}>',
             'footerEnd' => '</div>',
@@ -90,6 +88,11 @@ class CardHelper extends Helper
      */
     protected $_groupCount = 0;
 
+    /**
+     * Create card helper
+     *
+     * {@inheritDoc}
+     */
     public function __construct(\Cake\View\View $View, array $config = [])
     {
         $this->_states = new StackedStates([
@@ -125,9 +128,7 @@ class CardHelper extends Helper
      * - Other attributes will be passed to the `Html::div()` method.
      *
      * @param array $options Array of options. See above.
-     *
      * @return string A formated opening HTML tag for card groups.
-     *
      * @link http://getbootstrap.com/javascript/#collapse-example-accordion
      */
     public function startGroup($options = [])
@@ -210,15 +211,13 @@ class CardHelper extends Helper
      *
      * @param array|string $title   The card title or an array of options.
      * @param array        $options Array of options. See above.
-     *
      * @return string An HTML string containing opening elements for a card.
      */
     public function create($title = null, $options = [])
     {
-
         if (is_array($title)) {
             $options = $title;
-            $title   = null;
+            $title = null;
         }
 
         $out = '';
@@ -300,7 +299,6 @@ class CardHelper extends Helper
      *
      * @param string|null $content   Footer content, or `null`.
      * @param array       $options Array of options for the footer.
-     *
      * @return string An HTML string containing closing tags.
      */
     public function end($content = null, $options = [])
@@ -366,7 +364,6 @@ class CardHelper extends Helper
      *
      * @param string $title The card header content, or null to only open the header.
      * @param array $options Array of options. See above.
-     *
      * @return string A formated opening tag for the card header or the complete card
      * header.
      */
@@ -421,7 +418,6 @@ class CardHelper extends Helper
      *
      * @param string|null $text The card body content, or null to only open the body.
      * @param array $options Array of options for the body `<div>`.
-     *
      * @return string A formated opening tag for the card body or the complete card
      * body.
      */
@@ -466,7 +462,6 @@ class CardHelper extends Helper
      *
      * @param string $text The card footer content, or null to only open the footer.
      * @param array $options Array of options for the footer `<div>`.
-     *
      * @return string A formated opening tag for the card footer or the complete card
      * footer.
      */
@@ -532,7 +527,6 @@ class CardHelper extends Helper
      *
      * @param array $info The header content, or `null`, or an array of options.
      * @param array        $options Array of options. See above.
-     *
      * @return string A formated opening tag for the card header or the complete card
      * header.
      */
@@ -540,7 +534,7 @@ class CardHelper extends Helper
     {
         if (is_array($info)) {
             $options = $info;
-            $info    = null;
+            $info = null;
         }
         $options += [
             'title' => true,
@@ -554,7 +548,6 @@ class CardHelper extends Helper
      *
      * @param string $title Title of the card.
      * @param array $options Attributes for the title div.
-     *
      * @return string The card title.
      */
     public function title($title, $options = [])
@@ -605,14 +598,13 @@ class CardHelper extends Helper
      * @param string $content The body content, or `null`, or an array of options.
      * `$options`.
      * @param array $options Array of options for the card body `<div>`.
-     *
      * @return string
      */
     public function body($content = null, $options = [])
     {
         if (is_array($content)) {
             $options = $content;
-            $content    = null;
+            $content = null;
         }
 
         return $this->_createBody($content, $options);
@@ -649,7 +641,6 @@ class CardHelper extends Helper
      *
      * @param string|array $text The footer content, or `null`, or an array of options.
      * @param array        $options Array of options for the card footer `<div>`.
-     *
      * @return string A formated opening tag for the card footer or the complete card
      * footer.
      */
@@ -657,7 +648,7 @@ class CardHelper extends Helper
     {
         if (is_array($text)) {
             $options = $text;
-            $text    = null;
+            $text = null;
         }
 
         return $this->_createFooter($text, $options);
