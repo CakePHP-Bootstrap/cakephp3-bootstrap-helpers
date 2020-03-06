@@ -20,7 +20,6 @@ use Bootstrap\Utility\Matching;
  * HtmlHelper encloses all methods needed while working with HTML pages.
  *
  * @property \Cake\View\Helper\UrlHelper $Url
- *
  * @link http://book.cakephp.org/3.0/en/views/helpers/html.html
  */
 class HtmlHelper extends \Cake\View\Helper\HtmlHelper
@@ -93,9 +92,9 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
         ],
         'templateClass' => 'Bootstrap\View\EnhancedStringTemplate',
         'tooltip' => [
-            'tag'       => 'span',
+            'tag' => 'span',
             'placement' => 'right',
-            'toggle'    => 'tooltip',
+            'toggle' => 'tooltip',
         ],
         'badge' => [
             'type' => 'default',
@@ -119,10 +118,9 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
      *
      * @param string $icon Name of the icon.
      * @param array $options Array of options. See above.
-     *
      * @return string The HTML icon.
      */
-    public function icon($icon, array $options = [])
+    public function icon(string $icon, array $options = []): string
     {
         $options += [
             'templateVars' => [],
@@ -146,10 +144,15 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
     }
 
     /**
+     * Create a Twitter Bootstrap badge.
+     *
+     * {@inheritDoc}
      * @deprecated 4.0.0 Use the badge() instead.
      */
     public function label($text, $type = null, $options = [])
     {
+        deprecationWarning('HtmlHelper::label is deprecated. Use HtmlHelper::badge instead.');
+
         return $this->badge($text, $type, $options);
     }
 
@@ -163,13 +166,12 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
      *
      * @param string $text The badge text.
      * @param string|array $type The badge type (default, primary, secondary, success, warning,
-     * info, danger) or the array of options (see `$options`).
+     *                           info, danger) or the array of options (see `$options`).
      * @param array $options Array of options. See above. Default values are retrieved
-     * from the configuration.
-     *
-     * @param array $options Array of attributes for the span element.
+     *                       from the configuration.
+     * @return string
      */
-    public function badge($text, $type = null, $options = [])
+    public function badge(string $text, $type = null, array $options = []): string
     {
         if (is_string($type)) {
             $options['type'] = $type;
@@ -204,12 +206,11 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
      * - Other attributes will be assigned to the wrapper element.
      *
      * @param string $text The alert text.
-     * @param string|array $type The type of the alert.
+     * @param string|array|null $type The type of the alert.
      * @param array $options Array of options. See above.
-     *
      * @return string A HTML bootstrap alert element.
      */
-    public function alert($text, $type = null, $options = [])
+    public function alert(string $text, $type = null, array $options = []): string
     {
         if (is_string($type)) {
             $options['type'] = $type;
@@ -256,11 +257,10 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
      * @param string $text The HTML tag inner text.
      * @param string $tooltip The tooltip text.
      * @param array  $options An array of options. See above. Default values are retrieved
-     * from the configuration.
-     *
+     *                        from the configuration.
      * @return string The text wrapped in the specified HTML tag with a tooltip.
      */
-    public function tooltip($text, $tooltip, $options = [])
+    public function tooltip(string $text, string $tooltip, array $options = []): string
     {
         $options += $this->getConfig('tooltip') + [
             'tooltip' => $tooltip,
@@ -288,20 +288,19 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
      * - `templateVars` Provide template variables for the `progressBar` template.
      * - Other attributes will be assigned to the progress bar element.
      *
-     * @param int|array $widths
+     * @param int|array $widths Progress width
      *   - `int` The width (in %) of the bar.
      *   - `array` An array of bars, with, for each bar, the following fields:
      *      - `width` **required** The width of the bar.
      *      - Other options possible (see above).
      * @param array $options Array of options. See above.
-     *
      * @return string The HTML bootstrap progress bar.
      */
-    public function progress($widths, array $options = [])
+    public function progress($widths, array $options = []): string
     {
         $options += $this->getConfig('progress') + [
             'striped' => false,
-            'active'  => false,
+            'active' => false,
             'min' => 0,
             'max' => 100,
             'templateVars' => [],
@@ -330,7 +329,10 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
                 'min' => $width['min'],
                 'max' => $width['max'],
                 'width' => $width['width'],
-                'attrs' => $this->templater()->formatAttributes($width, ['striped', 'active', 'min', 'max', 'type', 'width']),
+                'attrs' => $this->templater()->formatAttributes(
+                    $width,
+                    ['striped', 'active', 'min', 'max', 'type', 'width']
+                ),
                 'templateVars' => $width['templateVars'],
             ]);
         }
