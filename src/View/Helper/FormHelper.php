@@ -231,7 +231,6 @@ class FormHelper extends \Cake\View\Helper\FormHelper
      *   be an ORM entity, ORM resultset, or an array of meta data. You can use false or null
      *   to make a model-less form.
      * @param array $options An array of html attributes and options.
-     *
      * @return string An formatted opening FORM tag.
      */
     public function create($model = null, array $options = []): string
@@ -259,7 +258,7 @@ class FormHelper extends \Cake\View\Helper\FormHelper
      *
      * @return array
      */
-    public function getColumnSizes()
+    public function getColumnSizes(): array
     {
         return $this->getConfig('columns');
     }
@@ -268,9 +267,10 @@ class FormHelper extends \Cake\View\Helper\FormHelper
      * Set the column sizes configuration associated with the
      * form helper.
      *
+     * @param array $columns Array of columns options to set
      * @return array
      */
-    public function setColumnSizes($columns)
+    public function setColumnSizes(array $columns): array
     {
         return $this->setConfig('columns', $columns, false);
     }
@@ -280,11 +280,9 @@ class FormHelper extends \Cake\View\Helper\FormHelper
      * optionally adding the offset prefix to the classes.
      *
      * @param string $what The type of the column (`'label'`, `'input'`, `'error'`).
-     * @param bool   $offset Set to `true` to add the offset prefix.
-     *
      * @return string The classes for the size or offset of the specified column.
      */
-    protected function _getColumnClass($what)
+    protected function _getColumnClass(string $what): string
     {
         $columns = $this->getConfig('columns');
         $classes = [];
@@ -307,12 +305,12 @@ class FormHelper extends \Cake\View\Helper\FormHelper
      * accordingly. If `$addonOrButtons` is a string, the wrapper will be chosen depending
      * on the content (see `_matchButton()`).
      *
-     * @param string|array $addonOrButtons Content to be wrapped or array of buttons to be
+     * @param string|array|null $addonOrButtons Content to be wrapped or array of buttons to be
      * wrapped.
-     *
-     * @return string The elements wrapped in a suitable HTML element.
+     * @param string $type Input group type
+     * @return string|null The elements wrapped in a suitable HTML element.
      */
-    protected function _wrapInputGroup($addonOrButtons, $type)
+    protected function _wrapInputGroup($addonOrButtons, string $type): ?string
     {
         if ($addonOrButtons) {
             if (is_array($addonOrButtons)) {
@@ -344,11 +342,10 @@ class FormHelper extends \Cake\View\Helper\FormHelper
      * @param string $input The input content.
      * @param string $prepend The content to prepend to `$input`.
      * @param string $append The content to append to `$input`.
-     *
      * @return string A string containing the three elements concatenated an wrapped inside
-     * an input group `<div>`.
+     *                  an input group `<div>`.
      */
-    protected function _wrap($input, $prepend, $append)
+    protected function _wrap(string $input, string $prepend, string $append): string
     {
         return $this->formatTemplate('inputGroup', [
             'inputGroupStart' => $this->formatTemplate('inputGroupStart', [
@@ -367,11 +364,10 @@ class FormHelper extends \Cake\View\Helper\FormHelper
      * @param string|null $input Input to which `$prepend` will be prepend, or
      * null to create an opening input group.
      * @param string|array $prepend The content to prepend.,
-     *
      * @return string The input with the content of `$prepend` prepended or an
      * opening `<div>` for an input group.
      */
-    public function prepend($input, $prepend)
+    public function prepend(?string $input, $prepend): string
     {
         $prepend = $this->_wrapInputGroup($prepend, 'prepend');
         if ($input === null) {
@@ -386,12 +382,11 @@ class FormHelper extends \Cake\View\Helper\FormHelper
      *
      * @param string|null $input Input to which `$append` will be append, or
      * null to create a closing element for an input group.
-     * @param string|array $append The content to append.,
-     *
+     * @param string|array|null $append The content to append.,
      * @return string The input with the content of `$append` appended or a
      * closing `</div>` for an input group.
      */
-    public function append($input, $append)
+    public function append(?string $input, $append = null): string
     {
         $append = $this->_wrapInputGroup($append, 'append');
         if ($input === null) {
@@ -407,11 +402,10 @@ class FormHelper extends \Cake\View\Helper\FormHelper
      * @param string $input The input to be wrapped (see `prepend()` and `append()`).
      * @param string|array $prepend The content to prepend (see `prepend()`).
      * @param string|array $append The content to append (see `append()`).
-     *
      * @return string A string containing the given `$input` wrapped between `$prepend` and
      * `$append` according to the behavior of `prepend()` and `append()`.
      */
-    public function wrap($input, $prepend, $append)
+    public function wrap(string $input, $prepend, $append): string
     {
         return $this->prepend(null, $prepend) . $input . $this->append(null, $append);
     }
@@ -454,10 +448,9 @@ class FormHelper extends \Cake\View\Helper\FormHelper
      *
      * @param string $fieldName This should be "modelname.fieldname"
      * @param array $options Each type of input takes different options.
-     *
      * @return string Completed form widget.
      */
-    public function control($fieldName, array $options = []): string
+    public function control(string $fieldName, array $options = []): string
     {
         $options += [
             'type' => null,
@@ -471,10 +464,10 @@ class FormHelper extends \Cake\View\Helper\FormHelper
         ];
 
         $options += [
-            'prepend'      => null,
-            'append'       => null,
-            'help'         => null,
-            'inline'       => false,
+            'prepend' => null,
+            'append' => null,
+            'help' => null,
+            'inline' => false,
         ];
 
         $options = $this->_parseOptions($fieldName, $options);
@@ -492,7 +485,7 @@ class FormHelper extends \Cake\View\Helper\FormHelper
 
         if ($prepend || $append) {
             $prepend = $this->prepend(null, $prepend);
-            $append  = $this->append(null, $append);
+            $append = $this->append(null, $append);
         }
 
         if ($help) {
@@ -514,7 +507,7 @@ class FormHelper extends \Cake\View\Helper\FormHelper
     /**
      * {@inheritDoc}
      */
-    protected function _getInput($fieldName, $options)
+    protected function _getInput(string $fieldName, array $options)
     {
         $label = $options['labelOptions'];
         switch (strtolower($options['type'])) {
@@ -562,7 +555,7 @@ class FormHelper extends \Cake\View\Helper\FormHelper
      *
      * @return string Completed radio widget set.
      */
-    public function inlineRadio($fieldName, $options = [], array $attributes = [])
+    public function inlineRadio(string $fieldName, $options = [], array $attributes = []): string
     {
         $attributes['options'] = $options;
         $attributes['idPrefix'] = $this->_idPrefix;
@@ -590,10 +583,9 @@ class FormHelper extends \Cake\View\Helper\FormHelper
      *
      * @param string $fieldName Name of a field, in the form "modelname.fieldname"
      * @param array $options Array of HTML attributes.
-     *
      * @return string A generated file input.
      */
-    public function file($fieldName, array $options = []): string
+    public function file(string $fieldName, array $options = []): string
     {
         $options += ['secure' => true];
         $options = $this->_initInputField($fieldName, $options);
@@ -621,11 +613,11 @@ class FormHelper extends \Cake\View\Helper\FormHelper
      * - `escape` HTML entity encode the $title of the button. Defaults to `false`.
      *
      * @param string $title The button's caption. Not automatically HTML encoded.
+     * @param array $options Button options
      * @return string A HTML button tag.
-     *
      * @link http://book.cakephp.org/3.0/en/views/helpers/form.html#creating-button-elements
      */
-    public function button($title, array $options = []): string
+    public function button(string $title, array $options = []): string
     {
         [$options, $easyIcon] = $this->_easyIconOption($options);
 
@@ -638,12 +630,11 @@ class FormHelper extends \Cake\View\Helper\FormHelper
      *
      * @param string $title The button's caption. Not automatically HTML encoded.
      * @param string|array $type If array, behaves like options, otherwize will be used as
-     * the `btype` option.
+     *                           the `btype` option.
      * @param array $options Array of options and HTML attributes.
-     *
      * @return string A HTML button tag.
      */
-    public function cbutton($title, $type = [], array $options = [])
+    public function cbutton(string $title, $type = [], array $options = []): string
     {
         if (is_array($type)) {
             $options = $type;
@@ -668,10 +659,9 @@ class FormHelper extends \Cake\View\Helper\FormHelper
      *
      * @param array $buttons Array of buttons for the group.
      * @param array $options Array of options. See above.
-     *
      * @return string A HTML string containing the button group.
      */
-    public function buttonGroup($buttons, array $options = [])
+    public function buttonGroup(array $buttons, array $options = []): string
     {
         $options += [
             'vertical' => false,
@@ -694,10 +684,9 @@ class FormHelper extends \Cake\View\Helper\FormHelper
      *
      * @param array $buttonGroups Array of groups for the toolbar
      * @param array $options Array of options for the `Html::div` method.
-     *
      * @return string A HTML string containing the button toolbar.
      */
-    public function buttonToolbar(array $buttonGroups, array $options = [])
+    public function buttonToolbar(array $buttonGroups, array $options = []): string
     {
         $options += [
             'templateVars' => [],
@@ -729,7 +718,7 @@ class FormHelper extends \Cake\View\Helper\FormHelper
      *
      * @return string A HTML string containing the button dropdown.
      */
-    public function dropdownButton($title, array $menu = [], array $options = [])
+    public function dropdownButton(string $title, array $menu = [], array $options = []): string
     {
         // List of options to send to the dropdown() method
         $optsForHtml = ['align'];
@@ -778,16 +767,15 @@ class FormHelper extends \Cake\View\Helper\FormHelper
      * - Other attributes will be assigned to the input element.
      *
      * @param string|null $caption The label appearing on the button OR if string
-     * contains :// or the  extension .jpg, .jpe, .jpeg, .gif, .png use an image if
-     * the extension exists, AND the first character is /, image is relative to webroot,
-     *  OR if the first character is not /, image is relative to webroot/img.
-     *
+     *                             contains :// or the  extension .jpg, .jpe, .jpeg, .gif, .png
+     *                             use an image if the extension exists, AND the first character
+     *                             is /, image is relative to webroot, OR if the first character
+     *                             is not /, image is relative to webroot/img.
      * @param array $options Array of options. See above.
-     *
      * @return string A HTML submit button
      * @link http://book.cakephp.org/3.0/en/views/helpers/form.html#creating-buttons-and-submit-elements
      */
-    public function submit($caption = null, array $options = []): string
+    public function submit(?string $caption = null, array $options = []): string
     {
         return parent::submit($caption, $this->_addButtonClasses($options));
     }
@@ -797,12 +785,11 @@ class FormHelper extends \Cake\View\Helper\FormHelper
      *
      * @param string $caption See `FormHelper::submit` documentation.
      * @param string|array $type If array, behaves like options, otherwize will be used as
-     * the `btype` option.
+     *                           the `btype` option.
      * @param array $options Array of options and HTML attributes, see `FormHelper::submit`.
-     *
      * @return string A HTML submit button.
      */
-    public function csubmit($caption = null, $type = [], array $options = [])
+    public function csubmit(?string $caption = null, $type = [], array $options = []): string
     {
         if (is_array($type)) {
             $options = $type;
