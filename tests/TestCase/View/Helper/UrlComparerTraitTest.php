@@ -295,4 +295,20 @@ class UrlComparerTraitTest extends TestCase {
         $this->_testCompare($tests, [], ['action' => false, 'pass' => false]);
     }
 
+    public function testGetOnlyRoutes() {
+        // current request is POST
+        $_SERVER['REQUEST_METHOD'] = 'POST';
+
+        // cleanup router and add an unique get only route
+        Router::resetRoutes();
+        $builder = new RouteBuilder(Router::getRouteCollection(), '/');
+        $builder->get('/get_only', ['controller' => 'tests_apps', 'action' => 'get_method']);
+        // force route collection to avoid loading config/routes.php
+        Router::setRouteCollection(Router::getRouteCollection());
+
+        $url = $this->trait->normalize('/get_only');
+
+        $this->assertSame('/tests_apps/get_method', $url);
+    }
+
 };
