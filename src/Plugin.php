@@ -2,16 +2,13 @@
 declare(strict_types=1);
 
 /**
- * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- *
  * Licensed under The MIT License
+ * For full copyright and license information, please see the LICENSE file
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://cakephp.org CakePHP(tm) Project
- * @since         DebugKit 3.15.0
- * @license       https://www.opensource.org/licenses/mit-license.php MIT License
+ * @copyright   Copyright (c) Mikaël Capelle (https://typename.fr)
+ * @license     https://opensource.org/licenses/mit-license.php MIT License
+ * @link        https://holt59.github.io/cakephp3-bootstrap-helpers/
  */
 namespace Bootstrap;
 
