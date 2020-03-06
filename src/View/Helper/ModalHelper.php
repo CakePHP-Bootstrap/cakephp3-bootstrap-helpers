@@ -42,7 +42,7 @@ class ModalHelper extends Helper
      *
      * @var array
      */
-    public $_defaultConfig = [
+    protected $_defaultConfig = [
         'templates' => [
             'modalStart' => '<div class="modal fade{{attrs.class}}" tabindex="-1" role="dialog"{{attrs}} aria-hidden="true">{{dialogStart}}{{contentStart}}',
             'modalEnd' => '{{contentEnd}}{{dialogEnd}}</div>',
@@ -112,18 +112,16 @@ class ModalHelper extends Helper
      *
      * @param array|string $title The modal title or an array of options.
      * @param array $options Array of options. See above.
-     *
      * @return string An HTML string containing opening elements for a modal.
      */
-    public function create($title = null, $options = [])
+    public function create($title = null, array $options = []): string
     {
-
         if (is_array($title)) {
             $options = $title;
         }
 
         $this->_currentId = null;
-        $this->_current   = null;
+        $this->_current = null;
 
         $options += [
             'id' => null,
@@ -191,12 +189,11 @@ class ModalHelper extends Helper
      * echo $this->Modal->end([$this->Form->button('Save'), $this->Form->button('Close')]);
      * ```
      *
-     * @param array $buttons Array of buttons for the `footer()` method or `null`.
+     * @param array|null $buttons Array of buttons for the `footer()` method or `null`.
      * @param array $options Array of options for the `footer()` method.
-     *
      * @return string An HTML string containing closing tags for the modal.
      */
-    public function end($buttons = null, $options = [])
+    public function end(?array $buttons = null, array $options = []): string
     {
         $res = $this->_cleanCurrent();
         if ($buttons !== null) {
@@ -215,7 +212,7 @@ class ModalHelper extends Helper
      *
      * @return string An HTML string containing closing elements.
      */
-    protected function _cleanCurrent()
+    protected function _cleanCurrent(): string
     {
         if ($this->_current) {
             $current = $this->_current;
@@ -234,10 +231,9 @@ class ModalHelper extends Helper
      * @param string $part The name of the part(`'header'`, `'body'`, `'footer'`).
      * @param string $content The content of the part or `null`.
      * @param array $options Array of options for the `Html::tag` method.
-     *
      * @return string
      */
-    protected function _part($part, $content = null, $options = [])
+    protected function _part(string $part, ?string $content = null, array $options = []): string
     {
         $options += [
             'templateVars' => [],
@@ -267,13 +263,10 @@ class ModalHelper extends Helper
      *
      * @param string $title The modal header content, or null to only open the header.
      * @param array $options Array of options. See above.
-     *
-     * @return string A formated opening tag for the modal header or the complete modal
-     * header.
-     *
+     * @return string A formated opening tag for the modal header or the complete modal header.
      * @see `BootstrapModalHelper::header`
      */
-    protected function _createHeader($title = null, $options = [])
+    protected function _createHeader(?string $title = null, array $options = []): string
     {
         $options += [
             'close' => true,
@@ -306,13 +299,10 @@ class ModalHelper extends Helper
      *
      * @param string $text The modal body content, or `null` to only open the body.
      * @param array $options Array of options. See above.
-     *
-     * @return string A formated opening tag for the modal body or the complete modal
-     * body.
-     *
+     * @return string A formated opening tag for the modal body or the complete modal body.
      * @see `BootstrapModalHelper::body`
      */
-    protected function _createBody($text = null, $options = [])
+    protected function _createBody(?string $text = null, array $options = []): string
     {
         return $this->_part('body', $text, $options);
     }
@@ -332,11 +322,9 @@ class ModalHelper extends Helper
      *
      * @param string $content The modal footer content, or `null` to only open the footer.
      * @param array $options Array of options. See above.
-     *
-     * @return string A formated opening tag for the modal footer or the complete modal
-     * footer.
+     * @return string A formated opening tag for the modal footer or the complete modal footer.
      */
-    protected function _createFooter($content = null, $options = [])
+    protected function _createFooter(?string $content = null, array $options = []): string
     {
         $options += [
             'close' => true,
@@ -380,13 +368,11 @@ class ModalHelper extends Helper
      * - `templateVars` Provide template variables for the `headerStart` template.
      * - Other attributes will be assigned to the modal header element.
      *
-     * @param array $info The modal header content, or an array of options.
+     * @param string|array|null $info The modal header content, or an array of options.
      * @param array $options Array of options. See above.
-     *
-     * @return string A formated opening tag for the modal header or the complete modal
-     * header.
+     * @return string A formated opening tag for the modal header or the complete modal header.
      */
-    public function header($info = null, $options = [])
+    public function header($info = null, array $options = [])
     {
         if (is_array($info)) {
             $options = $info;
@@ -425,14 +411,11 @@ class ModalHelper extends Helper
      * - `templateVars` Provide template variables for the `bodyStart` template.
      * - Other attributes will be assigned to the modal body element.
      *
-     * @param array|string $info The body content, or `null`, or an array of options.
-     * `$options`.
+     * @param array|string|null $info The body content, or `null`, or an array of options. `$options`.
      * @param array $options Array of options. See above.
-     *
-     * @return string A formated opening tag for the modal body or the complete modal
-     * body.
+     * @return string A formated opening tag for the modal body or the complete modal body.
      */
-    public function body($info = null, $options = [])
+    public function body($info = null, array $options = []): string
     {
         if (is_array($info)) {
             $options = $info;
@@ -478,13 +461,11 @@ class ModalHelper extends Helper
      * - `templateVars` Provide template variables for the `footerStart` template.
      * - Other attributes will be assigned to the modal footer element.
      *
-     * @param string|array $buttons The footer content, or `null`, or an array of options.
+     * @param string|array|null $buttons The footer content, or `null`, or an array of options.
      * @param array        $options Array of options. See above.
-     *
-     * @return string A formated opening tag for the modal footer or the complete modal
-     * footer.
+     * @return string A formated opening tag for the modal footer or the complete modal footer.
      */
-    public function footer($buttons = null, $options = [])
+    public function footer($buttons = null, array $options = []): string
     {
         if (is_array($buttons)) {
             if (!empty($buttons) && $this->_isAssociativeArray($buttons)) {
