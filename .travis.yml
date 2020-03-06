@@ -1,17 +1,14 @@
 language: php
 
 php:
-  - 5.6
-  - 7.0
-  - 7.1
   - 7.2
   - 7.3
+  - 7.4
 
 dist: trusty
 
 env:
-  - CAKEPHP_VERSION=3.7.*
-  - CAKEPHP_VERSION=3.8.*
+  - CAKEPHP_VERSION=4.0.*
 
 cache:
   directories:
@@ -24,11 +21,10 @@ before_install:
 install: composer update --prefer-dist --no-interaction
 
 script:
-  - if [[ $TRAVIS_PHP_VERSION = 7.0 ]]; then export CODECOVERAGE=1; vendor/bin/phpunit --coverage-clover=clover.xml; fi
-  - if [[ $TRAVIS_PHP_VERSION != 7.0 ]]; then vendor/bin/phpunit; fi
+  - export CODECOVERAGE=1; vendor/bin/phpunit --coverage-clover=clover.xml
 
 after_success:
-  - if [[ $TRAVIS_PHP_VERSION = 7.0 ]]; then bash <(curl -s https://codecov.io/bash); fi
+  - bash <(curl -s https://codecov.io/bash)
 
 notifications:
   email: true
