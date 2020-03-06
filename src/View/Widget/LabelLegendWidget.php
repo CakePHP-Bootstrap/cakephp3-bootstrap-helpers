@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 /**
  *
  * Licensed under The MIT License
@@ -23,20 +25,20 @@ use Cake\View\Widget\LabelWidget;
  * This class is intended as an internal implementation detail
  * of Cake\View\Helper\FormHelper and is not intended for direct use.
  */
-class LabelLegendWidget extends LabelWidget {
-
-    /**
-     * The template to use for labels.
-     *
-     * @var string
-     */
+class LabelLegendWidget extends LabelWidget
+{
+     /**
+      * The template to use for labels.
+      *
+      * @var string
+      */
      protected $_templateForLabel = 'label';
 
-    /**
-     * The template to use for legends.
-     *
-     * @var string
-     */
+     /**
+      * The template to use for legends.
+      *
+      * @var string
+      */
      protected $_templateForLegend = 'labelLegend';
 
     /**
@@ -46,11 +48,10 @@ class LabelLegendWidget extends LabelWidget {
     {
         if (isset($data['for']) && $data['for'] === false) {
             $this->_labelTemplate = $this->_templateForLegend;
-        }
-        else {
+        } else {
             $this->_labelTemplate = $this->_templateForLabel;
         }
+
         return parent::render($data, $context);
     }
-
-};
+}

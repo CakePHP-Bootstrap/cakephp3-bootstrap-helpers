@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Bootstrap\Test\TestCase\View\Helper;
 
@@ -8,8 +9,8 @@ use Cake\Http\ServerRequest;
 use Cake\TestSuite\TestCase;
 use Cake\View\View;
 
-class FormHelperTest extends TestCase {
-
+class FormHelperTest extends TestCase
+{
     /**
      * @var \Cake\View\View
      */
@@ -42,7 +43,7 @@ class FormHelperTest extends TestCase {
 
         $this->View = new View($request);
         $this->View->loadHelper('Html', [
-            'className' => 'Bootstrap.Html'
+            'className' => 'Bootstrap.Html',
         ]);
         $this->form = new FormHelper($this->View);
         $this->dateRegex = [
@@ -62,26 +63,27 @@ class FormHelperTest extends TestCase {
                 'title' => ['type' => 'string', 'null' => true],
                 'body' => 'text',
                 'published' => ['type' => 'string', 'length' => 1, 'default' => 'N'],
-                '_constraints' => ['primary' => ['type' => 'primary', 'columns' => ['id']]]
+                '_constraints' => ['primary' => ['type' => 'primary', 'columns' => ['id']]],
             ],
             'required' => [
                 'author_id' => true,
                 'title' => true,
-            ]
+            ],
         ];
 
         Configure::write('debug', true);
     }
 
-    public function testCreate() {
+    public function testCreate()
+    {
         // Standard form
         $this->assertHtml([
             ['form' => [
                 'method',
                 'accept-charset',
                 'role' => 'form',
-                'action'
-            ]]
+                'action',
+            ]],
         ], $this->form->create());
         // Horizontal form
         $result = $this->form->create(null, ['horizontal' => true]);
@@ -98,144 +100,147 @@ class FormHelperTest extends TestCase {
                 'accept-charset',
                 'role' => 'form',
                 'action',
-                'class' => 'form-inline'
-            ]]
+                'class' => 'form-inline',
+            ]],
         ], $result);
         // Automatically return to non horizonal form
         $result = $this->form->create();
         $this->assertEquals($this->form->inline, false);
     }
 
-    public function testColumnSizes() {
+    public function testColumnSizes()
+    {
         $this->form->setConfig('columns', [
             'md' => [
                 'label' => 4,
-                'input' => 8
+                'input' => 8,
             ],
             'sm' => [
                 'label' => 12,
-                'input' => 12
-            ]
+                'input' => 12,
+            ],
         ], false);
         $this->form->create(null, ['horizontal' => true]);
         $result = $this->form->control('test', ['type' => 'text']);
         $expected = [
             ['div' => [
-                'class' => 'form-group row text'
+                'class' => 'form-group row text',
             ]],
             ['label' => [
                 'class' => 'col-form-label col-md-4 col-sm-12',
-                'for' => 'test'
+                'for' => 'test',
             ]],
             'Test',
             '/label',
             ['div' => [
-                'class' => 'col-md-8 col-sm-12'
+                'class' => 'col-md-8 col-sm-12',
             ]],
             ['input' => [
                 'type'  => 'text',
                 'class' => 'form-control',
                 'name'  => 'test',
-                'id'    => 'test'
+                'id'    => 'test',
             ]],
             '/div',
-            '/div'
+            '/div',
         ];
         $this->assertHtml($expected, $result);
 
         $this->article['errors'] = [
             'Article' => [
                 'title' => 'error message',
-                'content' => 'some <strong>test</strong> data with <a href="#">HTML</a> chars'
-            ]
+                'content' => 'some <strong>test</strong> data with <a href="#">HTML</a> chars',
+            ],
         ];
 
         $this->form->setConfig('columns', [
             'md' => [
                 'label' => 4,
-                'input' => 8
+                'input' => 8,
             ],
             'sm' => [
                 'label' => 4,
-                'input' => 8
-            ]
+                'input' => 8,
+            ],
         ], false);
         $this->form->create($this->article, ['horizontal' => true]);
         $result = $this->form->control('Article.title', ['type' => 'text']);
         $expected = [
             ['div' => [
-                'class' => 'form-group row has-error text'
+                'class' => 'form-group row has-error text',
             ]],
             ['label' => [
                 'class' => 'col-form-label col-md-4 col-sm-4',
-                'for' => 'article-title'
+                'for' => 'article-title',
             ]],
             'Title',
             '/label',
             ['div' => [
-                'class' => 'col-md-8 col-sm-8'
+                'class' => 'col-md-8 col-sm-8',
             ]],
             ['input' => [
                 'type'  => 'text',
                 'class' => 'form-control is-invalid',
                 'name'  => 'Article[title]',
-                'id'    => 'article-title'
+                'id'    => 'article-title',
             ]],
             ['div' => [
-                'class' => 'error-message invalid-feedback'
+                'class' => 'error-message invalid-feedback',
             ]],
             'error message',
             '/div',
             '/div',
-            '/div'
+            '/div',
         ];
         $this->assertHtml($expected, $result, true);
     }
 
-    public function testButton() {
+    public function testButton()
+    {
         // default button
         $button = $this->form->button('Test');
         $this->assertHtml([
             ['button' => [
                 'class' => 'btn btn-primary',
-                'type' => 'submit'
-            ]], 'Test', '/button'
+                'type' => 'submit',
+            ]], 'Test', '/button',
         ], $button);
         // button with bootstrap-type and bootstrap-size
         $button = $this->form->button('Test', [
             'bootstrap-type' => 'success',
-            'bootstrap-size' => 'sm'
+            'bootstrap-size' => 'sm',
         ]);
         $this->assertHtml([
             ['button' => [
                 'class' => 'btn btn-success btn-sm',
-                'type' => 'submit'
-            ]], 'Test', '/button'
+                'type' => 'submit',
+            ]], 'Test', '/button',
         ], $button);
         // button with btype and size
         $button = $this->form->button('Test', [
             'btype' => 'success',
-            'size' => 'sm'
+            'size' => 'sm',
         ]);
         $this->assertHtml([
             ['button' => [
                 'class' => 'btn btn-success btn-sm',
-                'type' => 'submit'
-            ]], 'Test', '/button'
+                'type' => 'submit',
+            ]], 'Test', '/button',
         ], $button);
         // button with class
         $button = $this->form->button('Test', [
-            'class' => 'btn btn-primary'
+            'class' => 'btn btn-primary',
         ]);
         $this->assertHtml([
             ['button' => [
                 'class' => 'btn btn-primary',
-                'type' => 'submit'
-            ]], 'Test', '/button'
+                'type' => 'submit',
+            ]], 'Test', '/button',
         ], $button);
     }
 
-    public function testCustomFunctions() {
+    public function testCustomFunctions()
+    {
         $this->assertEquals(
             $this->form->cbutton('b', ['class' => 'cl']),
             $this->form->button('b', ['class' => 'cl'])
@@ -254,9 +259,10 @@ class FormHelperTest extends TestCase {
         );
     }
 
-    protected function _testInput($expected, $fieldName, $options = [], $debug = false) {
+    protected function _testInput($expected, $fieldName, $options = [], $debug = false)
+    {
         $formOptions = [];
-        if(isset($options['_formOptions'])) {
+        if (isset($options['_formOptions'])) {
             $formOptions = $options['_formOptions'];
             unset($options['_formOptions']);
         }
@@ -265,15 +271,16 @@ class FormHelperTest extends TestCase {
         $assert = $this->assertHtml($expected, $result, $debug);
     }
 
-    public function testInput() {
+    public function testInput()
+    {
         $fieldName = 'field';
         // Standard form
         $this->_testInput([
             ['div' => [
-                'class' => 'form-group text'
+                'class' => 'form-group text',
             ]],
             ['label' => [
-                'for'   => $fieldName
+                'for'   => $fieldName,
             ]],
             \Cake\Utility\Inflector::humanize($fieldName),
             '/label',
@@ -281,45 +288,46 @@ class FormHelperTest extends TestCase {
                 'type'  => 'text',
                 'class' => 'form-control',
                 'name'  => $fieldName,
-                'id'    => $fieldName
+                'id'    => $fieldName,
             ]],
-            '/div'
+            '/div',
         ], $fieldName);
         // Horizontal form
         $this->_testInput([
             ['div' => [
-                'class' => 'form-group row text'
+                'class' => 'form-group row text',
             ]],
             ['label' => [
                 'class' => 'col-form-label col-md-2',
-                'for' => $fieldName
+                'for' => $fieldName,
             ]],
             \Cake\Utility\Inflector::humanize($fieldName),
             '/label',
             ['div' => [
-                'class' => 'col-md-10'
+                'class' => 'col-md-10',
             ]],
             ['input' => [
                 'type'  => 'text',
                 'class' => 'form-control',
                 'name'  => $fieldName,
-                'id'    => $fieldName
+                'id'    => $fieldName,
             ]],
             '/div',
-            '/div'
+            '/div',
         ], $fieldName, [
-            '_formOptions' => ['horizontal' => true]
+            '_formOptions' => ['horizontal' => true],
         ]);
     }
 
-    public function testInputText() {
+    public function testInputText()
+    {
         $fieldName = 'field';
         $this->_testInput([
             ['div' => [
-                'class' => 'form-group text'
+                'class' => 'form-group text',
             ]],
             ['label' => [
-                'for'   => $fieldName
+                'for'   => $fieldName,
             ]],
             \Cake\Utility\Inflector::humanize($fieldName),
             '/label',
@@ -327,67 +335,69 @@ class FormHelperTest extends TestCase {
                 'type'  => 'text',
                 'class' => 'form-control',
                 'name'  => $fieldName,
-                'id'    => $fieldName
+                'id'    => $fieldName,
             ]],
-            '/div'
+            '/div',
         ], $fieldName, ['type' => 'text']);
     }
 
-    public function testButtonGroup() {
+    public function testButtonGroup()
+    {
         // Basic test:
         $expected = [
             ['div' => [
-                'class' => 'btn-group', 'role' => 'group'
+                'class' => 'btn-group', 'role' => 'group',
             ]],
             ['button' => ['class' => 'btn btn-primary', 'type' => 'submit']], '1', '/button',
             ['button' => ['class' => 'btn btn-primary', 'type' => 'submit']], '2', '/button',
-            '/div'
+            '/div',
         ];
         $this->assertHtml($expected, $this->form->buttonGroup([
-            $this->form->button('1'), $this->form->button('2')
+            $this->form->button('1'), $this->form->button('2'),
         ]));
 
         // Custom attributes:
         $expected = [
             ['div' => [
-                'class' => 'btn-group myclass', 'role' => 'group', 'data-test' => 'mydata'
+                'class' => 'btn-group myclass', 'role' => 'group', 'data-test' => 'mydata',
             ]],
             ['button' => ['class' => 'btn btn-primary', 'type' => 'submit']], '1', '/button',
             ['button' => ['class' => 'btn btn-primary', 'type' => 'submit']], '2', '/button',
-            '/div'
+            '/div',
         ];
         $this->assertHtml($expected, $this->form->buttonGroup([
-            $this->form->button('1'), $this->form->button('2')
+            $this->form->button('1'), $this->form->button('2'),
         ], ['class' => 'myclass', 'data-test' => 'mydata']));
 
         // Vertical + custom attributes:
         $expected = [
             ['div' => [
-                'class' => 'btn-group-vertical myclass', 'role' => 'group', 'data-test' => 'mydata'
+                'class' => 'btn-group-vertical myclass', 'role' => 'group', 'data-test' => 'mydata',
             ]],
             ['button' => ['class' => 'btn btn-primary', 'type' => 'submit']], '1', '/button',
             ['button' => ['class' => 'btn btn-primary', 'type' => 'submit']], '2', '/button',
-            '/div'
+            '/div',
         ];
         $this->assertHtml($expected, $this->form->buttonGroup([
-            $this->form->button('1'), $this->form->button('2')
+            $this->form->button('1'), $this->form->button('2'),
         ], ['class' => 'myclass', 'data-test' => 'mydata', 'vertical' => true]));
     }
 
-    public function testInputRadio() {
+    public function testInputRadio()
+    {
         $fieldName = 'color';
         $options   = [
             'type' => 'radio',
             'options' => [
                 'red' => 'Red',
                 'blue' => 'Blue',
-                'green' => 'Green'
-            ]
+                'green' => 'Green',
+            ],
         ];
         // Default
         $expected = [
             ['fieldset' => [
-                'class' => 'form-group radio'
+                'class' => 'form-group radio',
             ]],
             ['label' => []],
             \Cake\Utility\Inflector::humanize($fieldName),
@@ -396,28 +406,28 @@ class FormHelperTest extends TestCase {
                 'type' => 'hidden',
                 'name' => $fieldName,
                 'value' => '',
-                'class' => 'form-control'
-            ]]
+                'class' => 'form-control',
+            ]],
         ];
-        foreach($options['options'] as $key => $value) {
+        foreach ($options['options'] as $key => $value) {
             $expected = array_merge($expected, [
                 ['div' => [
-                    'class' => 'form-check'
+                    'class' => 'form-check',
                 ]],
                 ['label' => [
-                    'for'   => $fieldName.'-'.$key,
-                    'class' => 'form-check-label'
+                    'for'   => $fieldName . '-' . $key,
+                    'class' => 'form-check-label',
                 ]],
                 ['input' => [
                     'type'  => 'radio',
                     'class' => 'form-check-input',
                     'name'  => $fieldName,
                     'value' => $key,
-                    'id'    => $fieldName.'-'.$key
+                    'id'    => $fieldName . '-' . $key,
                 ]],
                 $value,
                 '/label',
-                '/div'
+                '/div',
             ]);
         }
         $expected = array_merge($expected, ['/fieldset']);
@@ -425,11 +435,11 @@ class FormHelperTest extends TestCase {
 
         // Inline
         $options += [
-            'inline' => true
+            'inline' => true,
         ];
         $expected = [
             ['fieldset' => [
-                'class' => 'form-group inlineradio'
+                'class' => 'form-group inlineradio',
             ]],
             ['label' => [ ]],
             \Cake\Utility\Inflector::humanize($fieldName),
@@ -438,28 +448,28 @@ class FormHelperTest extends TestCase {
                 'type' => 'hidden',
                 'name' => $fieldName,
                 'value' => '',
-                'class' => 'form-control'
-            ]]
+                'class' => 'form-control',
+            ]],
         ];
-        foreach($options['options'] as $key => $value) {
+        foreach ($options['options'] as $key => $value) {
             $expected = array_merge($expected, [
                 ['div' => [
-                    'class' => 'form-check form-check-inline'
+                    'class' => 'form-check form-check-inline',
                 ]],
                 ['label' => [
-                    'for'   => $fieldName.'-'.$key,
-                    'class' => 'form-check-label'
+                    'for'   => $fieldName . '-' . $key,
+                    'class' => 'form-check-label',
                 ]],
                 ['input' => [
                     'type'  => 'radio',
                     'class' => 'form-check-input',
                     'name'  => $fieldName,
                     'value' => $key,
-                    'id'    => $fieldName.'-'.$key
+                    'id'    => $fieldName . '-' . $key,
                 ]],
                 $value,
                 '/label',
-                '/div'
+                '/div',
             ]);
         }
         $expected = array_merge($expected, ['/fieldset']);
@@ -467,50 +477,50 @@ class FormHelperTest extends TestCase {
 
         // Horizontal
         $options += [
-            '_formOptions' => ['horizontal' => true]
+            '_formOptions' => ['horizontal' => true],
         ];
         $options['inline'] = false;
         $expected = [
             ['fieldset' => [
-                'class' => 'form-group radio'
+                'class' => 'form-group radio',
             ]],
             ['div' => [
-                'class' => 'row'
+                'class' => 'row',
             ]],
             ['legend' => [
-                'class' => 'col-form-label pt-0 col-md-2'
+                'class' => 'col-form-label pt-0 col-md-2',
             ]],
             \Cake\Utility\Inflector::humanize($fieldName),
             '/legend',
             ['div' => [
-                'class' => 'col-md-10'
+                'class' => 'col-md-10',
             ]],
             ['input' => [
                 'type' => 'hidden',
                 'name' => $fieldName,
                 'value' => '',
-                'class' => 'form-control'
-            ]]
+                'class' => 'form-control',
+            ]],
         ];
-        foreach($options['options'] as $key => $value) {
+        foreach ($options['options'] as $key => $value) {
             $expected = array_merge($expected, [
                 ['div' => [
-                    'class' => 'form-check'
+                    'class' => 'form-check',
                 ]],
                 ['label' => [
-                    'for'   => $fieldName.'-'.$key,
-                    'class' => 'form-check-label'
+                    'for'   => $fieldName . '-' . $key,
+                    'class' => 'form-check-label',
                 ]],
                 ['input' => [
                     'type'  => 'radio',
                     'class' => 'form-check-input',
                     'name'  => $fieldName,
                     'value' => $key,
-                    'id'    => $fieldName.'-'.$key
+                    'id'    => $fieldName . '-' . $key,
                 ]],
                 $value,
                 '/label',
-                '/div'
+                '/div',
             ]);
         }
         $expected = array_merge($expected, ['/div', '/div', '/fieldset']);
@@ -520,143 +530,145 @@ class FormHelperTest extends TestCase {
         $options['inline'] = true;
         $expected = [
             ['fieldset' => [
-                'class' => 'form-group inlineradio'
+                'class' => 'form-group inlineradio',
             ]],
             ['div' => [
-                'class' => 'row'
+                'class' => 'row',
             ]],
             ['legend' => [
-                'class' => 'col-form-label pt-0 col-md-2'
+                'class' => 'col-form-label pt-0 col-md-2',
             ]],
             \Cake\Utility\Inflector::humanize($fieldName),
             '/legend',
             ['div' => [
-                'class' => 'col-md-10'
+                'class' => 'col-md-10',
             ]],
             ['input' => [
                 'type' => 'hidden',
                 'name' => $fieldName,
                 'value' => '',
-                'class' => 'form-control'
-            ]]
+                'class' => 'form-control',
+            ]],
         ];
-        foreach($options['options'] as $key => $value) {
+        foreach ($options['options'] as $key => $value) {
             $expected = array_merge($expected, [
                 ['div' => [
-                    'class' => 'form-check form-check-inline'
+                    'class' => 'form-check form-check-inline',
                 ]],
                 ['label' => [
-                    'for'   => $fieldName.'-'.$key,
-                    'class' => 'form-check-label'
+                    'for'   => $fieldName . '-' . $key,
+                    'class' => 'form-check-label',
                 ]],
                 ['input' => [
                     'type'  => 'radio',
                     'class' => 'form-check-input',
                     'name'  => $fieldName,
                     'value' => $key,
-                    'id'    => $fieldName.'-'.$key
+                    'id'    => $fieldName . '-' . $key,
                 ]],
                 $value,
                 '/label',
-                '/div'
+                '/div',
             ]);
         }
         $expected = array_merge($expected, ['/div', '/div', '/fieldset']);
         $this->_testInput($expected, $fieldName, $options);
     }
 
-    public function testInputCheckbox() {
+    public function testInputCheckbox()
+    {
         $fieldName = 'color';
         $options   = [
-            'type' => 'checkbox'
+            'type' => 'checkbox',
         ];
         // Default
         $expected = [
             ['div' => [
-                'class' => 'form-check checkbox'
+                'class' => 'form-check checkbox',
             ]],
             ['input' => [
                 'type' => 'hidden',
                 'name' => $fieldName,
                 'value' => "0",
-                'class' => 'form-control'
+                'class' => 'form-control',
             ]],
             ['label' => [
                 'for'   => $fieldName,
-                'class' => 'form-check-label'
+                'class' => 'form-check-label',
             ]],
             ['input' => [
                 'type'  => 'checkbox',
                 'class' => 'form-check-input',
                 'name'  => $fieldName,
                 'value' => "1",
-                'id'    => $fieldName
+                'id'    => $fieldName,
             ]],
             \Cake\Utility\Inflector::humanize($fieldName),
             '/label',
-            '/div'
+            '/div',
         ];
         $this->_testInput($expected, $fieldName, $options);
 
         // Horizontal
         $expected = [
             ['div' => [
-                'class' => 'form-group row'
+                'class' => 'form-group row',
             ]],
             ['div' => ['class' => 'col-md-2']], '/div',
             ['div' => [
-                'class' => 'col-md-10'
+                'class' => 'col-md-10',
             ]],
             ['div' => [
-                'class' => 'form-check checkbox'
+                'class' => 'form-check checkbox',
             ]],
             ['input' => [
                 'type' => 'hidden',
                 'name' => $fieldName,
                 'value' => "0",
-                'class' => 'form-control'
+                'class' => 'form-control',
             ]],
             ['label' => [
                 'for'   => $fieldName,
-                'class' => 'form-check-label'
+                'class' => 'form-check-label',
             ]],
             ['input' => [
                 'type'  => 'checkbox',
                 'class' => 'form-check-input',
                 'name'  => $fieldName,
                 'value' => "1",
-                'id'    => $fieldName
+                'id'    => $fieldName,
             ]],
             \Cake\Utility\Inflector::humanize($fieldName),
             '/label',
             '/div',
             '/div',
-            '/div'
+            '/div',
         ];
         $this->_testInput($expected, $fieldName, $options + [
-            '_formOptions' => ['horizontal' => true]
+            '_formOptions' => ['horizontal' => true],
         ], true);
     }
 
-    public function testInputGroup() {
+    public function testInputGroup()
+    {
         $fieldName = 'field';
         $options   = [
             'type' => 'text',
-            'label' => false
+            'label' => false,
         ];
         // Test with prepend addon
         $expected = [
             ['div' => [
-                'class' => 'form-group text'
+                'class' => 'form-group text',
             ]],
             ['div' => [
-                'class' => 'input-group'
+                'class' => 'input-group',
             ]],
             ['div' => [
-                'class' => 'input-group-prepend'
+                'class' => 'input-group-prepend',
             ]],
             ['span' => [
-                'class' => 'input-group-text'
+                'class' => 'input-group-text',
             ]],
             '@',
             '/span',
@@ -665,52 +677,52 @@ class FormHelperTest extends TestCase {
                 'type' => 'text',
                 'class' => 'form-control',
                 'name' => $fieldName,
-                'id' => $fieldName
+                'id' => $fieldName,
             ]],
             '/div',
-            '/div'
+            '/div',
         ];
         $this->_testInput($expected, $fieldName, $options + ['prepend' => '@']);
         // Test with append
         $expected = [
             ['div' => [
-                'class' => 'form-group text'
+                'class' => 'form-group text',
             ]],
             ['div' => [
-                'class' => 'input-group'
+                'class' => 'input-group',
             ]],
             ['input' => [
                 'type' => 'text',
                 'class' => 'form-control',
                 'name' => $fieldName,
-                'id' => $fieldName
+                'id' => $fieldName,
             ]],
             ['div' => [
-                'class' => 'input-group-append'
+                'class' => 'input-group-append',
             ]],
             ['span' => [
-                'class' => 'input-group-text'
+                'class' => 'input-group-text',
             ]],
             '.00',
             '/span',
             '/div',
             '/div',
-            '/div'
+            '/div',
         ];
         $this->_testInput($expected, $fieldName, $options + ['append' => '.00']);
         // Test with append + prepend
         $expected = [
             ['div' => [
-                'class' => 'form-group text'
+                'class' => 'form-group text',
             ]],
             ['div' => [
-                'class' => 'input-group'
+                'class' => 'input-group',
             ]],
             ['div' => [
-                'class' => 'input-group-prepend'
+                'class' => 'input-group-prepend',
             ]],
             ['span' => [
-                'class' => 'input-group-text'
+                'class' => 'input-group-text',
             ]],
             '$',
             '/span',
@@ -719,36 +731,39 @@ class FormHelperTest extends TestCase {
                 'type' => 'text',
                 'class' => 'form-control',
                 'name' => $fieldName,
-                'id' => $fieldName
+                'id' => $fieldName,
             ]],
             ['div' => [
-                'class' => 'input-group-append'
+                'class' => 'input-group-append',
             ]],
             ['span' => [
-                'class' => 'input-group-text'
+                'class' => 'input-group-text',
             ]],
             '.00',
             '/span',
             '/div',
             '/div',
-            '/div'
+            '/div',
         ];
-        $this->_testInput($expected, $fieldName,
-                           $options + ['prepend' => '$', 'append' => '.00']);
+        $this->_testInput(
+            $expected,
+            $fieldName,
+            $options + ['prepend' => '$', 'append' => '.00']
+        );
         // Test with prepend button
         $expected = [
             ['div' => [
-                'class' => 'form-group text'
+                'class' => 'form-group text',
             ]],
             ['div' => [
-                'class' => 'input-group'
+                'class' => 'input-group',
             ]],
             ['div' => [
-                'class' => 'input-group-prepend'
+                'class' => 'input-group-prepend',
             ]],
             ['button' => [
                 'class' => 'btn btn-primary',
-                'type'  => 'submit'
+                'type'  => 'submit',
             ]],
             'Go!',
             '/button',
@@ -757,119 +772,126 @@ class FormHelperTest extends TestCase {
                 'type' => 'text',
                 'class' => 'form-control',
                 'name' => $fieldName,
-                'id' => $fieldName
+                'id' => $fieldName,
             ]],
             '/div',
-            '/div'
+            '/div',
         ];
 
-        $this->_testInput($expected, $fieldName,
-                           $options + ['prepend' => $this->form->button('Go!')]);
+        $this->_testInput(
+            $expected,
+            $fieldName,
+            $options + ['prepend' => $this->form->button('Go!')]
+        );
 
         // Test with append button
         $expected = [
             ['div' => [
-                'class' => 'form-group text'
+                'class' => 'form-group text',
             ]],
             ['div' => [
-                'class' => 'input-group'
+                'class' => 'input-group',
             ]],
             ['input' => [
                 'type' => 'text',
                 'class' => 'form-control',
                 'name' => $fieldName,
-                'id' => $fieldName
+                'id' => $fieldName,
             ]],
             ['div' => [
-                'class' => 'input-group-append'
+                'class' => 'input-group-append',
             ]],
             ['button' => [
                 'class' => 'btn btn-primary',
-                'type'  => 'submit'
+                'type'  => 'submit',
             ]],
             'Go!',
             '/button',
             '/div',
             '/div',
-            '/div'
+            '/div',
         ];
-        $this->_testInput($expected, $fieldName,
-                           $options + ['append' => $this->form->button('Go!')]);
+        $this->_testInput(
+            $expected,
+            $fieldName,
+            $options + ['append' => $this->form->button('Go!')]
+        );
         // Test with append 2 button
         $expected = [
             ['div' => [
-                'class' => 'form-group text'
+                'class' => 'form-group text',
             ]],
             ['div' => [
-                'class' => 'input-group'
+                'class' => 'input-group',
             ]],
             ['input' => [
                 'type' => 'text',
                 'class' => 'form-control',
                 'name' => $fieldName,
-                'id' => $fieldName
+                'id' => $fieldName,
             ]],
             ['div' => [
-                'class' => 'input-group-append'
+                'class' => 'input-group-append',
             ]],
             ['button' => [
                 'class' => 'btn btn-primary',
-                'type'  => 'submit'
+                'type'  => 'submit',
             ]],
             'Go!',
             '/button',
             ['button' => [
                 'class' => 'btn btn-primary',
-                'type'  => 'submit'
+                'type'  => 'submit',
             ]],
             'GoGo!',
             '/button',
             '/div',
             '/div',
-            '/div'
+            '/div',
         ];
         $this->_testInput($expected, $fieldName, $options + [
-            'append' => [$this->form->button('Go!'), $this->form->button('GoGo!')]
+            'append' => [$this->form->button('Go!'), $this->form->button('GoGo!')],
         ]);
     }
 
-    public function testAppendDropdown() {
+    public function testAppendDropdown()
+    {
         $fieldName = 'field';
         $options   = [
             'type' => 'text',
-            'label' => false
+            'label' => false,
         ];
         // Test with append dropdown
         $expected = [
             ['div' => [
-                'class' => 'form-group text'
+                'class' => 'form-group text',
             ]],
             ['div' => [
-                'class' => 'input-group'
+                'class' => 'input-group',
             ]],
             ['input' => [
                 'type' => 'text',
                 'class' => 'form-control',
                 'name' => $fieldName,
-                'id' => $fieldName
+                'id' => $fieldName,
             ]],
             ['div' => [
-                'class' => 'input-group-append'
+                'class' => 'input-group-append',
             ]],
             ['div' => [
                 'class' => 'btn-group',
-                'role' => 'group'
+                'role' => 'group',
             ]],
             ['button' => [
                 'data-toggle' => 'dropdown',
                 'class' => 'dropdown-toggle btn btn-primary',
                 'aria-haspopup' => 'true',
-                'aria-expanded' => 'false'
+                'aria-expanded' => 'false',
             ]],
             'Action',
             '/button',
             ['div' => [
-                'class' => 'dropdown-menu dropdown-menu-left'
+                'class' => 'dropdown-menu dropdown-menu-left',
             ]],
             ['a' => ['href'  => '#', 'class' => 'dropdown-item']], 'Link 1', '/a',
             ['a' => ['href'  => '#', 'class' => 'dropdown-item',]], 'Link 2', '/a',
@@ -879,48 +901,48 @@ class FormHelperTest extends TestCase {
             '/div',
             '/div',
             '/div',
-            '/div'
+            '/div',
         ];
         $this->_testInput($expected, $fieldName, $options + [
             'append' => $this->form->dropdownButton('Action', [
                 ['item' => ['title' => 'Link 1', 'url' => '#']],
                 ['item' => ['title' => 'Link 2', 'url' => '#']],
                 'divider',
-                ['item' => ['title' => 'Link 3', 'url' => '#']]
-            ])
+                ['item' => ['title' => 'Link 3', 'url' => '#']],
+            ]),
         ]);
 
         // Test with append dropup
         $expected = [
             ['div' => [
-                'class' => 'form-group text'
+                'class' => 'form-group text',
             ]],
             ['div' => [
-                'class' => 'input-group'
+                'class' => 'input-group',
             ]],
             ['input' => [
                 'type' => 'text',
                 'class' => 'form-control',
                 'name' => $fieldName,
-                'id' => $fieldName
+                'id' => $fieldName,
             ]],
             ['div' => [
-                'class' => 'input-group-append'
+                'class' => 'input-group-append',
             ]],
             ['div' => [
                 'class' => 'btn-group dropup',
-                'role' => 'group'
+                'role' => 'group',
             ]],
             ['button' => [
                 'data-toggle' => 'dropdown',
                 'class' => 'dropdown-toggle btn btn-primary',
                 'aria-haspopup' => 'true',
-                'aria-expanded' => 'false'
+                'aria-expanded' => 'false',
             ]],
             'Action',
             '/button',
             ['div' => [
-                'class' => 'dropdown-menu dropdown-menu-left'
+                'class' => 'dropdown-menu dropdown-menu-left',
             ]],
             ['a' => ['href'  => '#', 'class' => 'dropdown-item']], 'Link 1', '/a',
             ['a' => ['href'  => '#', 'class' => 'dropdown-item',]], 'Link 2', '/a',
@@ -930,32 +952,33 @@ class FormHelperTest extends TestCase {
             '/div',
             '/div',
             '/div',
-            '/div'
+            '/div',
         ];
         $this->_testInput($expected, $fieldName, $options + [
             'append' => $this->form->dropdownButton('Action', [
                 ['item' => ['title' => 'Link 1', 'url' => '#']],
                 ['item' => ['title' => 'Link 2', 'url' => '#']],
                 'divider',
-                ['item' => ['title' => 'Link 3', 'url' => '#']]
-            ], ['dropup' => true])
+                ['item' => ['title' => 'Link 3', 'url' => '#']],
+            ], ['dropup' => true]),
         ]);
     }
 
-    public function testInputTemplateVars() {
+    public function testInputTemplateVars()
+    {
         $fieldName = 'field';
         // Add a template with the help placeholder.
         $help = 'Some help text.';
         $this->form->setTemplates([
-            'inputContainer' => '<div class="form-group {{type}}{{required}}">{{content}}<span>{{help}}</span></div>'
+            'inputContainer' => '<div class="form-group {{type}}{{required}}">{{content}}<span>{{help}}</span></div>',
         ]);
         // Standard form
         $this->_testInput([
             ['div' => [
-                'class' => 'form-group text'
+                'class' => 'form-group text',
             ]],
             ['label' => [
-                'for'   => $fieldName
+                'for'   => $fieldName,
             ]],
             \Cake\Utility\Inflector::humanize($fieldName),
             '/label',
@@ -963,16 +986,17 @@ class FormHelperTest extends TestCase {
                 'type'  => 'text',
                 'class' => 'form-control',
                 'name'  => $fieldName,
-                'id'    => $fieldName
+                'id'    => $fieldName,
             ]],
             ['span' => true],
             $help,
             '/span',
-            '/div'
+            '/div',
         ], $fieldName, ['templateVars' => ['help' => $help]]);
     }
 
-    public function testDateTime() {
+    public function testDateTime()
+    {
         extract($this->dateRegex);
 
         $now = strtotime('now');
@@ -991,7 +1015,7 @@ class FormHelperTest extends TestCase {
         $result = $this->form->control('Contact.date', ['type' => 'date']);
         $expected = [
             ['div' => [
-                'class' => 'form-group date'
+                'class' => 'form-group date',
             ]],
             ['label' => []],
             'Date',
@@ -1002,12 +1026,13 @@ class FormHelperTest extends TestCase {
                 'class' => 'form-control',
                 'id' => 'contact-date',
             ]],
-            '/div'
+            '/div',
         ];
         $this->assertHtml($expected, $result);
     }
 
-    public function testSubmit() {
+    public function testSubmit()
+    {
         $this->form->horizontal = false;
         $result = $this->form->submit('Submit');
         $expected = [
@@ -1015,9 +1040,9 @@ class FormHelperTest extends TestCase {
             ['input' => [
                 'type' => 'submit',
                 'class' => 'btn btn-primary',
-                'value' => 'Submit'
+                'value' => 'Submit',
             ]],
-            '/div'
+            '/div',
         ];
         $this->assertHtml($expected, $result);
 
@@ -1031,15 +1056,16 @@ class FormHelperTest extends TestCase {
             ['input' => [
                 'type' => 'submit',
                 'class' => 'btn btn-primary',
-                'value' => 'Submit'
+                'value' => 'Submit',
             ]],
             '/div',
-            '/div'
+            '/div',
         ];
         $this->assertHtml($expected, $result);
     }
 
-    public function testCustomFileInput() {
+    public function testCustomFileInput()
+    {
         $this->form->setConfig('useCustomFileInput', true);
         $result = $this->form->file('Contact.picture');
         $expected = [
@@ -1048,7 +1074,7 @@ class FormHelperTest extends TestCase {
                 'name' => 'Contact[picture]',
                 'id' => 'Contact[picture]',
                 'style' => 'display: none;',
-                'onchange' => "document.getElementById('Contact[picture]-input').value = (this.files.length <= 1) ? (this.files.length ? this.files[0].name : '') : this.files.length + ' ' + 'files selected';"
+                'onchange' => "document.getElementById('Contact[picture]-input').value = (this.files.length <= 1) ? (this.files.length ? this.files[0].name : '') : this.files.length + ' ' + 'files selected';",
             ]],
             ['div' => ['class' => 'input-group']],
             ['div' => ['class' => 'input-group-btn']],
@@ -1066,7 +1092,7 @@ class FormHelperTest extends TestCase {
                 'class' => 'form-control',
                 'readonly' => 'readonly',
                 'id' => 'Contact[picture]-input',
-                'onclick' => "document.getElementById('Contact[picture]').click();"
+                'onclick' => "document.getElementById('Contact[picture]').click();",
             ]],
             '/div',
         ];
@@ -1080,14 +1106,14 @@ class FormHelperTest extends TestCase {
                 'name' => 'Contact[picture]',
                 'id' => 'Contact[picture]',
                 'style' => 'display: none;',
-                'onchange' => "document.getElementById('Contact[picture]-input').value = (this.files.length <= 1) ? (this.files.length ? this.files[0].name : '') : this.files.length + ' ' + 'files selected';"
+                'onchange' => "document.getElementById('Contact[picture]-input').value = (this.files.length <= 1) ? (this.files.length ? this.files[0].name : '') : this.files.length + ' ' + 'files selected';",
             ]],
             ['div' => ['class' => 'input-group']],
             ['div' => ['class' => 'input-group-btn']],
             ['button' => [
                 'class' => 'btn btn-primary',
                 'type' => 'button',
-                'onclick' => "document.getElementById('Contact[picture]').click();"
+                'onclick' => "document.getElementById('Contact[picture]').click();",
             ]],
             __('Choose Files'),
             '/button',
@@ -1098,28 +1124,29 @@ class FormHelperTest extends TestCase {
                 'class' => 'form-control',
                 'readonly' => 'readonly',
                 'id' => 'Contact[picture]-input',
-                'onclick' => "document.getElementById('Contact[picture]').click();"
+                'onclick' => "document.getElementById('Contact[picture]').click();",
             ]],
             '/div',
         ];
         $this->assertHtml($expected, $result);
     }
 
-    public function testUploadCustomFileInput() {
+    public function testUploadCustomFileInput()
+    {
         $expected = [
             ['input' => [
                 'type' => 'file',
                 'name' => 'Contact[picture]',
                 'id' => 'Contact[picture]',
                 'style' => 'display: none;',
-                'onchange' => "document.getElementById('Contact[picture]-input').value = (this.files.length <= 1) ? (this.files.length ? this.files[0].name : '') : this.files.length + ' ' + 'files selected';"
+                'onchange' => "document.getElementById('Contact[picture]-input').value = (this.files.length <= 1) ? (this.files.length ? this.files[0].name : '') : this.files.length + ' ' + 'files selected';",
             ]],
             ['div' => ['class' => 'input-group']],
             ['div' => ['class' => 'input-group-btn']],
             ['button' => [
                 'class' => 'btn btn-primary',
                 'type' => 'button',
-                'onclick' => "document.getElementById('Contact[picture]').click();"
+                'onclick' => "document.getElementById('Contact[picture]').click();",
             ]],
             __('Choose File'),
             '/button',
@@ -1130,7 +1157,7 @@ class FormHelperTest extends TestCase {
                 'class' => 'form-control',
                 'readonly' => 'readonly',
                 'id' => 'Contact[picture]-input',
-                'onclick' => "document.getElementById('Contact[picture]').click();"
+                'onclick' => "document.getElementById('Contact[picture]').click();",
             ]],
             '/div',
         ];
@@ -1141,7 +1168,7 @@ class FormHelperTest extends TestCase {
 
         $this->form->getView()->setRequest($this->form->getView()->getRequest()->withData('Contact.picture', [
             'name' => '', 'type' => '', 'tmp_name' => '',
-            'error' => 4, 'size' => 0
+            'error' => 4, 'size' => 0,
         ]));
         $result = $this->form->file('Contact.picture');
         $this->assertHtml($expected, $result);
@@ -1154,7 +1181,8 @@ class FormHelperTest extends TestCase {
         $this->assertHtml($expected, $result);
     }
 
-    public function testFormSecuredFileControl() {
+    public function testFormSecuredFileControl()
+    {
         $this->View->setRequest($this->View->getRequest()->withAttribute('formTokenData', [
             'unlockedFields' => [],
         ]));

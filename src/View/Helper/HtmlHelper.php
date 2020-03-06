@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 /**
  *
  * Licensed under The MIT License
@@ -25,8 +27,8 @@ use Bootstrap\Utility\Matching;
  *
  * @link http://book.cakephp.org/3.0/en/views/helpers/html.html
  */
-class HtmlHelper extends \Cake\View\Helper\HtmlHelper {
-
+class HtmlHelper extends \Cake\View\Helper\HtmlHelper
+{
     use ClassTrait;
     use EasyIconTrait;
 
@@ -83,7 +85,7 @@ class HtmlHelper extends \Cake\View\Helper\HtmlHelper {
             'alertCloseContent' => '<span aria-hidden="true">&times;</span>',
             'tooltip' => '<{{tag}} data-toggle="{{toggle}}" data-placement="{{placement}}" title="{{tooltip}}"{{attrs}}>{{content}}</{{tag}}>',
             'progressBar' =>
-'<div class="progress-bar bg-{{type}}{{attrs.class}}" role="progressbar"
+    '<div class="progress-bar bg-{{type}}{{attrs.class}}" role="progressbar"
 aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style="width: {{width}}%;"{{attrs}}>{{inner}}</div>',
             'progressBarInner' => '<span class="sr-only">{{width}}%</span>',
             'progressBarContainer' => '<div class="progress{{attrs.class}}"{{attrs}}>{{content}}</div>',
@@ -91,24 +93,24 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
             'dropdownMenuItem' => '<a href="{{url}}" class="dropdown-item{{attrs.class}}"{{attrs}}>{{content}}</a>',
             'dropdownMenuHeader' => '<h6 class="dropdown-header{{attrs.class}}"{{attrs}}>{{content}}</h6>',
             'dropdownMenuDivider' => '<div role="separator" class="dropdown-divider{{attrs.class}}"{{attrs}}></div>',
-            'confirmJs' => '{{confirm}}'
+            'confirmJs' => '{{confirm}}',
         ],
         'templateClass' => 'Bootstrap\View\EnhancedStringTemplate',
         'tooltip' => [
             'tag'       => 'span',
             'placement' => 'right',
-            'toggle'    => 'tooltip'
+            'toggle'    => 'tooltip',
         ],
         'badge' => [
-            'type' => 'default'
+            'type' => 'default',
         ],
         'alert' => [
             'type' => 'warning',
-            'close' => true
+            'close' => true,
         ],
         'progress' => [
-            'type' => 'primary'
-        ]
+            'type' => 'primary',
+        ],
     ];
 
     /**
@@ -124,14 +126,16 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
      *
      * @return string The HTML icon.
      */
-    public function icon($icon, array $options = []) {
+    public function icon($icon, array $options = [])
+    {
         $options += [
-            'templateVars' => []
+            'templateVars' => [],
         ];
+
         return $this->formatTemplate('icon', [
             'type' => $icon,
             'attrs' => $this->templater()->formatAttributes($options),
-            'templateVars' => $options['templateVars']
+            'templateVars' => $options['templateVars'],
         ]);
     }
 
@@ -140,14 +144,16 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
      */
     public function link($title, $url = null, array $options = []): string
     {
-        list($options, $easyIcon) = $this->_easyIconOption($options);
+        [$options, $easyIcon] = $this->_easyIconOption($options);
+
         return $this->_injectIcon(parent::link($title, $url, $options), $easyIcon);
     }
 
     /**
      * @deprecated 4.0.0 Use the badge() instead.
      */
-    public function label($text, $type = null, $options = []) {
+    public function label($text, $type = null, $options = [])
+    {
         return $this->badge($text, $type, $options);
     }
 
@@ -167,22 +173,23 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
      *
      * @param array $options Array of attributes for the span element.
      */
-     public function badge($text, $type = null, $options = []) {
+    public function badge($text, $type = null, $options = [])
+    {
         if (is_string($type)) {
             $options['type'] = $type;
-        }
-        else if (is_array($type)) {
+        } elseif (is_array($type)) {
             $options = $type;
         }
         $options += $this->getConfig('badge') + [
-            'templateVars' => []
+           'templateVars' => [],
         ];
         $type = $options['type'];
+
         return $this->formatTemplate('badge', [
-            'type' => $options['type'],
-            'content' => $text,
-            'attrs' => $this->templater()->formatAttributes($options, ['type']),
-            'templateVars' => $options['templateVars']
+           'type' => $options['type'],
+           'content' => $text,
+           'attrs' => $this->templater()->formatAttributes($options, ['type']),
+           'templateVars' => $options['templateVars'],
         ]);
     }
 
@@ -206,35 +213,36 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
      *
      * @return string A HTML bootstrap alert element.
      */
-    public function alert($text, $type = null, $options = []) {
+    public function alert($text, $type = null, $options = [])
+    {
         if (is_string($type)) {
             $options['type'] = $type;
-        }
-        else if (is_array($type)) {
+        } elseif (is_array($type)) {
             $options = $type;
         }
         $options += $this->getConfig('alert') + [
-            'templateVars' => []
+            'templateVars' => [],
         ];
         $close = null;
         if ($options['close']) {
             $closeContent = $this->formatTemplate('alertCloseContent', [
-                'templateVars' => $options['templateVars']
+                'templateVars' => $options['templateVars'],
             ]);
             $close = $this->formatTemplate('alertCloseButton', [
                 'label' => __('Close'),
                 'content' => $closeContent,
                 'attrs' => $this->templater()->formatAttributes([]),
-                'templateVars' => $options['templateVars']
+                'templateVars' => $options['templateVars'],
             ]);
             $options = $this->addClass($options, 'alert-dismissible');
         }
+
         return $this->formatTemplate('alert', [
             'type' => $options['type'],
             'close' => $close,
             'content' => $text,
             'attrs' => $this->templater()->formatAttributes($options, ['close', 'type']),
-            'templateVars' => $options['templateVars']
+            'templateVars' => $options['templateVars'],
         ]);
     }
 
@@ -256,15 +264,17 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
      *
      * @return string The text wrapped in the specified HTML tag with a tooltip.
      */
-    public function tooltip($text, $tooltip, $options = []) {
+    public function tooltip($text, $tooltip, $options = [])
+    {
         $options += $this->getConfig('tooltip') + [
             'tooltip' => $tooltip,
-            'templateVars' => []
+            'templateVars' => [],
         ];
+
         return $this->formatTemplate('tooltip', [
             'content' => $text,
             'attrs' => $this->templater()->formatAttributes($options, ['tag', 'toggle', 'placement', 'tooltip']),
-            'templateVars' => array_merge($options, $options['templateVars'])
+            'templateVars' => array_merge($options, $options['templateVars']),
         ]);
     }
 
@@ -291,17 +301,18 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
      *
      * @return string The HTML bootstrap progress bar.
      */
-    public function progress($widths, array $options = []) {
+    public function progress($widths, array $options = [])
+    {
         $options += $this->getConfig('progress') + [
             'striped' => false,
             'active'  => false,
             'min' => 0,
             'max' => 100,
-            'templateVars' => []
+            'templateVars' => [],
         ];
         if (!is_array($widths)) {
             $widths = [
-                ['width' => $widths]
+                ['width' => $widths],
             ];
         }
         $bars = '';
@@ -314,7 +325,7 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
                 $width = $this->addClass($width, 'progress-bar-striped progress-bar-animated');
             }
             $inner = $this->formatTemplate('progressBarInner', [
-                'width' => $width['width']
+                'width' => $width['width'],
             ]);
 
             $bars .= $this->formatTemplate('progressBar', [
@@ -324,13 +335,14 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
                 'max' => $width['max'],
                 'width' => $width['width'],
                 'attrs' => $this->templater()->formatAttributes($width, ['striped', 'active', 'min', 'max', 'type', 'width']),
-                'templateVars' => $width['templateVars']
+                'templateVars' => $width['templateVars'],
             ]);
         }
+
         return $this->formatTemplate('progressBarContainer', [
             'content' => $bars,
             'attrs' => $this->templater()->formatAttributes([]),
-            'templateVars' => $options['templateVars']
+            'templateVars' => $options['templateVars'],
         ]);
     }
 
@@ -363,7 +375,8 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
      *
      * @return string
      */
-    public function dropdown(array $menu = [], array $options = []) {
+    public function dropdown(array $menu = [], array $options = [])
+    {
         $normalized = [];
         foreach ($menu as $key => $value) {
             if (!is_numeric($key)) {
@@ -373,26 +386,23 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
             if (!is_array($value)) {
                 if ($value === 'divider') {
                     $value = ['divider' => []];
-                }
-                else {
+                } else {
                     $value = ['item' => ['title' => $value]];
                 }
             }
             if (isset($value[0])) {
                 if ($value[0] == 'header') {
                     $value = ['header' => ['title' => $value[1]]];
-                }
-                else if ($value[0] == 'divider') {
+                } elseif ($value[0] == 'divider') {
                     $value = ['divider' => []];
-                }
-                else {
+                } else {
                     if ($value[0] == 'link') {
                         array_shift($value);
                     }
                     $title = array_shift($value);
                     $url = array_shift($value);
                     $value = ['item' => array_merge([
-                        'title' => $title, 'url' => $url], $value)
+                        'title' => $title, 'url' => $url], $value),
                     ];
                 }
             }
@@ -409,32 +419,30 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
         foreach ($normalized as $item) {
             foreach ($item as $key => $value) {
                 $value += [
-                    'templateVars' => []
+                    'templateVars' => [],
                 ];
                 if ($key == 'divider') {
                     $content .= $this->formatTemplate('dropdownMenuDivider', [
                         'attrs' => $this->templater()->formatAttributes($value),
-                        'templateVars' => $value['templateVars']
+                        'templateVars' => $value['templateVars'],
                     ]);
                 }
                 if ($key == 'header') {
                     $content .= $this->formatTemplate('dropdownMenuHeader', [
                         'content' => $value['title'],
                         'attrs' => $this->templater()->formatAttributes($value, ['title']),
-                        'templateVars' => $value['templateVars']
+                        'templateVars' => $value['templateVars'],
                     ]);
                 }
                 if ($key == 'item') {
                     $title = $value['title'];
                     if (isset($value['url'])) {
                         $url = $this->Url->build($value['url']);
-                    }
-                    else if (Matching::matchTag('a', $value['title'], $title, $attrs)) {
+                    } elseif (Matching::matchTag('a', $value['title'], $title, $attrs)) {
                         $value += $attrs;
                         $url = $value['href'];
                         unset($value['href']);
-                    }
-                    else {
+                    } else {
                         $url = '#';
                         $value = $this->addClass($value, 'disabled');
                     }
@@ -442,23 +450,21 @@ aria-valuenow="{{width}}" aria-valuemin="{{min}}" aria-valuemax="{{max}}" style=
                         'content' => $title,
                         'url' => $url,
                         'attrs' => $this->templater()->formatAttributes($value, ['title', 'url']),
-                        'templateVars' => $value['templateVars']
+                        'templateVars' => $value['templateVars'],
                     ]);
                 }
             }
         }
         $options += [
             'align' => 'left',
-            'templateVars' => []
+            'templateVars' => [],
         ];
-        $options = $this->addClass($options, 'dropdown-menu-'.$options['align']);
+        $options = $this->addClass($options, 'dropdown-menu-' . $options['align']);
+
         return $this->formatTemplate('dropdownMenu', [
             'content' => $content,
             'attrs' => $this->templater()->formatAttributes($options, ['align']),
-            'templateVars' => $options['templateVars']
+            'templateVars' => $options['templateVars'],
         ]);
     }
-
 }
-
-?>

@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 /**
  *
  * Licensed under The MIT License
@@ -26,8 +28,8 @@ use Cake\View\StringTemplateTrait;
  * @property \Bootstrap\View\Helper\HtmlHelper $Html
  * @property \Cake\View\Helper\UrlHelper $Url
  */
-class NavbarHelper extends Helper {
-
+class NavbarHelper extends Helper
+{
     use ClassTrait;
     use EasyIconTrait;
     use StringTemplateTrait;
@@ -39,7 +41,7 @@ class NavbarHelper extends Helper {
      * @var array
      */
     public $helpers = [
-        'Html', 'Url'
+        'Html', 'Url',
     ];
 
     /**
@@ -62,7 +64,7 @@ class NavbarHelper extends Helper {
             'responsiveEnd' => '</div>',
             'header' => '{{brand}}{{toggleButton}}',
             'toggleButton' =>
-'<button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#{{id}}" aria-controls="{{id}}" aria-label="{{label}}" aria-expanded="false">
+    '<button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#{{id}}" aria-controls="{{id}}" aria-label="{{label}}" aria-expanded="false">
     <span class="navbar-toggler-icon"></span>
 </button>',
             'brand' => '<a class="navbar-brand{{attrs.class}}" href="{{url}}"{{attrs}}>{{content}}</a>',
@@ -70,7 +72,7 @@ class NavbarHelper extends Helper {
             'dropdownMenuStart' => '<div class="dropdown-menu{{attrs.class}}"{{attrs}}>',
             'dropdownMenuEnd' => '</div>',
             'dropdownLink' =>
-'<a href="{{url}}" class="nav-link dropdown-toggle{{attrs.class}}" data-toggle="dropdown" role="button"
+    '<a href="{{url}}" class="nav-link dropdown-toggle{{attrs.class}}" data-toggle="dropdown" role="button"
 aria-haspopup="true" aria-expanded="false">{{content}}</a>',
             'innerMenuStart' => '<li class="nav-item dropdown{{attrs.class}}"{{attrs}}>{{dropdownLink}}{{dropdownMenuStart}}',
             'innerMenuEnd' => '{{dropdownMenuEnd}}</li>',
@@ -89,7 +91,7 @@ aria-haspopup="true" aria-expanded="false">{{content}}</a>',
             'navbarText' => '<span class="navbar-text{{attrs.class}}"{{attrs}}>{{content}}</span>',
         ],
         'templateClass' => 'Bootstrap\View\EnhancedStringTemplate',
-        'autoActiveLink' => true
+        'autoActiveLink' => true,
     ];
 
     /**
@@ -125,7 +127,8 @@ aria-haspopup="true" aria-expanded="false">{{content}}</a>',
      *
      * @return string containing the HTML starting element of the navbar.
      */
-    public function create($brand, $options = []) {
+    public function create($brand, $options = [])
+    {
 
         $options += [
             'id' => 'navbar',
@@ -134,7 +137,7 @@ aria-haspopup="true" aria-expanded="false">{{content}}</a>',
             'sticky' => false,
             'theme' => 'light',
             'container' => false,
-            'templateVars' => []
+            'templateVars' => [],
         ];
 
         $this->_responsive = $options['collapse'] !== false;
@@ -145,14 +148,14 @@ aria-haspopup="true" aria-expanded="false">{{content}}</a>',
             $scheme = $options['theme'];
             $bg = null;
             if (is_array($scheme)) {
-                list($scheme, $bg) = $scheme;
+                [$scheme, $bg] = $scheme;
             }
             if ($bg === null) {
                 $bg = $scheme;
             }
-            $options = $this->addClass($options, 'navbar-'.$scheme);
+            $options = $this->addClass($options, 'navbar-' . $scheme);
             if ($bg !== false) {
-                $options = $this->addClass($options, 'bg-'.$bg);
+                $options = $this->addClass($options, 'bg-' . $bg);
             }
         }
 
@@ -161,7 +164,7 @@ aria-haspopup="true" aria-expanded="false">{{content}}</a>',
             if ($fixed === true) {
                 $fixed = 'top';
             }
-            $options = $this->addClass($options, 'fixed-'.$fixed);
+            $options = $this->addClass($options, 'fixed-' . $fixed);
         }
         if ($options['sticky'] !== false) {
             $options = $this->addClass($options, 'sticky-top');
@@ -171,14 +174,14 @@ aria-haspopup="true" aria-expanded="false">{{content}}</a>',
             if (is_string($brand)) {
                 $brand = [
                     'name' => $brand,
-                    'url' => '/'
+                    'url' => '/',
                 ];
             }
             $brand = $this->formatTemplate('brand', [
                 'content' => $brand['name'],
                 'url' => $this->Url->build($brand['url']),
                 'attrs' => $this->templater()->formatAttributes($brand, ['name', 'url']),
-                'templateVars' => $options['templateVars']
+                'templateVars' => $options['templateVars'],
             ]);
         }
 
@@ -186,13 +189,12 @@ aria-haspopup="true" aria-expanded="false">{{content}}</a>',
         if ($this->_responsive) {
             $toggleButton = $this->formatTemplate('toggleButton', [
                 'label' => __('Toggle navigation'),
-                'id' => $options['id']
+                'id' => $options['id'],
             ]);
             if ($options['collapse'] !== true) {
-                $options = $this->addClass($options, 'navbar-expand-'.$options['collapse']);
+                $options = $this->addClass($options, 'navbar-expand-' . $options['collapse']);
             }
-        }
-        else {
+        } else {
             $options = $this->addClass($options, 'navbar-expand');
         }
 
@@ -200,7 +202,7 @@ aria-haspopup="true" aria-expanded="false">{{content}}</a>',
         if ($this->_container) {
             $containerStart = $this->formatTemplate('containerStart', [
                 'attrs' => $this->templater()->formatAttributes([]),
-                'templateVars' => $options['templateVars']
+                'templateVars' => $options['templateVars'],
             ]);
         }
 
@@ -209,7 +211,7 @@ aria-haspopup="true" aria-expanded="false">{{content}}</a>',
             $responsiveStart .= $this->formatTemplate('responsiveStart', [
                 'id' => $options['id'],
                 'attrs' => $this->templater()->formatAttributes([]),
-                'templateVars' => $options['templateVars']
+                'templateVars' => $options['templateVars'],
             ]);
         }
 
@@ -217,7 +219,7 @@ aria-haspopup="true" aria-expanded="false">{{content}}</a>',
         if ($this->_responsive || $brand) {
             $header = $this->formatTemplate('header', [
                 'toggleButton' => $toggleButton,
-                'brand' => $brand
+                'brand' => $brand,
             ]);
         }
 
@@ -226,7 +228,7 @@ aria-haspopup="true" aria-expanded="false">{{content}}</a>',
             'responsiveStart' => $responsiveStart,
             'containerStart' => $containerStart,
             'attrs' => $this->templater()->formatAttributes($options, ['id', 'fixed', 'collapse', 'sticky', 'theme', 'container']),
-            'templateVars' => $options['templateVars']
+            'templateVars' => $options['templateVars'],
         ]);
     }
 
@@ -252,14 +254,15 @@ aria-haspopup="true" aria-expanded="false">{{content}}</a>',
      *
      * @return string A HTML tag wrapping the link.
      */
-    public function link($name, $url = '', array $options = [], array $linkOptions = []) {
+    public function link($name, $url = '', array $options = [], array $linkOptions = [])
+    {
         $url = $this->Url->build($url);
         $options += [
             'active' => [],
-            'templateVars' => []
+            'templateVars' => [],
         ];
         $linkOptions += [
-            'templateVars' => []
+            'templateVars' => [],
         ];
         if (is_string($options['active'])) {
             $options['active'] = [];
@@ -269,8 +272,8 @@ aria-haspopup="true" aria-expanded="false">{{content}}</a>',
         }
         $active = $options['active'] ? 'Active' : '';
         $level = $this->_level > 1 ? 'inner' : 'outer';
-        $template = $level.'MenuItem'.$active;
-        $linkTemplate = $level.'MenuItemLink'.$active;
+        $template = $level . 'MenuItem' . $active;
+        $linkTemplate = $level . 'MenuItemLink' . $active;
 
         // inner menu, no wrapper elements, options go directly for link
         if ($level === 'inner') {
@@ -281,12 +284,13 @@ aria-haspopup="true" aria-expanded="false">{{content}}</a>',
             'content' => $name,
             'url' => $url,
             'attrs' => $this->templater()->formatAttributes($linkOptions, ['active']),
-            'templateVars' => $linkOptions['templateVars']
+            'templateVars' => $linkOptions['templateVars'],
         ]);
+
         return $this->formatTemplate($template, [
             'link' => $link,
             'attrs' => $this->templater()->formatAttributes($options, ['active']),
-            'templateVars' => $options['templateVars']
+            'templateVars' => $options['templateVars'],
         ]);
     }
 
@@ -300,13 +304,15 @@ aria-haspopup="true" aria-expanded="false">{{content}}</a>',
      *
      * @param array $options Array of options. See above.
      *
-     * @return A HTML dropdown divider tag.
+     * @return \Bootstrap\View\Helper\A HTML dropdown divider tag.
      */
-    public function divider(array $options = []) {
+    public function divider(array $options = [])
+    {
         $options += ['templateVars' => []];
+
         return $this->formatTemplate('innerMenuItemDivider', [
             'attrs' => $this->templater()->formatAttributes($options),
-            'templateVars' => $options['templateVars']
+            'templateVars' => $options['templateVars'],
         ]);
     }
 
@@ -317,18 +323,20 @@ aria-haspopup="true" aria-expanded="false">{{content}}</a>',
      *
      * - `templateVars` Provide template variables for the header template.
      * - Other attributes will be assigned to the header element.
-     **
+     * *
      * @param string $name Title of the header.
      * @param array $options Array of options for the wrapper tag.
      *
-     * @return A HTML header tag.
+     * @return \Bootstrap\View\Helper\A HTML header tag.
      */
-    public function header($name, array $options = []) {
+    public function header($name, array $options = [])
+    {
         $options += ['templateVars' => []];
+
         return $this->formatTemplate('innerMenuItemHeader', [
             'content' => $name,
             'attrs' => $this->templater()->formatAttributes($options),
-            'templateVars' => $options['templateVars']
+            'templateVars' => $options['templateVars'],
         ]);
     }
 
@@ -345,14 +353,16 @@ aria-haspopup="true" aria-expanded="false">{{content}}</a>',
      *
      * @return string A HTML element wrapping the text for the navbar.
      */
-    public function text($text, $options = []) {
+    public function text($text, $options = [])
+    {
         $options += [
-            'templateVars' => []
+            'templateVars' => [],
         ];
+
         return $this->formatTemplate('navbarText', [
             'content' => $text,
             'attrs' => $this->templater()->formatAttributes($options),
-            'templateVars' => $options['templateVars']
+            'templateVars' => $options['templateVars'],
         ]);
     }
 
@@ -392,31 +402,37 @@ aria-haspopup="true" aria-expanded="false">{{content}}</a>',
      *
      * @return string HTML elements to start a menu.
      */
-    public function beginMenu($name = null, $url = null, $options = [],
-                              $linkOptions = [], $listOptions = []) {
+    public function beginMenu(
+        $name = null,
+        $url = null,
+        $options = [],
+        $linkOptions = [],
+        $listOptions = []
+    ) {
         $template = 'outerMenuStart';
         $templateOptions = [];
         if (is_array($name)) {
             $options = $name;
         }
         $options += [
-            'templateVars' => []
+            'templateVars' => [],
         ];
         if ($this->_level == 1) {
             $template = 'innerMenuStart';
             $templateOptions['dropdownLink'] = $this->formatTemplate('dropdownLink', [
                 'content' => $name,
                 'url' => $url ? $this->Url->build($url) : '#',
-                'attrs' => $this->templater()->formatAttributes($linkOptions)
+                'attrs' => $this->templater()->formatAttributes($linkOptions),
             ]);
             $templateOptions['dropdownMenuStart'] = $this->formatTemplate('dropdownMenuStart', [
-                'attrs' => $this->templater()->formatAttributes($listOptions)
+                'attrs' => $this->templater()->formatAttributes($listOptions),
             ]);
         }
         $this->_level += 1;
+
         return $this->formatTemplate($template, $templateOptions + [
             'attrs' => $this->templater()->formatAttributes($options),
-            'templateVars' => $options['templateVars']
+            'templateVars' => $options['templateVars'],
         ]);
     }
 
@@ -425,7 +441,8 @@ aria-haspopup="true" aria-expanded="false">{{content}}</a>',
      *
      * @return string HTML elements to close a menu.
      */
-    public function endMenu() {
+    public function endMenu()
+    {
         $template = 'outerMenuEnd';
         $options = [];
         if ($this->_level == 2) {
@@ -433,6 +450,7 @@ aria-haspopup="true" aria-expanded="false">{{content}}</a>',
             $options['dropdownMenuEnd'] = $this->formatTemplate('dropdownMenuEnd', []);
         }
         $this->_level -= 1;
+
         return $this->formatTemplate($template, $options);
     }
 
@@ -441,7 +459,8 @@ aria-haspopup="true" aria-expanded="false">{{content}}</a>',
      *
      * @return string HTML elements to close the navbar.
      */
-    public function end() {
+    public function end()
+    {
         $containerEnd = '';
         if ($this->_container) {
             $containerEnd = $this->formatTemplate('containerEnd', []);
@@ -450,12 +469,10 @@ aria-haspopup="true" aria-expanded="false">{{content}}</a>',
         if ($this->_responsive) {
             $responsiveEnd = $this->formatTemplate('responsiveEnd', []);
         }
+
         return $this->formatTemplate('navbarEnd', [
             'containerEnd' => $containerEnd,
-            'responsiveEnd' => $responsiveEnd
+            'responsiveEnd' => $responsiveEnd,
         ]);
     }
-
 }
-
-?>

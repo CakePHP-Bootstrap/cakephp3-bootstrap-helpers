@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 /**
  * @since     4.0.3
  */

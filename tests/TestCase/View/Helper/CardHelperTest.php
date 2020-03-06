@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Bootstrap\Test\TestCase\View\Helper;
 
@@ -7,8 +8,8 @@ use Cake\Core\Configure;
 use Cake\TestSuite\TestCase;
 use Cake\View\View;
 
-class CardHelperTest extends TestCase {
-
+class CardHelperTest extends TestCase
+{
     /**
      * Instance of CardHelper.
      *
@@ -26,60 +27,63 @@ class CardHelperTest extends TestCase {
         parent::setUp();
         $view = new View();
         $view->loadHelper('Html', [
-            'className' => 'Bootstrap.Html'
+            'className' => 'Bootstrap.Html',
         ]);
         $this->card = new CardHelper($view);
         Configure::write('debug', true);
     }
 
-    protected function reset() {
+    protected function reset()
+    {
         $this->card->end();
     }
 
-    public function testCreate() {
+    public function testCreate()
+    {
         $title = "My Modal";
         $id = "myModalId";
         // Test standard create with title
         $result = $this->card->create($title);
         $this->assertHtml([
             ['div' => [
-                'class' => 'card card-default'
+                'class' => 'card card-default',
             ]],
             ['div' => [
-                'class' => 'card-header'
+                'class' => 'card-header',
             ]],
             $title,
             '/div',
             ['div' => [
-                'class' => 'card-body'
-            ]]
+                'class' => 'card-body',
+            ]],
         ], $result);
         $this->reset();
         // Test standard create with title
         $result = $this->card->create($title, ['body' => false]);
         $this->assertHtml([
             ['div' => [
-                'class' => 'card card-default'
+                'class' => 'card card-default',
             ]],
             ['div' => [
-                'class' => 'card-header'
+                'class' => 'card-header',
             ]],
-            $title
+            $title,
         ], $result);
         $this->reset();
         // Test standard create without title
         $result = $this->card->create();
         $this->assertHtml([
             ['div' => [
-                'class' => 'card card-default'
-            ]]
+                'class' => 'card card-default',
+            ]],
         ], $result);
         $this->reset();
     }
 
-    public function testHeader() {
+    public function testHeader()
+    {
         $content = 'Header';
-        $htmlContent = '<b>'.$content.'</b>';
+        $htmlContent = '<b>' . $content . '</b>';
         $extraclass = 'my-extra-class';
 
         // Simple test
@@ -87,9 +91,9 @@ class CardHelperTest extends TestCase {
         $result = $this->card->header($content);
         $this->assertHtml([
             ['div' => [
-                'class' => 'card-header'
+                'class' => 'card-header',
             ]],
-            $content
+            $content,
         ], $result);
         $this->reset();
 
@@ -98,9 +102,9 @@ class CardHelperTest extends TestCase {
         $result = $this->card->header($htmlContent);
         $this->assertHtml([
             ['div' => [
-                'class' => 'card-header'
+                'class' => 'card-header',
             ]],
-            htmlspecialchars($htmlContent)
+            htmlspecialchars($htmlContent),
         ], $result);
         $this->reset();
 
@@ -109,9 +113,9 @@ class CardHelperTest extends TestCase {
         $result = $this->card->header($htmlContent, ['escape' => false]);
         $this->assertHtml([
             ['div' => [
-                'class' => 'card-header'
+                'class' => 'card-header',
             ]],
-            ['b' => true], $content, '/b'
+            ['b' => true], $content, '/b',
         ], $result);
         $this->reset();
 
@@ -121,12 +125,12 @@ class CardHelperTest extends TestCase {
         $result = $this->card->header($iconContent);
         $this->assertHtml([
             ['div' => [
-                'class' => 'card-header'
+                'class' => 'card-header',
             ]],
             ['i' => [
                 'class' => 'fa fa-home',
-                'aria-hidden' => 'true'
-            ]], '/i', ' Home'
+                'aria-hidden' => 'true',
+            ]], '/i', ' Home',
         ], $result);
         $this->reset();
 
@@ -139,21 +143,21 @@ class CardHelperTest extends TestCase {
             ['div' => [
                 'class' => 'card-header',
                 'role'  => 'tab',
-                'id'    => 'heading-4'
+                'id'    => 'heading-4',
             ]],
             ['h5' => [
-                'class' => 'mb-0'
+                'class' => 'mb-0',
             ]],
             ['a' => [
                 'role'          => 'button',
                 'data-toggle'   => 'collapse',
                 'href'          => '#collapse-4',
                 'aria-expanded' => 'true',
-                'aria-controls' => 'collapse-4'
+                'aria-controls' => 'collapse-4',
             ]],
             htmlspecialchars($htmlContent),
             '/a',
-            '/h5'
+            '/h5',
         ], $result);
         $this->reset();
 
@@ -164,21 +168,21 @@ class CardHelperTest extends TestCase {
             ['div' => [
                 'role'  => 'tab',
                 'id'    => 'heading-5',
-                'class' => 'card-header'
+                'class' => 'card-header',
             ]],
             ['h5' => [
-                'class' => 'mb-0'
+                'class' => 'mb-0',
             ]],
             ['a' => [
                 'role'          => 'button',
                 'data-toggle'   => 'collapse',
                 'href'          => '#collapse-5',
                 'aria-expanded' => 'true',
-                'aria-controls' => 'collapse-5'
+                'aria-controls' => 'collapse-5',
             ]],
             ['b' => true], $content, '/b',
             '/a',
-            '/h5'
+            '/h5',
         ], $result);
         $this->reset();
 
@@ -190,29 +194,30 @@ class CardHelperTest extends TestCase {
             ['div' => [
                 'role'  => 'tab',
                 'id'    => 'heading-6',
-                'class' => 'card-header'
+                'class' => 'card-header',
             ]],
             ['h5' => [
-                'class' => 'mb-0'
+                'class' => 'mb-0',
             ]],
             ['a' => [
                 'role'          => 'button',
                 'data-toggle'   => 'collapse',
                 'href'          => '#collapse-6',
                 'aria-expanded' => 'true',
-                'aria-controls' => 'collapse-6'
+                'aria-controls' => 'collapse-6',
             ]],
             ['i' => [
                 'class' => 'fa fa-home',
-                'aria-hidden' => 'true'
+                'aria-hidden' => 'true',
             ]], '/i', ' Home',
             '/a',
-            '/h5'
+            '/h5',
         ], $result, true);
         $this->reset();
     }
 
-    public function testFooter() {
+    public function testFooter()
+    {
         $content = 'Footer';
         $extraclass = 'my-extra-class';
 
@@ -221,16 +226,16 @@ class CardHelperTest extends TestCase {
         $result = $this->card->footer($content, ['class' => $extraclass]);
         $this->assertHtml([
             ['div' => [
-                'class' => 'card-footer '.$extraclass
+                'class' => 'card-footer ' . $extraclass,
             ]],
             $content,
-            '/div'
+            '/div',
         ], $result);
         $this->reset();
-
     }
 
-    public function testGroup() {
+    public function testGroup()
+    {
 
         $cardHeading = 'This is a card heading';
         $cardContent = 'A bit of HTML code inside!';
@@ -251,48 +256,48 @@ class CardHelperTest extends TestCase {
         $expected = [
             ['div' => [
                 'role' => 'tablist',
-                'id' => 'cardGroup-1'
-            ]]
+                'id' => 'cardGroup-1',
+            ]],
         ];
 
         for ($i = 0; $i < 3; ++$i) {
             $expected = array_merge($expected, [
                 ['div' => [
-                    'class' => 'card card-default'
+                    'class' => 'card card-default',
                 ]],
                 ['div' => [
                     'class' => 'card-header',
                     'role'  => 'tab',
-                    'id'    => 'heading-'.$i
+                    'id'    => 'heading-' . $i,
                 ]],
                 ['h5' => [
-                    'class' => 'mb-0'
+                    'class' => 'mb-0',
                 ]],
                 ['a' => [
                     'role'          => 'button',
                     'data-toggle'   => 'collapse',
-                    'href'          => '#collapse-'.$i,
+                    'href'          => '#collapse-' . $i,
                     'aria-expanded' => $i ? 'false' : 'true',
-                    'aria-controls' => 'collapse-'.$i,
-                    'data-parent'   => '#cardGroup-1'
+                    'aria-controls' => 'collapse-' . $i,
+                    'data-parent'   => '#cardGroup-1',
                 ]],
                 $cardHeading,
                 '/a',
                 '/h5',
                 '/div',
                 ['div' => [
-                    'class'           => 'collapse'.($i ? '' : ' in'),
+                    'class'           => 'collapse' . ($i ? '' : ' in'),
                     'role'            => 'tabpanel',
-                    'aria-labelledby' => 'heading-'.$i,
-                    'id'              => 'collapse-'.$i
+                    'aria-labelledby' => 'heading-' . $i,
+                    'id'              => 'collapse-' . $i,
                 ]],
                 ['div' => [
-                    'class' => 'card-body'
+                    'class' => 'card-body',
                 ]],
                 $cardContent,
                 '/div',
                 '/div',
-                '/div'
+                '/div',
             ]);
         }
 
@@ -300,25 +305,26 @@ class CardHelperTest extends TestCase {
 
         $expected = array_merge($expected, [
             ['div' => [
-                'class' => 'card card-default'
+                'class' => 'card card-default',
             ]],
             ['div' => [
-                'class' => 'card-header'
+                'class' => 'card-header',
             ]],
             $cardHeading,
             '/div',
             ['div' => [
-                'class' => 'card-body'
+                'class' => 'card-body',
             ]],
             $cardContent,
             '/div',
-            '/div'
+            '/div',
         ]);
 
         $this->assertHtml($expected, $result, false);
     }
 
-    public function testCardGroupInsideCard() {
+    public function testCardGroupInsideCard()
+    {
 
         $cardHeading = 'This is a card heading';
         $cardContent = 'A bit of HTML code inside!';
@@ -335,67 +341,65 @@ class CardHelperTest extends TestCase {
 
         $expected = [
             ['div' => [
-                'class' => 'card card-default'
+                'class' => 'card card-default',
             ]],
             ['div' => [
-                'class' => 'card-header'
+                'class' => 'card-header',
             ]],
             $cardHeading,
             '/div',
             ['div' => [
-                'class' => 'card-body'
+                'class' => 'card-body',
             ]],
             ['div' => [
                 'role'                 => 'tablist',
-                'id'                   => 'cardGroup-1'
-            ]]
+                'id'                   => 'cardGroup-1',
+            ]],
         ];
 
         for ($i = 1; $i < 3; ++$i) {
             $expected = array_merge($expected, [
                 ['div' => [
-                    'class' => 'card card-default'
+                    'class' => 'card card-default',
                 ]],
                 ['div' => [
                     'class' => 'card-header',
                     'role'  => 'tab',
-                    'id'    => 'heading-'.$i
+                    'id'    => 'heading-' . $i,
                 ]],
                 ['h5' => [
-                    'class' => 'mb-0'
+                    'class' => 'mb-0',
                 ]],
                 ['a' => [
                     'role'          => 'button',
                     'data-toggle'   => 'collapse',
-                    'href'          => '#collapse-'.$i,
-                    'aria-expanded' => ($i > 1) ? 'false' : 'true',
-                    'aria-controls' => 'collapse-'.$i,
-                    'data-parent'   => '#cardGroup-1'
+                    'href'          => '#collapse-' . $i,
+                    'aria-expanded' => $i > 1 ? 'false' : 'true',
+                    'aria-controls' => 'collapse-' . $i,
+                    'data-parent'   => '#cardGroup-1',
                 ]],
                 $cardHeading,
                 '/a',
                 '/h5',
                 '/div',
                 ['div' => [
-                    'class'           => 'collapse'.($i > 1 ? '' : ' in'),
+                    'class'           => 'collapse' . ($i > 1 ? '' : ' in'),
                     'role'            => 'tabpanel',
-                    'aria-labelledby' => 'heading-'.$i,
-                    'id'              => 'collapse-'.$i
+                    'aria-labelledby' => 'heading-' . $i,
+                    'id'              => 'collapse-' . $i,
                 ]],
                 ['div' => [
-                    'class' => 'card-body'
+                    'class' => 'card-body',
                 ]],
                 $cardContent,
                 '/div',
                 '/div',
-                '/div'
+                '/div',
             ]);
         }
 
         $expected = array_merge($expected, ['/div', '/div']);
 
         $this->assertHtml($expected, $result, false);
-
     }
-
 }

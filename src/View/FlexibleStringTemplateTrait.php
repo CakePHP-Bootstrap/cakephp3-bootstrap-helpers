@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 /**
  *
  * Licensed under The MIT License
@@ -24,8 +26,8 @@ use Cake\View\StringTemplate;
  * method for reading/updating templates. An implementation of this method
  * is provided by `Cake\Core\InstanceConfigTrait`
  */
-trait FlexibleStringTemplateTrait {
-
+trait FlexibleStringTemplateTrait
+{
     /**
      * Returns the templater instance.
      *
@@ -43,12 +45,12 @@ trait FlexibleStringTemplateTrait {
                 if (is_string($templates)) {
                     $this->_templater->add($this->_defaultConfig['templates']);
                     $this->_templater->load($templates);
-                }
-                else {
+                } else {
                     $this->_templater->add($templates);
                 }
             }
         }
+
         return $this->_templater;
     }
-};
+}

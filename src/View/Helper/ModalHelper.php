@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 /**
  *
  * Licensed under The MIT License
@@ -24,8 +26,8 @@ use Cake\View\StringTemplateTrait;
  *
  * @property \Bootstrap\View\Helper\HtmlHelper $Html
  */
-class ModalHelper extends Helper {
-
+class ModalHelper extends Helper
+{
     use ClassTrait;
     use EasyIconTrait;
     use StringTemplateTrait;
@@ -36,7 +38,7 @@ class ModalHelper extends Helper {
      * @var array
      */
     public $helpers = [
-        'Html'
+        'Html',
     ];
 
     /**
@@ -62,9 +64,9 @@ class ModalHelper extends Helper {
             'bodyEnd' => '</div>',
             'footerStart' => '<div class="modal-footer{{attrs.class}}"{{attrs}}>',
             'footerEnd' => '</div>',
-            'modalFooterCloseButton' => '<button type="button" class="btn btn-default{{attrs.class}}" data-dismiss="modal"{{attrs}}>{{content}}</button>'
+            'modalFooterCloseButton' => '<button type="button" class="btn btn-default{{attrs.class}}" data-dismiss="modal"{{attrs}}>{{content}}</button>',
         ],
-        'templateClass' => 'Bootstrap\View\EnhancedStringTemplate'
+        'templateClass' => 'Bootstrap\View\EnhancedStringTemplate',
     ];
 
     /**
@@ -103,12 +105,12 @@ class ModalHelper extends Helper {
      * ### Options
      *
      * - `body` If `$title` is a string, set to `false` to not open the body after
-       * the panel header. Default is `true`.
+     * the panel header. Default is `true`.
      * - `close` Set to `false` to not add a close button to the modal. Default is `true`.
      * - `id` Identifier of the modal. If specified, a `aria-labelledby` HTML attribute
      * will be added to the modal and the header will be set accordingly.
      * - `size` Size of the modal. Either a shortcut(`'lg'`/`'large'`/`'modal-lg'` or
-     *(`'sm'`/`'small'`/`'modal-sm'`) or `false`(no size specified) or a custom class.
+     * (`'sm'`/`'small'`/`'modal-sm'`) or `false`(no size specified) or a custom class.
      * Other options will be passed to the `Html::div` method for creating the
      * outer modal `<div>`.
      *
@@ -117,9 +119,10 @@ class ModalHelper extends Helper {
      *
      * @return string An HTML string containing opening elements for a modal.
      */
-    public function create($title = null, $options = []) {
+    public function create($title = null, $options = [])
+    {
 
-        if(is_array($title)) {
+        if (is_array($title)) {
             $options = $title;
         }
 
@@ -131,52 +134,53 @@ class ModalHelper extends Helper {
             'close' => true,
             'body' => true,
             'size' => false,
-            'templateVars' => []
+            'templateVars' => [],
         ];
 
         $dialogOptions = [];
 
-        if($options['id']) {
+        if ($options['id']) {
             $this->_currentId = $options['id'];
-            $options['aria-labelledby'] = $this->_currentId.'Label';
+            $options['aria-labelledby'] = $this->_currentId . 'Label';
         }
 
-        switch($options['size']) {
-        case 'lg':
-        case 'large':
-        case 'modal-lg':
-            $size = ' modal-lg';
-            break;
-        case 'sm':
-        case 'small':
-        case 'modal-sm':
-            $size = ' modal-sm';
-            break;
-        case false:
-            $size = '';
-            break;
-        default:
-            $size = ' '.$options['size'];
-            break;
+        switch ($options['size']) {
+            case 'lg':
+            case 'large':
+            case 'modal-lg':
+                $size = ' modal-lg';
+                break;
+            case 'sm':
+            case 'small':
+            case 'modal-sm':
+                $size = ' modal-sm';
+                break;
+            case false:
+                $size = '';
+                break;
+            default:
+                $size = ' ' . $options['size'];
+                break;
         }
         $dialogOptions = $this->addClass($dialogOptions, $size);
 
         $dialogStart = $this->formatTemplate('modalDialogStart', [
-            'attrs' => $this->templater()->formatAttributes($dialogOptions)
+            'attrs' => $this->templater()->formatAttributes($dialogOptions),
         ]);
         $contentStart = $this->formatTemplate('modalContentStart', []);
         $res = $this->formatTemplate('modalStart', [
             'dialogStart' => $dialogStart,
             'contentStart' => $contentStart,
             'attrs' => $this->templater()->formatAttributes($options, ['body', 'close', 'size']),
-            'templateVars' => $options['templateVars']
+            'templateVars' => $options['templateVars'],
         ]);
-        if(is_string($title) && $title) {
+        if (is_string($title) && $title) {
             $res .= $this->_createHeader($title, ['close' => $options['close']]);
-            if($options['body']) {
+            if ($options['body']) {
                 $res .= $this->_createBody();
             }
         }
+
         return $res;
     }
 
@@ -196,15 +200,17 @@ class ModalHelper extends Helper {
      *
      * @return string An HTML string containing closing tags for the modal.
      */
-    public function end($buttons = NULL, $options = []) {
+    public function end($buttons = null, $options = [])
+    {
         $res = $this->_cleanCurrent();
-        if($buttons !== null) {
+        if ($buttons !== null) {
             $res .= $this->footer($buttons, $options);
         }
         $res .= $this->formatTemplate('modalEnd', [
             'contentEnd' => $this->formatTemplate('modalContentEnd', []),
-            'dialogEnd' => $this->formatTemplate('modalDialogEnd', [])
+            'dialogEnd' => $this->formatTemplate('modalDialogEnd', []),
         ]);
+
         return $res;
     }
 
@@ -213,12 +219,15 @@ class ModalHelper extends Helper {
      *
      * @return string An HTML string containing closing elements.
      */
-    protected function _cleanCurrent() {
+    protected function _cleanCurrent()
+    {
         if ($this->_current) {
             $current = $this->_current;
             $this->_current = null;
-            return $this->formatTemplate($current.'End', []);
+
+            return $this->formatTemplate($current . 'End', []);
         }
+
         return '';
     }
 
@@ -232,20 +241,22 @@ class ModalHelper extends Helper {
      *
      * @return string
      */
-    protected function _part($part, $content = null, $options = []) {
+    protected function _part($part, $content = null, $options = [])
+    {
         $options += [
-            'templateVars' => []
+            'templateVars' => [],
         ];
         $out = $this->_cleanCurrent();
-        $out .= $this->formatTemplate($part.'Start', [
+        $out .= $this->formatTemplate($part . 'Start', [
             'attrs' => $this->templater()->formatAttributes($options, ['close']),
-            'templateVars' => $options
+            'templateVars' => $options,
         ]);
         $this->_current = $part;
         if ($content) {
             $out .= $content;
             $out .= $this->_cleanCurrent();
         }
+
         return $out;
     }
 
@@ -258,7 +269,7 @@ class ModalHelper extends Helper {
      * - `templateVars` Provide template variables for the `headerStart` template.
      * - Other attributes will be assigned to the modal header element.
      *
-     * @param string $text The modal header content, or null to only open the header.
+     * @param string $title The modal header content, or null to only open the header.
      * @param array $options Array of options. See above.
      *
      * @return string A formated opening tag for the modal header or the complete modal
@@ -266,27 +277,30 @@ class ModalHelper extends Helper {
      *
      * @see `BootstrapModalHelper::header`
      */
-    protected function _createHeader($title = null, $options = []) {
+    protected function _createHeader($title = null, $options = [])
+    {
         $options += [
-            'close' => true
+            'close' => true,
         ];
         $out = null;
-        if($title) {
+        if ($title) {
             $out = $this->formatTemplate('modalTitle', [
                 'content' => $title,
                 'attrs' => $this->templater()->formatAttributes([
-                    'id' => $this->_currentId ? $this->_currentId.'Label' : false
-                ])
+                    'id' => $this->_currentId ? $this->_currentId . 'Label' : false,
+                ]),
             ]);
-            if($options['close']) {
+            if ($options['close']) {
                 $out .= $this->formatTemplate('modalHeaderCloseButton', [
                     'content' => $this->formatTemplate('modalHeaderCloseContent', []),
-                    'label' => __('Close')
+                    'label' => __('Close'),
                 ]);
             }
         }
+
         return $this->_part('header', $out, $options);
     }
+
     /**
      * Create or open a modal body.
      *
@@ -302,7 +316,8 @@ class ModalHelper extends Helper {
      *
      * @see `BootstrapModalHelper::body`
      */
-    protected function _createBody($text = null, $options = []) {
+    protected function _createBody($text = null, $options = [])
+    {
         return $this->_part('body', $text, $options);
     }
 
@@ -325,15 +340,17 @@ class ModalHelper extends Helper {
      * @return string A formated opening tag for the modal footer or the complete modal
      * footer.
      */
-    protected function _createFooter($content = null, $options = []) {
+    protected function _createFooter($content = null, $options = [])
+    {
         $options += [
-            'close' => true
+            'close' => true,
         ];
-        if(!$content  && $options['close']) {
+        if (!$content && $options['close']) {
             $content .= $this->formatTemplate('modalFooterCloseButton', [
-                'content' => __('Close')
+                'content' => __('Close'),
             ]);
         }
+
         return $this->_part('footer', $content, $options);
     }
 
@@ -367,17 +384,19 @@ class ModalHelper extends Helper {
      * - `templateVars` Provide template variables for the `headerStart` template.
      * - Other attributes will be assigned to the modal header element.
      *
-     * @param string|array $text The modal header content, or an array of options.
+     * @param array $info The modal header content, or an array of options.
      * @param array $options Array of options. See above.
      *
      * @return string A formated opening tag for the modal header or the complete modal
      * header.
      */
-    public function header($info = null, $options = []) {
-        if(is_array($info)) {
+    public function header($info = null, $options = [])
+    {
+        if (is_array($info)) {
             $options = $info;
             $info = null;
         }
+
         return $this->_createHeader($info, $options);
     }
 
@@ -417,11 +436,13 @@ class ModalHelper extends Helper {
      * @return string A formated opening tag for the modal body or the complete modal
      * body.
      */
-    public function body($info = null, $options = []) {
-        if(is_array($info)) {
+    public function body($info = null, $options = [])
+    {
+        if (is_array($info)) {
             $options = $info;
             $info = null;
         }
+
         return $this->_createBody($info, $options);
     }
 
@@ -467,19 +488,17 @@ class ModalHelper extends Helper {
      * @return string A formated opening tag for the modal footer or the complete modal
      * footer.
      */
-    public function footer($buttons = null, $options = []) {
-        if(is_array($buttons)) {
-            if(!empty($buttons) && $this->_isAssociativeArray($buttons)) {
+    public function footer($buttons = null, $options = [])
+    {
+        if (is_array($buttons)) {
+            if (!empty($buttons) && $this->_isAssociativeArray($buttons)) {
                 $options = $buttons;
                 $buttons = null;
-            }
-            else {
+            } else {
                 $buttons = implode('', $buttons);
             }
         }
+
         return $this->_createFooter($buttons, $options);
     }
-
 }
-
-?>

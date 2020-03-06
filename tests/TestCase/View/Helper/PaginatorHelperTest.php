@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Bootstrap\Test\TestCase\View\Helper;
 
@@ -10,8 +11,9 @@ use Cake\Routing\Router;
 use Cake\TestSuite\TestCase;
 use Cake\View\View;
 
-class PaginatorHelperTest extends TestCase {
-/**
+class PaginatorHelperTest extends TestCase
+{
+    /**
      * @var string
      */
     protected $locale;
@@ -59,7 +61,7 @@ class PaginatorHelperTest extends TestCase {
 
         $this->View = new View($request);
         $this->View->loadHelper('Html', [
-            'className' => 'Bootstrap.Html'
+            'className' => 'Bootstrap.Html',
         ]);
         $this->Paginator = new PaginatorHelper($this->View);
 
@@ -95,7 +97,7 @@ class PaginatorHelperTest extends TestCase {
             ['li' => ['class' => 'page-item']], ['a' => ['href' => '/index?page=10', 'class' => 'page-link']], '10', '/a', '/li',
             ['li' => ['class' => 'page-item']], ['a' => ['href' => '/index?page=11', 'class' => 'page-link']], '11', '/a', '/li',
             ['li' => ['class' => 'page-item']], ['a' => ['href' => '/index?page=12', 'class' => 'page-link']], '12', '/a', '/li',
-            '/ul'
+            '/ul',
         ];
         $this->assertHtml($expected, $result);
         $result = $this->Paginator->numbers(['first' => 'first', 'last' => 'last']);
@@ -114,7 +116,7 @@ class PaginatorHelperTest extends TestCase {
             ['li' => ['class' => 'page-item']], ['a' => ['href' => '/index?page=12', 'class' => 'page-link']], '12', '/a', '/li',
             ['li' => ['class' => 'ellipsis disabled']], ['a' => []], '&hellip;', '/a', '/li',
             ['li' => ['class' => 'page-item']], ['a' => ['href' => '/index?page=15', 'class' => 'page-link']], 'last', '/a', '/li',
-            '/ul'
+            '/ul',
         ];
         $this->assertHtml($expected, $result);
         $result = $this->Paginator->numbers(['first' => '2', 'last' => '8']);
@@ -133,7 +135,7 @@ class PaginatorHelperTest extends TestCase {
             ['li' => ['class' => 'page-item']], ['a' => ['href' => '/index?page=12', 'class' => 'page-link']], '12', '/a', '/li',
             ['li' => ['class' => 'ellipsis disabled']], ['a' => []], '&hellip;', '/a', '/li',
             ['li' => ['class' => 'page-item']], ['a' => ['href' => '/index?page=15', 'class' => 'page-link']], '8', '/a', '/li',
-            '/ul'
+            '/ul',
         ];
         $this->assertHtml($expected, $result);
         $result = $this->Paginator->numbers(['first' => '8', 'last' => '8']);
@@ -152,7 +154,7 @@ class PaginatorHelperTest extends TestCase {
             ['li' => ['class' => 'page-item']], ['a' => ['href' => '/index?page=12', 'class' => 'page-link']], '12', '/a', '/li',
             ['li' => ['class' => 'ellipsis disabled']], ['a' => []], '&hellip;', '/a', '/li',
             ['li' => ['class' => 'page-item']], ['a' => ['href' => '/index?page=15', 'class' => 'page-link']], '8', '/a', '/li',
-            '/ul'
+            '/ul',
         ];
         $this->assertHtml($expected, $result);
 
@@ -178,7 +180,7 @@ class PaginatorHelperTest extends TestCase {
             ['li' => ['class' => 'page-item']], ['a' => ['href' => '/index?page=7', 'class' => 'page-link']], '7', '/a', '/li',
             ['li' => ['class' => 'page-item']], ['a' => ['href' => '/index?page=8', 'class' => 'page-link']], '8', '/a', '/li',
             ['li' => ['class' => 'page-item']], ['a' => ['href' => '/index?page=9', 'class' => 'page-link']], '9', '/a', '/li',
-            '/ul'
+            '/ul',
         ];
         $this->assertHtml($expected, $result);
 
@@ -204,7 +206,7 @@ class PaginatorHelperTest extends TestCase {
             ['li' => ['class' => 'page-item']], ['a' => ['href' => '/index?page=13', 'class' => 'page-link']], '13', '/a', '/li',
             ['li' => ['class' => 'page-item active']], ['a' => ['href' => '/index?%3F%5Bpage%5D=14&amp;page=14', 'class' => 'page-link']], '14', '/a', '/li',
             ['li' => ['class' => 'page-item']], ['a' => ['href' => '/index?page=15', 'class' => 'page-link']], '15', '/a', '/li',
-            '/ul'
+            '/ul',
         ];
         $this->assertHtml($expected, $result);
 
@@ -230,7 +232,7 @@ class PaginatorHelperTest extends TestCase {
             ['li' => ['class' => 'page-item']], ['a' => ['href' => '/index?page=7', 'class' => 'page-link']], '7', '/a', '/li',
             ['li' => ['class' => 'page-item']], ['a' => ['href' => '/index?page=8', 'class' => 'page-link']], '8', '/a', '/li',
             ['li' => ['class' => 'page-item']], ['a' => ['href' => '/index?page=9', 'class' => 'page-link']], '9', '/a', '/li',
-            '/ul'
+            '/ul',
         ];
         $this->assertHtml($expected, $result);
 
@@ -246,7 +248,7 @@ class PaginatorHelperTest extends TestCase {
             ['li' => ['class' => 'page-item']], ['a' => ['href' => '/index?page=7', 'class' => 'page-link']], '7', '/a', '/li',
             ['li' => ['class' => 'page-item']], ['a' => ['href' => '/index?page=8', 'class' => 'page-link']], '8', '/a', '/li',
             ['li' => ['class' => 'page-item']], ['a' => ['href' => '/index?page=9', 'class' => 'page-link']], '9', '/a', '/li',
-            '/ul'
+            '/ul',
         ];
         $this->assertHtml($expected, $result);
 
@@ -274,7 +276,7 @@ class PaginatorHelperTest extends TestCase {
             ['li' => ['class' => 'page-item']], ['a' => ['href' => '/index?page=13', 'class' => 'page-link']], '13', '/a', '/li',
             ['li' => ['class' => 'page-item']], ['a' => ['href' => '/index?page=14', 'class' => 'page-link']], '14', '/a', '/li',
             ['li' => ['class' => 'page-item active']], ['a' => ['href' => '/index?%3F%5Bpage%5D=15&amp;page=15', 'class' => 'page-link']], '15', '/a', '/li',
-            '/ul'
+            '/ul',
         ];
         $this->assertHtml($expected, $result);
 
@@ -303,7 +305,7 @@ class PaginatorHelperTest extends TestCase {
             ['li' => ['class' => 'page-item']], ['a' => ['href' => '/index?page=13', 'class' => 'page-link']], '13', '/a', '/li',
             ['li' => ['class' => 'page-item']], ['a' => ['href' => '/index?page=14', 'class' => 'page-link']], '14', '/a', '/li',
             ['li' => ['class' => 'page-item']], ['a' => ['href' => '/index?page=15', 'class' => 'page-link']], '15', '/a', '/li',
-            '/ul'
+            '/ul',
         ];
         $this->assertHtml($expected, $result);
 
@@ -332,7 +334,7 @@ class PaginatorHelperTest extends TestCase {
             ['li' => ['class' => 'page-item']], ['a' => ['href' => '/index?page=10', 'class' => 'page-link']], '10', '/a', '/li',
             ['li' => ['class' => 'ellipsis disabled']], ['a' => []], '&hellip;', '/a', '/li',
             ['li' => ['class' => 'page-item']], ['a' => ['href' => '/index?page=42', 'class' => 'page-link']], '42', '/a', '/li',
-            '/ul'
+            '/ul',
         ];
         $this->assertHtml($expected, $result);
 
@@ -361,60 +363,62 @@ class PaginatorHelperTest extends TestCase {
             ['li' => ['class' => 'page-item']], ['a' => ['href' => '/index?page=40', 'class' => 'page-link']], '40', '/a', '/li',
             ['li' => ['class' => 'page-item']], ['a' => ['href' => '/index?page=41', 'class' => 'page-link']], '41', '/a', '/li',
             ['li' => ['class' => 'page-item']], ['a' => ['href' => '/index?page=42', 'class' => 'page-link']], '42', '/a', '/li',
-            '/ul'
+            '/ul',
         ];
         $this->assertHtml($expected, $result);
     }
 
-    public function testPrev() {
+    public function testPrev()
+    {
         $this->assertHtml([
             ['li' => [
-                'class' => 'page-item disabled'
+                'class' => 'page-item disabled',
             ]],
             ['a' => [
-                'class' => 'page-link'
+                'class' => 'page-link',
             ]], '&lt;', '/a',
-            '/li'
+            '/li',
         ], $this->Paginator->prev('<'));
         $this->assertHtml([
             ['li' => [
-                'class' => 'page-item disabled'
+                'class' => 'page-item disabled',
             ]],
             ['a' => [
-                'class' => 'page-link'
+                'class' => 'page-link',
             ]],
             ['i' => [
                 'class' => 'fa fa-chevron-left',
-                'aria-hidden' => 'true'
+                'aria-hidden' => 'true',
             ]],
-            '/i', '/a', '/li'
+            '/i', '/a', '/li',
         ], $this->Paginator->prev('i:chevron-left'));
     }
 
-    public function testNext() {
+    public function testNext()
+    {
         $this->assertHtml([
             ['li' => [
-                'class' => 'page-item'
+                'class' => 'page-item',
             ]],
             ['a' => [
                 'href' => '/index?page=2',
-                'class' => 'page-link'
+                'class' => 'page-link',
             ]], '&gt;', '/a',
-            '/li'
+            '/li',
         ], $this->Paginator->next('>'));
         $this->assertHtml([
             ['li' => [
-                'class' => 'page-item'
+                'class' => 'page-item',
             ]],
             ['a' => [
                 'href' => '/index?page=2',
-                'class' => 'page-link'
+                'class' => 'page-link',
             ]],
             ['i' => [
                 'class' => 'fa fa-chevron-right',
-                'aria-hidden' => 'true'
+                'aria-hidden' => 'true',
             ]],
-            '/i', '/a', '/li'
+            '/i', '/a', '/li',
         ], $this->Paginator->next('i:chevron-right'));
     }
-};
+}

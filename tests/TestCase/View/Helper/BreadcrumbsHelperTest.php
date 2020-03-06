@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Bootstrap\Test\TestCase\View\Helper;
 
@@ -6,8 +7,8 @@ use Bootstrap\View\Helper\BreadcrumbsHelper;
 use Cake\TestSuite\TestCase;
 use Cake\View\View;
 
-class BreadcrumbsHelperTest extends TestCase {
-
+class BreadcrumbsHelperTest extends TestCase
+{
     /**
      * Instance of the BreadcrumbsHelper.
      *
@@ -27,7 +28,6 @@ class BreadcrumbsHelperTest extends TestCase {
         $this->breadcrumbs = new BreadcrumbsHelper($view);
         $this->loadRoutes();
     }
-
 
     /**
      * Tests the render method
@@ -52,7 +52,7 @@ class BreadcrumbsHelperTest extends TestCase {
         $expected = [
             ['ol' => [
                 'class' => 'breadcrumb',
-                'data-stuff' => 'foo and bar'
+                'data-stuff' => 'foo and bar',
             ]],
             ['li' => ['class' => 'breadcrumb-item first']],
             ['a' => ['href' => '/', 'data-foo' => 'bar']],
@@ -67,9 +67,8 @@ class BreadcrumbsHelperTest extends TestCase {
             ['li' => ['class' => 'breadcrumb-item active final', 'aria-current' => 'page']],
             'Final crumb',
             '/li',
-            '/ol'
+            '/ol',
         ];
         $this->assertHtml($expected, $result);
     }
-
-};
+}

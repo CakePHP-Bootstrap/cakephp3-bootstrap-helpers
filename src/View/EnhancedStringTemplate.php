@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 /**
  *
  * Licensed under The MIT License
@@ -17,8 +19,8 @@ namespace Bootstrap\View;
 use Cake\View\StringTemplate;
 use RuntimeException;
 
-class EnhancedStringTemplate extends StringTemplate {
-
+class EnhancedStringTemplate extends StringTemplate
+{
     /**
      * General callback function.
      *
@@ -40,34 +42,42 @@ class EnhancedStringTemplate extends StringTemplate {
      * @param array  $data The data to insert.
      *
      * @return string
-    */
+     */
     public function format($name, array $data): string
     {
         if (!isset($this->_compiled[$name])) {
             throw new RuntimeException("Cannot find template named '$name'.");
         }
-        list($template, $placeholders) = $this->_compiled[$name];
+        [$template, $placeholders] = $this->_compiled[$name];
         // If there is a {{attrs.xxxx}} block in $template, remove the xxxx attribute
         // from $data['attrs'] and add its content to $data['attrs.class'].
         if (isset($data['attrs'])) {
             foreach ($placeholders as $placeholder) {
-                if (substr($placeholder, 0, 6) == 'attrs.'
-                    && preg_match('#'.substr($placeholder, 6).'="([^"]*)"#',
-                                  $data['attrs'], $matches) > 0) {
-                    $data['attrs'] = preg_replace('#'.substr($placeholder, 6).'="[^"]*"#',
-                                                  '', $data['attrs']);
+                if (
+                    substr($placeholder, 0, 6) == 'attrs.'
+                    && preg_match(
+                        '#' . substr($placeholder, 6) . '="([^"]*)"#',
+                        $data['attrs'],
+                        $matches
+                    ) > 0
+                ) {
+                    $data['attrs'] = preg_replace(
+                        '#' . substr($placeholder, 6) . '="[^"]*"#',
+                        '',
+                        $data['attrs']
+                    );
                     $data[$placeholder] = trim($matches[1]);
                     if ($data[$placeholder]) {
-                        $data[$placeholder] = ' '.$data[$placeholder];
+                        $data[$placeholder] = ' ' . $data[$placeholder];
                     }
                 }
             }
             $data['attrs'] = trim($data['attrs']);
             if ($data['attrs']) {
-                $data['attrs'] = ' '.$data['attrs'];
+                $data['attrs'] = ' ' . $data['attrs'];
             }
         }
+
         return parent::format($name, $data);
     }
-
-};
+}

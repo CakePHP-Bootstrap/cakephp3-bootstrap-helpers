@@ -1,9 +1,9 @@
 <?php
+declare(strict_types=1);
+
 use Cake\Cache\Cache;
 use Cake\Core\Configure;
 use Cake\Core\Plugin;
-use Cake\Datasource\ConnectionManager;
-use Cake\Routing\DispatcherFactory;
 use Cake\Utility\Security;
 
 require_once 'vendor/autoload.php';

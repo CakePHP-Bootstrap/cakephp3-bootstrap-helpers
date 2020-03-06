@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Bootstrap\Test\TestCase\View\Helper;
 
@@ -9,22 +10,23 @@ use Bootstrap\View\Helper\PaginatorHelper;
 use Cake\TestSuite\TestCase;
 use Cake\View\View;
 
-class PublicEasyIconTrait {
-
+class PublicEasyIconTrait
+{
     use EasyIconTrait;
 
-    public function __construct($view) {
+    public function __construct($view)
+    {
         $this->Html = new HtmlHelper($view);
     }
 
-    public function publicMakeIcon($title, &$converted) {
+    public function publicMakeIcon($title, &$converted)
+    {
         return $this->_makeIcon($title, $converted);
     }
+}
 
-};
-
-class EasyIconTraitTest extends TestCase {
-
+class EasyIconTraitTest extends TestCase
+{
     /**
      * Instance of PublicEasyIconTrait.
      *
@@ -63,7 +65,7 @@ class EasyIconTraitTest extends TestCase {
         parent::setUp();
         $view = new View();
         $view->loadHelper('Html', [
-            'className' => 'Bootstrap.Html'
+            'className' => 'Bootstrap.Html',
         ]);
         $this->html = $view->Html;
         $this->trait = new PublicEasyIconTrait($view);
@@ -71,14 +73,18 @@ class EasyIconTraitTest extends TestCase {
         $this->paginator = new PaginatorHelper($view);
     }
 
-    public function testEasyIcon() {
+    public function testEasyIcon()
+    {
         $converted = false;
 
         $this->assertHtml(
             [['i' => [
                 'class' => 'fa fa-plus',
-                'aria-hidden' => 'true'
-            ]], '/i'], $this->trait->publicMakeIcon('i:plus', $converted));
+                'aria-hidden' => 'true',
+            ]],
+            '/i'],
+            $this->trait->publicMakeIcon('i:plus', $converted)
+        );
         $this->assertTrue($converted);
 
         $this->assertHtml(['Click Me!'], $this->trait->publicMakeIcon('Click Me!', $converted));
@@ -86,13 +92,13 @@ class EasyIconTraitTest extends TestCase {
 
         $this->assertHtml([['i' => [
                 'class' => 'fa fa-plus',
-                'aria-hidden' => 'true'
+                'aria-hidden' => 'true',
             ]], '/i', ' Add'], $this->trait->publicMakeIcon('i:plus Add', $converted));
         $this->assertTrue($converted);
 
         $this->assertHtml(['Add ', ['i' => [
             'class' => 'fa fa-plus',
-            'aria-hidden' => 'true'
+            'aria-hidden' => 'true',
         ]], '/i'], $this->trait->publicMakeIcon('Add i:plus', $converted));
         $this->assertTrue($converted);
 
@@ -101,23 +107,24 @@ class EasyIconTraitTest extends TestCase {
         $this->assertFalse($converted);
     }
 
-    public function testHtmlHelperMethods() {
+    public function testHtmlHelperMethods()
+    {
 
         // BootstrapHtmlHelper
         $result = $this->html->link('i:dashboard Dashboard', '/dashboard');
         $this->assertHtml([
             ['a' => [
-                'href' => '/dashboard'
+                'href' => '/dashboard',
             ]],
             ['i' => [
                 'class' => 'fa fa-dashboard',
-                'aria-hidden' => 'true'
-            ]], '/i', 'Dashboard', '/a'
+                'aria-hidden' => 'true',
+            ]], '/i', 'Dashboard', '/a',
         ], $result);
-
     }
 
-    public function testPaginatorHelperMethods() {
+    public function testPaginatorHelperMethods()
+    {
 
         // BootstrapPaginatorHelper - TODO
         // BootstrapPaginatorHelper::prev($title, array $options = []);
@@ -126,40 +133,41 @@ class EasyIconTraitTest extends TestCase {
         $this->markTestIncomplete();
     }
 
-    public function testFormHelperMethod() {
+    public function testFormHelperMethod()
+    {
 
         // BootstrapFormHelper
         $result = $this->form->button('i:plus');
         $this->assertHtml([
             ['button' => [
                 'class' => 'btn btn-primary',
-                'type'  => 'submit'
+                'type'  => 'submit',
             ]], ['i' => [
                 'class' => 'fa fa-plus',
-                'aria-hidden' => 'true'
-            ]], '/i', '/button'
+                'aria-hidden' => 'true',
+            ]], '/i', '/button',
         ], $result);
         $result = $this->form->control('fieldname', [
             'prepend' => 'i:home',
             'append'  => 'i:plus',
-            'label'   => false
+            'label'   => false,
         ]);
         $this->assertHtml([
             ['div' => [
-                'class' => 'form-group text'
+                'class' => 'form-group text',
             ]],
             ['div' => [
-                'class' => 'input-group'
+                'class' => 'input-group',
             ]],
             ['div' => [
-                'class' => 'input-group-prepend'
+                'class' => 'input-group-prepend',
             ]],
             ['span' => [
-                'class' => 'input-group-text'
+                'class' => 'input-group-text',
             ]],
             ['i' => [
                 'class' => 'fa fa-home',
-                'aria-hidden' => 'true'
+                'aria-hidden' => 'true',
             ]], '/i',
             '/span',
             '/div',
@@ -167,25 +175,24 @@ class EasyIconTraitTest extends TestCase {
                 'type' => 'text',
                 'class' => 'form-control',
                 'name' => 'fieldname',
-                'id' => 'fieldname'
+                'id' => 'fieldname',
             ]],
             ['div' => [
-                'class' => 'input-group-append'
+                'class' => 'input-group-append',
             ]],
             ['span' => [
-                'class' => 'input-group-text'
+                'class' => 'input-group-text',
             ]],
             ['i' => [
                 'class' => 'fa fa-plus',
-                'aria-hidden' => 'true'
+                'aria-hidden' => 'true',
             ]], '/i',
             '/span',
             '/div',
             '/div',
-            '/div'
+            '/div',
         ], $result);
         //BootstrapFormHelper::prepend($input, $prepend); // For $prepend.
         //BootstrapFormHelper::append($input, $append); // For $append.
     }
-
-};
+}

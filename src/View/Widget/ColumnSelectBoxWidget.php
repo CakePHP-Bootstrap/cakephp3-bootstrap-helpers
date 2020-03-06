@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 /**
  *
  * Licensed under The MIT License
@@ -22,8 +24,8 @@ use Cake\View\Widget\SelectBoxWidget;
  * Generally this element is used by other widgets,
  * and FormHelper itself.
  */
-class ColumnSelectBoxWidget extends SelectBoxWidget {
-
+class ColumnSelectBoxWidget extends SelectBoxWidget
+{
     /**
      * Render a select box form input inside a column.
      *
@@ -59,7 +61,7 @@ class ColumnSelectBoxWidget extends SelectBoxWidget {
             'options' => [],
             'disabled' => null,
             'val' => null,
-            'templateVars' => []
+            'templateVars' => [],
         ];
         $options = $this->_renderContent($data);
         $name = $data['name'];
@@ -67,6 +69,7 @@ class ColumnSelectBoxWidget extends SelectBoxWidget {
         if (isset($data['disabled']) && is_array($data['disabled'])) {
             unset($data['disabled']);
         }
+
         return $this->_templates->format('selectColumn', [
             'name' => $name,
             'templateVars' => $data['templateVars'],
@@ -74,4 +77,4 @@ class ColumnSelectBoxWidget extends SelectBoxWidget {
             'content' => implode('', $options),
         ]);
     }
-};
+}

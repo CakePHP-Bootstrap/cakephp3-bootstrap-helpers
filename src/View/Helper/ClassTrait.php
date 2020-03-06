@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 /**
  *
  * Licensed under The MIT License
@@ -14,13 +16,12 @@
  */
 namespace Bootstrap\View\Helper;
 
-
 /**
  * A trait that provides useful methods to generate bootstrap html specific
  * code.
  */
-trait ClassTrait {
-
+trait ClassTrait
+{
     /**
      * Adds the given class to the element options.
      *
@@ -30,7 +31,7 @@ trait ClassTrait {
      *
      * @return array Array of options with `$key` set or updated.
      */
-    public function addClass(array $options = [], $class = null, $key = 'class'):array
+    public function addClass(array $options = [], $class = null, $key = 'class'): array
     {
         if (!is_array($class)) {
             $class = explode(' ', trim($class));
@@ -47,6 +48,7 @@ trait ClassTrait {
         $class = array_unique($class);
         $class = array_filter($class);
         $options[$key] = implode(' ', $class);
+
         return $options;
     }
 
@@ -60,11 +62,12 @@ trait ClassTrait {
      * @return array The new options with class values (btn, and btn-* according to
      * initial options).
      */
-    protected function _addButtonClasses($options) {
+    protected function _addButtonClasses($options)
+    {
         $options += [
             'btype' => $this->getConfig('buttons.type'),
             'size' => false,
-            'block' => false
+            'block' => false,
         ];
         if (isset($options['bootstrap-type'])) {
             $options['btype'] = $options['bootstrap-type'];
@@ -78,19 +81,25 @@ trait ClassTrait {
         $type = $options['btype'];
         $size = $options['size'];
         $block = $options['block'];
-        unset($options['btype'], $options['size'], $options['block'],
-            $options['bootstrap-type'], $options['bootstrap-size'],
-            $options['bootstrap-block']);
+        unset(
+            $options['btype'],
+            $options['size'],
+            $options['block'],
+            $options['bootstrap-type'],
+            $options['bootstrap-size'],
+            $options['bootstrap-block']
+        );
         $options = $this->addClass($options, 'btn');
         if (!preg_match('#btn-[a-z]+#', $options['class'])) {
-            $options = $this->addClass($options, 'btn-'.$type);
+            $options = $this->addClass($options, 'btn-' . $type);
         }
         if ($size) {
-            $options = $this->addClass($options, 'btn-'.$size);
+            $options = $this->addClass($options, 'btn-' . $size);
         }
         if ($block) {
             $options = $this->addClass($options, 'btn-block');
         }
+
         return $options;
     }
 
@@ -101,10 +110,8 @@ trait ClassTrait {
      *
      * @return bool `true` if the array is associative, `false` otherwize.
      */
-    protected function _isAssociativeArray($array) {
+    protected function _isAssociativeArray($array)
+    {
         return array_keys($array) !== range(0, count($array) - 1);
     }
-
 }
-
-?>

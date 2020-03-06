@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 /**
  *
  * Licensed under The MIT License
@@ -15,7 +17,6 @@
 namespace Bootstrap\View\Helper;
 
 use Bootstrap\Utility\StackedStates;
-
 use Cake\View\Helper;
 use Cake\View\StringTemplateTrait;
 
@@ -26,8 +27,8 @@ use Cake\View\StringTemplateTrait;
  *
  * @property \Bootstrap\View\Helper\HtmlHelper $Html
  */
-class CardHelper extends Helper {
-
+class CardHelper extends Helper
+{
     use ClassTrait;
     use EasyIconTrait;
     use StringTemplateTrait;
@@ -38,7 +39,7 @@ class CardHelper extends Helper {
      * @var array
      */
     public $helpers = [
-        'Html'
+        'Html',
     ];
 
     /**
@@ -57,7 +58,7 @@ class CardHelper extends Helper {
             'headerStart' => '<div class="card-header{{attrs.class}}"{{attrs}}>',
             'headerCollapsibleStart' => '<div class="card-header{{attrs.class}}" role="tab"{{attrs}}>',
             'headerCollapsibleLink' =>
-'<h5 class="mb-0"><a role="button" data-toggle="collapse" href="#{{target}}" aria-expanded="{{expanded}}" aria-controls="{{target}}"{{attrs}}>{{content}}</a></h5>',
+    '<h5 class="mb-0"><a role="button" data-toggle="collapse" href="#{{target}}" aria-expanded="{{expanded}}" aria-controls="{{target}}"{{attrs}}>{{content}}</a></h5>',
             'headerEnd' => '</div>',
             'title' => '<h4 class="card-title{{attrs.class}}"{{attrs}}>{{content}}</h4>',
             'bodyStart' => '<div class="card-body{{attrs.class}}"{{attrs}}>',
@@ -66,16 +67,16 @@ class CardHelper extends Helper {
                 '<div class="collapse{{attrs.class}}" role="tabpanel" aria-labelledby="{{headId}}"{{attrs}}>{{bodyStart}}',
             'bodyCollapsibleEnd' => '{{bodyEnd}}</div>',
             'footerStart' => '<div class="card-footer{{attrs.class}}"{{attrs}}>',
-            'footerEnd' => '</div>'
+            'footerEnd' => '</div>',
         ],
         'templateClass' => 'Bootstrap\View\EnhancedStringTemplate',
-        'collapsible' => false
+        'collapsible' => false,
     ];
 
     /**
      * States of the card helper (contains states of type 'group' and 'card').
      *
-     * @var StackedStates
+     * @var \Bootstrap\Utility\StackedStates
      */
     protected $_states;
 
@@ -93,13 +94,14 @@ class CardHelper extends Helper {
      */
     protected $_groupCount = 0;
 
-    public function __construct(\Cake\View\View $View, array $config = []) {
+    public function __construct(\Cake\View\View $View, array $config = [])
+    {
         $this->_states = new StackedStates([
             'group' => [
                 'groupCardOpen' => false,
                 'groupCardCount' => -1,
                 'groupId' => false,
-                'groupCollapsible' => true
+                'groupCollapsible' => true,
             ],
             'card' => [
                 'part' => null,
@@ -107,11 +109,12 @@ class CardHelper extends Helper {
                 'headId' => null,
                 'collapsible' => false,
                 'open' => false,
-                'inGroup' => false
-            ]
+                'inGroup' => false,
+            ],
         ]);
         parent::__construct($View, $config);
     }
+
     /**
      * Open a card group.
      *
@@ -131,22 +134,24 @@ class CardHelper extends Helper {
      *
      * @link http://getbootstrap.com/javascript/#collapse-example-accordion
      */
-    public function startGroup($options = []) {
+    public function startGroup($options = [])
+    {
         $options += [
-            'id' => 'cardGroup-'.(++$this->_groupCount),
+            'id' => 'cardGroup-' . (++$this->_groupCount),
             'collapsible' => true,
             'open' => 0,
-            'templateVars' => []
+            'templateVars' => [],
         ];
         $this->_states->push('group', [
             'groupCardOpen' => $options['open'],
             'groupCardCount' => -1,
             'groupId' => $options['id'],
-            'groupCollapsible' => $options['collapsible']
+            'groupCollapsible' => $options['collapsible'],
         ]);
+
         return $this->formatTemplate('cardGroupStart', [
             'attrs' => $this->templater()->formatAttributes($options, ['open', 'collapsible']),
-            'templateVars' => $options['templateVars']
+            'templateVars' => $options['templateVars'],
         ]);
     }
 
@@ -155,13 +160,15 @@ class CardHelper extends Helper {
      *
      * @return string An HTML string containing closing tags.
      */
-    public function endGroup() {
+    public function endGroup()
+    {
         $out = '';
         while ($this->_states->is('card')) { // cards were not closed
             $out .= $this->end();
         }
         $out .= $this->formatTemplate('cardGroupEnd', []);
         $this->_states->pop();
+
         return $out;
     }
 
@@ -210,7 +217,8 @@ class CardHelper extends Helper {
      *
      * @return string An HTML string containing opening elements for a card.
      */
-    public function create($title = null, $options = []) {
+    public function create($title = null, $options = [])
+    {
 
         if (is_array($title)) {
             $options = $title;
@@ -232,7 +240,7 @@ class CardHelper extends Helper {
             'open' => !$this->_states->is('group'),
             'card-count' => $this->_cardCount,
             'title' => [],
-            'templateVars' => []
+            'templateVars' => [],
         ];
 
         $this->_cardCount = intval($options['card-count']) + 1;
@@ -241,8 +249,10 @@ class CardHelper extends Helper {
         $open = $options['open'];
         if ($this->_states->is('group')) {
             // increment count inside
-            $this->_states->setValue('groupCardCount',
-                $this->_states->getValue('groupCardCount') + 1);
+            $this->_states->setValue(
+                'groupCardCount',
+                $this->_states->getValue('groupCardCount') + 1
+            );
             $open = $open
                 || $this->_states->getValue('groupCardOpen')
                     == $this->_states->getValue('groupCardCount');
@@ -251,24 +261,26 @@ class CardHelper extends Helper {
         $out .= $this->formatTemplate('cardStart', [
             'type' => $options['type'],
             'attrs' => $this->templater()->formatAttributes(
-                $options, ['body', 'type', 'collapsible', 'open', 'card-count', 'title']),
-            'templateVars' => $options['templateVars']
+                $options,
+                ['body', 'type', 'collapsible', 'open', 'card-count', 'title']
+            ),
+            'templateVars' => $options['templateVars'],
         ]);
 
         $this->_states->push('card', [
             'part' => null,
-            'bodyId' => 'collapse-'.$options['card-count'],
-            'headId' => 'heading-'.$options['card-count'],
+            'bodyId' => 'collapse-' . $options['card-count'],
+            'headId' => 'heading-' . $options['card-count'],
             'collapsible' => $options['collapsible'],
             'open' => $open,
             'inGroup' => $this->_states->is('group'),
             'groupId' => $this->_states->is('group') ?
-                $this->_states->getValue('groupId') : 0
+                $this->_states->getValue('groupId') : 0,
         ]);
 
         if (is_string($title) && $title) {
             $out .= $this->_createHeader($title, [
-                'title' => $options['title']
+                'title' => $options['title'],
             ]);
             $out .= $this->_cleanCurrent();
             if ($options['body']) {
@@ -295,7 +307,8 @@ class CardHelper extends Helper {
      *
      * @return string An HTML string containing closing tags.
      */
-    public function end($content = null, $options = []) {
+    public function end($content = null, $options = [])
+    {
         $this->_lastCardClosed = true;
         $res = '';
         $res .= $this->_cleanCurrent();
@@ -304,6 +317,7 @@ class CardHelper extends Helper {
         }
         $res .= $this->formatTemplate('cardEnd', []);
         $this->_states->pop();
+
         return $res;
     }
 
@@ -312,7 +326,8 @@ class CardHelper extends Helper {
      *
      * @return string An HTML string containing closing elements.
      */
-    protected function _cleanCurrent() {
+    protected function _cleanCurrent()
+    {
         if (!$this->_states->is('card')) {
             return '';
         }
@@ -320,16 +335,17 @@ class CardHelper extends Helper {
         if ($current === null) {
             return '';
         }
-        $out = $this->formatTemplate($current.'End', []);
+        $out = $this->formatTemplate($current . 'End', []);
         if ($this->_states->getValue('collapsible')) {
-            $ctplt = $current.'CollapsibleEnd';
+            $ctplt = $current . 'CollapsibleEnd';
             if ($this->getTemplates($ctplt)) {
                 $out = $this->formatTemplate($ctplt, [
-                    $current.'End' => $out
+                    $current . 'End' => $out,
                 ]);
             }
         }
         $this->_states->setValue('part', null);
+
         return $out;
     }
 
@@ -338,7 +354,8 @@ class CardHelper extends Helper {
      *
      * @return bool `true` if the current card should be open, `false` otherwize.
      */
-    protected function _isOpen() {
+    protected function _isOpen()
+    {
         return $this->_states->getValue('open');
     }
 
@@ -351,26 +368,27 @@ class CardHelper extends Helper {
      * - `templateVars` Provide template variables for the header template.
      * - Other attributes will be assigned to the header element.
      *
-     * @param string $text The card header content, or null to only open the header.
+     * @param string $title The card header content, or null to only open the header.
      * @param array $options Array of options. See above.
      *
      * @return string A formated opening tag for the card header or the complete card
      * header.
      */
-    protected function _createHeader($title, $options = []) {
+    protected function _createHeader($title, $options = [])
+    {
         $title = $this->_makeIcon($title, $converted);
         $options += [
             'escape' => !$converted,
-            'templateVars' => []
+            'templateVars' => [],
         ];
         $out = $this->formatTemplate('headerStart', [
             'attrs' => $this->templater()->formatAttributes($options, ['title']),
-            'templateVars' => $options['templateVars']
+            'templateVars' => $options['templateVars'],
         ]);
         if ($this->_states->getValue('collapsible')) {
             $out = $this->formatTemplate('headerCollapsibleStart', [
                 'attrs' => $this->templater()->formatAttributes(['id' => $this->_states->getValue('headId')]),
-                'templateVars' => $options['templateVars']
+                'templateVars' => $options['templateVars'],
             ]);
             if ($title) {
                 $title = $this->formatTemplate('headerCollapsibleLink', [
@@ -378,14 +396,14 @@ class CardHelper extends Helper {
                     'target' => $this->_states->getValue('bodyId'),
                     'content' => $options['escape'] ? h($title) : $title,
                     'attrs' => $this->templater()->formatAttributes($this->_states->getValue('inGroup') ? [
-                        'data-parent' => '#'.$this->_states->getValue('groupId')
+                        'data-parent' => '#' . $this->_states->getValue('groupId'),
                     ] : []),
-                    'templateVars' => $options['templateVars']
+                    'templateVars' => $options['templateVars'],
                 ]);
             }
             $options['escape'] = false;
         }
-        $out = $this->_cleanCurrent().$out;
+        $out = $this->_cleanCurrent() . $out;
         $this->_states->setValue('part', 'header');
         if ($title) {
             if ($options['escape']) {
@@ -393,6 +411,7 @@ class CardHelper extends Helper {
             }
             $out .= $title;
         }
+
         return $out;
     }
 
@@ -410,14 +429,15 @@ class CardHelper extends Helper {
      * @return string A formated opening tag for the card body or the complete card
      * body.
      */
-    protected function _createBody($text = null, $options = []) {
+    protected function _createBody($text = null, $options = [])
+    {
         $options += [
-            'templateVars' => []
+            'templateVars' => [],
         ];
 
         $out = $this->formatTemplate('bodyStart', [
             'attrs' => $this->templater()->formatAttributes($options),
-            'templateVars' => $options['templateVars']
+            'templateVars' => $options['templateVars'],
         ]);
         if ($this->_states->getValue('collapsible')) {
             $out = $this->formatTemplate('bodyCollapsibleStart', [
@@ -425,17 +445,18 @@ class CardHelper extends Helper {
                 'headId' => $this->_states->getValue('headId'),
                 'attrs' => $this->templater()->formatAttributes([
                     'id' => $this->_states->getValue('bodyId'),
-                    'class' => $this->_isOpen() ? 'in' : ''
+                    'class' => $this->_isOpen() ? 'in' : '',
                 ]),
-                'templateVars' => $options['templateVars']
+                'templateVars' => $options['templateVars'],
             ]);
         }
-        $out = $this->_cleanCurrent().$out;
+        $out = $this->_cleanCurrent() . $out;
         $this->_states->setValue('part', 'body');
         if ($text) {
             $out .= $text;
             $out .= $this->_cleanCurrent();
         }
+
         return $out;
     }
 
@@ -453,20 +474,22 @@ class CardHelper extends Helper {
      * @return string A formated opening tag for the card footer or the complete card
      * footer.
      */
-    protected function _createFooter($text = null, $options = []) {
+    protected function _createFooter($text = null, $options = [])
+    {
         $options += [
-            'templateVars' => []
+            'templateVars' => [],
         ];
         $out = $this->_cleanCurrent();
         $this->_states->setValue('part', 'footer');
         $out .= $this->formatTemplate('footerStart', [
             'attrs' => $this->templater()->formatAttributes($options),
-            'templateVars' => $options['templateVars']
+            'templateVars' => $options['templateVars'],
         ]);
         if ($text) {
             $out .= $text;
             $out .= $this->_cleanCurrent();
         }
+
         return $out;
     }
 
@@ -511,20 +534,22 @@ class CardHelper extends Helper {
      * - `templateVars` Provide template variables for the header template.
      * - Other attributes will be assigned to the header element.
      *
-     * @param string|array $text The header content, or `null`, or an array of options.
+     * @param array $info The header content, or `null`, or an array of options.
      * @param array        $options Array of options. See above.
      *
      * @return string A formated opening tag for the card header or the complete card
      * header.
      */
-    public function header($info = null, $options = []) {
+    public function header($info = null, $options = [])
+    {
         if (is_array($info)) {
             $options = $info;
             $info    = null;
         }
         $options += [
-            'title' => true
+            'title' => true,
         ];
+
         return $this->_createHeader($info, $options);
     }
 
@@ -536,17 +561,19 @@ class CardHelper extends Helper {
      *
      * @return string The card title.
      */
-    public function title($title, $options = []) {
+    public function title($title, $options = [])
+    {
         $options += [
-            'templateVars' => []
+            'templateVars' => [],
         ];
         if ($this->_states->getValue('part') !== 'body') {
             $this->body();
         }
+
         return $this->formatTemplate('title', [
             'content' => $title,
             'attrs' => $this->templater()->formatAttributes($options),
-            'templateVars' => $options['templateVars']
+            'templateVars' => $options['templateVars'],
         ]);
     }
 
@@ -579,17 +606,19 @@ class CardHelper extends Helper {
      * - `templateVars` Provide template variables for the body template.
      * - Other attributes will be assigned to the body element.
      *
-     * @param array|string $info The body content, or `null`, or an array of options.
+     * @param string $content The body content, or `null`, or an array of options.
      * `$options`.
      * @param array $options Array of options for the card body `<div>`.
      *
      * @return string
      */
-    public function body($content = null, $options = []) {
+    public function body($content = null, $options = [])
+    {
         if (is_array($content)) {
             $options = $content;
             $content    = null;
         }
+
         return $this->_createBody($content, $options);
     }
 
@@ -628,14 +657,13 @@ class CardHelper extends Helper {
      * @return string A formated opening tag for the card footer or the complete card
      * footer.
      */
-    public function footer($text = null, $options = []) {
+    public function footer($text = null, $options = [])
+    {
         if (is_array($text)) {
             $options = $text;
             $text    = null;
         }
+
         return $this->_createFooter($text, $options);
     }
-
 }
-
-?>

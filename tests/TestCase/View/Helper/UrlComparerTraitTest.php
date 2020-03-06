@@ -1,27 +1,28 @@
 <?php
+declare(strict_types=1);
 
 namespace Bootstrap\Test\TestCase\View\Helper;
 
 use Bootstrap\View\Helper\UrlComparerTrait;
 use Cake\Core\Configure;
 use Cake\Http\ServerRequest;
+use Cake\Routing\Route\DashedRoute;
 use Cake\Routing\RouteBuilder;
 use Cake\Routing\Router;
-use Cake\Routing\Route\DashedRoute;
 use Cake\TestSuite\TestCase;
 
-class PublicUrlComparerTrait {
-
+class PublicUrlComparerTrait
+{
     use UrlComparerTrait;
 
-    public function normalize($url, $pass = []) {
+    public function normalize($url, $pass = [])
+    {
         return $this->_normalize($url, $pass);
     }
+}
 
-};
-
-class UrlComparerTraitTest extends TestCase {
-
+class UrlComparerTraitTest extends TestCase
+{
     /**
      * Instance of PublicUrlComparerTrait.
      *
@@ -64,7 +65,8 @@ class UrlComparerTraitTest extends TestCase {
         parent::tearDown();
     }
 
-    public function testNormalizedWithoutPass() {
+    public function testNormalizedWithoutPass()
+    {
         $tests = [
             ['/pages/test', '/pages/display'], // normalize as /pages due to (2)
             ['/users/login', '/users/login'],
@@ -73,7 +75,7 @@ class UrlComparerTraitTest extends TestCase {
             ['/admin/users/login', '/admin/users/login'],
         ];
         foreach ($tests as $test) {
-            list($lhs, $rhs) = $test;
+            [$lhs, $rhs] = $test;
             $nm = $this->trait->normalize($lhs, ['pass' => false]);
             $this->assertTrue($nm == $rhs, sprintf("%s is not normalized as %s but %s.", $lhs, $rhs, $nm));
         }
@@ -84,7 +86,7 @@ class UrlComparerTraitTest extends TestCase {
                 'action' => 'view',
                 'plugin' => null,
                 'controller' => 'pages',
-                'pass' => ['1']
+                'pass' => ['1'],
             ],
         ]);
         Router::setRequest($request);
@@ -126,13 +128,14 @@ class UrlComparerTraitTest extends TestCase {
             ['http://localhost/somewhere/cakephp', null],
         ];
         foreach ($tests as $test) {
-            list($lhs, $rhs) = $test;
+            [$lhs, $rhs] = $test;
             $nm = $this->trait->normalize($lhs, ['pass' => false]);
             $this->assertTrue($nm == $rhs, sprintf("%s is not normalized as %s but %s.", $lhs, $rhs, $nm));
         }
     }
 
-    public function testNormalizedWithPass() {
+    public function testNormalizedWithPass()
+    {
         $tests = [
             ['/pages/test', '/pages/display/test'], // normalize as /pages due to (2)
             ['/users/login', '/users/login'],
@@ -140,7 +143,7 @@ class UrlComparerTraitTest extends TestCase {
             ['/admin/users/login', '/admin/users/login'],
         ];
         foreach ($tests as $test) {
-            list($lhs, $rhs) = $test;
+            [$lhs, $rhs] = $test;
             $nm = $this->trait->normalize($lhs);
             $this->assertTrue($nm == $rhs, sprintf("%s is not normalized as %s but %s.", $lhs, $rhs, $nm));
         }
@@ -151,7 +154,7 @@ class UrlComparerTraitTest extends TestCase {
                 'action' => 'view',
                 'plugin' => null,
                 'controller' => 'pages',
-                'pass' => ['1']
+                'pass' => ['1'],
             ],
         ]);
         Router::setRequest($request);
@@ -188,28 +191,30 @@ class UrlComparerTraitTest extends TestCase {
             ['http://localhost/cakephp/admin/users/login/whatever?query=no#anchor', '/admin/users/login/whatever'],
             ['http://github.com/cakephp/admin/users', null],
             ['http://localhost/notcakephp', null],
-            ['http://localhost/somewhere/cakephp', null]
+            ['http://localhost/somewhere/cakephp', null],
 
         ];
         foreach ($tests as $test) {
-            list($lhs, $rhs) = $test;
+            [$lhs, $rhs] = $test;
             $nm = $this->trait->normalize($lhs);
             $this->assertTrue($nm == $rhs, sprintf("%s is not normalized as %s but %s.", $lhs, $rhs, $nm));
         }
     }
 
-    public function _testCompare($matchTrue, $matchFalse, $parts = []) {
+    public function _testCompare($matchTrue, $matchFalse, $parts = [])
+    {
         foreach ($matchTrue as $urls) {
-            list($lhs, $rhs) = $urls;
+            [$lhs, $rhs] = $urls;
             $this->assertTrue($this->trait->compareUrls($lhs, $rhs, $parts), sprintf('%s [] != %s', Router::url($lhs), Router::url($rhs)));
         }
         foreach ($matchFalse as $urls) {
-            list($lhs, $rhs) = $urls;
+            [$lhs, $rhs] = $urls;
             $this->assertTrue(!$this->trait->compareUrls($lhs, $rhs, $parts), sprintf('%s == %s', Router::url($lhs), Router::url($rhs)));
         }
     }
 
-    public function testCompare() {
+    public function testCompare()
+    {
         $urlsMatchTrue = [
             // Test root
             ['/', '/'],
@@ -229,12 +234,13 @@ class UrlComparerTraitTest extends TestCase {
             ['https://github.com', '/'],
             ['/pages/url', '/pages'],
             ['/pages/url', '/pages/something'],
-            [['controller' => 'users', 'action' => 'index'], '/users/edit']
+            [['controller' => 'users', 'action' => 'index'], '/users/edit'],
         ];
         $this->_testCompare($urlsMatchTrue, $urlsMatchFalse);
     }
 
-    public function testFullBase() {
+    public function testFullBase()
+    {
         $request = new ServerRequest([
             'url' => '/pages/view/1',
             'base' => '/cakephp',
@@ -242,7 +248,7 @@ class UrlComparerTraitTest extends TestCase {
                 'action' => 'view',
                 'plugin' => null,
                 'controller' => 'pages',
-                'pass' => ['1']
+                'pass' => ['1'],
             ],
         ]);
         Router::setRequest($request);
@@ -270,14 +276,14 @@ class UrlComparerTraitTest extends TestCase {
             ['/pages/display/test', '/pages/display/test'],
             ['/admin/users/login', '/admin/users/login'],
             ['/cakephp/admin/rights', '/admin/rights'],
-            ['/cakephp/admin/users/edit', '/admin/users/edit/1']
+            ['/cakephp/admin/users/edit', '/admin/users/edit/1'],
         ];
         $urlsMatchFalse = [
             ['https://github.com', '/'],
             ['/pages/url', '/pages'],
             ['/pages/url', '/pages/something'],
             [[], ['controller' => 'pages', 'action' => 'view']],
-            ['/cakephp/admin/users/edit/1', '/admin/users/edit']
+            ['/cakephp/admin/users/edit/1', '/admin/users/edit'],
         ];
         $this->_testCompare($urlsMatchTrue, $urlsMatchFalse);
 
@@ -287,23 +293,24 @@ class UrlComparerTraitTest extends TestCase {
                 'action' => 'display',
                 'plugin' => null,
                 'controller' => 'pages',
-                'pass' => ['faq']
+                'pass' => ['faq'],
             ])
             ->withAttribute('base', '/cakephp');
         Router::setRequest($request);
         $this->_testCompare([
             ['/pages/faq', []],
             [['controller' => 'Pages', 'action' => 'display', 'faq'], []],
-            ['/pages', []]
+            ['/pages', []],
         ], [
-            ['/pages/credits', []]
+            ['/pages/credits', []],
         ]);
     }
 
-    public function testCompareCustom() {
+    public function testCompareCustom()
+    {
         $tests = [
-            [['controller' => 'Apartments', 'action' => 'index'], '/apartments/edit']
+            [['controller' => 'Apartments', 'action' => 'index'], '/apartments/edit'],
         ];
         $this->_testCompare($tests, [], ['action' => false, 'pass' => false]);
     }
-};
+}

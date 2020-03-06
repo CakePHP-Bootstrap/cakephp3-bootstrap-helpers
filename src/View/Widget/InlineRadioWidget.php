@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 /**
  *
  * Licensed under The MIT License
@@ -22,9 +24,9 @@ use Cake\View\Widget\RadioWidget;
  * This class is intended as an internal implementation detail
  * of Cake\View\Helper\BootstrapFormHelper and is not intended for direct use.
  */
-class InlineRadioWidget extends RadioWidget {
-
-   /**
+class InlineRadioWidget extends RadioWidget
+{
+    /**
      * Renders a single radio input and label.
      *
      * @param string|int $val The value of the radio input.
@@ -80,16 +82,17 @@ class InlineRadioWidget extends RadioWidget {
             $context,
             $escape
         );
-        if ($label === false &&
+        if (
+            $label === false &&
             strpos($this->_templates->get('inlineRadioWrapper'), '{{input}}') === false
         ) {
             $label = $input;
         }
+
         return $this->_templates->format('inlineRadioWrapper', [
             'input' => $input,
             'label' => $label,
             'templateVars' => $data['templateVars'],
         ]);
     }
-
-};
+}

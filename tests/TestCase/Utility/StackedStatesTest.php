@@ -1,17 +1,18 @@
 <?php
+declare(strict_types=1);
 
 namespace Bootstrap\Test\TestCase\Utility;
 
 use Bootstrap\Utility\StackedStates;
 use Cake\TestSuite\TestCase;
 
-class StackedStatesTest extends TestCase {
-
-    /**
-     * Instance of StackedStates.
-     *
-     * @var StackedStates
-     */
+class StackedStatesTest extends TestCase
+{
+     /**
+      * Instance of StackedStates.
+      *
+      * @var StackedStates
+      */
      public $states;
 
     /**
@@ -24,70 +25,71 @@ class StackedStatesTest extends TestCase {
         $this->states = new StackedStates();
     }
 
-    public function testPushAndPop() {
+    public function testPushAndPop()
+    {
         // push 1
         $this->states->push('type1', [
             'key1' => 1,
-            'key2' => 2
+            'key2' => 2,
         ]);
         $this->assertEquals($this->states->type(), 'type1');
         $this->assertTrue($this->states->is('type1'));
         $this->assertEquals($this->states->current(), [
             'key1' => 1,
-            'key2' => 2
+            'key2' => 2,
         ]);
 
         // push 2
         $this->states->push('type2', [
             'key1' => 3,
             'key2' => 7,
-            'key3' => 19
+            'key3' => 19,
         ]);
         $this->assertEquals($this->states->type(), 'type2');
         $this->assertTrue($this->states->is('type2'));
         $this->assertEquals($this->states->current(), [
             'key1' => 3,
             'key2' => 7,
-            'key3' => 19
+            'key3' => 19,
         ]);
 
         // push 3
         $this->states->push('type1', [
             'key1' => 42,
-            'key2' => 43
+            'key2' => 43,
         ]);
         $this->assertEquals($this->states->type(), 'type1');
         $this->assertTrue($this->states->is('type1'));
         $this->assertEquals($this->states->current(), [
             'key1' => 42,
-            'key2' => 43
+            'key2' => 43,
         ]);
 
         // pop 1
-        list($type, $state) = $this->states->pop();
+        [$type, $state] = $this->states->pop();
         $this->assertEquals($type, 'type1');
         $this->assertEquals($state, [
             'key1' => 42,
-            'key2' => 43
+            'key2' => 43,
         ]);
         $this->assertEquals($this->states->type(), 'type2');
         $this->assertTrue($this->states->is('type2'));
         $this->assertEquals($this->states->current(), [
             'key1' => 3,
             'key2' => 7,
-            'key3' => 19
+            'key3' => 19,
         ]);
 
         // push 4
         $this->states->push('type3', [
             'key1' => 27,
-            'key2' => 29
+            'key2' => 29,
         ]);
         $this->assertEquals($this->states->type(), 'type3');
         $this->assertTrue($this->states->is('type3'));
         $this->assertEquals($this->states->current(), [
             'key1' => 27,
-            'key2' => 29
+            'key2' => 29,
         ]);
 
         // pop
@@ -97,7 +99,7 @@ class StackedStatesTest extends TestCase {
         $this->assertEquals($this->states->current(), [
             'key1' => 3,
             'key2' => 7,
-            'key3' => 19
+            'key3' => 19,
         ]);
 
         // pop
@@ -106,39 +108,39 @@ class StackedStatesTest extends TestCase {
         $this->assertTrue($this->states->is('type1'));
         $this->assertEquals($this->states->current(), [
             'key1' => 1,
-            'key2' => 2
+            'key2' => 2,
         ]);
 
         // pop
-        list($type, $state) = $this->states->pop();
+        [$type, $state] = $this->states->pop();
         $this->assertEquals($type, 'type1');
         $this->assertEquals($state, [
             'key1' => 1,
-            'key2' => 2
+            'key2' => 2,
         ]);
 
         $this->assertTrue($this->states->isEmpty());
-
     }
 
-    public function testDefaults() {
+    public function testDefaults()
+    {
 
         $states = new StackedStates([
             't1' => [
                 'key1' => 2,
-                'key2' => 4
+                'key2' => 4,
             ],
             't2' => [
                 'key1' => 3,
                 'key2' => 5,
-                'key3' => 18
-            ]
+                'key3' => 18,
+            ],
         ]);
 
         $states->push('t1');
         $this->assertEquals($states->current(), [
             'key1' => 2,
-            'key2' => 4
+            'key2' => 4,
         ]);
         $states->pop();
 
@@ -146,21 +148,21 @@ class StackedStatesTest extends TestCase {
         $this->assertEquals($states->current(), [
             'key1' => 3,
             'key2' => 5,
-            'key3' => 18
+            'key3' => 18,
         ]);
         $states->pop();
 
         $states->push('t1', ['key1' => 5]);
         $this->assertEquals($states->current(), [
             'key1' => 5,
-            'key2' => 4
+            'key2' => 4,
         ]);
         $states->pop();
 
         $states->push('t1', ['key1' => 5, 'key2' => 13]);
         $this->assertEquals($states->current(), [
             'key1' => 5,
-            'key2' => 13
+            'key2' => 13,
         ]);
         $states->pop();
 
@@ -168,7 +170,7 @@ class StackedStatesTest extends TestCase {
         $this->assertEquals($states->current(), [
             'key1' => 5,
             'key2' => 13,
-            'key3' => 17
+            'key3' => 17,
         ]);
         $states->pop();
 
@@ -176,16 +178,17 @@ class StackedStatesTest extends TestCase {
         $this->assertEquals($states->current(), [
             'key1' => 5,
             'key2' => 13,
-            'key3' => 17
+            'key3' => 17,
         ]);
         $states->pop();
     }
 
-    public function testGetValue() {
+    public function testGetValue()
+    {
         $this->states->push('type2', [
             'key1' => 3,
             'key2' => 7,
-            'key3' => 19
+            'key3' => 19,
         ]);
 
         $this->assertEquals($this->states->getValue('key1'), 3);
@@ -193,7 +196,8 @@ class StackedStatesTest extends TestCase {
         $this->assertEquals($this->states->getValue('key3'), 19);
     }
 
-    public function testSetValue() {
+    public function testSetValue()
+    {
         $this->states->push('type2');
 
         $this->states->setValue('key1', 18);
@@ -208,5 +212,4 @@ class StackedStatesTest extends TestCase {
         $this->states->setValue('key1', 13);
         $this->assertEquals($this->states->getValue('key1'), 13);
     }
-
-};
+}

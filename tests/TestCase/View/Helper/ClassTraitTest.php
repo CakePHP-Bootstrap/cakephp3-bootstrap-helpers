@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Bootstrap\Test\TestCase\View\Helper;
 
@@ -6,17 +7,17 @@ use Bootstrap\View\Helper\ClassTrait;
 use Cake\TestSuite\TestCase;
 use Cake\View\View;
 
-class PublicClassTrait {
-
+class PublicClassTrait
+{
     use ClassTrait;
 
-    public function __construct($view) {
+    public function __construct($view)
+    {
     }
+}
 
-};
-
-class BootstrapTraitTest extends TestCase {
-
+class BootstrapTraitTest extends TestCase
+{
     /**
      * Instance of PublicClassTrait.
      *
@@ -36,20 +37,20 @@ class BootstrapTraitTest extends TestCase {
         $this->trait = new PublicClassTrait($view);
     }
 
-    public function testAddClass() {
+    public function testAddClass()
+    {
         // Test with a string
         $opts = [
-            'class' => 'class-1'
+            'class' => 'class-1',
         ];
         $opts = $this->trait->addClass($opts, '  class-1    class-2  ');
         $this->assertEquals($opts, [
-            'class' => 'class-1 class-2'
+            'class' => 'class-1 class-2',
         ]);
         // Test with an array
         $opts = $this->trait->addClass($opts, ['class-1', 'class-3']);
         $this->assertEquals($opts, [
-            'class' => 'class-1 class-2 class-3'
+            'class' => 'class-1 class-2 class-3',
         ]);
     }
-
-};
+}

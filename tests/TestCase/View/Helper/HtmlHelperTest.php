@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Bootstrap\Test\TestCase\View\Helper;
 
@@ -6,8 +7,8 @@ use Bootstrap\View\Helper\HtmlHelper;
 use Cake\TestSuite\TestCase;
 use Cake\View\View;
 
-class HtmlHelperTest extends TestCase {
-
+class HtmlHelperTest extends TestCase
+{
     /**
      * Instance of HtmlHelper.
      *
@@ -27,39 +28,40 @@ class HtmlHelperTest extends TestCase {
         $this->html = new HtmlHelper($view);
     }
 
-    public function testIcon() {
+    public function testIcon()
+    {
 
         // Default icon
         $result = $this->html->icon('home', [
             'id' => 'my-id',
-            'class' => 'my-class'
+            'class' => 'my-class',
         ]);
         $expected = [
             ['i' => [
                 'aria-hidden' => 'true',
                 'class' => 'fa fa-home my-class',
-                'id' => 'my-id'
+                'id' => 'my-id',
             ]],
-            '/i'
+            '/i',
         ];
         $this->assertHtml($expected, $result);
 
         // Custom templates
         $oldTemplates = $this->html->getTemplates();
         $this->html->setTemplates([
-            'icon' => '<span class="fa fa-{{type}}{{attrs.class}}" data-type="{{type}}"{{attrs}}>{{inner}}</span>'
+            'icon' => '<span class="fa fa-{{type}}{{attrs.class}}" data-type="{{type}}"{{attrs}}>{{inner}}</span>',
         ]);
         $result = $this->html->icon('home', [
             'id' => 'my-id',
-            'class' => 'my-class'
+            'class' => 'my-class',
         ]);
         $expected = [
             ['span' => [
                 'class' => 'fa fa-home my-class',
                 'data-type' => 'home',
-                'id' => 'my-id'
+                'id' => 'my-id',
             ]],
-            '/span'
+            '/span',
         ];
         // With template variables
         $this->assertHtml($expected, $result);
@@ -67,86 +69,87 @@ class HtmlHelperTest extends TestCase {
             'id' => 'my-id',
             'class' => 'my-class',
             'templateVars' => [
-                'inner' => 'inner home'
-            ]
+                'inner' => 'inner home',
+            ],
         ]);
         $expected = [
             ['span' => [
                 'class' => 'fa fa-home my-class',
                 'data-type' => 'home',
-                'id' => 'my-id'
+                'id' => 'my-id',
             ]],
             'inner home',
-            '/span'
+            '/span',
         ];
         $this->assertHtml($expected, $result);
         $this->html->setTemplates($oldTemplates);
-
     }
 
-    public function testBadge() {
+    public function testBadge()
+    {
         $content = 'My Label';
         // Standard test
         $this->assertHtml([
             ['span' => [
-                'class' => 'badge badge-default'
+                'class' => 'badge badge-default',
             ]],
             'My Label',
-            '/span'
+            '/span',
         ], $this->html->badge($content));
         // Type
         $this->assertHtml([
             ['span' => [
-                'class' => 'badge badge-primary'
+                'class' => 'badge badge-primary',
             ]],
             'My Label',
-            '/span'
+            '/span',
         ], $this->html->badge($content, 'primary'));
         // Type + Options
         $options = [
             'class' => 'my-badge-class',
-            'id'    => 'my-badge-id'
+            'id'    => 'my-badge-id',
         ];
         $this->assertHtml([
             ['span' => [
-                'class' => 'badge badge-primary '.$options['class'],
-                'id'    => $options['id']
+                'class' => 'badge badge-primary ' . $options['class'],
+                'id'    => $options['id'],
             ]],
             'My Label',
-            '/span'
+            '/span',
         ], $this->html->badge($content, 'primary', $options));
         // Only options
         $options = [
             'class' => 'my-badge-class',
             'id'    => 'my-badge-id',
-            'type'  => 'primary'
+            'type'  => 'primary',
         ];
         $this->assertHtml([
             ['span' => [
-                'class' => 'badge badge-primary '.$options['class'],
-                'id'    => $options['id']
+                'class' => 'badge badge-primary ' . $options['class'],
+                'id'    => $options['id'],
             ]],
             'My Label',
-            '/span'
+            '/span',
         ], $this->html->badge($content, $options));
     }
 
-    public function testAlert() {
+    public function testAlert()
+    {
 
         // Default
         $result = $this->html->alert('Alert');
         $expected = [
             ['div' => [
                 'class' => 'alert alert-warning alert-dismissible',
-                'role' => 'alert'
+                'role' => 'alert',
             ]],
             ['button' => [
                 'type' => 'button',
                 'class' => 'close',
                 'data-dismiss' => 'alert',
-                'aria-label' => 'Close'
+                'aria-label' => 'Close',
             ]], ['span' => ['aria-hidden' => 'true']], '&times;', '/span', '/button',
-            'Alert', '/div'
+            'Alert', '/div',
         ];
         $this->assertHtml($expected, $result);
 
@@ -155,36 +158,36 @@ class HtmlHelperTest extends TestCase {
         $expected = [
             ['div' => [
                 'class' => 'alert alert-primary alert-dismissible',
-                'role' => 'alert'
+                'role' => 'alert',
             ]],
             ['button' => [
                 'type' => 'button',
                 'class' => 'close',
                 'data-dismiss' => 'alert',
-                'aria-label' => 'Close'
+                'aria-label' => 'Close',
             ]], ['span' => ['aria-hidden' => 'true']], '&times;', '/span', '/button',
-            'Alert', '/div'
+            'Alert', '/div',
         ];
         $this->assertHtml($expected, $result);
 
         // Custom attributes
         $result = $this->html->alert('Alert', 'primary', [
             'class' => 'my-class',
-            'id' => 'my-id'
+            'id' => 'my-id',
         ]);
         $expected = [
             ['div' => [
                 'class' => 'alert alert-primary my-class alert-dismissible',
                 'role' => 'alert',
-                'id' => 'my-id'
+                'id' => 'my-id',
             ]],
             ['button' => [
                 'type' => 'button',
                 'class' => 'close',
                 'data-dismiss' => 'alert',
-                'aria-label' => 'Close'
+                'aria-label' => 'Close',
             ]], ['span' => ['aria-hidden' => 'true']], '&times;', '/span', '/button',
-            'Alert', '/div'
+            'Alert', '/div',
         ];
         $this->assertHtml($expected, $result);
 
@@ -192,33 +195,35 @@ class HtmlHelperTest extends TestCase {
         $result = $this->html->alert('Alert', 'primary', [
             'class' => 'my-class',
             'id' => 'my-id',
-            'close' => false
+            'close' => false,
         ]);
         $expected = [
             ['div' => [
                 'class' => 'alert alert-primary my-class',
                 'role' => 'alert',
-                'id' => 'my-id'
+                'id' => 'my-id',
             ]],
-            'Alert', '/div'
+            'Alert', '/div',
         ];
         $this->assertHtml($expected, $result);
     }
 
-    public function testTooltip() {
+    public function testTooltip()
+    {
         // Default test
         $result = $this->html->tooltip('Content', 'Tooltip');
         $expected = [
             ['span' => [
                 'data-toggle' => 'tooltip',
                 'data-placement' => 'right',
-                'title' => 'Tooltip'
-            ]], 'Content', '/span'
+                'title' => 'Tooltip',
+            ]], 'Content', '/span',
         ];
         $this->assertHtml($expected, $result);
     }
 
-    public function testProgress() {
+    public function testProgress()
+    {
         // Default test
         $result = $this->html->progress(20);
         $expected = [
@@ -229,11 +234,11 @@ class HtmlHelperTest extends TestCase {
                 'aria-valuenow' => 20,
                 'aria-valuemin' => 0,
                 'aria-valuemax' => 100,
-                'style' => 'width: 20%;'
+                'style' => 'width: 20%;',
             ]],
             ['span' => ['class' => 'sr-only']], '20%', '/span',
             '/div',
-            '/div'
+            '/div',
         ];
         $this->assertHtml($expected, $result);
 
@@ -241,7 +246,7 @@ class HtmlHelperTest extends TestCase {
         $result = $this->html->progress([
             ['width' => 20, 'class' => 'my-class'],
             ['width' => 15, 'id' => 'my-id'],
-            ['width' => 10, 'active' => true]
+            ['width' => 10, 'active' => true],
         ], ['striped' => true]);
         $expected = [
             ['div' => ['class' => 'progress']],
@@ -251,7 +256,7 @@ class HtmlHelperTest extends TestCase {
                 'aria-valuenow' => 20,
                 'aria-valuemin' => 0,
                 'aria-valuemax' => 100,
-                'style' => 'width: 20%;'
+                'style' => 'width: 20%;',
             ]],
             ['span' => ['class' => 'sr-only']], '20%', '/span',
             '/div',
@@ -262,7 +267,7 @@ class HtmlHelperTest extends TestCase {
                 'aria-valuemin' => 0,
                 'aria-valuemax' => 100,
                 'style' => 'width: 15%;',
-                'id' => 'my-id'
+                'id' => 'my-id',
             ]],
             ['span' => ['class' => 'sr-only']], '15%', '/span',
             '/div',
@@ -272,16 +277,17 @@ class HtmlHelperTest extends TestCase {
                 'aria-valuenow' => 10,
                 'aria-valuemin' => 0,
                 'aria-valuemax' => 100,
-                'style' => 'width: 10%;'
+                'style' => 'width: 10%;',
             ]],
             ['span' => ['class' => 'sr-only']], '10%', '/span',
             '/div',
-            '/div'
+            '/div',
         ];
         $this->assertHtml($expected, $result);
     }
 
-    public function testDropdown() {
+    public function testDropdown()
+    {
         $this->loadRoutes();
 
         $result = $this->html->dropdown([
@@ -291,7 +297,7 @@ class HtmlHelperTest extends TestCase {
             ['divider'],
             ['item' => [
                 'title' => 'Link 1',
-                'url' => '/link1'
+                'url' => '/link1',
             ]],
             ['divider' => true],
             ['header' => [
@@ -300,13 +306,13 @@ class HtmlHelperTest extends TestCase {
             'Item 1',
             ['Item 2', '#'],
             ['item' => [
-                'title' => 'Item 3'
+                'title' => 'Item 3',
             ]],
             ['item' => [
                 'title' => 'Item 4',
                 'url' => '/link4',
-                'class' => 'my-class-4'
-            ]]
+                'class' => 'my-class-4',
+            ]],
         ]);
         $expected = [
             ['div' => ['class' => 'dropdown-menu dropdown-menu-left']],
@@ -321,7 +327,7 @@ class HtmlHelperTest extends TestCase {
             ['a' => ['href' => '#', 'class' => 'dropdown-item']], 'Item 2', '/a',
             ['a' => ['href' => '#', 'class' => 'dropdown-item disabled']], 'Item 3', '/a',
             ['a' => ['href' => '/link4', 'class' => 'dropdown-item my-class-4']], 'Item 4', '/a',
-            '/div'
+            '/div',
         ];
         $this->assertHtml($expected, $result);
 
@@ -342,9 +348,8 @@ class HtmlHelperTest extends TestCase {
             ['a' => ['href' => '/pages/home', 'class' => 'dropdown-item']], 'Link 3', '/a',
             ['div' => ['role' => 'separator', 'class' => 'dropdown-divider']], '/div',
             ['a' => ['href' => '/link4', 'class' => 'dropdown-item']], 'Link 4', '/a',
-            '/div'
+            '/div',
         ];
         $this->assertHtml($expected, $result);
     }
-
 }

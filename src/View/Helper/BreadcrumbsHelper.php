@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 /**
  *
  * Licensed under The MIT License
@@ -19,8 +21,8 @@ namespace Bootstrap\View\Helper;
  *
  * @property \Cake\View\Helper\UrlHelper $Url
  */
-class BreadcrumbsHelper extends \Cake\View\Helper\BreadcrumbsHelper{
-
+class BreadcrumbsHelper extends \Cake\View\Helper\BreadcrumbsHelper
+{
     /**
      * Default config for the helper.
      *
@@ -32,9 +34,8 @@ class BreadcrumbsHelper extends \Cake\View\Helper\BreadcrumbsHelper{
             'wrapper' => '<ol class="breadcrumb{{attrs.class}}"{{attrs}}>{{content}}</ol>',
             'item' => '<li class="breadcrumb-item{{attrs.class}}"{{attrs}}><a href="{{url}}"{{innerAttrs}}>{{title}}</a></li>',
             'itemWithoutLink' => '<li class="breadcrumb-item active{{attrs.class}}" aria-current="page"{{attrs}}>{{title}}</li>',
-            'separator' => ''
+            'separator' => '',
         ],
-        'templateClass' => 'Bootstrap\View\EnhancedStringTemplate'
+        'templateClass' => 'Bootstrap\View\EnhancedStringTemplate',
     ];
-
-};
+}

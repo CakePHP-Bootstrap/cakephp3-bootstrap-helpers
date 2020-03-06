@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 /**
  *
  * Licensed under The MIT License
@@ -14,12 +16,11 @@
  */
 namespace Bootstrap\Utility;
 
-
 /**
  * A trait that provides useful methods to match HTML tag.
  */
-class Matching {
-
+class Matching
+{
     /**
      * Check if the given input string match the given tag, and returns
      * an array of attributes if attrs is not null. This function does not
@@ -32,7 +33,8 @@ class Matching {
      *
      * @return bool True if the given tag was found, false otherwize.
      **/
-    public static function matchTag($tag, $subject, &$content = null, &$attrs = null) {
+    public static function matchTag($tag, $subject, &$content = null, &$attrs = null)
+    {
         $xml = new \XMLReader();
         $xml->xml($subject, 'UTF-8', LIBXML_NOERROR | LIBXML_ERR_NONE);
 
@@ -67,7 +69,8 @@ class Matching {
      * @return bool True if an attribute with the given name/value was found, false
      * otherwize.
      **/
-    public static function matchAttribute($attr, $value, $subject) {
+    public static function matchAttribute($attr, $value, $subject)
+    {
         $xml = new \XMLReader();
         $xml->xml($subject, 'UTF-8', LIBXML_NOERROR | LIBXML_ERR_NONE);
 
@@ -90,7 +93,8 @@ class Matching {
      *
      * @return bool True if the given tag or given attribute is found.
      **/
-    public static function findTagOrAttribute($tag, $attrs, $subject) {
+    public static function findTagOrAttribute($tag, $attrs, $subject)
+    {
         $xml = new \XMLReader();
         $xml->xml($subject, 'UTF-8', LIBXML_NOERROR | LIBXML_ERR_NONE);
         // failed to parse => false
@@ -109,8 +113,10 @@ class Matching {
             if (!is_null($attrs)) {
                 foreach ($attrs as $attr => $attrValue) {
                     $value = $xml->getAttribute($attr);
-                    if (!is_null($value)
-                        && (is_null($attrValue) || $value == $attrValue)) {
+                    if (
+                        !is_null($value)
+                        && (is_null($attrValue) || $value == $attrValue)
+                    ) {
                         return true;
                     }
                 }
@@ -120,5 +126,3 @@ class Matching {
         return false;
     }
 }
-
-?>

@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 /**
  *
  * Licensed under The MIT License
@@ -20,8 +22,8 @@ namespace Bootstrap\View\Helper;
  * After setting messages in your controllers with FlashComponent, you can use
  * this class to output your flash messages in your views.
  */
-class FlashHelper extends \Cake\View\Helper\FlashHelper {
-
+class FlashHelper extends \Cake\View\Helper\FlashHelper
+{
     /**
      * Available bootstrap templates for alert.
      *
@@ -32,7 +34,8 @@ class FlashHelper extends \Cake\View\Helper\FlashHelper {
     /**
      * {@inheritDoc}
      */
-    public function render($key = 'flash', array $options = []) {
+    public function render($key = 'flash', array $options = [])
+    {
         if (!$this->getView()->getRequest()->getSession()->check("Flash.$key")) {
             return;
         }
@@ -46,14 +49,11 @@ class FlashHelper extends \Cake\View\Helper\FlashHelper {
         }
         foreach ($flash as &$message) {
             if (in_array(basename($message['element']), $this->_bootstrapTemplates)) {
-                $message['element'] = 'Bootstrap.'.$message['element'];
+                $message['element'] = 'Bootstrap.' . $message['element'];
             }
         }
         $this->getView()->getRequest()->getSession()->write("Flash.$key", $flash);
 
         return parent::render($key, $options);
     }
-
 }
-
-?>
