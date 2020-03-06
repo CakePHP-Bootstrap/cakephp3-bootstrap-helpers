@@ -90,7 +90,7 @@ class FancyFileWidget implements WidgetInterface
     public function render(array $data, \Cake\View\Form\ContextInterface $context): string
     {
         $data += [
-            '_input'  => [],
+            '_input' => [],
             '_button' => [],
             'id' => $data['name'],
             'count-label' => __('files selected'),
@@ -174,10 +174,11 @@ class FancyFileWidget implements WidgetInterface
 
     /**
      * Determine name of fake input field
+     *
      * @param string $fieldName original field name
      * @return string fake field name
      */
-    protected static function _fakeFieldName($fieldName)
+    protected static function _fakeFieldName(string $fieldName): string
     {
         return preg_replace('/(\]?)$/', '-text$1', $fieldName, 1);
     }
