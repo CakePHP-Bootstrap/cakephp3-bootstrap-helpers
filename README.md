@@ -1,11 +1,11 @@
-CakePHP 3.x Helpers for Bootstrap
+CakePHP 4.x Helpers for Bootstrap
 =================================
 
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
 [![Travis](https://img.shields.io/travis/Holt59/cakephp3-bootstrap-helpers/4.0.3.svg?style=flat-square)](https://travis-ci.com/Holt59/cakephp3-bootstrap-helpers)
 [![Packagist](https://img.shields.io/packagist/dt/holt59/cakephp3-bootstrap-helpers.svg?style=flat-square)](https://packagist.org/packages/holt59/cakephp3-bootstrap-helpers)
 
-CakePHP 3.x Helpers to generate HTML with @Twitter Boostrap style: `Breadcrumbs`, `Flash`, `Form`, `Html`, `Modal`, `Navbar`,
+CakePHP 4.x Helpers to generate HTML with @Twitter Boostrap style: `Breadcrumbs`, `Flash`, `Form`, `Html`, `Modal`, `Navbar`,
 `Card` and `Paginator` helpers available!
 
 How to... ?
@@ -19,16 +19,7 @@ If you want the **Bootstrap 4** version of the plugin:
 
 ```bash
 # Stable version:
-composer require holt59/cakephp3-bootstrap-helpers:4.0.2
-
-# Development version (latest fixes):
-composer require holt59/cakephp3-bootstrap-helpers:dev-4.0.1-alpha
-```
-
-- Load the plugin in your `config/bootstrap.php`:
-
-```php
-Plugin::load('Bootstrap');
+composer require holt59/cakephp3-bootstrap-helpers:4.0.3
 ```
 
 - [Load the helpers](https://book.cakephp.org/3.0/en/views/helpers.html#configuring-helpers) you want in your `View/AppView.php`:
@@ -89,7 +80,7 @@ Copyright and license
 
 The MIT License (MIT)
 
-Copyright (c) 2013-2017, Mikaël Capelle.
+Copyright (c) 2013-2020, Mikaël Capelle.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
