@@ -133,7 +133,6 @@ class StackedStatesTest extends TestCase
 
     public function testDefaults()
     {
-
         $states = new StackedStates([
             't1' => [
                 'key1' => 2,

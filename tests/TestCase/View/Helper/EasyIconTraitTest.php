@@ -12,27 +12,11 @@ declare(strict_types=1);
  */
 namespace Bootstrap\Test\TestCase\View\Helper;
 
-use Bootstrap\View\Helper\EasyIconTrait;
+use Bootstrap\TestApp\PublicEasyIconTrait;
 use Bootstrap\View\Helper\FormHelper;
-use Bootstrap\View\Helper\HtmlHelper;
 use Bootstrap\View\Helper\PaginatorHelper;
 use Cake\TestSuite\TestCase;
 use Cake\View\View;
-
-class PublicEasyIconTrait
-{
-    use EasyIconTrait;
-
-    public function __construct($view)
-    {
-        $this->Html = new HtmlHelper($view);
-    }
-
-    public function publicMakeIcon($title, &$converted)
-    {
-        return $this->_makeIcon($title, $converted);
-    }
-}
 
 class EasyIconTraitTest extends TestCase
 {
@@ -118,7 +102,6 @@ class EasyIconTraitTest extends TestCase
 
     public function testHtmlHelperMethods()
     {
-
         // BootstrapHtmlHelper
         $result = $this->html->link('i:dashboard Dashboard', '/dashboard');
         $this->assertHtml([
@@ -134,7 +117,6 @@ class EasyIconTraitTest extends TestCase
 
     public function testPaginatorHelperMethods()
     {
-
         // BootstrapPaginatorHelper - TODO
         // BootstrapPaginatorHelper::prev($title, array $options = []);
         // BootstrapPaginatorHelper::next($title, array $options = []);
@@ -144,13 +126,12 @@ class EasyIconTraitTest extends TestCase
 
     public function testFormHelperMethod()
     {
-
         // BootstrapFormHelper
         $result = $this->form->button('i:plus');
         $this->assertHtml([
             ['button' => [
                 'class' => 'btn btn-primary',
-                'type'  => 'submit',
+                'type' => 'submit',
             ]], ['i' => [
                 'class' => 'fa fa-plus',
                 'aria-hidden' => 'true',
@@ -158,8 +139,8 @@ class EasyIconTraitTest extends TestCase
         ], $result);
         $result = $this->form->control('fieldname', [
             'prepend' => 'i:home',
-            'append'  => 'i:plus',
-            'label'   => false,
+            'append' => 'i:plus',
+            'label' => false,
         ]);
         $this->assertHtml([
             ['div' => [

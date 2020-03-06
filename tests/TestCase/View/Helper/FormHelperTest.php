@@ -145,10 +145,10 @@ class FormHelperTest extends TestCase
                 'class' => 'col-md-8 col-sm-12',
             ]],
             ['input' => [
-                'type'  => 'text',
+                'type' => 'text',
                 'class' => 'form-control',
-                'name'  => 'test',
-                'id'    => 'test',
+                'name' => 'test',
+                'id' => 'test',
             ]],
             '/div',
             '/div',
@@ -188,10 +188,10 @@ class FormHelperTest extends TestCase
                 'class' => 'col-md-8 col-sm-8',
             ]],
             ['input' => [
-                'type'  => 'text',
+                'type' => 'text',
                 'class' => 'form-control is-invalid',
-                'name'  => 'Article[title]',
-                'id'    => 'article-title',
+                'name' => 'Article[title]',
+                'id' => 'article-title',
             ]],
             ['div' => [
                 'class' => 'error-message invalid-feedback',
@@ -289,15 +289,15 @@ class FormHelperTest extends TestCase
                 'class' => 'form-group text',
             ]],
             ['label' => [
-                'for'   => $fieldName,
+                'for' => $fieldName,
             ]],
             \Cake\Utility\Inflector::humanize($fieldName),
             '/label',
             ['input' => [
-                'type'  => 'text',
+                'type' => 'text',
                 'class' => 'form-control',
-                'name'  => $fieldName,
-                'id'    => $fieldName,
+                'name' => $fieldName,
+                'id' => $fieldName,
             ]],
             '/div',
         ], $fieldName);
@@ -316,10 +316,10 @@ class FormHelperTest extends TestCase
                 'class' => 'col-md-10',
             ]],
             ['input' => [
-                'type'  => 'text',
+                'type' => 'text',
                 'class' => 'form-control',
-                'name'  => $fieldName,
-                'id'    => $fieldName,
+                'name' => $fieldName,
+                'id' => $fieldName,
             ]],
             '/div',
             '/div',
@@ -336,15 +336,15 @@ class FormHelperTest extends TestCase
                 'class' => 'form-group text',
             ]],
             ['label' => [
-                'for'   => $fieldName,
+                'for' => $fieldName,
             ]],
             \Cake\Utility\Inflector::humanize($fieldName),
             '/label',
             ['input' => [
-                'type'  => 'text',
+                'type' => 'text',
                 'class' => 'form-control',
-                'name'  => $fieldName,
-                'id'    => $fieldName,
+                'name' => $fieldName,
+                'id' => $fieldName,
             ]],
             '/div',
         ], $fieldName, ['type' => 'text']);
@@ -395,7 +395,7 @@ class FormHelperTest extends TestCase
     public function testInputRadio()
     {
         $fieldName = 'color';
-        $options   = [
+        $options = [
             'type' => 'radio',
             'options' => [
                 'red' => 'Red',
@@ -424,15 +424,15 @@ class FormHelperTest extends TestCase
                     'class' => 'form-check',
                 ]],
                 ['label' => [
-                    'for'   => $fieldName . '-' . $key,
+                    'for' => $fieldName . '-' . $key,
                     'class' => 'form-check-label',
                 ]],
                 ['input' => [
-                    'type'  => 'radio',
+                    'type' => 'radio',
                     'class' => 'form-check-input',
-                    'name'  => $fieldName,
+                    'name' => $fieldName,
                     'value' => $key,
-                    'id'    => $fieldName . '-' . $key,
+                    'id' => $fieldName . '-' . $key,
                 ]],
                 $value,
                 '/label',
@@ -466,15 +466,15 @@ class FormHelperTest extends TestCase
                     'class' => 'form-check form-check-inline',
                 ]],
                 ['label' => [
-                    'for'   => $fieldName . '-' . $key,
+                    'for' => $fieldName . '-' . $key,
                     'class' => 'form-check-label',
                 ]],
                 ['input' => [
-                    'type'  => 'radio',
+                    'type' => 'radio',
                     'class' => 'form-check-input',
-                    'name'  => $fieldName,
+                    'name' => $fieldName,
                     'value' => $key,
-                    'id'    => $fieldName . '-' . $key,
+                    'id' => $fieldName . '-' . $key,
                 ]],
                 $value,
                 '/label',
@@ -517,15 +517,15 @@ class FormHelperTest extends TestCase
                     'class' => 'form-check',
                 ]],
                 ['label' => [
-                    'for'   => $fieldName . '-' . $key,
+                    'for' => $fieldName . '-' . $key,
                     'class' => 'form-check-label',
                 ]],
                 ['input' => [
-                    'type'  => 'radio',
+                    'type' => 'radio',
                     'class' => 'form-check-input',
-                    'name'  => $fieldName,
+                    'name' => $fieldName,
                     'value' => $key,
-                    'id'    => $fieldName . '-' . $key,
+                    'id' => $fieldName . '-' . $key,
                 ]],
                 $value,
                 '/label',
@@ -565,15 +565,15 @@ class FormHelperTest extends TestCase
                     'class' => 'form-check form-check-inline',
                 ]],
                 ['label' => [
-                    'for'   => $fieldName . '-' . $key,
+                    'for' => $fieldName . '-' . $key,
                     'class' => 'form-check-label',
                 ]],
                 ['input' => [
-                    'type'  => 'radio',
+                    'type' => 'radio',
                     'class' => 'form-check-input',
-                    'name'  => $fieldName,
+                    'name' => $fieldName,
                     'value' => $key,
-                    'id'    => $fieldName . '-' . $key,
+                    'id' => $fieldName . '-' . $key,
                 ]],
                 $value,
                 '/label',
@@ -587,7 +587,7 @@ class FormHelperTest extends TestCase
     public function testInputCheckbox()
     {
         $fieldName = 'color';
-        $options   = [
+        $options = [
             'type' => 'checkbox',
         ];
         // Default
@@ -602,15 +602,15 @@ class FormHelperTest extends TestCase
                 'class' => 'form-control',
             ]],
             ['label' => [
-                'for'   => $fieldName,
+                'for' => $fieldName,
                 'class' => 'form-check-label',
             ]],
             ['input' => [
-                'type'  => 'checkbox',
+                'type' => 'checkbox',
                 'class' => 'form-check-input',
-                'name'  => $fieldName,
+                'name' => $fieldName,
                 'value' => "1",
-                'id'    => $fieldName,
+                'id' => $fieldName,
             ]],
             \Cake\Utility\Inflector::humanize($fieldName),
             '/label',
@@ -637,15 +637,15 @@ class FormHelperTest extends TestCase
                 'class' => 'form-control',
             ]],
             ['label' => [
-                'for'   => $fieldName,
+                'for' => $fieldName,
                 'class' => 'form-check-label',
             ]],
             ['input' => [
-                'type'  => 'checkbox',
+                'type' => 'checkbox',
                 'class' => 'form-check-input',
-                'name'  => $fieldName,
+                'name' => $fieldName,
                 'value' => "1",
-                'id'    => $fieldName,
+                'id' => $fieldName,
             ]],
             \Cake\Utility\Inflector::humanize($fieldName),
             '/label',
@@ -661,7 +661,7 @@ class FormHelperTest extends TestCase
     public function testInputGroup()
     {
         $fieldName = 'field';
-        $options   = [
+        $options = [
             'type' => 'text',
             'label' => false,
         ];
@@ -772,7 +772,7 @@ class FormHelperTest extends TestCase
             ]],
             ['button' => [
                 'class' => 'btn btn-primary',
-                'type'  => 'submit',
+                'type' => 'submit',
             ]],
             'Go!',
             '/button',
@@ -812,7 +812,7 @@ class FormHelperTest extends TestCase
             ]],
             ['button' => [
                 'class' => 'btn btn-primary',
-                'type'  => 'submit',
+                'type' => 'submit',
             ]],
             'Go!',
             '/button',
@@ -844,13 +844,13 @@ class FormHelperTest extends TestCase
             ]],
             ['button' => [
                 'class' => 'btn btn-primary',
-                'type'  => 'submit',
+                'type' => 'submit',
             ]],
             'Go!',
             '/button',
             ['button' => [
                 'class' => 'btn btn-primary',
-                'type'  => 'submit',
+                'type' => 'submit',
             ]],
             'GoGo!',
             '/button',
@@ -866,7 +866,7 @@ class FormHelperTest extends TestCase
     public function testAppendDropdown()
     {
         $fieldName = 'field';
-        $options   = [
+        $options = [
             'type' => 'text',
             'label' => false,
         ];
@@ -902,10 +902,10 @@ class FormHelperTest extends TestCase
             ['div' => [
                 'class' => 'dropdown-menu dropdown-menu-left',
             ]],
-            ['a' => ['href'  => '#', 'class' => 'dropdown-item']], 'Link 1', '/a',
-            ['a' => ['href'  => '#', 'class' => 'dropdown-item',]], 'Link 2', '/a',
+            ['a' => ['href' => '#', 'class' => 'dropdown-item']], 'Link 1', '/a',
+            ['a' => ['href' => '#', 'class' => 'dropdown-item',]], 'Link 2', '/a',
             ['div' => ['role' => 'separator', 'class' => 'dropdown-divider']], '/div',
-            ['a' => ['href'  => '#', 'class' => 'dropdown-item']], 'Link 3', '/a',
+            ['a' => ['href' => '#', 'class' => 'dropdown-item']], 'Link 3', '/a',
             '/div',
             '/div',
             '/div',
@@ -953,10 +953,10 @@ class FormHelperTest extends TestCase
             ['div' => [
                 'class' => 'dropdown-menu dropdown-menu-left',
             ]],
-            ['a' => ['href'  => '#', 'class' => 'dropdown-item']], 'Link 1', '/a',
-            ['a' => ['href'  => '#', 'class' => 'dropdown-item',]], 'Link 2', '/a',
+            ['a' => ['href' => '#', 'class' => 'dropdown-item']], 'Link 1', '/a',
+            ['a' => ['href' => '#', 'class' => 'dropdown-item',]], 'Link 2', '/a',
             ['div' => ['role' => 'separator', 'class' => 'dropdown-divider']], '/div',
-            ['a' => ['href'  => '#', 'class' => 'dropdown-item']], 'Link 3', '/a',
+            ['a' => ['href' => '#', 'class' => 'dropdown-item']], 'Link 3', '/a',
             '/div',
             '/div',
             '/div',
@@ -987,15 +987,15 @@ class FormHelperTest extends TestCase
                 'class' => 'form-group text',
             ]],
             ['label' => [
-                'for'   => $fieldName,
+                'for' => $fieldName,
             ]],
             \Cake\Utility\Inflector::humanize($fieldName),
             '/label',
             ['input' => [
-                'type'  => 'text',
+                'type' => 'text',
                 'class' => 'form-control',
-                'name'  => $fieldName,
-                'id'    => $fieldName,
+                'name' => $fieldName,
+                'id' => $fieldName,
             ]],
             ['span' => true],
             $help,

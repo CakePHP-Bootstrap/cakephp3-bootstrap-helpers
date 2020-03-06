@@ -151,16 +151,16 @@ class CardHelperTest extends TestCase
         $this->assertHtml([
             ['div' => [
                 'class' => 'card-header',
-                'role'  => 'tab',
-                'id'    => 'heading-4',
+                'role' => 'tab',
+                'id' => 'heading-4',
             ]],
             ['h5' => [
                 'class' => 'mb-0',
             ]],
             ['a' => [
-                'role'          => 'button',
-                'data-toggle'   => 'collapse',
-                'href'          => '#collapse-4',
+                'role' => 'button',
+                'data-toggle' => 'collapse',
+                'href' => '#collapse-4',
                 'aria-expanded' => 'true',
                 'aria-controls' => 'collapse-4',
             ]],
@@ -175,17 +175,17 @@ class CardHelperTest extends TestCase
         $result = $this->card->header($htmlContent, ['escape' => false]);
         $this->assertHtml([
             ['div' => [
-                'role'  => 'tab',
-                'id'    => 'heading-5',
+                'role' => 'tab',
+                'id' => 'heading-5',
                 'class' => 'card-header',
             ]],
             ['h5' => [
                 'class' => 'mb-0',
             ]],
             ['a' => [
-                'role'          => 'button',
-                'data-toggle'   => 'collapse',
-                'href'          => '#collapse-5',
+                'role' => 'button',
+                'data-toggle' => 'collapse',
+                'href' => '#collapse-5',
                 'aria-expanded' => 'true',
                 'aria-controls' => 'collapse-5',
             ]],
@@ -201,17 +201,17 @@ class CardHelperTest extends TestCase
         $result = $this->card->header($iconContent);
         $this->assertHtml([
             ['div' => [
-                'role'  => 'tab',
-                'id'    => 'heading-6',
+                'role' => 'tab',
+                'id' => 'heading-6',
                 'class' => 'card-header',
             ]],
             ['h5' => [
                 'class' => 'mb-0',
             ]],
             ['a' => [
-                'role'          => 'button',
-                'data-toggle'   => 'collapse',
-                'href'          => '#collapse-6',
+                'role' => 'button',
+                'data-toggle' => 'collapse',
+                'href' => '#collapse-6',
                 'aria-expanded' => 'true',
                 'aria-controls' => 'collapse-6',
             ]],
@@ -245,7 +245,6 @@ class CardHelperTest extends TestCase
 
     public function testGroup()
     {
-
         $cardHeading = 'This is a card heading';
         $cardContent = 'A bit of HTML code inside!';
 
@@ -276,29 +275,29 @@ class CardHelperTest extends TestCase
                 ]],
                 ['div' => [
                     'class' => 'card-header',
-                    'role'  => 'tab',
-                    'id'    => 'heading-' . $i,
+                    'role' => 'tab',
+                    'id' => 'heading-' . $i,
                 ]],
                 ['h5' => [
                     'class' => 'mb-0',
                 ]],
                 ['a' => [
-                    'role'          => 'button',
-                    'data-toggle'   => 'collapse',
-                    'href'          => '#collapse-' . $i,
+                    'role' => 'button',
+                    'data-toggle' => 'collapse',
+                    'href' => '#collapse-' . $i,
                     'aria-expanded' => $i ? 'false' : 'true',
                     'aria-controls' => 'collapse-' . $i,
-                    'data-parent'   => '#cardGroup-1',
+                    'data-parent' => '#cardGroup-1',
                 ]],
                 $cardHeading,
                 '/a',
                 '/h5',
                 '/div',
                 ['div' => [
-                    'class'           => 'collapse' . ($i ? '' : ' in'),
-                    'role'            => 'tabpanel',
+                    'class' => 'collapse' . ($i ? '' : ' in'),
+                    'role' => 'tabpanel',
                     'aria-labelledby' => 'heading-' . $i,
-                    'id'              => 'collapse-' . $i,
+                    'id' => 'collapse-' . $i,
                 ]],
                 ['div' => [
                     'class' => 'card-body',
@@ -334,7 +333,6 @@ class CardHelperTest extends TestCase
 
     public function testCardGroupInsideCard()
     {
-
         $cardHeading = 'This is a card heading';
         $cardContent = 'A bit of HTML code inside!';
 
@@ -361,8 +359,8 @@ class CardHelperTest extends TestCase
                 'class' => 'card-body',
             ]],
             ['div' => [
-                'role'                 => 'tablist',
-                'id'                   => 'cardGroup-1',
+                'role' => 'tablist',
+                'id' => 'cardGroup-1',
             ]],
         ];
 
@@ -373,29 +371,29 @@ class CardHelperTest extends TestCase
                 ]],
                 ['div' => [
                     'class' => 'card-header',
-                    'role'  => 'tab',
-                    'id'    => 'heading-' . $i,
+                    'role' => 'tab',
+                    'id' => 'heading-' . $i,
                 ]],
                 ['h5' => [
                     'class' => 'mb-0',
                 ]],
                 ['a' => [
-                    'role'          => 'button',
-                    'data-toggle'   => 'collapse',
-                    'href'          => '#collapse-' . $i,
+                    'role' => 'button',
+                    'data-toggle' => 'collapse',
+                    'href' => '#collapse-' . $i,
                     'aria-expanded' => $i > 1 ? 'false' : 'true',
                     'aria-controls' => 'collapse-' . $i,
-                    'data-parent'   => '#cardGroup-1',
+                    'data-parent' => '#cardGroup-1',
                 ]],
                 $cardHeading,
                 '/a',
                 '/h5',
                 '/div',
                 ['div' => [
-                    'class'           => 'collapse' . ($i > 1 ? '' : ' in'),
-                    'role'            => 'tabpanel',
+                    'class' => 'collapse' . ($i > 1 ? '' : ' in'),
+                    'role' => 'tabpanel',
                     'aria-labelledby' => 'heading-' . $i,
-                    'id'              => 'collapse-' . $i,
+                    'id' => 'collapse-' . $i,
                 ]],
                 ['div' => [
                     'class' => 'card-body',

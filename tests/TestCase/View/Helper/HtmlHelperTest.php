@@ -39,7 +39,6 @@ class HtmlHelperTest extends TestCase
 
     public function testIcon()
     {
-
         // Default icon
         $result = $this->html->icon('home', [
             'id' => 'my-id',
@@ -116,12 +115,12 @@ class HtmlHelperTest extends TestCase
         // Type + Options
         $options = [
             'class' => 'my-badge-class',
-            'id'    => 'my-badge-id',
+            'id' => 'my-badge-id',
         ];
         $this->assertHtml([
             ['span' => [
                 'class' => 'badge badge-primary ' . $options['class'],
-                'id'    => $options['id'],
+                'id' => $options['id'],
             ]],
             'My Label',
             '/span',
@@ -129,13 +128,13 @@ class HtmlHelperTest extends TestCase
         // Only options
         $options = [
             'class' => 'my-badge-class',
-            'id'    => 'my-badge-id',
-            'type'  => 'primary',
+            'id' => 'my-badge-id',
+            'type' => 'primary',
         ];
         $this->assertHtml([
             ['span' => [
                 'class' => 'badge badge-primary ' . $options['class'],
-                'id'    => $options['id'],
+                'id' => $options['id'],
             ]],
             'My Label',
             '/span',
@@ -144,7 +143,6 @@ class HtmlHelperTest extends TestCase
 
     public function testAlert()
     {
-
         // Default
         $result = $this->html->alert('Alert');
         $expected = [

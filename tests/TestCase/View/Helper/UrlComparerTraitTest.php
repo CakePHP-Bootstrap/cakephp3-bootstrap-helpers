@@ -12,23 +12,13 @@ declare(strict_types=1);
  */
 namespace Bootstrap\Test\TestCase\View\Helper;
 
-use Bootstrap\View\Helper\UrlComparerTrait;
+use Bootstrap\TestApp\PublicUrlComparerTrait;
 use Cake\Core\Configure;
 use Cake\Http\ServerRequest;
 use Cake\Routing\Route\DashedRoute;
 use Cake\Routing\RouteBuilder;
 use Cake\Routing\Router;
 use Cake\TestSuite\TestCase;
-
-class PublicUrlComparerTrait
-{
-    use UrlComparerTrait;
-
-    public function normalize($url, $pass = [])
-    {
-        return $this->_normalize($url, $pass);
-    }
-}
 
 class UrlComparerTraitTest extends TestCase
 {
@@ -210,7 +200,7 @@ class UrlComparerTraitTest extends TestCase
         }
     }
 
-    public function _testCompare($matchTrue, $matchFalse, $parts = [])
+    private function _testCompare($matchTrue, $matchFalse, $parts = [])
     {
         foreach ($matchTrue as $urls) {
             [$lhs, $rhs] = $urls;

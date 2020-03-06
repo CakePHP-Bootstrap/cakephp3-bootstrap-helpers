@@ -12,20 +12,11 @@ declare(strict_types=1);
  */
 namespace Bootstrap\Test\TestCase\View\Helper;
 
-use Bootstrap\View\Helper\ClassTrait;
+use Bootstrap\TestApp\PublicClassTrait;
 use Cake\TestSuite\TestCase;
 use Cake\View\View;
 
-class PublicClassTrait
-{
-    use ClassTrait;
-
-    public function __construct($view)
-    {
-    }
-}
-
-class BootstrapTraitTest extends TestCase
+class ClassTraitTest extends TestCase
 {
     /**
      * Instance of PublicClassTrait.
