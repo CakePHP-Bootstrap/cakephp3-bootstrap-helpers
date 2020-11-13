@@ -30,7 +30,7 @@ trait ClassTrait {
      *
      * @return array Array of options with `$key` set or updated.
      */
-    public function addClass(array $options = [], $class = null, $key = 'class') {
+    public function addClass(array $options = [], $class = null, $key = 'class'):array {
         if (!is_array($class)) {
             $class = explode(' ', trim($class));
         }

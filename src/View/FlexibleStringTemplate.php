@@ -54,7 +54,7 @@ class FlexibleStringTemplate extends EnhancedStringTemplate {
      *
      * @return string
     */
-    public function format($name, array $data) {
+    public function format($name, array $data): string {
         $name = $this->_getTemplateName($name, $data);
         return parent::format($name, $data);
     }
