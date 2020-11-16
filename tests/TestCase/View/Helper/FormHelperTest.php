@@ -13,9 +13,9 @@ declare(strict_types=1);
 namespace Bootstrap\Test\TestCase\View\Helper;
 
 use Bootstrap\View\Helper\FormHelper;
-use Cake\Core\Configure;
 use Cake\Http\ServerRequest;
 use Cake\TestSuite\TestCase;
+use Cake\Utility\Inflector;
 use Cake\View\View;
 
 class FormHelperTest extends TestCase
@@ -28,9 +28,19 @@ class FormHelperTest extends TestCase
     /**
      * Instance of FormHelper.
      *
-     * @var FormHelper
+     * @var \Bootstrap\View\Helper\FormHelper
      */
     public $form;
+
+    /**
+     * @var string[]
+     */
+    private $dateRegex;
+
+    /**
+     * @var array
+     */
+    private $article;
 
     /**
      * Setup
@@ -79,14 +89,54 @@ class FormHelperTest extends TestCase
                 'title' => true,
             ],
         ];
-
-        Configure::write('debug', true);
     }
 
+    /**
+     * @test
+     */
+    public function testLoadHelperWithConfiguration()
+    {
+        $this->View->loadHelper('Form', [
+            'className' => 'Bootstrap.Form',
+            'templates' => ['checkboxFormGroup' => '<testing>{{label}}</testing>'],
+            'widgets' => [
+                // override select
+                'select' => ['Textarea'],
+            ]
+        ]);
+        $helper = $this->View->Form;
+
+        // \Cake\View\Helper\FormHelper configuration is untouched
+        self::assertSame('<button{{attrs}}>{{text}}</button>', $helper->getConfig('templates.button'));
+
+        // \Bootstrap\View\Helper\FormHelper default configuration is loaded
+        self::assertSame('{{append}}</div>', $helper->getConfig('templates.inputGroupEnd'));
+
+        // Custom configuration correctly applied
+        self::assertSame('<testing>{{label}}</testing>', $helper->getConfig('templates.checkboxFormGroup'));
+
+        $widgets = $helper->getWidgetLocator();
+
+        // \Cake\View\Helper\FormHelper widgets are untouched
+        self::assertInstanceOf('Cake\View\Widget\DateTimeWidget', $widgets->get('datetime'));
+
+        // \Bootstrap\View\Helper\FormHelper default widgets are set
+        self::assertInstanceOf('Bootstrap\View\Widget\FancyFileWidget', $widgets->get('fancyFile'));
+        self::assertInstanceOf('Bootstrap\View\Widget\LabelLegendWidget', $widgets->get('label'));
+        self::assertInstanceOf('Bootstrap\View\Widget\InlineRadioWidget', $widgets->get('inlineRadio'));
+        self::assertInstanceOf('Bootstrap\View\Widget\ColumnSelectBoxWidget', $widgets->get('selectColumn'));
+
+        // Custom widgets are correctly applied
+        self::assertInstanceOf('Cake\View\Widget\TextareaWidget', $widgets->get('select'));
+    }
+
+    /**
+     * @test
+     */
     public function testCreate()
     {
         // Standard form
-        $this->assertHtml([
+        self::assertHtml([
             ['form' => [
                 'method',
                 'accept-charset',
@@ -94,16 +144,19 @@ class FormHelperTest extends TestCase
                 'action',
             ]],
         ], $this->form->create());
+
         // Horizontal form
-        $result = $this->form->create(null, ['horizontal' => true]);
-        $this->assertEquals($this->form->horizontal, true);
-        // Automatically return to non horizonal form
-        $result = $this->form->create();
-        $this->assertEquals($this->form->horizontal, false);
+        $this->form->create(null, ['horizontal' => true]);
+        self::assertEquals(true, $this->form->horizontal);
+
+        // Automatically return to non horizontal form
+        $this->form->create();
+        self::assertEquals(false, $this->form->horizontal);
+
         // Inline form
         $result = $this->form->create(null, ['inline' => true]);
-        $this->assertEquals($this->form->inline, true);
-        $this->assertHtml([
+        self::assertEquals(true, $this->form->inline);
+        self::assertHtml([
             ['form' => [
                 'method',
                 'accept-charset',
@@ -112,11 +165,15 @@ class FormHelperTest extends TestCase
                 'class' => 'form-inline',
             ]],
         ], $result);
-        // Automatically return to non horizonal form
-        $result = $this->form->create();
-        $this->assertEquals($this->form->inline, false);
+
+        // Automatically return to non horizontal form
+        $this->form->create();
+        self::assertEquals(false, $this->form->inline);
     }
 
+    /**
+     * @test
+     */
     public function testColumnSizes()
     {
         $this->form->setConfig('columns', [
@@ -153,7 +210,7 @@ class FormHelperTest extends TestCase
             '/div',
             '/div',
         ];
-        $this->assertHtml($expected, $result);
+        self::assertHtml($expected, $result);
 
         $this->article['errors'] = [
             'Article' => [
@@ -201,14 +258,17 @@ class FormHelperTest extends TestCase
             '/div',
             '/div',
         ];
-        $this->assertHtml($expected, $result, true);
+        self::assertHtml($expected, $result, true);
     }
 
+    /**
+     * @test
+     */
     public function testButton()
     {
         // default button
         $button = $this->form->button('Test');
-        $this->assertHtml([
+        self::assertHtml([
             ['button' => [
                 'class' => 'btn btn-primary',
                 'type' => 'submit',
@@ -219,7 +279,7 @@ class FormHelperTest extends TestCase
             'bootstrap-type' => 'success',
             'bootstrap-size' => 'sm',
         ]);
-        $this->assertHtml([
+        self::assertHtml([
             ['button' => [
                 'class' => 'btn btn-success btn-sm',
                 'type' => 'submit',
@@ -230,7 +290,7 @@ class FormHelperTest extends TestCase
             'btype' => 'success',
             'size' => 'sm',
         ]);
-        $this->assertHtml([
+        self::assertHtml([
             ['button' => [
                 'class' => 'btn btn-success btn-sm',
                 'type' => 'submit',
@@ -240,7 +300,7 @@ class FormHelperTest extends TestCase
         $button = $this->form->button('Test', [
             'class' => 'btn btn-primary',
         ]);
-        $this->assertHtml([
+        self::assertHtml([
             ['button' => [
                 'class' => 'btn btn-primary',
                 'type' => 'submit',
@@ -248,27 +308,38 @@ class FormHelperTest extends TestCase
         ], $button);
     }
 
+    /**
+     * @test
+     */
     public function testCustomFunctions()
     {
-        $this->assertEquals(
+        self::assertEquals(
             $this->form->cbutton('b', ['class' => 'cl']),
             $this->form->button('b', ['class' => 'cl'])
         );
-        $this->assertEquals(
+        self::assertEquals(
             $this->form->cbutton('b', 'danger', ['class' => 'cl']),
             $this->form->button('b', ['class' => 'cl', 'btype' => 'danger'])
         );
-        $this->assertEquals(
+        self::assertEquals(
             $this->form->csubmit('b', ['class' => 'cl']),
             $this->form->submit('b', ['class' => 'cl'])
         );
-        $this->assertEquals(
+        self::assertEquals(
             $this->form->csubmit('b', 'danger', ['class' => 'cl']),
             $this->form->submit('b', ['class' => 'cl', 'btype' => 'danger'])
         );
     }
 
-    protected function _testInput($expected, $fieldName, $options = [], $debug = false)
+    /**
+     * Check Form::control() output
+     *
+     * @param  array $expected Expected Html
+     * @param  string $fieldName Field name
+     * @param  array $options Field options
+     * @param  bool $debug Activate Html debug mode
+     */
+    public function assertControl(array $expected, string $fieldName, array $options = [], bool $debug = false)
     {
         $formOptions = [];
         if (isset($options['_formOptions'])) {
@@ -277,21 +348,24 @@ class FormHelperTest extends TestCase
         }
         $this->form->create(null, $formOptions);
         $result = $this->form->control($fieldName, $options);
-        $assert = $this->assertHtml($expected, $result, $debug);
+        self::assertHtml($expected, $result, $debug);
     }
 
+    /**
+     * @test
+     */
     public function testInput()
     {
         $fieldName = 'field';
         // Standard form
-        $this->_testInput([
+        $this->assertControl([
             ['div' => [
                 'class' => 'form-group text',
             ]],
             ['label' => [
                 'for' => $fieldName,
             ]],
-            \Cake\Utility\Inflector::humanize($fieldName),
+            Inflector::humanize($fieldName),
             '/label',
             ['input' => [
                 'type' => 'text',
@@ -302,7 +376,7 @@ class FormHelperTest extends TestCase
             '/div',
         ], $fieldName);
         // Horizontal form
-        $this->_testInput([
+        $this->assertControl([
             ['div' => [
                 'class' => 'form-group row text',
             ]],
@@ -310,7 +384,7 @@ class FormHelperTest extends TestCase
                 'class' => 'col-form-label col-md-2',
                 'for' => $fieldName,
             ]],
-            \Cake\Utility\Inflector::humanize($fieldName),
+            Inflector::humanize($fieldName),
             '/label',
             ['div' => [
                 'class' => 'col-md-10',
@@ -328,17 +402,20 @@ class FormHelperTest extends TestCase
         ]);
     }
 
+    /**
+     * @test
+     */
     public function testInputText()
     {
         $fieldName = 'field';
-        $this->_testInput([
+        $this->assertControl([
             ['div' => [
                 'class' => 'form-group text',
             ]],
             ['label' => [
                 'for' => $fieldName,
             ]],
-            \Cake\Utility\Inflector::humanize($fieldName),
+            Inflector::humanize($fieldName),
             '/label',
             ['input' => [
                 'type' => 'text',
@@ -350,6 +427,9 @@ class FormHelperTest extends TestCase
         ], $fieldName, ['type' => 'text']);
     }
 
+    /**
+     * @test
+     */
     public function testButtonGroup()
     {
         // Basic test:
@@ -361,7 +441,7 @@ class FormHelperTest extends TestCase
             ['button' => ['class' => 'btn btn-primary', 'type' => 'submit']], '2', '/button',
             '/div',
         ];
-        $this->assertHtml($expected, $this->form->buttonGroup([
+        self::assertHtml($expected, $this->form->buttonGroup([
             $this->form->button('1'), $this->form->button('2'),
         ]));
 
@@ -374,7 +454,7 @@ class FormHelperTest extends TestCase
             ['button' => ['class' => 'btn btn-primary', 'type' => 'submit']], '2', '/button',
             '/div',
         ];
-        $this->assertHtml($expected, $this->form->buttonGroup([
+        self::assertHtml($expected, $this->form->buttonGroup([
             $this->form->button('1'), $this->form->button('2'),
         ], ['class' => 'myclass', 'data-test' => 'mydata']));
 
@@ -387,11 +467,14 @@ class FormHelperTest extends TestCase
             ['button' => ['class' => 'btn btn-primary', 'type' => 'submit']], '2', '/button',
             '/div',
         ];
-        $this->assertHtml($expected, $this->form->buttonGroup([
+        self::assertHtml($expected, $this->form->buttonGroup([
             $this->form->button('1'), $this->form->button('2'),
         ], ['class' => 'myclass', 'data-test' => 'mydata', 'vertical' => true]));
     }
 
+    /**
+     * @test
+     */
     public function testInputRadio()
     {
         $fieldName = 'color';
@@ -409,7 +492,7 @@ class FormHelperTest extends TestCase
                 'class' => 'form-group radio',
             ]],
             ['label' => []],
-            \Cake\Utility\Inflector::humanize($fieldName),
+            Inflector::humanize($fieldName),
             '/label',
             ['input' => [
                 'type' => 'hidden',
@@ -440,7 +523,7 @@ class FormHelperTest extends TestCase
             ]);
         }
         $expected = array_merge($expected, ['/fieldset']);
-        $this->_testInput($expected, $fieldName, $options);
+        $this->assertControl($expected, $fieldName, $options);
 
         // Inline
         $options += [
@@ -451,7 +534,7 @@ class FormHelperTest extends TestCase
                 'class' => 'form-group inlineradio',
             ]],
             ['label' => [ ]],
-            \Cake\Utility\Inflector::humanize($fieldName),
+            Inflector::humanize($fieldName),
             '/label',
             ['input' => [
                 'type' => 'hidden',
@@ -482,7 +565,7 @@ class FormHelperTest extends TestCase
             ]);
         }
         $expected = array_merge($expected, ['/fieldset']);
-        $this->_testInput($expected, $fieldName, $options);
+        $this->assertControl($expected, $fieldName, $options);
 
         // Horizontal
         $options += [
@@ -499,7 +582,7 @@ class FormHelperTest extends TestCase
             ['legend' => [
                 'class' => 'col-form-label pt-0 col-md-2',
             ]],
-            \Cake\Utility\Inflector::humanize($fieldName),
+            Inflector::humanize($fieldName),
             '/legend',
             ['div' => [
                 'class' => 'col-md-10',
@@ -533,7 +616,7 @@ class FormHelperTest extends TestCase
             ]);
         }
         $expected = array_merge($expected, ['/div', '/div', '/fieldset']);
-        $this->_testInput($expected, $fieldName, $options);
+        $this->assertControl($expected, $fieldName, $options);
 
         // Horizontal + Inline
         $options['inline'] = true;
@@ -547,7 +630,7 @@ class FormHelperTest extends TestCase
             ['legend' => [
                 'class' => 'col-form-label pt-0 col-md-2',
             ]],
-            \Cake\Utility\Inflector::humanize($fieldName),
+            Inflector::humanize($fieldName),
             '/legend',
             ['div' => [
                 'class' => 'col-md-10',
@@ -581,9 +664,12 @@ class FormHelperTest extends TestCase
             ]);
         }
         $expected = array_merge($expected, ['/div', '/div', '/fieldset']);
-        $this->_testInput($expected, $fieldName, $options);
+        $this->assertControl($expected, $fieldName, $options);
     }
 
+    /**
+     * @test
+     */
     public function testInputCheckbox()
     {
         $fieldName = 'color';
@@ -612,11 +698,11 @@ class FormHelperTest extends TestCase
                 'value' => "1",
                 'id' => $fieldName,
             ]],
-            \Cake\Utility\Inflector::humanize($fieldName),
+            Inflector::humanize($fieldName),
             '/label',
             '/div',
         ];
-        $this->_testInput($expected, $fieldName, $options);
+        $this->assertControl($expected, $fieldName, $options);
 
         // Horizontal
         $expected = [
@@ -647,17 +733,20 @@ class FormHelperTest extends TestCase
                 'value' => "1",
                 'id' => $fieldName,
             ]],
-            \Cake\Utility\Inflector::humanize($fieldName),
+            Inflector::humanize($fieldName),
             '/label',
             '/div',
             '/div',
             '/div',
         ];
-        $this->_testInput($expected, $fieldName, $options + [
+        $this->assertControl($expected, $fieldName, $options + [
             '_formOptions' => ['horizontal' => true],
         ], true);
     }
 
+    /**
+     * @test
+     */
     public function testInputGroup()
     {
         $fieldName = 'field';
@@ -691,7 +780,7 @@ class FormHelperTest extends TestCase
             '/div',
             '/div',
         ];
-        $this->_testInput($expected, $fieldName, $options + ['prepend' => '@']);
+        $this->assertControl($expected, $fieldName, $options + ['prepend' => '@']);
         // Test with append
         $expected = [
             ['div' => [
@@ -718,7 +807,7 @@ class FormHelperTest extends TestCase
             '/div',
             '/div',
         ];
-        $this->_testInput($expected, $fieldName, $options + ['append' => '.00']);
+        $this->assertControl($expected, $fieldName, $options + ['append' => '.00']);
         // Test with append + prepend
         $expected = [
             ['div' => [
@@ -754,7 +843,7 @@ class FormHelperTest extends TestCase
             '/div',
             '/div',
         ];
-        $this->_testInput(
+        $this->assertControl(
             $expected,
             $fieldName,
             $options + ['prepend' => '$', 'append' => '.00']
@@ -787,7 +876,7 @@ class FormHelperTest extends TestCase
             '/div',
         ];
 
-        $this->_testInput(
+        $this->assertControl(
             $expected,
             $fieldName,
             $options + ['prepend' => $this->form->button('Go!')]
@@ -820,7 +909,7 @@ class FormHelperTest extends TestCase
             '/div',
             '/div',
         ];
-        $this->_testInput(
+        $this->assertControl(
             $expected,
             $fieldName,
             $options + ['append' => $this->form->button('Go!')]
@@ -858,11 +947,14 @@ class FormHelperTest extends TestCase
             '/div',
             '/div',
         ];
-        $this->_testInput($expected, $fieldName, $options + [
+        $this->assertControl($expected, $fieldName, $options + [
             'append' => [$this->form->button('Go!'), $this->form->button('GoGo!')],
         ]);
     }
 
+    /**
+     * @test
+     */
     public function testAppendDropdown()
     {
         $fieldName = 'field';
@@ -912,7 +1004,7 @@ class FormHelperTest extends TestCase
             '/div',
             '/div',
         ];
-        $this->_testInput($expected, $fieldName, $options + [
+        $this->assertControl($expected, $fieldName, $options + [
             'append' => $this->form->dropdownButton('Action', [
                 ['item' => ['title' => 'Link 1', 'url' => '#']],
                 ['item' => ['title' => 'Link 2', 'url' => '#']],
@@ -963,7 +1055,7 @@ class FormHelperTest extends TestCase
             '/div',
             '/div',
         ];
-        $this->_testInput($expected, $fieldName, $options + [
+        $this->assertControl($expected, $fieldName, $options + [
             'append' => $this->form->dropdownButton('Action', [
                 ['item' => ['title' => 'Link 1', 'url' => '#']],
                 ['item' => ['title' => 'Link 2', 'url' => '#']],
@@ -973,6 +1065,9 @@ class FormHelperTest extends TestCase
         ]);
     }
 
+    /**
+     * @test
+     */
     public function testInputTemplateVars()
     {
         $fieldName = 'field';
@@ -982,14 +1077,14 @@ class FormHelperTest extends TestCase
             'inputContainer' => '<div class="form-group {{type}}{{required}}">{{content}}<span>{{help}}</span></div>',
         ]);
         // Standard form
-        $this->_testInput([
+        $this->assertControl([
             ['div' => [
                 'class' => 'form-group text',
             ]],
             ['label' => [
                 'for' => $fieldName,
             ]],
-            \Cake\Utility\Inflector::humanize($fieldName),
+            Inflector::humanize($fieldName),
             '/label',
             ['input' => [
                 'type' => 'text',
@@ -1004,23 +1099,26 @@ class FormHelperTest extends TestCase
         ], $fieldName, ['templateVars' => ['help' => $help]]);
     }
 
+    /**
+     * @test
+     */
     public function testDateTime()
     {
         extract($this->dateRegex);
 
-        $now = strtotime('now');
         $result = $this->form->dateTime('Contact.date');
         $expected = [
             ['input' => [
                 'type' => 'datetime-local',
                 'name' => 'Contact[date]',
                 'class' => 'form-control',
+                'step' => '1',
+                'value' => '',
             ]],
         ];
-        $this->assertHtml($expected, $result);
+        self::assertHtml($expected, $result);
 
         // Test with input()
-        $now = strtotime('now');
         $result = $this->form->control('Contact.date', ['type' => 'date']);
         $expected = [
             ['div' => [
@@ -1034,12 +1132,16 @@ class FormHelperTest extends TestCase
                 'name' => 'Contact[date]',
                 'class' => 'form-control',
                 'id' => 'contact-date',
+                'value' => '',
             ]],
             '/div',
         ];
-        $this->assertHtml($expected, $result);
+        self::assertHtml($expected, $result);
     }
 
+    /**
+     * @test
+     */
     public function testSubmit()
     {
         $this->form->horizontal = false;
@@ -1053,7 +1155,7 @@ class FormHelperTest extends TestCase
             ]],
             '/div',
         ];
-        $this->assertHtml($expected, $result);
+        self::assertHtml($expected, $result);
 
         // horizontal forms
         $this->form->horizontal = true;
@@ -1070,42 +1172,43 @@ class FormHelperTest extends TestCase
             '/div',
             '/div',
         ];
-        $this->assertHtml($expected, $result);
+        self::assertHtml($expected, $result);
     }
 
+    /**
+     * @test
+     */
     public function testCustomFileInput()
     {
         $this->form->setConfig('useCustomFileInput', true);
         $result = $this->form->file('Contact.picture');
         $expected = [
-            ['input' => [
-                'type' => 'file',
-                'name' => 'Contact[picture]',
-                'id' => 'Contact[picture]',
-                'style' => 'display: none;',
-                'onchange' => "document.getElementById('Contact[picture]-input').value = (this.files.length <= 1) ? (this.files.length ? this.files[0].name : '') : this.files.length + ' ' + 'files selected';",
-            ]],
-            ['div' => ['class' => 'input-group']],
-            ['div' => ['class' => 'input-group-btn']],
-            ['button' => [
-                'class' => 'btn btn-primary',
-                'type' => 'button',
-                'onclick' => "document.getElementById('Contact[picture]').click();",
-            ]],
-            __('Choose File'),
-            '/button',
-            '/div',
-            ['input' => [
-                'type' => 'text',
-                'name' => 'Contact[picture-text]',
-                'class' => 'form-control',
-                'readonly' => 'readonly',
-                'id' => 'Contact[picture]-input',
-                'onclick' => "document.getElementById('Contact[picture]').click();",
-            ]],
-            '/div',
+            [
+                'input' => [
+                    'type' => 'file',
+                    'name' => 'Contact[picture]',
+                    'id' => 'Contact[picture]',
+                    'style' => 'display: none;',
+                    'onchange' => "document.getElementById('Contact[picture]-input').value = (this.files.length <= 1) ? (this.files.length ? this.files[0].name : '') : this.files.length + ' ' + 'files selected';",
+                ],
+            ], ['div' => ['class' => 'input-group']], ['div' => ['class' => 'input-group-btn']], [
+                'button' => [
+                    'class' => 'btn btn-primary',
+                    'type' => 'button',
+                    'onclick' => "document.getElementById('Contact[picture]').click();",
+                ],
+            ], __('Choose File'), '/button', '/div', [
+                'input' => [
+                    'type' => 'text',
+                    'name' => 'Contact[picture-text]',
+                    'class' => 'form-control',
+                    'readonly' => 'readonly',
+                    'id' => 'Contact[picture]-input',
+                    'onclick' => "document.getElementById('Contact[picture]').click();",
+                ],
+            ], '/div'
         ];
-        $this->assertHtml($expected, $result);
+        self::assertHtml($expected, $result);
 
         $result = $this->form->file('Contact.picture', ['multiple' => true]);
         $expected = [
@@ -1137,9 +1240,12 @@ class FormHelperTest extends TestCase
             ]],
             '/div',
         ];
-        $this->assertHtml($expected, $result);
+        self::assertHtml($expected, $result);
     }
 
+    /**
+     * @test
+     */
     public function testUploadCustomFileInput()
     {
         $expected = [
@@ -1173,23 +1279,26 @@ class FormHelperTest extends TestCase
         $this->form->setConfig('useCustomFileInput', true);
 
         $result = $this->form->file('Contact.picture');
-        $this->assertHtml($expected, $result);
+        self::assertHtml($expected, $result);
 
         $this->form->getView()->setRequest($this->form->getView()->getRequest()->withData('Contact.picture', [
             'name' => '', 'type' => '', 'tmp_name' => '',
             'error' => 4, 'size' => 0,
         ]));
         $result = $this->form->file('Contact.picture');
-        $this->assertHtml($expected, $result);
+        self::assertHtml($expected, $result);
 
         $this->form->getView()->setRequest($this->form->getView()->getRequest()->withData(
             'Contact.picture',
             'no data should be set in value'
         ));
         $result = $this->form->file('Contact.picture');
-        $this->assertHtml($expected, $result);
+        self::assertHtml($expected, $result);
     }
 
+    /**
+     * @test
+     */
     public function testFormSecuredFileControl()
     {
         $this->View->setRequest($this->View->getRequest()->withAttribute('formTokenData', [
@@ -1204,6 +1313,6 @@ class FormHelperTest extends TestCase
 
         $tokenData = $this->form->getFormProtector()->buildTokenData();
 
-        $this->assertSame('949a50880781bda6c5c21f4ef7e82548c682b7e8%3A', $tokenData['fields']);
+        self::assertSame('949a50880781bda6c5c21f4ef7e82548c682b7e8%3A', $tokenData['fields']);
     }
 }
